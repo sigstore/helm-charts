@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+{{- if .Values.server.deploymentAnnotations }}
+  annotations:
+    {{ toYaml .Values.server.deploymentAnnotations | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "rekor.server.labels" . | nindent 4 }}
+  name: {{ template "rekor.server.fullname" . }}
+{{ include "rekor.namespace" . | indent 2 }}
+spec:
+  selector:
+    {{- if .Values.schedulerName }}
+    schedulerName: "{{ .Values.schedulerName }}"
+    {{- end }}
+    matchLabels:
+      {{- include "rekor.server.matchLabels" . | nindent 6 }}
+  replicas: {{ .Values.server.replicaCount }}
+  {{- if .Values.server.strategy }}
+  strategy:
+{{ toYaml .Values.server.strategy | trim | indent 4 }}
+    {{ if eq .Values.server.strategy.type "Recreate" }}rollingUpdate: null{{ end }}
+{{- end }}
+  template:
+    metadata:
+    {{- if .Values.server.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.server.podAnnotations | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "rekor.server.labels" . | nindent 8 }}
+        {{- if .Values.server.podLabels}}
+        {{ toYaml .Values.server.podLabels | nindent 8 }}
+        {{- end}}
+    spec:
+      serviceAccountName: {{ template "rekor.serviceAccountName.server" . }}
+      {{- if .Values.server.extraInitContainers }}
+      initContainers:
+{{ toYaml .Values.server.extraInitContainers | indent 8 }}
+      {{- end }}
+{{- if .Values.server.priorityClassName }}
+      priorityClassName: "{{ .Values.server.priorityClassName }}"
+{{- end }}
+      containers:
+        - name: {{ template "rekor.name" . }}-{{ .Values.server.name }}
+          image: "{{ template "rekor.image" .Values.server.image }}"
+          imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
+          args:
+{{  include "rekor.server.args" . | indent 12 }}
+          ports:
+{{- include "rekor.containerPorts" .Values.server.service.ports | indent 12 }}
+{{- if eq "true" (include "rekor.server.fileAttestationStorage" .) }}
+          volumeMounts:
+            - name: storage
+              mountPath: {{ template "rekor.server.fileAttestationStorage.path" . }}
+{{- end -}}
+{{- if .Values.server.livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.server.livenessProbe | indent 12 }}
+{{- end }}
+{{- if .Values.server.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.server.readinessProbe | indent 12 }}
+{{- end }}
+          resources:
+{{ toYaml .Values.server.resources | indent 12 }}
+    {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.server | indent 8 }}
+    {{- end }}
+    {{- if .Values.server.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.server.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- with .Values.server.dnsConfig }}
+      dnsConfig:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- if .Values.server.securityContext }}
+      securityContext:
+{{ toYaml .Values.server.securityContext | indent 8 }}
+    {{- end }}
+    {{- if .Values.server.tolerations }}
+      tolerations:
+{{ toYaml .Values.server.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.server.affinity }}
+      affinity:
+{{ toYaml .Values.server.affinity | indent 8 }}
+    {{- end }}
+      volumes:
+{{- if eq "true" (include "rekor.server.fileAttestationStorage" .) }}
+  {{- if not .Values.server.attestation_storage.persistence.enabled }}
+        - name: storage
+          emptyDir: {}
+  {{- else if .Values.server.attestation_storage.persistence.existingClaim }}
+        - name: storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.server.attestation_storage.persistence.existingClaim }}
+  {{- else }}
+        - name: storage
+          persistentVolumeClaim:
+            claimName: {{ template "rekor.server.fullname" . }}
+  {{- end }}
+{{- end }}

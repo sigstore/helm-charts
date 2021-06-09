@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+{{- if .Values.trillianLogServer.service.annotations }}
+  annotations:
+{{ toYaml .Values.trillianLogServer.service.annotations | indent 4 }}
+{{- end }}
+  labels:
+    {{- include "rekor.trillianLogServer.labels" . | nindent 4 }}
+{{- if .Values.trillianLogServer.service.labels }}
+{{ toYaml .Values.trillianLogServer.service.labels | indent 4 }}
+{{- end }}
+  name: {{ template "rekor.trillianLogServer.fullname" . }}
+{{ include "rekor.namespace" . | indent 2 }}
+spec:
+  ports:
+    {{- tpl (toYaml .Values.trillianLogServer.service.ports) . | nindent 4 }}
+  selector:
+    {{- include "rekor.trillianLogServer.matchLabels" . | nindent 4 }}
+  type: "{{ .Values.trillianLogServer.service.type }}"

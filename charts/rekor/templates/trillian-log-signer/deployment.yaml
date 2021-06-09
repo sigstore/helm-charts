@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+{{- if .Values.trillianLogSigner.deploymentAnnotations }}
+  annotations:
+    {{ toYaml .Values.trillianLogSigner.deploymentAnnotations | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "rekor.trillianLogSigner.labels" . | nindent 4 }}
+  name: {{ template "rekor.trillianLogSigner.fullname" . }}
+{{ include "rekor.namespace" . | indent 2 }}
+spec:
+  selector:
+    {{- if .Values.schedulerName }}
+    schedulerName: "{{ .Values.schedulerName }}"
+    {{- end }}
+    matchLabels:
+      {{- include "rekor.trillianLogSigner.matchLabels" . | nindent 6 }}
+  replicas: {{ .Values.trillianLogSigner.replicaCount }}
+  {{- if .Values.trillianLogSigner.strategy }}
+  strategy:
+{{ toYaml .Values.trillianLogSigner.strategy | trim | indent 4 }}
+    {{ if eq .Values.trillianLogSigner.strategy.type "Recreate" }}rollingUpdate: null{{ end }}
+{{- end }}
+  template:
+    metadata:
+    {{- if .Values.trillianLogSigner.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.trillianLogSigner.podAnnotations | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "rekor.trillianLogSigner.labels" . | nindent 8 }}
+        {{- if .Values.trillianLogSigner.podLabels}}
+        {{ toYaml .Values.trillianLogSigner.podLabels | nindent 8 }}
+        {{- end}}
+    spec:
+      serviceAccountName: {{ template "rekor.serviceAccountName.trillianLogSigner" . }}
+      {{- if .Values.trillianLogSigner.extraInitContainers }}
+      initContainers:
+{{ toYaml .Values.trillianLogSigner.extraInitContainers | indent 8 }}
+      {{- end }}
+{{- if .Values.trillianLogSigner.priorityClassName }}
+      priorityClassName: "{{ .Values.trillianLogSigner.priorityClassName }}"
+{{- end }}
+      containers:
+        - name: {{ template "rekor.name" . }}-{{ .Values.trillianLogSigner.name }}
+          image: "{{ template "rekor.image" .Values.trillianLogSigner.image }}"
+          imagePullPolicy: "{{ .Values.trillianLogSigner.image.pullPolicy }}"
+          args:
+{{  include "rekor.trillianLogSigner.args" . | indent 12 }}
+          env:
+            - name: MYSQL_USER
+              value: {{ .Values.mysql.auth.username | quote }}
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-password
+            - name: MYSQL_DATABASE
+              value: {{ template "mysql.database" . }}
+            - name: MYSQL_HOSTNAME
+              value: {{ template "mysql.hostname" . }}
+            - name: MYSQL_PORT
+              value: {{ .Values.mysql.port | quote }}
+          ports:
+{{- include "rekor.containerPorts" .Values.trillianLogSigner.service.ports | indent 12 }}
+{{- if .Values.trillianLogSigner.livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.trillianLogSigner.livenessProbe | indent 12 }}
+{{- end }}
+{{- if .Values.trillianLogSigner.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.trillianLogSigner.readinessProbe | indent 12 }}
+{{- end }}
+          resources:
+{{ toYaml .Values.trillianLogSigner.resources | indent 12 }}
+    {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+    {{- end }}
+    {{- if .Values.trillianLogSigner.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.trillianLogSigner.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- with .Values.trillianLogSigner.dnsConfig }}
+      dnsConfig:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- if .Values.trillianLogSigner.securityContext }}
+      securityContext:
+{{ toYaml .Values.trillianLogSigner.securityContext | indent 8 }}
+    {{- end }}
+    {{- if .Values.trillianLogSigner.tolerations }}
+      tolerations:
+{{ toYaml .Values.trillianLogSigner.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.trillianLogSigner.affinity }}
+      affinity:
+{{ toYaml .Values.trillianLogSigner.affinity | indent 8 }}
+    {{- end }}

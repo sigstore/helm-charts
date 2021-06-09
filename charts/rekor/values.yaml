@@ -1,0 +1,227 @@
+imagePullSecrets:
+
+redis:
+  enabled: true
+  replicaCount: 1
+  hostname: ""
+  port: 6379
+  args:
+    - --bind
+    - 0.0.0.0
+    - --appendonly
+    - "yes"
+  name: redis
+  image:
+    repository: docker.io/redis
+    pullPolicy: IfNotPresent
+    version: "5.0.10"
+  resources: {}
+  readinessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+    exec:
+      command:
+        - /bin/sh
+        - -i
+        - -c
+        - test "$(redis-cli -h 127.0.0.1 ping)" = "PONG"
+  service:
+    type: ClusterIP
+    ports:
+      - name: 6379-tcp
+        port: 6379
+        protocol: TCP
+        targetPort: 6379
+  serviceAccount:
+    create: true
+    name:
+    annotations: {}
+mysql:
+  enabled: true
+  replicaCount: 1
+  name: mysql
+  hostname: ""
+  port: 3306
+  strategy:
+    type: Recreate
+  image:
+    repository: gcr.io/trillian-opensource-ci/db_server
+    pullPolicy: IfNotPresent
+    version: "5e12fb368c8fd19e10aeb5a5cf785107f8069c08"
+  resources: {}
+  args:
+    - "--ignore-db-dir=lost+found"
+  service:
+    type: ClusterIP
+    ports:
+      - name: 3306-tcp
+        port: 3306
+        protocol: TCP
+        targetPort: 3306
+  livenessProbe:
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+    exec:
+      command:
+        - /etc/init.d/mysql
+        - status
+  readinessProbe:
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+    exec:
+      command:
+        - /etc/init.d/mysql
+        - status
+  secret:
+    annotations: {}
+  auth:
+    username: "mysql"
+    password: ""
+    rootPassword: ""
+    existingSecret: ""
+  persistence:
+    enabled: true
+    annotations: {}
+    storageClass: null
+    size: 5Gi
+    mountPath: /var/lib/mysql
+    subPath: ""
+    existingClaim: ""
+    accessModes:
+      - ReadWriteOnce
+  serviceAccount:
+    create: true
+    name:
+    annotations: {}
+server:
+  enabled: true
+  replicaCount: 1
+  name: server
+  port: 3000
+  image:
+    # repository: gcr.io/projectsigstore/rekor-server
+    repository: quay.io/ablock/rekor-server
+    pullPolicy: IfNotPresent
+    version: latest
+    # version: "sha256:6a057af4c9a4a86fbb0ece4680def495777bdcfd48b750244b4f2cb498c4d816"
+  logging:
+    production: false
+  ingress:
+    enabled: true
+    annotations: {}
+    path: /
+    tls: {}
+  service:
+    type: ClusterIP
+    ports:
+      - name: 3000-tcp
+        port: 3000
+        protocol: TCP
+        targetPort: 3000
+      - name: 2112-tcp
+        port: 2112
+        protocol: TCP
+        targetPort: 2112
+  readinessProbe:
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+    httpGet:
+      port: 3000
+      path: /ping
+  livenessProbe:
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+    httpGet:
+      port: 3000
+      path: /ping
+  attestation_storage:
+    enabled: true
+    bucket: file:///var/run/attestations
+    persistence:
+      enabled: true
+      annotations: {}
+      storageClass: null
+      size: 5Gi
+      mountPath: /var/lib/mysql
+      subPath: ""
+      existingClaim: ""
+      accessModes:
+        - ReadWriteOnce
+  deploymentAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: "2112"
+  resources: {}
+  extraArgs: []
+  serviceAccount:
+    create: true
+    name:
+    annotations: {}
+trillianLogServer:
+  enabled: true
+  replicaCount: 1
+  name: trillian-log-server
+  port: 8091
+  image:
+    repository: gcr.io/trillian-opensource-ci/log_server
+    pullPolicy: IfNotPresent
+    version: "5e12fb368c8fd19e10aeb5a5cf785107f8069c08"
+  service:
+    type: ClusterIP
+    ports:
+      - name: 8091-tcp
+        port: 8091
+        protocol: TCP
+        targetPort: 8091
+      - name: 8090-tcp
+        port: 8090
+        protocol: TCP
+        targetPort: 8090
+  livenessProbe: {}
+  readinessProbe: {}
+  resources: {}
+  extraArgs: []
+  serviceAccount:
+    create: true
+    name:
+    annotations: {}
+trillianLogSigner:
+  enabled: true
+  replicaCount: 1
+  name: trillian-log-signer
+  image:
+    repository: gcr.io/trillian-opensource-ci/log_signer
+    pullPolicy: IfNotPresent
+    version: "5e12fb368c8fd19e10aeb5a5cf785107f8069c08"
+  service:
+    type: ClusterIP
+    ports:
+      - name: 8092-tcp
+        port: 8092
+        protocol: TCP
+        targetPort: 8091
+  livenessProbe: {}
+  readinessProbe: {}
+  resources: {}
+  extraArgs: []
+  serviceAccount:
+    create: true
+    name:
+    annotations: {}
+# Force namespace of namespaced resources
+forceNamespace: null

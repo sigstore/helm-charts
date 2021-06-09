@@ -1,0 +1,22 @@
+{{- if .Values.redis.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+{{- if .Values.redis.service.annotations }}
+  annotations:
+{{ toYaml .Values.redis.service.annotations | indent 4 }}
+{{- end }}
+  labels:
+    {{- include "rekor.redis.labels" . | nindent 4 }}
+{{- if .Values.redis.service.labels }}
+{{ toYaml .Values.redis.service.labels | indent 4 }}
+{{- end }}
+  name: {{ template "rekor.redis.fullname" . }}
+{{ include "rekor.namespace" . | indent 2 }}
+spec:
+  ports:
+    {{- tpl (toYaml .Values.redis.service.ports) . | nindent 4 }}
+  selector:
+    {{- include "rekor.redis.matchLabels" . | nindent 4 }}
+  type: "{{ .Values.redis.service.type }}"
+{{- end -}}

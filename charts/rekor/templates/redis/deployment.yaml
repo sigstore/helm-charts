@@ -1,0 +1,96 @@
+{{- if .Values.redis.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+{{- if .Values.redis.deploymentAnnotations }}
+  annotations:
+    {{ toYaml .Values.redis.deploymentAnnotations | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "rekor.redis.labels" . | nindent 4 }}
+  name: {{ template "rekor.redis.fullname" . }}
+{{ include "rekor.namespace" . | indent 2 }}
+spec:
+  selector:
+    {{- if .Values.schedulerName }}
+    schedulerName: "{{ .Values.schedulerName }}"
+    {{- end }}
+    matchLabels:
+      {{- include "rekor.redis.matchLabels" . | nindent 6 }}
+  replicas: {{ .Values.redis.replicaCount }}
+  {{- if .Values.redis.strategy }}
+  strategy:
+{{ toYaml .Values.redis.strategy | trim | indent 4 }}
+    {{ if eq .Values.redis.strategy.type "Recreate" }}rollingUpdate: null{{ end }}
+{{- end }}
+  template:
+    metadata:
+    {{- if .Values.redis.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.redis.podAnnotations | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "rekor.redis.labels" . | nindent 8 }}
+        {{- if .Values.redis.podLabels}}
+        {{ toYaml .Values.redis.podLabels | nindent 8 }}
+        {{- end}}
+    spec:
+      serviceAccountName: {{ template "rekor.serviceAccountName.redis" . }}
+      {{- if .Values.redis.extraInitContainers }}
+      initContainers:
+{{ toYaml .Values.redis.extraInitContainers | indent 8 }}
+      {{- end }}
+{{- if .Values.redis.priorityClassName }}
+      priorityClassName: "{{ .Values.redis.priorityClassName }}"
+{{- end }}
+      containers:
+        - name: {{ template "rekor.name" . }}-{{ .Values.redis.name }}
+          image: "{{ template "rekor.image" .Values.redis.image }}"
+          imagePullPolicy: "{{ .Values.redis.image.pullPolicy }}"
+        {{- if .Values.redis.args }}
+          args:
+{{ toYaml .Values.redis.args | indent 12 }}
+        {{- end }}
+          ports:
+{{- include "rekor.containerPorts" .Values.redis.service.ports | indent 12 }}
+{{- if .Values.redis.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.redis.readinessProbe | indent 12 }}
+{{- end }}
+{{- if .Values.redis.livenessProbe }}
+          readinessProbe:
+{{ toYaml .Values.redis.livenessProbe | indent 12 }}
+{{- end }}
+          resources:
+{{ toYaml .Values.redis.resources | indent 12 }}
+          volumeMounts:
+            - name: storage
+              mountPath: /data
+    {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+    {{- end }}
+    {{- if .Values.redis.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.redis.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- with .Values.redis.dnsConfig }}
+      dnsConfig:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- if .Values.redis.securityContext }}
+      securityContext:
+{{ toYaml .Values.redis.securityContext | indent 8 }}
+    {{- end }}
+    {{- if .Values.redis.tolerations }}
+      tolerations:
+{{ toYaml .Values.redis.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.redis.affinity }}
+      affinity:
+{{ toYaml .Values.redis.affinity | indent 8 }}
+    {{- end }}
+      volumes:
+        - name: storage
+          emptyDir: {}
+{{- end }}

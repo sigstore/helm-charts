@@ -1,0 +1,27 @@
+{{- if and .Values.server.attestation_storage.persistence.enabled (eq "true" (include "rekor.server.fileAttestationStorage" .)) (not .Values.server.attestation_storage.persistence.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+{{- if .Values.server.attestation_storage.persistence.annotations }}
+  annotations:
+{{ toYaml .Values.server.attestation_storage.persistence.annotations | indent 4 }}
+{{- end }}
+  labels:
+    {{- include "rekor.server.labels" . | nindent 4 }}
+{{- if .Values.server.attestation_storage.persistence.labels }}
+{{ toYaml .Values.server.attestation_storage.persistence.labels | indent 4 }}
+{{- end }}
+  name: {{ template "rekor.server.fullname" . }}
+{{ include "rekor.namespace" . | indent 2 }}
+spec:
+  accessModes:
+  {{- range .Values.server.attestation_storage.persistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.server.attestation_storage.persistence.size | quote }}
+{{- if .Values.server.attestation_storage.persistence.storageClass }}
+  storageClassName: {{ .Values.server.attestation_storage.persistence.storageClass }}
+{{- end }}
+{{- end }}

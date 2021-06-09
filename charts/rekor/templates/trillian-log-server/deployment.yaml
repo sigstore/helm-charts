@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+{{- if .Values.trillianLogServer.deploymentAnnotations }}
+  annotations:
+    {{ toYaml .Values.trillianLogServer.deploymentAnnotations | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "rekor.trillianLogServer.labels" . | nindent 4 }}
+  name: {{ template "rekor.trillianLogServer.fullname" . }}
+{{ include "rekor.namespace" . | indent 2 }}
+spec:
+  selector:
+    {{- if .Values.schedulerName }}
+    schedulerName: "{{ .Values.schedulerName }}"
+    {{- end }}
+    matchLabels:
+      {{- include "rekor.trillianLogServer.matchLabels" . | nindent 6 }}
+  replicas: {{ .Values.trillianLogServer.replicaCount }}
+  {{- if .Values.trillianLogServer.strategy }}
+  strategy:
+{{ toYaml .Values.trillianLogServer.strategy | trim | indent 4 }}
+    {{ if eq .Values.trillianLogServer.strategy.type "Recreate" }}rollingUpdate: null{{ end }}
+{{- end }}
+  template:
+    metadata:
+    {{- if .Values.trillianLogServer.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.trillianLogServer.podAnnotations | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "rekor.trillianLogServer.labels" . | nindent 8 }}
+        {{- if .Values.trillianLogServer.podLabels}}
+        {{ toYaml .Values.trillianLogServer.podLabels | nindent 8 }}
+        {{- end}}
+    spec:
+      serviceAccountName: {{ template "rekor.serviceAccountName.trillianLogServer" . }}
+      {{- if .Values.trillianLogServer.extraInitContainers }}
+      initContainers:
+{{ toYaml .Values.trillianLogServer.extraInitContainers | indent 8 }}
+      {{- end }}
+{{- if .Values.trillianLogServer.priorityClassName }}
+      priorityClassName: "{{ .Values.trillianLogServer.priorityClassName }}"
+{{- end }}
+      containers:
+        - name: {{ template "rekor.name" . }}-{{ .Values.trillianLogServer.name }}
+          image: "{{ template "rekor.image" .Values.trillianLogServer.image }}"
+          imagePullPolicy: "{{ .Values.trillianLogServer.image.pullPolicy }}"
+          args:
+{{  include "rekor.trillianLogServer.args" . | indent 12 }}
+          env:
+            - name: MYSQL_USER
+              value: {{ .Values.mysql.auth.username | quote }}
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-password
+            - name: MYSQL_DATABASE
+              value: {{ template "mysql.database" . }}
+            - name: MYSQL_HOSTNAME
+              value: {{ template "mysql.hostname" . }}
+            - name: MYSQL_PORT
+              value: {{ .Values.mysql.port | quote }}
+          ports:
+{{- include "rekor.containerPorts" .Values.trillianLogServer.service.ports | indent 12 }}
+{{- if .Values.trillianLogServer.livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.trillianLogServer.livenessProbe | indent 12 }}
+{{- end }}
+{{- if .Values.trillianLogServer.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.trillianLogServer.readinessProbe | indent 12 }}
+{{- end }}
+          resources:
+{{ toYaml .Values.trillianLogServer.resources | indent 12 }}
+    {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+    {{- end }}
+    {{- if .Values.trillianLogServer.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.trillianLogServer.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- with .Values.trillianLogServer.dnsConfig }}
+      dnsConfig:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- if .Values.trillianLogServer.securityContext }}
+      securityContext:
+{{ toYaml .Values.trillianLogServer.securityContext | indent 8 }}
+    {{- end }}
+    {{- if .Values.trillianLogServer.tolerations }}
+      tolerations:
+{{ toYaml .Values.trillianLogServer.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.trillianLogServer.affinity }}
+      affinity:
+{{ toYaml .Values.trillianLogServer.affinity | indent 8 }}
+    {{- end }}
