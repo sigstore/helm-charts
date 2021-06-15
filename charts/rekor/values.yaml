@@ -108,11 +108,9 @@ server:
   name: server
   port: 3000
   image:
-    # repository: gcr.io/projectsigstore/rekor-server
-    repository: quay.io/ablock/rekor-server
+    repository: gcr.io/projectsigstore/rekor-server
     pullPolicy: IfNotPresent
-    version: latest
-    # version: "sha256:6a057af4c9a4a86fbb0ece4680def495777bdcfd48b750244b4f2cb498c4d816"
+    version: "sha256:6a057af4c9a4a86fbb0ece4680def495777bdcfd48b750244b4f2cb498c4d816"
   logging:
     production: false
   ingress:

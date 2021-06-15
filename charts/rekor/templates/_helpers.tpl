@@ -378,7 +378,6 @@ Log Signer Arguments
 Server Arguments
 */}}
 {{- define "rekor.server.args" -}}
-- "rekor-server"
 - "serve"
 - {{ printf "--trillian_log_server.address=%s" (include "rekor.trillianLogServer.fullname" .) | quote }}
 - {{ printf "--trillian_log_server.port=%d" (.Values.trillianLogServer.port | int) | quote }}
