@@ -4,4 +4,4 @@
 
 ## Charts
 
-* [rekor](rekor)
+* [rekor](charts/rekor)
