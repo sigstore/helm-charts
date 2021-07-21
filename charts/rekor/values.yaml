@@ -50,7 +50,7 @@ mysql:
   image:
     repository: gcr.io/trillian-opensource-ci/db_server
     pullPolicy: IfNotPresent
-    version: "5e12fb368c8fd19e10aeb5a5cf785107f8069c08"
+    version: "df474653733c51ed91d60cf3efee69f7bf3199bd"
   resources: {}
   args:
     - "--ignore-db-dir=lost+found"
@@ -108,9 +108,9 @@ server:
   name: server
   port: 3000
   image:
-    repository: gcr.io/projectsigstore/rekor/ci/rekor
+    repository: gcr.io/projectsigstore/rekor-server
     pullPolicy: IfNotPresent
-    version: "sha256:0ea9a82e0f1e62d88e8f1a57403c0e0e3d269b3e5d84278c59db96fcf464f116"
+    version: "sha256:90baf84b7e4e09827a9fe3e5659923717a96d9c9dad909e1eb73f02b287c2a0d"
   logging:
     production: false
   ingress:
@@ -178,7 +178,7 @@ trillianLogServer:
   image:
     repository: gcr.io/trillian-opensource-ci/log_server
     pullPolicy: IfNotPresent
-    version: "5e12fb368c8fd19e10aeb5a5cf785107f8069c08"
+    version: "df474653733c51ed91d60cf3efee69f7bf3199bd"
   service:
     type: ClusterIP
     ports:
@@ -205,7 +205,7 @@ trillianLogSigner:
   image:
     repository: gcr.io/trillian-opensource-ci/log_signer
     pullPolicy: IfNotPresent
-    version: "5e12fb368c8fd19e10aeb5a5cf785107f8069c08"
+    version: "df474653733c51ed91d60cf3efee69f7bf3199bd"
   service:
     type: ClusterIP
     ports:

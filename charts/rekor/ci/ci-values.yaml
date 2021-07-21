@@ -1,0 +1,4 @@
+---
+server:
+  ingress:
+    hostname: rekor.localhost
