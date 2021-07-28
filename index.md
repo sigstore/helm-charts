@@ -1,5 +1,7 @@
 # Sigstore Helm Repository
 
+![sigstore](assets/sigstore_logo.png)
+
 This branch contains the assets associated to serve the static helm index and chart files
 
 ## Usage
