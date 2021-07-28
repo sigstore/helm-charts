@@ -2,6 +2,24 @@ apiVersion: v1
 entries:
   rekor:
   - apiVersion: v2
+    appVersion: 0.3.0
+    created: "2021-07-28T14:42:16.162817101Z"
+    description: Rekor is an API based server for validation and a transparency log
+      for storage
+    digest: eb40ce4f57cde051462da4e24ff714f680539519612646a94c00145448fee20b
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor
+    sources:
+    - https://github.com/sigstore/rekor
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-0.2.0/rekor-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2021-07-24T05:21:57.055244682Z"
     description: A Helm chart for Kubernetes
     digest: d08f5b505df24fc2df6931f43bce4677bcdf02c7d56b049ee083d4880f52094d
@@ -17,4 +35,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/rekor-0.1.2/rekor-0.1.2.tgz
     version: 0.1.2
-generated: "2021-07-24T05:21:57.056397669Z"
+generated: "2021-07-28T14:42:16.162825901Z"
