@@ -461,3 +461,20 @@ Return the location for file based Attestation storage.
 {{- define "rekor.server.fileAttestationStorage.path" -}}
 {{- print (substr 7 -1 .Values.server.attestation_storage.bucket) -}}
 {{- end -}}
+
+{{/*
+Return a random Secret value or the value of an exising Secret key value
+*/}}
+{{- define "rekor.randomSecret" -}}
+{{- $randomSecret := (randAlpha 10) }}
+{{- $secret := (lookup "v1" "Secret" .context.Release.Namespace .secretName) }}
+{{- if $secret }}
+{{- if hasKey $secret.data .key }}
+{{- print (index $secret.data .key) | b64dec }}
+{{- else }}
+{{- print $randomSecret }}
+{{- end }}
+{{- else }}
+{{- print $randomSecret }}
+{{- end }}
+{{- end -}}
