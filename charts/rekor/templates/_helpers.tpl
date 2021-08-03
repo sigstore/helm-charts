@@ -466,7 +466,7 @@ Return the location for file based Attestation storage.
 Return a random Secret value or the value of an exising Secret key value
 */}}
 {{- define "rekor.randomSecret" -}}
-{{- $randomSecret := (randAlpha 10) }}
+{{- $randomSecret := (randAlphaNum 10) }}
 {{- $secret := (lookup "v1" "Secret" .context.Release.Namespace .secretName) }}
 {{- if $secret }}
 {{- if hasKey $secret.data .key }}
