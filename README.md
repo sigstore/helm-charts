@@ -15,3 +15,4 @@ $ helm repo update
 ## Charts
 
 * [rekor](charts/rekor)
+* [cosigned](charts/cosigned)
