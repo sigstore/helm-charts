@@ -1,6 +1,6 @@
 apiVersion: v2
 name: rekor
-description: Rekor is an API based server for validation and a transparency log for storage
+description: Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
 type: application
 
