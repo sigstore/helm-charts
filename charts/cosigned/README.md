@@ -31,8 +31,6 @@ helm repo update
 helm install cosigned -n cosign-system sigstore/cosigned --devel --set webhook.secretKeyRef.name=mysecret
 ```
 
-We need to add the `--devel` flag because we are still in the development of the chart. This will be removed when we release cosigned `v1.2.0`
-
 To enable the Admission Controller to check the signed images you will need to add the following annotation in the namespaces that you are interested to watch:
 
 Annotation: `cosigned.sigstore.dev/include: "true"`

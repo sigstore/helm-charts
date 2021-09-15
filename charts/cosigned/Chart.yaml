@@ -6,7 +6,7 @@ sources:
 name: cosigned
 type: application
 version: v0.0.3-dev
-appVersion: "dev"
+appVersion: v1.2.0
 maintainers:
   - name: dlorenc
   - name: hectorj2f
