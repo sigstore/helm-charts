@@ -1,5 +1,22 @@
 apiVersion: v1
 entries:
+  cosigned:
+  - apiVersion: v2
+    appVersion: v1.2.0
+    created: "2021-09-16T13:45:26.820472634Z"
+    description: The Helm chart for Cosigned
+    digest: a7c01d840d569db2d6d6d5284e40bccc3e42f6b531260210d4422e97d5a107ae
+    home: https://github.com/sigstore/cosign
+    maintainers:
+    - name: dlorenc
+    - name: hectorj2f
+    name: cosigned
+    sources:
+    - https://github.com/sigstore/cosign
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/cosigned-v0.0.3-dev/cosigned-v0.0.3-dev.tgz
+    version: v0.0.3-dev
   rekor:
   - apiVersion: v2
     appVersion: 0.3.0
@@ -53,4 +70,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/rekor-0.1.2/rekor-0.1.2.tgz
     version: 0.1.2
-generated: "2021-08-04T14:55:38.565434024Z"
+generated: "2021-09-16T13:45:26.820492434Z"
