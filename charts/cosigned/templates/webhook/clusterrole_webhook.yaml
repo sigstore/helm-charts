@@ -1,0 +1,27 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ template "cosigned.fullname" . }}-webhook
+  labels:
+    {{- include "cosigned.labels" . | nindent 4 }}
+    control-plane: {{ template "cosigned.fullname" . }}-webhook
+rules:
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create"]
+  # Allow the reconciliation of exactly our validating webhook.
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources: ["validatingwebhookconfigurations"]
+    verbs: ["list", "watch"]
+
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources: ["validatingwebhookconfigurations"]
+    verbs: ["get", "update"]
+    resourceNames: ["cosigned.sigstore.dev"]
+
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list"]
+    # The webhook configured the namespace as the OwnerRef on various cluster-scoped resources,
+    # which requires we can Get the system namespace.
+    resourceNames: [ "{{ .Release.Namespace }}" ]

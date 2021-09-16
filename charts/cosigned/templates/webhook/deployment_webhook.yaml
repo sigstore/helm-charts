@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "cosigned.labels" . | nindent 4 }}
+    control-plane: {{ template "cosigned.fullname" . }}-webhook
+  name: {{ template "cosigned.fullname" . }}-webhook
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "cosigned.selectorLabels" . | nindent 6 }}
+      control-plane: {{ template "cosigned.fullname" . }}-webhook
+  template:
+    metadata:
+      labels:
+        {{- include "cosigned.selectorLabels" . | nindent 8 }}
+        control-plane: {{ template "cosigned.fullname" . }}-webhook
+    spec:
+      nodeSelector:
+        {{- toYaml .Values.commonNodeSelector | nindent 8 }}
+      tolerations:
+        {{- toYaml .Values.commonTolerations | nindent 8 }}
+      serviceAccountName: {{ template "cosigned.fullname" . }}-webhook
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: {{ template "cosigned.name" . }}-{{ .Values.webhook.name }}
+        image: "{{ template "cosigned.image" .Values.webhook.image }}"
+        imagePullPolicy: "{{ .Values.webhook.image.pullPolicy }}"
+        env:
+        - name: SYSTEM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: CONFIG_LOGGING_NAME
+          value: {{ template "cosigned.fullname" . }}-webhook-logging
+        - name: METRICS_DOMAIN
+          value: sigstore.dev/cosigned
+        - name: WEBHOOK_NAME
+          value: webhook
+{{- if .Values.webhook.env }}
+{{- range $key, $value := .Values.webhook.env }}
+        - name: "{{ $key }}"
+          value: "{{ $value }}"
+{{- end }}
+{{- end }}
+        args:
+        - -secret-name={{ template "cosigned.fullname" . }}-cosign-key
+        {{- range $key, $value := .Values.webhook.extraArgs }}
+        - -{{ $key }}={{ $value }}
+        {{- end }}
+        ports:
+        - containerPort: 8443
+          name: https
+          protocol: TCP
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        resources:
+        {{- with .Values.webhook.resources }}
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        livenessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 20
+          periodSeconds: 1
+          httpGet:
+            port: 8443
+            scheme: HTTPS
+            path: /healthz
+            httpHeaders:
+            - name: k-kubelet-probe
+              value: "webhook"
+        readinessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 20
+          periodSeconds: 1
+          httpGet:
+            port: 8443
+            scheme: HTTPS
+            path: /readyz
+            httpHeaders:
+            - name: k-kubelet-probe
+              value: "webhook"
+        securityContext:
+        {{- with .Values.webhook.podSecurityContext }}
+        {{- toYaml . | nindent 10}}
+        {{- end }}
+      {{- if .Values.webhook.securityContext.enabled }}
+      securityContext:
+        {{- with .Values.webhook.securityContext }}
+        {{- toYaml . | nindent 8}}
+        {{- end }}
+      {{- end }}
