@@ -49,3 +49,7 @@ commonTolerations: []
 #   operator: "Equal"
 #   value: "value"
 #   effect: "NoSchedule"
+
+## serviceMonitor makes cosigned metrics discoverable to prometheus
+serviceMonitor:
+  enabled: false

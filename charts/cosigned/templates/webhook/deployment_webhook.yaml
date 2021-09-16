@@ -35,6 +35,8 @@ spec:
               fieldPath: metadata.namespace
         - name: CONFIG_LOGGING_NAME
           value: {{ template "cosigned.fullname" . }}-webhook-logging
+        - name: CONFIG_OBSERVABILITY_NAME
+          value: {{ template "cosigned.fullname" . }}-webhook-observability
         - name: METRICS_DOMAIN
           value: sigstore.dev/cosigned
         - name: WEBHOOK_NAME
