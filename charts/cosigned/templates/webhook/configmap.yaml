@@ -32,7 +32,7 @@ data:
   # Changes are be picked up immediately.
   loglevel.controller: "info"
   loglevel.webhook: "info"
-{{- if and .Values.serviceMonitor.enabled (.Capabilities.APIVersions.Has "monitoring.coreos.com/v1") }}
+{{- if .Values.serviceMonitor.enabled }}
 ---
 apiVersion: v1
 kind: ConfigMap
