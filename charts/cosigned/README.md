@@ -17,8 +17,6 @@ The previous command generates two key files `cosign.key` and `cosign.pub`. Next
 
 ```shell
 kubectl create namespace cosign-system
-
-kubectl create secret generic mysecret -n cosign-system --from-file=cosign.pub=./cosign.pub --from-file=cosign.key=./cosign.key --from-literal=cosign.password=$COSING_PASSWORD
 ```
 
 Install `cosigned` using Helm and setting the value of the secret key reference to `mysecret` that you created above:
@@ -26,9 +24,7 @@ Install `cosigned` using Helm and setting the value of the secret key reference 
 ```shell
 helm repo add sigstore https://sigstore.github.io/helm-charts
 
-helm repo update
-
-helm install cosigned -n cosign-system sigstore/cosigned --devel --set webhook.secretKeyRef.name=mysecret
+helm upgrade -i cosigned -n cosign-system sigstore/cosigned --devel --set cosign.cosignKey="$(openssl base64 -A -in cosign.key)" --set cosign.cosignPub="$(openssl base64 -A -in cosign.pub)" --set cosign.cosignPassword="$(echo -n "${COSIGN_PASSWORD}" | openssl base64 -A)"
 ```
 
 To enable the Admission Controller to check the signed images you will need to add the following annotation in the namespaces that you are interested to watch:
