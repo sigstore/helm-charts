@@ -12,9 +12,11 @@ redis:
     - "yes"
   name: redis
   image:
-    repository: docker.io/redis
+    registry: docker.io
+    repository: redis
     pullPolicy: IfNotPresent
-    version: "5.0.10"
+    # 5.0.10
+    version: "sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"
   resources: {}
   readinessProbe:
     initialDelaySeconds: 5
@@ -48,9 +50,11 @@ mysql:
   strategy:
     type: Recreate
   image:
-    repository: gcr.io/trillian-opensource-ci/db_server
+    registry: gcr.io
+    repository: trillian-opensource-ci/db_server
     pullPolicy: IfNotPresent
-    version: "df474653733c51ed91d60cf3efee69f7bf3199bd"
+    # df474653733c51ed91d60cf3efee69f7bf3199bd
+    version: "sha256:e21b597eedb84063c7d958b6548e62ff1531a2ce7c024f366ccb4fb43163218c"
   resources: {}
   args:
     - "--ignore-db-dir=lost+found"
@@ -108,8 +112,10 @@ server:
   name: server
   port: 3000
   image:
-    repository: gcr.io/projectsigstore/rekor-server
+    registry: gcr.io
+    repository: projectsigstore/rekor-server
     pullPolicy: IfNotPresent
+    # v0.3.0
     version: "sha256:3dadc6f0d718c9aab3beefec2131713b52af89c280aa460220fa2a7ec5ca4205"
   logging:
     production: false
@@ -176,9 +182,11 @@ trillianLogServer:
   name: trillian-log-server
   port: 8091
   image:
-    repository: gcr.io/trillian-opensource-ci/log_server
+    registry: gcr.io
+    repository: trillian-opensource-ci/log_server
     pullPolicy: IfNotPresent
-    version: "df474653733c51ed91d60cf3efee69f7bf3199bd"
+    # df474653733c51ed91d60cf3efee69f7bf3199bd
+    version: "sha256:d1e117c2815f9842f9e9c10a27a45d4ded86848195ca4a08fede536d1832a1ab"
   service:
     type: ClusterIP
     ports:
@@ -203,9 +211,11 @@ trillianLogSigner:
   replicaCount: 1
   name: trillian-log-signer
   image:
-    repository: gcr.io/trillian-opensource-ci/log_signer
+    registry: gcr.io
+    repository: trillian-opensource-ci/log_signer
     pullPolicy: IfNotPresent
-    version: "df474653733c51ed91d60cf3efee69f7bf3199bd"
+    # df474653733c51ed91d60cf3efee69f7bf3199bd
+    version: "sha256:20d3d6ce98ae38698e3d641c8e386a9f85b4fd1a2c43462687347bb4952bdc52"
   service:
     type: ClusterIP
     ports:
