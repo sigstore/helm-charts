@@ -2,8 +2,8 @@ name: Lint Charts
 
 on:
   pull_request:
-    paths-ignore:
-      - ".github/**"
+    paths:
+      - "charts/**"
 
 jobs:
   test:
