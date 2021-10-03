@@ -23,3 +23,26 @@ spec:
   selector:
     {{- include "cosigned.selectorLabels" . | nindent 4 }}
     control-plane: {{ template "cosigned.fullname" . }}-webhook
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    {{- if .Values.webhook.service.annotations }}
+    {{ toYaml .Values.webhook.service.annotations | nindent 4 }}
+    {{- end }}
+  labels:
+    {{- include "cosigned.labels" . | nindent 4 }}
+    control-plane: {{ template "cosigned.fullname" . }}-webhook
+  name: {{ template "cosigned.fullname" . }}-webhook-metrics
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 9090
+    protocol: TCP
+    targetPort: metrics
+  selector:
+    {{- include "cosigned.selectorLabels" . | nindent 4 }}
+    control-plane: {{ template "cosigned.fullname" . }}-webhook

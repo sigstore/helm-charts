@@ -32,3 +32,17 @@ data:
   # Changes are be picked up immediately.
   loglevel.controller: "info"
   loglevel.webhook: "info"
+{{- if .Values.serviceMonitor.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    {{- include "cosigned.labels" . | nindent 4 }}
+    control-plane: {{ template "cosigned.fullname" . }}-webhook
+  name: {{ template "cosigned.fullname" . }}-webhook-observability
+  namespace: {{ .Release.Namespace }}
+data:
+  metrics.backend-destination: prometheus
+  metrics.request-metrics-backend-destination: prometheus
+{{- end }}
