@@ -36,7 +36,7 @@ helm install cosigned -n cosign-system sigstore/cosigned --devel --set webhook.s
 
 #### Enabling Admission control 
 
-To enable the `cosigned adission webhook` to check for signed images, you will need to add the following annotation in each namespace that you would want the webhook triggered:
+To enable the `cosigned admission webhook` to check for signed images, you will need to add the following annotation in each namespace that you would want the webhook triggered:
 
 Annotation: `cosigned.sigstore.dev/include: "true"`
 
