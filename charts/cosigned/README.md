@@ -1,12 +1,11 @@
-## Cosigned Admission Webhook
+# Cosigned Admission Webhook
 
-### Requirements
+## Requirements
 * Kubernetes cluster with rights to install admission webhooks
 * Helm
 
-###Deploy `cosigned` Helm Chart
+### Deploy `cosigned` Helm Chart
 
-Generate a keypair to validate the signatures of the deployed Kubernetes resources and their images:
 
 ```shell
 export COSIGN_PASSWORD=<my_cosign_password>
@@ -34,7 +33,7 @@ helm repo update
 helm install cosigned -n cosign-system sigstore/cosigned --devel --set webhook.secretKeyRef.name=mysecret
 ```
 
-#### Enabling Admission control 
+### Enabling Admission control 
 
 To enable the `cosigned admission webhook` to check for signed images, you will need to add the following annotation in each namespace that you would want the webhook triggered:
 
@@ -53,7 +52,7 @@ spec:
   - kubernetes
 ```
 
-#### Testing the webhook 
+### Testing the webhook 
 
 1. Using Unsigned Images: 
 Creating a deployment referencing images that are not signed will yield the following error and no resources will be created:
@@ -62,11 +61,11 @@ Creating a deployment referencing images that are not signed will yield the foll
     kubectl apply -f my-deployment.yaml
     Error from server (BadRequest): error when creating "my-deployment.yaml": admission webhook "cosigned.sigstore.dev" denied the request: validation failed: invalid image signature: spec.template.spec.containers[0].image
     ```
-2. Using Signed Images
+2. Using Signed Images: Assuming a signed `nginx` image with a tag `signed` exists on a registry, the resource will be successfully created.
 
    ```shell
-   kubectl run testsignedpod  --image=< REGISTRY_USER >/nginx:signed -n testns
-   pod/testsignedpod created
+   kubectl run pod1-signed  --image=< REGISTRY_USER >/nginx:signed -n testns
+   pod/pod1-signed created
    ```
 
 
