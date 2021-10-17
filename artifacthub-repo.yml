@@ -1,0 +1,9 @@
+# Artifact Hub repository metadata file
+repositoryID: <artifacthub-id>
+owners:
+  - name: cpanato
+    email: ctadeu@gmail.com
+  - name: sabre1041
+    email: andy.block@gmail.com
+  - name: hectorj2f
+    email: hectorj@gmail.com
