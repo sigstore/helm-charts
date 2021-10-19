@@ -1,5 +1,7 @@
 # Helm Charts
 
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/sigstore)](https://artifacthub.io/packages/search?repo=sigstore)
+
 [Helm](https://helm.sh) Charts to support the [Sigstore](https://sigstore.dev) project.
 
 
