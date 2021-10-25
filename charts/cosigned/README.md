@@ -18,7 +18,7 @@ The previous command generates two key files `cosign.key` and `cosign.pub`. Next
 ```shell
 kubectl create namespace cosign-system
 
-kubectl create secret generic mysecret -n cosign-system --from-file=cosign.pub=./cosign.pub --from-file=cosign.key=./cosign.key --from-literal=cosign.password=$COSING_PASSWORD
+kubectl create secret generic mysecret -n cosign-system --from-file=cosign.pub=./cosign.pub --from-file=cosign.key=./cosign.key --from-literal=cosign.password=$COSIGN_PASSWORD
 ```
 
 Install `cosigned` using Helm and setting the value of the secret key reference to `mysecret` that you created above:
