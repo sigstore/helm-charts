@@ -4,9 +4,8 @@
 * Kubernetes cluster with rights to install admission webhooks
 * Helm
 
-## Deploy `cosigned` Helm Chart
+### Deploy `cosigned` Helm Chart
 
-Generate a keypair to validate the signatures of the deployed Kubernetes resources and their images:
 
 ```shell
 export COSIGN_PASSWORD=<my_cosign_password>
@@ -27,7 +26,9 @@ helm repo add sigstore https://sigstore.github.io/helm-charts
 helm upgrade -i cosigned -n cosign-system sigstore/cosigned --devel --set cosign.cosignKey="$(openssl base64 -A -in cosign.key)" --set cosign.cosignPub="$(openssl base64 -A -in cosign.pub)" --set cosign.cosignPassword="$(echo -n "${COSIGN_PASSWORD}" | openssl base64 -A)"
 ```
 
-To enable the Admission Controller to check the signed images you will need to add the following annotation in the namespaces that you are interested to watch:
+### Enabling Admission control
+
+To enable the `cosigned admission webhook` to check for signed images, you will need to add the following annotation in each namespace that you would want the webhook triggered:
 
 Annotation: `cosigned.sigstore.dev/include: "true"`
 
@@ -44,9 +45,21 @@ spec:
   - kubernetes
 ```
 
-Then when creating, for example, a Deployment that does not have the images signed you will get the following error:
+### Testing the webhook
 
-```shell
-kubectl apply -f my-deployment.yaml
-Error from server (BadRequest): error when creating "my-deployment.yaml": admission webhook "cosigned.sigstore.dev" denied the request: validation failed: invalid image signature: spec.template.spec.containers[0].image
-```
+1. Using Unsigned Images:
+Creating a deployment referencing images that are not signed will yield the following error and no resources will be created:
+
+    ```shell
+    kubectl apply -f my-deployment.yaml
+    Error from server (BadRequest): error when creating "my-deployment.yaml": admission webhook "cosigned.sigstore.dev" denied the request: validation failed: invalid image signature: spec.template.spec.containers[0].image
+    ```
+2. Using Signed Images: Assuming a signed `nginx` image with a tag `signed` exists on a registry, the resource will be successfully created.
+
+   ```shell
+   kubectl run pod1-signed  --image=< REGISTRY_USER >/nginx:signed -n testns
+   pod/pod1-signed created
+   ```
+
+
+
