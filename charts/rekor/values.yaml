@@ -1,5 +1,12 @@
 imagePullSecrets:
 
+initContainerImage:
+  registry: docker.io
+  repository: appropriate/curl
+  # latest from 2021-10-28
+  version: sha256:c8bf5bbec6397465a247c2bb3e589bb77e4f62ff88a027175ecb2d9e4f12c9d7
+  imagePullPolicy: IfNotPresent
+
 redis:
   enabled: true
   replicaCount: 1
