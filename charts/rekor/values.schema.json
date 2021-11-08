@@ -1700,7 +1700,10 @@
                         },
                         "storageClass": {
                             "$id": "#/properties/mysql/properties/persistence/properties/storageClass",
-                            "type": "null",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
                             "title": "The storageClass schema",
                             "description": "An explanation about the purpose of this instance.",
                             "default": null,
@@ -2630,7 +2633,10 @@
                                 },
                                 "storageClass": {
                                     "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/storageClass",
-                                    "type": "null",
+                                    "type":  [
+                                        "string",
+                                        "null"
+                                    ],
                                     "title": "The storageClass schema",
                                     "description": "An explanation about the purpose of this instance.",
                                     "default": null,
