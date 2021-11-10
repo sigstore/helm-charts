@@ -1,8 +1,11 @@
 cosign:
+  secretKeyRef:
+    name:
   # add the values in base64 encoded
   cosignKey:
   cosignPub:
   cosignPassword:
+
 
 webhook:
   name: webhook
