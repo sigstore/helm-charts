@@ -6,7 +6,6 @@ cosign:
   cosignPub:
   cosignPassword:
 
-
 webhook:
   name: webhook
   image:
