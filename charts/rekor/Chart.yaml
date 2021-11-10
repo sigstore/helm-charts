@@ -30,3 +30,5 @@ annotations:
       image: gcr.io/trillian-opensource-ci/db_server@sha256:e21b597eedb84063c7d958b6548e62ff1531a2ce7c024f366ccb4fb43163218c
     - name: redis
       image: docker.io/redis@sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4
+    - name: appropriate/curl
+      image: docker.io/appropriate/curl@sha256:c8bf5bbec6397465a247c2bb3e589bb77e4f62ff88a027175ecb2d9e4f12c9d7

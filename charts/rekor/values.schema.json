@@ -234,7 +234,8 @@
                 "enabled": true,
                 "replicaCount": 1,
                 "name": "trillian-log-server",
-                "port": 8091,
+                "portRPC": 8091,
+                "portHTTP": 8090,
                 "image": {
                     "registry": "gcr.io",
                     "repository": "trillian-opensource-ci/log_server",
@@ -272,6 +273,8 @@
                 "enabled": true,
                 "replicaCount": 1,
                 "name": "trillian-log-signer",
+                "portRPC": 8091,
+                "portHTTP": 8090,
                 "image": {
                     "registry": "gcr.io",
                     "repository": "trillian-opensource-ci/log_signer",
@@ -282,8 +285,8 @@
                     "type": "ClusterIP",
                     "ports": [
                         {
-                            "name": "8092-tcp",
-                            "port": 8092,
+                            "name": "8091-tcp",
+                            "port": 8091,
                             "protocol": "TCP",
                             "targetPort": 8091
                         }
@@ -2854,7 +2857,8 @@
                     "enabled": true,
                     "replicaCount": 1,
                     "name": "trillian-log-server",
-                    "port": 8091,
+                    "portRPC": 8091,
+                    "portHTTP": 8090,
                     "image": {
                         "registry": "gcr.io",
                         "repository": "trillian-opensource-ci/log_server",
@@ -2893,7 +2897,8 @@
                 "enabled",
                 "replicaCount",
                 "name",
-                "port",
+                "portRPC",
+                "portHTTP",
                 "image",
                 "service",
                 "livenessProbe",
@@ -2932,14 +2937,24 @@
                         "trillian-log-server"
                     ]
                 },
-                "port": {
-                    "$id": "#/properties/trillianLogServer/properties/port",
+                "portRPC": {
+                    "$id": "#/properties/trillianLogServer/properties/portRPC",
                     "type": "integer",
                     "title": "The port schema",
                     "description": "An explanation about the purpose of this instance.",
                     "default": 0,
                     "examples": [
                         8091
+                    ]
+                },
+                "portHTTP": {
+                    "$id": "#/properties/trillianLogServer/properties/portHTTP",
+                    "type": "integer",
+                    "title": "The port schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                        8090
                     ]
                 },
                 "image": {
@@ -3259,6 +3274,8 @@
                     "enabled": true,
                     "replicaCount": 1,
                     "name": "trillian-log-signer",
+                    "portRPC": 8091,
+                    "portHTTP": 8090,
                     "image": {
                         "registry": "gcr.io",
                         "repository": "trillian-opensource-ci/log_signer",
@@ -3269,8 +3286,8 @@
                         "type": "ClusterIP",
                         "ports": [
                             {
-                                "name": "8092-tcp",
-                                "port": 8092,
+                                "name": "8091-tcp",
+                                "port": 8091,
                                 "protocol": "TCP",
                                 "targetPort": 8091
                             }
@@ -3291,6 +3308,8 @@
                 "enabled",
                 "replicaCount",
                 "name",
+                "portRPC",
+                "portHTTP",
                 "image",
                 "service",
                 "livenessProbe",
@@ -3327,6 +3346,26 @@
                     "default": "",
                     "examples": [
                         "trillian-log-signer"
+                    ]
+                },
+                "portRPC": {
+                    "$id": "#/properties/trillianLogSigner/properties/portRPC",
+                    "type": "integer",
+                    "title": "The port schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                        8091
+                    ]
+                },
+                "portHTTP": {
+                    "$id": "#/properties/trillianLogSigner/properties/portHTTP",
+                    "type": "integer",
+                    "title": "The port schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                        8090
                     ]
                 },
                 "image": {

@@ -350,8 +350,8 @@ Log Server Arguments
 {{- define "rekor.trillianLogServer.args" -}}
 - '--storage_system=mysql'
 - '--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)'
-- '--rpc_endpoint=0.0.0.0:8091'
-- '--http_endpoint=0.0.0.0:8090'
+- {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.trillianLogServer.portRPC | int) | quote }}
+- {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.trillianLogServer.portHTTP | int) | quote }}
 - '--alsologtostderr'
 {{- if .Values.trillianLogServer.extraArgs -}}
 {{ toYaml .Values.trillianLogServer.extraArgs }}
@@ -364,8 +364,8 @@ Log Signer Arguments
 {{- define "rekor.trillianLogSigner.args" -}}
 - '--storage_system=mysql'
 - '--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)'
-- '--rpc_endpoint=0.0.0.0:8091'
-- '--http_endpoint=0.0.0.0:8090'
+- {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.trillianLogSigner.portRPC | int) | quote }}
+- {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.trillianLogSigner.portHTTP | int) | quote }}
 - '--force_master'
 - '--alsologtostderr'
 {{- if .Values.trillianLogSigner.extraArgs -}}
@@ -380,7 +380,7 @@ Server Arguments
 {{- define "rekor.server.args" -}}
 - "serve"
 - {{ printf "--trillian_log_server.address=%s" (include "rekor.trillianLogServer.fullname" .) | quote }}
-- {{ printf "--trillian_log_server.port=%d" (.Values.trillianLogServer.port | int) | quote }}
+- {{ printf "--trillian_log_server.port=%d" (.Values.trillianLogServer.portRPC | int) | quote }}
 - {{ printf "--redis_server.address=%s" (include "redis.hostname" .) | quote }}
 - {{ printf "--redis_server.port=%d" (.Values.redis.port | int) | quote }}
 - "--rekor_server.address=0.0.0.0"

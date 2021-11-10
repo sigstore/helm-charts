@@ -187,7 +187,8 @@ trillianLogServer:
   enabled: true
   replicaCount: 1
   name: trillian-log-server
-  port: 8091
+  portRPC: 8091
+  portHTTP: 8090
   image:
     registry: gcr.io
     repository: trillian-opensource-ci/log_server
@@ -217,6 +218,8 @@ trillianLogSigner:
   enabled: true
   replicaCount: 1
   name: trillian-log-signer
+  portRPC: 8091
+  portHTTP: 8090
   image:
     registry: gcr.io
     repository: trillian-opensource-ci/log_signer
@@ -226,8 +229,8 @@ trillianLogSigner:
   service:
     type: ClusterIP
     ports:
-      - name: 8092-tcp
-        port: 8092
+      - name: 8091-tcp
+        port: 8091
         protocol: TCP
         targetPort: 8091
   livenessProbe: {}
