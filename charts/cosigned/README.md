@@ -18,9 +18,7 @@ The previous command generates two key files `cosign.key` and `cosign.pub`. Next
 kubectl create namespace cosign-system
 
 kubectl create secret generic mysecret -n \
-cosign-system --from-file=cosign.pub=./cosign.pub \
---from-file=cosign.key=./cosign.key \
---from-literal=cosign.password=$COSIGN_PASSWORD
+cosign-system --from-file=cosign.pub=./cosign.pub
 ```
 
 Install `cosigned` using Helm and setting the value of the secret key reference to `mysecret` that you created above:
@@ -30,7 +28,7 @@ helm repo add sigstore https://sigstore.github.io/helm-charts
 
 helm repo update
 
-helm install cosigned -n cosign-system sigstore/cosigned --devel --set webhook.secretKeyRef.name=mysecret
+helm install cosigned -n cosign-system sigstore/cosigned --devel --set cosign.secretKeyRef.name=mysecret
 ```
 
 ### Enabling Admission control
