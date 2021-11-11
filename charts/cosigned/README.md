@@ -33,7 +33,7 @@ helm repo update
 helm install cosigned -n cosign-system sigstore/cosigned --devel --set webhook.secretKeyRef.name=mysecret
 ```
 
-### Enabling Admission control 
+### Enabling Admission control
 
 To enable the `cosigned admission webhook` to check for signed images, you will need to add the following annotation in each namespace that you would want the webhook triggered:
 
@@ -52,9 +52,9 @@ spec:
   - kubernetes
 ```
 
-### Testing the webhook 
+### Testing the webhook
 
-1. Using Unsigned Images: 
+1. Using Unsigned Images:
 Creating a deployment referencing images that are not signed will yield the following error and no resources will be created:
 
     ```shell
