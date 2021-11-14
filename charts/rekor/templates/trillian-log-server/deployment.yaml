@@ -35,8 +35,12 @@ spec:
         {{- end}}
     spec:
       serviceAccountName: {{ template "rekor.serviceAccountName.trillianLogServer" . }}
-      {{- if .Values.trillianLogServer.extraInitContainers }}
       initContainers:
+        - name: "wait-for-trillian-db"
+          image: "{{ template "rekor.image" .Values.initContainerImage }}"
+          imagePullPolicy: {{ .Values.initContainerImage.imagePullPolicy }}
+          command: ["sh", "-c", "until curl --max-time 10 http://{{ template "mysql.hostname" . }}:{{ .Values.mysql.port }}; do echo waiting for {{ template "mysql.hostname" . }}; sleep 5; done;"]
+      {{- if .Values.trillianLogServer.extraInitContainers }}
 {{ toYaml .Values.trillianLogServer.extraInitContainers | indent 8 }}
       {{- end }}
 {{- if .Values.trillianLogServer.priorityClassName }}
