@@ -50,7 +50,7 @@ spec:
         args:
         {{- if and .Values.cosign.secretKeyRef }}
         {{- if .Values.cosign.secretKeyRef.name }}
-        - -secret-name="{{ .Values.cosign.secretKeyRef.name }}"
+        - -secret-name={{ .Values.cosign.secretKeyRef.name }}
         {{- end }}
         {{- else }}
         - -secret-name={{ template "cosigned.fullname" . }}-cosign-key
