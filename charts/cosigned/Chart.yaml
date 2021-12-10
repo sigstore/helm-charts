@@ -8,8 +8,8 @@ sources:
 type: application
 
 name: cosigned
-version: v0.1.6
-appVersion: v1.3.1
+version: v0.1.7
+appVersion: v1.4.0
 
 maintainers:
   - name: dlorenc
@@ -19,4 +19,4 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: cosigned
-      image: gcr.io/projectsigstore/cosigned:v1.3.1@sha256:6b7dad33dfee585a9dd0bb13c9d5fd5e96bb92267628a97f4131f900aab300b6
+      image: gcr.io/projectsigstore/cosigned:v1.4.0@sha256:e8cab7aaa67116da504d5eeab88d2094faf7592530c244e8bc3760a93f989b31
