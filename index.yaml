@@ -4,6 +4,27 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: cosigned
+          image: gcr.io/projectsigstore/cosigned:v1.4.0@sha256:e8cab7aaa67116da504d5eeab88d2094faf7592530c244e8bc3760a93f989b31
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: v1.4.0
+    created: "2021-12-10T17:34:39.463566134Z"
+    description: The Helm chart for Cosigned
+    digest: 521959776c838a3671cf7c2801aaf34b4dc9b0cdbc083f9bd6f69071d6ace36b
+    home: https://github.com/sigstore/cosign
+    maintainers:
+    - name: dlorenc
+    - name: hectorj2f
+    name: cosigned
+    sources:
+    - https://github.com/sigstore/cosign
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/cosigned-v0.1.7/cosigned-v0.1.7.tgz
+    version: v0.1.7
+  - annotations:
+      artifacthub.io/images: |
+        - name: cosigned
           image: gcr.io/projectsigstore/cosigned:v1.3.1@sha256:6b7dad33dfee585a9dd0bb13c9d5fd5e96bb92267628a97f4131f900aab300b6
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
@@ -471,4 +492,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/rekor-0.1.2/rekor-0.1.2.tgz
     version: 0.1.2
-generated: "2021-11-29T09:56:59.423571672Z"
+generated: "2021-12-10T17:34:39.463667035Z"
