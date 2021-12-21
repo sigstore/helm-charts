@@ -8,6 +8,27 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: v1.4.1
+    created: "2021-12-21T20:23:52.889303716Z"
+    description: The Helm chart for Cosigned
+    digest: 01cb4e1468c08012b26a615002da88f4e2da1db4cbcf151fc81246a5ae4adf45
+    home: https://github.com/sigstore/cosign
+    maintainers:
+    - name: dlorenc
+    - name: hectorj2f
+    name: cosigned
+    sources:
+    - https://github.com/sigstore/cosign
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/cosigned-v0.1.9/cosigned-v0.1.9.tgz
+    version: v0.1.9
+  - annotations:
+      artifacthub.io/images: |
+        - name: cosigned
+          image: gcr.io/projectsigstore/cosigned:v1.4.1@sha256:d1aee97490481dae0a979913bb92fa749164fbc91a314a6b5d94aa1a87b69396
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: v1.4.1
     created: "2021-12-10T17:43:35.346445793Z"
     description: The Helm chart for Cosigned
     digest: 18b673909d0ef4710fa4bc98b53c049baab47b41c7b69689f1ad1c550bf307dd
@@ -284,6 +305,43 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 0.3.0
+    created: "2021-12-21T20:23:53.051511627Z"
+    description: Part of the sigstore project, Rekor is a timestamping server and
+      transparency log for storing signatures, as well as an API based server for
+      validation
+    digest: 06248bba5b7180229b1f8459d5a9933476a8c8dbb7f5c93d69faf64027bbdf4a
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor
+    sources:
+    - https://github.com/sigstore/rekor
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-0.2.9/rekor-0.2.9.tgz
+    version: 0.2.9
+  - annotations:
+      artifacthub.io/images: |
+        - name: rekor-server
+          image: gcr.io/projectsigstore/rekor-server@sha256:3dadc6f0d718c9aab3beefec2131713b52af89c280aa460220fa2a7ec5ca4205
+        - name: log_server
+          image: gcr.io/trillian-opensource-ci/log_server@sha256:d1e117c2815f9842f9e9c10a27a45d4ded86848195ca4a08fede536d1832a1ab
+        - name: log_signer
+          image: gcr.io/trillian-opensource-ci/log_signer@sha256:20d3d6ce98ae38698e3d641c8e386a9f85b4fd1a2c43462687347bb4952bdc52
+        - name: db_server
+          image: gcr.io/trillian-opensource-ci/db_server@sha256:e21b597eedb84063c7d958b6548e62ff1531a2ce7c024f366ccb4fb43163218c
+        - name: redis
+          image: docker.io/redis@sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl@sha256:1a2209a10a11295c3ab6952d1278a9ea2ce0d20e33fdeaeb24d7a4586767c825
+        - name: toolbelt/netcat
+          image: docker.io/toolbelt/netcat@sha256:a88ddd1f371229e7ea40a200a02145ddd48af602a028e0657e0ba6a18c58dbaf
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.3.0
     created: "2021-11-29T09:56:59.423462373Z"
     description: Part of the sigstore project, Rekor is a timestamping server and
       transparency log for storing signatures, as well as an API based server for
@@ -513,4 +571,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/rekor-0.1.2/rekor-0.1.2.tgz
     version: 0.1.2
-generated: "2021-12-10T17:43:35.346552694Z"
+generated: "2021-12-21T20:23:53.05164443Z"
