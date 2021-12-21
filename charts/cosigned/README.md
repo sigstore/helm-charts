@@ -7,18 +7,13 @@
 ### Deploy `cosigned` Helm Chart
 
 
+Let's create a secret to validate the signatures, once we define `k8s://` scheme for the command, cosign will generate public/private key pairs, and store them in a Secret without touching a disk:
 ```shell
 export COSIGN_PASSWORD=<my_cosign_password>
-cosign generate-key-pair
-```
 
-The previous command generates two key files `cosign.key` and `cosign.pub`. Next, create a secret to validate the signatures:
-
-```shell
 kubectl create namespace cosign-system
 
-kubectl create secret generic mysecret -n \
-cosign-system --from-file=cosign.pub=./cosign.pub
+cosign generate-key-pair k8s://cosign-system/mysecret
 ```
 
 Install `cosigned` using Helm and setting the value of the secret key reference to `mysecret` that you created above:
