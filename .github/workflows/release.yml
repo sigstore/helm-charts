@@ -26,10 +26,28 @@ jobs:
         with:
           version: v3.7.1
 
+      - name: Install sigstore Helm plugin
+        run: |
+          helm plugin install https://github.com/sigstore/helm-sigstore
+      - name: Install GPG Keys
+        run: |
+          cat <(echo -e "${{ secrets.GPG_PRIVATE_KEY }}") | gpg --import --batch
+          gpg --export > /home/runner/.gnupg/pubring.gpg
+          gpg --export-secret-keys > /home/runner/.gnupg/secring.gpg
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@c25b74a986eb925b398320414b576227f375f946 # pin@v1.2.1
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_SIGN: "true"
+          CR_KEY: "${{ secrets.GPG_KEY_NAME }}"
+          CR_KEYRING: "/home/runner/.gnupg/secring.gpg"
+
+      - name: Upload Helm Charts to Rekor
+        run: |
+          for chart in `find .cr-release-packages -name '*.tgz' -print`; do
+            helm sigstore upload --keyring=/home/runner/.gnupg/secring.gpg ${chart}
+          done
 
       - name: Login to GitHub Container Registry
         run: |
