@@ -30,6 +30,8 @@ webhook:
     capabilities:
       drop:
       - all
+  serviceAccount:
+    annotations: {}
   service:
     annotations: {}
     type: ClusterIP
