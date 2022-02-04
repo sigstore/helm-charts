@@ -4,8 +4,8 @@ description: Part of the sigstore project, Rekor is a timestamping server and tr
 
 type: application
 
-version: 0.2.10
-appVersion: 0.4.0
+version: 0.2.11
+appVersion: 0.5.0
 
 keywords:
   - security
@@ -21,7 +21,7 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: rekor-server
-      image: gcr.io/projectsigstore/rekor-server@sha256:726ae4de825447ec74420f72ca2e17f906e6591240802f5e85b0dc340ed163b3
+      image: gcr.io/projectsigstore/rekor-server@sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6
     - name: log_server
       image: gcr.io/trillian-opensource-ci/log_server@sha256:d1e117c2815f9842f9e9c10a27a45d4ded86848195ca4a08fede536d1832a1ab
     - name: log_signer
