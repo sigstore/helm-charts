@@ -8,8 +8,8 @@ sources:
 type: application
 
 name: cosigned
-version: v0.1.9
-appVersion: v1.4.1
+version: 0.1.10
+appVersion: 1.4.1
 
 maintainers:
   - name: dlorenc
