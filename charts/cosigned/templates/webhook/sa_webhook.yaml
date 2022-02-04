@@ -6,3 +6,7 @@ metadata:
     control-plane: {{ template "cosigned.fullname" . }}-webhook
   name: {{ template "cosigned.fullname" . }}-webhook
   namespace: {{ .Release.Namespace }}
+  {{- with .Values.webhook.serviceAccount.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
