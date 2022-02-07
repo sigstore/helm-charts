@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "fulcio.fullname" . }}
+{{ include "fulcio.namespace" . | indent 2 }}
+  labels:
+    {{- include "fulcio.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.server.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "fulcio.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "fulcio.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ template "fulcio.serviceAccountName" . }}
+      # This doesn't actually use Kubernetes credentials, so don't mount them in.
+      automountServiceAccountToken: {{ .Values.server.serviceAccount.mountToken }}
+      containers:
+        - name: {{ template "fulcio.fullname" . }}
+          image: "{{ template "fulcio.image" .Values.server.image }}"
+          imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
+          ports:
+            - containerPort: 5555
+          args:
+            - "serve"
+            - "--port=5555"
+            - "--ca=fileca"
+            - "--fileca-key"
+            - "/var/run/fulcio-secrets/key.pem"
+            - "--fileca-cert"
+            - "/var/run/fulcio-secrets/cert.pem"
+            - "--fileca-key-passwd"
+            - "$(PASSWORD)"
+            - "--ct-log-url=http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace }}.svc/sigstorescaffolding"
+          env:
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fulcio-secret
+                  key: password
+          volumeMounts:
+            - name: fulcio-config
+              mountPath: /etc/fulcio-config
+            - name: oidc-info
+              mountPath: /var/run/fulcio
+            - name: fulcio-cert
+              mountPath: "/var/run/fulcio-secrets"
+              readOnly: true
+      volumes:
+        - name: fulcio-config
+          configMap:
+            name: {{ template "fulcio.config" . }}
+        - name: fulcio-cert
+          secret:
+            secretName: fulcio-secret
+            items:
+              - key: private
+                path: key.pem
+              - key: cert
+                path: cert.pem
+        - name: oidc-info
+          projected:
+            sources:
+              - configMap:
+                  name: kube-root-ca.crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+                      mode: 0666

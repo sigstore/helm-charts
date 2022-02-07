@@ -1,0 +1,33 @@
+server:
+  replicaCount: 1
+  image:
+    registry: gcr.io
+    repository: vaikas/server
+    pullPolicy: IfNotPresent
+    # TODO
+    version: "sha256:6f7b22349dd0465041a3c22af04c949f848a509b24907228929aa1514a0afc5d"
+  serviceAccount:
+    create: true
+    name:
+    annotations: {}
+    mountToken: false
+createcerts:
+  enabled: true
+  replicaCount: 1
+  name: createcerts
+  image:
+    registry: gcr.io
+    repository: vaikas/createcerts
+    pullPolicy: IfNotPresent
+    # TODO
+    version: "sha256:8dbdd3e56273bee36449cddb6b8bc8ac7d4cda4408e7d396f6000b3c37106150"
+  serviceAccount:
+    create: true
+    name:
+    annotations: {}
+    mountToken: true
+ctlog:
+  name: ctlog
+  namespace: ctlog-system
+# Force namespace of namespaced resources
+forceNamespace: null

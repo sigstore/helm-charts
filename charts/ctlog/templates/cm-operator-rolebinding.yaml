@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ template "ctlog.fullname" . }}-cm-operator
+{{ include "ctlog.namespace" . | indent 2 }}
+  labels:
+    {{- include "ctlog.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ template "ctlog.fullname" . }}-cm-operator
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "ctlog.serviceAccountName.createtree" . }}
+{{ include "ctlog.namespace" . | indent 4 }}
