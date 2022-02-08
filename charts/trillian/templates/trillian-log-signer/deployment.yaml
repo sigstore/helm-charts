@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+{{- if .Values.logSigner.deploymentAnnotations }}
+  annotations:
+    {{ toYaml .Values.logSigner.deploymentAnnotations | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "trillian.logSigner.labels" . | nindent 4 }}
+  name: {{ template "trillian.logSigner.fullname" . }}
+{{ include "trillian.namespace" . | indent 2 }}
+spec:
+  selector:
+    {{- if .Values.schedulerName }}
+    schedulerName: "{{ .Values.schedulerName }}"
+    {{- end }}
+    matchLabels:
+      {{- include "trillian.logSigner.matchLabels" . | nindent 6 }}
+  replicas: {{ .Values.logSigner.replicaCount }}
+  {{- if .Values.logSigner.strategy }}
+  strategy:
+{{ toYaml .Values.logSigner.strategy | trim | indent 4 }}
+    {{ if eq .Values.logSigner.strategy.type "Recreate" }}rollingUpdate: null{{ end }}
+{{- end }}
+  template:
+    metadata:
+    {{- if .Values.logSigner.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.logSigner.podAnnotations | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "trillian.logSigner.labels" . | nindent 8 }}
+        {{- if .Values.logSigner.podLabels}}
+        {{ toYaml .Values.logSigner.podLabels | nindent 8 }}
+        {{- end}}
+    spec:
+      serviceAccountName: {{ template "trillian.serviceAccountName.logSigner" . }}
+      initContainers:
+        - name: "wait-for-trillian-db"
+          image: "{{ template "trillian.image" .Values.initContainerImage.netcat }}"
+          imagePullPolicy: {{ .Values.initContainerImage.netcat.imagePullPolicy }}
+          command: ["sh", "-c", "until nc -z -w 10 {{ template "mysql.hostname" . }} {{ .Values.mysql.port }}; do echo waiting for {{ template "mysql.hostname" . }}; sleep 5; done;"]
+      {{- if .Values.logSigner.extraInitContainers }}
+{{ toYaml .Values.logSigner.extraInitContainers | indent 8 }}
+      {{- end }}
+{{- if .Values.logSigner.priorityClassName }}
+      priorityClassName: "{{ .Values.logSigner.priorityClassName }}"
+{{- end }}
+      containers:
+        - name: {{ template "trillian.name" . }}-{{ .Values.logSigner.name }}
+          image: "{{ template "trillian.image" .Values.logSigner.image }}"
+          imagePullPolicy: "{{ .Values.logSigner.image.pullPolicy }}"
+          args:
+{{  include "trillian.logSigner.args" . | indent 12 }}
+          env:
+            - name: MYSQL_USER
+              value: {{ .Values.mysql.auth.username | quote }}
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-password
+            - name: MYSQL_DATABASE
+              value: {{ template "mysql.database" . }}
+            - name: MYSQL_HOSTNAME
+              value: {{ template "mysql.hostname" . }}
+            - name: MYSQL_PORT
+              value: {{ .Values.mysql.port | quote }}
+          ports:
+{{- include "trillian.containerPorts" .Values.logSigner.service.ports | indent 12 }}
+{{- if .Values.logSigner.livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.logSigner.livenessProbe | indent 12 }}
+{{- end }}
+{{- if .Values.logSigner.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.logSigner.readinessProbe | indent 12 }}
+{{- end }}
+          resources:
+{{ toYaml .Values.logSigner.resources | indent 12 }}
+    {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+    {{- end }}
+    {{- if .Values.logSigner.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.logSigner.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- with .Values.logSigner.dnsConfig }}
+      dnsConfig:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- if .Values.logSigner.securityContext }}
+      securityContext:
+{{ toYaml .Values.logSigner.securityContext | indent 8 }}
+    {{- end }}
+    {{- if .Values.logSigner.tolerations }}
+      tolerations:
+{{ toYaml .Values.logSigner.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.logSigner.affinity }}
+      affinity:
+{{ toYaml .Values.logSigner.affinity | indent 8 }}
+    {{- end }}

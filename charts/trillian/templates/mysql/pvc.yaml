@@ -1,0 +1,27 @@
+{{- if and .Values.mysql.enabled (.Values.mysql.persistence.enabled) (not .Values.mysql.persistence.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+{{- if .Values.mysql.persistence.annotations }}
+  annotations:
+{{ toYaml .Values.mysql.persistence.annotations | indent 4 }}
+{{- end }}
+  labels:
+    {{- include "trillian.mysql.labels" . | nindent 4 }}
+{{- if .Values.mysql.persistence.labels }}
+{{ toYaml .Values.mysql.persistence.labels | indent 4 }}
+{{- end }}
+  name: {{ template "trillian.mysql.fullname" . }}
+{{ include "trillian.namespace" . | indent 2 }}
+spec:
+  accessModes:
+  {{- range .Values.mysql.persistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.mysql.persistence.size | quote }}
+{{- if .Values.mysql.persistence.storageClass }}
+  storageClassName: {{ .Values.mysql.persistence.storageClass }}
+{{- end }}
+{{- end }}

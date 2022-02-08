@@ -1,0 +1,22 @@
+{{- if .Values.mysql.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+{{- if .Values.mysql.service.annotations }}
+  annotations:
+{{ toYaml .Values.mysql.service.annotations | indent 4 }}
+{{- end }}
+  labels:
+    {{- include "trillian.mysql.labels" . | nindent 4 }}
+{{- if .Values.mysql.service.labels }}
+{{ toYaml .Values.mysql.service.labels | indent 4 }}
+{{- end }}
+  name: {{ template "trillian.mysql.fullname" . }}
+{{ include "trillian.namespace" . | indent 2 }}
+spec:
+  ports:
+    {{- tpl (toYaml .Values.mysql.service.ports) . | nindent 4 }}
+  selector:
+    {{- include "trillian.mysql.matchLabels" . | nindent 4 }}
+  type: "{{ .Values.mysql.service.type }}"
+{{- end -}}
