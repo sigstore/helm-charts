@@ -39,7 +39,7 @@ spec:
         - name: "wait-for-trillian-log-server"
           image: "{{ template "rekor.image" .Values.initContainerImage.curl }}"
           imagePullPolicy: {{ .Values.initContainerImage.curl.imagePullPolicy }}
-          command: ["sh", "-c", "until curl --max-time 10 http://{{ template "rekor.trillianLogServer.fullname" . }}:{{ .Values.trillianLogServer.portHTTP}}; do echo waiting for {{ template "rekor.trillianLogServer.fullname" . }}; sleep 5; done;"]
+          command: ["sh", "-c", "until curl --max-time 10 http://{{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace.name }}:{{ .Values.trillian.logServer.portHTTP}}; do echo waiting for {{ .Values.trillian.logServer.name }}; sleep 5; done;"]
       {{- if .Values.server.extraInitContainers }}
 {{ toYaml .Values.server.extraInitContainers | indent 8 }}
       {{- end }}

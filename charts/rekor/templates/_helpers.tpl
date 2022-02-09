@@ -86,41 +86,6 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 
 
 {{/*
-Create a fully qualified Trillian Log Server name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-*/}}
-{{- define "rekor.trillianLogServer.fullname" -}}
-{{- if .Values.trillianLogServer.fullnameOverride -}}
-{{- .Values.trillianLogServer.fullnameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- if contains $name .Release.Name -}}
-{{- printf "%s-%s" .Release.Name .Values.trillianLogServer.name | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- printf "%s-%s-%s" .Release.Name $name .Values.trillianLogServer.name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Create a fully qualified Trillian Log Signer name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-*/}}
-{{- define "rekor.trillianLogSigner.fullname" -}}
-{{- if .Values.trillianLogSigner.fullnameOverride -}}
-{{- .Values.trillianLogSigner.fullnameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- if contains $name .Release.Name -}}
-{{- printf "%s-%s" .Release.Name .Values.trillianLogSigner.name | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- printf "%s-%s-%s" .Release.Name $name .Values.trillianLogSigner.name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-
-
-{{/*
 Define the rekor.namespace template if set with forceNamespace or .Release.Namespace is set
 */}}
 {{- define "rekor.namespace" -}}
@@ -131,41 +96,13 @@ Define the rekor.namespace template if set with forceNamespace or .Release.Names
 {{- end -}}
 {{- end -}}
 
-{{/*
-Return the secret with MySQL credentials
-*/}}
-{{- define "mysql.secretName" -}}
-    {{- if .Values.mysql.auth.existingSecret -}}
-        {{- printf "%s" .Values.mysql.auth.existingSecret -}}
-    {{- else -}}
-        {{- printf "%s" (include "rekor.mysql.fullname" .) -}}
-    {{- end -}}
-{{- end -}}
-
-{{/*
-Return the hostname for mysql
-*/}}
-{{- define "mysql.hostname" -}}
-{{- default (include "rekor.mysql.fullname" .) .Values.mysql.hostname }}
-{{- end -}}
-
-{{/*
-Return the database for mysql
-*/}}
-{{- define "mysql.database" -}}
-{{- default (include "rekor.fullname" .) .Values.mysql.database }}
-{{- end -}}
-
 
 {{/*
 Return the hostname for redis
 */}}
 {{- define "redis.hostname" -}}
 {{- default (include "rekor.redis.fullname" .) .Values.redis.hostname }}
-{{- end -}}
-
-
-
+{{- end -}} 
 
 {{/*
 Create labels for rekor components
@@ -312,16 +249,6 @@ Create the name of the service account to use for the Trillian Log Signer compon
 {{- end -}}
 {{- end -}}
 
-{{/*
-Create the name of the service account to use for the Trillian Log Signer component
-*/}}
-{{- define "rekor.serviceAccountName.trillianLogServer" -}}
-{{- if .Values.trillianLogServer.serviceAccount.create -}}
-    {{ default (include "rekor.trillianLogServer.fullname" .) .Values.trillianLogServer.serviceAccount.name }}
-{{- else -}}
-    {{ default "default" .Values.trillianLogServer.serviceAccount.name }}
-{{- end -}}
-{{- end -}}
 
 {{/*
 Create the image path for the passed in image field
@@ -345,42 +272,12 @@ Create Container Ports based on Service Ports
 {{- end -}}
 
 {{/*
-Log Server Arguments
-*/}}
-{{- define "rekor.trillianLogServer.args" -}}
-- '--storage_system=mysql'
-- '--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)'
-- {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.trillianLogServer.portRPC | int) | quote }}
-- {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.trillianLogServer.portHTTP | int) | quote }}
-- '--alsologtostderr'
-{{- if .Values.trillianLogServer.extraArgs -}}
-{{ toYaml .Values.trillianLogServer.extraArgs }}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Log Signer Arguments
-*/}}
-{{- define "rekor.trillianLogSigner.args" -}}
-- '--storage_system=mysql'
-- '--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)'
-- {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.trillianLogSigner.portRPC | int) | quote }}
-- {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.trillianLogSigner.portHTTP | int) | quote }}
-- '--force_master'
-- '--alsologtostderr'
-{{- if .Values.trillianLogSigner.extraArgs -}}
-{{ toYaml .Values.trillianLogSigner.extraArgs }}
-{{- end -}}
-{{- end -}}
-
-
-{{/*
 Server Arguments
 */}}
 {{- define "rekor.server.args" -}}
 - "serve"
-- {{ printf "--trillian_log_server.address=%s" (include "rekor.trillianLogServer.fullname" .) | quote }}
-- {{ printf "--trillian_log_server.port=%d" (.Values.trillianLogServer.portRPC | int) | quote }}
+- {{ printf "--trillian_log_server.address=%s.%s" .Values.trillian.logServer.name .Values.trillian.namespace.name | quote }}
+- {{ printf "--trillian_log_server.port=%d" (.Values.trillian.logServer.portRPC | int) | quote }}
 - {{ printf "--redis_server.address=%s" (include "redis.hostname" .) | quote }}
 - {{ printf "--redis_server.port=%d" (.Values.redis.port | int) | quote }}
 - "--rekor_server.address=0.0.0.0"

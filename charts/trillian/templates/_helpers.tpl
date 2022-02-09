@@ -105,7 +105,7 @@ Define the raw trillian.namespace template if set with forceNamespace or .Releas
 Define the trillian.namespace template if set with forceNamespace or .Release.Namespace is set
 */}}
 {{- define "trillian.namespace" -}}
-{{ printf "trillian: %s" (include "trillian.rawnamespace" .) }}
+{{ printf "namespace: %s" (include "trillian.rawnamespace" .) }}
 {{- end -}}
 
 {{/*
