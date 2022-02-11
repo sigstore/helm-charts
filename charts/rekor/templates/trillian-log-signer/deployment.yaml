@@ -1,3 +1,4 @@
+{{- if .Values.trillianLogSigner.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -102,3 +103,4 @@ spec:
       affinity:
 {{ toYaml .Values.trillianLogSigner.affinity | indent 8 }}
     {{- end }}
+{{- end }}
