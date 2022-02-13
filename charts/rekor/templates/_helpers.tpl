@@ -30,7 +30,22 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-
+{{/*
+Create a fully qualified Rekor createtree name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "rekor.createtree.fullname" -}}
+{{- if .Values.createtree.fullnameOverride -}}
+{{- .Values.createtree.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- printf "%s-%s" .Release.Name .Values.createtree.name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s-%s" .Release.Name $name .Values.createtree.name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
 
 
 {{/*
@@ -201,7 +216,16 @@ Create the name of the service account to use
 {{- end }}
 
 
-
+{{/*
+Create the name of the service account to use for the createtree component
+*/}}
+{{- define "rekor.serviceAccountName.createtree" -}}
+{{- if .Values.createtree.serviceAccount.create -}}
+    {{ default (include "rekor.createtree.fullname" .) .Values.createtree.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.createtree.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
 
 
 
@@ -276,12 +300,14 @@ Server Arguments
 */}}
 {{- define "rekor.server.args" -}}
 - "serve"
-- {{ printf "--trillian_log_server.address=%s.%s" .Values.trillian.logServer.name .Values.trillian.namespace.name | quote }}
+- {{ printf "--trillian_log_server.address=%s.%s" .Values.trillian.logServer.name .Values.trillian.forceNamespace | quote }}
 - {{ printf "--trillian_log_server.port=%d" (.Values.trillian.logServer.portRPC | int) | quote }}
 - {{ printf "--redis_server.address=%s" (include "redis.hostname" .) | quote }}
 - {{ printf "--redis_server.port=%d" (.Values.redis.port | int) | quote }}
 - "--rekor_server.address=0.0.0.0"
 - "--rekor_server.signer=memory"
+- "--enable_retrieve_api=true"
+- "--trillian_log_server.tlog_id=$(TREE_ID)"
 {{- if .Values.server.attestation_storage.enabled }}
 - "--enable_attestation_storage"
 - {{ printf "--attestation_storage_bucket=%s" (.Values.server.attestation_storage.bucket) | quote }}
@@ -375,3 +401,10 @@ Return a random Secret value or the value of an exising Secret key value
 {{- print $randomSecret }}
 {{- end }}
 {{- end -}}
+
+{{/*
+Create the name of the config
+*/}}
+{{- define "rekor.config" -}}
+{{ printf "%s-config" (include "rekor.fullname" .) }}
+{{- end }}

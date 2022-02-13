@@ -54,14 +54,20 @@ spec:
 {{  include "trillian.logServer.args" . | indent 12 }}
           env:
             - name: MYSQL_USER
-              value: {{ .Values.mysql.auth.username | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-user
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "mysql.secretName" . }}
                   key: mysql-password
             - name: MYSQL_DATABASE
-              value: {{ template "mysql.database" . }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-database
             - name: MYSQL_HOSTNAME
               value: {{ template "mysql.hostname" . }}
             - name: MYSQL_PORT

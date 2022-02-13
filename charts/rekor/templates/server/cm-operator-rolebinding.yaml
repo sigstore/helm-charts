@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ template "rekor.fullname" . }}-cm-operator
+{{ include "rekor.namespace" . | indent 2 }}
+  labels:
+    {{- include "rekor.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ template "rekor.fullname" . }}-cm-operator
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "rekor.serviceAccountName.createtree" . }}
+{{ include "rekor.namespace" . | indent 4 }}

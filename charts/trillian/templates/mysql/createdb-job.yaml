@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    {{- include "trillian.mysql.labels" . | nindent 4 }}
+  name: {{ template "trillian.createdb.fullname" . }}
+{{ include "trillian.namespace" . | indent 2 }}
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ template "trillian.serviceAccountName.createdb" . }}
+      restartPolicy: Never
+      containers:
+        - name:  {{ template "trillian.createdb.fullname" . }}
+          image: "{{ template "trillian.image" .Values.createdb.image }}"
+          args: ["--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(DATABASE_HOSTNAME):{{ .Values.mysql.port }})/", "--db_name=$(DATABASE_NAME)"]
+          env:
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-database
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-password
+            - name: DATABASE_HOSTNAME
+              value: {{ template "mysql.hostname" . }}

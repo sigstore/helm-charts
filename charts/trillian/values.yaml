@@ -1,3 +1,6 @@
+namespace:
+  create: false
+  name: trillian-system
 initContainerImage:
   curl:
     registry: docker.io
@@ -85,10 +88,10 @@ logServer:
   portHTTP: 8090
   image:
     registry: gcr.io
-    repository: trillian-opensource-ci/log_server
+    repository: projectsigstore/trillian_log_server
     pullPolicy: IfNotPresent
-    # df474653733c51ed91d60cf3efee69f7bf3199bd
-    version: "sha256:d1e117c2815f9842f9e9c10a27a45d4ded86848195ca4a08fede536d1832a1ab"
+    # <TODO>
+    version: "sha256:f850a0defd089ea844822030c67ae05bc93c91168a7dd4aceb0b6648c39f696b"
   service:
     type: ClusterIP
     ports:
@@ -116,10 +119,10 @@ logSigner:
   portHTTP: 8090
   image:
     registry: gcr.io
-    repository: trillian-opensource-ci/log_signer
+    repository: projectsigstore/trillian_log_signer
     pullPolicy: IfNotPresent
-    # df474653733c51ed91d60cf3efee69f7bf3199bd
-    version: "sha256:20d3d6ce98ae38698e3d641c8e386a9f85b4fd1a2c43462687347bb4952bdc52"
+    # <TODO>
+    version: "sha256:fe90d523f6617974f70878918e4b31d49b2b46a86024bb2d6b01d2bbfed8edbf"
   service:
     type: ClusterIP
     ports:
@@ -131,6 +134,18 @@ logSigner:
   readinessProbe: {}
   resources: {}
   extraArgs: []
+  serviceAccount:
+    create: true
+    name:
+    annotations: {}
+createdb:
+  name: createdb
+  image:
+    registry: ghcr.io
+    repository: vaikas/createdb
+    pullPolicy: IfNotPresent
+    # <TODO>
+    version: "sha256:1ff448bcc688004bf50ec1042fc3c770e058534e034b97c2eeae7d2609958d0d"
   serviceAccount:
     create: true
     name:

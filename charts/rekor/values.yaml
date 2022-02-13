@@ -100,6 +100,8 @@ server:
     httpGet:
       port: 3000
       path: /ping
+  config:
+    key: treeID
   attestation_storage:
     enabled: true
     bucket: file:///var/run/attestations
@@ -123,6 +125,18 @@ server:
     create: true
     name:
     annotations: {}
+createtree:
+  name: createtree
+  image:
+    registry: ghcr.io
+    repository: vaikas/createtree
+    pullPolicy: IfNotPresent
+    # <TODO>
+    version: "sha256:acb229e035262f8c2c6451bc96eaaa5689d62a67ac42e533d14b7f74aa2ca837"
+  serviceAccount:
+    create: true
+    name:
+    annotations: {}
 # Configure Trillian dependency
 trillian:
   enabled: true
@@ -141,6 +155,8 @@ trillian:
     fullnameOverride: trillian-logsigner
   mysql:
     fullnameOverride: trillian-mysql
+  createtree:
+    fullnameOverride: trillian-checktree
 
 # Force namespace of namespaced resources
 forceNamespace: null

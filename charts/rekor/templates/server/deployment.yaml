@@ -50,6 +50,12 @@ spec:
         - name: {{ template "rekor.name" . }}-{{ .Values.server.name }}
           image: "{{ template "rekor.image" .Values.server.image }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
+          env:
+            - name: TREE_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "rekor.config" . }}
+                  key: {{ .Values.server.config.key }}
           args:
 {{  include "rekor.server.args" . | indent 12 }}
           ports:
