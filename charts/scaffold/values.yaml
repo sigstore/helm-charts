@@ -1,0 +1,63 @@
+---
+# Fulcio
+fulcio:
+  enabled: true
+  namespace:
+    name: fulcio-system
+    create: true
+  forceNamespace: fulcio-system
+  fullnameOverride: fulcio
+  createcerts:
+    fullnameOverride: fulcio-createcerts
+  ctlog:
+    enabled: false
+# CTLog
+ctlog:
+  enabled: true
+  namespace:
+    name: ctlog-system
+    create: true
+  forceNamespace: ctlog-system
+  fullnameOverride: ctlog
+  createcerts:
+    fullnameOverride: ctlog-createcerts
+  createtree:
+    fullnameOverride: ctlog-createtree
+# Rekor
+rekor:
+  enabled: true
+  namespace:
+    name: rekor-system
+    create: true
+  forceNamespace: rekor-system
+  fullnameOverride: rekor
+  createtree:
+    fullnameOverride: rekor-checktree
+  server:
+    fullnameOverride: rekor-server
+  redis:
+    fullnameOverride: rekor-redis
+  trillian:
+    enabled: false
+# Trillian
+trillian:
+  enabled: true
+  namespace:
+    name: trillian-system
+    create: true
+  forceNamespace: trillian-system
+  fullnameOverride: trillian
+  logServer:
+    name: trillian-logserver
+    fullnameOverride: trillian-logserver
+    portHTTP: 8090
+    portRPC: 8091
+  logSigner:
+    name: trillian-logsigner
+    fullnameOverride: trillian-logsigner
+  mysql:
+    fullnameOverride: trillian-mysql
+  createtree:
+    fullnameOverride: trillian-checktree
+  createdb:
+    fullnameOverride: trillian-createdb

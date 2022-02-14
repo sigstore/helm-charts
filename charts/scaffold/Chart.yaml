@@ -1,0 +1,37 @@
+apiVersion: v2
+name: scaffold
+description: Scaffolding the components of the sigstore architecture
+
+type: application
+
+version: 0.1.0
+
+keywords:
+  - security
+  - pki
+
+home: https://sigstore.dev/
+
+maintainers:
+  - name: The Sigstore Authors
+
+dependencies:
+  - name: fulcio
+    version: 0.1.0
+    repository: "file://../fulcio"
+    condition: fulcio.enabled
+  - name: rekor
+    version: 0.2.12
+    repository: "file://../rekor"
+    condition: rekor.enabled
+  - name: trillian
+    version: 0.1.0
+    repository: "file://../trillian"
+    condition: trillian.enabled
+  - name: ctlog
+    version: 0.1.0
+    repository: "file://../ctlog"
+    condition: ctlog.enabled
+
+annotations:
+  artifacthub.io/license: Apache-2.0
