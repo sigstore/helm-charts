@@ -126,3 +126,52 @@ Create the name of the config
 {{ printf "%s-config" (include "fulcio.fullname" .) }}
 {{- end }}
 
+{{/*
+Create the name of the secret
+*/}}
+{{- define "fulcio.secret" -}}
+{{ printf "%s-secret" (include "fulcio.fullname" .) }}
+{{- end }}
+
+{{/*
+Return the appropriate apiVersion for ingress.
+*/}}
+{{- define "ingress.apiVersion" -}}
+{{- if .Values.server.ingress.apiVersion -}}
+{{- .Values.server.ingress.apiVersion -}}
+{{- else if semverCompare "<1.14-0" .Capabilities.KubeVersion.Version -}}
+{{- print "extensions/v1beta1" -}}
+{{- else if semverCompare "<1.19-0" .Capabilities.KubeVersion.Version -}}
+{{- print "networking.k8s.io/v1beta1" -}}
+{{- else -}}
+{{- print "networking.k8s.io/v1" -}}
+{{- end }}
+{{- end }}
+
+{{/*
+Print "true" if the API pathType field is supported
+*/}}
+{{- define "ingress.supportsPathType" -}}
+{{- if (semverCompare "<1.18-0" .Capabilities.KubeVersion.Version) -}}
+{{- print "false" -}}
+{{- else -}}
+{{- print "true" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the appropriate apiVersion for ingress.
+*/}}
+{{- define "fulcio.server.ingress.backend" -}}
+{{- $apiVersion := (include "ingress.apiVersion" .) -}}
+{{- $serviceName := (include "fulcio.fullname" .) -}}
+{{- if or (eq $apiVersion "extensions/v1beta1") (eq $apiVersion "networking.k8s.io/v1beta1") -}}
+serviceName: {{ $serviceName }}
+servicePort: {{ .Values.server.svcPort }}
+{{- else -}}
+service:
+  name: {{ $serviceName }}
+  port:
+    number: {{ .Values.server.svcPort | int }}
+{{- end -}}
+{{- end -}}

@@ -152,3 +152,10 @@ Create the name of the config
 {{- define "ctlog.config" -}}
 {{ printf "%s-config" (include "ctlog.fullname" .) }}
 {{- end }}
+
+{{/*
+Create the name of the secret
+*/}}
+{{- define "ctlog.secret" -}}
+{{ printf "%s-secret" (include "ctlog.fullname" .) }}
+{{- end }}

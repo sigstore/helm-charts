@@ -15,4 +15,9 @@ spec:
         - name: {{ template "ctlog.createtree.fullname" . }}
           image: "{{ template "ctlog.image" .Values.createtree.image }}"
           imagePullPolicy: "{{ .Values.createtree.image.pullPolicy }}"
-          args: ["--namespace={{ include "ctlog.rawnamespace" . }}", "--configmap=ctlog-config", "--display_name=ctlogtree"]
+          env:
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          args: ["--namespace=$(NAMESPACE)", "--configmap={{ template "ctlog.config" . }}", "--display_name={{ template "ctlog.createtree.fullname" . }}","--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}"]

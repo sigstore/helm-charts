@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "ctlog.createtree.fullname" . }}
+  name: {{ template "ctlog.fullname" . }}
 {{ include "ctlog.namespace" . | indent 2 }}
   labels:
     {{- include "ctlog.labels" . | nindent 4 }}
@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: {{ template "ctlog.serviceAccountName" . }}
       containers:
-        - name: {{ template "ctlog.createtree.fullname" . }}
+        - name: {{ template "ctlog.fullname" . }}
           image: "{{ template "ctlog.image" .Values.server.image }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
           args: ["--http_endpoint=0.0.0.0:6962", "--log_config=/ctfe-config/ct_server.cfg", "--alsologtostderr"]
@@ -33,7 +33,7 @@ spec:
       volumes:
         - name: keys
           secret:
-            secretName: ctlog-secret
+            secretName: {{ template "ctlog.secret" . }}
             items:
               - key: private
                 path: privkey.pem

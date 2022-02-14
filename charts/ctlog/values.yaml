@@ -1,26 +1,35 @@
+namespace:
+  create: false
+  name: ctlog-system
 server:
   replicaCount: 1
   image:
-    registry: gcr.io
+    registry: ghcr.io
     repository: vaikas/ct_server
     pullPolicy: IfNotPresent
     # TODO
-    version: "sha256:935b13f5fa9646c55faf7219f26eea650aa2e509819ad6b11e41f8b4924fcaf7"
+    version: "sha256:2c02400fad795693c8ccec43017d057601c62f0752d861319933c5ed463f062d"
   serviceAccount:
     create: true
     name:
     annotations: {}
     mountToken: false
-
+  service:
+    type: ClusterIP
+    ports:
+      - name: 80-tcp
+        port: 80
+        protocol: TCP
+        targetPort: 6962
 createtree:
   enabled: true
   name: createtree
   image:
-    registry: gcr.io
+    registry: ghcr.io
     repository: vaikas/createtree
     pullPolicy: IfNotPresent
     # TODO
-    version: "sha256:4abf45842808aa35a7aa4f2058ff7629ba1c4626571e1a64667828dd1d3759ab"
+    version: "sha256:acb229e035262f8c2c6451bc96eaaa5689d62a67ac42e533d14b7f74aa2ca837"
   serviceAccount:
     create: true
     name:
@@ -31,15 +40,22 @@ createcerts:
   replicaCount: 1
   name: createcerts
   image:
-    registry: gcr.io
-    repository: vaikas/createcerts
+    registry: ghcr.io
+    #repository: vaikas/createcerts
+    repository: sabre1041/createcerts
     pullPolicy: IfNotPresent
     # TODO
-    version: "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
+    #version: "sha256:c8ea6165cd73c51adbf2b2b70897318ef934ca18554be2bc66b16cde01a6a0a6"
+    version: "sha256:c615be8fe0d26309f32a1b728460b13eaf97bfc5e3c4c6c8eca03aa8ff57e497"
   serviceAccount:
     create: true
     name:
     annotations: {}
     mountToken: true
+trillian:
+  namespace: trillian-system
+  logServer:
+    name: trillian-logserver
+    portRPC: 8091
 # Force namespace of namespaced resources
 forceNamespace: null

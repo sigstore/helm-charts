@@ -1,33 +1,61 @@
+namespace:
+  create: false
+  name: fulcio-system
 server:
   replicaCount: 1
+  svcPort: 80
   image:
     registry: gcr.io
-    repository: vaikas/server
+    repository: projectsigstore/fulcio
     pullPolicy: IfNotPresent
     # TODO
-    version: "sha256:6f7b22349dd0465041a3c22af04c949f848a509b24907228929aa1514a0afc5d"
+    version: "sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841"
   serviceAccount:
     create: true
     name:
     annotations: {}
     mountToken: false
+  service:
+    type: ClusterIP
+    ports:
+      - name: 80-tcp
+        port: 80
+        protocol: TCP
+        targetPort: 5555
+  ingress:
+    enabled: true
+    annotations: {}
+    path: /
+    tls: {}
 createcerts:
   enabled: true
   replicaCount: 1
   name: createcerts
   image:
-    registry: gcr.io
+    registry: ghcr.io
     repository: vaikas/createcerts
     pullPolicy: IfNotPresent
     # TODO
-    version: "sha256:8dbdd3e56273bee36449cddb6b8bc8ac7d4cda4408e7d396f6000b3c37106150"
+    version: "sha256:5dd07d84546cf0036fc47c5b0aad38a185ab35c2a045ce789ca96ac2568694f3"
   serviceAccount:
     create: true
     name:
     annotations: {}
     mountToken: true
+# Configure ctlog dependency
 ctlog:
+  enabled: true
   name: ctlog
-  namespace: ctlog-system
+  forceNamespace: ctlog-system
+  fullnameOverride: ctlog
+  namespace:
+    name: ctlog-system
+    create: true
+  createtree:
+    name: ctlog-createtree
+    fullnameOverride: ctlog-createtree
+  createcerts:
+    name: ctlog-createcerts
+    fullnameOverride: ctlog-createcerts
 # Force namespace of namespaced resources
 forceNamespace: null

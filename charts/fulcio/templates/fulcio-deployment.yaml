@@ -39,7 +39,7 @@ spec:
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: fulcio-secret
+                  name: {{ template "fulcio.secret" . }}
                   key: password
           volumeMounts:
             - name: fulcio-config
@@ -55,7 +55,7 @@ spec:
             name: {{ template "fulcio.config" . }}
         - name: fulcio-cert
           secret:
-            secretName: fulcio-secret
+            secretName: {{ template "fulcio.secret" . }}
             items:
               - key: private
                 path: key.pem

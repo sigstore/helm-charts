@@ -15,12 +15,16 @@ home: https://sigstore.dev/
 maintainers:
   - name: The Sigstore Authors
 
+dependencies:
+  - name: ctlog
+    version: 0.1.0
+    repository: "file://../ctlog"
+    condition: ctlog.enabled
+
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
-    - name: ct_server
-      image: gcr.io/vaikas/ct_server@sha256:935b13f5fa9646c55faf7219f26eea650aa2e509819ad6b11e41f8b4924fcaf7
+    - name: fulcio
+      image: gcr.io/projectsigstore/fulcio@sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841
     - name: createcerts
-      image: gcr.io/vaikas/createcerts@sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6
-    - name: createtree
-      image: gcr.io/vaikas/createtree@sha256:4abf45842808aa35a7aa4f2058ff7629ba1c4626571e1a64667828dd1d3759ab
+      image: ghcr.io/vaikas/createcerts@sha256:5dd07d84546cf0036fc47c5b0aad38a185ab35c2a045ce789ca96ac2568694f3

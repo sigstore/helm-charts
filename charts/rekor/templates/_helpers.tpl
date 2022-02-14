@@ -306,7 +306,9 @@ Server Arguments
 - {{ printf "--redis_server.port=%d" (.Values.redis.port | int) | quote }}
 - "--rekor_server.address=0.0.0.0"
 - "--rekor_server.signer=memory"
+{{- if .Values.server.retrieve_api.enabled }}
 - "--enable_retrieve_api=true"
+{{- end }}
 - "--trillian_log_server.tlog_id=$(TREE_ID)"
 {{- if .Values.server.attestation_storage.enabled }}
 - "--enable_attestation_storage"

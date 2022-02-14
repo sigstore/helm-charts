@@ -102,6 +102,8 @@ server:
       path: /ping
   config:
     key: treeID
+  retrieve_api:
+    enabled: true
   attestation_storage:
     enabled: true
     bucket: file:///var/run/attestations
