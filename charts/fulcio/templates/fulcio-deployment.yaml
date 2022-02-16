@@ -48,14 +48,6 @@ spec:
         - name: fulcio-config
           configMap:
             name: {{ template "fulcio.config" . }}
-        - name: fulcio-cert
-          secret:
-            secretName: {{ template "fulcio.secret" . }}
-            items:
-              - key: private
-                path: key.pem
-              - key: cert
-                path: cert.pem
         - name: oidc-info
           projected:
             sources:

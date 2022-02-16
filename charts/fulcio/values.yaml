@@ -2,7 +2,7 @@ namespace:
   create: false
   name: fulcio-system
 config:
-  values:
+  contents:
 server:
   replicaCount: 1
   svcPort: 80

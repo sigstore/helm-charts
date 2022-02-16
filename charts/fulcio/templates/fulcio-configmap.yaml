@@ -7,6 +7,23 @@ metadata:
     {{- include "fulcio.labels" . | nindent 4 }}
 data:
   config.json: |-
-{{- range $key, $val := .Values.config.values }}
-{{ $key | quote | indent 6}}: {{ $val | quote }}
-{{- end}}
+    {
+      "OIDCIssuers": {
+        "https://accounts.google.com": {
+          "IssuerURL": "https://accounts.google.com",
+          "ClientID": "sigstore",
+          "Type": "email"
+        },
+        "https://token.actions.githubusercontent.com": {
+          "IssuerURL": "https://token.actions.githubusercontent.com",
+          "ClientID": "sigstore",
+          "Type": "github-workflow"
+        }
+      },
+      "MetaIssuers": {
+        "https://container.googleapis.com/v1/projects/*/locations/*/clusters/*": {
+          "Type": "kubernetes",
+          "ClientID": "sigstore"
+        }
+      }
+    }
