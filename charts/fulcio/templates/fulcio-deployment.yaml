@@ -30,20 +30,11 @@ spec:
             - "--ca={{ .Values.server.args.certificateAuthority }}"
             - "--gcp_private_ca_parent={{ .Values.server.args.gcp_private_ca_parent }}"
             - "--ct-log-url=http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/sigstorescaffolding"
-          env:
-            - name: PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fulcio.secret" . }}
-                  key: password
           volumeMounts:
             - name: fulcio-config
               mountPath: /etc/fulcio-config
             - name: oidc-info
               mountPath: /var/run/fulcio
-            - name: fulcio-cert
-              mountPath: "/var/run/fulcio-secrets"
-              readOnly: true
       volumes:
         - name: fulcio-config
           configMap:
