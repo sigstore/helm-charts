@@ -23,17 +23,12 @@ spec:
           image: "{{ template "fulcio.image" .Values.server.image }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
           ports:
-            - containerPort: 5555
+            - containerPort: {{ .Values.server.args.port}}
           args:
             - "serve"
-            - "--port=5555"
-            - "--ca=fileca"
-            - "--fileca-key"
-            - "/var/run/fulcio-secrets/key.pem"
-            - "--fileca-cert"
-            - "/var/run/fulcio-secrets/cert.pem"
-            - "--fileca-key-passwd"
-            - "$(PASSWORD)"
+            - "--port={{ .Values.server.args.port}}"
+            - "--ca={{ .Values.server.args.certificateAuthority }}"
+            - "--gcp_private_ca_parent={{ .Values.server.args.gcp_private_ca_parent }}"
             - "--ct-log-url=http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/sigstorescaffolding"
           env:
             - name: PASSWORD

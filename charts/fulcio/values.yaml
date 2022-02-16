@@ -1,6 +1,7 @@
 namespace:
   create: false
   name: fulcio-system
+config:
 server:
   replicaCount: 1
   svcPort: 80
@@ -10,11 +11,15 @@ server:
     pullPolicy: IfNotPresent
     # latest
     version: "sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841"
+  args:
+    port: 5555
+    certificateAuthority: googleca
+    gcp_private_ca_parent: projects/test/locations/us-east1/caPools/test
   serviceAccount:
     create: true
     name:
     annotations: {}
-    mountToken: false
+    mountToken: true
   service:
     type: ClusterIP
     ports:

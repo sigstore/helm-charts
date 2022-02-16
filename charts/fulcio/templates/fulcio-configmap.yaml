@@ -6,19 +6,4 @@ metadata:
   labels:
     {{- include "fulcio.labels" . | nindent 4 }}
 data:
-  config.json: |-
-    {
-      "OIDCIssuers": {
-        "https://kubernetes.default.svc": {
-          "IssuerURL": "https://kubernetes.default.svc",
-          "ClientID": "sigstore",
-          "Type": "kubernetes"
-        }
-      },
-      "MetaIssuers": {
-        "https://kubernetes.*.svc": {
-          "ClientID": "sigstore",
-          "Type": "kubernetes"
-        }
-      }
-    }
+  {{}}
