@@ -6,4 +6,7 @@ metadata:
   labels:
     {{- include "fulcio.labels" . | nindent 4 }}
 data:
-  {{}}
+  config.json: |-
+{{- range $key, $val := .Values.config.values }}
+{{ $key | quote | indent 6}}: {{ $val | quote }}
+{{- end}}
