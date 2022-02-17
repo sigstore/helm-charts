@@ -46,14 +46,14 @@ spec:
             - "$(PASSWORD)"
             {{- end }}
             - "--ct-log-url=http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/sigstorescaffolding"
-           {{- if eq .Values.server.args.certificateAuthority "fileca" }}
+          {{- if eq .Values.server.args.certificateAuthority "fileca" }}
           env:
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "fulcio.secret" . }}
                   key: password
-             {{- end }}
+          {{- end }}
           volumeMounts:
             - name: fulcio-config
               mountPath: /etc/fulcio-config
