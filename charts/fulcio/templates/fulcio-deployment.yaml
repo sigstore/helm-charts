@@ -28,13 +28,42 @@ spec:
             - "serve"
             - "--port={{ .Values.server.args.port}}"
             - "--ca={{ .Values.server.args.certificateAuthority }}"
+            {{- if eq .Values.server.args.certificateAuthority "googleca" }}
             - "--gcp_private_ca_parent={{ .Values.server.args.gcp_private_ca_parent }}"
+            {{- end }}
+            {{- if eq .Values.server.args.certificateAuthority "pkcs11ca" }}
+            - "--hsm-caroot-id={{ .Values.server.args.hsm_caroot_id }}"
+            {{- end }}
+            {{- if eq .Values.server.args.certificateAuthority "aws-hsm-root-ca-path" }}
+            - "--aws-hsm-root-ca-path={{ .Values.server.args.aws_hsm_root_ca_path }}"
+            {{- end }}
+            {{- if eq .Values.server.args.certificateAuthority "fileca" }}
+            - "--fileca-key"
+            - "/var/run/fulcio-secrets/key.pem"
+            - "--fileca-cert"
+            - "/var/run/fulcio-secrets/cert.pem"
+            - "--fileca-key-passwd"
+            - "$(PASSWORD)"
+            {{- end }}
             - "--ct-log-url=http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/sigstorescaffolding"
+           {{- if eq .Values.server.args.certificateAuthority "fileca" }}
+          env:
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fulcio.secret" . }}
+                  key: password
+             {{- end }}
           volumeMounts:
             - name: fulcio-config
               mountPath: /etc/fulcio-config
             - name: oidc-info
               mountPath: /var/run/fulcio
+           {{- if eq .Values.server.args.certificateAuthority "fileca" }}
+           - name: fulcio-cert
+             mountPath: "/var/run/fulcio-secrets"
+             readOnly: true
+           {{- end }}
       volumes:
         - name: fulcio-config
           configMap:
@@ -48,3 +77,13 @@ spec:
                     - key: ca.crt
                       path: ca.crt
                       mode: 0666
+        {{- if eq .Values.server.args.certificateAuthority "fileca" }}
+        - name: fulcio-cert
+          secret:
+            secretName: {{ template "fulcio.secret" . }}
+            items:
+              - key: private
+                path: key.pem
+              - key: cert
+                path: cert.pem
+        {{- end }}

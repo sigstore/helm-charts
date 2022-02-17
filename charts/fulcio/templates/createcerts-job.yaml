@@ -1,0 +1,25 @@
+{{- if eq .Values.server.args.certificateAuthority "fileca" }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "fulcio.createcerts.fullname" . }}
+{{ include "fulcio.namespace" . | indent 2 }}
+  labels:
+    {{- include "fulcio.labels" . | nindent 4 }}
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ template "fulcio.serviceAccountName.createcerts" . }}
+      restartPolicy: Never
+      automountServiceAccountToken: {{ .Values.createcerts.serviceAccount.mountToken }}
+      containers:
+        - name: {{ template "fulcio.createcerts.fullname" . }}
+          image: "{{ template "fulcio.image" .Values.createcerts.image }}"
+          imagePullPolicy: "{{ .Values.createcerts.image.pullPolicy }}"
+          args: ["--secret=fulcio-secret"]
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+{{- end }}
