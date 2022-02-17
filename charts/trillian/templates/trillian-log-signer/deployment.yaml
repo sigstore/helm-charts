@@ -47,6 +47,19 @@ spec:
       priorityClassName: "{{ .Values.logSigner.priorityClassName }}"
 {{- end }}
       containers:
+        {{- if .Values.mysql.gcp.enabled }}
+        - name: cloud-sql-proxy
+          image: "{{ template "trillian.gcloudsql.image" .Values.mysql.gcp.cloudsql }}"
+          command:
+            - "/cloud_sql_proxy"
+            - "-instances={{ .Values.mysql.gcp.instance }}=tcp:{{ .Values.mysql.service.ports }}"
+          securityContext:
+            runAsNonRoot: true
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "1"
+        {{- end }}
         - name: {{ template "trillian.name" . }}-{{ .Values.logSigner.name }}
           image: "{{ template "trillian.image" .Values.logSigner.image }}"
           imagePullPolicy: "{{ .Values.logSigner.image.pullPolicy }}"
