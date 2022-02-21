@@ -7,8 +7,8 @@ server:
     registry: ghcr.io
     repository: vaikas/ct_server
     pullPolicy: IfNotPresent
-    # TODO
-    version: "sha256:2c02400fad795693c8ccec43017d057601c62f0752d861319933c5ed463f062d"
+    # v0.1.17
+    version: "sha256:e3f9e14e3c12986c83f565c4cc7c6e6b208c764cf9d8bb1fac9e2450d0b0691d"
   serviceAccount:
     create: true
     name:
@@ -28,8 +28,8 @@ createtree:
     registry: ghcr.io
     repository: vaikas/createtree
     pullPolicy: IfNotPresent
-    # TODO
-    version: "sha256:acb229e035262f8c2c6451bc96eaaa5689d62a67ac42e533d14b7f74aa2ca837"
+    # v0.1.17
+    version: "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
   serviceAccount:
     create: true
     name:
@@ -41,12 +41,10 @@ createcerts:
   name: createcerts
   image:
     registry: ghcr.io
-    #repository: vaikas/createcerts
-    repository: sabre1041/createcerts
+    repository: vaikas/createcerts
     pullPolicy: IfNotPresent
-    # TODO
-    #version: "sha256:c8ea6165cd73c51adbf2b2b70897318ef934ca18554be2bc66b16cde01a6a0a6"
-    version: "sha256:c615be8fe0d26309f32a1b728460b13eaf97bfc5e3c4c6c8eca03aa8ff57e497"
+    # v0.1.17
+    version: "sha256:f853fc5dfd0c752142b93a6ee5d79b36aae65254cf29764a8bc654ea91c63c0d"
   serviceAccount:
     create: true
     name:

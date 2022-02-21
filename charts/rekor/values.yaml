@@ -7,8 +7,8 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # 7.79.1
-    version: sha256:1a2209a10a11295c3ab6952d1278a9ea2ce0d20e33fdeaeb24d7a4586767c825
+    # 7.81.0
+    version: sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8
     imagePullPolicy: IfNotPresent
 
 redis:
@@ -75,7 +75,7 @@ server:
     type: ClusterIP
     ports:
       - name: 3000-tcp
-        port: 3000
+        port: 80
         protocol: TCP
         targetPort: 3000
       - name: 2112-tcp
@@ -133,8 +133,8 @@ createtree:
     registry: ghcr.io
     repository: vaikas/createtree
     pullPolicy: IfNotPresent
-    # <TODO>
-    version: "sha256:acb229e035262f8c2c6451bc96eaaa5689d62a67ac42e533d14b7f74aa2ca837"
+    # v0.1.17
+    version: "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
   serviceAccount:
     create: true
     name:
