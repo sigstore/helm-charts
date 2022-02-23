@@ -49,7 +49,7 @@ spec:
       containers:
         {{- if .Values.mysql.gcp.enabled }}
         - name: cloud-sql-proxy
-          image: "{{ template "trillian.gcloudsql.image" .Values.mysql.gcp.cloudsql }}"
+          image: "{{ template "trillian.image" .Values.mysql.gcp.cloudsql }}"
           command:
             - "/cloud_sql_proxy"
             - "-instances={{ .Values.mysql.gcp.instance }}=tcp:{{ .Values.mysql.service.ports }}"

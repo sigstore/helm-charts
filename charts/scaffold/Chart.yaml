@@ -4,7 +4,7 @@ description: Scaffolding the components of the sigstore architecture
 
 type: application
 
-version: 0.1.2
+version: 0.1.0
 
 keywords:
   - security
@@ -17,7 +17,7 @@ maintainers:
 
 dependencies:
   - name: fulcio
-    version: 0.1.3
+    version: 0.1.0
     repository: "file://../fulcio"
     condition: fulcio.enabled
   - name: rekor

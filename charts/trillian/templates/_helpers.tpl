@@ -273,18 +273,6 @@ Create the image path for the passed in image field
 {{- end -}}
 {{- end -}}
 
-
-{{/*
-Create the image path for the passed in image field
-*/}}
-{{- define "trillian.gcloudsql.image" -}}
-{{- if eq (substr 0 7 .version) "sha256:" -}}
-{{- printf "%s/%s@%s" .registry .repository .version -}}
-{{- else -}}
-{{- printf "%s/%s:%s" .registry .repository .version -}}
-{{- end -}}
-{{- end -}}
-
 {{/*
 Return the secret with MySQL credentials
 */}}

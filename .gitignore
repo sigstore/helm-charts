@@ -1,1 +1,2 @@
-charts/scaffold/charts/
+charts/*/charts
+charts/*/Chart.lock
