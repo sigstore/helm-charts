@@ -7,4 +7,4 @@ metadata:
     {{- include "fulcio.labels" . | nindent 4 }}
 data:
   config.json: |-
-{{ .Values.config.contents | toJson | nindent 4 }}
+{{ .Values.config.contents | toJson | indent 4 }}

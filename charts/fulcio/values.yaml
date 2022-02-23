@@ -2,7 +2,21 @@ namespace:
   create: false
   name: fulcio-system
 config:
-  contents:
+  contents: {
+    "OIDCIssuers": {
+      "https://kubernetes.default.svc": {
+        "IssuerURL": "https://kubernetes.default.svc",
+        "ClientID": "sigstore",
+        "Type": "kubernetes"
+      }
+    },
+    "MetaIssuers": {
+      "https://kubernetes.*.svc": {
+        "ClientID": "sigstore",
+        "Type": "kubernetes"
+      }
+    }
+  }
 server:
   replicaCount: 1
   svcPort: 80
