@@ -2,6 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ template "cosigned.fullname" . }}-webhook
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "cosigned.labels" . | nindent 4 }}
     control-plane: {{ template "cosigned.fullname" . }}-webhook
