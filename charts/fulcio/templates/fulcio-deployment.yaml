@@ -60,9 +60,9 @@ spec:
             - name: oidc-info
               mountPath: /var/run/fulcio
            {{- if eq .Values.server.args.certificateAuthority "fileca" }}
-           - name: fulcio-cert
-             mountPath: "/var/run/fulcio-secrets"
-             readOnly: true
+            - name: fulcio-cert
+              mountPath: "/var/run/fulcio-secrets"
+              readOnly: true
            {{- end }}
       volumes:
         - name: fulcio-config

@@ -1,0 +1,8 @@
+chart-dirs:
+  - charts
+excluded-charts:
+  - ctlog
+  - fulcio
+validate-maintainers: false
+remote: origin
+target-branch: main

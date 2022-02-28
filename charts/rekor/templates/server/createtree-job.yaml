@@ -14,7 +14,7 @@ spec:
       containers:
         - name: {{ template "rekor.createtree.fullname" . }}
           image: "{{ template "rekor.image" .Values.createtree.image }}"
-          args: ["--namespace=$(NAMESPACE)", "--configmap=rekor-config", "--display_name=rekortree","--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.forceNamespace }}:{{ .Values.trillian.logServer.portRPC}}"]
+          args: ["--namespace=$(NAMESPACE)", "--configmap={{ template "rekor.config" . }}", "--display_name=rekortree","--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.forceNamespace }}:{{ .Values.trillian.logServer.portRPC}}"]
           env:
           - name: NAMESPACE
             valueFrom:
