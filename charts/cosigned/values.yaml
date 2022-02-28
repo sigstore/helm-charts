@@ -8,8 +8,8 @@ webhook:
   name: webhook
   image:
     repository: gcr.io/projectsigstore/cosigned
-    # crane digest gcr.io/projectsigstore/cosigned:v1.4.1
-    version: sha256:d1aee97490481dae0a979913bb92fa749164fbc91a314a6b5d94aa1a87b69396
+    # crane digest gcr.io/projectsigstore/cosigned:v1.5.2
+    version: sha256:18c7db5051c0d5ac147b1785567ef647f23f7949ae5858776561cfc9cd8cc4b2
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
