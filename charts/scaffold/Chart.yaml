@@ -21,7 +21,7 @@ dependencies:
     repository: "file://../fulcio"
     condition: fulcio.enabled
   - name: rekor
-    version: 0.2.8
+    version: 0.2.13
     repository: "file://../rekor"
     condition: rekor.enabled
   - name: trillian
