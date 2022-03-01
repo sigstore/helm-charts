@@ -1,8 +1,8 @@
 cosign:
   secretKeyRef:
-    name:
+    name: ""
   # add the values in base64 encoded
-  cosignPub:
+  cosignPub: ""
 
 webhook:
   name: webhook
@@ -29,7 +29,7 @@ webhook:
     runAsUser: 1000
     capabilities:
       drop:
-      - all
+        - all
   serviceAccount:
     annotations: {}
   service:

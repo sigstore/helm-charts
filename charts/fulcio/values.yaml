@@ -35,7 +35,7 @@ server:
     gcp_private_ca_parent: projects/test/locations/us-east1/caPools/test
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
     mountToken: true
   service:
@@ -62,7 +62,7 @@ createcerts:
     version: "sha256:db84952d3425ca6acb66a4843b2ad30f1982e460037c17030b850275d6d8b338"
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
     mountToken: true
 # Configure ctlog dependency
@@ -81,4 +81,4 @@ ctlog:
     name: ctlog-createcerts
     fullnameOverride: ctlog-createcerts
 # Force namespace of namespaced resources
-forceNamespace: null
+forceNamespace: ""

@@ -44,7 +44,7 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | createcerts.serviceAccount.annotations | object | `{}` |  |
 | createcerts.serviceAccount.create | bool | `true` |  |
 | createcerts.serviceAccount.mountToken | bool | `true` |  |
-| createcerts.serviceAccount.name | string | `nil` |  |
+| createcerts.serviceAccount.name | string | `""` |  |
 | ctlog.createcerts.fullnameOverride | string | `"ctlog-createcerts"` |  |
 | ctlog.createcerts.name | string | `"ctlog-createcerts"` |  |
 | ctlog.createtree.fullnameOverride | string | `"ctlog-createtree"` |  |
@@ -55,7 +55,7 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | ctlog.name | string | `"ctlog"` |  |
 | ctlog.namespace.create | bool | `true` |  |
 | ctlog.namespace.name | string | `"ctlog-system"` |  |
-| forceNamespace | string | `nil` |  |
+| forceNamespace | string | `""` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"fulcio-system"` |  |
 | server.args.aws_hsm_root_ca_path | string | `nil` |  |
@@ -80,7 +80,7 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | server.serviceAccount.annotations | object | `{}` |  |
 | server.serviceAccount.create | bool | `true` |  |
 | server.serviceAccount.mountToken | bool | `true` |  |
-| server.serviceAccount.name | string | `nil` |  |
+| server.serviceAccount.name | string | `""` |  |
 | server.svcPort | int | `80` |  |
 
 ----------------------------------------------

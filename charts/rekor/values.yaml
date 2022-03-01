@@ -50,7 +50,7 @@ redis:
         targetPort: 6379
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
 
 server:
@@ -125,7 +125,7 @@ server:
   extraArgs: []
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
 createtree:
   name: createtree
@@ -137,7 +137,7 @@ createtree:
     version: "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
 # Configure Trillian dependency
 trillian:
@@ -161,4 +161,4 @@ trillian:
     fullnameOverride: trillian-checktree
 
 # Force namespace of namespaced resources
-forceNamespace: null
+forceNamespace: ""

@@ -39,8 +39,8 @@ The following table lists the configurable parameters of the Rekor chart and the
 | createtree.name | string | `"createtree"` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
 | createtree.serviceAccount.create | bool | `true` |  |
-| createtree.serviceAccount.name | string | `nil` |  |
-| forceNamespace | string | `nil` |  |
+| createtree.serviceAccount.name | string | `""` |  |
+| forceNamespace | string | `""` |  |
 | imagePullSecrets | string | `nil` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
@@ -78,7 +78,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | redis.service.type | string | `"ClusterIP"` |  |
 | redis.serviceAccount.annotations | object | `{}` |  |
 | redis.serviceAccount.create | bool | `true` |  |
-| redis.serviceAccount.name | string | `nil` |  |
+| redis.serviceAccount.name | string | `""` |  |
 | server.attestation_storage.bucket | string | `"file:///var/run/attestations"` |  |
 | server.attestation_storage.enabled | bool | `true` |  |
 | server.attestation_storage.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
@@ -134,7 +134,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.service.type | string | `"ClusterIP"` |  |
 | server.serviceAccount.annotations | object | `{}` |  |
 | server.serviceAccount.create | bool | `true` |  |
-| server.serviceAccount.name | string | `nil` |  |
+| server.serviceAccount.name | string | `""` |  |
 | trillian.createtree.fullnameOverride | string | `"trillian-checktree"` |  |
 | trillian.enabled | bool | `true` |  |
 | trillian.forceNamespace | string | `"trillian-system"` |  |

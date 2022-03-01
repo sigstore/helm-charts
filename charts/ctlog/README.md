@@ -32,7 +32,7 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createcerts.serviceAccount.annotations | object | `{}` |  |
 | createcerts.serviceAccount.create | bool | `true` |  |
 | createcerts.serviceAccount.mountToken | bool | `true` |  |
-| createcerts.serviceAccount.name | string | `nil` |  |
+| createcerts.serviceAccount.name | string | `""` |  |
 | createtree.enabled | bool | `true` |  |
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
@@ -42,8 +42,8 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createtree.serviceAccount.annotations | object | `{}` |  |
 | createtree.serviceAccount.create | bool | `true` |  |
 | createtree.serviceAccount.mountToken | bool | `true` |  |
-| createtree.serviceAccount.name | string | `nil` |  |
-| forceNamespace | string | `nil` |  |
+| createtree.serviceAccount.name | string | `""` |  |
+| forceNamespace | string | `""` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"ctlog-system"` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -59,7 +59,7 @@ The following table lists the configurable parameters of the ctlog chart and the
 | server.serviceAccount.annotations | object | `{}` |  |
 | server.serviceAccount.create | bool | `true` |  |
 | server.serviceAccount.mountToken | bool | `false` |  |
-| server.serviceAccount.name | string | `nil` |  |
+| server.serviceAccount.name | string | `""` |  |
 | trillian.logServer.name | string | `"trillian-logserver"` |  |
 | trillian.logServer.portRPC | int | `8091` |  |
 | trillian.namespace | string | `"trillian-system"` |  |

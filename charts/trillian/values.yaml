@@ -17,8 +17,8 @@ initContainerImage:
 
 mysql:
   gcp:
-    enabled:
-    instance:
+    enabled: ""
+    instance: ""
     cloudsql:
       registry: gcr.io
       repository: cloudsql-docker/gce-proxy
@@ -85,7 +85,7 @@ mysql:
       - ReadWriteOnce
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
 logServer:
   enabled: true
@@ -116,7 +116,7 @@ logServer:
   extraArgs: []
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
 logSigner:
   enabled: true
@@ -143,7 +143,7 @@ logSigner:
   extraArgs: []
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
 createdb:
   name: createdb
@@ -155,7 +155,7 @@ createdb:
     version: "sha256:e167e5849c1f6fbd1d2b5f3debb58e6f6a541c68350ea06540bc2c8823036506"
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
 # Force namespace of namespaced resources
-forceNamespace: null
+forceNamespace: ""

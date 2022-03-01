@@ -73,6 +73,8 @@ The following table lists the configurable parameters of the scaffold chart and 
 | trillian.namespace.create | bool | `true` |  |
 | trillian.namespace.name | string | `"trillian-system"` |  |
 
+----------------------------------------------
+
 ## Ingress
 
 To enabled access from external resources, an Ingress resource is created for both Rekor and Fulcio. The configuration necessary for each Ingress resource is primarily dependent on the specific Ingress Controller being used. In most cases, implementation specific configuration is specified as annotations on the Ingress resources. These can be applied using the `fulcio.server.ingress.annotations` and `rekor.server.ingress.annotations` parameters.

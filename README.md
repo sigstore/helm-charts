@@ -4,7 +4,6 @@
 
 [Helm](https://helm.sh) Charts to support the [Sigstore](https://sigstore.dev) project.
 
-
 ## Usage
 
 Charts are available in the following formats:
@@ -17,14 +16,14 @@ Charts are available in the following formats:
 The following command can be used to add the chart repository:
 
 ```shell
-$ helm repo add sigstore https://sigstore.github.io/helm-charts
-$ helm repo update
+helm repo add sigstore https://sigstore.github.io/helm-charts
+helm repo update
 ```
 
 Once the chart has been added, install one of the available charts:
 
 ```shell
-$ helm upgrade -i <release_name> sigstore/<chart_name>
+helm upgrade -i <release_name> sigstore/<chart_name>
 ```
 
 ### Installing from an OCI Registry
@@ -34,7 +33,7 @@ Charts are also available in OCI format. The list of available charts can be fou
 Install one of the available charts:
 
 ```shell
-$ helm upgrade -i oci://ghcr.io/sigstore/helm-charts/<chart_name> --version=<version>
+helm upgrade -i oci://ghcr.io/sigstore/helm-charts/<chart_name> --version=<version>
 ```
 
 ## Provenance
@@ -53,5 +52,9 @@ NOTE: The public key that was used to sign a particular chart may not be identic
 
 ## Charts
 
-* [rekor](charts/rekor)
 * [cosigned](charts/cosigned)
+* [ctlog](charts/ctlog)
+* [fulcio](charts/fulcio)
+* [rekor](charts/rekor)
+* [scaffold](charts/scaffold)
+* [trillian](charts/trillian)

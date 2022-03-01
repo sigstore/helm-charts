@@ -1,0 +1,2255 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "namespace": {
+                "create": false,
+                "name": "rekor-system"
+            },
+            "imagePullSecrets": null,
+            "initContainerImage": {
+                "curl": {
+                    "registry": "docker.io",
+                    "repository": "curlimages/curl",
+                    "version": "sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8",
+                    "imagePullPolicy": "IfNotPresent"
+                }
+            },
+            "redis": {
+                "enabled": true,
+                "replicaCount": 1,
+                "hostname": "",
+                "port": 6379,
+                "args": [
+                    "--bind",
+                    "0.0.0.0",
+                    "--appendonly",
+                    "yes"
+                ],
+                "name": "redis",
+                "image": {
+                    "registry": "docker.io",
+                    "repository": "redis",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"
+                },
+                "resources": {},
+                "readinessProbe": {
+                    "initialDelaySeconds": 5,
+                    "periodSeconds": 10,
+                    "timeoutSeconds": 1,
+                    "failureThreshold": 3,
+                    "successThreshold": 1,
+                    "exec": {
+                        "command": [
+                            "/bin/sh",
+                            "-i",
+                            "-c",
+                            "test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""
+                        ]
+                    }
+                },
+                "service": {
+                    "type": "ClusterIP",
+                    "ports": [
+                        {
+                            "name": "6379-tcp",
+                            "port": 6379,
+                            "protocol": "TCP",
+                            "targetPort": 6379
+                        }
+                    ]
+                },
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {}
+                }
+            },
+            "server": {
+                "enabled": true,
+                "replicaCount": 1,
+                "name": "server",
+                "port": 3000,
+                "image": {
+                    "registry": "gcr.io",
+                    "repository": "projectsigstore/rekor-server",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
+                },
+                "logging": {
+                    "production": false
+                },
+                "ingress": {
+                    "enabled": true,
+                    "annotations": {},
+                    "path": "/",
+                    "tls": {}
+                },
+                "service": {
+                    "type": "ClusterIP",
+                    "ports": [
+                        {
+                            "name": "3000-tcp",
+                            "port": 80,
+                            "protocol": "TCP",
+                            "targetPort": 3000
+                        },
+                        {
+                            "name": "2112-tcp",
+                            "port": 2112,
+                            "protocol": "TCP",
+                            "targetPort": 2112
+                        }
+                    ]
+                },
+                "readinessProbe": {
+                    "initialDelaySeconds": 10,
+                    "periodSeconds": 10,
+                    "timeoutSeconds": 1,
+                    "failureThreshold": 3,
+                    "successThreshold": 1,
+                    "httpGet": {
+                        "port": 3000,
+                        "path": "/ping"
+                    }
+                },
+                "livenessProbe": {
+                    "initialDelaySeconds": 30,
+                    "periodSeconds": 10,
+                    "timeoutSeconds": 1,
+                    "failureThreshold": 3,
+                    "successThreshold": 1,
+                    "httpGet": {
+                        "port": 3000,
+                        "path": "/ping"
+                    }
+                },
+                "config": {
+                    "key": "treeID"
+                },
+                "retrieve_api": {
+                    "enabled": true
+                },
+                "attestation_storage": {
+                    "enabled": true,
+                    "bucket": "file:///var/run/attestations",
+                    "persistence": {
+                        "enabled": true,
+                        "annotations": {},
+                        "storageClass": null,
+                        "size": "5Gi",
+                        "mountPath": "/var/lib/mysql",
+                        "subPath": "",
+                        "existingClaim": "",
+                        "accessModes": [
+                            "ReadWriteOnce"
+                        ]
+                    }
+                },
+                "deploymentAnnotations": {
+                    "prometheus.io/scrape": "true",
+                    "prometheus.io/path": "/metrics",
+                    "prometheus.io/port": "2112"
+                },
+                "resources": {},
+                "extraArgs": [],
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {}
+                }
+            },
+            "createtree": {
+                "name": "createtree",
+                "image": {
+                    "registry": "ghcr.io",
+                    "repository": "vaikas/createtree",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
+                },
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {}
+                }
+            },
+            "trillian": {
+                "enabled": true,
+                "namespace": {
+                    "name": "trillian-system",
+                    "create": true
+                },
+                "forceNamespace": "trillian-system",
+                "fullnameOverride": "trillian",
+                "logServer": {
+                    "name": "trillian-logserver",
+                    "fullnameOverride": "trillian-logserver",
+                    "portHTTP": 8090,
+                    "portRPC": 8091
+                },
+                "logSigner": {
+                    "name": "trillian-logsigner",
+                    "fullnameOverride": "trillian-logsigner"
+                },
+                "mysql": {
+                    "fullnameOverride": "trillian-mysql"
+                },
+                "createtree": {
+                    "fullnameOverride": "trillian-checktree"
+                }
+            },
+            "forceNamespace": ""
+        }
+    ],
+    "required": [],
+    "properties": {
+        "namespace": {
+            "$id": "#/properties/namespace",
+            "type": "object",
+            "title": "The namespace schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "create": false,
+                    "name": "rekor-system"
+                }
+            ],
+            "required": [],
+            "properties": {
+                "create": {
+                    "$id": "#/properties/namespace/properties/create",
+                    "type": "boolean",
+                    "title": "The create schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        false
+                    ]
+                },
+                "name": {
+                    "$id": "#/properties/namespace/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "rekor-system"
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "imagePullSecrets": {
+            "$id": "#/properties/imagePullSecrets",
+            "type": "null",
+            "title": "The imagePullSecrets schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": null,
+            "examples": [
+                null
+            ]
+        },
+        "initContainerImage": {
+            "$id": "#/properties/initContainerImage",
+            "type": "object",
+            "title": "The initContainerImage schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "curl": {
+                        "registry": "docker.io",
+                        "repository": "curlimages/curl",
+                        "version": "sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8",
+                        "imagePullPolicy": "IfNotPresent"
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "curl": {
+                    "$id": "#/properties/initContainerImage/properties/curl",
+                    "type": "object",
+                    "title": "The curl schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "registry": "docker.io",
+                            "repository": "curlimages/curl",
+                            "version": "sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8",
+                            "imagePullPolicy": "IfNotPresent"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "registry": {
+                            "$id": "#/properties/initContainerImage/properties/curl/properties/registry",
+                            "type": "string",
+                            "title": "The registry schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "docker.io"
+                            ]
+                        },
+                        "repository": {
+                            "$id": "#/properties/initContainerImage/properties/curl/properties/repository",
+                            "type": "string",
+                            "title": "The repository schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "curlimages/curl"
+                            ]
+                        },
+                        "version": {
+                            "$id": "#/properties/initContainerImage/properties/curl/properties/version",
+                            "type": "string",
+                            "title": "The version schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8"
+                            ]
+                        },
+                        "imagePullPolicy": {
+                            "$id": "#/properties/initContainerImage/properties/curl/properties/imagePullPolicy",
+                            "type": "string",
+                            "title": "The imagePullPolicy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "redis": {
+            "$id": "#/properties/redis",
+            "type": "object",
+            "title": "The redis schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "enabled": true,
+                    "replicaCount": 1,
+                    "hostname": "",
+                    "port": 6379,
+                    "args": [
+                        "--bind",
+                        "0.0.0.0",
+                        "--appendonly",
+                        "yes"
+                    ],
+                    "name": "redis",
+                    "image": {
+                        "registry": "docker.io",
+                        "repository": "redis",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"
+                    },
+                    "resources": {},
+                    "readinessProbe": {
+                        "initialDelaySeconds": 5,
+                        "periodSeconds": 10,
+                        "timeoutSeconds": 1,
+                        "failureThreshold": 3,
+                        "successThreshold": 1,
+                        "exec": {
+                            "command": [
+                                "/bin/sh",
+                                "-i",
+                                "-c",
+                                "test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""
+                            ]
+                        }
+                    },
+                    "service": {
+                        "type": "ClusterIP",
+                        "ports": [
+                            {
+                                "name": "6379-tcp",
+                                "port": 6379,
+                                "protocol": "TCP",
+                                "targetPort": 6379
+                            }
+                        ]
+                    },
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
+                        "annotations": {}
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "$id": "#/properties/redis/properties/enabled",
+                    "type": "boolean",
+                    "title": "The enabled schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                },
+                "replicaCount": {
+                    "$id": "#/properties/redis/properties/replicaCount",
+                    "type": "integer",
+                    "title": "The replicaCount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                        1
+                    ]
+                },
+                "hostname": {
+                    "$id": "#/properties/redis/properties/hostname",
+                    "type": "string",
+                    "title": "The hostname schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        ""
+                    ]
+                },
+                "port": {
+                    "$id": "#/properties/redis/properties/port",
+                    "type": "integer",
+                    "title": "The port schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                        6379
+                    ]
+                },
+                "args": {
+                    "$id": "#/properties/redis/properties/args",
+                    "type": "array",
+                    "title": "The args schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": [],
+                    "examples": [
+                        [
+                            "--bind",
+                            "0.0.0.0"
+                        ]
+                    ],
+                    "additionalItems": true,
+                    "items": {
+                        "$id": "#/properties/redis/properties/args/items",
+                        "anyOf": [
+                            {
+                                "$id": "#/properties/redis/properties/args/items/anyOf/0",
+                                "type": "string",
+                                "title": "The first anyOf schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": "",
+                                "examples": [
+                                    "--bind",
+                                    "0.0.0.0"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "name": {
+                    "$id": "#/properties/redis/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "redis"
+                    ]
+                },
+                "image": {
+                    "$id": "#/properties/redis/properties/image",
+                    "type": "object",
+                    "title": "The image schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "registry": "docker.io",
+                            "repository": "redis",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "registry": {
+                            "$id": "#/properties/redis/properties/image/properties/registry",
+                            "type": "string",
+                            "title": "The registry schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "docker.io"
+                            ]
+                        },
+                        "repository": {
+                            "$id": "#/properties/redis/properties/image/properties/repository",
+                            "type": "string",
+                            "title": "The repository schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "redis"
+                            ]
+                        },
+                        "pullPolicy": {
+                            "$id": "#/properties/redis/properties/image/properties/pullPolicy",
+                            "type": "string",
+                            "title": "The pullPolicy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        },
+                        "version": {
+                            "$id": "#/properties/redis/properties/image/properties/version",
+                            "type": "string",
+                            "title": "The version schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "resources": {
+                    "$id": "#/properties/redis/properties/resources",
+                    "type": "object",
+                    "title": "The resources schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {}
+                    ],
+                    "required": [],
+                    "additionalProperties": true
+                },
+                "readinessProbe": {
+                    "$id": "#/properties/redis/properties/readinessProbe",
+                    "type": "object",
+                    "title": "The readinessProbe schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "initialDelaySeconds": 5,
+                            "periodSeconds": 10,
+                            "timeoutSeconds": 1,
+                            "failureThreshold": 3,
+                            "successThreshold": 1,
+                            "exec": {
+                                "command": [
+                                    "/bin/sh",
+                                    "-i",
+                                    "-c",
+                                    "test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""
+                                ]
+                            }
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "initialDelaySeconds": {
+                            "$id": "#/properties/redis/properties/readinessProbe/properties/initialDelaySeconds",
+                            "type": "integer",
+                            "title": "The initialDelaySeconds schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                5
+                            ]
+                        },
+                        "periodSeconds": {
+                            "$id": "#/properties/redis/properties/readinessProbe/properties/periodSeconds",
+                            "type": "integer",
+                            "title": "The periodSeconds schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                10
+                            ]
+                        },
+                        "timeoutSeconds": {
+                            "$id": "#/properties/redis/properties/readinessProbe/properties/timeoutSeconds",
+                            "type": "integer",
+                            "title": "The timeoutSeconds schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                1
+                            ]
+                        },
+                        "failureThreshold": {
+                            "$id": "#/properties/redis/properties/readinessProbe/properties/failureThreshold",
+                            "type": "integer",
+                            "title": "The failureThreshold schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                3
+                            ]
+                        },
+                        "successThreshold": {
+                            "$id": "#/properties/redis/properties/readinessProbe/properties/successThreshold",
+                            "type": "integer",
+                            "title": "The successThreshold schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                1
+                            ]
+                        },
+                        "exec": {
+                            "$id": "#/properties/redis/properties/readinessProbe/properties/exec",
+                            "type": "object",
+                            "title": "The exec schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "command": [
+                                        "/bin/sh",
+                                        "-i",
+                                        "-c",
+                                        "test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""
+                                    ]
+                                }
+                            ],
+                            "required": [],
+                            "properties": {
+                                "command": {
+                                    "$id": "#/properties/redis/properties/readinessProbe/properties/exec/properties/command",
+                                    "type": "array",
+                                    "title": "The command schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": [],
+                                    "examples": [
+                                        [
+                                            "/bin/sh",
+                                            "-i"
+                                        ]
+                                    ],
+                                    "additionalItems": true,
+                                    "items": {
+                                        "$id": "#/properties/redis/properties/readinessProbe/properties/exec/properties/command/items",
+                                        "anyOf": [
+                                            {
+                                                "$id": "#/properties/redis/properties/readinessProbe/properties/exec/properties/command/items/anyOf/0",
+                                                "type": "string",
+                                                "title": "The first anyOf schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "/bin/sh",
+                                                    "-i"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "service": {
+                    "$id": "#/properties/redis/properties/service",
+                    "type": "object",
+                    "title": "The service schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "type": "ClusterIP",
+                            "ports": [
+                                {
+                                    "name": "6379-tcp",
+                                    "port": 6379,
+                                    "protocol": "TCP",
+                                    "targetPort": 6379
+                                }
+                            ]
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "type": {
+                            "$id": "#/properties/redis/properties/service/properties/type",
+                            "type": "string",
+                            "title": "The type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "ClusterIP"
+                            ]
+                        },
+                        "ports": {
+                            "$id": "#/properties/redis/properties/service/properties/ports",
+                            "type": "array",
+                            "title": "The ports schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": [],
+                            "examples": [
+                                [
+                                    {
+                                        "name": "6379-tcp",
+                                        "port": 6379,
+                                        "protocol": "TCP",
+                                        "targetPort": 6379
+                                    }
+                                ]
+                            ],
+                            "additionalItems": true,
+                            "items": {
+                                "$id": "#/properties/redis/properties/service/properties/ports/items",
+                                "anyOf": [
+                                    {
+                                        "$id": "#/properties/redis/properties/service/properties/ports/items/anyOf/0",
+                                        "type": "object",
+                                        "title": "The first anyOf schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": {},
+                                        "examples": [
+                                            {
+                                                "name": "6379-tcp",
+                                                "port": 6379,
+                                                "protocol": "TCP",
+                                                "targetPort": 6379
+                                            }
+                                        ],
+                                        "required": [],
+                                        "properties": {
+                                            "name": {
+                                                "$id": "#/properties/redis/properties/service/properties/ports/items/anyOf/0/properties/name",
+                                                "type": "string",
+                                                "title": "The name schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "6379-tcp"
+                                                ]
+                                            },
+                                            "port": {
+                                                "$id": "#/properties/redis/properties/service/properties/ports/items/anyOf/0/properties/port",
+                                                "type": "integer",
+                                                "title": "The port schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": 0,
+                                                "examples": [
+                                                    6379
+                                                ]
+                                            },
+                                            "protocol": {
+                                                "$id": "#/properties/redis/properties/service/properties/ports/items/anyOf/0/properties/protocol",
+                                                "type": "string",
+                                                "title": "The protocol schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "TCP"
+                                                ]
+                                            },
+                                            "targetPort": {
+                                                "$id": "#/properties/redis/properties/service/properties/ports/items/anyOf/0/properties/targetPort",
+                                                "type": "integer",
+                                                "title": "The targetPort schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": 0,
+                                                "examples": [
+                                                    6379
+                                                ]
+                                            }
+                                        },
+                                        "additionalProperties": true
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "serviceAccount": {
+                    "$id": "#/properties/redis/properties/serviceAccount",
+                    "type": "object",
+                    "title": "The serviceAccount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {}
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "create": {
+                            "$id": "#/properties/redis/properties/serviceAccount/properties/create",
+                            "type": "boolean",
+                            "title": "The create schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "name": {
+                            "$id": "#/properties/redis/properties/serviceAccount/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                ""
+                            ]
+                        },
+                        "annotations": {
+                            "$id": "#/properties/redis/properties/serviceAccount/properties/annotations",
+                            "type": "object",
+                            "title": "The annotations schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {}
+                            ],
+                            "required": [],
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "server": {
+            "$id": "#/properties/server",
+            "type": "object",
+            "title": "The server schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "enabled": true,
+                    "replicaCount": 1,
+                    "name": "server",
+                    "port": 3000,
+                    "image": {
+                        "registry": "gcr.io",
+                        "repository": "projectsigstore/rekor-server",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
+                    },
+                    "logging": {
+                        "production": false
+                    },
+                    "ingress": {
+                        "enabled": true,
+                        "annotations": {},
+                        "path": "/",
+                        "tls": {}
+                    },
+                    "service": {
+                        "type": "ClusterIP",
+                        "ports": [
+                            {
+                                "name": "3000-tcp",
+                                "port": 80,
+                                "protocol": "TCP",
+                                "targetPort": 3000
+                            },
+                            {
+                                "name": "2112-tcp",
+                                "port": 2112,
+                                "protocol": "TCP",
+                                "targetPort": 2112
+                            }
+                        ]
+                    },
+                    "readinessProbe": {
+                        "initialDelaySeconds": 10,
+                        "periodSeconds": 10,
+                        "timeoutSeconds": 1,
+                        "failureThreshold": 3,
+                        "successThreshold": 1,
+                        "httpGet": {
+                            "port": 3000,
+                            "path": "/ping"
+                        }
+                    },
+                    "livenessProbe": {
+                        "initialDelaySeconds": 30,
+                        "periodSeconds": 10,
+                        "timeoutSeconds": 1,
+                        "failureThreshold": 3,
+                        "successThreshold": 1,
+                        "httpGet": {
+                            "port": 3000,
+                            "path": "/ping"
+                        }
+                    },
+                    "config": {
+                        "key": "treeID"
+                    },
+                    "retrieve_api": {
+                        "enabled": true
+                    },
+                    "attestation_storage": {
+                        "enabled": true,
+                        "bucket": "file:///var/run/attestations",
+                        "persistence": {
+                            "enabled": true,
+                            "annotations": {},
+                            "storageClass": null,
+                            "size": "5Gi",
+                            "mountPath": "/var/lib/mysql",
+                            "subPath": "",
+                            "existingClaim": "",
+                            "accessModes": [
+                                "ReadWriteOnce"
+                            ]
+                        }
+                    },
+                    "deploymentAnnotations": {
+                        "prometheus.io/scrape": "true",
+                        "prometheus.io/path": "/metrics",
+                        "prometheus.io/port": "2112"
+                    },
+                    "resources": {},
+                    "extraArgs": [],
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
+                        "annotations": {}
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "$id": "#/properties/server/properties/enabled",
+                    "type": "boolean",
+                    "title": "The enabled schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                },
+                "replicaCount": {
+                    "$id": "#/properties/server/properties/replicaCount",
+                    "type": "integer",
+                    "title": "The replicaCount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                        1
+                    ]
+                },
+                "name": {
+                    "$id": "#/properties/server/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "server"
+                    ]
+                },
+                "port": {
+                    "$id": "#/properties/server/properties/port",
+                    "type": "integer",
+                    "title": "The port schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                        3000
+                    ]
+                },
+                "image": {
+                    "$id": "#/properties/server/properties/image",
+                    "type": "object",
+                    "title": "The image schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "registry": "gcr.io",
+                            "repository": "projectsigstore/rekor-server",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "registry": {
+                            "$id": "#/properties/server/properties/image/properties/registry",
+                            "type": "string",
+                            "title": "The registry schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "gcr.io"
+                            ]
+                        },
+                        "repository": {
+                            "$id": "#/properties/server/properties/image/properties/repository",
+                            "type": "string",
+                            "title": "The repository schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "projectsigstore/rekor-server"
+                            ]
+                        },
+                        "pullPolicy": {
+                            "$id": "#/properties/server/properties/image/properties/pullPolicy",
+                            "type": "string",
+                            "title": "The pullPolicy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        },
+                        "version": {
+                            "$id": "#/properties/server/properties/image/properties/version",
+                            "type": "string",
+                            "title": "The version schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "logging": {
+                    "$id": "#/properties/server/properties/logging",
+                    "type": "object",
+                    "title": "The logging schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "production": false
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "production": {
+                            "$id": "#/properties/server/properties/logging/properties/production",
+                            "type": "boolean",
+                            "title": "The production schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                false
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "ingress": {
+                    "$id": "#/properties/server/properties/ingress",
+                    "type": "object",
+                    "title": "The ingress schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "enabled": true,
+                            "annotations": {},
+                            "path": "/",
+                            "tls": {}
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "enabled": {
+                            "$id": "#/properties/server/properties/ingress/properties/enabled",
+                            "type": "boolean",
+                            "title": "The enabled schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "annotations": {
+                            "$id": "#/properties/server/properties/ingress/properties/annotations",
+                            "type": "object",
+                            "title": "The annotations schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {}
+                            ],
+                            "required": [],
+                            "additionalProperties": true
+                        },
+                        "path": {
+                            "$id": "#/properties/server/properties/ingress/properties/path",
+                            "type": "string",
+                            "title": "The path schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "/"
+                            ]
+                        },
+                        "tls": {
+                            "$id": "#/properties/server/properties/ingress/properties/tls",
+                            "type": "object",
+                            "title": "The tls schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {}
+                            ],
+                            "required": [],
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "service": {
+                    "$id": "#/properties/server/properties/service",
+                    "type": "object",
+                    "title": "The service schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "type": "ClusterIP",
+                            "ports": [
+                                {
+                                    "name": "3000-tcp",
+                                    "port": 80,
+                                    "protocol": "TCP",
+                                    "targetPort": 3000
+                                },
+                                {
+                                    "name": "2112-tcp",
+                                    "port": 2112,
+                                    "protocol": "TCP",
+                                    "targetPort": 2112
+                                }
+                            ]
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "type": {
+                            "$id": "#/properties/server/properties/service/properties/type",
+                            "type": "string",
+                            "title": "The type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "ClusterIP"
+                            ]
+                        },
+                        "ports": {
+                            "$id": "#/properties/server/properties/service/properties/ports",
+                            "type": "array",
+                            "title": "The ports schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": [],
+                            "examples": [
+                                [
+                                    {
+                                        "name": "3000-tcp",
+                                        "port": 80,
+                                        "protocol": "TCP",
+                                        "targetPort": 3000
+                                    },
+                                    {
+                                        "name": "2112-tcp",
+                                        "port": 2112,
+                                        "protocol": "TCP",
+                                        "targetPort": 2112
+                                    }
+                                ]
+                            ],
+                            "additionalItems": true,
+                            "items": {
+                                "$id": "#/properties/server/properties/service/properties/ports/items",
+                                "anyOf": [
+                                    {
+                                        "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0",
+                                        "type": "object",
+                                        "title": "The first anyOf schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": {},
+                                        "examples": [
+                                            {
+                                                "name": "3000-tcp",
+                                                "port": 80,
+                                                "protocol": "TCP",
+                                                "targetPort": 3000
+                                            }
+                                        ],
+                                        "required": [],
+                                        "properties": {
+                                            "name": {
+                                                "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0/properties/name",
+                                                "type": "string",
+                                                "title": "The name schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "3000-tcp"
+                                                ]
+                                            },
+                                            "port": {
+                                                "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0/properties/port",
+                                                "type": "integer",
+                                                "title": "The port schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": 0,
+                                                "examples": [
+                                                    80
+                                                ]
+                                            },
+                                            "protocol": {
+                                                "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0/properties/protocol",
+                                                "type": "string",
+                                                "title": "The protocol schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "TCP"
+                                                ]
+                                            },
+                                            "targetPort": {
+                                                "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0/properties/targetPort",
+                                                "type": "integer",
+                                                "title": "The targetPort schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": 0,
+                                                "examples": [
+                                                    3000
+                                                ]
+                                            }
+                                        },
+                                        "additionalProperties": true
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "readinessProbe": {
+                    "$id": "#/properties/server/properties/readinessProbe",
+                    "type": "object",
+                    "title": "The readinessProbe schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "initialDelaySeconds": 10,
+                            "periodSeconds": 10,
+                            "timeoutSeconds": 1,
+                            "failureThreshold": 3,
+                            "successThreshold": 1,
+                            "httpGet": {
+                                "port": 3000,
+                                "path": "/ping"
+                            }
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "initialDelaySeconds": {
+                            "$id": "#/properties/server/properties/readinessProbe/properties/initialDelaySeconds",
+                            "type": "integer",
+                            "title": "The initialDelaySeconds schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                10
+                            ]
+                        },
+                        "periodSeconds": {
+                            "$id": "#/properties/server/properties/readinessProbe/properties/periodSeconds",
+                            "type": "integer",
+                            "title": "The periodSeconds schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                10
+                            ]
+                        },
+                        "timeoutSeconds": {
+                            "$id": "#/properties/server/properties/readinessProbe/properties/timeoutSeconds",
+                            "type": "integer",
+                            "title": "The timeoutSeconds schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                1
+                            ]
+                        },
+                        "failureThreshold": {
+                            "$id": "#/properties/server/properties/readinessProbe/properties/failureThreshold",
+                            "type": "integer",
+                            "title": "The failureThreshold schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                3
+                            ]
+                        },
+                        "successThreshold": {
+                            "$id": "#/properties/server/properties/readinessProbe/properties/successThreshold",
+                            "type": "integer",
+                            "title": "The successThreshold schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                1
+                            ]
+                        },
+                        "httpGet": {
+                            "$id": "#/properties/server/properties/readinessProbe/properties/httpGet",
+                            "type": "object",
+                            "title": "The httpGet schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "port": 3000,
+                                    "path": "/ping"
+                                }
+                            ],
+                            "required": [],
+                            "properties": {
+                                "port": {
+                                    "$id": "#/properties/server/properties/readinessProbe/properties/httpGet/properties/port",
+                                    "type": "integer",
+                                    "title": "The port schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0,
+                                    "examples": [
+                                        3000
+                                    ]
+                                },
+                                "path": {
+                                    "$id": "#/properties/server/properties/readinessProbe/properties/httpGet/properties/path",
+                                    "type": "string",
+                                    "title": "The path schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "/ping"
+                                    ]
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "livenessProbe": {
+                    "$id": "#/properties/server/properties/livenessProbe",
+                    "type": "object",
+                    "title": "The livenessProbe schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "initialDelaySeconds": 30,
+                            "periodSeconds": 10,
+                            "timeoutSeconds": 1,
+                            "failureThreshold": 3,
+                            "successThreshold": 1,
+                            "httpGet": {
+                                "port": 3000,
+                                "path": "/ping"
+                            }
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "initialDelaySeconds": {
+                            "$id": "#/properties/server/properties/livenessProbe/properties/initialDelaySeconds",
+                            "type": "integer",
+                            "title": "The initialDelaySeconds schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                30
+                            ]
+                        },
+                        "periodSeconds": {
+                            "$id": "#/properties/server/properties/livenessProbe/properties/periodSeconds",
+                            "type": "integer",
+                            "title": "The periodSeconds schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                10
+                            ]
+                        },
+                        "timeoutSeconds": {
+                            "$id": "#/properties/server/properties/livenessProbe/properties/timeoutSeconds",
+                            "type": "integer",
+                            "title": "The timeoutSeconds schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                1
+                            ]
+                        },
+                        "failureThreshold": {
+                            "$id": "#/properties/server/properties/livenessProbe/properties/failureThreshold",
+                            "type": "integer",
+                            "title": "The failureThreshold schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                3
+                            ]
+                        },
+                        "successThreshold": {
+                            "$id": "#/properties/server/properties/livenessProbe/properties/successThreshold",
+                            "type": "integer",
+                            "title": "The successThreshold schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                1
+                            ]
+                        },
+                        "httpGet": {
+                            "$id": "#/properties/server/properties/livenessProbe/properties/httpGet",
+                            "type": "object",
+                            "title": "The httpGet schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "port": 3000,
+                                    "path": "/ping"
+                                }
+                            ],
+                            "required": [],
+                            "properties": {
+                                "port": {
+                                    "$id": "#/properties/server/properties/livenessProbe/properties/httpGet/properties/port",
+                                    "type": "integer",
+                                    "title": "The port schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": 0,
+                                    "examples": [
+                                        3000
+                                    ]
+                                },
+                                "path": {
+                                    "$id": "#/properties/server/properties/livenessProbe/properties/httpGet/properties/path",
+                                    "type": "string",
+                                    "title": "The path schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "/ping"
+                                    ]
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "config": {
+                    "$id": "#/properties/server/properties/config",
+                    "type": "object",
+                    "title": "The config schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "key": "treeID"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "key": {
+                            "$id": "#/properties/server/properties/config/properties/key",
+                            "type": "string",
+                            "title": "The key schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "treeID"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "retrieve_api": {
+                    "$id": "#/properties/server/properties/retrieve_api",
+                    "type": "object",
+                    "title": "The retrieve_api schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "enabled": true
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "enabled": {
+                            "$id": "#/properties/server/properties/retrieve_api/properties/enabled",
+                            "type": "boolean",
+                            "title": "The enabled schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "attestation_storage": {
+                    "$id": "#/properties/server/properties/attestation_storage",
+                    "type": "object",
+                    "title": "The attestation_storage schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "enabled": true,
+                            "bucket": "file:///var/run/attestations",
+                            "persistence": {
+                                "enabled": true,
+                                "annotations": {},
+                                "storageClass": null,
+                                "size": "5Gi",
+                                "mountPath": "/var/lib/mysql",
+                                "subPath": "",
+                                "existingClaim": "",
+                                "accessModes": [
+                                    "ReadWriteOnce"
+                                ]
+                            }
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "enabled": {
+                            "$id": "#/properties/server/properties/attestation_storage/properties/enabled",
+                            "type": "boolean",
+                            "title": "The enabled schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "bucket": {
+                            "$id": "#/properties/server/properties/attestation_storage/properties/bucket",
+                            "type": "string",
+                            "title": "The bucket schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "file:///var/run/attestations"
+                            ]
+                        },
+                        "persistence": {
+                            "$id": "#/properties/server/properties/attestation_storage/properties/persistence",
+                            "type": "object",
+                            "title": "The persistence schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "enabled": true,
+                                    "annotations": {},
+                                    "storageClass": null,
+                                    "size": "5Gi",
+                                    "mountPath": "/var/lib/mysql",
+                                    "subPath": "",
+                                    "existingClaim": "",
+                                    "accessModes": [
+                                        "ReadWriteOnce"
+                                    ]
+                                }
+                            ],
+                            "required": [],
+                            "properties": {
+                                "enabled": {
+                                    "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/enabled",
+                                    "type": "boolean",
+                                    "title": "The enabled schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "annotations": {
+                                    "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/annotations",
+                                    "type": "object",
+                                    "title": "The annotations schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": {},
+                                    "examples": [
+                                        {}
+                                    ],
+                                    "required": [],
+                                    "additionalProperties": true
+                                },
+                                "storageClass": {
+                                    "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/storageClass",
+                                    "type": "null",
+                                    "title": "The storageClass schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": null,
+                                    "examples": [
+                                        null
+                                    ]
+                                },
+                                "size": {
+                                    "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/size",
+                                    "type": "string",
+                                    "title": "The size schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "5Gi"
+                                    ]
+                                },
+                                "mountPath": {
+                                    "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/mountPath",
+                                    "type": "string",
+                                    "title": "The mountPath schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "/var/lib/mysql"
+                                    ]
+                                },
+                                "subPath": {
+                                    "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/subPath",
+                                    "type": "string",
+                                    "title": "The subPath schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        ""
+                                    ]
+                                },
+                                "existingClaim": {
+                                    "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/existingClaim",
+                                    "type": "string",
+                                    "title": "The existingClaim schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        ""
+                                    ]
+                                },
+                                "accessModes": {
+                                    "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/accessModes",
+                                    "type": "array",
+                                    "title": "The accessModes schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": [],
+                                    "examples": [
+                                        [
+                                            "ReadWriteOnce"
+                                        ]
+                                    ],
+                                    "additionalItems": true,
+                                    "items": {
+                                        "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/accessModes/items",
+                                        "anyOf": [
+                                            {
+                                                "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/accessModes/items/anyOf/0",
+                                                "type": "string",
+                                                "title": "The first anyOf schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "ReadWriteOnce"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "deploymentAnnotations": {
+                    "$id": "#/properties/server/properties/deploymentAnnotations",
+                    "type": "object",
+                    "title": "The deploymentAnnotations schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "prometheus.io/scrape": "true",
+                            "prometheus.io/path": "/metrics",
+                            "prometheus.io/port": "2112"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "prometheus.io/scrape": {
+                            "$id": "#/properties/server/properties/deploymentAnnotations/properties/prometheus.io/scrape",
+                            "type": "string",
+                            "title": "The prometheus.io/scrape schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "true"
+                            ]
+                        },
+                        "prometheus.io/path": {
+                            "$id": "#/properties/server/properties/deploymentAnnotations/properties/prometheus.io/path",
+                            "type": "string",
+                            "title": "The prometheus.io/path schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "/metrics"
+                            ]
+                        },
+                        "prometheus.io/port": {
+                            "$id": "#/properties/server/properties/deploymentAnnotations/properties/prometheus.io/port",
+                            "type": "string",
+                            "title": "The prometheus.io/port schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "2112"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "resources": {
+                    "$id": "#/properties/server/properties/resources",
+                    "type": "object",
+                    "title": "The resources schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {}
+                    ],
+                    "required": [],
+                    "additionalProperties": true
+                },
+                "extraArgs": {
+                    "$id": "#/properties/server/properties/extraArgs",
+                    "type": "array",
+                    "title": "The extraArgs schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": [],
+                    "examples": [
+                        []
+                    ],
+                    "additionalItems": true,
+                    "items": {
+                        "$id": "#/properties/server/properties/extraArgs/items"
+                    }
+                },
+                "serviceAccount": {
+                    "$id": "#/properties/server/properties/serviceAccount",
+                    "type": "object",
+                    "title": "The serviceAccount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {}
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "create": {
+                            "$id": "#/properties/server/properties/serviceAccount/properties/create",
+                            "type": "boolean",
+                            "title": "The create schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "name": {
+                            "$id": "#/properties/server/properties/serviceAccount/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                ""
+                            ]
+                        },
+                        "annotations": {
+                            "$id": "#/properties/server/properties/serviceAccount/properties/annotations",
+                            "type": "object",
+                            "title": "The annotations schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {}
+                            ],
+                            "required": [],
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "createtree": {
+            "$id": "#/properties/createtree",
+            "type": "object",
+            "title": "The createtree schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "name": "createtree",
+                    "image": {
+                        "registry": "ghcr.io",
+                        "repository": "vaikas/createtree",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
+                    },
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
+                        "annotations": {}
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "name": {
+                    "$id": "#/properties/createtree/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "createtree"
+                    ]
+                },
+                "image": {
+                    "$id": "#/properties/createtree/properties/image",
+                    "type": "object",
+                    "title": "The image schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "registry": "ghcr.io",
+                            "repository": "vaikas/createtree",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "registry": {
+                            "$id": "#/properties/createtree/properties/image/properties/registry",
+                            "type": "string",
+                            "title": "The registry schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "ghcr.io"
+                            ]
+                        },
+                        "repository": {
+                            "$id": "#/properties/createtree/properties/image/properties/repository",
+                            "type": "string",
+                            "title": "The repository schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "vaikas/createtree"
+                            ]
+                        },
+                        "pullPolicy": {
+                            "$id": "#/properties/createtree/properties/image/properties/pullPolicy",
+                            "type": "string",
+                            "title": "The pullPolicy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        },
+                        "version": {
+                            "$id": "#/properties/createtree/properties/image/properties/version",
+                            "type": "string",
+                            "title": "The version schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "serviceAccount": {
+                    "$id": "#/properties/createtree/properties/serviceAccount",
+                    "type": "object",
+                    "title": "The serviceAccount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {}
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "create": {
+                            "$id": "#/properties/createtree/properties/serviceAccount/properties/create",
+                            "type": "boolean",
+                            "title": "The create schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "name": {
+                            "$id": "#/properties/createtree/properties/serviceAccount/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                ""
+                            ]
+                        },
+                        "annotations": {
+                            "$id": "#/properties/createtree/properties/serviceAccount/properties/annotations",
+                            "type": "object",
+                            "title": "The annotations schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {}
+                            ],
+                            "required": [],
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "trillian": {
+            "$id": "#/properties/trillian",
+            "type": "object",
+            "title": "The trillian schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "enabled": true,
+                    "namespace": {
+                        "name": "trillian-system",
+                        "create": true
+                    },
+                    "forceNamespace": "trillian-system",
+                    "fullnameOverride": "trillian",
+                    "logServer": {
+                        "name": "trillian-logserver",
+                        "fullnameOverride": "trillian-logserver",
+                        "portHTTP": 8090,
+                        "portRPC": 8091
+                    },
+                    "logSigner": {
+                        "name": "trillian-logsigner",
+                        "fullnameOverride": "trillian-logsigner"
+                    },
+                    "mysql": {
+                        "fullnameOverride": "trillian-mysql"
+                    },
+                    "createtree": {
+                        "fullnameOverride": "trillian-checktree"
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "$id": "#/properties/trillian/properties/enabled",
+                    "type": "boolean",
+                    "title": "The enabled schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                },
+                "namespace": {
+                    "$id": "#/properties/trillian/properties/namespace",
+                    "type": "object",
+                    "title": "The namespace schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "name": "trillian-system",
+                            "create": true
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "name": {
+                            "$id": "#/properties/trillian/properties/namespace/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-system"
+                            ]
+                        },
+                        "create": {
+                            "$id": "#/properties/trillian/properties/namespace/properties/create",
+                            "type": "boolean",
+                            "title": "The create schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "forceNamespace": {
+                    "$id": "#/properties/trillian/properties/forceNamespace",
+                    "type": "string",
+                    "title": "The forceNamespace schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "trillian-system"
+                    ]
+                },
+                "fullnameOverride": {
+                    "$id": "#/properties/trillian/properties/fullnameOverride",
+                    "type": "string",
+                    "title": "The fullnameOverride schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "trillian"
+                    ]
+                },
+                "logServer": {
+                    "$id": "#/properties/trillian/properties/logServer",
+                    "type": "object",
+                    "title": "The logServer schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "name": "trillian-logserver",
+                            "fullnameOverride": "trillian-logserver",
+                            "portHTTP": 8090,
+                            "portRPC": 8091
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "name": {
+                            "$id": "#/properties/trillian/properties/logServer/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-logserver"
+                            ]
+                        },
+                        "fullnameOverride": {
+                            "$id": "#/properties/trillian/properties/logServer/properties/fullnameOverride",
+                            "type": "string",
+                            "title": "The fullnameOverride schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-logserver"
+                            ]
+                        },
+                        "portHTTP": {
+                            "$id": "#/properties/trillian/properties/logServer/properties/portHTTP",
+                            "type": "integer",
+                            "title": "The portHTTP schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                8090
+                            ]
+                        },
+                        "portRPC": {
+                            "$id": "#/properties/trillian/properties/logServer/properties/portRPC",
+                            "type": "integer",
+                            "title": "The portRPC schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                8091
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "logSigner": {
+                    "$id": "#/properties/trillian/properties/logSigner",
+                    "type": "object",
+                    "title": "The logSigner schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "name": "trillian-logsigner",
+                            "fullnameOverride": "trillian-logsigner"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "name": {
+                            "$id": "#/properties/trillian/properties/logSigner/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-logsigner"
+                            ]
+                        },
+                        "fullnameOverride": {
+                            "$id": "#/properties/trillian/properties/logSigner/properties/fullnameOverride",
+                            "type": "string",
+                            "title": "The fullnameOverride schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-logsigner"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "mysql": {
+                    "$id": "#/properties/trillian/properties/mysql",
+                    "type": "object",
+                    "title": "The mysql schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "fullnameOverride": "trillian-mysql"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "fullnameOverride": {
+                            "$id": "#/properties/trillian/properties/mysql/properties/fullnameOverride",
+                            "type": "string",
+                            "title": "The fullnameOverride schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-mysql"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "createtree": {
+                    "$id": "#/properties/trillian/properties/createtree",
+                    "type": "object",
+                    "title": "The createtree schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "fullnameOverride": "trillian-checktree"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "fullnameOverride": {
+                            "$id": "#/properties/trillian/properties/createtree/properties/fullnameOverride",
+                            "type": "string",
+                            "title": "The fullnameOverride schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-checktree"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "forceNamespace": {
+            "$id": "#/properties/forceNamespace",
+            "type": "string",
+            "title": "The forceNamespace schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        }
+    },
+    "additionalProperties": true
+}

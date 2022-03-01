@@ -11,7 +11,7 @@ server:
     version: "sha256:e3f9e14e3c12986c83f565c4cc7c6e6b208c764cf9d8bb1fac9e2450d0b0691d"
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
     mountToken: false
   service:
@@ -32,7 +32,7 @@ createtree:
     version: "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
     mountToken: true
 createcerts:
@@ -47,7 +47,7 @@ createcerts:
     version: "sha256:f853fc5dfd0c752142b93a6ee5d79b36aae65254cf29764a8bc654ea91c63c0d"
   serviceAccount:
     create: true
-    name:
+    name: ""
     annotations: {}
     mountToken: true
 trillian:
@@ -56,4 +56,4 @@ trillian:
     name: trillian-logserver
     portRPC: 8091
 # Force namespace of namespaced resources
-forceNamespace: null
+forceNamespace: ""

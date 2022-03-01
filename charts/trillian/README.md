@@ -31,8 +31,8 @@ The following table lists the configurable parameters of the trilian chart and t
 | createdb.name | string | `"createdb"` |  |
 | createdb.serviceAccount.annotations | object | `{}` |  |
 | createdb.serviceAccount.create | bool | `true` |  |
-| createdb.serviceAccount.name | string | `nil` |  |
-| forceNamespace | string | `nil` |  |
+| createdb.serviceAccount.name | string | `""` |  |
+| forceNamespace | string | `""` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
@@ -65,7 +65,7 @@ The following table lists the configurable parameters of the trilian chart and t
 | logServer.service.type | string | `"ClusterIP"` |  |
 | logServer.serviceAccount.annotations | object | `{}` |  |
 | logServer.serviceAccount.create | bool | `true` |  |
-| logServer.serviceAccount.name | string | `nil` |  |
+| logServer.serviceAccount.name | string | `""` |  |
 | logSigner.enabled | bool | `true` |  |
 | logSigner.extraArgs | list | `[]` |  |
 | logSigner.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -86,7 +86,7 @@ The following table lists the configurable parameters of the trilian chart and t
 | logSigner.service.type | string | `"ClusterIP"` |  |
 | logSigner.serviceAccount.annotations | object | `{}` |  |
 | logSigner.serviceAccount.create | bool | `true` |  |
-| logSigner.serviceAccount.name | string | `nil` |  |
+| logSigner.serviceAccount.name | string | `""` |  |
 | mysql.args[0] | string | `"--ignore-db-dir=lost+found"` |  |
 | mysql.auth.existingSecret | string | `""` |  |
 | mysql.auth.password | string | `""` |  |
@@ -96,8 +96,8 @@ The following table lists the configurable parameters of the trilian chart and t
 | mysql.gcp.cloudsql.registry | string | `"gcr.io"` |  |
 | mysql.gcp.cloudsql.repository | string | `"cloudsql-docker/gce-proxy"` |  |
 | mysql.gcp.cloudsql.version | string | `"1.28.1"` |  |
-| mysql.gcp.enabled | string | `nil` |  |
-| mysql.gcp.instance | string | `nil` |  |
+| mysql.gcp.enabled | string | `""` |  |
+| mysql.gcp.instance | string | `""` |  |
 | mysql.hostname | string | `""` |  |
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
@@ -137,7 +137,7 @@ The following table lists the configurable parameters of the trilian chart and t
 | mysql.service.type | string | `"ClusterIP"` |  |
 | mysql.serviceAccount.annotations | object | `{}` |  |
 | mysql.serviceAccount.create | bool | `true` |  |
-| mysql.serviceAccount.name | string | `nil` |  |
+| mysql.serviceAccount.name | string | `""` |  |
 | mysql.strategy.type | string | `"Recreate"` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"trillian-system"` |  |
