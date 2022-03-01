@@ -1,8 +1,8 @@
 # rekor
 
-[Rekor](https://github.com/sigstore/rekor) provides a restful API based server for validation and a transparency log for storage.
+[Rekor](https://docs.sigstore.dev/rekor/overview/) provides a restful API based server for validation and a transparency log for storage.
 
-The following components are included by default:
+The following components are also included as either direct components or through chart dependencies:
 
 * [MySQL](https://www.mysql.com)
 * [Redis](https://redis.io)
@@ -12,7 +12,8 @@ The following components are included by default:
 ## Quick Installation
 
 ```shell
-$ helm install [RELEASE_NAME] .
+helm dependency update .
+helm install [RELEASE_NAME] .
 ```
 
 This command deploys the default configuration for the rekor chart. The [Parameters] section describes the various ways in which the chart can be configured.
@@ -20,7 +21,7 @@ This command deploys the default configuration for the rekor chart. The [Paramet
 ## Uninstallation
 
 ```shell
-$ helm uninstall [RELEASE_NAME]
+helm uninstall [RELEASE_NAME]
 ```
 
 The previous command removes the previously installed chart.
@@ -29,220 +30,137 @@ The previous command removes the previously installed chart.
 
 The following table lists the configurable parameters of the Rekor chart and their default values.
 
-| Parameter                 | Description                                     | Default                                                 |
-|---------------------------|-------------------------------------------------|---------------------------------------------------------|
-| `imagePullSecrets`    | Registry secret names as an array                    | `[]`                                                   |
-| `forceNamespace` | Explicitly specify the namespace to deploy the chart | `nil` |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
+| createtree.image.registry | string | `"ghcr.io"` |  |
+| createtree.image.repository | string | `"vaikas/createtree"` |  |
+| createtree.image.version | string | `"sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"` |  |
+| createtree.name | string | `"createtree"` |  |
+| createtree.serviceAccount.annotations | object | `{}` |  |
+| createtree.serviceAccount.create | bool | `true` |  |
+| createtree.serviceAccount.name | string | `nil` |  |
+| forceNamespace | string | `nil` |  |
+| imagePullSecrets | string | `nil` |  |
+| initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
+| initContainerImage.curl.registry | string | `"docker.io"` |  |
+| initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
+| initContainerImage.curl.version | string | `"sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8"` | 7.81.0 |
+| namespace.create | bool | `false` |  |
+| namespace.name | string | `"rekor-system"` |  |
+| redis.args[0] | string | `"--bind"` |  |
+| redis.args[1] | string | `"0.0.0.0"` |  |
+| redis.args[2] | string | `"--appendonly"` |  |
+| redis.args[3] | string | `"yes"` |  |
+| redis.enabled | bool | `true` |  |
+| redis.hostname | string | `""` |  |
+| redis.image.pullPolicy | string | `"IfNotPresent"` |  |
+| redis.image.registry | string | `"docker.io"` |  |
+| redis.image.repository | string | `"redis"` |  |
+| redis.image.version | string | `"sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"` | 5.0.10 |
+| redis.name | string | `"redis"` |  |
+| redis.port | int | `6379` |  |
+| redis.readinessProbe.exec.command[0] | string | `"/bin/sh"` |  |
+| redis.readinessProbe.exec.command[1] | string | `"-i"` |  |
+| redis.readinessProbe.exec.command[2] | string | `"-c"` |  |
+| redis.readinessProbe.exec.command[3] | string | `"test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""` |  |
+| redis.readinessProbe.failureThreshold | int | `3` |  |
+| redis.readinessProbe.initialDelaySeconds | int | `5` |  |
+| redis.readinessProbe.periodSeconds | int | `10` |  |
+| redis.readinessProbe.successThreshold | int | `1` |  |
+| redis.readinessProbe.timeoutSeconds | int | `1` |  |
+| redis.replicaCount | int | `1` |  |
+| redis.resources | object | `{}` |  |
+| redis.service.ports[0].name | string | `"6379-tcp"` |  |
+| redis.service.ports[0].port | int | `6379` |  |
+| redis.service.ports[0].protocol | string | `"TCP"` |  |
+| redis.service.ports[0].targetPort | int | `6379` |  |
+| redis.service.type | string | `"ClusterIP"` |  |
+| redis.serviceAccount.annotations | object | `{}` |  |
+| redis.serviceAccount.create | bool | `true` |  |
+| redis.serviceAccount.name | string | `nil` |  |
+| server.attestation_storage.bucket | string | `"file:///var/run/attestations"` |  |
+| server.attestation_storage.enabled | bool | `true` |  |
+| server.attestation_storage.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
+| server.attestation_storage.persistence.annotations | object | `{}` |  |
+| server.attestation_storage.persistence.enabled | bool | `true` |  |
+| server.attestation_storage.persistence.existingClaim | string | `""` |  |
+| server.attestation_storage.persistence.mountPath | string | `"/var/lib/mysql"` |  |
+| server.attestation_storage.persistence.size | string | `"5Gi"` |  |
+| server.attestation_storage.persistence.storageClass | string | `nil` |  |
+| server.attestation_storage.persistence.subPath | string | `""` |  |
+| server.config.key | string | `"treeID"` |  |
+| server.deploymentAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
+| server.deploymentAnnotations."prometheus.io/port" | string | `"2112"` |  |
+| server.deploymentAnnotations."prometheus.io/scrape" | string | `"true"` |  |
+| server.enabled | bool | `true` |  |
+| server.extraArgs | list | `[]` |  |
+| server.image.pullPolicy | string | `"IfNotPresent"` |  |
+| server.image.registry | string | `"gcr.io"` |  |
+| server.image.repository | string | `"projectsigstore/rekor-server"` |  |
+| server.image.version | string | `"sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"` | v0.5.0 |
+| server.ingress.annotations | object | `{}` |  |
+| server.ingress.enabled | bool | `true` |  |
+| server.ingress.path | string | `"/"` |  |
+| server.ingress.tls | object | `{}` |  |
+| server.livenessProbe.failureThreshold | int | `3` |  |
+| server.livenessProbe.httpGet.path | string | `"/ping"` |  |
+| server.livenessProbe.httpGet.port | int | `3000` |  |
+| server.livenessProbe.initialDelaySeconds | int | `30` |  |
+| server.livenessProbe.periodSeconds | int | `10` |  |
+| server.livenessProbe.successThreshold | int | `1` |  |
+| server.livenessProbe.timeoutSeconds | int | `1` |  |
+| server.logging.production | bool | `false` |  |
+| server.name | string | `"server"` |  |
+| server.port | int | `3000` |  |
+| server.readinessProbe.failureThreshold | int | `3` |  |
+| server.readinessProbe.httpGet.path | string | `"/ping"` |  |
+| server.readinessProbe.httpGet.port | int | `3000` |  |
+| server.readinessProbe.initialDelaySeconds | int | `10` |  |
+| server.readinessProbe.periodSeconds | int | `10` |  |
+| server.readinessProbe.successThreshold | int | `1` |  |
+| server.readinessProbe.timeoutSeconds | int | `1` |  |
+| server.replicaCount | int | `1` |  |
+| server.resources | object | `{}` |  |
+| server.retrieve_api.enabled | bool | `true` |  |
+| server.service.ports[0].name | string | `"3000-tcp"` |  |
+| server.service.ports[0].port | int | `80` |  |
+| server.service.ports[0].protocol | string | `"TCP"` |  |
+| server.service.ports[0].targetPort | int | `3000` |  |
+| server.service.ports[1].name | string | `"2112-tcp"` |  |
+| server.service.ports[1].port | int | `2112` |  |
+| server.service.ports[1].protocol | string | `"TCP"` |  |
+| server.service.ports[1].targetPort | int | `2112` |  |
+| server.service.type | string | `"ClusterIP"` |  |
+| server.serviceAccount.annotations | object | `{}` |  |
+| server.serviceAccount.create | bool | `true` |  |
+| server.serviceAccount.name | string | `nil` |  |
+| trillian.createtree.fullnameOverride | string | `"trillian-checktree"` |  |
+| trillian.enabled | bool | `true` |  |
+| trillian.forceNamespace | string | `"trillian-system"` |  |
+| trillian.fullnameOverride | string | `"trillian"` |  |
+| trillian.logServer.fullnameOverride | string | `"trillian-logserver"` |  |
+| trillian.logServer.name | string | `"trillian-logserver"` |  |
+| trillian.logServer.portHTTP | int | `8090` |  |
+| trillian.logServer.portRPC | int | `8091` |  |
+| trillian.logSigner.fullnameOverride | string | `"trillian-logsigner"` |  |
+| trillian.logSigner.name | string | `"trillian-logsigner"` |  |
+| trillian.mysql.fullnameOverride | string | `"trillian-mysql"` |  |
+| trillian.namespace.create | bool | `true` |  |
+| trillian.namespace.name | string | `"trillian-system"` |  |
 
-### MySQL
-
-| Parameter                 | Description                                     | Default                                                 |
-|---------------------------|-------------------------------------------------|---------------------------------------------------------|
-| `mysql.enabled`    | Deploy the MySQL component                    | `true`                                                   |
-| `mysql.replicaCount` | Number of replicas to deploy | `1` |
-| `mysql.hostname` | Hostname of the MySQL instance | `""` |
-| `mysql.port` | Hostname of the MySQL instance | `3306` |
-| `mysql.args` | Default container args  | `['--ignore-db-dir=lost+found']` |
-| `mysql.name` | Name of the MySQL component | `mysql` |
-| `mysql.image.repository` | Repository of the MySQL image | `gcr.io/trillian-opensource-ci/db_server` |
-| `mysql.image.pullPolicy` | MySQL image pull policy | `IfNotPresent` |
-| `mysql.image.version` | MySQL tag or image ID | `5e12fb368c8fd19e10aeb5a5cf785107f8069c08` |
-| `mysql.resources` | MySQL compute resources | `{}` |
-| `mysql.livenessProbe` | MySQL liveness probe configuration | Check `values.yaml` file |
-| `redis.readinessProbe` | MySQL readiness probe configuration | Check `values.yaml` file |
-| `mysql.service.type` | Kubernetes Service type | `ClusterIP` |
-| `mysql.service.ports` | Kubernetes Service type | Check `values.yaml` file |
-| `mysql.serviceAccount.create` | Create a dedicated Service Account for MySQL | `true` |
-| `mysql.serviceAccount.name` | Name of the dedicated Service Account for MySQL | `""` |
-| `mysql.serviceAccount.annotations` | Annotations to apply on the dedicated Service Account for Redis | `{}` |
-| `mysql.secret.annotations` | Annotations to apply on the secret containing MySQL credentials | `{}` |
-| `mysql.auth.existingSecret` | Name of the existing secret containing MySQL credentials | `""` |
-| `mysql.auth.username` | MySQL username | `mysql` |
-| `mysql.auth.password` | MySQL password | `""` (Autogenerated when empty) |
-| `mysql.auth.rootPassword` | MySQL root password | `""` (Autogenerated when empty) |
-| `mysql.persistence.enabled` | Enable persistent storage | `true` |
-| `mysql.persistence.annotations` | Annotations to apply on the _PersistentVolumeClaim_ | `{}` |
-| `mysql.persistence.storageClass` | Name of the Storage Class | `nil` |
-| `mysql.persistence.size` | Storage size to request | `5Gi` |
-| `mysql.persistence.mountPath` | Location in container to mount storage | `/var/lib/mysql` |
-| `mysql.persistence.subPath` | Mount subpath | `""` |
-| `mysql.persistence.existingClaim` | Name of the exist_PersistentVolumeClaim_ing  to use for storage | `""` |
-| `mysql.persistence.accessModes` | Access modes to request for the _PersistentVolumeClaim_ | `["ReadWriteOnce"]` |
-| `mysql.deploymentAnnotations` | Annotations to apply on the Deployment | `{}` |
-| `mysql.schedulerName` | Scheduler name to use | `nil` |
-| `mysql.strategy` | Update Strategy | `nil` |
-| `mysql.podAnnotations` | Annotations to apply on the MySQL Pod | `nil` |
-| `mysql.podLabels` | Labels to apply on the MySQL Pod | `nil` |
-| `mysql.extraInitContainers` | Extra `initContainers` to inject into the Deployment | `nil` |
-| `mysql.priorityClassName` | Name of the Priority Class | `nil` |
-| `mysql.nodeSelector` | Node Selector | `nil` |
-| `mysql.dnsConfig` | DNS Configuration for the pod | `nil` |
-| `mysql.securityContext` | Pod security context | `nil` |
-| `mysql.tolerations` | Tolerations applied to the pod | `nil` |
-| `mysql.affinity` | Pod affinity | `nil` |
-
-### Redis
-
-| Parameter                 | Description                                     | Default                                                 |
-|---------------------------|-------------------------------------------------|---------------------------------------------------------|
-| `redis.enabled`    | Deploy the Redis component                    | `true`                                                   |
-| `redis.replicaCount` | Number of replicas to deploy | `1` |
-| `redis.hostname` | Hostname of the Redis instance | `""` |
-| `redis.port` | Hostname of the Redis instance | `6379` |
-| `redis.args` | Default container args  | `['--bind', '0.0.0.0', '--appendonly', '"yes"']` |
-| `redis.name` | Name of the Redis component | `redis` |
-| `redis.image.repository` | Repository of the Redis image | `redis` |
-| `redis.image.pullPolicy` | Redis image pull policy | `IfNotPresent` |
-| `redis.image.version` | Redis tag or image ID | `5.0.10` |
-| `redis.resources` | Redis compute resources | `{}` |
-| `redis.livenessProbe` | Redis liveness probe configuration | Check `values.yaml` file |
-| `redis.readinessProbe` | Redis readiness probe configuration | Check `values.yaml` file |
-| `redis.service.type` | Kubernetes Service type | `ClusterIP` |
-| `redis.service.ports` | Kubernetes Service type | Check `values.yaml` file |
-| `redis.serviceAccount.create` | Create a dedicated Service Account for Redis | `true` |
-| `redis.serviceAccount.name` | Name of the dedicated Service Account for Redis | `""` |
-| `redis.serviceAccount.annotations` | Annotations to apply on the dedicated Service Account for Redis | `{}` |
-| `redis.deploymentAnnotations` | Annotations to apply on the Deployment | `{}` |
-| `redis.schedulerName` | Scheduler name to use | `nil` |
-| `redis.strategy` | Update Strategy | `nil` |
-| `redis.podAnnotations` | Annotations to apply on the Redis Pod | `nil` |
-| `redis.podLabels` | Labels to apply on the Redis Pod | `nil` |
-| `redis.extraInitContainers` | Extra `initContainers` to inject into the Deployment | `nil` |
-| `redis.priorityClassName` | Name of the Priority Class | `nil` |
-| `redis.nodeSelector` | Node Selector | `nil` |
-| `redis.dnsConfig` | DNS Configuration for the pod | `nil` |
-| `redis.securityContext` | Pod security context | `nil` |
-| `redis.tolerations` | Tolerations applied to the pod | `nil` |
-| `redis.affinity` | Pod affinity | `nil` |
-
-
-### Server
-
-| Parameter                 | Description                                     | Default                                                 |
-|---------------------------|-------------------------------------------------|---------------------------------------------------------|
-| `server.enabled`    | Deploy the Server component                    | `true`                                                   |
-| `server.replicaCount` | Number of replicas to deploy | `1` |
-| `server.hostname` | Hostname of the Server instance | `""` |
-| `server.port` | Hostname of the Server instance | `3000` |
-| `server.args` | Default container args  | `['--bind', '0.0.0.0', '--appendonly', '"yes"']` |
-| `server.name` | Name of the Server component | `server` |
-| `server.image.repository` | Repository of the Server image | `quay.io/ablock/rekor-server` |
-| `server.image.pullPolicy` | Server image pull policy | `IfNotPresent` |
-| `server.image.version` | Server tag or image ID | `latest` |
-| `server.logging.production` | Enable production logging | `false` |
-| `server.ingress.enabled` | Create an Ingress resource | `true` |
-| `server.ingress.hostname` | Ingress hostname | `nil` (Required when Ingress is enabled) |
-| `server.ingress.annotations` | Annotations applied to the Ingress resource | `true` |
-| `server.ingress.path` | Ingress path | `/` |
-| `server.ingress.pathtype` | Ingress PathType | `nil` |
-| `server.ingress.tls` | Ingress TLS configuration | `{}` |
-| `server.ingress.tls.secretName` | Name of the secret containing the ingress certificate | `{}` |
-| `server.resources` | Server compute resources | `{}` |
-| `server.livenessProbe` | Server liveness probe configuration | Check `values.yaml` file |
-| `server.readinessProbe` | Server readiness probe configuration | Check `values.yaml` file |
-| `server.service.type` | Kubernetes Service type | `ClusterIP` |
-| `server.service.ports` | Kubernetes Service type | Check `values.yaml` file |
-| `server.serviceAccount.create` | Create a dedicated Service Account for Server | `true` |
-| `server.serviceAccount.name` | Name of the dedicated Service Account for Server | `""` |
-| `server.serviceAccount.annotations` | Annotations to apply on the dedicated Service Account for Server | `{}` |
-| `server.deploymentAnnotations` | Annotations to apply on the Deployment | `{}` |
-| `server.schedulerName` | Scheduler name to use | `nil` |
-| `server.strategy` | Update Strategy | `nil` |
-| `server.podAnnotations` | Annotations to apply on the Server Pod | `nil` |
-| `server.podLabels` | Labels to apply on the Server Pod | `nil` |
-| `server.extraInitContainers` | Extra `initContainers` to inject into the Deployment | `nil` |
-| `server.priorityClassName` | Name of the Priority Class | `nil` |
-| `server.nodeSelector` | Node Selector | `nil` |
-| `server.dnsConfig` | DNS Configuration for the pod | `nil` |
-| `server.securityContext` | Pod security context | `nil` |
-| `server.tolerations` | Tolerations applied to the pod | `nil` |
-| `server.affinity` | Pod affinity | `nil` |
-| `server.attestation_storage.enabled` | Enable attestation storage | `false` |
-| `server.attestation_storage.bucket` | Attestation storage bucket | `file:///var/run/attestations` |
-| `server.attestation_storage.persistence.enabled` | Enable persistent storage for file based attestation | `true` |
-| `server.attestation_storage.persistence.annotations` | Annotations to apply on the _PersistentVolumeClaim_ | `{}` |
-| `server.attestation_storage.persistence.storageClass` | Name of the Storage Class | `nil` |
-| `server.attestation_storage.persistence.size` | Storage size to request | `5Gi` |
-| `server.attestation_storage.persistence.existingClaim` | Name of the exist_PersistentVolumeClaim_ing  to use for storage | `""` |
-| `server.attestation_storage.persistence.accessModes` | Access modes to request for the _PersistentVolumeClaim_ | `["ReadWriteOnce"]` |
-
-
-### Trillian Log Server
-
-| Parameter                 | Description                                     | Default                                                 |
-|---------------------------|-------------------------------------------------|---------------------------------------------------------|
-| `trillianLogServer.enabled`    | Deploy the Trillian Log Server component                    | `true`                                                   |
-| `trillianLogServer.replicaCount` | Number of replicas to deploy | `1` |
-| `trillianLogServer.extraArgs` | Extra container args  | `{}` |
-| `trillianLogServer.name` | Name of the Trillian Log Server component | `trillian-log-server` |
-| `trillianLogServer.port` | Hostname of the Server instance | `8091` |
-| `trillianLogServer.image.repository` | Repository of the Trillian Log Server image | `gcr.io/trillian-opensource-ci/log_server` |
-| `trillianLogServer.image.pullPolicy` | Trillian Log Server image pull policy | `IfNotPresent` |
-| `trillianLogServer.image.version` | Trillian Log Server tag or image ID | `5e12fb368c8fd19e10aeb5a5cf785107f8069c08` |
-| `trillianLogServer.resources` | Trillian Log Server compute resources | `{}` |
-| `trillianLogServer.livenessProbe` | Trillian Log Server liveness probe configuration | Check `values.yaml` file |
-| `trillianLogServer.readinessProbe` | Trillian Log Server readiness probe configuration | Check `values.yaml` file |
-| `trillianLogServer.service.type` | Kubernetes Service type | `ClusterIP` |
-| `trillianLogServer.service.ports` | Kubernetes Service type | Check `values.yaml` file |
-| `trillianLogServer.serviceAccount.create` | Create a dedicated Service Account for Redis | `true` |
-| `trillianLogServer.serviceAccount.name` | Name of the dedicated Service Account for Redis | `""` |
-| `trillianLogServer.serviceAccount.annotations` | Annotations to apply on the dedicated Service Account for the Trillian Log Server | `{}` |
-| `trillianLogServer.deploymentAnnotations` | Annotations to apply on the Deployment | `{}` |
-| `trillianLogServer.schedulerName` | Scheduler name to use | `nil` |
-| `trillianLogServer.strategy` | Update Strategy | `nil` |
-| `trillianLogServer.podAnnotations` | Annotations to apply on the Trillian Log Server Pod | `nil` |
-| `trillianLogServer.podLabels` | Labels to apply on the Trillian Log Server Pod | `nil` |
-| `trillianLogServer.extraInitContainers` | Extra `initContainers` to inject into the Deployment | `nil` |
-| `trillianLogServer.priorityClassName` | Name of the Priority Class | `nil` |
-| `trillianLogServer.nodeSelector` | Node Selector | `nil` |
-| `trillianLogServer.dnsConfig` | DNS Configuration for the pod | `nil` |
-| `trillianLogServer.securityContext` | Pod security context | `nil` |
-| `trillianLogServer.tolerations` | Tolerations applied to the pod | `nil` |
-| `trillianLogServer.affinity` | Pod affinity | `nil` |
-
-### Trillian Log Signer
-
-| Parameter                 | Description                                     | Default                                                 |
-|---------------------------|-------------------------------------------------|---------------------------------------------------------|
-| `trillianLogSigner.enabled`    | Deploy the Trillian Log Signer component                    | `true`                                                   |
-| `trillianLogSigner.replicaCount` | Number of replicas to deploy | `1` |
-| `trillianLogSigner.extraArgs` | Extra container args  | `{}` |
-| `trillianLogSigner.name` | Name of the Trillian Log Signer component | `trillian-log-signer` |
-| `trillianLogSigner.image.repository` | Repository of the Trillian Log Signer image | `gcr.io/trillian-opensource-ci/log_signer` |
-| `trillianLogSigner.image.pullPolicy` | Trillian Log Signer image pull policy | `IfNotPresent` |
-| `trillianLogSigner.image.version` | Trillian Log Signer tag or image ID | `5e12fb368c8fd19e10aeb5a5cf785107f8069c08` |
-| `trillianLogSigner.resources` | Trillian Log Signer compute resources | `{}` |
-| `trillianLogSigner.livenessProbe` | Trillian Log Signer liveness probe configuration | Check `values.yaml` file |
-| `trillianLogSigner.readinessProbe` | Trillian Log Signer readiness probe configuration | Check `values.yaml` file |
-| `trillianLogSigner.service.type` | Kubernetes Service type | `ClusterIP` |
-| `trillianLogSigner.service.ports` | Kubernetes Service type | Check `values.yaml` file |
-| `trillianLogSigner.serviceAccount.create` | Create a dedicated Service Account for Redis | `true` |
-| `trillianLogSigner.serviceAccount.name` | Name of the dedicated Service Account for Redis | `""` |
-| `trillianLogSigner.serviceAccount.annotations` | Annotations to apply on the dedicated Service Account for the Trillian Log Signer | `{}` |
-| `trillianLogSigner.deploymentAnnotations` | Annotations to apply on the Deployment | `{}` |
-| `trillianLogSigner.schedulerName` | Scheduler name to use | `nil` |
-| `trillianLogSigner.strategy` | Update Strategy | `nil` |
-| `trillianLogSigner.podAnnotations` | Annotations to apply on the Trillian Log Signer Pod | `nil` |
-| `trillianLogSigner.podLabels` | Labels to apply on the Trillian Log Signer Pod | `nil` |
-| `trillianLogSigner.extraInitContainers` | Extra `initContainers` to inject into the Deployment | `nil` |
-| `trillianLogSigner.priorityClassName` | Name of the Priority Class | `nil` |
-| `trillianLogSigner.nodeSelector` | Node Selector | `nil` |
-| `trillianLogSigner.dnsConfig` | DNS Configuration for the pod | `nil` |
-| `trillianLogSigner.securityContext` | Pod security context | `nil` |
-| `trillianLogSigner.tolerations` | Tolerations applied to the pod | `nil` |
-| `trillianLogSigner.affinity` | Pod affinity | `nil` |
+----------------------------------------------
 
 ## MySQL Credentials
 
 Credentials for running (when deployed) and connecting to MySQL are stored in a secret resource. The _passsword_ and _root password_ are automatically generated when not provided.
 
-_Note:_ If you plan to perform an upgrade of the chart, be sure to specify these values explicitly. 
+_Note:_ If you plan to perform an upgrade of the chart, be sure to specify these values explicitly.
 
 An existing secret containing credentials for MySQL can be provided by passing the `mysql.auth.existingSecret` parameter. This secret must have the following keys:
 
 * `mysql-password` - Password for connecting to MySQL
 * `mysql-root-password` - Root Password (required when deploying MySQL)
-
 
 ## Integration with External Components
 
