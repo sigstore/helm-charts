@@ -76,7 +76,7 @@
                     "registry": "ghcr.io",
                     "repository": "sigstore/scaffolding/createcerts",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:f7128653d09c678cedaace3b48443164060433af6926ba320adb1500c7731dc5"
+                    "version": "sha256:46a355b021a9613b4ba578e92743e884e4567407b2b84e401343708c92b8b72e"
                 },
                 "serviceAccount": {
                     "create": true,
@@ -784,7 +784,7 @@
                         "registry": "ghcr.io",
                         "repository": "sigstore/scaffolding/createcerts",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:f7128653d09c678cedaace3b48443164060433af6926ba320adb1500c7731dc5"
+                        "version": "sha256:46a355b021a9613b4ba578e92743e884e4567407b2b84e401343708c92b8b72e"
                     },
                     "serviceAccount": {
                         "create": true,
@@ -837,7 +837,7 @@
                             "registry": "ghcr.io",
                             "repository": "sigstore/scaffolding/createcerts",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:f7128653d09c678cedaace3b48443164060433af6926ba320adb1500c7731dc5"
+                            "version": "sha256:46a355b021a9613b4ba578e92743e884e4567407b2b84e401343708c92b8b72e"
                         }
                     ],
                     "required": [],
@@ -879,7 +879,7 @@
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "sha256:f7128653d09c678cedaace3b48443164060433af6926ba320adb1500c7731dc5"
+                                "sha256:46a355b021a9613b4ba578e92743e884e4567407b2b84e401343708c92b8b72e"
                             ]
                         }
                     },

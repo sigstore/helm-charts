@@ -17,7 +17,7 @@
                     "registry": "ghcr.io",
                     "repository": "sigstore/scaffolding/ct_server",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de"
+                    "version": "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
                 },
                 "serviceAccount": {
                     "create": true,
@@ -53,15 +53,15 @@
                     "mountToken": true
                 }
             },
-            "createcerts": {
+            "createctconfig": {
                 "enabled": true,
                 "replicaCount": 1,
-                "name": "createcerts",
+                "name": "createctconfig",
                 "image": {
                     "registry": "ghcr.io",
-                    "repository": "sigstore/scaffolding/createcerts",
+                    "repository": "sigstore/scaffolding/createctconfig",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:6baad7b01770798fcaa4fcdefb96217ce46fae16e33b63ac4f1af1c07b38cf19"
+                    "version": "sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e"
                 },
                 "serviceAccount": {
                     "create": true,
@@ -132,7 +132,7 @@
                         "registry": "ghcr.io",
                         "repository": "sigstore/scaffolding/ct_server",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de"
+                        "version": "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
                     },
                     "serviceAccount": {
                         "create": true,
@@ -176,7 +176,7 @@
                             "registry": "ghcr.io",
                             "repository": "sigstore/scaffolding/ct_server",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de"
+                            "version": "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
                         }
                     ],
                     "required": [],
@@ -218,7 +218,7 @@
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de"
+                                "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
                             ]
                         }
                     },
@@ -573,22 +573,22 @@
             },
             "additionalProperties": true
         },
-        "createcerts": {
-            "$id": "#/properties/createcerts",
+        "createctconfig": {
+            "$id": "#/properties/createctconfig",
             "type": "object",
-            "title": "The createcerts schema",
+            "title": "The createctconfig schema",
             "description": "An explanation about the purpose of this instance.",
             "default": {},
             "examples": [
                 {
                     "enabled": true,
                     "replicaCount": 1,
-                    "name": "createcerts",
+                    "name": "createctconfig",
                     "image": {
                         "registry": "ghcr.io",
-                        "repository": "sigstore/scaffolding/createcerts",
+                        "repository": "sigstore/scaffolding/createctconfig",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:6baad7b01770798fcaa4fcdefb96217ce46fae16e33b63ac4f1af1c07b38cf19"
+                        "version": "sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e"
                     },
                     "serviceAccount": {
                         "create": true,
@@ -601,7 +601,7 @@
             "required": [],
             "properties": {
                 "enabled": {
-                    "$id": "#/properties/createcerts/properties/enabled",
+                    "$id": "#/properties/createctconfig/properties/enabled",
                     "type": "boolean",
                     "title": "The enabled schema",
                     "description": "An explanation about the purpose of this instance.",
@@ -611,7 +611,7 @@
                     ]
                 },
                 "replicaCount": {
-                    "$id": "#/properties/createcerts/properties/replicaCount",
+                    "$id": "#/properties/createctconfig/properties/replicaCount",
                     "type": "integer",
                     "title": "The replicaCount schema",
                     "description": "An explanation about the purpose of this instance.",
@@ -621,17 +621,17 @@
                     ]
                 },
                 "name": {
-                    "$id": "#/properties/createcerts/properties/name",
+                    "$id": "#/properties/createctconfig/properties/name",
                     "type": "string",
                     "title": "The name schema",
                     "description": "An explanation about the purpose of this instance.",
                     "default": "",
                     "examples": [
-                        "createcerts"
+                        "createctconfig"
                     ]
                 },
                 "image": {
-                    "$id": "#/properties/createcerts/properties/image",
+                    "$id": "#/properties/createctconfig/properties/image",
                     "type": "object",
                     "title": "The image schema",
                     "description": "An explanation about the purpose of this instance.",
@@ -639,15 +639,15 @@
                     "examples": [
                         {
                             "registry": "ghcr.io",
-                            "repository": "sigstore/scaffolding/createcerts",
+                            "repository": "sigstore/scaffolding/createctconfig",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:6baad7b01770798fcaa4fcdefb96217ce46fae16e33b63ac4f1af1c07b38cf19"
+                            "version": "sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e"
                         }
                     ],
                     "required": [],
                     "properties": {
                         "registry": {
-                            "$id": "#/properties/createcerts/properties/image/properties/registry",
+                            "$id": "#/properties/createctconfig/properties/image/properties/registry",
                             "type": "string",
                             "title": "The registry schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -657,17 +657,17 @@
                             ]
                         },
                         "repository": {
-                            "$id": "#/properties/createcerts/properties/image/properties/repository",
+                            "$id": "#/properties/createctconfig/properties/image/properties/repository",
                             "type": "string",
                             "title": "The repository schema",
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "sigstore/scaffolding/createcerts"
+                                "sigstore/scaffolding/createctconfig"
                             ]
                         },
                         "pullPolicy": {
-                            "$id": "#/properties/createcerts/properties/image/properties/pullPolicy",
+                            "$id": "#/properties/createctconfig/properties/image/properties/pullPolicy",
                             "type": "string",
                             "title": "The pullPolicy schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -677,20 +677,20 @@
                             ]
                         },
                         "version": {
-                            "$id": "#/properties/createcerts/properties/image/properties/version",
+                            "$id": "#/properties/createctconfig/properties/image/properties/version",
                             "type": "string",
                             "title": "The version schema",
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "sha256:6baad7b01770798fcaa4fcdefb96217ce46fae16e33b63ac4f1af1c07b38cf19"
+                                "sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e"
                             ]
                         }
                     },
                     "additionalProperties": true
                 },
                 "serviceAccount": {
-                    "$id": "#/properties/createcerts/properties/serviceAccount",
+                    "$id": "#/properties/createctconfig/properties/serviceAccount",
                     "type": "object",
                     "title": "The serviceAccount schema",
                     "description": "An explanation about the purpose of this instance.",
@@ -706,7 +706,7 @@
                     "required": [],
                     "properties": {
                         "create": {
-                            "$id": "#/properties/createcerts/properties/serviceAccount/properties/create",
+                            "$id": "#/properties/createctconfig/properties/serviceAccount/properties/create",
                             "type": "boolean",
                             "title": "The create schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -716,7 +716,7 @@
                             ]
                         },
                         "name": {
-                            "$id": "#/properties/createcerts/properties/serviceAccount/properties/name",
+                            "$id": "#/properties/createctconfig/properties/serviceAccount/properties/name",
                             "type": "string",
                             "title": "The name schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -726,7 +726,7 @@
                             ]
                         },
                         "annotations": {
-                            "$id": "#/properties/createcerts/properties/serviceAccount/properties/annotations",
+                            "$id": "#/properties/createctconfig/properties/serviceAccount/properties/annotations",
                             "type": "object",
                             "title": "The annotations schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -738,7 +738,7 @@
                             "additionalProperties": true
                         },
                         "mountToken": {
-                            "$id": "#/properties/createcerts/properties/serviceAccount/properties/mountToken",
+                            "$id": "#/properties/createctconfig/properties/serviceAccount/properties/mountToken",
                             "type": "boolean",
                             "title": "The mountToken schema",
                             "description": "An explanation about the purpose of this instance.",

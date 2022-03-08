@@ -38,7 +38,7 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | createcerts.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createcerts.image.registry | string | `"ghcr.io"` |  |
 | createcerts.image.repository | string | `"sigstore/scaffolding/createcerts"` |  |
-| createcerts.image.version | string | `"sha256:f7128653d09c678cedaace3b48443164060433af6926ba320adb1500c7731dc5"` |  |
+| createcerts.image.version | string | `"sha256:46a355b021a9613b4ba578e92743e884e4567407b2b84e401343708c92b8b72e"` |  |
 | createcerts.name | string | `"createcerts"` |  |
 | createcerts.replicaCount | int | `1` |  |
 | createcerts.serviceAccount.annotations | object | `{}` |  |

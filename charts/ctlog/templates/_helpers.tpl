@@ -42,18 +42,18 @@ Define the ctlog.namespace template if set with forceNamespace or .Release.Names
 {{- end -}}
 
 {{/*
-Create a fully qualified createcerts name.
+Create a fully qualified createctconfig name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "ctlog.createcerts.fullname" -}}
-{{- if .Values.createcerts.fullnameOverride -}}
-{{- .Values.createcerts.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- define "ctlog.createctconfig.fullname" -}}
+{{- if .Values.createctconfig.fullnameOverride -}}
+{{- .Values.createctconfig.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- if contains $name .Release.Name -}}
-{{- printf "%s-%s" .Release.Name .Values.createcerts.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s" .Release.Name .Values.createctconfig.name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- printf "%s-%s-%s" .Release.Name $name .Values.createcerts.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s-%s" .Release.Name $name .Values.createctconfig.name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -114,18 +114,18 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
-Create the name of the service account to use for the createcerts component
+Create the name of the service account to use for the createctconfig component
 */}}
-{{- define "ctlog.serviceAccountName.createcerts" -}}
-{{- if .Values.createcerts.serviceAccount.create -}}
-    {{ default (include "ctlog.createcerts.fullname" .) .Values.createcerts.serviceAccount.name }}
+{{- define "ctlog.serviceAccountName.createctconfig" -}}
+{{- if .Values.createctconfig.serviceAccount.create -}}
+    {{ default (include "ctlog.createctconfig.fullname" .) .Values.createctconfig.serviceAccount.name }}
 {{- else -}}
-    {{ default "default" .Values.createcerts.serviceAccount.name }}
+    {{ default "default" .Values.createctconfig.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
 
 {{/*
-Create the name of the service account to use for the createcerts component
+Create the name of the service account to use for the createtree component
 */}}
 {{- define "ctlog.serviceAccountName.createtree" -}}
 {{- if .Values.createtree.serviceAccount.create -}}
