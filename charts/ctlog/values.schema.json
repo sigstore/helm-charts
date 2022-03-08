@@ -15,9 +15,9 @@
                 "replicaCount": 1,
                 "image": {
                     "registry": "ghcr.io",
-                    "repository": "vaikas/ct_server",
+                    "repository": "sigstore/scaffolding/ct_server",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:e3f9e14e3c12986c83f565c4cc7c6e6b208c764cf9d8bb1fac9e2450d0b0691d"
+                    "version": "sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de"
                 },
                 "serviceAccount": {
                     "create": true,
@@ -42,9 +42,9 @@
                 "name": "createtree",
                 "image": {
                     "registry": "ghcr.io",
-                    "repository": "vaikas/createtree",
+                    "repository": "sigstore/scaffolding/createtree",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
+                    "version": "sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"
                 },
                 "serviceAccount": {
                     "create": true,
@@ -59,9 +59,9 @@
                 "name": "createcerts",
                 "image": {
                     "registry": "ghcr.io",
-                    "repository": "vaikas/createcerts",
+                    "repository": "sigstore/scaffolding/createcerts",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:f853fc5dfd0c752142b93a6ee5d79b36aae65254cf29764a8bc654ea91c63c0d"
+                    "version": "sha256:6baad7b01770798fcaa4fcdefb96217ce46fae16e33b63ac4f1af1c07b38cf19"
                 },
                 "serviceAccount": {
                     "create": true,
@@ -130,9 +130,9 @@
                     "replicaCount": 1,
                     "image": {
                         "registry": "ghcr.io",
-                        "repository": "vaikas/ct_server",
+                        "repository": "sigstore/scaffolding/ct_server",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:e3f9e14e3c12986c83f565c4cc7c6e6b208c764cf9d8bb1fac9e2450d0b0691d"
+                        "version": "sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de"
                     },
                     "serviceAccount": {
                         "create": true,
@@ -174,9 +174,9 @@
                     "examples": [
                         {
                             "registry": "ghcr.io",
-                            "repository": "vaikas/ct_server",
+                            "repository": "sigstore/scaffolding/ct_server",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:e3f9e14e3c12986c83f565c4cc7c6e6b208c764cf9d8bb1fac9e2450d0b0691d"
+                            "version": "sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de"
                         }
                     ],
                     "required": [],
@@ -198,7 +198,7 @@
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "vaikas/ct_server"
+                                "sigstore/scaffolding/ct_server"
                             ]
                         },
                         "pullPolicy": {
@@ -218,7 +218,7 @@
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "sha256:e3f9e14e3c12986c83f565c4cc7c6e6b208c764cf9d8bb1fac9e2450d0b0691d"
+                                "sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de"
                             ]
                         }
                     },
@@ -416,9 +416,9 @@
                     "name": "createtree",
                     "image": {
                         "registry": "ghcr.io",
-                        "repository": "vaikas/createtree",
+                        "repository": "sigstore/scaffolding/createtree",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
+                        "version": "sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"
                     },
                     "serviceAccount": {
                         "create": true,
@@ -459,9 +459,9 @@
                     "examples": [
                         {
                             "registry": "ghcr.io",
-                            "repository": "vaikas/createtree",
+                            "repository": "sigstore/scaffolding/createtree",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
+                            "version": "sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"
                         }
                     ],
                     "required": [],
@@ -483,7 +483,7 @@
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "vaikas/createtree"
+                                "sigstore/scaffolding/createtree"
                             ]
                         },
                         "pullPolicy": {
@@ -503,7 +503,7 @@
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"
+                                "sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"
                             ]
                         }
                     },
@@ -586,9 +586,9 @@
                     "name": "createcerts",
                     "image": {
                         "registry": "ghcr.io",
-                        "repository": "vaikas/createcerts",
+                        "repository": "sigstore/scaffolding/createcerts",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:f853fc5dfd0c752142b93a6ee5d79b36aae65254cf29764a8bc654ea91c63c0d"
+                        "version": "sha256:6baad7b01770798fcaa4fcdefb96217ce46fae16e33b63ac4f1af1c07b38cf19"
                     },
                     "serviceAccount": {
                         "create": true,
@@ -639,9 +639,9 @@
                     "examples": [
                         {
                             "registry": "ghcr.io",
-                            "repository": "vaikas/createcerts",
+                            "repository": "sigstore/scaffolding/createcerts",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:f853fc5dfd0c752142b93a6ee5d79b36aae65254cf29764a8bc654ea91c63c0d"
+                            "version": "sha256:6baad7b01770798fcaa4fcdefb96217ce46fae16e33b63ac4f1af1c07b38cf19"
                         }
                     ],
                     "required": [],
@@ -663,7 +663,7 @@
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "vaikas/createcerts"
+                                "sigstore/scaffolding/createcerts"
                             ]
                         },
                         "pullPolicy": {
@@ -683,7 +683,7 @@
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "sha256:f853fc5dfd0c752142b93a6ee5d79b36aae65254cf29764a8bc654ea91c63c0d"
+                                "sha256:6baad7b01770798fcaa4fcdefb96217ce46fae16e33b63ac4f1af1c07b38cf19"
                             ]
                         }
                     },

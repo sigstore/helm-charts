@@ -56,10 +56,10 @@ createcerts:
   name: createcerts
   image:
     registry: ghcr.io
-    repository: vaikas/createcerts
+    repository: sigstore/scaffolding/createcerts
     pullPolicy: IfNotPresent
-    # v0.1.17
-    version: "sha256:db84952d3425ca6acb66a4843b2ad30f1982e460037c17030b850275d6d8b338"
+    # v0.2.0
+    version: "sha256:f7128653d09c678cedaace3b48443164060433af6926ba320adb1500c7731dc5"
   serviceAccount:
     create: true
     name: ""

@@ -145,17 +145,5 @@ logSigner:
     create: true
     name: ""
     annotations: {}
-createdb:
-  name: createdb
-  image:
-    registry: ghcr.io
-    repository: vaikas/createdb
-    pullPolicy: IfNotPresent
-    # v0.1.17
-    version: "sha256:e167e5849c1f6fbd1d2b5f3debb58e6f6a541c68350ea06540bc2c8823036506"
-  serviceAccount:
-    create: true
-    name: ""
-    annotations: {}
 # Force namespace of namespaced resources
 forceNamespace: ""

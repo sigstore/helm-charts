@@ -24,14 +24,6 @@ The following table lists the configurable parameters of the trilian chart and t
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| createdb.image.pullPolicy | string | `"IfNotPresent"` |  |
-| createdb.image.registry | string | `"ghcr.io"` |  |
-| createdb.image.repository | string | `"vaikas/createdb"` |  |
-| createdb.image.version | string | `"sha256:e167e5849c1f6fbd1d2b5f3debb58e6f6a541c68350ea06540bc2c8823036506"` |  |
-| createdb.name | string | `"createdb"` |  |
-| createdb.serviceAccount.annotations | object | `{}` |  |
-| createdb.serviceAccount.create | bool | `true` |  |
-| createdb.serviceAccount.name | string | `""` |  |
 | forceNamespace | string | `""` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |

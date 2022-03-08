@@ -27,4 +27,4 @@ annotations:
     - name: fulcio
       image: gcr.io/projectsigstore/fulcio@sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841
     - name: createcerts
-      image: ghcr.io/vaikas/createcerts@sha256:db84952d3425ca6acb66a4843b2ad30f1982e460037c17030b850275d6d8b338
+      image: ghcr.io/sigstore/scaffolding/createcerts@sha256:f7128653d09c678cedaace3b48443164060433af6926ba320adb1500c7731dc5

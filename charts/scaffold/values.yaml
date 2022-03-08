@@ -31,8 +31,6 @@ rekor:
     create: true
   forceNamespace: rekor-system
   fullnameOverride: rekor
-  createtree:
-    fullnameOverride: rekor-checktree
   server:
     fullnameOverride: rekor-server
   redis:
@@ -57,7 +55,3 @@ trillian:
     fullnameOverride: trillian-logsigner
   mysql:
     fullnameOverride: trillian-mysql
-  createtree:
-    fullnameOverride: trillian-checktree
-  createdb:
-    fullnameOverride: trillian-createdb

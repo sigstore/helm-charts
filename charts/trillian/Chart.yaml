@@ -28,5 +28,3 @@ annotations:
       image: gcr.io/projectsigstore/trillian_log_server@sha256:f850a0defd089ea844822030c67ae05bc93c91168a7dd4aceb0b6648c39f696b
     - name: log_signer
       image: gcr.io/projectsigstore/trillian_log_signer@sha256:fe90d523f6617974f70878918e4b31d49b2b46a86024bb2d6b01d2bbfed8edbf
-    - name: createdb
-      image: ghcr.io/vaikas/createdb@sha256:e167e5849c1f6fbd1d2b5f3debb58e6f6a541c68350ea06540bc2c8823036506

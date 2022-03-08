@@ -25,8 +25,8 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createcerts.enabled | bool | `true` |  |
 | createcerts.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createcerts.image.registry | string | `"ghcr.io"` |  |
-| createcerts.image.repository | string | `"vaikas/createcerts"` |  |
-| createcerts.image.version | string | `"sha256:f853fc5dfd0c752142b93a6ee5d79b36aae65254cf29764a8bc654ea91c63c0d"` |  |
+| createcerts.image.repository | string | `"sigstore/scaffolding/createcerts"` |  |
+| createcerts.image.version | string | `"sha256:6baad7b01770798fcaa4fcdefb96217ce46fae16e33b63ac4f1af1c07b38cf19"` |  |
 | createcerts.name | string | `"createcerts"` |  |
 | createcerts.replicaCount | int | `1` |  |
 | createcerts.serviceAccount.annotations | object | `{}` |  |
@@ -36,8 +36,8 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createtree.enabled | bool | `true` |  |
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
-| createtree.image.repository | string | `"vaikas/createtree"` |  |
-| createtree.image.version | string | `"sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"` |  |
+| createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
+| createtree.image.version | string | `"sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
 | createtree.serviceAccount.create | bool | `true` |  |
@@ -48,8 +48,8 @@ The following table lists the configurable parameters of the ctlog chart and the
 | namespace.name | string | `"ctlog-system"` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
-| server.image.repository | string | `"vaikas/ct_server"` |  |
-| server.image.version | string | `"sha256:e3f9e14e3c12986c83f565c4cc7c6e6b208c764cf9d8bb1fac9e2450d0b0691d"` |  |
+| server.image.repository | string | `"sigstore/scaffolding/ct_server"` |  |
+| server.image.version | string | `"sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de"` |  |
 | server.replicaCount | int | `1` |  |
 | server.service.ports[0].name | string | `"80-tcp"` |  |
 | server.service.ports[0].port | int | `80` |  |

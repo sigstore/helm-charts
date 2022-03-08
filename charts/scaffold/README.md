@@ -49,7 +49,6 @@ The following table lists the configurable parameters of the scaffold chart and 
 | fulcio.fullnameOverride | string | `"fulcio"` |  |
 | fulcio.namespace.create | bool | `true` |  |
 | fulcio.namespace.name | string | `"fulcio-system"` |  |
-| rekor.createtree.fullnameOverride | string | `"rekor-checktree"` |  |
 | rekor.enabled | bool | `true` |  |
 | rekor.forceNamespace | string | `"rekor-system"` |  |
 | rekor.fullnameOverride | string | `"rekor"` |  |
@@ -58,8 +57,6 @@ The following table lists the configurable parameters of the scaffold chart and 
 | rekor.redis.fullnameOverride | string | `"rekor-redis"` |  |
 | rekor.server.fullnameOverride | string | `"rekor-server"` |  |
 | rekor.trillian.enabled | bool | `false` |  |
-| trillian.createdb.fullnameOverride | string | `"trillian-createdb"` |  |
-| trillian.createtree.fullnameOverride | string | `"trillian-checktree"` |  |
 | trillian.enabled | bool | `true` |  |
 | trillian.forceNamespace | string | `"trillian-system"` |  |
 | trillian.fullnameOverride | string | `"trillian"` |  |

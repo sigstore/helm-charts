@@ -34,8 +34,8 @@ The following table lists the configurable parameters of the Rekor chart and the
 |-----|------|---------|-------------|
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
-| createtree.image.repository | string | `"vaikas/createtree"` |  |
-| createtree.image.version | string | `"sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58"` |  |
+| createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
+| createtree.image.version | string | `"sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
 | createtree.serviceAccount.create | bool | `true` |  |
@@ -135,7 +135,6 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.serviceAccount.annotations | object | `{}` |  |
 | server.serviceAccount.create | bool | `true` |  |
 | server.serviceAccount.name | string | `""` |  |
-| trillian.createtree.fullnameOverride | string | `"trillian-checktree"` |  |
 | trillian.enabled | bool | `true` |  |
 | trillian.forceNamespace | string | `"trillian-system"` |  |
 | trillian.fullnameOverride | string | `"trillian"` |  |

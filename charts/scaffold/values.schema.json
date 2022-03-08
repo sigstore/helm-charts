@@ -45,9 +45,6 @@
                 },
                 "forceNamespace": "rekor-system",
                 "fullnameOverride": "rekor",
-                "createtree": {
-                    "fullnameOverride": "rekor-checktree"
-                },
                 "server": {
                     "fullnameOverride": "rekor-server"
                 },
@@ -78,12 +75,6 @@
                 },
                 "mysql": {
                     "fullnameOverride": "trillian-mysql"
-                },
-                "createtree": {
-                    "fullnameOverride": "trillian-checktree"
-                },
-                "createdb": {
-                    "fullnameOverride": "trillian-createdb"
                 }
             }
         }
@@ -399,9 +390,6 @@
                     },
                     "forceNamespace": "rekor-system",
                     "fullnameOverride": "rekor",
-                    "createtree": {
-                        "fullnameOverride": "rekor-checktree"
-                    },
                     "server": {
                         "fullnameOverride": "rekor-server"
                     },
@@ -481,32 +469,6 @@
                     "examples": [
                         "rekor"
                     ]
-                },
-                "createtree": {
-                    "$id": "#/properties/rekor/properties/createtree",
-                    "type": "object",
-                    "title": "The createtree schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "fullnameOverride": "rekor-checktree"
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "fullnameOverride": {
-                            "$id": "#/properties/rekor/properties/createtree/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "rekor-checktree"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
                 },
                 "server": {
                     "$id": "#/properties/rekor/properties/server",
@@ -616,12 +578,6 @@
                     },
                     "mysql": {
                         "fullnameOverride": "trillian-mysql"
-                    },
-                    "createtree": {
-                        "fullnameOverride": "trillian-checktree"
-                    },
-                    "createdb": {
-                        "fullnameOverride": "trillian-createdb"
                     }
                 }
             ],
@@ -811,58 +767,6 @@
                             "default": "",
                             "examples": [
                                 "trillian-mysql"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "createtree": {
-                    "$id": "#/properties/trillian/properties/createtree",
-                    "type": "object",
-                    "title": "The createtree schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "fullnameOverride": "trillian-checktree"
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "fullnameOverride": {
-                            "$id": "#/properties/trillian/properties/createtree/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "trillian-checktree"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "createdb": {
-                    "$id": "#/properties/trillian/properties/createdb",
-                    "type": "object",
-                    "title": "The createdb schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "fullnameOverride": "trillian-createdb"
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "fullnameOverride": {
-                            "$id": "#/properties/trillian/properties/createdb/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "trillian-createdb"
                             ]
                         }
                     },

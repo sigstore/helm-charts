@@ -27,7 +27,7 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: createtree
-      image: ghcr.io/vaikas/createtree@sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58
+      image: ghcr.io/sigstore/scaffolding/createtree@sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1
     - name: curlimages/curl
       image: docker.io/curlimages/curl@sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8
     - name: rekor-server

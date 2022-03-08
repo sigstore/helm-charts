@@ -19,8 +19,8 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: ct_server
-      image: ghcr.io/vaikas/ct_server@sha256:e3f9e14e3c12986c83f565c4cc7c6e6b208c764cf9d8bb1fac9e2450d0b0691d
+      image: ghcr.io/sigstore/scaffolding/ct_server@sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de
     - name: createcerts
-      image: ghcr.io/vaikas/createcerts@sha256:f853fc5dfd0c752142b93a6ee5d79b36aae65254cf29764a8bc654ea91c63c0d
+      image: sigstore/scaffolding/createcerts@sha256:f7128653d09c678cedaace3b48443164060433af6926ba320adb1500c7731dc5
     - name: createtree
-      image: ghcr.io/vaikas/createtree@sha256:030ac4741bb73255c2b45e2b26c7350f4ce64992b74995854f92d8f617864a58
+      image: ghcr.io/sigstore/scaffolding/createtree@sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1

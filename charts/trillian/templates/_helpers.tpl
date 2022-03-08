@@ -38,23 +38,6 @@ Return the database for mysql
 {{- end -}}
 
 {{/*
-Create a fully qualified createdb name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-*/}}
-{{- define "trillian.createdb.fullname" -}}
-{{- if .Values.createdb.fullnameOverride -}}
-{{- .Values.createdb.fullnameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- if contains $name .Release.Name -}}
-{{- printf "%s-%s" .Release.Name .Values.createdb.name | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- printf "%s-%s-%s" .Release.Name $name .Values.createdb.name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
 Create a fully qualified Mysql name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
@@ -125,16 +108,6 @@ Define the trillian.namespace template if set with forceNamespace or .Release.Na
 {{ printf "namespace: %s" (include "trillian.rawnamespace" .) }}
 {{- end -}}
 
-{{/*
-Create the name of the service account to use for the createdb component
-*/}}
-{{- define "trillian.serviceAccountName.createdb" -}}
-{{- if .Values.mysql.serviceAccount.create -}}
-    {{ default (include "trillian.createdb.fullname" .) .Values.createdb.serviceAccount.name }}
-{{- else -}}
-    {{ default "default" .Values.createdb.serviceAccount.name }}
-{{- end -}}
-{{- end -}}
 
 {{/*
 Create the name of the service account to use for the mysql component
