@@ -4,7 +4,7 @@ Umbrella chart for deploying the components of the [sigstore](https://www.sigsto
 
 The following components are also included as either direct components or through chart dependencies:
 
-* ctlog
+* [ctlog](https://github.com/google/certificate-transparency-go)
 * [Fulcio](https://docs.sigstore.dev/fulcio/overview/)
 * [MySQL](https://www.mysql.com)
 * [Redis](https://redis.io)
