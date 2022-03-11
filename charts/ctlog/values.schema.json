@@ -1,0 +1,835 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "namespace": {
+                "create": false,
+                "name": "ctlog-system"
+            },
+            "server": {
+                "replicaCount": 1,
+                "image": {
+                    "registry": "ghcr.io",
+                    "repository": "sigstore/scaffolding/ct_server",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
+                },
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {},
+                    "mountToken": false
+                },
+                "service": {
+                    "type": "ClusterIP",
+                    "ports": [
+                        {
+                            "name": "80-tcp",
+                            "port": 80,
+                            "protocol": "TCP",
+                            "targetPort": 6962
+                        }
+                    ]
+                }
+            },
+            "createtree": {
+                "enabled": true,
+                "name": "createtree",
+                "image": {
+                    "registry": "ghcr.io",
+                    "repository": "sigstore/scaffolding/createtree",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"
+                },
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {},
+                    "mountToken": true
+                }
+            },
+            "createctconfig": {
+                "enabled": true,
+                "replicaCount": 1,
+                "name": "createctconfig",
+                "image": {
+                    "registry": "ghcr.io",
+                    "repository": "sigstore/scaffolding/createctconfig",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e"
+                },
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {},
+                    "mountToken": true
+                }
+            },
+            "trillian": {
+                "namespace": "trillian-system",
+                "logServer": {
+                    "name": "trillian-logserver",
+                    "portRPC": 8091
+                }
+            },
+            "forceNamespace": ""
+        }
+    ],
+    "required": [],
+    "properties": {
+        "namespace": {
+            "$id": "#/properties/namespace",
+            "type": "object",
+            "title": "The namespace schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "create": false,
+                    "name": "ctlog-system"
+                }
+            ],
+            "required": [],
+            "properties": {
+                "create": {
+                    "$id": "#/properties/namespace/properties/create",
+                    "type": "boolean",
+                    "title": "The create schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        false
+                    ]
+                },
+                "name": {
+                    "$id": "#/properties/namespace/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "ctlog-system"
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "server": {
+            "$id": "#/properties/server",
+            "type": "object",
+            "title": "The server schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "replicaCount": 1,
+                    "image": {
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/scaffolding/ct_server",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
+                    },
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
+                        "annotations": {},
+                        "mountToken": false
+                    },
+                    "service": {
+                        "type": "ClusterIP",
+                        "ports": [
+                            {
+                                "name": "80-tcp",
+                                "port": 80,
+                                "protocol": "TCP",
+                                "targetPort": 6962
+                            }
+                        ]
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "replicaCount": {
+                    "$id": "#/properties/server/properties/replicaCount",
+                    "type": "integer",
+                    "title": "The replicaCount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                        1
+                    ]
+                },
+                "image": {
+                    "$id": "#/properties/server/properties/image",
+                    "type": "object",
+                    "title": "The image schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "registry": "ghcr.io",
+                            "repository": "sigstore/scaffolding/ct_server",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "registry": {
+                            "$id": "#/properties/server/properties/image/properties/registry",
+                            "type": "string",
+                            "title": "The registry schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "ghcr.io"
+                            ]
+                        },
+                        "repository": {
+                            "$id": "#/properties/server/properties/image/properties/repository",
+                            "type": "string",
+                            "title": "The repository schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sigstore/scaffolding/ct_server"
+                            ]
+                        },
+                        "pullPolicy": {
+                            "$id": "#/properties/server/properties/image/properties/pullPolicy",
+                            "type": "string",
+                            "title": "The pullPolicy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        },
+                        "version": {
+                            "$id": "#/properties/server/properties/image/properties/version",
+                            "type": "string",
+                            "title": "The version schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "serviceAccount": {
+                    "$id": "#/properties/server/properties/serviceAccount",
+                    "type": "object",
+                    "title": "The serviceAccount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {},
+                            "mountToken": false
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "create": {
+                            "$id": "#/properties/server/properties/serviceAccount/properties/create",
+                            "type": "boolean",
+                            "title": "The create schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "name": {
+                            "$id": "#/properties/server/properties/serviceAccount/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                ""
+                            ]
+                        },
+                        "annotations": {
+                            "$id": "#/properties/server/properties/serviceAccount/properties/annotations",
+                            "type": "object",
+                            "title": "The annotations schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {}
+                            ],
+                            "required": [],
+                            "additionalProperties": true
+                        },
+                        "mountToken": {
+                            "$id": "#/properties/server/properties/serviceAccount/properties/mountToken",
+                            "type": "boolean",
+                            "title": "The mountToken schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                false
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "service": {
+                    "$id": "#/properties/server/properties/service",
+                    "type": "object",
+                    "title": "The service schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "type": "ClusterIP",
+                            "ports": [
+                                {
+                                    "name": "80-tcp",
+                                    "port": 80,
+                                    "protocol": "TCP",
+                                    "targetPort": 6962
+                                }
+                            ]
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "type": {
+                            "$id": "#/properties/server/properties/service/properties/type",
+                            "type": "string",
+                            "title": "The type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "ClusterIP"
+                            ]
+                        },
+                        "ports": {
+                            "$id": "#/properties/server/properties/service/properties/ports",
+                            "type": "array",
+                            "title": "The ports schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": [],
+                            "examples": [
+                                [
+                                    {
+                                        "name": "80-tcp",
+                                        "port": 80,
+                                        "protocol": "TCP",
+                                        "targetPort": 6962
+                                    }
+                                ]
+                            ],
+                            "additionalItems": true,
+                            "items": {
+                                "$id": "#/properties/server/properties/service/properties/ports/items",
+                                "anyOf": [
+                                    {
+                                        "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0",
+                                        "type": "object",
+                                        "title": "The first anyOf schema",
+                                        "description": "An explanation about the purpose of this instance.",
+                                        "default": {},
+                                        "examples": [
+                                            {
+                                                "name": "80-tcp",
+                                                "port": 80,
+                                                "protocol": "TCP",
+                                                "targetPort": 6962
+                                            }
+                                        ],
+                                        "required": [],
+                                        "properties": {
+                                            "name": {
+                                                "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0/properties/name",
+                                                "type": "string",
+                                                "title": "The name schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "80-tcp"
+                                                ]
+                                            },
+                                            "port": {
+                                                "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0/properties/port",
+                                                "type": "integer",
+                                                "title": "The port schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": 0,
+                                                "examples": [
+                                                    80
+                                                ]
+                                            },
+                                            "protocol": {
+                                                "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0/properties/protocol",
+                                                "type": "string",
+                                                "title": "The protocol schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "TCP"
+                                                ]
+                                            },
+                                            "targetPort": {
+                                                "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0/properties/targetPort",
+                                                "type": "integer",
+                                                "title": "The targetPort schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": 0,
+                                                "examples": [
+                                                    6962
+                                                ]
+                                            }
+                                        },
+                                        "additionalProperties": true
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "createtree": {
+            "$id": "#/properties/createtree",
+            "type": "object",
+            "title": "The createtree schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "enabled": true,
+                    "name": "createtree",
+                    "image": {
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/scaffolding/createtree",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"
+                    },
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
+                        "annotations": {},
+                        "mountToken": true
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "$id": "#/properties/createtree/properties/enabled",
+                    "type": "boolean",
+                    "title": "The enabled schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                },
+                "name": {
+                    "$id": "#/properties/createtree/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "createtree"
+                    ]
+                },
+                "image": {
+                    "$id": "#/properties/createtree/properties/image",
+                    "type": "object",
+                    "title": "The image schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "registry": "ghcr.io",
+                            "repository": "sigstore/scaffolding/createtree",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "registry": {
+                            "$id": "#/properties/createtree/properties/image/properties/registry",
+                            "type": "string",
+                            "title": "The registry schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "ghcr.io"
+                            ]
+                        },
+                        "repository": {
+                            "$id": "#/properties/createtree/properties/image/properties/repository",
+                            "type": "string",
+                            "title": "The repository schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sigstore/scaffolding/createtree"
+                            ]
+                        },
+                        "pullPolicy": {
+                            "$id": "#/properties/createtree/properties/image/properties/pullPolicy",
+                            "type": "string",
+                            "title": "The pullPolicy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        },
+                        "version": {
+                            "$id": "#/properties/createtree/properties/image/properties/version",
+                            "type": "string",
+                            "title": "The version schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "serviceAccount": {
+                    "$id": "#/properties/createtree/properties/serviceAccount",
+                    "type": "object",
+                    "title": "The serviceAccount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {},
+                            "mountToken": true
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "create": {
+                            "$id": "#/properties/createtree/properties/serviceAccount/properties/create",
+                            "type": "boolean",
+                            "title": "The create schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "name": {
+                            "$id": "#/properties/createtree/properties/serviceAccount/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                ""
+                            ]
+                        },
+                        "annotations": {
+                            "$id": "#/properties/createtree/properties/serviceAccount/properties/annotations",
+                            "type": "object",
+                            "title": "The annotations schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {}
+                            ],
+                            "required": [],
+                            "additionalProperties": true
+                        },
+                        "mountToken": {
+                            "$id": "#/properties/createtree/properties/serviceAccount/properties/mountToken",
+                            "type": "boolean",
+                            "title": "The mountToken schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "createctconfig": {
+            "$id": "#/properties/createctconfig",
+            "type": "object",
+            "title": "The createctconfig schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "enabled": true,
+                    "replicaCount": 1,
+                    "name": "createctconfig",
+                    "image": {
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/scaffolding/createctconfig",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e"
+                    },
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
+                        "annotations": {},
+                        "mountToken": true
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "enabled": {
+                    "$id": "#/properties/createctconfig/properties/enabled",
+                    "type": "boolean",
+                    "title": "The enabled schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                },
+                "replicaCount": {
+                    "$id": "#/properties/createctconfig/properties/replicaCount",
+                    "type": "integer",
+                    "title": "The replicaCount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": 0,
+                    "examples": [
+                        1
+                    ]
+                },
+                "name": {
+                    "$id": "#/properties/createctconfig/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "createctconfig"
+                    ]
+                },
+                "image": {
+                    "$id": "#/properties/createctconfig/properties/image",
+                    "type": "object",
+                    "title": "The image schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "registry": "ghcr.io",
+                            "repository": "sigstore/scaffolding/createctconfig",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "registry": {
+                            "$id": "#/properties/createctconfig/properties/image/properties/registry",
+                            "type": "string",
+                            "title": "The registry schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "ghcr.io"
+                            ]
+                        },
+                        "repository": {
+                            "$id": "#/properties/createctconfig/properties/image/properties/repository",
+                            "type": "string",
+                            "title": "The repository schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sigstore/scaffolding/createctconfig"
+                            ]
+                        },
+                        "pullPolicy": {
+                            "$id": "#/properties/createctconfig/properties/image/properties/pullPolicy",
+                            "type": "string",
+                            "title": "The pullPolicy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        },
+                        "version": {
+                            "$id": "#/properties/createctconfig/properties/image/properties/version",
+                            "type": "string",
+                            "title": "The version schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "serviceAccount": {
+                    "$id": "#/properties/createctconfig/properties/serviceAccount",
+                    "type": "object",
+                    "title": "The serviceAccount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {},
+                            "mountToken": true
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "create": {
+                            "$id": "#/properties/createctconfig/properties/serviceAccount/properties/create",
+                            "type": "boolean",
+                            "title": "The create schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "name": {
+                            "$id": "#/properties/createctconfig/properties/serviceAccount/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                ""
+                            ]
+                        },
+                        "annotations": {
+                            "$id": "#/properties/createctconfig/properties/serviceAccount/properties/annotations",
+                            "type": "object",
+                            "title": "The annotations schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {}
+                            ],
+                            "required": [],
+                            "additionalProperties": true
+                        },
+                        "mountToken": {
+                            "$id": "#/properties/createctconfig/properties/serviceAccount/properties/mountToken",
+                            "type": "boolean",
+                            "title": "The mountToken schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "trillian": {
+            "$id": "#/properties/trillian",
+            "type": "object",
+            "title": "The trillian schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "namespace": "trillian-system",
+                    "logServer": {
+                        "name": "trillian-logserver",
+                        "portRPC": 8091
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "namespace": {
+                    "$id": "#/properties/trillian/properties/namespace",
+                    "type": "string",
+                    "title": "The namespace schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "trillian-system"
+                    ]
+                },
+                "logServer": {
+                    "$id": "#/properties/trillian/properties/logServer",
+                    "type": "object",
+                    "title": "The logServer schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "name": "trillian-logserver",
+                            "portRPC": 8091
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "name": {
+                            "$id": "#/properties/trillian/properties/logServer/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-logserver"
+                            ]
+                        },
+                        "portRPC": {
+                            "$id": "#/properties/trillian/properties/logServer/properties/portRPC",
+                            "type": "integer",
+                            "title": "The portRPC schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                8091
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "forceNamespace": {
+            "$id": "#/properties/forceNamespace",
+            "type": "string",
+            "title": "The forceNamespace schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        }
+    },
+    "additionalProperties": true
+}

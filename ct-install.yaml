@@ -1,0 +1,10 @@
+chart-dirs:
+  - charts
+excluded-charts:
+  - ctlog
+  - fulcio
+  - scaffold
+validate-maintainers: false
+remote: origin
+target-branch: main
+helm-extra-args: "--timeout 1000s"

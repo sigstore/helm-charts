@@ -1,0 +1,27 @@
+{{- if .Values.server.ingress.enabled }}
+apiVersion: {{ include "ingress.apiVersion" .}}
+kind: Ingress
+metadata:
+  labels:
+    {{- include "fulcio.labels" . | nindent 4 }}
+  name: {{ template "fulcio.fullname" . }}
+{{ include "fulcio.namespace" . | indent 2 }}
+  annotations:
+{{ toYaml .Values.server.ingress.annotations | indent 4 }}
+spec:
+  rules:
+    - host: {{ required "An Ingress hostname is required" .Values.server.ingress.hostname }}
+      http:
+        paths:
+          - path: {{ .Values.server.ingress.path }}
+            {{- if eq "true" (include "ingress.supportsPathType" .) }}
+            pathType: {{ default "Prefix" .Values.server.ingress.pathType }}
+            {{- end }}
+            backend: {{- include "fulcio.server.ingress.backend" .  | nindent 14 }}
+{{- if .Values.server.ingress.tls }}
+  tls:
+    - hosts:
+        - {{  .Values.server.ingress.hostname | quote }}
+      secretName: {{ .Values.server.ingress.tls.secretName }}
+{{- end -}}
+{{- end }}

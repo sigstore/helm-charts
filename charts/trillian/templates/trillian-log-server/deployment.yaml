@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+{{- if .Values.logServer.deploymentAnnotations }}
+  annotations:
+    {{ toYaml .Values.logServer.deploymentAnnotations | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "trillian.logServer.labels" . | nindent 4 }}
+  name: {{ template "trillian.logServer.fullname" . }}
+{{ include "trillian.namespace" . | indent 2 }}
+spec:
+  selector:
+    {{- if .Values.schedulerName }}
+    schedulerName: "{{ .Values.schedulerName }}"
+    {{- end }}
+    matchLabels:
+      {{- include "trillian.logServer.matchLabels" . | nindent 6 }}
+  replicas: {{ .Values.logServer.replicaCount }}
+  {{- if .Values.logServer.strategy }}
+  strategy:
+{{ toYaml .Values.logServer.strategy | trim | indent 4 }}
+    {{ if eq .Values.logServer.strategy.type "Recreate" }}rollingUpdate: null{{ end }}
+{{- end }}
+  template:
+    metadata:
+    {{- if .Values.logServer.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.logServer.podAnnotations | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "trillian.logServer.labels" . | nindent 8 }}
+        {{- if .Values.logServer.podLabels}}
+        {{ toYaml .Values.logServer.podLabels | nindent 8 }}
+        {{- end}}
+    spec:
+      serviceAccountName: {{ template "trillian.serviceAccountName.logServer" . }}
+      initContainers:
+        - name: "wait-for-trillian-db"
+          image: "{{ template "trillian.image" .Values.initContainerImage.netcat }}"
+          imagePullPolicy: {{ .Values.initContainerImage.netcat.imagePullPolicy }}
+          command: ["sh", "-c", "until nc -z -w 10 {{ template "mysql.hostname" . }} {{ .Values.mysql.port }}; do echo waiting for {{ template "mysql.hostname" . }}; sleep 5; done;"]
+      {{- if .Values.logServer.extraInitContainers }}
+{{ toYaml .Values.logServer.extraInitContainers | indent 8 }}
+      {{- end }}
+{{- if .Values.logServer.priorityClassName }}
+      priorityClassName: "{{ .Values.logServer.priorityClassName }}"
+{{- end }}
+      containers:
+        {{- if .Values.mysql.gcp.enabled }}
+        - name: cloud-sql-proxy
+          image: "{{ template "trillian.image" .Values.mysql.gcp.cloudsql }}"
+          command:
+            - "/cloud_sql_proxy"
+            - "-instances={{ .Values.mysql.gcp.instance }}=tcp:{{ .Values.mysql.service.ports }}"
+          securityContext:
+            runAsNonRoot: true
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "1"
+        {{- end }}
+        - name: {{ template "trillian.name" . }}-{{ .Values.logServer.name }}
+          image: "{{ template "trillian.image" .Values.logServer.image }}"
+          imagePullPolicy: "{{ .Values.logServer.image.pullPolicy }}"
+          args:
+{{  include "trillian.logServer.args" . | indent 12 }}
+          env:
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-database
+            - name: MYSQL_HOSTNAME
+              value: {{ template "mysql.hostname" . }}
+            - name: MYSQL_PORT
+              value: {{ .Values.mysql.port | quote }}
+          ports:
+{{- include "trillian.containerPorts" .Values.logServer.service.ports | indent 12 }}
+{{- if .Values.logServer.livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.logServer.livenessProbe | indent 12 }}
+{{- end }}
+{{- if .Values.logServer.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.logServer.readinessProbe | indent 12 }}
+{{- end }}
+          resources:
+{{ toYaml .Values.logServer.resources | indent 12 }}
+    {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+    {{- end }}
+    {{- if .Values.logServer.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.logServer.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- with .Values.logServer.dnsConfig }}
+      dnsConfig:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- if .Values.logServer.securityContext }}
+      securityContext:
+{{ toYaml .Values.logServer.securityContext | indent 8 }}
+    {{- end }}
+    {{- if .Values.logServer.tolerations }}
+      tolerations:
+{{ toYaml .Values.logServer.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.logServer.affinity }}
+      affinity:
+{{ toYaml .Values.logServer.affinity | indent 8 }}
+    {{- end }}

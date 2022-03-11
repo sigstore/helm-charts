@@ -26,7 +26,7 @@ jobs:
           python-version: 3.7
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@5f16c27cf7a4fa9c776ff73734df3909b2b65127 # pin@v2.1.0
+        uses: helm/chart-testing-action@6b64532d456fa490a3da177fbd181ac4c8192b58 # pin@v2.2.0
 
       - name: Run chart-testing (lint)
         run: ct lint --config ct.yaml
@@ -41,4 +41,4 @@ jobs:
         run: "helm install ingress-nginx/ingress-nginx --generate-name --set controller.service.type='NodePort' --set controller.admissionWebhooks.enabled=false"
 
       - name: Run chart-testing (install)
-        run: ct install --config ct.yaml
+        run: ct install --config ct-install.yaml

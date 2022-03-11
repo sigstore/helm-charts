@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "ctlog.fullname" . }}
+{{ include "ctlog.namespace" . | indent 2 }}
+  labels:
+    {{- include "ctlog.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.server.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "ctlog.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "ctlog.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ template "ctlog.serviceAccountName" . }}
+      containers:
+        - name: {{ template "ctlog.fullname" . }}
+          image: "{{ template "ctlog.image" .Values.server.image }}"
+          imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
+          args: ["--http_endpoint=0.0.0.0:6962", "--log_config=/ctfe-config/ct_server.cfg", "--alsologtostderr"]
+          volumeMounts:
+            - name: keys
+              mountPath: "/ctfe-keys"
+              readOnly: true
+            - name: config
+              mountPath: "/ctfe-config"
+              readOnly: true
+          ports:
+            - containerPort: 6962
+      volumes:
+        - name: keys
+          secret:
+            secretName: {{ template "ctlog.secret" . }}
+            items:
+              - key: private
+                path: privkey.pem
+              - key: public
+                path: pubkey.pem
+              - key: rootca
+                path: roots.pem
+        - name: config
+          configMap:
+            name: {{ template "ctlog.config" . }}
+            items:
+              - key: config
+                path: ct_server.cfg

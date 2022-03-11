@@ -1,0 +1,30 @@
+apiVersion: v2
+name: fulcio
+description: Fulcio
+
+type: application
+
+version: 0.1.0
+
+keywords:
+  - security
+  - pki
+
+home: https://sigstore.dev/
+
+maintainers:
+  - name: The Sigstore Authors
+
+dependencies:
+  - name: ctlog
+    version: 0.1.0
+    repository: "file://../ctlog"
+    condition: ctlog.enabled
+
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/images: |
+    - name: fulcio
+      image: gcr.io/projectsigstore/fulcio@sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841
+    - name: createcerts
+      image: ghcr.io/sigstore/scaffolding/createcerts@sha256:f7128653d09c678cedaace3b48443164060433af6926ba320adb1500c7731dc5

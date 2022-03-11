@@ -1,0 +1,59 @@
+namespace:
+  create: false
+  name: ctlog-system
+server:
+  replicaCount: 1
+  image:
+    registry: ghcr.io
+    repository: sigstore/scaffolding/ct_server
+    pullPolicy: IfNotPresent
+    # v0.2.1
+    version: "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    mountToken: false
+  service:
+    type: ClusterIP
+    ports:
+      - name: 80-tcp
+        port: 80
+        protocol: TCP
+        targetPort: 6962
+createtree:
+  enabled: true
+  name: createtree
+  image:
+    registry: ghcr.io
+    repository: sigstore/scaffolding/createtree
+    pullPolicy: IfNotPresent
+    # v0.2.1
+    version: "sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    mountToken: true
+createctconfig:
+  enabled: true
+  replicaCount: 1
+  name: createctconfig
+  image:
+    registry: ghcr.io
+    repository: sigstore/scaffolding/createctconfig
+    pullPolicy: IfNotPresent
+    # v0.2.1
+    version: "sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e"
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    mountToken: true
+trillian:
+  namespace: trillian-system
+  logServer:
+    name: trillian-logserver
+    portRPC: 8091
+# Force namespace of namespaced resources
+forceNamespace: ""

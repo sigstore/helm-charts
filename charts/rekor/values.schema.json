@@ -7,7 +7,19 @@
     "default": {},
     "examples": [
         {
+            "namespace": {
+                "create": false,
+                "name": "rekor-system"
+            },
             "imagePullSecrets": null,
+            "initContainerImage": {
+                "curl": {
+                    "registry": "docker.io",
+                    "repository": "curlimages/curl",
+                    "version": "sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8",
+                    "imagePullPolicy": "IfNotPresent"
+                }
+            },
             "redis": {
                 "enabled": true,
                 "replicaCount": 1,
@@ -24,7 +36,7 @@
                     "registry": "docker.io",
                     "repository": "redis",
                     "pullPolicy": "IfNotPresent",
-                    "version": "5.0.10"
+                    "version": "sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"
                 },
                 "resources": {},
                 "readinessProbe": {
@@ -55,90 +67,7 @@
                 },
                 "serviceAccount": {
                     "create": true,
-                    "name": null,
-                    "annotations": {}
-                }
-            },
-            "mysql": {
-                "enabled": true,
-                "replicaCount": 1,
-                "name": "mysql",
-                "hostname": "",
-                "port": 3306,
-                "strategy": {
-                    "type": "Recreate"
-                },
-                "image": {
-                    "registry": "gcr.io",
-                    "repository": "trillian-opensource-ci/db_server",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "df474653733c51ed91d60cf3efee69f7bf3199bd"
-                },
-                "resources": {},
-                "args": [
-                    "--ignore-db-dir=lost+found"
-                ],
-                "service": {
-                    "type": "ClusterIP",
-                    "ports": [
-                        {
-                            "name": "3306-tcp",
-                            "port": 3306,
-                            "protocol": "TCP",
-                            "targetPort": 3306
-                        }
-                    ]
-                },
-                "livenessProbe": {
-                    "initialDelaySeconds": 30,
-                    "periodSeconds": 10,
-                    "timeoutSeconds": 1,
-                    "failureThreshold": 3,
-                    "successThreshold": 1,
-                    "exec": {
-                        "command": [
-                            "/etc/init.d/mysql",
-                            "status"
-                        ]
-                    }
-                },
-                "readinessProbe": {
-                    "initialDelaySeconds": 10,
-                    "periodSeconds": 10,
-                    "timeoutSeconds": 1,
-                    "failureThreshold": 3,
-                    "successThreshold": 1,
-                    "exec": {
-                        "command": [
-                            "/etc/init.d/mysql",
-                            "status"
-                        ]
-                    }
-                },
-                "secret": {
-                    "annotations": {}
-                },
-                "auth": {
-                    "username": "mysql",
-                    "password": "",
-                    "rootPassword": "",
-                    "existingSecret": ""
-                },
-                "persistence": {
-                    "enabled": true,
-                    "annotations": {},
-                    "storageClass": null,
-                    "size": "5Gi",
-                    "mountPath": "/var/lib/mysql",
-                    "subPath": "",
-                    "existingClaim": "",
-                    "accessModes": [
-                        "ReadWriteOnce"
-                    ]
-                },
-                "serviceAccount": {
-                    "create": true,
-                    "name": null,
+                    "name": "",
                     "annotations": {}
                 }
             },
@@ -151,7 +80,7 @@
                     "registry": "gcr.io",
                     "repository": "projectsigstore/rekor-server",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:3dadc6f0d718c9aab3beefec2131713b52af89c280aa460220fa2a7ec5ca4205"
+                    "version": "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
                 },
                 "logging": {
                     "production": false
@@ -167,7 +96,7 @@
                     "ports": [
                         {
                             "name": "3000-tcp",
-                            "port": 3000,
+                            "port": 80,
                             "protocol": "TCP",
                             "targetPort": 3000
                         },
@@ -201,6 +130,12 @@
                         "path": "/ping"
                     }
                 },
+                "config": {
+                    "key": "treeID"
+                },
+                "retrieve_api": {
+                    "enabled": true
+                },
                 "attestation_storage": {
                     "enabled": true,
                     "bucket": "file:///var/run/attestations",
@@ -226,93 +161,88 @@
                 "extraArgs": [],
                 "serviceAccount": {
                     "create": true,
-                    "name": null,
+                    "name": "",
                     "annotations": {}
                 }
             },
-            "trillianLogServer": {
-                "enabled": true,
-                "replicaCount": 1,
-                "name": "trillian-log-server",
-                "portRPC": 8091,
-                "portHTTP": 8090,
+            "createtree": {
+                "name": "createtree",
                 "image": {
-                    "registry": "gcr.io",
-                    "repository": "trillian-opensource-ci/log_server",
+                    "registry": "ghcr.io",
+                    "repository": "sigstore/scaffolding/createtree",
                     "pullPolicy": "IfNotPresent",
-                    "version": "df474653733c51ed91d60cf3efee69f7bf3199bd"
+                    "version": "sha256:6bef73fa9c9d1f2b00c5c2c8c2d7e0b43b651686b686d3c66235e78f426c0aa5"
                 },
-                "service": {
-                    "type": "ClusterIP",
-                    "ports": [
-                        {
-                            "name": "8091-tcp",
-                            "port": 8091,
-                            "protocol": "TCP",
-                            "targetPort": 8091
-                        },
-                        {
-                            "name": "8090-tcp",
-                            "port": 8090,
-                            "protocol": "TCP",
-                            "targetPort": 8090
-                        }
-                    ]
-                },
-                "livenessProbe": {},
-                "readinessProbe": {},
-                "resources": {},
-                "extraArgs": [],
                 "serviceAccount": {
                     "create": true,
-                    "name": null,
+                    "name": "",
                     "annotations": {}
                 }
             },
-            "trillianLogSigner": {
+            "trillian": {
                 "enabled": true,
-                "replicaCount": 1,
-                "name": "trillian-log-signer",
-                "portRPC": 8091,
-                "portHTTP": 8090,
-                "image": {
-                    "registry": "gcr.io",
-                    "repository": "trillian-opensource-ci/log_signer",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "df474653733c51ed91d60cf3efee69f7bf3199bd"
+                "namespace": {
+                    "name": "trillian-system",
+                    "create": true
                 },
-                "service": {
-                    "type": "ClusterIP",
-                    "ports": [
-                        {
-                            "name": "8091-tcp",
-                            "port": 8091,
-                            "protocol": "TCP",
-                            "targetPort": 8091
-                        }
-                    ]
+                "forceNamespace": "trillian-system",
+                "fullnameOverride": "trillian",
+                "logServer": {
+                    "name": "trillian-logserver",
+                    "fullnameOverride": "trillian-logserver",
+                    "portHTTP": 8090,
+                    "portRPC": 8091
                 },
-                "livenessProbe": {},
-                "readinessProbe": {},
-                "resources": {},
-                "extraArgs": [],
-                "serviceAccount": {
-                    "create": true,
-                    "name": null,
-                    "annotations": {}
+                "logSigner": {
+                    "name": "trillian-logsigner",
+                    "fullnameOverride": "trillian-logsigner"
+                },
+                "mysql": {
+                    "fullnameOverride": "trillian-mysql"
                 }
             },
-            "forceNamespace": null
+            "forceNamespace": ""
         }
     ],
-    "required": [
-        "redis",
-        "mysql",
-        "server",
-        "trillianLogServer",
-        "trillianLogSigner"
-    ],
+    "required": [],
     "properties": {
+        "namespace": {
+            "$id": "#/properties/namespace",
+            "type": "object",
+            "title": "The namespace schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "create": false,
+                    "name": "rekor-system"
+                }
+            ],
+            "required": [],
+            "properties": {
+                "create": {
+                    "$id": "#/properties/namespace/properties/create",
+                    "type": "boolean",
+                    "title": "The create schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        false
+                    ]
+                },
+                "name": {
+                    "$id": "#/properties/namespace/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "rekor-system"
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
         "imagePullSecrets": {
             "$id": "#/properties/imagePullSecrets",
             "type": "null",
@@ -322,6 +252,86 @@
             "examples": [
                 null
             ]
+        },
+        "initContainerImage": {
+            "$id": "#/properties/initContainerImage",
+            "type": "object",
+            "title": "The initContainerImage schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "curl": {
+                        "registry": "docker.io",
+                        "repository": "curlimages/curl",
+                        "version": "sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8",
+                        "imagePullPolicy": "IfNotPresent"
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "curl": {
+                    "$id": "#/properties/initContainerImage/properties/curl",
+                    "type": "object",
+                    "title": "The curl schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "registry": "docker.io",
+                            "repository": "curlimages/curl",
+                            "version": "sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8",
+                            "imagePullPolicy": "IfNotPresent"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "registry": {
+                            "$id": "#/properties/initContainerImage/properties/curl/properties/registry",
+                            "type": "string",
+                            "title": "The registry schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "docker.io"
+                            ]
+                        },
+                        "repository": {
+                            "$id": "#/properties/initContainerImage/properties/curl/properties/repository",
+                            "type": "string",
+                            "title": "The repository schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "curlimages/curl"
+                            ]
+                        },
+                        "version": {
+                            "$id": "#/properties/initContainerImage/properties/curl/properties/version",
+                            "type": "string",
+                            "title": "The version schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8"
+                            ]
+                        },
+                        "imagePullPolicy": {
+                            "$id": "#/properties/initContainerImage/properties/curl/properties/imagePullPolicy",
+                            "type": "string",
+                            "title": "The imagePullPolicy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
         },
         "redis": {
             "$id": "#/properties/redis",
@@ -346,7 +356,7 @@
                         "registry": "docker.io",
                         "repository": "redis",
                         "pullPolicy": "IfNotPresent",
-                        "version": "5.0.10"
+                        "version": "sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"
                     },
                     "resources": {},
                     "readinessProbe": {
@@ -377,23 +387,12 @@
                     },
                     "serviceAccount": {
                         "create": true,
-                        "name": null,
+                        "name": "",
                         "annotations": {}
                     }
                 }
             ],
-            "required": [
-                "enabled",
-                "replicaCount",
-                "hostname",
-                "port",
-                "args",
-                "name",
-                "image",
-                "resources",
-                "readinessProbe",
-                "service"
-            ],
+            "required": [],
             "properties": {
                 "enabled": {
                     "$id": "#/properties/redis/properties/enabled",
@@ -486,15 +485,10 @@
                             "registry": "docker.io",
                             "repository": "redis",
                             "pullPolicy": "IfNotPresent",
-                            "version": "5.0.10"
+                            "version": "sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"
                         }
                     ],
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy",
-                        "version"
-                    ],
+                    "required": [],
                     "properties": {
                         "registry": {
                             "$id": "#/properties/redis/properties/image/properties/registry",
@@ -533,7 +527,7 @@
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "5.0.10"
+                                "sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"
                             ]
                         }
                     },
@@ -574,14 +568,7 @@
                             }
                         }
                     ],
-                    "required": [
-                        "initialDelaySeconds",
-                        "periodSeconds",
-                        "timeoutSeconds",
-                        "failureThreshold",
-                        "successThreshold",
-                        "exec"
-                    ],
+                    "required": [],
                     "properties": {
                         "initialDelaySeconds": {
                             "$id": "#/properties/redis/properties/readinessProbe/properties/initialDelaySeconds",
@@ -649,9 +636,7 @@
                                     ]
                                 }
                             ],
-                            "required": [
-                                "command"
-                            ],
+                            "required": [],
                             "properties": {
                                 "command": {
                                     "$id": "#/properties/redis/properties/readinessProbe/properties/exec/properties/command",
@@ -708,10 +693,7 @@
                             ]
                         }
                     ],
-                    "required": [
-                        "type",
-                        "ports"
-                    ],
+                    "required": [],
                     "properties": {
                         "type": {
                             "$id": "#/properties/redis/properties/service/properties/type",
@@ -757,12 +739,7 @@
                                                 "targetPort": 6379
                                             }
                                         ],
-                                        "required": [
-                                            "name",
-                                            "port",
-                                            "protocol",
-                                            "targetPort"
-                                        ],
+                                        "required": [],
                                         "properties": {
                                             "name": {
                                                 "$id": "#/properties/redis/properties/service/properties/ports/items/anyOf/0/properties/name",
@@ -822,14 +799,11 @@
                     "examples": [
                         {
                             "create": true,
-                            "name": null,
+                            "name": "",
                             "annotations": {}
                         }
                     ],
-                    "required": [
-                        "create",
-                        "annotations"
-                    ],
+                    "required": [],
                     "properties": {
                         "create": {
                             "$id": "#/properties/redis/properties/serviceAccount/properties/create",
@@ -843,985 +817,16 @@
                         },
                         "name": {
                             "$id": "#/properties/redis/properties/serviceAccount/properties/name",
-                            "type": "null",
+                            "type": "string",
                             "title": "The name schema",
                             "description": "An explanation about the purpose of this instance.",
-                            "default": null,
+                            "default": "",
                             "examples": [
-                                null
+                                ""
                             ]
                         },
                         "annotations": {
                             "$id": "#/properties/redis/properties/serviceAccount/properties/annotations",
-                            "type": "object",
-                            "title": "The annotations schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {}
-                            ],
-                            "required": [],
-                            "additionalProperties": true
-                        }
-                    },
-                    "additionalProperties": true
-                }
-            },
-            "additionalProperties": true
-        },
-        "mysql": {
-            "$id": "#/properties/mysql",
-            "type": "object",
-            "title": "The mysql schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {
-                    "enabled": true,
-                    "replicaCount": 1,
-                    "name": "mysql",
-                    "hostname": "",
-                    "port": 3306,
-                    "strategy": {
-                        "type": "Recreate"
-                    },
-                    "image": {
-                        "registry": "gcr.io",
-                        "repository": "trillian-opensource-ci/db_server",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "df474653733c51ed91d60cf3efee69f7bf3199bd"
-                    },
-                    "resources": {},
-                    "args": [
-                        "--ignore-db-dir=lost+found"
-                    ],
-                    "service": {
-                        "type": "ClusterIP",
-                        "ports": [
-                            {
-                                "name": "3306-tcp",
-                                "port": 3306,
-                                "protocol": "TCP",
-                                "targetPort": 3306
-                            }
-                        ]
-                    },
-                    "livenessProbe": {
-                        "initialDelaySeconds": 30,
-                        "periodSeconds": 10,
-                        "timeoutSeconds": 1,
-                        "failureThreshold": 3,
-                        "successThreshold": 1,
-                        "exec": {
-                            "command": [
-                                "/etc/init.d/mysql",
-                                "status"
-                            ]
-                        }
-                    },
-                    "readinessProbe": {
-                        "initialDelaySeconds": 10,
-                        "periodSeconds": 10,
-                        "timeoutSeconds": 1,
-                        "failureThreshold": 3,
-                        "successThreshold": 1,
-                        "exec": {
-                            "command": [
-                                "/etc/init.d/mysql",
-                                "status"
-                            ]
-                        }
-                    },
-                    "secret": {
-                        "annotations": {}
-                    },
-                    "auth": {
-                        "username": "mysql",
-                        "password": "",
-                        "rootPassword": "",
-                        "existingSecret": ""
-                    },
-                    "persistence": {
-                        "enabled": true,
-                        "annotations": {},
-                        "storageClass": null,
-                        "size": "5Gi",
-                        "mountPath": "/var/lib/mysql",
-                        "subPath": "",
-                        "existingClaim": "",
-                        "accessModes": [
-                            "ReadWriteOnce"
-                        ]
-                    },
-                    "serviceAccount": {
-                        "create": true,
-                        "name": null,
-                        "annotations": {}
-                    }
-                }
-            ],
-            "required": [
-                "enabled",
-                "replicaCount",
-                "name",
-                "hostname",
-                "port",
-                "strategy",
-                "image",
-                "resources",
-                "args",
-                "service",
-                "livenessProbe",
-                "readinessProbe",
-                "secret",
-                "auth",
-                "persistence"
-            ],
-            "properties": {
-                "enabled": {
-                    "$id": "#/properties/mysql/properties/enabled",
-                    "type": "boolean",
-                    "title": "The enabled schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": false,
-                    "examples": [
-                        true
-                    ]
-                },
-                "replicaCount": {
-                    "$id": "#/properties/mysql/properties/replicaCount",
-                    "type": "integer",
-                    "title": "The replicaCount schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": 0,
-                    "examples": [
-                        1
-                    ]
-                },
-                "name": {
-                    "$id": "#/properties/mysql/properties/name",
-                    "type": "string",
-                    "title": "The name schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "mysql"
-                    ]
-                },
-                "hostname": {
-                    "$id": "#/properties/mysql/properties/hostname",
-                    "type": "string",
-                    "title": "The hostname schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        ""
-                    ]
-                },
-                "port": {
-                    "$id": "#/properties/mysql/properties/port",
-                    "type": "integer",
-                    "title": "The port schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": 0,
-                    "examples": [
-                        3306
-                    ]
-                },
-                "strategy": {
-                    "$id": "#/properties/mysql/properties/strategy",
-                    "type": "object",
-                    "title": "The strategy schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "type": "Recreate"
-                        }
-                    ],
-                    "required": [
-                        "type"
-                    ],
-                    "properties": {
-                        "type": {
-                            "$id": "#/properties/mysql/properties/strategy/properties/type",
-                            "type": "string",
-                            "title": "The type schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "Recreate"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "image": {
-                    "$id": "#/properties/mysql/properties/image",
-                    "type": "object",
-                    "title": "The image schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "registry": "gcr.io",
-                            "repository": "trillian-opensource-ci/db_server",
-                            "pullPolicy": "IfNotPresent",
-                            "version": "df474653733c51ed91d60cf3efee69f7bf3199bd"
-                        }
-                    ],
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy",
-                        "version"
-                    ],
-                    "properties": {
-                        "registry": {
-                            "$id": "#/properties/mysql/properties/image/properties/registry",
-                            "type": "string",
-                            "title": "The registry schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "gcr.io"
-                            ]
-                        },
-                        "repository": {
-                            "$id": "#/properties/mysql/properties/image/properties/repository",
-                            "type": "string",
-                            "title": "The repository schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "trillian-opensource-ci/db_server"
-                            ]
-                        },
-                        "pullPolicy": {
-                            "$id": "#/properties/mysql/properties/image/properties/pullPolicy",
-                            "type": "string",
-                            "title": "The pullPolicy schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "IfNotPresent"
-                            ]
-                        },
-                        "version": {
-                            "$id": "#/properties/mysql/properties/image/properties/version",
-                            "type": "string",
-                            "title": "The version schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "df474653733c51ed91d60cf3efee69f7bf3199bd"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "resources": {
-                    "$id": "#/properties/mysql/properties/resources",
-                    "type": "object",
-                    "title": "The resources schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {}
-                    ],
-                    "required": [],
-                    "additionalProperties": true
-                },
-                "args": {
-                    "$id": "#/properties/mysql/properties/args",
-                    "type": "array",
-                    "title": "The args schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": [],
-                    "examples": [
-                        [
-                            "--ignore-db-dir=lost+found"
-                        ]
-                    ],
-                    "additionalItems": true,
-                    "items": {
-                        "$id": "#/properties/mysql/properties/args/items",
-                        "anyOf": [
-                            {
-                                "$id": "#/properties/mysql/properties/args/items/anyOf/0",
-                                "type": "string",
-                                "title": "The first anyOf schema",
-                                "description": "An explanation about the purpose of this instance.",
-                                "default": "",
-                                "examples": [
-                                    "--ignore-db-dir=lost+found"
-                                ]
-                            }
-                        ]
-                    }
-                },
-                "service": {
-                    "$id": "#/properties/mysql/properties/service",
-                    "type": "object",
-                    "title": "The service schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "type": "ClusterIP",
-                            "ports": [
-                                {
-                                    "name": "3306-tcp",
-                                    "port": 3306,
-                                    "protocol": "TCP",
-                                    "targetPort": 3306
-                                }
-                            ]
-                        }
-                    ],
-                    "required": [
-                        "type",
-                        "ports"
-                    ],
-                    "properties": {
-                        "type": {
-                            "$id": "#/properties/mysql/properties/service/properties/type",
-                            "type": "string",
-                            "title": "The type schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "ClusterIP"
-                            ]
-                        },
-                        "ports": {
-                            "$id": "#/properties/mysql/properties/service/properties/ports",
-                            "type": "array",
-                            "title": "The ports schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": [],
-                            "examples": [
-                                [
-                                    {
-                                        "name": "3306-tcp",
-                                        "port": 3306,
-                                        "protocol": "TCP",
-                                        "targetPort": 3306
-                                    }
-                                ]
-                            ],
-                            "additionalItems": true,
-                            "items": {
-                                "$id": "#/properties/mysql/properties/service/properties/ports/items",
-                                "anyOf": [
-                                    {
-                                        "$id": "#/properties/mysql/properties/service/properties/ports/items/anyOf/0",
-                                        "type": "object",
-                                        "title": "The first anyOf schema",
-                                        "description": "An explanation about the purpose of this instance.",
-                                        "default": {},
-                                        "examples": [
-                                            {
-                                                "name": "3306-tcp",
-                                                "port": 3306,
-                                                "protocol": "TCP",
-                                                "targetPort": 3306
-                                            }
-                                        ],
-                                        "required": [
-                                            "name",
-                                            "port",
-                                            "protocol",
-                                            "targetPort"
-                                        ],
-                                        "properties": {
-                                            "name": {
-                                                "$id": "#/properties/mysql/properties/service/properties/ports/items/anyOf/0/properties/name",
-                                                "type": "string",
-                                                "title": "The name schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": "",
-                                                "examples": [
-                                                    "3306-tcp"
-                                                ]
-                                            },
-                                            "port": {
-                                                "$id": "#/properties/mysql/properties/service/properties/ports/items/anyOf/0/properties/port",
-                                                "type": "integer",
-                                                "title": "The port schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": 0,
-                                                "examples": [
-                                                    3306
-                                                ]
-                                            },
-                                            "protocol": {
-                                                "$id": "#/properties/mysql/properties/service/properties/ports/items/anyOf/0/properties/protocol",
-                                                "type": "string",
-                                                "title": "The protocol schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": "",
-                                                "examples": [
-                                                    "TCP"
-                                                ]
-                                            },
-                                            "targetPort": {
-                                                "$id": "#/properties/mysql/properties/service/properties/ports/items/anyOf/0/properties/targetPort",
-                                                "type": "integer",
-                                                "title": "The targetPort schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": 0,
-                                                "examples": [
-                                                    3306
-                                                ]
-                                            }
-                                        },
-                                        "additionalProperties": true
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "livenessProbe": {
-                    "$id": "#/properties/mysql/properties/livenessProbe",
-                    "type": "object",
-                    "title": "The livenessProbe schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "initialDelaySeconds": 30,
-                            "periodSeconds": 10,
-                            "timeoutSeconds": 1,
-                            "failureThreshold": 3,
-                            "successThreshold": 1,
-                            "exec": {
-                                "command": [
-                                    "/etc/init.d/mysql",
-                                    "status"
-                                ]
-                            }
-                        }
-                    ],
-                    "required": [
-                        "initialDelaySeconds",
-                        "periodSeconds",
-                        "timeoutSeconds",
-                        "failureThreshold",
-                        "successThreshold",
-                        "exec"
-                    ],
-                    "properties": {
-                        "initialDelaySeconds": {
-                            "$id": "#/properties/mysql/properties/livenessProbe/properties/initialDelaySeconds",
-                            "type": "integer",
-                            "title": "The initialDelaySeconds schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                30
-                            ]
-                        },
-                        "periodSeconds": {
-                            "$id": "#/properties/mysql/properties/livenessProbe/properties/periodSeconds",
-                            "type": "integer",
-                            "title": "The periodSeconds schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                10
-                            ]
-                        },
-                        "timeoutSeconds": {
-                            "$id": "#/properties/mysql/properties/livenessProbe/properties/timeoutSeconds",
-                            "type": "integer",
-                            "title": "The timeoutSeconds schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "failureThreshold": {
-                            "$id": "#/properties/mysql/properties/livenessProbe/properties/failureThreshold",
-                            "type": "integer",
-                            "title": "The failureThreshold schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                3
-                            ]
-                        },
-                        "successThreshold": {
-                            "$id": "#/properties/mysql/properties/livenessProbe/properties/successThreshold",
-                            "type": "integer",
-                            "title": "The successThreshold schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "exec": {
-                            "$id": "#/properties/mysql/properties/livenessProbe/properties/exec",
-                            "type": "object",
-                            "title": "The exec schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {
-                                    "command": [
-                                        "/etc/init.d/mysql",
-                                        "status"
-                                    ]
-                                }
-                            ],
-                            "required": [
-                                "command"
-                            ],
-                            "properties": {
-                                "command": {
-                                    "$id": "#/properties/mysql/properties/livenessProbe/properties/exec/properties/command",
-                                    "type": "array",
-                                    "title": "The command schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": [],
-                                    "examples": [
-                                        [
-                                            "/etc/init.d/mysql",
-                                            "status"
-                                        ]
-                                    ],
-                                    "additionalItems": true,
-                                    "items": {
-                                        "$id": "#/properties/mysql/properties/livenessProbe/properties/exec/properties/command/items",
-                                        "anyOf": [
-                                            {
-                                                "$id": "#/properties/mysql/properties/livenessProbe/properties/exec/properties/command/items/anyOf/0",
-                                                "type": "string",
-                                                "title": "The first anyOf schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": "",
-                                                "examples": [
-                                                    "/etc/init.d/mysql",
-                                                    "status"
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                }
-                            },
-                            "additionalProperties": true
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "readinessProbe": {
-                    "$id": "#/properties/mysql/properties/readinessProbe",
-                    "type": "object",
-                    "title": "The readinessProbe schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "initialDelaySeconds": 10,
-                            "periodSeconds": 10,
-                            "timeoutSeconds": 1,
-                            "failureThreshold": 3,
-                            "successThreshold": 1,
-                            "exec": {
-                                "command": [
-                                    "/etc/init.d/mysql",
-                                    "status"
-                                ]
-                            }
-                        }
-                    ],
-                    "required": [
-                        "initialDelaySeconds",
-                        "periodSeconds",
-                        "timeoutSeconds",
-                        "failureThreshold",
-                        "successThreshold",
-                        "exec"
-                    ],
-                    "properties": {
-                        "initialDelaySeconds": {
-                            "$id": "#/properties/mysql/properties/readinessProbe/properties/initialDelaySeconds",
-                            "type": "integer",
-                            "title": "The initialDelaySeconds schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                10
-                            ]
-                        },
-                        "periodSeconds": {
-                            "$id": "#/properties/mysql/properties/readinessProbe/properties/periodSeconds",
-                            "type": "integer",
-                            "title": "The periodSeconds schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                10
-                            ]
-                        },
-                        "timeoutSeconds": {
-                            "$id": "#/properties/mysql/properties/readinessProbe/properties/timeoutSeconds",
-                            "type": "integer",
-                            "title": "The timeoutSeconds schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "failureThreshold": {
-                            "$id": "#/properties/mysql/properties/readinessProbe/properties/failureThreshold",
-                            "type": "integer",
-                            "title": "The failureThreshold schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                3
-                            ]
-                        },
-                        "successThreshold": {
-                            "$id": "#/properties/mysql/properties/readinessProbe/properties/successThreshold",
-                            "type": "integer",
-                            "title": "The successThreshold schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "exec": {
-                            "$id": "#/properties/mysql/properties/readinessProbe/properties/exec",
-                            "type": "object",
-                            "title": "The exec schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {
-                                    "command": [
-                                        "/etc/init.d/mysql",
-                                        "status"
-                                    ]
-                                }
-                            ],
-                            "required": [
-                                "command"
-                            ],
-                            "properties": {
-                                "command": {
-                                    "$id": "#/properties/mysql/properties/readinessProbe/properties/exec/properties/command",
-                                    "type": "array",
-                                    "title": "The command schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": [],
-                                    "examples": [
-                                        [
-                                            "/etc/init.d/mysql",
-                                            "status"
-                                        ]
-                                    ],
-                                    "additionalItems": true,
-                                    "items": {
-                                        "$id": "#/properties/mysql/properties/readinessProbe/properties/exec/properties/command/items",
-                                        "anyOf": [
-                                            {
-                                                "$id": "#/properties/mysql/properties/readinessProbe/properties/exec/properties/command/items/anyOf/0",
-                                                "type": "string",
-                                                "title": "The first anyOf schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": "",
-                                                "examples": [
-                                                    "/etc/init.d/mysql",
-                                                    "status"
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                }
-                            },
-                            "additionalProperties": true
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "secret": {
-                    "$id": "#/properties/mysql/properties/secret",
-                    "type": "object",
-                    "title": "The secret schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "annotations": {}
-                        }
-                    ],
-                    "required": [
-                        "annotations"
-                    ],
-                    "properties": {
-                        "annotations": {
-                            "$id": "#/properties/mysql/properties/secret/properties/annotations",
-                            "type": "object",
-                            "title": "The annotations schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {}
-                            ],
-                            "required": [],
-                            "additionalProperties": true
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "auth": {
-                    "$id": "#/properties/mysql/properties/auth",
-                    "type": "object",
-                    "title": "The auth schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "username": "mysql",
-                            "password": "",
-                            "rootPassword": "",
-                            "existingSecret": ""
-                        }
-                    ],
-                    "required": [
-                        "username",
-                        "password",
-                        "rootPassword",
-                        "existingSecret"
-                    ],
-                    "properties": {
-                        "username": {
-                            "$id": "#/properties/mysql/properties/auth/properties/username",
-                            "type": "string",
-                            "title": "The username schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "mysql"
-                            ]
-                        },
-                        "password": {
-                            "$id": "#/properties/mysql/properties/auth/properties/password",
-                            "type": "string",
-                            "title": "The password schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                ""
-                            ]
-                        },
-                        "rootPassword": {
-                            "$id": "#/properties/mysql/properties/auth/properties/rootPassword",
-                            "type": "string",
-                            "title": "The rootPassword schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                ""
-                            ]
-                        },
-                        "existingSecret": {
-                            "$id": "#/properties/mysql/properties/auth/properties/existingSecret",
-                            "type": "string",
-                            "title": "The existingSecret schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                ""
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "persistence": {
-                    "$id": "#/properties/mysql/properties/persistence",
-                    "type": "object",
-                    "title": "The persistence schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "enabled": true,
-                            "annotations": {},
-                            "storageClass": null,
-                            "size": "5Gi",
-                            "mountPath": "/var/lib/mysql",
-                            "subPath": "",
-                            "existingClaim": "",
-                            "accessModes": [
-                                "ReadWriteOnce"
-                            ]
-                        }
-                    ],
-                    "required": [
-                        "enabled",
-                        "annotations",
-                        "size",
-                        "mountPath",
-                        "subPath",
-                        "existingClaim",
-                        "accessModes"
-                    ],
-                    "properties": {
-                        "enabled": {
-                            "$id": "#/properties/mysql/properties/persistence/properties/enabled",
-                            "type": "boolean",
-                            "title": "The enabled schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "annotations": {
-                            "$id": "#/properties/mysql/properties/persistence/properties/annotations",
-                            "type": "object",
-                            "title": "The annotations schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {}
-                            ],
-                            "required": [],
-                            "additionalProperties": true
-                        },
-                        "storageClass": {
-                            "$id": "#/properties/mysql/properties/persistence/properties/storageClass",
-                            "type": [
-                                "string",
-                                "null"
-                            ],
-                            "title": "The storageClass schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": null,
-                            "examples": [
-                                null
-                            ]
-                        },
-                        "size": {
-                            "$id": "#/properties/mysql/properties/persistence/properties/size",
-                            "type": "string",
-                            "title": "The size schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "5Gi"
-                            ]
-                        },
-                        "mountPath": {
-                            "$id": "#/properties/mysql/properties/persistence/properties/mountPath",
-                            "type": "string",
-                            "title": "The mountPath schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "/var/lib/mysql"
-                            ]
-                        },
-                        "subPath": {
-                            "$id": "#/properties/mysql/properties/persistence/properties/subPath",
-                            "type": "string",
-                            "title": "The subPath schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                ""
-                            ]
-                        },
-                        "existingClaim": {
-                            "$id": "#/properties/mysql/properties/persistence/properties/existingClaim",
-                            "type": "string",
-                            "title": "The existingClaim schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                ""
-                            ]
-                        },
-                        "accessModes": {
-                            "$id": "#/properties/mysql/properties/persistence/properties/accessModes",
-                            "type": "array",
-                            "title": "The accessModes schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": [],
-                            "examples": [
-                                [
-                                    "ReadWriteOnce"
-                                ]
-                            ],
-                            "additionalItems": true,
-                            "items": {
-                                "$id": "#/properties/mysql/properties/persistence/properties/accessModes/items",
-                                "anyOf": [
-                                    {
-                                        "$id": "#/properties/mysql/properties/persistence/properties/accessModes/items/anyOf/0",
-                                        "type": "string",
-                                        "title": "The first anyOf schema",
-                                        "description": "An explanation about the purpose of this instance.",
-                                        "default": "",
-                                        "examples": [
-                                            "ReadWriteOnce"
-                                        ]
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "serviceAccount": {
-                    "$id": "#/properties/mysql/properties/serviceAccount",
-                    "type": "object",
-                    "title": "The serviceAccount schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "create": true,
-                            "name": null,
-                            "annotations": {}
-                        }
-                    ],
-                    "required": [
-                        "create",
-                        "annotations"
-                    ],
-                    "properties": {
-                        "create": {
-                            "$id": "#/properties/mysql/properties/serviceAccount/properties/create",
-                            "type": "boolean",
-                            "title": "The create schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "name": {
-                            "$id": "#/properties/mysql/properties/serviceAccount/properties/name",
-                            "type": "null",
-                            "title": "The name schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": null,
-                            "examples": [
-                                null
-                            ]
-                        },
-                        "annotations": {
-                            "$id": "#/properties/mysql/properties/serviceAccount/properties/annotations",
                             "type": "object",
                             "title": "The annotations schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -1854,7 +859,7 @@
                         "registry": "gcr.io",
                         "repository": "projectsigstore/rekor-server",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:3dadc6f0d718c9aab3beefec2131713b52af89c280aa460220fa2a7ec5ca4205"
+                        "version": "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
                     },
                     "logging": {
                         "production": false
@@ -1870,7 +875,7 @@
                         "ports": [
                             {
                                 "name": "3000-tcp",
-                                "port": 3000,
+                                "port": 80,
                                 "protocol": "TCP",
                                 "targetPort": 3000
                             },
@@ -1904,6 +909,12 @@
                             "path": "/ping"
                         }
                     },
+                    "config": {
+                        "key": "treeID"
+                    },
+                    "retrieve_api": {
+                        "enabled": true
+                    },
                     "attestation_storage": {
                         "enabled": true,
                         "bucket": "file:///var/run/attestations",
@@ -1929,27 +940,12 @@
                     "extraArgs": [],
                     "serviceAccount": {
                         "create": true,
-                        "name": null,
+                        "name": "",
                         "annotations": {}
                     }
                 }
             ],
-            "required": [
-                "enabled",
-                "replicaCount",
-                "name",
-                "port",
-                "image",
-                "logging",
-                "ingress",
-                "service",
-                "readinessProbe",
-                "livenessProbe",
-                "attestation_storage",
-                "deploymentAnnotations",
-                "resources",
-                "extraArgs"
-            ],
+            "required": [],
             "properties": {
                 "enabled": {
                     "$id": "#/properties/server/properties/enabled",
@@ -2002,15 +998,10 @@
                             "registry": "gcr.io",
                             "repository": "projectsigstore/rekor-server",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:3dadc6f0d718c9aab3beefec2131713b52af89c280aa460220fa2a7ec5ca4205"
+                            "version": "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
                         }
                     ],
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy",
-                        "version"
-                    ],
+                    "required": [],
                     "properties": {
                         "registry": {
                             "$id": "#/properties/server/properties/image/properties/registry",
@@ -2049,7 +1040,7 @@
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "sha256:3dadc6f0d718c9aab3beefec2131713b52af89c280aa460220fa2a7ec5ca4205"
+                                "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
                             ]
                         }
                     },
@@ -2066,9 +1057,7 @@
                             "production": false
                         }
                     ],
-                    "required": [
-                        "production"
-                    ],
+                    "required": [],
                     "properties": {
                         "production": {
                             "$id": "#/properties/server/properties/logging/properties/production",
@@ -2097,12 +1086,7 @@
                             "tls": {}
                         }
                     ],
-                    "required": [
-                        "enabled",
-                        "annotations",
-                        "path",
-                        "tls"
-                    ],
+                    "required": [],
                     "properties": {
                         "enabled": {
                             "$id": "#/properties/server/properties/ingress/properties/enabled",
@@ -2163,7 +1147,7 @@
                             "ports": [
                                 {
                                     "name": "3000-tcp",
-                                    "port": 3000,
+                                    "port": 80,
                                     "protocol": "TCP",
                                     "targetPort": 3000
                                 },
@@ -2176,10 +1160,7 @@
                             ]
                         }
                     ],
-                    "required": [
-                        "type",
-                        "ports"
-                    ],
+                    "required": [],
                     "properties": {
                         "type": {
                             "$id": "#/properties/server/properties/service/properties/type",
@@ -2201,7 +1182,7 @@
                                 [
                                     {
                                         "name": "3000-tcp",
-                                        "port": 3000,
+                                        "port": 80,
                                         "protocol": "TCP",
                                         "targetPort": 3000
                                     },
@@ -2226,17 +1207,12 @@
                                         "examples": [
                                             {
                                                 "name": "3000-tcp",
-                                                "port": 3000,
+                                                "port": 80,
                                                 "protocol": "TCP",
                                                 "targetPort": 3000
                                             }
                                         ],
-                                        "required": [
-                                            "name",
-                                            "port",
-                                            "protocol",
-                                            "targetPort"
-                                        ],
+                                        "required": [],
                                         "properties": {
                                             "name": {
                                                 "$id": "#/properties/server/properties/service/properties/ports/items/anyOf/0/properties/name",
@@ -2255,7 +1231,7 @@
                                                 "description": "An explanation about the purpose of this instance.",
                                                 "default": 0,
                                                 "examples": [
-                                                    3000
+                                                    80
                                                 ]
                                             },
                                             "protocol": {
@@ -2306,14 +1282,7 @@
                             }
                         }
                     ],
-                    "required": [
-                        "initialDelaySeconds",
-                        "periodSeconds",
-                        "timeoutSeconds",
-                        "failureThreshold",
-                        "successThreshold",
-                        "httpGet"
-                    ],
+                    "required": [],
                     "properties": {
                         "initialDelaySeconds": {
                             "$id": "#/properties/server/properties/readinessProbe/properties/initialDelaySeconds",
@@ -2377,10 +1346,7 @@
                                     "path": "/ping"
                                 }
                             ],
-                            "required": [
-                                "port",
-                                "path"
-                            ],
+                            "required": [],
                             "properties": {
                                 "port": {
                                     "$id": "#/properties/server/properties/readinessProbe/properties/httpGet/properties/port",
@@ -2427,14 +1393,7 @@
                             }
                         }
                     ],
-                    "required": [
-                        "initialDelaySeconds",
-                        "periodSeconds",
-                        "timeoutSeconds",
-                        "failureThreshold",
-                        "successThreshold",
-                        "httpGet"
-                    ],
+                    "required": [],
                     "properties": {
                         "initialDelaySeconds": {
                             "$id": "#/properties/server/properties/livenessProbe/properties/initialDelaySeconds",
@@ -2498,10 +1457,7 @@
                                     "path": "/ping"
                                 }
                             ],
-                            "required": [
-                                "port",
-                                "path"
-                            ],
+                            "required": [],
                             "properties": {
                                 "port": {
                                     "$id": "#/properties/server/properties/livenessProbe/properties/httpGet/properties/port",
@@ -2525,6 +1481,58 @@
                                 }
                             },
                             "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "config": {
+                    "$id": "#/properties/server/properties/config",
+                    "type": "object",
+                    "title": "The config schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "key": "treeID"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "key": {
+                            "$id": "#/properties/server/properties/config/properties/key",
+                            "type": "string",
+                            "title": "The key schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "treeID"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "retrieve_api": {
+                    "$id": "#/properties/server/properties/retrieve_api",
+                    "type": "object",
+                    "title": "The retrieve_api schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "enabled": true
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "enabled": {
+                            "$id": "#/properties/server/properties/retrieve_api/properties/enabled",
+                            "type": "boolean",
+                            "title": "The enabled schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
                         }
                     },
                     "additionalProperties": true
@@ -2553,11 +1561,7 @@
                             }
                         }
                     ],
-                    "required": [
-                        "enabled",
-                        "bucket",
-                        "persistence"
-                    ],
+                    "required": [],
                     "properties": {
                         "enabled": {
                             "$id": "#/properties/server/properties/attestation_storage/properties/enabled",
@@ -2599,15 +1603,7 @@
                                     ]
                                 }
                             ],
-                            "required": [
-                                "enabled",
-                                "annotations",
-                                "size",
-                                "mountPath",
-                                "subPath",
-                                "existingClaim",
-                                "accessModes"
-                            ],
+                            "required": [],
                             "properties": {
                                 "enabled": {
                                     "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/enabled",
@@ -2633,10 +1629,7 @@
                                 },
                                 "storageClass": {
                                     "$id": "#/properties/server/properties/attestation_storage/properties/persistence/properties/storageClass",
-                                    "type":  [
-                                        "string",
-                                        "null"
-                                    ],
+                                    "type": "null",
                                     "title": "The storageClass schema",
                                     "description": "An explanation about the purpose of this instance.",
                                     "default": null,
@@ -2731,11 +1724,7 @@
                             "prometheus.io/port": "2112"
                         }
                     ],
-                    "required": [
-                        "prometheus.io/scrape",
-                        "prometheus.io/path",
-                        "prometheus.io/port"
-                    ],
+                    "required": [],
                     "properties": {
                         "prometheus.io/scrape": {
                             "$id": "#/properties/server/properties/deploymentAnnotations/properties/prometheus.io/scrape",
@@ -2805,14 +1794,11 @@
                     "examples": [
                         {
                             "create": true,
-                            "name": null,
+                            "name": "",
                             "annotations": {}
                         }
                     ],
-                    "required": [
-                        "create",
-                        "annotations"
-                    ],
+                    "required": [],
                     "properties": {
                         "create": {
                             "$id": "#/properties/server/properties/serviceAccount/properties/create",
@@ -2826,12 +1812,12 @@
                         },
                         "name": {
                             "$id": "#/properties/server/properties/serviceAccount/properties/name",
-                            "type": "null",
+                            "type": "string",
                             "title": "The name schema",
                             "description": "An explanation about the purpose of this instance.",
-                            "default": null,
+                            "default": "",
                             "examples": [
-                                null
+                                ""
                             ]
                         },
                         "annotations": {
@@ -2852,160 +1838,78 @@
             },
             "additionalProperties": true
         },
-        "trillianLogServer": {
-            "$id": "#/properties/trillianLogServer",
+        "createtree": {
+            "$id": "#/properties/createtree",
             "type": "object",
-            "title": "The trillianLogServer schema",
+            "title": "The createtree schema",
             "description": "An explanation about the purpose of this instance.",
             "default": {},
             "examples": [
                 {
-                    "enabled": true,
-                    "replicaCount": 1,
-                    "name": "trillian-log-server",
-                    "portRPC": 8091,
-                    "portHTTP": 8090,
+                    "name": "createtree",
                     "image": {
-                        "registry": "gcr.io",
-                        "repository": "trillian-opensource-ci/log_server",
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/scaffolding/createtree",
                         "pullPolicy": "IfNotPresent",
-                        "version": "df474653733c51ed91d60cf3efee69f7bf3199bd"
+                        "version": "sha256:6bef73fa9c9d1f2b00c5c2c8c2d7e0b43b651686b686d3c66235e78f426c0aa5"
                     },
-                    "service": {
-                        "type": "ClusterIP",
-                        "ports": [
-                            {
-                                "name": "8091-tcp",
-                                "port": 8091,
-                                "protocol": "TCP",
-                                "targetPort": 8091
-                            },
-                            {
-                                "name": "8090-tcp",
-                                "port": 8090,
-                                "protocol": "TCP",
-                                "targetPort": 8090
-                            }
-                        ]
-                    },
-                    "livenessProbe": {},
-                    "readinessProbe": {},
-                    "resources": {},
-                    "extraArgs": [],
                     "serviceAccount": {
                         "create": true,
-                        "name": null,
+                        "name": "",
                         "annotations": {}
                     }
                 }
             ],
-            "required": [
-                "enabled",
-                "replicaCount",
-                "name",
-                "portRPC",
-                "portHTTP",
-                "image",
-                "service",
-                "livenessProbe",
-                "readinessProbe",
-                "resources",
-                "extraArgs"
-            ],
+            "required": [],
             "properties": {
-                "enabled": {
-                    "$id": "#/properties/trillianLogServer/properties/enabled",
-                    "type": "boolean",
-                    "title": "The enabled schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": false,
-                    "examples": [
-                        true
-                    ]
-                },
-                "replicaCount": {
-                    "$id": "#/properties/trillianLogServer/properties/replicaCount",
-                    "type": "integer",
-                    "title": "The replicaCount schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": 0,
-                    "examples": [
-                        1
-                    ]
-                },
                 "name": {
-                    "$id": "#/properties/trillianLogServer/properties/name",
+                    "$id": "#/properties/createtree/properties/name",
                     "type": "string",
                     "title": "The name schema",
                     "description": "An explanation about the purpose of this instance.",
                     "default": "",
                     "examples": [
-                        "trillian-log-server"
-                    ]
-                },
-                "portRPC": {
-                    "$id": "#/properties/trillianLogServer/properties/portRPC",
-                    "type": "integer",
-                    "title": "The port schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": 0,
-                    "examples": [
-                        8091
-                    ]
-                },
-                "portHTTP": {
-                    "$id": "#/properties/trillianLogServer/properties/portHTTP",
-                    "type": "integer",
-                    "title": "The port schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": 0,
-                    "examples": [
-                        8090
+                        "createtree"
                     ]
                 },
                 "image": {
-                    "$id": "#/properties/trillianLogServer/properties/image",
+                    "$id": "#/properties/createtree/properties/image",
                     "type": "object",
                     "title": "The image schema",
                     "description": "An explanation about the purpose of this instance.",
                     "default": {},
                     "examples": [
                         {
-                            "registry": "gcr.io",
-                            "repository": "trillian-opensource-ci/log_server",
+                            "registry": "ghcr.io",
+                            "repository": "sigstore/scaffolding/createtree",
                             "pullPolicy": "IfNotPresent",
-                            "version": "df474653733c51ed91d60cf3efee69f7bf3199bd"
+                            "version": "sha256:6bef73fa9c9d1f2b00c5c2c8c2d7e0b43b651686b686d3c66235e78f426c0aa5"
                         }
                     ],
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy",
-                        "version"
-                    ],
+                    "required": [],
                     "properties": {
                         "registry": {
-                            "$id": "#/properties/trillianLogServer/properties/image/properties/registry",
+                            "$id": "#/properties/createtree/properties/image/properties/registry",
                             "type": "string",
                             "title": "The registry schema",
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "gcr.io"
+                                "ghcr.io"
                             ]
                         },
                         "repository": {
-                            "$id": "#/properties/trillianLogServer/properties/image/properties/repository",
+                            "$id": "#/properties/createtree/properties/image/properties/repository",
                             "type": "string",
                             "title": "The repository schema",
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "trillian-opensource-ci/log_server"
+                                "sigstore/scaffolding/createtree"
                             ]
                         },
                         "pullPolicy": {
-                            "$id": "#/properties/trillianLogServer/properties/image/properties/pullPolicy",
+                            "$id": "#/properties/createtree/properties/image/properties/pullPolicy",
                             "type": "string",
                             "title": "The pullPolicy schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -3015,206 +1919,20 @@
                             ]
                         },
                         "version": {
-                            "$id": "#/properties/trillianLogServer/properties/image/properties/version",
+                            "$id": "#/properties/createtree/properties/image/properties/version",
                             "type": "string",
                             "title": "The version schema",
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "df474653733c51ed91d60cf3efee69f7bf3199bd"
+                                "sha256:6bef73fa9c9d1f2b00c5c2c8c2d7e0b43b651686b686d3c66235e78f426c0aa5"
                             ]
                         }
                     },
                     "additionalProperties": true
-                },
-                "service": {
-                    "$id": "#/properties/trillianLogServer/properties/service",
-                    "type": "object",
-                    "title": "The service schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "type": "ClusterIP",
-                            "ports": [
-                                {
-                                    "name": "8091-tcp",
-                                    "port": 8091,
-                                    "protocol": "TCP",
-                                    "targetPort": 8091
-                                },
-                                {
-                                    "name": "8090-tcp",
-                                    "port": 8090,
-                                    "protocol": "TCP",
-                                    "targetPort": 8090
-                                }
-                            ]
-                        }
-                    ],
-                    "required": [
-                        "type",
-                        "ports"
-                    ],
-                    "properties": {
-                        "type": {
-                            "$id": "#/properties/trillianLogServer/properties/service/properties/type",
-                            "type": "string",
-                            "title": "The type schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "ClusterIP"
-                            ]
-                        },
-                        "ports": {
-                            "$id": "#/properties/trillianLogServer/properties/service/properties/ports",
-                            "type": "array",
-                            "title": "The ports schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": [],
-                            "examples": [
-                                [
-                                    {
-                                        "name": "8091-tcp",
-                                        "port": 8091,
-                                        "protocol": "TCP",
-                                        "targetPort": 8091
-                                    },
-                                    {
-                                        "name": "8090-tcp",
-                                        "port": 8090,
-                                        "protocol": "TCP",
-                                        "targetPort": 8090
-                                    }
-                                ]
-                            ],
-                            "additionalItems": true,
-                            "items": {
-                                "$id": "#/properties/trillianLogServer/properties/service/properties/ports/items",
-                                "anyOf": [
-                                    {
-                                        "$id": "#/properties/trillianLogServer/properties/service/properties/ports/items/anyOf/0",
-                                        "type": "object",
-                                        "title": "The first anyOf schema",
-                                        "description": "An explanation about the purpose of this instance.",
-                                        "default": {},
-                                        "examples": [
-                                            {
-                                                "name": "8091-tcp",
-                                                "port": 8091,
-                                                "protocol": "TCP",
-                                                "targetPort": 8091
-                                            }
-                                        ],
-                                        "required": [
-                                            "name",
-                                            "port",
-                                            "protocol",
-                                            "targetPort"
-                                        ],
-                                        "properties": {
-                                            "name": {
-                                                "$id": "#/properties/trillianLogServer/properties/service/properties/ports/items/anyOf/0/properties/name",
-                                                "type": "string",
-                                                "title": "The name schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": "",
-                                                "examples": [
-                                                    "8091-tcp"
-                                                ]
-                                            },
-                                            "port": {
-                                                "$id": "#/properties/trillianLogServer/properties/service/properties/ports/items/anyOf/0/properties/port",
-                                                "type": "integer",
-                                                "title": "The port schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": 0,
-                                                "examples": [
-                                                    8091
-                                                ]
-                                            },
-                                            "protocol": {
-                                                "$id": "#/properties/trillianLogServer/properties/service/properties/ports/items/anyOf/0/properties/protocol",
-                                                "type": "string",
-                                                "title": "The protocol schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": "",
-                                                "examples": [
-                                                    "TCP"
-                                                ]
-                                            },
-                                            "targetPort": {
-                                                "$id": "#/properties/trillianLogServer/properties/service/properties/ports/items/anyOf/0/properties/targetPort",
-                                                "type": "integer",
-                                                "title": "The targetPort schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": 0,
-                                                "examples": [
-                                                    8091
-                                                ]
-                                            }
-                                        },
-                                        "additionalProperties": true
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "livenessProbe": {
-                    "$id": "#/properties/trillianLogServer/properties/livenessProbe",
-                    "type": "object",
-                    "title": "The livenessProbe schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {}
-                    ],
-                    "required": [],
-                    "additionalProperties": true
-                },
-                "readinessProbe": {
-                    "$id": "#/properties/trillianLogServer/properties/readinessProbe",
-                    "type": "object",
-                    "title": "The readinessProbe schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {}
-                    ],
-                    "required": [],
-                    "additionalProperties": true
-                },
-                "resources": {
-                    "$id": "#/properties/trillianLogServer/properties/resources",
-                    "type": "object",
-                    "title": "The resources schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {}
-                    ],
-                    "required": [],
-                    "additionalProperties": true
-                },
-                "extraArgs": {
-                    "$id": "#/properties/trillianLogServer/properties/extraArgs",
-                    "type": "array",
-                    "title": "The extraArgs schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": [],
-                    "examples": [
-                        []
-                    ],
-                    "additionalItems": true,
-                    "items": {
-                        "$id": "#/properties/trillianLogServer/properties/extraArgs/items"
-                    }
                 },
                 "serviceAccount": {
-                    "$id": "#/properties/trillianLogServer/properties/serviceAccount",
+                    "$id": "#/properties/createtree/properties/serviceAccount",
                     "type": "object",
                     "title": "The serviceAccount schema",
                     "description": "An explanation about the purpose of this instance.",
@@ -3222,17 +1940,14 @@
                     "examples": [
                         {
                             "create": true,
-                            "name": null,
+                            "name": "",
                             "annotations": {}
                         }
                     ],
-                    "required": [
-                        "create",
-                        "annotations"
-                    ],
+                    "required": [],
                     "properties": {
                         "create": {
-                            "$id": "#/properties/trillianLogServer/properties/serviceAccount/properties/create",
+                            "$id": "#/properties/createtree/properties/serviceAccount/properties/create",
                             "type": "boolean",
                             "title": "The create schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -3242,17 +1957,17 @@
                             ]
                         },
                         "name": {
-                            "$id": "#/properties/trillianLogServer/properties/serviceAccount/properties/name",
-                            "type": "null",
+                            "$id": "#/properties/createtree/properties/serviceAccount/properties/name",
+                            "type": "string",
                             "title": "The name schema",
                             "description": "An explanation about the purpose of this instance.",
-                            "default": null,
+                            "default": "",
                             "examples": [
-                                null
+                                ""
                             ]
                         },
                         "annotations": {
-                            "$id": "#/properties/trillianLogServer/properties/serviceAccount/properties/annotations",
+                            "$id": "#/properties/createtree/properties/serviceAccount/properties/annotations",
                             "type": "object",
                             "title": "The annotations schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -3269,63 +1984,40 @@
             },
             "additionalProperties": true
         },
-        "trillianLogSigner": {
-            "$id": "#/properties/trillianLogSigner",
+        "trillian": {
+            "$id": "#/properties/trillian",
             "type": "object",
-            "title": "The trillianLogSigner schema",
+            "title": "The trillian schema",
             "description": "An explanation about the purpose of this instance.",
             "default": {},
             "examples": [
                 {
                     "enabled": true,
-                    "replicaCount": 1,
-                    "name": "trillian-log-signer",
-                    "portRPC": 8091,
-                    "portHTTP": 8090,
-                    "image": {
-                        "registry": "gcr.io",
-                        "repository": "trillian-opensource-ci/log_signer",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "df474653733c51ed91d60cf3efee69f7bf3199bd"
+                    "namespace": {
+                        "name": "trillian-system",
+                        "create": true
                     },
-                    "service": {
-                        "type": "ClusterIP",
-                        "ports": [
-                            {
-                                "name": "8091-tcp",
-                                "port": 8091,
-                                "protocol": "TCP",
-                                "targetPort": 8091
-                            }
-                        ]
+                    "forceNamespace": "trillian-system",
+                    "fullnameOverride": "trillian",
+                    "logServer": {
+                        "name": "trillian-logserver",
+                        "fullnameOverride": "trillian-logserver",
+                        "portHTTP": 8090,
+                        "portRPC": 8091
                     },
-                    "livenessProbe": {},
-                    "readinessProbe": {},
-                    "resources": {},
-                    "extraArgs": [],
-                    "serviceAccount": {
-                        "create": true,
-                        "name": null,
-                        "annotations": {}
+                    "logSigner": {
+                        "name": "trillian-logsigner",
+                        "fullnameOverride": "trillian-logsigner"
+                    },
+                    "mysql": {
+                        "fullnameOverride": "trillian-mysql"
                     }
                 }
             ],
-            "required": [
-                "enabled",
-                "replicaCount",
-                "name",
-                "portRPC",
-                "portHTTP",
-                "image",
-                "service",
-                "livenessProbe",
-                "readinessProbe",
-                "resources",
-                "extraArgs"
-            ],
+            "required": [],
             "properties": {
                 "enabled": {
-                    "$id": "#/properties/trillianLogSigner/properties/enabled",
+                    "$id": "#/properties/trillian/properties/enabled",
                     "type": "boolean",
                     "title": "The enabled schema",
                     "description": "An explanation about the purpose of this instance.",
@@ -3334,304 +2026,32 @@
                         true
                     ]
                 },
-                "replicaCount": {
-                    "$id": "#/properties/trillianLogSigner/properties/replicaCount",
-                    "type": "integer",
-                    "title": "The replicaCount schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": 0,
-                    "examples": [
-                        1
-                    ]
-                },
-                "name": {
-                    "$id": "#/properties/trillianLogSigner/properties/name",
-                    "type": "string",
-                    "title": "The name schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "trillian-log-signer"
-                    ]
-                },
-                "portRPC": {
-                    "$id": "#/properties/trillianLogSigner/properties/portRPC",
-                    "type": "integer",
-                    "title": "The port schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": 0,
-                    "examples": [
-                        8091
-                    ]
-                },
-                "portHTTP": {
-                    "$id": "#/properties/trillianLogSigner/properties/portHTTP",
-                    "type": "integer",
-                    "title": "The port schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": 0,
-                    "examples": [
-                        8090
-                    ]
-                },
-                "image": {
-                    "$id": "#/properties/trillianLogSigner/properties/image",
+                "namespace": {
+                    "$id": "#/properties/trillian/properties/namespace",
                     "type": "object",
-                    "title": "The image schema",
+                    "title": "The namespace schema",
                     "description": "An explanation about the purpose of this instance.",
                     "default": {},
                     "examples": [
                         {
-                            "registry": "gcr.io",
-                            "repository": "trillian-opensource-ci/log_signer",
-                            "pullPolicy": "IfNotPresent",
-                            "version": "df474653733c51ed91d60cf3efee69f7bf3199bd"
+                            "name": "trillian-system",
+                            "create": true
                         }
-                    ],
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy",
-                        "version"
-                    ],
-                    "properties": {
-                        "registry": {
-                            "$id": "#/properties/trillianLogSigner/properties/image/properties/registry",
-                            "type": "string",
-                            "title": "The registry schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "gcr.io"
-                            ]
-                        },
-                        "repository": {
-                            "$id": "#/properties/trillianLogSigner/properties/image/properties/repository",
-                            "type": "string",
-                            "title": "The repository schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "trillian-opensource-ci/log_signer"
-                            ]
-                        },
-                        "pullPolicy": {
-                            "$id": "#/properties/trillianLogSigner/properties/image/properties/pullPolicy",
-                            "type": "string",
-                            "title": "The pullPolicy schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "IfNotPresent"
-                            ]
-                        },
-                        "version": {
-                            "$id": "#/properties/trillianLogSigner/properties/image/properties/version",
-                            "type": "string",
-                            "title": "The version schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "df474653733c51ed91d60cf3efee69f7bf3199bd"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "service": {
-                    "$id": "#/properties/trillianLogSigner/properties/service",
-                    "type": "object",
-                    "title": "The service schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "type": "ClusterIP",
-                            "ports": [
-                                {
-                                    "name": "8092-tcp",
-                                    "port": 8092,
-                                    "protocol": "TCP",
-                                    "targetPort": 8091
-                                }
-                            ]
-                        }
-                    ],
-                    "required": [
-                        "type",
-                        "ports"
-                    ],
-                    "properties": {
-                        "type": {
-                            "$id": "#/properties/trillianLogSigner/properties/service/properties/type",
-                            "type": "string",
-                            "title": "The type schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "ClusterIP"
-                            ]
-                        },
-                        "ports": {
-                            "$id": "#/properties/trillianLogSigner/properties/service/properties/ports",
-                            "type": "array",
-                            "title": "The ports schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": [],
-                            "examples": [
-                                [
-                                    {
-                                        "name": "8092-tcp",
-                                        "port": 8092,
-                                        "protocol": "TCP",
-                                        "targetPort": 8091
-                                    }
-                                ]
-                            ],
-                            "additionalItems": true,
-                            "items": {
-                                "$id": "#/properties/trillianLogSigner/properties/service/properties/ports/items",
-                                "anyOf": [
-                                    {
-                                        "$id": "#/properties/trillianLogSigner/properties/service/properties/ports/items/anyOf/0",
-                                        "type": "object",
-                                        "title": "The first anyOf schema",
-                                        "description": "An explanation about the purpose of this instance.",
-                                        "default": {},
-                                        "examples": [
-                                            {
-                                                "name": "8092-tcp",
-                                                "port": 8092,
-                                                "protocol": "TCP",
-                                                "targetPort": 8091
-                                            }
-                                        ],
-                                        "required": [
-                                            "name",
-                                            "port",
-                                            "protocol",
-                                            "targetPort"
-                                        ],
-                                        "properties": {
-                                            "name": {
-                                                "$id": "#/properties/trillianLogSigner/properties/service/properties/ports/items/anyOf/0/properties/name",
-                                                "type": "string",
-                                                "title": "The name schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": "",
-                                                "examples": [
-                                                    "8092-tcp"
-                                                ]
-                                            },
-                                            "port": {
-                                                "$id": "#/properties/trillianLogSigner/properties/service/properties/ports/items/anyOf/0/properties/port",
-                                                "type": "integer",
-                                                "title": "The port schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": 0,
-                                                "examples": [
-                                                    8092
-                                                ]
-                                            },
-                                            "protocol": {
-                                                "$id": "#/properties/trillianLogSigner/properties/service/properties/ports/items/anyOf/0/properties/protocol",
-                                                "type": "string",
-                                                "title": "The protocol schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": "",
-                                                "examples": [
-                                                    "TCP"
-                                                ]
-                                            },
-                                            "targetPort": {
-                                                "$id": "#/properties/trillianLogSigner/properties/service/properties/ports/items/anyOf/0/properties/targetPort",
-                                                "type": "integer",
-                                                "title": "The targetPort schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": 0,
-                                                "examples": [
-                                                    8091
-                                                ]
-                                            }
-                                        },
-                                        "additionalProperties": true
-                                    }
-                                ]
-                            }
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "livenessProbe": {
-                    "$id": "#/properties/trillianLogSigner/properties/livenessProbe",
-                    "type": "object",
-                    "title": "The livenessProbe schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {}
                     ],
                     "required": [],
-                    "additionalProperties": true
-                },
-                "readinessProbe": {
-                    "$id": "#/properties/trillianLogSigner/properties/readinessProbe",
-                    "type": "object",
-                    "title": "The readinessProbe schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {}
-                    ],
-                    "required": [],
-                    "additionalProperties": true
-                },
-                "resources": {
-                    "$id": "#/properties/trillianLogSigner/properties/resources",
-                    "type": "object",
-                    "title": "The resources schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {}
-                    ],
-                    "required": [],
-                    "additionalProperties": true
-                },
-                "extraArgs": {
-                    "$id": "#/properties/trillianLogSigner/properties/extraArgs",
-                    "type": "array",
-                    "title": "The extraArgs schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": [],
-                    "examples": [
-                        []
-                    ],
-                    "additionalItems": true,
-                    "items": {
-                        "$id": "#/properties/trillianLogSigner/properties/extraArgs/items"
-                    }
-                },
-                "serviceAccount": {
-                    "$id": "#/properties/trillianLogSigner/properties/serviceAccount",
-                    "type": "object",
-                    "title": "The serviceAccount schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "create": true,
-                            "name": null,
-                            "annotations": {}
-                        }
-                    ],
-                    "required": [
-                        "create",
-                        "annotations"
-                    ],
                     "properties": {
+                        "name": {
+                            "$id": "#/properties/trillian/properties/namespace/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-system"
+                            ]
+                        },
                         "create": {
-                            "$id": "#/properties/trillianLogSigner/properties/serviceAccount/properties/create",
+                            "$id": "#/properties/trillian/properties/namespace/properties/create",
                             "type": "boolean",
                             "title": "The create schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -3639,28 +2059,148 @@
                             "examples": [
                                 true
                             ]
-                        },
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "forceNamespace": {
+                    "$id": "#/properties/trillian/properties/forceNamespace",
+                    "type": "string",
+                    "title": "The forceNamespace schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "trillian-system"
+                    ]
+                },
+                "fullnameOverride": {
+                    "$id": "#/properties/trillian/properties/fullnameOverride",
+                    "type": "string",
+                    "title": "The fullnameOverride schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "trillian"
+                    ]
+                },
+                "logServer": {
+                    "$id": "#/properties/trillian/properties/logServer",
+                    "type": "object",
+                    "title": "The logServer schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "name": "trillian-logserver",
+                            "fullnameOverride": "trillian-logserver",
+                            "portHTTP": 8090,
+                            "portRPC": 8091
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
                         "name": {
-                            "$id": "#/properties/trillianLogSigner/properties/serviceAccount/properties/name",
-                            "type": "null",
+                            "$id": "#/properties/trillian/properties/logServer/properties/name",
+                            "type": "string",
                             "title": "The name schema",
                             "description": "An explanation about the purpose of this instance.",
-                            "default": null,
+                            "default": "",
                             "examples": [
-                                null
+                                "trillian-logserver"
                             ]
                         },
-                        "annotations": {
-                            "$id": "#/properties/trillianLogSigner/properties/serviceAccount/properties/annotations",
-                            "type": "object",
-                            "title": "The annotations schema",
+                        "fullnameOverride": {
+                            "$id": "#/properties/trillian/properties/logServer/properties/fullnameOverride",
+                            "type": "string",
+                            "title": "The fullnameOverride schema",
                             "description": "An explanation about the purpose of this instance.",
-                            "default": {},
+                            "default": "",
                             "examples": [
-                                {}
-                            ],
-                            "required": [],
-                            "additionalProperties": true
+                                "trillian-logserver"
+                            ]
+                        },
+                        "portHTTP": {
+                            "$id": "#/properties/trillian/properties/logServer/properties/portHTTP",
+                            "type": "integer",
+                            "title": "The portHTTP schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                8090
+                            ]
+                        },
+                        "portRPC": {
+                            "$id": "#/properties/trillian/properties/logServer/properties/portRPC",
+                            "type": "integer",
+                            "title": "The portRPC schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                8091
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "logSigner": {
+                    "$id": "#/properties/trillian/properties/logSigner",
+                    "type": "object",
+                    "title": "The logSigner schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "name": "trillian-logsigner",
+                            "fullnameOverride": "trillian-logsigner"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "name": {
+                            "$id": "#/properties/trillian/properties/logSigner/properties/name",
+                            "type": "string",
+                            "title": "The name schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-logsigner"
+                            ]
+                        },
+                        "fullnameOverride": {
+                            "$id": "#/properties/trillian/properties/logSigner/properties/fullnameOverride",
+                            "type": "string",
+                            "title": "The fullnameOverride schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-logsigner"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "mysql": {
+                    "$id": "#/properties/trillian/properties/mysql",
+                    "type": "object",
+                    "title": "The mysql schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "fullnameOverride": "trillian-mysql"
+                        }
+                    ],
+                    "required": [],
+                    "properties": {
+                        "fullnameOverride": {
+                            "$id": "#/properties/trillian/properties/mysql/properties/fullnameOverride",
+                            "type": "string",
+                            "title": "The fullnameOverride schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "trillian-mysql"
+                            ]
                         }
                     },
                     "additionalProperties": true
@@ -3670,12 +2210,12 @@
         },
         "forceNamespace": {
             "$id": "#/properties/forceNamespace",
-            "type": "null",
+            "type": "string",
             "title": "The forceNamespace schema",
             "description": "An explanation about the purpose of this instance.",
-            "default": null,
+            "default": "",
             "examples": [
-                null
+                ""
             ]
         }
     },

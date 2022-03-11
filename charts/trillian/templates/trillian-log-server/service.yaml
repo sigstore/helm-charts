@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+{{- if .Values.logServer.service.annotations }}
+  annotations:
+{{ toYaml .Values.logServer.service.annotations | indent 4 }}
+{{- end }}
+  labels:
+    {{- include "trillian.logServer.labels" . | nindent 4 }}
+{{- if .Values.logServer.service.labels }}
+{{ toYaml .Values.logServer.service.labels | indent 4 }}
+{{- end }}
+  name: {{ template "trillian.logServer.fullname" . }}
+{{ include "trillian.namespace" . | indent 2 }}
+spec:
+  ports:
+    {{- tpl (toYaml .Values.logServer.service.ports) . | nindent 4 }}
+  selector:
+    {{- include "trillian.logServer.matchLabels" . | nindent 4 }}
+  type: "{{ .Values.logServer.service.type }}"

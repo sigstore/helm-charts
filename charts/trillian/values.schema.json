@@ -1,0 +1,199 @@
+{
+    "namespace": {
+        "create": false,
+        "name": "trillian-system"
+    },
+    "initContainerImage": {
+        "curl": {
+            "registry": "docker.io",
+            "repository": "curlimages/curl",
+            "version": "sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8",
+            "imagePullPolicy": "IfNotPresent"
+        },
+        "netcat": {
+            "registry": "docker.io",
+            "repository": "toolbelt/netcat",
+            "version": "sha256:99a582fa45fe1b50c97c652c9ada24b96c80d7071283227bd9a9f8eaa1c7a12b",
+            "imagePullPolicy": "IfNotPresent"
+        }
+    },
+    "mysql": {
+        "gcp": {
+            "enabled": "",
+            "instance": "",
+            "cloudsql": {
+                "registry": "gcr.io",
+                "repository": "cloudsql-docker/gce-proxy",
+                "version": "1.28.1"
+            }
+        },
+        "enabled": true,
+        "replicaCount": 1,
+        "name": "mysql",
+        "hostname": "",
+        "port": 3306,
+        "strategy": {
+            "type": "Recreate"
+        },
+        "image": {
+            "registry": "gcr.io",
+            "repository": "trillian-opensource-ci/db_server",
+            "pullPolicy": "IfNotPresent",
+            "version": "sha256:0794abd3bdf44a567f5d6ef18a0b76802f388611b63aae33eaf28c3b0c5964d8"
+        },
+        "resources": {},
+        "args": [
+            "--ignore-db-dir=lost+found"
+        ],
+        "service": {
+            "type": "ClusterIP",
+            "ports": [
+                {
+                    "name": "3306-tcp",
+                    "port": 3306,
+                    "protocol": "TCP",
+                    "targetPort": 3306
+                }
+            ]
+        },
+        "livenessProbe": {
+            "initialDelaySeconds": 30,
+            "periodSeconds": 10,
+            "timeoutSeconds": 1,
+            "failureThreshold": 3,
+            "successThreshold": 1,
+            "exec": {
+                "command": [
+                    "/etc/init.d/mysql",
+                    "status"
+                ]
+            }
+        },
+        "readinessProbe": {
+            "initialDelaySeconds": 10,
+            "periodSeconds": 10,
+            "timeoutSeconds": 1,
+            "failureThreshold": 3,
+            "successThreshold": 1,
+            "exec": {
+                "command": [
+                    "/etc/init.d/mysql",
+                    "status"
+                ]
+            }
+        },
+        "secret": {
+            "annotations": {}
+        },
+        "auth": {
+            "username": "mysql",
+            "password": "",
+            "rootPassword": "",
+            "existingSecret": ""
+        },
+        "persistence": {
+            "enabled": true,
+            "annotations": {},
+            "storageClass": null,
+            "size": "5Gi",
+            "mountPath": "/var/lib/mysql",
+            "subPath": "",
+            "existingClaim": "",
+            "accessModes": [
+                "ReadWriteOnce"
+            ]
+        },
+        "serviceAccount": {
+            "create": true,
+            "name": "",
+            "annotations": {}
+        }
+    },
+    "logServer": {
+        "enabled": true,
+        "replicaCount": 1,
+        "name": "trillian-log-server",
+        "portRPC": 8091,
+        "portHTTP": 8090,
+        "image": {
+            "registry": "gcr.io",
+            "repository": "projectsigstore/trillian_log_server",
+            "pullPolicy": "IfNotPresent",
+            "version": "sha256:f850a0defd089ea844822030c67ae05bc93c91168a7dd4aceb0b6648c39f696b"
+        },
+        "service": {
+            "type": "ClusterIP",
+            "ports": [
+                {
+                    "name": "8091-tcp",
+                    "port": 8091,
+                    "protocol": "TCP",
+                    "targetPort": 8091
+                },
+                {
+                    "name": "8090-tcp",
+                    "port": 8090,
+                    "protocol": "TCP",
+                    "targetPort": 8090
+                }
+            ]
+        },
+        "livenessProbe": {},
+        "readinessProbe": {},
+        "resources": {},
+        "extraArgs": [],
+        "serviceAccount": {
+            "create": true,
+            "name": "",
+            "annotations": {}
+        }
+    },
+    "logSigner": {
+        "enabled": true,
+        "replicaCount": 1,
+        "name": "trillian-log-signer",
+        "portRPC": 8091,
+        "portHTTP": 8090,
+        "image": {
+            "registry": "gcr.io",
+            "repository": "projectsigstore/trillian_log_signer",
+            "pullPolicy": "IfNotPresent",
+            "version": "sha256:fe90d523f6617974f70878918e4b31d49b2b46a86024bb2d6b01d2bbfed8edbf"
+        },
+        "service": {
+            "type": "ClusterIP",
+            "ports": [
+                {
+                    "name": "8091-tcp",
+                    "port": 8091,
+                    "protocol": "TCP",
+                    "targetPort": 8091
+                }
+            ]
+        },
+        "livenessProbe": {},
+        "readinessProbe": {},
+        "resources": {},
+        "extraArgs": [],
+        "serviceAccount": {
+            "create": true,
+            "name": "",
+            "annotations": {}
+        }
+    },
+    "createdb": {
+        "name": "createdb",
+        "image": {
+            "registry": "ghcr.io",
+            "repository": "vaikas/createdb",
+            "pullPolicy": "IfNotPresent",
+            "version": "sha256:e167e5849c1f6fbd1d2b5f3debb58e6f6a541c68350ea06540bc2c8823036506"
+        },
+        "serviceAccount": {
+            "create": true,
+            "name": "",
+            "annotations": {}
+        }
+    },
+    "forceNamespace": ""
+}

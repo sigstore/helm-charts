@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+{{- if .Values.logSigner.service.annotations }}
+  annotations:
+{{ toYaml .Values.logSigner.service.annotations | indent 4 }}
+{{- end }}
+  labels:
+    {{- include "trillian.logSigner.labels" . | nindent 4 }}
+{{- if .Values.logSigner.service.labels }}
+{{ toYaml .Values.logSigner.service.labels | indent 4 }}
+{{- end }}
+  name: {{ template "trillian.logSigner.fullname" . }}
+{{ include "trillian.namespace" . | indent 2 }}
+spec:
+  ports:
+    {{- tpl (toYaml .Values.logSigner.service.ports) . | nindent 4 }}
+  selector:
+    {{- include "trillian.logSigner.matchLabels" . | nindent 4 }}
+  type: "{{ .Values.logSigner.service.type }}"

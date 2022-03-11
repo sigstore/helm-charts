@@ -1,0 +1,84 @@
+namespace:
+  create: false
+  name: fulcio-system
+config:
+  contents: {
+    "OIDCIssuers": {
+      "https://kubernetes.default.svc": {
+        "IssuerURL": "https://kubernetes.default.svc",
+        "ClientID": "sigstore",
+        "Type": "kubernetes"
+      }
+    },
+    "MetaIssuers": {
+      "https://kubernetes.*.svc": {
+        "ClientID": "sigstore",
+        "Type": "kubernetes"
+      }
+    }
+  }
+server:
+  replicaCount: 1
+  svcPort: 80
+  image:
+    registry: gcr.io
+    repository: projectsigstore/fulcio
+    pullPolicy: IfNotPresent
+    # latest
+    version: "sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841"
+  args:
+    port: 5555
+    # Valid values: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca
+    certificateAuthority: fileca
+    hsm_caroot_id:
+    aws_hsm_root_ca_path:
+    gcp_private_ca_parent: projects/test/locations/us-east1/caPools/test
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    mountToken: true
+  service:
+    type: ClusterIP
+    ports:
+      - name: 80-tcp
+        port: 80
+        protocol: TCP
+        targetPort: 5555
+  ingress:
+    enabled: true
+    annotations: {}
+    path: /
+    tls: {}
+createcerts:
+  enabled: true
+  replicaCount: 1
+  name: createcerts
+  image:
+    registry: ghcr.io
+    repository: sigstore/scaffolding/createcerts
+    pullPolicy: IfNotPresent
+    # v0.2.1
+    version: "sha256:46a355b021a9613b4ba578e92743e884e4567407b2b84e401343708c92b8b72e"
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    mountToken: true
+# Configure ctlog dependency
+ctlog:
+  enabled: true
+  name: ctlog
+  forceNamespace: ctlog-system
+  fullnameOverride: ctlog
+  namespace:
+    name: ctlog-system
+    create: true
+  createtree:
+    name: ctlog-createtree
+    fullnameOverride: ctlog-createtree
+  createcerts:
+    name: ctlog-createcerts
+    fullnameOverride: ctlog-createcerts
+# Force namespace of namespaced resources
+forceNamespace: ""
