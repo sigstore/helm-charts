@@ -10,7 +10,7 @@ metadata:
 {{- if .Values.server.service.labels }}
 {{ toYaml .Values.server.service.labels | indent 4 }}
 {{- end }}
-  name: {{ template "rekor.fullname" . }}
+  name: {{ template "rekor.server.fullname" . }}
 {{ include "rekor.namespace" . | indent 2 }}
 spec:
   ports:
