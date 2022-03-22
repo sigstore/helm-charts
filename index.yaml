@@ -327,6 +327,31 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/cosigned-v0.0.3-dev/cosigned-v0.0.3-dev.tgz
     version: v0.0.3-dev
+  ctlog:
+  - annotations:
+      artifacthub.io/images: |
+        - name: ct_server
+          image: ghcr.io/sigstore/scaffolding/ct_server@sha256:b128e676903c8ade1f331ac8e0679c0af440481f20fd2dd6eb1abe59a44074de
+        - name: createctconfig
+          image: sigstore/scaffolding/createctconfig@sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e
+        - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree@sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2022-03-22T10:25:59.308108+01:00"
+    description: Certificate Log
+    digest: cb8ae73ef412b83eb4144405c09b2abf4ce9f2a7a39adfbae5cf9ed57e4dc5bb
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: ctlog
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/ctlog-0.2.0/ctlog-0.2.0.tgz
+    version: 0.2.0
   rekor:
   - annotations:
       artifacthub.io/images: |
@@ -724,4 +749,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/rekor-0.1.2/rekor-0.1.2.tgz
     version: 0.1.2
-generated: "2022-02-22T08:55:49.357645327Z"
+generated: "2022-03-22T10:25:59.308224+01:00"
