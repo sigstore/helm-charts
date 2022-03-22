@@ -352,6 +352,34 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/ctlog-0.2.0/ctlog-0.2.0.tgz
     version: 0.2.0
+  fulcio:
+  - annotations:
+      artifacthub.io/images: |
+        - name: fulcio
+          image: gcr.io/projectsigstore/fulcio@sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841
+        - name: createcerts
+          image: ghcr.io/sigstore/scaffolding/createcerts@sha256:f7128653d09c678cedaace3b48443164060433af6926ba320adb1500c7731dc5
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2022-03-22T09:44:11.176921179Z"
+    dependencies:
+    - condition: ctlog.enabled
+      name: ctlog
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.0
+    description: Fulcio
+    digest: 28d50b2e4b5af92d3422a0ed06963389761954f0cb13619ee2f7e9092b26cce4
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: fulcio
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/fulcio-0.2.0/fulcio-0.2.0.tgz
+    version: 0.2.0
   rekor:
   - annotations:
       artifacthub.io/images: |
@@ -749,4 +777,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/rekor-0.1.2/rekor-0.1.2.tgz
     version: 0.1.2
-generated: "2022-03-22T10:25:59.308224+01:00"
+generated: "2022-03-22T09:44:11.177296002Z"
