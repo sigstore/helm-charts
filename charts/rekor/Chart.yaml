@@ -4,7 +4,7 @@ description: Part of the sigstore project, Rekor is a timestamping server and tr
 
 type: application
 
-version: 0.2.14
+version: 0.2.15
 appVersion: 0.5.0
 
 keywords:
@@ -19,8 +19,8 @@ maintainers:
 
 dependencies:
   - name: trillian
-    version: 0.1.0
-    repository: "file://../trillian"
+    version: 0.1.1
+    repository: https://sigstore.github.io/helm-charts
     condition: trillian.enabled
 
 annotations:
