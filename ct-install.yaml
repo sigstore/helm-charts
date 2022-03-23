@@ -8,3 +8,6 @@ validate-maintainers: false
 remote: origin
 target-branch: main
 helm-extra-args: "--timeout 1000s"
+chart-repos:
+  - ingress-nginx=https://kubernetes.github.io/ingress-nginx
+  - sigstore=https://sigstore.github.io/helm-charts
