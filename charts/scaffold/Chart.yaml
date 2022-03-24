@@ -18,7 +18,7 @@ maintainers:
 dependencies:
   - name: fulcio
     version: 0.2.2
-    repository: https://sigstore.github.io/helm-chartss
+    repository: https://sigstore.github.io/helm-charts
     condition: fulcio.enabled
   - name: rekor
     version: 0.2.15
