@@ -68,9 +68,12 @@ server:
     production: false
   ingress:
     enabled: true
+    hosts:
+      - host: rekor.localhost
+        path: /
     annotations: {}
-    path: /
-    tls: {}
+    tls: []
+    tlsEnabled: false
   service:
     type: ClusterIP
     ports:
