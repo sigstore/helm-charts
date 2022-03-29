@@ -314,7 +314,7 @@ Server Arguments
 - "--enable_attestation_storage"
 - {{ printf "--attestation_storage_bucket=%s" (.Values.server.attestation_storage.bucket) | quote }}
 {{- end -}}
-{{- if .Values.server.logging.production -}}
+{{- if .Values.server.logging.production }}
 - "--log_type=prod"
 {{- end -}}
 {{- if .Values.server.extraArgs -}}
