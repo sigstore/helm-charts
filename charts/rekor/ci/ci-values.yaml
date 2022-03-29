@@ -1,4 +1,6 @@
 ---
 server:
   ingress:
-    hostname: rekor.localhost
+    hosts:
+      - host: rekor.localhost
+        path: /

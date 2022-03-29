@@ -87,9 +87,15 @@
                 },
                 "ingress": {
                     "enabled": true,
+                    "hosts": [
+                      {
+                        "host": "rekor.localhost",
+                        "path": "/"
+                      }
+                    ],
                     "annotations": {},
-                    "path": "/",
-                    "tls": {}
+                    "tls": [],
+                    "tlsEnabled": false
                 },
                 "service": {
                     "type": "ClusterIP",
@@ -867,8 +873,14 @@
                     "ingress": {
                         "enabled": true,
                         "annotations": {},
-                        "path": "/",
-                        "tls": {}
+                        "hosts": [
+                          {
+                            "host": "rekor.localhost",
+                            "path": "/"
+                          }
+                        ],
+                        "tls": [],
+                        "tlsEnabled": false
                     },
                     "service": {
                         "type": "ClusterIP",
@@ -1082,8 +1094,14 @@
                         {
                             "enabled": true,
                             "annotations": {},
-                            "path": "/",
-                            "tls": {}
+                            "hosts": [
+                              {
+                                "host": "rekor.localhost",
+                                "path": "/"
+                              }
+                            ],
+                            "tls": [],
+                            "tlsEnabled": false
                         }
                     ],
                     "required": [],
@@ -1098,6 +1116,37 @@
                                 true
                             ]
                         },
+                        "hosts": {
+                            "$id": "#/properties/server/properties/ingress/properties/annotations",
+                            "type": "array",
+                            "title": "Hostname for ingress.",
+                            "description": "An explanation about the purpose of this instance.",
+                            "properties": {
+                              "host": {
+                                  "$id": "#/properties/server/properties/ingress/properties/hosts/properties/host",
+                                  "type": "string",
+                                  "title": "The host rule",
+                                  "description": "An explanation about the purpose of this instance.",
+                                  "examples": [
+                                      "/"
+                                  ]
+                              },
+                              "path": {
+                                  "$id": "#/properties/server/properties/ingress/properties/hosts/properties/path",
+                                  "type": "string",
+                                  "title": "The host path",
+                                  "description": "An explanation about the purpose of this instance.",
+                                  "default": "",
+                                  "examples": [
+                                      "/"
+                                  ]
+                              }
+                            },
+                            "default": [],
+                            "examples": [],
+                            "required": [],
+                            "additionalProperties": true
+                        },
                         "annotations": {
                             "$id": "#/properties/server/properties/ingress/properties/annotations",
                             "type": "object",
@@ -1110,27 +1159,36 @@
                             "required": [],
                             "additionalProperties": true
                         },
-                        "path": {
-                            "$id": "#/properties/server/properties/ingress/properties/path",
-                            "type": "string",
-                            "title": "The path schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "/"
-                            ]
-                        },
                         "tls": {
                             "$id": "#/properties/server/properties/ingress/properties/tls",
-                            "type": "object",
+                            "type": "array",
                             "title": "The tls schema",
                             "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {}
-                            ],
+                            "properties": {
+                              "hosts": {
+                                "items": {
+                                  "type": "string"
+                                },
+                                "type": "array",
+                                "description": "Hosts are a list of hosts included in the TLS certificate."
+                              },
+                              "secretName": {
+                                "type": "string",
+                                "description": "SecretName is the name of the secret used to terminate SSL traffic on 443. Field is left optional to allow SSL routing based on SNI hostname alone. If the SNI host in a listener conflicts with the \"Host\" header field used by an IngressRule, the SNI host is used for termination and value of the Host header is used for routing."
+                              }
+                            },
+                            "default": [],
+                            "examples": [],
                             "required": [],
                             "additionalProperties": true
+                        },
+                        "tlsEnabled": {
+                            "$id": "#/properties/server/properties/ingress/properties/tlsEnabled",
+                            "type": "boolean",
+                            "title": "Whether to have TLS.",
+                            "description": "Whether to have TLS clause.",
+                            "default": false,
+                            "examples": [ true ]
                         }
                     },
                     "additionalProperties": true

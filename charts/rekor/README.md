@@ -101,8 +101,12 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.image.version | string | `"sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"` | v0.5.0 |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.enabled | bool | `true` |  |
-| server.ingress.path | string | `"/"` |  |
-| server.ingress.tls | object | `{}` |  |
+| server.ingress.hosts | array | [] |  |
+| server.ingress.hosts.host | string |  |  |
+| server.ingress.hosts.path | string | `"/"` |  |
+| server.ingress.tls | array | `[]` |  |
+| server.ingress.tls.hosts | array | `[]` |  |
+| server.ingress.tls.secretName | string | `` |  |
 | server.livenessProbe.failureThreshold | int | `3` |  |
 | server.livenessProbe.httpGet.path | string | `"/ping"` |  |
 | server.livenessProbe.httpGet.port | int | `3000` |  |
