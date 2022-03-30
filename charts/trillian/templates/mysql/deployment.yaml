@@ -1,3 +1,4 @@
+{{- if .Values.mysql.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -117,4 +118,5 @@ spec:
         - name: storage
           persistentVolumeClaim:
             claimName: {{ template "trillian.mysql.fullname" . }}
+  {{- end }}
   {{- end }}

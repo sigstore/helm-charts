@@ -52,13 +52,13 @@ spec:
           image: "{{ template "trillian.image" .Values.mysql.gcp.cloudsql }}"
           command:
             - "/cloud_sql_proxy"
-            - "-instances={{ .Values.mysql.gcp.instance }}=tcp:{{ .Values.mysql.service.ports }}"
+            - "-instances={{ .Values.mysql.gcp.instance }}=tcp:{{ .Values.mysql.port }}"
+    {{- if .Values.mysql.gcp.cloudsql.securityContext }}
           securityContext:
-            runAsNonRoot: true
+{{ toYaml .Values.mysql.gcp.cloudsql.securityContext | indent 12 }}
+    {{- end }}
           resources:
-            requests:
-              memory: "2Gi"
-              cpu: "1"
+{{ toYaml .Values.mysql.gcp.cloudsql.resources | indent 12 }}
         {{- end }}
         - name: {{ template "trillian.name" . }}-{{ .Values.logServer.name }}
           image: "{{ template "trillian.image" .Values.logServer.image }}"
