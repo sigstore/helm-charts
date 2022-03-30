@@ -20,7 +20,8 @@ spec:
         - name: {{ template "ctlog.fullname" . }}
           image: "{{ template "ctlog.image" .Values.server.image }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
-          args: ["--http_endpoint=0.0.0.0:6962", "--log_config=/ctfe-config/ct_server.cfg", "--alsologtostderr"]
+          args:
+{{  include "ctlog.server.args" . | indent 12 }}
           volumeMounts:
             - name: keys
               mountPath: "/ctfe-keys"
@@ -30,6 +31,14 @@ spec:
               readOnly: true
           ports:
             - containerPort: 6962
+    {{- if .Values.server.resources }}
+          resources:
+{{ toYaml .Values.server.resources | indent 12 }}
+    {{- end }}
+    {{- if .Values.server.securityContext }}
+      securityContext:
+{{ toYaml .Values.server.securityContext | indent 8 }}
+    {{- end }}
       volumes:
         - name: keys
           secret:

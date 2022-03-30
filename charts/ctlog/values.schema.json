@@ -283,6 +283,7 @@
                             ]
                         }
                     },
+                    "extraArgs": [],
                     "additionalProperties": true
                 },
                 "service": {

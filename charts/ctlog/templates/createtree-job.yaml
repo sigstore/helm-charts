@@ -20,4 +20,13 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
-          args: ["--namespace=$(NAMESPACE)", "--configmap={{ template "ctlog.config" . }}", "--display_name={{ template "ctlog.createtree.fullname" . }}","--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}"]
+          args: [
+            "--namespace=$(NAMESPACE)",
+            "--configmap={{ template "ctlog.config" . }}",
+            "--display_name={{ template "ctlog.createtree.fullname" . }}",
+            "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}"
+          ]
+    {{- if .Values.createtree.securityContext }}
+      securityContext:
+{{ toYaml .Values.createtree.securityContext | indent 8 }}
+    {{- end }}
