@@ -1,4 +1,5 @@
 ---
 server:
   ingress:
-    hostname: fulcio.localhost
+    hosts:
+      - host: fulcio.localhost

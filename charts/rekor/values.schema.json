@@ -94,8 +94,7 @@
                       }
                     ],
                     "annotations": {},
-                    "tls": [],
-                    "tlsEnabled": false
+                    "tls": []
                 },
                 "service": {
                     "type": "ClusterIP",
@@ -879,8 +878,7 @@
                             "path": "/"
                           }
                         ],
-                        "tls": [],
-                        "tlsEnabled": false
+                        "tls": []
                     },
                     "service": {
                         "type": "ClusterIP",
@@ -1100,8 +1098,7 @@
                                 "path": "/"
                               }
                             ],
-                            "tls": [],
-                            "tlsEnabled": false
+                            "tls": []
                         }
                     ],
                     "required": [],
@@ -1181,14 +1178,6 @@
                             "examples": [],
                             "required": [],
                             "additionalProperties": true
-                        },
-                        "tlsEnabled": {
-                            "$id": "#/properties/server/properties/ingress/properties/tlsEnabled",
-                            "type": "boolean",
-                            "title": "Whether to have TLS.",
-                            "description": "Whether to have TLS clause.",
-                            "default": false,
-                            "examples": [ true ]
                         }
                     },
                     "additionalProperties": true

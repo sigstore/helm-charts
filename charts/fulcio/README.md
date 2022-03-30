@@ -69,8 +69,13 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | server.image.version | string | `"sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841"` |  |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.enabled | bool | `true` |  |
-| server.ingress.path | string | `"/"` |  |
-| server.ingress.tls | object | `{}` |  |
+| server.ingress.hosts | array | [] |  |
+| server.ingress.hosts.host | string |  |  |
+| server.ingress.hosts.path | string | `"/"` |  |
+| server.ingress.hosts.service_name | string |  |  |
+| server.ingress.tls | array | `[]` |  |
+| server.ingress.tls.hosts | array | `[]` |  |
+| server.ingress.tls.secretName | string | `` |  |
 | server.replicaCount | int | `1` |  |
 | server.service.ports[0].name | string | `"80-tcp"` |  |
 | server.service.ports[0].port | int | `80` |  |

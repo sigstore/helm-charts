@@ -22,4 +22,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+    {{- if .Values.createcerts.securityContext }}
+      securityContext:
+{{ toYaml .Values.createcerts.securityContext | indent 8 }}
+    {{- end }}
 {{- end }}

@@ -20,7 +20,7 @@ spec:
             {{- end }}
             backend: {{- include "rekor.server.ingress.backend" $  | nindent 14 }}
     {{- end }}
-{{- if .Values.server.ingress.tlsEnabled }}
+{{- if .Values.server.ingress.tls }}
   tls:
     {{- range .Values.server.ingress.tls }}
     - hosts:

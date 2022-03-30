@@ -341,7 +341,7 @@ Return the appropriate apiVersion for ingress.
 Print "true" if the API pathType field is supported
 */}}
 {{- define "ingress.supportsPathType" -}}
-{{- if (semverCompare "<1.18-0" $.Capabilities.KubeVersion.Version) -}}
+{{- if (semverCompare "<1.18-0" .Capabilities.KubeVersion.Version) -}}
 {{- print "false" -}}
 {{- else -}}
 {{- print "true" -}}

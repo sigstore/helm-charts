@@ -11,17 +11,17 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 If release name contains chart name it will be used as a full name.
 */}}
 {{- define "fulcio.fullname" -}}
-{{- if .Values.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- $name := default .Chart.Name .Values.nameOverride }}
-{{- if contains $name .Release.Name }}
-{{- .Release.Name | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
-{{- end }}
-{{- end }}
-{{- end }}
+{{- if .Values.server.fullnameOverride -}}
+{{- .Values.server.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- printf "%s-%s" .Release.Name .Values.server.name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s-%s" .Release.Name $name .Values.server.name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
 
 {{/*
 Define the raw fulcio.namespace template if set with forceNamespace or .Release.Namespace is set
@@ -120,6 +120,16 @@ Create the image path for the passed in image field
 {{- end -}}
 
 {{/*
+Create Container Ports based on Service Ports
+*/}}
+{{- define "fulcio.containerPorts" -}}
+{{- range . }}
+- containerPort: {{ (ternary .port .targetPort (empty .targetPort)) | int }}
+  protocol: {{ default "TCP" .protocol }}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create the name of the config
 */}}
 {{- define "fulcio.config" -}}
@@ -163,15 +173,18 @@ Print "true" if the API pathType field is supported
 Return the appropriate apiVersion for ingress.
 */}}
 {{- define "fulcio.server.ingress.backend" -}}
-{{- $apiVersion := (include "ingress.apiVersion" .) -}}
-{{- $serviceName := (include "fulcio.fullname" .) -}}
+{{- $root := index . 0 -}}
+{{- $local := index . 1 -}}
+{{- $apiVersion := (include "ingress.apiVersion" $root) -}}
+{{- $serviceName := (default (include "fulcio.fullname" $root) $local.service_name) -}}
+{{- $servicePort := $root.Values.server.svcPort -}}
 {{- if or (eq $apiVersion "extensions/v1beta1") (eq $apiVersion "networking.k8s.io/v1beta1") -}}
 serviceName: {{ $serviceName }}
-servicePort: {{ .Values.server.svcPort }}
+servicePort: {{ $servicePort }}
 {{- else -}}
 service:
   name: {{ $serviceName }}
   port:
-    number: {{ .Values.server.svcPort | int }}
+    number: {{ $servicePort | int }}
 {{- end -}}
 {{- end -}}

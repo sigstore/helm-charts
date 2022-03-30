@@ -12,6 +12,10 @@ spec:
       {{- include "fulcio.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+    {{- if .Values.server.podAnnotations }}
+      annotations:
+        {{- toYaml .Values.server.podAnnotations | nindent 8 }}
+    {{- end }}
       labels:
         {{- include "fulcio.selectorLabels" . | nindent 8 }}
     spec:
@@ -23,7 +27,7 @@ spec:
           image: "{{ template "fulcio.image" .Values.server.image }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
           ports:
-            - containerPort: {{ .Values.server.args.port}}
+{{- include "fulcio.containerPorts" .Values.server.service.ports | indent 12 }}
           args:
             - "serve"
             - "--port={{ .Values.server.args.port}}"
@@ -64,6 +68,14 @@ spec:
               mountPath: "/var/run/fulcio-secrets"
               readOnly: true
            {{- end }}
+    {{- if .Values.server.resources }}
+          resources:
+{{ toYaml .Values.server.resources | indent 12 }}
+    {{- end }}
+    {{- if .Values.server.securityContext }}
+      securityContext:
+{{ toYaml .Values.server.securityContext | indent 8 }}
+    {{- end }}
       volumes:
         - name: fulcio-config
           configMap:
