@@ -103,6 +103,24 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+Server Arguments
+*/}}
+{{- define "ctlog.server.args" -}}
+- "--http_endpoint=0.0.0.0:6962"
+- "--log_config=/ctfe-config/ct_server.cfg"
+- "--alsologtostderr"
+{{- if .Values.server.extraArgs -}}
+{{- range $key, $value := .Values.server.extraArgs }}
+{{- if $value }}
+- {{ printf "%v=%v" $key $value | quote }}
+{{- else }}
+- {{ printf $key | quote }}
+{{- end }}
+{{- end }}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "ctlog.serviceAccountName" -}}

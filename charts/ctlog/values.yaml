@@ -21,6 +21,7 @@ server:
         port: 80
         protocol: TCP
         targetPort: 6962
+  extraArgs: []
 createtree:
   enabled: true
   name: createtree

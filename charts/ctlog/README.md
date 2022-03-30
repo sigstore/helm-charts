@@ -29,6 +29,7 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createctconfig.image.version | string | `"sha256:a1a886e10c49a0d6f705e99fd879853c074fb537ec7411ab9f3eb61e0eebfc5e"` |  |
 | createctconfig.name | string | `"createctconfig"` |  |
 | createctconfig.replicaCount | int | `1` |  |
+| createctconfig.securityContext | object | `{}` |  |
 | createctconfig.serviceAccount.annotations | object | `{}` |  |
 | createctconfig.serviceAccount.create | bool | `true` |  |
 | createctconfig.serviceAccount.mountToken | bool | `true` |  |
@@ -39,6 +40,7 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
 | createtree.image.version | string | `"sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"` |  |
 | createtree.name | string | `"createtree"` |  |
+| createtree.securityContext | object | `{}` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
 | createtree.serviceAccount.create | bool | `true` |  |
 | createtree.serviceAccount.mountToken | bool | `true` |  |
@@ -46,11 +48,14 @@ The following table lists the configurable parameters of the ctlog chart and the
 | forceNamespace | string | `""` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"ctlog-system"` |  |
+| server.extraArgs | object | `{}` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/scaffolding/ct_server"` |  |
 | server.image.version | string | `"sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"` |  |
 | server.replicaCount | int | `1` |  |
+| server.resources | object | `{}` |  |
+| server.securityContext | object | `{}` |  |
 | server.service.ports[0].name | string | `"80-tcp"` |  |
 | server.service.ports[0].port | int | `80` |  |
 | server.service.ports[0].protocol | string | `"TCP"` |  |
