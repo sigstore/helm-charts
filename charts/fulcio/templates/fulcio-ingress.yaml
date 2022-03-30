@@ -10,18 +10,24 @@ metadata:
 {{ toYaml .Values.server.ingress.annotations | indent 4 }}
 spec:
   rules:
-    - host: {{ required "An Ingress hostname is required" .Values.server.ingress.hostname }}
+    {{- range .Values.server.ingress.hosts }}
+    - host: {{ required "An Ingress hostname is required" .host | quote }}
       http:
         paths:
-          - path: {{ .Values.server.ingress.path }}
-            {{- if eq "true" (include "ingress.supportsPathType" .) }}
-            pathType: {{ default "Prefix" .Values.server.ingress.pathType }}
+          - path: {{ .path }}
+            {{- if eq "true" (include "ingress.supportsPathType" $) }}
+            pathType: {{ default "Prefix" .pathType }}
             {{- end }}
-            backend: {{- include "fulcio.server.ingress.backend" .  | nindent 14 }}
-{{- if .Values.server.ingress.tls }}
+            backend: {{- include "fulcio.server.ingress.backend" (list $ .) | nindent 14 }}
+    {{- end }}
+{{- if .Values.server.ingress.tlsEnabled }}
   tls:
+    {{- range .Values.server.ingress.tls }}
     - hosts:
-        - {{  .Values.server.ingress.hostname | quote }}
-      secretName: {{ .Values.server.ingress.tls.secretName }}
+      {{- range .hosts }}
+      - {{ . | quote }}
+      {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
 {{- end -}}
 {{- end }}

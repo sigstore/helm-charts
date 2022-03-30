@@ -19,6 +19,7 @@ config:
   }
 server:
   replicaCount: 1
+  name: server
   svcPort: 80
   image:
     registry: gcr.io
@@ -48,8 +49,7 @@ server:
   ingress:
     enabled: true
     annotations: {}
-    path: /
-    tls: {}
+    tls: []
 createcerts:
   enabled: true
   replicaCount: 1
