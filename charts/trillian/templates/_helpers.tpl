@@ -146,13 +146,19 @@ Create the name of the service account to use for the Trillian Log Signer compon
 Log Server Arguments
 */}}
 {{- define "trillian.logServer.args" -}}
-- '--storage_system=mysql'
-- '--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)'
+- "--storage_system=mysql"
+- "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
 - {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.logServer.portRPC | int) | quote }}
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.logServer.portHTTP | int) | quote }}
-- '--alsologtostderr'
+- "--alsologtostderr"
 {{- if .Values.logServer.extraArgs -}}
-{{ toYaml .Values.logServer.extraArgs }}
+{{- range $key, $value := .Values.logServer.extraArgs }}
+{{- if $value }}
+- {{ printf "%v=%v" $key $value | quote }}
+{{- else }}
+- {{ printf $key | quote }}
+{{- end }}
+{{- end }}
 {{- end -}}
 {{- end -}}
 
@@ -160,14 +166,20 @@ Log Server Arguments
 Log Signer Arguments
 */}}
 {{- define "trillian.logSigner.args" -}}
-- '--storage_system=mysql'
-- '--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)'
+- "--storage_system=mysql"
+- "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
 - {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.logSigner.portRPC | int) | quote }}
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.logSigner.portHTTP | int) | quote }}
-- '--force_master'
-- '--alsologtostderr'
+- {{ printf "--force_master=%t" (default true .Values.logSigner.forceMaster) | quote }}
+- "--alsologtostderr"
 {{- if .Values.logSigner.extraArgs -}}
-{{ toYaml .Values.logSigner.extraArgs }}
+{{- range $key, $value := .Values.logSigner.extraArgs }}
+{{- if $value }}
+- {{ printf "%v=%v" $key $value | quote }}
+{{- else }}
+- {{ printf $key | quote }}
+{{- end }}
+{{- end }}
 {{- end -}}
 {{- end -}}
 

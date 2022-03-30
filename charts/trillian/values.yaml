@@ -17,12 +17,23 @@ initContainerImage:
 
 mysql:
   gcp:
-    enabled: ""
+    enabled: false
     instance: ""
     cloudsql:
       registry: gcr.io
       repository: cloudsql-docker/gce-proxy
-      version: "1.28.1"
+      version: "1.29"
+      resources:
+        requests:
+          memory: "2Gi"
+          cpu: "1"
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        capabilities:
+          drop:
+          - all
   enabled: true
   replicaCount: 1
   name: mysql
@@ -90,7 +101,7 @@ mysql:
 logServer:
   enabled: true
   replicaCount: 1
-  name: trillian-log-server
+  name: log-server
   portRPC: 8091
   portHTTP: 8090
   image:
@@ -121,7 +132,8 @@ logServer:
 logSigner:
   enabled: true
   replicaCount: 1
-  name: trillian-log-signer
+  name: log-signer
+  forceMaster: true
   portRPC: 8091
   portHTTP: 8090
   image:
