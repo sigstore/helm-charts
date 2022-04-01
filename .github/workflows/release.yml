@@ -41,7 +41,7 @@ jobs:
           gpg --export-secret-keys > /home/runner/.gnupg/secring.gpg
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@62088055651dab7087de02051b5601b15e3772a0 # pin@v1.3.0
+        uses: helm/chart-releaser-action@a3454e46a6f5ac4811069a381e646961dda2e1bf # pin@v1.4.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SIGN: "true"
