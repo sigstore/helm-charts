@@ -19,6 +19,7 @@ config:
   }
 server:
   replicaCount: 1
+  name: server
   svcPort: 80
   image:
     registry: gcr.io
@@ -41,15 +42,20 @@ server:
   service:
     type: ClusterIP
     ports:
-      - name: 80-tcp
+      - name: 5555-tcp
         port: 80
         protocol: TCP
         targetPort: 5555
+      - name: 2112-tcp
+        port: 2112
+        protocol: TCP
+        targetPort: 2112
   ingress:
     enabled: true
     annotations: {}
-    path: /
-    tls: {}
+    hosts:
+      - path: /
+    tls: []
 createcerts:
   enabled: true
   replicaCount: 1

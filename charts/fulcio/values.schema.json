@@ -64,8 +64,13 @@
                 "ingress": {
                     "enabled": true,
                     "annotations": {},
-                    "path": "/",
-                    "tls": {}
+                    "hosts": [
+                      {
+                        "host": "fulcio.localhost",
+                        "path": "/"
+                      }
+                    ],
+                    "tls": []
                 }
             },
             "createcerts": {
@@ -370,8 +375,13 @@
                     "ingress": {
                         "enabled": true,
                         "annotations": {},
-                        "path": "/",
-                        "tls": {}
+                        "hosts": [
+                          {
+                            "host": "fulcio.localhost",
+                            "path": "/"
+                          }
+                        ],
+                        "tls": []
                     }
                 }
             ],
@@ -455,6 +465,16 @@
                         }
                     },
                     "additionalProperties": true
+                },
+                "name": {
+                    "$id": "#/properties/server/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "server"
+                    ]
                 },
                 "args": {
                     "$id": "#/properties/server/properties/args",
@@ -713,8 +733,12 @@
                         {
                             "enabled": true,
                             "annotations": {},
-                            "path": "/",
-                            "tls": {}
+                            "hosts": [
+                              {
+                                "host": "fulcio.localhost"
+                              }
+                            ],
+                            "tls": []
                         }
                     ],
                     "required": [],
@@ -741,25 +765,68 @@
                             "required": [],
                             "additionalProperties": true
                         },
-                        "path": {
-                            "$id": "#/properties/server/properties/ingress/properties/path",
-                            "type": "string",
-                            "title": "The path schema",
+                        "hosts": {
+                            "$id": "#/properties/server/properties/ingress/properties/hosts",
+                            "type": "array",
+                            "title": "Hostname for ingress.",
                             "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "/"
-                            ]
+                            "properties": {
+                              "host": {
+                                  "$id": "#/properties/server/properties/ingress/properties/hosts/properties/host",
+                                  "type": "string",
+                                  "title": "The host rule",
+                                  "description": "An explanation about the purpose of this instance.",
+                                  "examples": [
+                                      ""
+                                  ]
+                              },
+                              "path": {
+                                  "$id": "#/properties/server/properties/ingress/properties/hosts/properties/path",
+                                  "type": "string",
+                                  "title": "The host path",
+                                  "description": "An explanation about the purpose of this instance.",
+                                  "default": "",
+                                  "examples": [
+                                      "/"
+                                  ]
+                              },
+                              "service_name": {
+                                  "$id": "#/properties/server/properties/ingress/properties/hosts/properties/service_name",
+                                  "type": "string",
+                                  "title": "The backend service name",
+                                  "description": "An explanation about the purpose of this instance.",
+                                  "default": "",
+                                  "examples": [
+                                      ""
+                                  ]
+                              }
+
+                            },
+                            "default": [],
+                            "examples": [],
+                            "required": [],
+                            "additionalProperties": true
                         },
                         "tls": {
                             "$id": "#/properties/server/properties/ingress/properties/tls",
-                            "type": "object",
+                            "type": "array",
                             "title": "The tls schema",
                             "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {}
-                            ],
+                            "properties": {
+                              "hosts": {
+                                "items": {
+                                  "type": "string"
+                                },
+                                "type": "array",
+                                "description": "Hosts are a list of hosts included in the TLS certificate."
+                              },
+                              "secretName": {
+                                "type": "string",
+                                "description": "SecretName is the name of the secret used to terminate SSL traffic on 443. Field is left optional to allow SSL routing based on SNI hostname alone. If the SNI host in a listener conflicts with the \"Host\" header field used by an IngressRule, the SNI host is used for termination and value of the Host header is used for routing."
+                              }
+                            },
+                            "default": [],
+                            "examples": [],
                             "required": [],
                             "additionalProperties": true
                         }
