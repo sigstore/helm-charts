@@ -4,7 +4,7 @@ description: Fulcio
 
 type: application
 
-version: 0.2.4
+version: 0.2.5
 
 keywords:
   - security
@@ -17,7 +17,7 @@ maintainers:
 
 dependencies:
   - name: ctlog
-    version: 0.2.3
+    version: 0.2.4
     repository: https://sigstore.github.io/helm-charts
     condition: ctlog.enabled
 
