@@ -99,8 +99,8 @@ spec:
       affinity:
 {{ toYaml .Values.server.affinity | indent 8 }}
     {{- end }}
-      volumes:
 {{- if eq "true" (include "rekor.server.fileAttestationStorage" .) }}
+      volumes:
   {{- if not .Values.server.attestation_storage.persistence.enabled }}
         - name: storage
           emptyDir: {}
