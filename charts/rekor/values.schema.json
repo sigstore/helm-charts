@@ -82,6 +82,7 @@
                     "pullPolicy": "IfNotPresent",
                     "version": "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
                 },
+                "signer": "memory",
                 "logging": {
                     "production": false
                 },
@@ -866,6 +867,7 @@
                         "pullPolicy": "IfNotPresent",
                         "version": "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
                     },
+                    "signer": "memory",
                     "logging": {
                         "production": false
                     },
@@ -1055,6 +1057,16 @@
                         }
                     },
                     "additionalProperties": true
+                },
+                "signer": {
+                    "$id": "#/properties/server/properties/signer",
+                    "type": "string",
+                    "title": "The signer schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "memory"
+                    ]
                 },
                 "logging": {
                     "$id": "#/properties/server/properties/logging",

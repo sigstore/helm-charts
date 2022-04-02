@@ -305,7 +305,7 @@ Server Arguments
 - {{ printf "--redis_server.address=%s" (include "redis.hostname" .) | quote }}
 - {{ printf "--redis_server.port=%d" (.Values.redis.port | int) | quote }}
 - "--rekor_server.address=0.0.0.0"
-- "--rekor_server.signer=memory"
+- {{ printf "--rekor_server.signer=%s" (.Values.server.signer) | quote }}
 {{- if .Values.server.retrieve_api.enabled }}
 - "--enable_retrieve_api=true"
 {{- end }}
