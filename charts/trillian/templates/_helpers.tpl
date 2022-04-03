@@ -292,7 +292,7 @@ Create Container Ports based on Service Ports
 */}}
 {{- define "trillian.containerPorts" -}}
 {{- range . }}
-- containerPort: {{ (ternary .tagrgetPort .port (empty .targetPort)) | int }}
+- containerPort: {{ (ternary .port .targetPort (empty .targetPort)) | int }}
   protocol: {{ default "TCP" .protocol }}
 {{- end -}}
 {{- end -}}
