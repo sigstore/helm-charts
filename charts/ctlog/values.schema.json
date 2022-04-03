@@ -19,6 +19,8 @@
                     "pullPolicy": "IfNotPresent",
                     "version": "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
                 },
+                "portHTTP": 6962,
+                "portHTTPMetrics": 6963,
                 "serviceAccount": {
                     "create": true,
                     "name": "",
@@ -134,6 +136,8 @@
                         "pullPolicy": "IfNotPresent",
                         "version": "sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"
                     },
+                    "portHTTP": 6962,
+                    "portHTTPMetrics": 6963,
                     "serviceAccount": {
                         "create": true,
                         "name": "",
@@ -223,6 +227,24 @@
                         }
                     },
                     "additionalProperties": true
+                },
+                "portHTTP": {
+                    "$id": "#/properties/server/properties/portHTTP",
+                    "type": "integer",
+                    "title": "The HTTP port schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [],
+                    "required": []
+                },
+                "portHTTP": {
+                    "$id": "#/properties/server/properties/portHTTPMetrics",
+                    "type": "integer",
+                    "title": "The HTTP metrics port schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [],
+                    "required": []
                 },
                 "serviceAccount": {
                     "$id": "#/properties/server/properties/serviceAccount",

@@ -106,7 +106,8 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Server Arguments
 */}}
 {{- define "ctlog.server.args" -}}
-- "--http_endpoint=0.0.0.0:6962"
+- {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.server.portHTTP | int) | quote }}
+- {{ printf "--metrics_endpoint=0.0.0.0:%d" (.Values.server.portHTTPMetrics | int) | quote }}
 - "--log_config=/ctfe-config/ct_server.cfg"
 - "--alsologtostderr"
 {{- if .Values.server.extraArgs -}}
@@ -177,3 +178,13 @@ Create the name of the secret
 {{- define "ctlog.secret" -}}
 {{ printf "%s-secret" (include "ctlog.fullname" .) }}
 {{- end }}
+
+{{/*
+Create Container Ports based on Service Ports
+*/}}
+{{- define "ctlog.containerPorts" -}}
+{{- range . }}
+- containerPort: {{ (ternary .port .targetPort (empty .targetPort)) | int }}
+  protocol: {{ default "TCP" .protocol }}
+{{- end -}}
+{{- end -}}
