@@ -30,7 +30,7 @@ spec:
               mountPath: "/ctfe-config"
               readOnly: true
           ports:
-            - containerPort: 6962
+{{- include "ctlog.containerPorts" .Values.server.service.ports | indent 12 }}
     {{- if .Values.server.resources }}
           resources:
 {{ toYaml .Values.server.resources | indent 12 }}

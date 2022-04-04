@@ -14,14 +14,22 @@ server:
     name: ""
     annotations: {}
     mountToken: false
+  portHTTP: 6962
+  portHTTPMetrics: 6963
   service:
     type: ClusterIP
     ports:
-      - name: 80-tcp
+      - name: 6962-tcp
         port: 80
         protocol: TCP
         targetPort: 6962
+      - name: 6963-tcp
+        port: 6963
+        protocol: TCP
+        targetPort: 6963
   extraArgs: []
+  securityContext:
+    runAsNonRoot: true
 createtree:
   enabled: true
   name: createtree
@@ -36,6 +44,8 @@ createtree:
     name: ""
     annotations: {}
     mountToken: true
+  securityContext:
+    runAsNonRoot: true
 createctconfig:
   enabled: true
   replicaCount: 1
@@ -51,6 +61,8 @@ createctconfig:
     name: ""
     annotations: {}
     mountToken: true
+  securityContext:
+    runAsNonRoot: true
 trillian:
   namespace: trillian-system
   logServer:
