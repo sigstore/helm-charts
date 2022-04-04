@@ -102,6 +102,9 @@ server:
     httpGet:
       port: 3000
       path: /ping
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65533
   config:
     key: treeID
   retrieve_api:
@@ -141,6 +144,10 @@ createtree:
     create: true
     name: ""
     annotations: {}
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65533
+
 # Configure Trillian dependency
 trillian:
   enabled: true

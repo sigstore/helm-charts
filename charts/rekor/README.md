@@ -40,6 +40,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | createtree.serviceAccount.annotations | object | `{}` |  |
 | createtree.serviceAccount.create | bool | `true` |  |
 | createtree.serviceAccount.name | string | `""` |  |
+| createtree.securityContext | `{}` |  |
 | forceNamespace | string | `""` |  |
 | imagePullSecrets | string | `nil` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |

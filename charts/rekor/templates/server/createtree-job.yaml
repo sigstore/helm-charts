@@ -20,3 +20,7 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
+    {{- if .Values.createtree.securityContext }}
+      securityContext:
+{{ toYaml .Values.createtree.securityContext | indent 8 }}
+    {{- end }}
