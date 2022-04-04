@@ -1,3 +1,4 @@
+{{- if eq .Values.server.args.certificateAuthority "fileca" }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -7,3 +8,4 @@ metadata:
     {{- include "fulcio.labels" . | nindent 4 }}
   annotations:
 {{ toYaml .Values.createcerts.serviceAccount.annotations | indent 4 }}
+{{- end }}

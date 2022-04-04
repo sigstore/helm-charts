@@ -56,6 +56,8 @@ server:
     hosts:
       - path: /
     tls: []
+  securityContext:
+    runAsNonRoot: true
 createcerts:
   enabled: true
   replicaCount: 1
@@ -71,6 +73,8 @@ createcerts:
     name: ""
     annotations: {}
     mountToken: true
+  securityContext:
+    runAsNonRoot: true
 # Configure ctlog dependency
 ctlog:
   enabled: true
