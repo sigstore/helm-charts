@@ -18,7 +18,7 @@ initContainerImage:
 mysql:
   gcp:
     enabled: false
-    instance: ""
+    instance: "projectid:region:instance-name"
     cloudsql:
       registry: gcr.io
       repository: cloudsql-docker/gce-proxy

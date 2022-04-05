@@ -27,7 +27,11 @@ If release name contains chart name it will be used as a full name.
 Return the hostname for mysql
 */}}
 {{- define "mysql.hostname" -}}
+{{- if (and (not .Values.mysql.enabled) .Values.mysql.gcp.enabled) -}}
+{{- default "localhost" .Values.mysql.hostname }}
+{{- else -}}
 {{- default (include "trillian.mysql.fullname" .) .Values.mysql.hostname }}
+{{- end -}}
 {{- end -}}
 
 {{/*

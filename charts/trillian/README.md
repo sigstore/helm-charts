@@ -90,7 +90,7 @@ The following table lists the configurable parameters of the trilian chart and t
 | mysql.gcp.cloudsql.version | string | `"1.28.1"` |  |
 | mysql.gcp.enabled | string | `""` |  |
 | mysql.gcp.instance | string | `""` |  |
-| mysql.hostname | string | `""` |  |
+| mysql.hostname | string | `""` | `Will default to localhost if not specified when mysql.gcp.enabled=true` |
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
 | mysql.image.repository | string | `"trillian-opensource-ci/db_server"` |  |
