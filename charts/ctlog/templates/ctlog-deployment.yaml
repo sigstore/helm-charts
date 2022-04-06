@@ -12,6 +12,10 @@ spec:
       {{- include "ctlog.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+    {{- if .Values.server.podAnnotations }}
+      annotations:
+        {{- toYaml .Values.server.podAnnotations | nindent 8 }}
+    {{- end }}
       labels:
         {{- include "ctlog.selectorLabels" . | nindent 8 }}
     spec:
