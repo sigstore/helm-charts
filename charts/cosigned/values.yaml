@@ -6,8 +6,8 @@ cosign:
 
 policywebhook:
   image:
-    repository: hectorj2f/policy-webhook
-    version: sha256:eab7f69290cce5df4ef17181b1f1e489b78a615a4fde1705878bb8c4de288205
+    repository: gcr.io/projectsigstore/policy-webhook
+    version: sha256:5eb1eb3b56e94721be5d398bff675b799883a8f5880c5f260d365e818c2f2116
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
@@ -38,9 +38,9 @@ policywebhook:
 webhook:
   name: webhook
   image:
-    repository: hectorj2f/cosigned
+    repository: gcr.io/projectsigstore/cosigned
     # crane digest gcr.io/projectsigstore/cosigned:v1.5.2
-    version: sha256:ea7dbc8e23f3ba26fe8daef4c7e7dd95dcb39852d78765124294823417217d1d
+    version: sha256:45d88f483c2eeaab4a4437cb0990705f285625d9968c3d6a0419a0b88e5668d3
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
