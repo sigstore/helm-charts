@@ -4,7 +4,7 @@ description: Certificate Log
 
 type: application
 
-version: 0.2.7
+version: 0.2.8
 
 keywords:
   - security
@@ -21,6 +21,6 @@ annotations:
     - name: ct_server
       image: ghcr.io/sigstore/scaffolding/ct_server@sha256:1c3a8d959ce6e45593be36c38d3a16ac5a8a5e63bc66f042dbc25507bc0ca223
     - name: createctconfig
-      image: ghcr.io/sigstore/scaffolding/createctconfig@sha256:15c26ff62d64c6ea0c44fce83ca138ac16eb670464063f3c5ec585dd4fce6171
+      image: ghcr.io/sigstore/scaffolding/createctconfig@sha256:a39dda7a6b1e67e44772f9e8142e69ccb3c1055a4236eb3b146be7226caa3722
     - name: createtree
-      image: ghcr.io/sigstore/scaffolding/createtree@sha256:a39dda7a6b1e67e44772f9e8142e69ccb3c1055a4236eb3b146be7226caa3722
+      image: ghcr.io/sigstore/scaffolding/createtree@sha256:15c26ff62d64c6ea0c44fce83ca138ac16eb670464063f3c5ec585dd4fce6171

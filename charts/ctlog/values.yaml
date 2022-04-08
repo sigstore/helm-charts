@@ -60,6 +60,7 @@ createctconfig:
     pullPolicy: IfNotPresent
     # v0.2.5
     version: "sha256:15c26ff62d64c6ea0c44fce83ca138ac16eb670464063f3c5ec585dd4fce6171"
+  fulcioURL: "http://fulcio.fulcio-system.svc"
   serviceAccount:
     create: true
     name: ""
