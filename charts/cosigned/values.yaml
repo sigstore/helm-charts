@@ -4,12 +4,43 @@ cosign:
   # add the values in base64 encoded
   cosignPub: ""
 
+policywebhook:
+  image:
+    repository: hectorj2f/policy-webhook
+    version: sha256:eab7f69290cce5df4ef17181b1f1e489b78a615a4fde1705878bb8c4de288205
+    pullPolicy: IfNotPresent
+  env: {}
+  extraArgs: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  serviceAccount:
+    annotations: {}
+  securityContext:
+    enabled: false
+    runAsUser: 65532
+  podSecurityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    capabilities:
+      drop:
+      - all
+  service:
+      annotations: {}
+      type: ClusterIP
+      port: 443
+
 webhook:
   name: webhook
   image:
-    repository: gcr.io/projectsigstore/cosigned
+    repository: hectorj2f/cosigned
     # crane digest gcr.io/projectsigstore/cosigned:v1.5.2
-    version: sha256:18c7db5051c0d5ac147b1785567ef647f23f7949ae5858776561cfc9cd8cc4b2
+    version: sha256:ea7dbc8e23f3ba26fe8daef4c7e7dd95dcb39852d78765124294823417217d1d
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}

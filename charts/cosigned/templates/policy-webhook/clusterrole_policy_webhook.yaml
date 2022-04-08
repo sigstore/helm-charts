@@ -1,0 +1,41 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ template "cosigned.fullname" . }}-policy-webhook
+  labels:
+    {{- include "cosigned.labels" . | nindent 4 }}
+    control-plane: {{ template "cosigned.fullname" . }}-policy-webhook
+rules:
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+  # Allow the reconciliation of exactly our validating webhook.
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
+    verbs: ["list", "watch"]
+
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
+    verbs: ["get", "update"]
+    resourceNames: ["cosigned.sigstore.dev","validating.clusterimagepolicy.sigstore.dev", "defaulting.clusterimagepolicy.sigstore.dev"]
+
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list"]
+    # The webhook configured the namespace as the OwnerRef on various cluster-scoped resources,
+    # which requires we can Get the system namespace.
+    resourceNames: [ "{{ .Release.Namespace }}" ]
+
+  # This is needed by k8schain to support fetching pull secrets attached to pod specs
+  # or their service accounts.  If pull secrets aren't used, the "secrets" below can
+  # be safely dropped, but the logic will fetch the service account to check for pull
+  # secrets.
+  - apiGroups: [""]
+    resources: ["serviceaccounts", "secrets"]
+    verbs: ["get"]
+
+  # Allow reconciliation of the ClusterImagePolic CRDs.
+  - apiGroups: ["cosigned.sigstore.dev", "validating.clusterimagepolicy.sigstore.dev", "defaulting.clusterimagepolicy.sigstore.dev"]
+    resources: ["clusterimagepolicies"]
+    verbs: ["get", "list", "update", "watch", "patch"]
+

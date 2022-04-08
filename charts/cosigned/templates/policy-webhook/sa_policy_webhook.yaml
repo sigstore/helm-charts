@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    {{- include "cosigned.labels" . | nindent 4 }}
+    control-plane: {{ template "cosigned.fullname" . }}-policy-webhook
+  name: {{ template "cosigned.fullname" . }}-policy-webhook
+  namespace: {{ .Release.Namespace }}
+  {{- with .Values.policywebhook.serviceAccount.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}

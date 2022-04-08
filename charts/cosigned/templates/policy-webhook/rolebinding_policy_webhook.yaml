@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ template "cosigned.fullname" . }}-policy-webhook
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "cosigned.labels" . | nindent 4 }}
+    control-plane: {{ template "cosigned.fullname" . }}-policy-webhook
+subjects:
+- kind: ServiceAccount
+  name: {{ template "cosigned.fullname" . }}-policy-webhook
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: Role
+  name: {{ template "cosigned.fullname" . }}-policy-webhook
+  apiGroup: rbac.authorization.k8s.io

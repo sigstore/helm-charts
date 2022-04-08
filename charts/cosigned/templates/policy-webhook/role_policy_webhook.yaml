@@ -1,0 +1,25 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ template "cosigned.fullname" . }}-policy-webhook
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "cosigned.labels" . | nindent 4 }}
+    control-plane: {{ template "cosigned.fullname" . }}-policy-webhook
+rules:
+  # Needed to watch and load configuration and secret data.
+  - apiGroups: [""]
+    resources: ["configmaps", "secrets"]
+    verbs: ["get", "list", "update", "watch"]
+
+  # Needed for leader election
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
+
+  # This is needed to create / patch ConfigMap that is created by the reconciler
+  # to consolidate various CIP configuration into a policy ConfigMap.
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    resourceNames: ["config-image-policies"]
+    verbs: ["get", "list", "create", "update", "patch", "watch"]

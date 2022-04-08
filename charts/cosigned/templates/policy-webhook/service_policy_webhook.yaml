@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "cosigned.fullname" . }}-policy-webhook
+  namespace: {{ .Release.Namespace }}
+spec:
+  ports:
+    - port: 443
+      targetPort: 8443
+  selector:
+    role: {{ template "cosigned.fullname" . }}-policy-webhook
