@@ -188,3 +188,28 @@ service:
     number: {{ $servicePort | int }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the contents for fulcio config.
+*/}}
+{{- define "fulcio.configmap.contents" -}}
+{{- if .Values.config.contents -}}
+{{- toPrettyJson .Values.config.contents }}
+{{- else -}}
+{
+  "OIDCIssuers": {
+    "https://kubernetes.default.svc": {
+      "IssuerURL": "https://kubernetes.default.svc",
+      "ClientID": "sigstore",
+      "Type": "kubernetes"
+    }
+  },
+  "MetaIssuers": {
+    "https://kubernetes.*.svc": {
+      "ClientID": "sigstore",
+      "Type": "kubernetes"
+    }
+  }
+}
+{{- end -}}
+{{- end -}}
