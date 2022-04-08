@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+---
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
@@ -20,7 +22,7 @@ webhooks:
       - v1
     clientConfig:
       service:
-        name: {{ template "cosigned.fullname" . }}-policy-webhook
+        name: policy-webhook
         namespace: {{ .Release.Namespace }}
     failurePolicy: Fail
     matchPolicy: Equivalent
@@ -36,7 +38,7 @@ webhooks:
       - v1
     clientConfig:
       service:
-        name: {{ template "cosigned.fullname" . }}-policy-webhook
+        name: policy-webhook
         namespace: {{ .Release.Namespace }}
     failurePolicy: Fail
     matchPolicy: Equivalent

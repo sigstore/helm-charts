@@ -116,7 +116,6 @@ Create the image path for the passed in image field
 {{- end -}}
 {{- end -}}
 
-
 {{/*
 Create the image path for the passed in policy-webhook image field
 */}}

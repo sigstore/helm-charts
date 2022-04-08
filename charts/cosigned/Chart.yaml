@@ -22,4 +22,3 @@ annotations:
       image: gcr.io/projectsigstore/cosigned:v1.7.1@sha256:45d88f483c2eeaab4a4437cb0990705f285625d9968c3d6a0419a0b88e5668d3
     - name: policywebhook
       image: gcr.io/projectsigstore/policy-webhook:v1.7.1@sha256:5eb1eb3b56e94721be5d398bff675b799883a8f5880c5f260d365e818c2f2116
-

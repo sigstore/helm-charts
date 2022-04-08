@@ -31,15 +31,15 @@ policywebhook:
       drop:
       - all
   service:
-      annotations: {}
-      type: ClusterIP
-      port: 443
+    annotations: {}
+    type: ClusterIP
+    port: 443
 
 webhook:
   name: webhook
   image:
     repository: gcr.io/projectsigstore/cosigned
-    # crane digest gcr.io/projectsigstore/cosigned:v1.5.2
+    # crane digest gcr.io/projectsigstore/cosigned:v1.7.1
     version: sha256:45d88f483c2eeaab4a4437cb0990705f285625d9968c3d6a0419a0b88e5668d3
     pullPolicy: IfNotPresent
   env: {}
