@@ -25,8 +25,8 @@ server:
     registry: gcr.io
     repository: projectsigstore/fulcio
     pullPolicy: IfNotPresent
-    # latest
-    version: "sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841"
+    # v0.3.0
+    version: "sha256:4bdb610d80e8ab7decb6e437ce5327568b91e98715a2aa653f51b075447510a7"
   args:
     port: 5555
     # Valid values: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca
@@ -66,8 +66,8 @@ createcerts:
     registry: ghcr.io
     repository: sigstore/scaffolding/createcerts
     pullPolicy: IfNotPresent
-    # v0.2.1
-    version: "sha256:46a355b021a9613b4ba578e92743e884e4567407b2b84e401343708c92b8b72e"
+    # v0.2.5
+    version: "sha256:720ef9e3e80e0b9a5fb30e6650583351b02ff6a668937f64c9ef3c8e421b24c5"
   serviceAccount:
     create: true
     name: ""
