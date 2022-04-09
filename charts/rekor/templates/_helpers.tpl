@@ -356,12 +356,12 @@ Return the appropriate apiVersion for ingress.
 {{- $serviceName := (include "rekor.server.fullname" .) -}}
 {{- if or (eq $apiVersion "extensions/v1beta1") (eq $apiVersion "networking.k8s.io/v1beta1") -}}
 serviceName: {{ $serviceName }}
-servicePort: {{ .Values.server.port }}
+servicePort: {{ (index .Values.server.service.ports 0).port | int }}
 {{- else -}}
 service:
   name: {{ $serviceName }}
   port:
-    number: {{ .Values.server.port | int }}
+    number: {{ (index .Values.server.service.ports 0).port | int }}
 {{- end -}}
 {{- end -}}
 
