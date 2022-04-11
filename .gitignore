@@ -1,2 +1,5 @@
 charts/*/charts
 charts/*/Chart.lock
+
+# Vim swap files
+*.swp

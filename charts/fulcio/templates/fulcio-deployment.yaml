@@ -48,6 +48,10 @@ spec:
             - "/var/run/fulcio-secrets/cert.pem"
             - "--fileca-key-passwd"
             - "$(PASSWORD)"
+            {{- if eq .Values.server.args.certificateAuthority "kmsca" }}
+            - "--kms-resource={{ .Values.server.args.kms_resource }}"
+            - "--kms-cert-chain-path=/etc/fulcio-config/chain.pem"
+            {{- end }}
             {{- end }}
             - "--ct-log-url=http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/sigstorescaffolding"
           {{- if eq .Values.server.args.certificateAuthority "fileca" }}

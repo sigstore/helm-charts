@@ -513,6 +513,30 @@
                                 "fileca"
                             ]
                         },
+                        "kms_resource": {
+                            "$id": "#/properties/server/properties/args/properties/kms_resourse",
+                            "type": "string",
+                            "title": "The kms resource schema",
+                            "description": "The KMS URI for backend KMS",
+                            "default": "",
+                            "examples": [
+                                "azurekms://[VAULT_NAME][VAULT_URI]/[KEY]",
+                                "awskms://[ENDPOINT]/[ID/ALIAS/ARN]",
+                                "gcpkms://projects/[PROJECT]/locations/global/keyRings/[KEYRING]/cryptoKeys/[KEY]/versions/[VERSION]",
+                                "hashivault://[KEY]",
+                                "k8s://[NAMESPACE]/[KEY]"
+                            ]
+                        },
+                        "kms_cert_chain": {
+                            "$id": "#/properties/server/properties/args/properties/kms_cert_chain",
+                            "type": "string",
+                            "title": "The kms chain schema",
+                            "description": "Certificate chain for KMS CA backend. Certificates must be PEM encoded and ordered from active intermediate first to root last",
+                            "default": "",
+                            "examples": [
+                                ""
+                            ]
+                        },
                         "hsm_caroot_id": {
                             "$id": "#/properties/server/properties/args/properties/hsm_caroot_id",
                             "type": "null",

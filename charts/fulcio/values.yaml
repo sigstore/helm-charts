@@ -15,8 +15,11 @@ server:
     version: "sha256:4bdb610d80e8ab7decb6e437ce5327568b91e98715a2aa653f51b075447510a7"
   args:
     port: 5555
-    # Valid values: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca
+    # Valid values: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca
     certificateAuthority: fileca
+    # kms_resource: gcpkms://....
+    # kms_cert_chain: |-
+    #   << your PEM encoded cert chain here. Order from active intermedate first to root last >>
     hsm_caroot_id:
     aws_hsm_root_ca_path:
     gcp_private_ca_parent: projects/test/locations/us-east1/caPools/test
