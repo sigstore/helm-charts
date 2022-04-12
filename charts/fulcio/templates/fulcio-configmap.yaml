@@ -8,3 +8,6 @@ metadata:
 data:
   config.json: |-
 {{ include "fulcio.configmap.contents" . | indent 4 }}
+  {{- if (eq .Values.server.args.certificateAuthority "kmsca")}}
+  chain.pem: {{.Values.server.args.kms_cert_chain | quote }}
+  {{- end }}

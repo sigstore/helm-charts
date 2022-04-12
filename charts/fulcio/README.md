@@ -60,6 +60,8 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | namespace.name | string | `"fulcio-system"` |  |
 | server.args.aws_hsm_root_ca_path | string | `nil` |  |
 | server.args.certificateAuthority | string | `"fileca"` |  |
+| server.args.kms_resource | string | `nil` | URI for KMS backend if using `kmsca` certificate authority |
+| server.args.kms_cert_chain | string | `nil` | PEM encoded certificate chain if using `kmsca` certificate authority |
 | server.args.gcp_private_ca_parent | string | `"projects/test/locations/us-east1/caPools/test"` |  |
 | server.args.hsm_caroot_id | string | `nil` |  |
 | server.args.port | int | `5555` |  |
