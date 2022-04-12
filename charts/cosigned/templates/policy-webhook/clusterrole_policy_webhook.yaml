@@ -53,4 +53,3 @@ rules:
   - apiGroups: ["cosigned.sigstore.dev", "validating.clusterimagepolicy.sigstore.dev", "defaulting.clusterimagepolicy.sigstore.dev"]
     resources: ["clusterimagepolicies"]
     verbs: ["get", "list", "update", "watch", "patch"]
-
