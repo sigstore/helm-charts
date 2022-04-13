@@ -8,8 +8,8 @@ sources:
 type: application
 
 name: cosigned
-version: 0.1.13
-appVersion: 1.5.2
+version: 0.1.14
+appVersion: 1.7.2
 
 maintainers:
   - name: dlorenc
@@ -19,4 +19,6 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: cosigned
-      image: gcr.io/projectsigstore/cosigned:v1.5.2@sha256:18c7db5051c0d5ac147b1785567ef647f23f7949ae5858776561cfc9cd8cc4b2
+      image: gcr.io/projectsigstore/cosigned:v1.7.2@sha256:766698b7c472ee4c37133a92203def72c90c3c49e2b334130e6e3a100254911e
+    - name: policywebhook
+      image: gcr.io/projectsigstore/policy-webhook:v1.7.2@sha256:59fd679d6629fbfa99b4413771dca16cb7891b0a91dd386dc46ea9fac46bcfbc

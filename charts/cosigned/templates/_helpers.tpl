@@ -115,3 +115,14 @@ Create the image path for the passed in image field
 {{- printf "%s:%s" .repository .version -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Create the image path for the passed in policy-webhook image field
+*/}}
+{{- define "policywebhook.image" -}}
+{{- if eq (substr 0 7 .version) "sha256:" -}}
+{{- printf "%s@%s" .repository .version -}}
+{{- else -}}
+{{- printf "%s:%s" .repository .version -}}
+{{- end -}}
+{{- end -}}

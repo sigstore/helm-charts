@@ -4,12 +4,43 @@ cosign:
   # add the values in base64 encoded
   cosignPub: ""
 
+policywebhook:
+  image:
+    repository: gcr.io/projectsigstore/policy-webhook
+    version: sha256:59fd679d6629fbfa99b4413771dca16cb7891b0a91dd386dc46ea9fac46bcfbc
+    pullPolicy: IfNotPresent
+  env: {}
+  extraArgs: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  serviceAccount:
+    annotations: {}
+  securityContext:
+    enabled: false
+    runAsUser: 65532
+  podSecurityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    capabilities:
+      drop:
+      - all
+  service:
+    annotations: {}
+    type: ClusterIP
+    port: 443
+
 webhook:
   name: webhook
   image:
     repository: gcr.io/projectsigstore/cosigned
-    # crane digest gcr.io/projectsigstore/cosigned:v1.5.2
-    version: sha256:18c7db5051c0d5ac147b1785567ef647f23f7949ae5858776561cfc9cd8cc4b2
+    # crane digest gcr.io/projectsigstore/cosigned:v1.7.2
+    version: sha256:766698b7c472ee4c37133a92203def72c90c3c49e2b334130e6e3a100254911e
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
