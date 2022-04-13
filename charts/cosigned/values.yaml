@@ -3,6 +3,7 @@ cosign:
     name: ""
   # add the values in base64 encoded
   cosignPub: ""
+  webhookName: ""
 
 policywebhook:
   image:

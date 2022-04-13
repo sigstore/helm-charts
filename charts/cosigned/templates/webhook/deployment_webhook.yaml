@@ -55,6 +55,9 @@ spec:
         {{- else }}
         - -secret-name={{ template "cosigned.fullname" . }}-cosign-key
         {{- end }}
+        {{- if .Values.cosign.webhookName }}
+        - --webhook-name={{ include "cosigned.webhookName" . | quote }}
+        {{- end }}
         {{- range $key, $value := .Values.webhook.extraArgs }}
         - -{{ $key }}={{ $value }}
         {{- end }}

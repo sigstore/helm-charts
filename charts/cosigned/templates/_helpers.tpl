@@ -117,6 +117,17 @@ Create the image path for the passed in image field
 {{- end -}}
 
 {{/*
+Cosigned webhook name
+*/}}
+{{- define "cosigned.webhookName" -}}
+{{- if .Values.cosign.webhookName -}}
+{{- .Values.cosign.webhookName -}}
+{{- else -}}
+cosigned.sigstore.dev
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create the image path for the passed in policy-webhook image field
 */}}
 {{- define "policywebhook.image" -}}

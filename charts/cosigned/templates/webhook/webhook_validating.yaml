@@ -1,9 +1,9 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: cosigned.sigstore.dev
+  name: {{ include "cosigned.webhookName" . }}
 webhooks:
-- name: cosigned.sigstore.dev
+- name: {{ include "cosigned.webhookName" . }}
   namespaceSelector:
     # The webhook should only apply to things that opt-in
     matchExpressions:
