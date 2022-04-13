@@ -15,6 +15,7 @@ The following table lists the configurable parameters of the cosigned chart and 
 | commonTolerations | list | `[]` |  |
 | cosign.cosignPub | string | `""` |  |
 | cosign.secretKeyRef.name | string | `""` |  |
+| cosign.webhookName | string | `""` |  |
 | serviceMonitor.enabled | bool | `false` |  |
 | webhook.env | object | `{}` |  |
 | webhook.extraArgs | object | `{}` |  |

@@ -13,7 +13,8 @@
                 "cosignPub": "",
                 "secretKeyRef": {
                     "name": ""
-                }
+                },
+                "webhookName": ""
             },
             "policywebhook": {
                 "env": {},
@@ -149,7 +150,8 @@
                     "cosignPub": "",
                     "secretKeyRef": {
                         "name": ""
-                    }
+                    },
+                    "webhookName": ""
                 }
             ],
             "required": [
@@ -194,6 +196,16 @@
                         }
                     },
                     "additionalProperties": true
+                },
+                "webhookName": {
+                    "$id": "#/properties/cosign/properties/webhookName",
+                    "type": "string",
+                    "title": "The webhookName schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        ""
+                    ]
                 }
             },
             "additionalProperties": true
