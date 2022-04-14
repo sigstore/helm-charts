@@ -17,7 +17,7 @@ rules:
   - apiGroups: ["admissionregistration.k8s.io"]
     resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
     verbs: ["get", "update"]
-    resourceNames: [{{ include "cosigned.webhookName" . | quote }}]
+    resourceNames: [{{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName | quote }}]
 
   - apiGroups: [""]
     resources: ["namespaces"]
