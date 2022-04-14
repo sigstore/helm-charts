@@ -14,7 +14,7 @@
                 "secretKeyRef": {
                     "name": ""
                 },
-                "webhookName": ""
+                "webhookName": "cosigned.sigstore.dev"
             },
             "policywebhook": {
                 "env": {},
@@ -151,12 +151,13 @@
                     "secretKeyRef": {
                         "name": ""
                     },
-                    "webhookName": ""
+                    "webhookName": "cosigned.sigstore.dev"
                 }
             ],
             "required": [
                 "cosignPub",
-                "secretKeyRef"
+                "secretKeyRef",
+                "webhookName"
             ],
             "properties": {
                 "cosignPub": {
@@ -204,7 +205,7 @@
                     "description": "An explanation about the purpose of this instance.",
                     "default": "",
                     "examples": [
-                        ""
+                        "cosigned.sigstore.dev"
                     ]
                 }
             },
