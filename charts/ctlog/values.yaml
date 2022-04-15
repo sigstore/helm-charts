@@ -31,6 +31,12 @@ server:
         port: 6963
         protocol: TCP
         targetPort: 6963
+  ingress:
+    enabled: false
+    hosts:
+      - path: /
+    annotations: {}
+    tls: []
   extraArgs: []
   securityContext:
     runAsNonRoot: true
