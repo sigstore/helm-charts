@@ -4,7 +4,7 @@ description: Trillian
 
 type: application
 
-version: 0.1.5
+version: 0.1.6
 
 keywords:
   - security
@@ -25,6 +25,6 @@ annotations:
     - name: db_server
       image: gcr.io/trillian-opensource-ci/db_server@sha256:0794abd3bdf44a567f5d6ef18a0b76802f388611b63aae33eaf28c3b0c5964d8
     - name: log_server
-      image: gcr.io/projectsigstore/trillian_log_server@sha256:f850a0defd089ea844822030c67ae05bc93c91168a7dd4aceb0b6648c39f696b
+      image: gcr.io/projectsigstore/trillian_log_server@sha256:08e2dfe4e5c683921f699d23732b8894bdc065071389d6fe59044442c16576f2
     - name: log_signer
-      image: gcr.io/projectsigstore/trillian_log_signer@sha256:fe90d523f6617974f70878918e4b31d49b2b46a86024bb2d6b01d2bbfed8edbf
+      image: gcr.io/projectsigstore/trillian_log_signer@sha256:2b7edf2920595241381ac57d753b04b2a7a06f84fc1bfcf98cb24097bb0f9f7a

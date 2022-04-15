@@ -109,7 +109,7 @@ logServer:
     repository: projectsigstore/trillian_log_server
     pullPolicy: IfNotPresent
     # 646d069f3cb996b6c0e66223404ddecf08822823
-    version: "sha256:f850a0defd089ea844822030c67ae05bc93c91168a7dd4aceb0b6648c39f696b"
+    version: "sha256:08e2dfe4e5c683921f699d23732b8894bdc065071389d6fe59044442c16576f2"
   service:
     type: ClusterIP
     ports:
@@ -141,7 +141,7 @@ logSigner:
     repository: projectsigstore/trillian_log_signer
     pullPolicy: IfNotPresent
     # 646d069f3cb996b6c0e66223404ddecf08822823
-    version: "sha256:fe90d523f6617974f70878918e4b31d49b2b46a86024bb2d6b01d2bbfed8edbf"
+    version: "sha256:2b7edf2920595241381ac57d753b04b2a7a06f84fc1bfcf98cb24097bb0f9f7a"
   service:
     type: ClusterIP
     ports:
