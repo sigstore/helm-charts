@@ -53,6 +53,14 @@ The following table lists the configurable parameters of the ctlog chart and the
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/scaffolding/ct_server"` |  |
 | server.image.version | string | `"sha256:f828f66c731ba104fdb7133c4a65653156c8e8394a47915813a7e90ed954b4a1"` |  |
+| server.ingress.annotations | object | `{}` |  |
+| server.ingress.enabled | bool | `true` |  |
+| server.ingress.hosts | array | [] |  |
+| server.ingress.hosts.host | string |  |  |
+| server.ingress.hosts.path | string | `"/"` |  |
+| server.ingress.tls | array | `[]` |  |
+| server.ingress.tls.hosts | array | `[]` |  |
+| server.ingress.tls.secretName | string | `` |  |
 | server.podAnnotations | string | `{}` |  |
 | server.portHTTP | integer | `6962` |  |
 | server.portHTTPMetrics | integer | `6963` |  |
