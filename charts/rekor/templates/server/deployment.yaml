@@ -101,11 +101,11 @@ spec:
       affinity:
 {{ toYaml .Values.server.affinity | indent 8 }}
     {{- end }}
-{{- if eq "true" (include "rekor.server.fileAttestationStorage" .) }}
       volumes:
         - name: {{ template "rekor.sharding-config" . }}
           configMap:
             name: {{ template "rekor.sharding-config" . }}
+{{- if eq "true" (include "rekor.server.fileAttestationStorage" .) }}
   {{- if not .Values.server.attestation_storage.persistence.enabled }}
         - name: storage
           emptyDir: {}
