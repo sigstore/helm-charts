@@ -7,8 +7,8 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # -- 7.81.0
-    version: sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8
+    # -- 7.82.0
+    version: "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"
     imagePullPolicy: IfNotPresent
 
 redis:
@@ -26,8 +26,8 @@ redis:
     registry: docker.io
     repository: redis
     pullPolicy: IfNotPresent
-    # -- 5.0.10
-    version: "sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"
+    # -- 6.2.6-alpine3.15
+    version: "sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39"
   resources: {}
   readinessProbe:
     initialDelaySeconds: 5
@@ -62,8 +62,8 @@ server:
     registry: gcr.io
     repository: projectsigstore/rekor-server
     pullPolicy: IfNotPresent
-    # -- v0.5.0
-    version: "sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"
+    # -- v0.6.0
+    version: "sha256:f0e178b838bd2da4dae5b56fc8d6d084ac90dbda8e72a91a64b3c956c4620a7c"
   logging:
     production: false
   ingress:
@@ -93,6 +93,10 @@ server:
     httpGet:
       port: 3000
       path: /ping
+  sharding:
+    mountPath: /sharding
+    filename: sharding-config.yaml
+    contents: ""
   livenessProbe:
     initialDelaySeconds: 30
     periodSeconds: 10
@@ -138,8 +142,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.2.1
-    version: "sha256:6bef73fa9c9d1f2b00c5c2c8c2d7e0b43b651686b686d3c66235e78f426c0aa5"
+    # v0.2.6
+    version: "sha256:f20a73f4c581c0b13daf9ede832b5b6b838acfeb04fe5f2690722c2146d9d8d7"
   serviceAccount:
     create: true
     name: ""

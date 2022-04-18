@@ -302,6 +302,7 @@ Server Arguments
 - "serve"
 - {{ printf "--trillian_log_server.address=%s.%s" .Values.trillian.logServer.name .Values.trillian.forceNamespace | quote }}
 - {{ printf "--trillian_log_server.port=%d" (.Values.trillian.logServer.portRPC | int) | quote }}
+- {{ printf "--trillian_log_server.sharding_config=%s/%s" .Values.server.sharding.mountPath .Values.server.sharding.filename | quote }}
 - {{ printf "--redis_server.address=%s" (include "redis.hostname" .) | quote }}
 - {{ printf "--redis_server.port=%d" (.Values.redis.port | int) | quote }}
 - "--rekor_server.address=0.0.0.0"
@@ -409,4 +410,11 @@ Create the name of the config
 */}}
 {{- define "rekor.config" -}}
 {{ printf "%s-config" (include "rekor.fullname" .) }}
+{{- end }}
+
+{{/*
+Create the name of the sharding config
+*/}}
+{{- define "rekor.sharding-config" -}}
+{{ printf "%s-sharding-config" (include "rekor.fullname" .) }}
 {{- end }}

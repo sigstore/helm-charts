@@ -64,6 +64,8 @@ spec:
           volumeMounts:
             - name: storage
               mountPath: {{ template "rekor.server.fileAttestationStorage.path" . }}
+            - name: {{ template "rekor.sharding-config" . }}
+              mountPath: {{ .Values.server.sharding.mountPath }}
 {{- end -}}
 {{- if .Values.server.livenessProbe }}
           livenessProbe:
@@ -101,6 +103,9 @@ spec:
     {{- end }}
 {{- if eq "true" (include "rekor.server.fileAttestationStorage" .) }}
       volumes:
+        - name: {{ template "rekor.sharding-config" . }}
+          configMap:
+            name: {{ template "rekor.sharding-config" . }}
   {{- if not .Values.server.attestation_storage.persistence.enabled }}
         - name: storage
           emptyDir: {}

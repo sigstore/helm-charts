@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "rekor.sharding-config" . }}
+{{ include "rekor.namespace" . | indent 2 }}
+  labels:
+    {{- include "rekor.server.labels" . | nindent 4 }}
+data:
+  {{ .Values.server.sharding.filename }}: |
+    {{ .Values.server.sharding.contents }}
