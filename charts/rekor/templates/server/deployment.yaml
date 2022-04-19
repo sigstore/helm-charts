@@ -60,12 +60,12 @@ spec:
 {{  include "rekor.server.args" . | indent 12 }}
           ports:
 {{- include "rekor.containerPorts" .Values.server.service.ports | indent 12 }}
-{{- if eq "true" (include "rekor.server.fileAttestationStorage" .) }}
           volumeMounts:
-            - name: storage
-              mountPath: {{ template "rekor.server.fileAttestationStorage.path" . }}
             - name: {{ template "rekor.sharding-config" . }}
               mountPath: {{ .Values.server.sharding.mountPath }}
+{{- if eq "true" (include "rekor.server.fileAttestationStorage" .) }}
+            - name: storage
+              mountPath: {{ template "rekor.server.fileAttestationStorage.path" . }}
 {{- end -}}
 {{- if .Values.server.livenessProbe }}
           livenessProbe:
