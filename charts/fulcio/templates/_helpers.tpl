@@ -175,9 +175,9 @@ Return the appropriate apiVersion for ingress.
 {{- define "fulcio.server.ingress.backend" -}}
 {{- $root := index . 0 -}}
 {{- $local := index . 1 -}}
+{{- $servicePort := index . 2 -}}
 {{- $apiVersion := (include "ingress.apiVersion" $root) -}}
 {{- $serviceName := (default (include "fulcio.fullname" $root) $local.service_name) -}}
-{{- $servicePort := $root.Values.server.svcPort -}}
 {{- if or (eq $apiVersion "extensions/v1beta1") (eq $apiVersion "networking.k8s.io/v1beta1") -}}
 serviceName: {{ $serviceName }}
 servicePort: {{ $servicePort }}

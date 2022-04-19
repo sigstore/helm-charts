@@ -7,6 +7,7 @@ server:
   replicaCount: 1
   name: server
   svcPort: 80
+  grpcSvcPort: 5554
   image:
     registry: gcr.io
     repository: projectsigstore/fulcio
@@ -15,6 +16,7 @@ server:
     version: "sha256:4bdb610d80e8ab7decb6e437ce5327568b91e98715a2aa653f51b075447510a7"
   args:
     port: 5555
+    grpcPort: 5554
     # Valid values: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca
     certificateAuthority: fileca
     # kms_resource: gcpkms://....
@@ -31,20 +33,36 @@ server:
   service:
     type: ClusterIP
     ports:
-      - name: 5555-tcp
+      - name: http
         port: 80
         protocol: TCP
         targetPort: 5555
+      - name: grpc
+        port: 5554
+        protocol: TCP
+        targetPort: 5554
       - name: 2112-tcp
         port: 2112
         protocol: TCP
         targetPort: 2112
   ingress:
-    enabled: true
-    annotations: {}
-    hosts:
-      - path: /
-    tls: []
+    http:
+      enabled: true
+      annotations: {}
+      hosts:
+        - path: /
+      tls: []
+    grpc:
+      enabled: false
+      annotations:
+        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+      hosts:
+        - host: fulcio.localhost
+          path: /dev.sigstore.fulcio.v2.CA
+      tls:
+        - secretName: fulcio-grpc-ingress-tls
+          hosts:
+            - fulcio.localhost
   securityContext:
     runAsNonRoot: true
 createcerts:
