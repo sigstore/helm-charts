@@ -7,21 +7,32 @@
     "default": {},
     "examples": [
         {
+            "commonNodeSelector": {},
+            "commonTolerations": [],
             "cosign": {
+                "cosignPub": "",
                 "secretKeyRef": {
                     "name": ""
-                },
-                "cosignPub": ""
+                }
             },
-            "webhook": {
-                "name": "webhook",
-                "image": {
-                    "repository": "gcr.io/projectsigstore/cosigned",
-                    "version": "sha256:18c7db5051c0d5ac147b1785567ef647f23f7949ae5858776561cfc9cd8cc4b2",
-                    "pullPolicy": "IfNotPresent"
-                },
+            "policywebhook": {
                 "env": {},
                 "extraArgs": {},
+                "image": {
+                    "pullPolicy": "IfNotPresent",
+                    "repository": "gcr.io/projectsigstore/policy-webhook",
+                    "version": "sha256:59fd679d6629fbfa99b4413771dca16cb7891b0a91dd386dc46ea9fac46bcfbc"
+                },
+                "podSecurityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "capabilities": {
+                        "drop": [
+                            "all"
+                        ]
+                    },
+                    "readOnlyRootFilesystem": true,
+                    "runAsNonRoot": true
+                },
                 "resources": {
                     "limits": {
                         "cpu": "100m",
@@ -36,34 +47,97 @@
                     "enabled": false,
                     "runAsUser": 65532
                 },
+                "service": {
+                    "annotations": {},
+                    "port": 443,
+                    "type": "ClusterIP"
+                },
+                "serviceAccount": {
+                    "annotations": {}
+                }
+            },
+            "serviceMonitor": {
+                "enabled": false
+            },
+            "webhook": {
+                "env": {},
+                "extraArgs": {},
+                "image": {
+                    "pullPolicy": "IfNotPresent",
+                    "repository": "gcr.io/projectsigstore/cosigned",
+                    "version": "sha256:766698b7c472ee4c37133a92203def72c90c3c49e2b334130e6e3a100254911e"
+                },
+                "name": "webhook",
                 "podSecurityContext": {
                     "allowPrivilegeEscalation": false,
-                    "readOnlyRootFilesystem": true,
-                    "runAsUser": 1000,
                     "capabilities": {
                         "drop": [
                             "all"
                         ]
+                    },
+                    "readOnlyRootFilesystem": true,
+                    "runAsUser": 1000
+                },
+                "resources": {
+                    "limits": {
+                        "cpu": "100m",
+                        "memory": "256Mi"
+                    },
+                    "requests": {
+                        "cpu": "100m",
+                        "memory": "128Mi"
                     }
                 },
-                "serviceAccount": {
-                    "annotations": {}
+                "securityContext": {
+                    "enabled": false,
+                    "runAsUser": 65532
                 },
                 "service": {
                     "annotations": {},
-                    "type": "ClusterIP",
-                    "port": 443
+                    "port": 443,
+                    "type": "ClusterIP"
+                },
+                "serviceAccount": {
+                    "annotations": {}
                 }
-            },
-            "commonNodeSelector": {},
-            "commonTolerations": [],
-            "serviceMonitor": {
-                "enabled": false
             }
         }
     ],
-    "required": [],
+    "required": [
+        "commonNodeSelector",
+        "commonTolerations",
+        "cosign",
+        "policywebhook",
+        "serviceMonitor",
+        "webhook"
+    ],
     "properties": {
+        "commonNodeSelector": {
+            "$id": "#/properties/commonNodeSelector",
+            "type": "object",
+            "title": "The commonNodeSelector schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {}
+            ],
+            "required": [],
+            "additionalProperties": true
+        },
+        "commonTolerations": {
+            "$id": "#/properties/commonTolerations",
+            "type": "array",
+            "title": "The commonTolerations schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "examples": [
+                []
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/commonTolerations/items"
+            }
+        },
         "cosign": {
             "$id": "#/properties/cosign",
             "type": "object",
@@ -72,14 +146,27 @@
             "default": {},
             "examples": [
                 {
+                    "cosignPub": "",
                     "secretKeyRef": {
                         "name": ""
-                    },
-                    "cosignPub": ""
+                    }
                 }
             ],
-            "required": [],
+            "required": [
+                "cosignPub",
+                "secretKeyRef"
+            ],
             "properties": {
+                "cosignPub": {
+                    "$id": "#/properties/cosign/properties/cosignPub",
+                    "type": "string",
+                    "title": "The cosignPub schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        ""
+                    ]
+                },
                 "secretKeyRef": {
                     "$id": "#/properties/cosign/properties/secretKeyRef",
                     "type": "object",
@@ -91,7 +178,9 @@
                             "name": ""
                         }
                     ],
-                    "required": [],
+                    "required": [
+                        "name"
+                    ],
                     "properties": {
                         "name": {
                             "$id": "#/properties/cosign/properties/secretKeyRef/properties/name",
@@ -105,36 +194,35 @@
                         }
                     },
                     "additionalProperties": true
-                },
-                "cosignPub": {
-                    "$id": "#/properties/cosign/properties/cosignPub",
-                    "type": "string",
-                    "title": "The cosignPub schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        ""
-                    ]
                 }
             },
             "additionalProperties": true
         },
-        "webhook": {
-            "$id": "#/properties/webhook",
+        "policywebhook": {
+            "$id": "#/properties/policywebhook",
             "type": "object",
-            "title": "The webhook schema",
+            "title": "The policywebhook schema",
             "description": "An explanation about the purpose of this instance.",
             "default": {},
             "examples": [
                 {
-                    "name": "webhook",
-                    "image": {
-                        "repository": "gcr.io/projectsigstore/cosigned",
-                        "version": "sha256:18c7db5051c0d5ac147b1785567ef647f23f7949ae5858776561cfc9cd8cc4b2",
-                        "pullPolicy": "IfNotPresent"
-                    },
                     "env": {},
                     "extraArgs": {},
+                    "image": {
+                        "pullPolicy": "IfNotPresent",
+                        "repository": "gcr.io/projectsigstore/policy-webhook",
+                        "version": "sha256:59fd679d6629fbfa99b4413771dca16cb7891b0a91dd386dc46ea9fac46bcfbc"
+                    },
+                    "podSecurityContext": {
+                        "allowPrivilegeEscalation": false,
+                        "capabilities": {
+                            "drop": [
+                                "all"
+                            ]
+                        },
+                        "readOnlyRootFilesystem": true,
+                        "runAsNonRoot": true
+                    },
                     "resources": {
                         "limits": {
                             "cpu": "100m",
@@ -149,75 +237,72 @@
                         "enabled": false,
                         "runAsUser": 65532
                     },
-                    "podSecurityContext": {
-                        "allowPrivilegeEscalation": false,
-                        "readOnlyRootFilesystem": true,
-                        "runAsUser": 1000,
-                        "capabilities": {
-                            "drop": [
-                                "all"
-                            ]
-                        }
+                    "service": {
+                        "annotations": {},
+                        "port": 443,
+                        "type": "ClusterIP"
                     },
                     "serviceAccount": {
                         "annotations": {}
-                    },
-                    "service": {
-                        "annotations": {},
-                        "type": "ClusterIP",
-                        "port": 443
                     }
                 }
             ],
-            "required": [],
+            "required": [
+                "env",
+                "extraArgs",
+                "image",
+                "podSecurityContext",
+                "resources",
+                "securityContext",
+                "service",
+                "serviceAccount"
+            ],
             "properties": {
-                "name": {
-                    "$id": "#/properties/webhook/properties/name",
-                    "type": "string",
-                    "title": "The name schema",
+                "env": {
+                    "$id": "#/properties/policywebhook/properties/env",
+                    "type": "object",
+                    "title": "The env schema",
                     "description": "An explanation about the purpose of this instance.",
-                    "default": "",
+                    "default": {},
                     "examples": [
-                        "webhook"
-                    ]
+                        {}
+                    ],
+                    "required": [],
+                    "additionalProperties": true
+                },
+                "extraArgs": {
+                    "$id": "#/properties/policywebhook/properties/extraArgs",
+                    "type": "object",
+                    "title": "The extraArgs schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {}
+                    ],
+                    "required": [],
+                    "additionalProperties": true
                 },
                 "image": {
-                    "$id": "#/properties/webhook/properties/image",
+                    "$id": "#/properties/policywebhook/properties/image",
                     "type": "object",
                     "title": "The image schema",
                     "description": "An explanation about the purpose of this instance.",
                     "default": {},
                     "examples": [
                         {
-                            "repository": "gcr.io/projectsigstore/cosigned",
-                            "version": "sha256:18c7db5051c0d5ac147b1785567ef647f23f7949ae5858776561cfc9cd8cc4b2",
-                            "pullPolicy": "IfNotPresent"
+                            "pullPolicy": "IfNotPresent",
+                            "repository": "gcr.io/projectsigstore/policy-webhook",
+                            "version": "sha256:59fd679d6629fbfa99b4413771dca16cb7891b0a91dd386dc46ea9fac46bcfbc"
                         }
                     ],
-                    "required": [],
+                    "required": [
+                        "pullPolicy",
+                        "repository",
+                        "version"
+                    ],
                     "properties": {
-                        "repository": {
-                            "$id": "#/properties/webhook/properties/image/properties/repository",
-                            "type": "string",
-                            "title": "The repository schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "gcr.io/projectsigstore/cosigned"
-                            ]
-                        },
-                        "version": {
-                            "$id": "#/properties/webhook/properties/image/properties/version",
-                            "type": "string",
-                            "title": "The version schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "sha256:18c7db5051c0d5ac147b1785567ef647f23f7949ae5858776561cfc9cd8cc4b2"
-                            ]
-                        },
                         "pullPolicy": {
-                            "$id": "#/properties/webhook/properties/image/properties/pullPolicy",
+                            "$id": "#/properties/policywebhook/properties/image/properties/pullPolicy",
                             "type": "string",
                             "title": "The pullPolicy schema",
                             "description": "An explanation about the purpose of this instance.",
@@ -225,10 +310,459 @@
                             "examples": [
                                 "IfNotPresent"
                             ]
+                        },
+                        "repository": {
+                            "$id": "#/properties/policywebhook/properties/image/properties/repository",
+                            "type": "string",
+                            "title": "The repository schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "gcr.io/projectsigstore/policy-webhook"
+                            ]
+                        },
+                        "version": {
+                            "$id": "#/properties/policywebhook/properties/image/properties/version",
+                            "type": "string",
+                            "title": "The version schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sha256:59fd679d6629fbfa99b4413771dca16cb7891b0a91dd386dc46ea9fac46bcfbc"
+                            ]
                         }
                     },
                     "additionalProperties": true
                 },
+                "podSecurityContext": {
+                    "$id": "#/properties/policywebhook/properties/podSecurityContext",
+                    "type": "object",
+                    "title": "The podSecurityContext schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "drop": [
+                                    "all"
+                                ]
+                            },
+                            "readOnlyRootFilesystem": true,
+                            "runAsNonRoot": true
+                        }
+                    ],
+                    "required": [
+                        "allowPrivilegeEscalation",
+                        "capabilities",
+                        "readOnlyRootFilesystem",
+                        "runAsNonRoot"
+                    ],
+                    "properties": {
+                        "allowPrivilegeEscalation": {
+                            "$id": "#/properties/policywebhook/properties/podSecurityContext/properties/allowPrivilegeEscalation",
+                            "type": "boolean",
+                            "title": "The allowPrivilegeEscalation schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "capabilities": {
+                            "$id": "#/properties/policywebhook/properties/podSecurityContext/properties/capabilities",
+                            "type": "object",
+                            "title": "The capabilities schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "drop": [
+                                        "all"
+                                    ]
+                                }
+                            ],
+                            "required": [
+                                "drop"
+                            ],
+                            "properties": {
+                                "drop": {
+                                    "$id": "#/properties/policywebhook/properties/podSecurityContext/properties/capabilities/properties/drop",
+                                    "type": "array",
+                                    "title": "The drop schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": [],
+                                    "examples": [
+                                        [
+                                            "all"
+                                        ]
+                                    ],
+                                    "additionalItems": true,
+                                    "items": {
+                                        "$id": "#/properties/policywebhook/properties/podSecurityContext/properties/capabilities/properties/drop/items",
+                                        "anyOf": [
+                                            {
+                                                "$id": "#/properties/policywebhook/properties/podSecurityContext/properties/capabilities/properties/drop/items/anyOf/0",
+                                                "type": "string",
+                                                "title": "The first anyOf schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "all"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "additionalProperties": true
+                        },
+                        "readOnlyRootFilesystem": {
+                            "$id": "#/properties/policywebhook/properties/podSecurityContext/properties/readOnlyRootFilesystem",
+                            "type": "boolean",
+                            "title": "The readOnlyRootFilesystem schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "runAsNonRoot": {
+                            "$id": "#/properties/policywebhook/properties/podSecurityContext/properties/runAsNonRoot",
+                            "type": "boolean",
+                            "title": "The runAsNonRoot schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "resources": {
+                    "$id": "#/properties/policywebhook/properties/resources",
+                    "type": "object",
+                    "title": "The resources schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "limits": {
+                                "cpu": "100m",
+                                "memory": "256Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "128Mi"
+                            }
+                        }
+                    ],
+                    "required": [
+                        "limits",
+                        "requests"
+                    ],
+                    "properties": {
+                        "limits": {
+                            "$id": "#/properties/policywebhook/properties/resources/properties/limits",
+                            "type": "object",
+                            "title": "The limits schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "cpu": "100m",
+                                    "memory": "256Mi"
+                                }
+                            ],
+                            "required": [
+                                "cpu",
+                                "memory"
+                            ],
+                            "properties": {
+                                "cpu": {
+                                    "$id": "#/properties/policywebhook/properties/resources/properties/limits/properties/cpu",
+                                    "type": "string",
+                                    "title": "The cpu schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "100m"
+                                    ]
+                                },
+                                "memory": {
+                                    "$id": "#/properties/policywebhook/properties/resources/properties/limits/properties/memory",
+                                    "type": "string",
+                                    "title": "The memory schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "256Mi"
+                                    ]
+                                }
+                            },
+                            "additionalProperties": true
+                        },
+                        "requests": {
+                            "$id": "#/properties/policywebhook/properties/resources/properties/requests",
+                            "type": "object",
+                            "title": "The requests schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "cpu": "100m",
+                                    "memory": "128Mi"
+                                }
+                            ],
+                            "required": [
+                                "cpu",
+                                "memory"
+                            ],
+                            "properties": {
+                                "cpu": {
+                                    "$id": "#/properties/policywebhook/properties/resources/properties/requests/properties/cpu",
+                                    "type": "string",
+                                    "title": "The cpu schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "100m"
+                                    ]
+                                },
+                                "memory": {
+                                    "$id": "#/properties/policywebhook/properties/resources/properties/requests/properties/memory",
+                                    "type": "string",
+                                    "title": "The memory schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "128Mi"
+                                    ]
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "securityContext": {
+                    "$id": "#/properties/policywebhook/properties/securityContext",
+                    "type": "object",
+                    "title": "The securityContext schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "enabled": false,
+                            "runAsUser": 65532
+                        }
+                    ],
+                    "required": [
+                        "enabled",
+                        "runAsUser"
+                    ],
+                    "properties": {
+                        "enabled": {
+                            "$id": "#/properties/policywebhook/properties/securityContext/properties/enabled",
+                            "type": "boolean",
+                            "title": "The enabled schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "runAsUser": {
+                            "$id": "#/properties/policywebhook/properties/securityContext/properties/runAsUser",
+                            "type": "integer",
+                            "title": "The runAsUser schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                65532
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "service": {
+                    "$id": "#/properties/policywebhook/properties/service",
+                    "type": "object",
+                    "title": "The service schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "annotations": {},
+                            "port": 443,
+                            "type": "ClusterIP"
+                        }
+                    ],
+                    "required": [
+                        "annotations",
+                        "port",
+                        "type"
+                    ],
+                    "properties": {
+                        "annotations": {
+                            "$id": "#/properties/policywebhook/properties/service/properties/annotations",
+                            "type": "object",
+                            "title": "The annotations schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {}
+                            ],
+                            "required": [],
+                            "additionalProperties": true
+                        },
+                        "port": {
+                            "$id": "#/properties/policywebhook/properties/service/properties/port",
+                            "type": "integer",
+                            "title": "The port schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                443
+                            ]
+                        },
+                        "type": {
+                            "$id": "#/properties/policywebhook/properties/service/properties/type",
+                            "type": "string",
+                            "title": "The type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "ClusterIP"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "serviceAccount": {
+                    "$id": "#/properties/policywebhook/properties/serviceAccount",
+                    "type": "object",
+                    "title": "The serviceAccount schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "annotations": {}
+                        }
+                    ],
+                    "required": [
+                        "annotations"
+                    ],
+                    "properties": {
+                        "annotations": {
+                            "$id": "#/properties/policywebhook/properties/serviceAccount/properties/annotations",
+                            "type": "object",
+                            "title": "The annotations schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {}
+                            ],
+                            "required": [],
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "serviceMonitor": {
+            "$id": "#/properties/serviceMonitor",
+            "type": "object",
+            "title": "The serviceMonitor schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "enabled": false
+                }
+            ],
+            "required": [
+                "enabled"
+            ],
+            "properties": {
+                "enabled": {
+                    "$id": "#/properties/serviceMonitor/properties/enabled",
+                    "type": "boolean",
+                    "title": "The enabled schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        false
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "webhook": {
+            "$id": "#/properties/webhook",
+            "type": "object",
+            "title": "The webhook schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "env": {},
+                    "extraArgs": {},
+                    "image": {
+                        "pullPolicy": "IfNotPresent",
+                        "repository": "gcr.io/projectsigstore/cosigned",
+                        "version": "sha256:766698b7c472ee4c37133a92203def72c90c3c49e2b334130e6e3a100254911e"
+                    },
+                    "name": "webhook",
+                    "podSecurityContext": {
+                        "allowPrivilegeEscalation": false,
+                        "capabilities": {
+                            "drop": [
+                                "all"
+                            ]
+                        },
+                        "readOnlyRootFilesystem": true,
+                        "runAsUser": 1000
+                    },
+                    "resources": {
+                        "limits": {
+                            "cpu": "100m",
+                            "memory": "256Mi"
+                        },
+                        "requests": {
+                            "cpu": "100m",
+                            "memory": "128Mi"
+                        }
+                    },
+                    "securityContext": {
+                        "enabled": false,
+                        "runAsUser": 65532
+                    },
+                    "service": {
+                        "annotations": {},
+                        "port": 443,
+                        "type": "ClusterIP"
+                    },
+                    "serviceAccount": {
+                        "annotations": {}
+                    }
+                }
+            ],
+            "required": [
+                "env",
+                "extraArgs",
+                "image",
+                "name",
+                "podSecurityContext",
+                "resources",
+                "securityContext",
+                "service",
+                "serviceAccount"
+            ],
+            "properties": {
                 "env": {
                     "$id": "#/properties/webhook/properties/env",
                     "type": "object",
@@ -253,6 +787,174 @@
                     "required": [],
                     "additionalProperties": true
                 },
+                "image": {
+                    "$id": "#/properties/webhook/properties/image",
+                    "type": "object",
+                    "title": "The image schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "pullPolicy": "IfNotPresent",
+                            "repository": "gcr.io/projectsigstore/cosigned",
+                            "version": "sha256:766698b7c472ee4c37133a92203def72c90c3c49e2b334130e6e3a100254911e"
+                        }
+                    ],
+                    "required": [
+                        "pullPolicy",
+                        "repository",
+                        "version"
+                    ],
+                    "properties": {
+                        "pullPolicy": {
+                            "$id": "#/properties/webhook/properties/image/properties/pullPolicy",
+                            "type": "string",
+                            "title": "The pullPolicy schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        },
+                        "repository": {
+                            "$id": "#/properties/webhook/properties/image/properties/repository",
+                            "type": "string",
+                            "title": "The repository schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "gcr.io/projectsigstore/cosigned"
+                            ]
+                        },
+                        "version": {
+                            "$id": "#/properties/webhook/properties/image/properties/version",
+                            "type": "string",
+                            "title": "The version schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "sha256:766698b7c472ee4c37133a92203def72c90c3c49e2b334130e6e3a100254911e"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "name": {
+                    "$id": "#/properties/webhook/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "webhook"
+                    ]
+                },
+                "podSecurityContext": {
+                    "$id": "#/properties/webhook/properties/podSecurityContext",
+                    "type": "object",
+                    "title": "The podSecurityContext schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "drop": [
+                                    "all"
+                                ]
+                            },
+                            "readOnlyRootFilesystem": true,
+                            "runAsUser": 1000
+                        }
+                    ],
+                    "required": [
+                        "allowPrivilegeEscalation",
+                        "capabilities",
+                        "readOnlyRootFilesystem",
+                        "runAsUser"
+                    ],
+                    "properties": {
+                        "allowPrivilegeEscalation": {
+                            "$id": "#/properties/webhook/properties/podSecurityContext/properties/allowPrivilegeEscalation",
+                            "type": "boolean",
+                            "title": "The allowPrivilegeEscalation schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "capabilities": {
+                            "$id": "#/properties/webhook/properties/podSecurityContext/properties/capabilities",
+                            "type": "object",
+                            "title": "The capabilities schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "drop": [
+                                        "all"
+                                    ]
+                                }
+                            ],
+                            "required": [
+                                "drop"
+                            ],
+                            "properties": {
+                                "drop": {
+                                    "$id": "#/properties/webhook/properties/podSecurityContext/properties/capabilities/properties/drop",
+                                    "type": "array",
+                                    "title": "The drop schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": [],
+                                    "examples": [
+                                        [
+                                            "all"
+                                        ]
+                                    ],
+                                    "additionalItems": true,
+                                    "items": {
+                                        "$id": "#/properties/webhook/properties/podSecurityContext/properties/capabilities/properties/drop/items",
+                                        "anyOf": [
+                                            {
+                                                "$id": "#/properties/webhook/properties/podSecurityContext/properties/capabilities/properties/drop/items/anyOf/0",
+                                                "type": "string",
+                                                "title": "The first anyOf schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "all"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "additionalProperties": true
+                        },
+                        "readOnlyRootFilesystem": {
+                            "$id": "#/properties/webhook/properties/podSecurityContext/properties/readOnlyRootFilesystem",
+                            "type": "boolean",
+                            "title": "The readOnlyRootFilesystem schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "runAsUser": {
+                            "$id": "#/properties/webhook/properties/podSecurityContext/properties/runAsUser",
+                            "type": "integer",
+                            "title": "The runAsUser schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                1000
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
                 "resources": {
                     "$id": "#/properties/webhook/properties/resources",
                     "type": "object",
@@ -271,7 +973,10 @@
                             }
                         }
                     ],
-                    "required": [],
+                    "required": [
+                        "limits",
+                        "requests"
+                    ],
                     "properties": {
                         "limits": {
                             "$id": "#/properties/webhook/properties/resources/properties/limits",
@@ -285,7 +990,10 @@
                                     "memory": "256Mi"
                                 }
                             ],
-                            "required": [],
+                            "required": [
+                                "cpu",
+                                "memory"
+                            ],
                             "properties": {
                                 "cpu": {
                                     "$id": "#/properties/webhook/properties/resources/properties/limits/properties/cpu",
@@ -322,7 +1030,10 @@
                                     "memory": "128Mi"
                                 }
                             ],
-                            "required": [],
+                            "required": [
+                                "cpu",
+                                "memory"
+                            ],
                             "properties": {
                                 "cpu": {
                                     "$id": "#/properties/webhook/properties/resources/properties/requests/properties/cpu",
@@ -362,7 +1073,10 @@
                             "runAsUser": 65532
                         }
                     ],
-                    "required": [],
+                    "required": [
+                        "enabled",
+                        "runAsUser"
+                    ],
                     "properties": {
                         "enabled": {
                             "$id": "#/properties/webhook/properties/securityContext/properties/enabled",
@@ -387,101 +1101,56 @@
                     },
                     "additionalProperties": true
                 },
-                "podSecurityContext": {
-                    "$id": "#/properties/webhook/properties/podSecurityContext",
+                "service": {
+                    "$id": "#/properties/webhook/properties/service",
                     "type": "object",
-                    "title": "The podSecurityContext schema",
+                    "title": "The service schema",
                     "description": "An explanation about the purpose of this instance.",
                     "default": {},
                     "examples": [
                         {
-                            "allowPrivilegeEscalation": false,
-                            "readOnlyRootFilesystem": true,
-                            "runAsUser": 1000,
-                            "capabilities": {
-                                "drop": [
-                                    "all"
-                                ]
-                            }
+                            "annotations": {},
+                            "port": 443,
+                            "type": "ClusterIP"
                         }
                     ],
-                    "required": [],
+                    "required": [
+                        "annotations",
+                        "port",
+                        "type"
+                    ],
                     "properties": {
-                        "allowPrivilegeEscalation": {
-                            "$id": "#/properties/webhook/properties/podSecurityContext/properties/allowPrivilegeEscalation",
-                            "type": "boolean",
-                            "title": "The allowPrivilegeEscalation schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                false
-                            ]
-                        },
-                        "readOnlyRootFilesystem": {
-                            "$id": "#/properties/webhook/properties/podSecurityContext/properties/readOnlyRootFilesystem",
-                            "type": "boolean",
-                            "title": "The readOnlyRootFilesystem schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "runAsUser": {
-                            "$id": "#/properties/webhook/properties/podSecurityContext/properties/runAsUser",
-                            "type": "integer",
-                            "title": "The runAsUser schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                1000
-                            ]
-                        },
-                        "capabilities": {
-                            "$id": "#/properties/webhook/properties/podSecurityContext/properties/capabilities",
+                        "annotations": {
+                            "$id": "#/properties/webhook/properties/service/properties/annotations",
                             "type": "object",
-                            "title": "The capabilities schema",
+                            "title": "The annotations schema",
                             "description": "An explanation about the purpose of this instance.",
                             "default": {},
                             "examples": [
-                                {
-                                    "drop": [
-                                        "all"
-                                    ]
-                                }
+                                {}
                             ],
                             "required": [],
-                            "properties": {
-                                "drop": {
-                                    "$id": "#/properties/webhook/properties/podSecurityContext/properties/capabilities/properties/drop",
-                                    "type": "array",
-                                    "title": "The drop schema",
-                                    "description": "An explanation about the purpose of this instance.",
-                                    "default": [],
-                                    "examples": [
-                                        [
-                                            "all"
-                                        ]
-                                    ],
-                                    "additionalItems": true,
-                                    "items": {
-                                        "$id": "#/properties/webhook/properties/podSecurityContext/properties/capabilities/properties/drop/items",
-                                        "anyOf": [
-                                            {
-                                                "$id": "#/properties/webhook/properties/podSecurityContext/properties/capabilities/properties/drop/items/anyOf/0",
-                                                "type": "string",
-                                                "title": "The first anyOf schema",
-                                                "description": "An explanation about the purpose of this instance.",
-                                                "default": "",
-                                                "examples": [
-                                                    "all"
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                }
-                            },
                             "additionalProperties": true
+                        },
+                        "port": {
+                            "$id": "#/properties/webhook/properties/service/properties/port",
+                            "type": "integer",
+                            "title": "The port schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                443
+                            ]
+                        },
+                        "type": {
+                            "$id": "#/properties/webhook/properties/service/properties/type",
+                            "type": "string",
+                            "title": "The type schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "ClusterIP"
+                            ]
                         }
                     },
                     "additionalProperties": true
@@ -497,7 +1166,9 @@
                             "annotations": {}
                         }
                     ],
-                    "required": [],
+                    "required": [
+                        "annotations"
+                    ],
                     "properties": {
                         "annotations": {
                             "$id": "#/properties/webhook/properties/serviceAccount/properties/annotations",
@@ -513,108 +1184,6 @@
                         }
                     },
                     "additionalProperties": true
-                },
-                "service": {
-                    "$id": "#/properties/webhook/properties/service",
-                    "type": "object",
-                    "title": "The service schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "annotations": {},
-                            "type": "ClusterIP",
-                            "port": 443
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "annotations": {
-                            "$id": "#/properties/webhook/properties/service/properties/annotations",
-                            "type": "object",
-                            "title": "The annotations schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": {},
-                            "examples": [
-                                {}
-                            ],
-                            "required": [],
-                            "additionalProperties": true
-                        },
-                        "type": {
-                            "$id": "#/properties/webhook/properties/service/properties/type",
-                            "type": "string",
-                            "title": "The type schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "ClusterIP"
-                            ]
-                        },
-                        "port": {
-                            "$id": "#/properties/webhook/properties/service/properties/port",
-                            "type": "integer",
-                            "title": "The port schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                443
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                }
-            },
-            "additionalProperties": true
-        },
-        "commonNodeSelector": {
-            "$id": "#/properties/commonNodeSelector",
-            "type": "object",
-            "title": "The commonNodeSelector schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {}
-            ],
-            "required": [],
-            "additionalProperties": true
-        },
-        "commonTolerations": {
-            "$id": "#/properties/commonTolerations",
-            "type": "array",
-            "title": "The commonTolerations schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": [],
-            "examples": [
-                []
-            ],
-            "additionalItems": true,
-            "items": {
-                "$id": "#/properties/commonTolerations/items"
-            }
-        },
-        "serviceMonitor": {
-            "$id": "#/properties/serviceMonitor",
-            "type": "object",
-            "title": "The serviceMonitor schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {
-                    "enabled": false
-                }
-            ],
-            "required": [],
-            "properties": {
-                "enabled": {
-                    "$id": "#/properties/serviceMonitor/properties/enabled",
-                    "type": "boolean",
-                    "title": "The enabled schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": false,
-                    "examples": [
-                        false
-                    ]
                 }
             },
             "additionalProperties": true
