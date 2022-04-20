@@ -32,7 +32,10 @@ rules:
   - apiGroups: ["admissionregistration.k8s.io"]
     resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
     verbs: ["get", "update"]
-    resourceNames: [ {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName | quote }}, "validating.clusterimagepolicy.sigstore.dev", "defaulting.clusterimagepolicy.sigstore.dev"]
+    resourceNames:
+    - {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName | quote }}
+    - {{ required "A valid policywebhook.webhookNames.defaulting is required" .Values.policywebhook.webhookNames.defaulting | quote }}
+    - {{ required "A valid policywebhook.webhookNames.validating is required" .Values.policywebhook.webhookNames.validating | quote }}
 
   - apiGroups: [""]
     resources: ["namespaces"]
