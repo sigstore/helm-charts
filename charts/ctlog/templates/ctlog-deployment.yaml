@@ -55,8 +55,16 @@ spec:
               - key: rootca
                 path: roots.pem
         - name: config
+          {{- if .Values.server.config.secret.enabled }}
+          secret:
+            secretName: {{ .Values.server.config.secret.name }}
+            items:
+              - key: config
+                path: ct_server.cfg
+          {{ else }}
           configMap:
             name: {{ template "ctlog.config" . }}
             items:
               - key: config
                 path: ct_server.cfg
+          {{- end }}
