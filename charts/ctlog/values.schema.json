@@ -37,6 +37,12 @@
                             "targetPort": 6962
                         }
                     ]
+                },
+                "config": {
+                    "secret": {
+                        "enabled": false,
+                        "name": "ctlog-config"
+                    }
                 }
             },
             "createtree": {
