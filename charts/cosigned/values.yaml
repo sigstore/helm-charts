@@ -3,6 +3,7 @@ cosign:
     name: ""
   # add the values in base64 encoded
   cosignPub: ""
+  webhookName: "cosigned.sigstore.dev"
 
 policywebhook:
   image:
@@ -34,6 +35,9 @@ policywebhook:
     annotations: {}
     type: ClusterIP
     port: 443
+  webhookNames:
+    defaulting: "defaulting.clusterimagepolicy.sigstore.dev"
+    validating: "validating.clusterimagepolicy.sigstore.dev"
 
 webhook:
   name: webhook

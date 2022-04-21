@@ -13,7 +13,8 @@
                 "cosignPub": "",
                 "secretKeyRef": {
                     "name": ""
-                }
+                },
+                "webhookName": "cosigned.sigstore.dev"
             },
             "policywebhook": {
                 "env": {},
@@ -54,6 +55,10 @@
                 },
                 "serviceAccount": {
                     "annotations": {}
+                },
+                "webhookNames": {
+                    "defaulting": "defaulting.clusterimagepolicy.sigstore.dev",
+                    "validating": "validating.clusterimagepolicy.sigstore.dev"
                 }
             },
             "serviceMonitor": {
@@ -149,12 +154,14 @@
                     "cosignPub": "",
                     "secretKeyRef": {
                         "name": ""
-                    }
+                    },
+                    "webhookName": "cosigned.sigstore.dev"
                 }
             ],
             "required": [
                 "cosignPub",
-                "secretKeyRef"
+                "secretKeyRef",
+                "webhookName"
             ],
             "properties": {
                 "cosignPub": {
@@ -194,6 +201,16 @@
                         }
                     },
                     "additionalProperties": true
+                },
+                "webhookName": {
+                    "$id": "#/properties/cosign/properties/webhookName",
+                    "type": "string",
+                    "title": "The webhookName schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "cosigned.sigstore.dev"
+                    ]
                 }
             },
             "additionalProperties": true
@@ -244,6 +261,10 @@
                     },
                     "serviceAccount": {
                         "annotations": {}
+                    },
+                    "webhookNames": {
+                        "defaulting": "defaulting.clusterimagepolicy.sigstore.dev",
+                        "validating": "validating.clusterimagepolicy.sigstore.dev"
                     }
                 }
             ],
@@ -255,7 +276,8 @@
                 "resources",
                 "securityContext",
                 "service",
-                "serviceAccount"
+                "serviceAccount",
+                "webhookNames"
             ],
             "properties": {
                 "env": {
@@ -666,6 +688,46 @@
                             ],
                             "required": [],
                             "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "webhookNames": {
+                    "$id": "#/properties/policywebhook/properties/webhookNames",
+                    "type": "object",
+                    "title": "The webhookNames schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "defaulting": "defaulting.clusterimagepolicy.sigstore.dev",
+                            "validating": "validating.clusterimagepolicy.sigstore.dev"
+                        }
+                    ],
+                    "required": [
+                        "defaulting",
+                        "validating"
+                    ],
+                    "properties": {
+                        "defaulting": {
+                            "$id": "#/properties/policywebhook/properties/webhookNames/properties/defaulting",
+                            "type": "string",
+                            "title": "The defaulting schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "defaulting.clusterimagepolicy.sigstore.dev"
+                            ]
+                        },
+                        "validating": {
+                            "$id": "#/properties/policywebhook/properties/webhookNames/properties/validating",
+                            "type": "string",
+                            "title": "The validating schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "validating.clusterimagepolicy.sigstore.dev"
+                            ]
                         }
                     },
                     "additionalProperties": true

@@ -16,7 +16,7 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
-  name: defaulting.clusterimagepolicy.sigstore.dev
+  name: {{ required "A valid policywebhook.webhookNames.defaulting is required" .Values.policywebhook.webhookNames.defaulting }}
 webhooks:
   - admissionReviewVersions:
       - v1
@@ -26,13 +26,13 @@ webhooks:
         namespace: {{ .Release.Namespace }}
     failurePolicy: Fail
     matchPolicy: Equivalent
-    name: defaulting.clusterimagepolicy.sigstore.dev
+    name: {{ required "A valid policywebhook.webhookNames.defaulting is required" .Values.policywebhook.webhookNames.defaulting }}
     sideEffects: None
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: validating.clusterimagepolicy.sigstore.dev
+  name: {{ required "A valid policywebhook.webhookNames.validating is required" .Values.policywebhook.webhookNames.validating }}
 webhooks:
   - admissionReviewVersions:
       - v1
@@ -42,5 +42,5 @@ webhooks:
         namespace: {{ .Release.Namespace }}
     failurePolicy: Fail
     matchPolicy: Equivalent
-    name: validating.clusterimagepolicy.sigstore.dev
+    name: {{ required "A valid policywebhook.webhookNames.defaulting is required" .Values.policywebhook.webhookNames.defaulting }}
     sideEffects: None

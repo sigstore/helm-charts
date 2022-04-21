@@ -25,12 +25,12 @@ spec:
   selector:
     matchLabels:
       {{- include "cosigned.selectorLabels" . | nindent 6 }}
-      control-plane: {{ template "cosigned.fullname" . }}-policy-webhook      
+      control-plane: {{ template "cosigned.fullname" . }}-policy-webhook
   template:
     metadata:
       labels:
         {{- include "cosigned.selectorLabels" . | nindent 8 }}
-        control-plane: {{ template "cosigned.fullname" . }}-policy-webhook        
+        control-plane: {{ template "cosigned.fullname" . }}-policy-webhook
     spec:
       nodeSelector:
         {{- toYaml .Values.commonNodeSelector | nindent 8 }}
@@ -56,6 +56,10 @@ spec:
         image: "{{ template "cosigned.image" .Values.policywebhook.image }}"
         imagePullPolicy: "{{ .Values.policywebhook.image.pullPolicy }}"
         args:
+        {{- if semverCompare ">= 1.8-0" .Chart.AppVersion }}
+        - --mutating-webhook-name={{ required "A valid policywebhook.webhookNames.defaulting is required" .Values.policywebhook.webhookNames.defaulting }}
+        - --validating-webhook-name={{ required "A valid policywebhook.webhookNames.validating is required" .Values.policywebhook.webhookNames.validating }}
+        {{- end }}
         {{- range $key, $value := .Values.policywebhook.extraArgs }}
         - -{{ $key }}={{ $value }}
         {{- end }}
@@ -69,7 +73,7 @@ spec:
         - name: "{{ $key }}"
           value: "{{ $value }}"
 {{- end }}
-{{- end }}        
+{{- end }}
         - name: SYSTEM_NAMESPACE
           valueFrom:
             fieldRef:
@@ -88,7 +92,7 @@ spec:
           protocol: TCP
         - containerPort: 9090
           name: metrics
-          protocol: TCP          
+          protocol: TCP
         securityContext:
           {{- with .Values.webhook.podSecurityContext }}
           {{- toYaml . | nindent 10}}
@@ -112,7 +116,7 @@ spec:
       # Our webhook should gracefully terminate by lame ducking first, set this to a sufficiently
       # high value that we respect whatever value it has configured for the lame duck grace period.
       terminationGracePeriodSeconds: 300
-      
+
       {{- if .Values.policywebhook.securityContext.enabled }}
       securityContext:
         {{- with .Values.policywebhook.securityContext }}
