@@ -30,7 +30,8 @@ spec:
 {{- include "fulcio.containerPorts" .Values.server.service.ports | indent 12 }}
           args:
             - "serve"
-            - "--port={{ .Values.server.args.port}}"
+            - "--port={{ .Values.server.args.port }}"
+            - "--grpc-port={{ .Values.server.args.grpcPort }}"
             - "--ca={{ .Values.server.args.certificateAuthority }}"
             {{- if eq .Values.server.args.certificateAuthority "googleca" }}
             - "--gcp_private_ca_parent={{ .Values.server.args.gcp_private_ca_parent }}"

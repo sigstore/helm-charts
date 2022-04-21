@@ -6,6 +6,35 @@ The following components are also included as either direct components or throug
 
 * ctlog
 
+## *NOTE* 0.3.0 NOT backwards compatible
+
+In version 0.3.0, we will be introducing a second ingress in support of the new gRPC endpoint as introduced in v0.4.0 of Fulcio.
+
+The change in particular is the structure of the ingress values.
+
+Previously
+```shell
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - host: fulcio.localhost
+        path: /
+```
+
+Now
+```shell
+server:
+  ingress:
+    http:
+      enabled: true
+      hosts:
+        - host: fulcio.localhost
+          path: /
+    grpc:
+      enabled: false
+```
+
 ## Quick Installation
 
 ```shell
