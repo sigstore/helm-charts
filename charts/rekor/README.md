@@ -91,6 +91,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.attestation_storage.persistence.storageClass | string | `nil` |  |
 | server.attestation_storage.persistence.subPath | string | `""` |  |
 | server.config.key | string | `"treeID"` |  |
+| server.config.treeID | string | `""` |  |
 | server.deploymentAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
 | server.deploymentAnnotations."prometheus.io/port" | string | `"2112"` |  |
 | server.deploymentAnnotations."prometheus.io/scrape" | string | `"true"` |  |

@@ -111,6 +111,7 @@ server:
     runAsUser: 65533
   config:
     key: treeID
+    treeID: ""
   retrieve_api:
     enabled: true
   attestation_storage:
