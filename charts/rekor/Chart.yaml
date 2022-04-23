@@ -4,7 +4,7 @@ description: Part of the sigstore project, Rekor is a timestamping server and tr
 
 type: application
 
-version: 0.2.28
+version: 0.2.29
 appVersion: 0.6.0
 
 keywords:

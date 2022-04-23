@@ -137,7 +137,8 @@
                     }
                 },
                 "config": {
-                    "key": "treeID"
+                    "key": "treeID",
+                    "treeID": ""
                 },
                 "retrieve_api": {
                     "enabled": true
