@@ -44,6 +44,7 @@ server:
   extraArgs: []
   securityContext:
     runAsNonRoot: true
+    runAsUser: 65533
 createtree:
   enabled: true
   name: createtree
@@ -60,6 +61,7 @@ createtree:
     mountToken: true
   securityContext:
     runAsNonRoot: true
+    runAsUser: 65533
 createctconfig:
   enabled: true
   replicaCount: 1
@@ -78,6 +80,7 @@ createctconfig:
     mountToken: true
   securityContext:
     runAsNonRoot: true
+    runAsUser: 65533
 trillian:
   namespace: trillian-system
   logServer:
