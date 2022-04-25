@@ -6,7 +6,6 @@ fulcio:
     name: fulcio-system
     create: true
   forceNamespace: fulcio-system
-  fullnameOverride: fulcio
   server:
     fullnameOverride: fulcio-server
   createcerts:
