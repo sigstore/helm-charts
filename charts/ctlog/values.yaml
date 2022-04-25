@@ -11,8 +11,8 @@ server:
     registry: ghcr.io
     repository: sigstore/scaffolding/ct_server
     pullPolicy: IfNotPresent
-    # v0.2.5
-    version: "sha256:1c3a8d959ce6e45593be36c38d3a16ac5a8a5e63bc66f042dbc25507bc0ca223"
+    # v0.2.9
+    version: "sha256:6f5ec5dbff8f886b3b56ff206b8e836fe564bbd64a1436ac8c5e7ae341163e24"
   serviceAccount:
     create: true
     name: ""
@@ -52,8 +52,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.2.5
-    version: "sha256:f20a73f4c581c0b13daf9ede832b5b6b838acfeb04fe5f2690722c2146d9d8d7"
+    # v0.2.9
+    version: "sha256:b8bbd91bafb1312719ae0d1a59c1deec3c90e74d5f91a16c419841f786b8fc96"
   serviceAccount:
     create: true
     name: ""
@@ -70,8 +70,8 @@ createctconfig:
     registry: ghcr.io
     repository: sigstore/scaffolding/createctconfig
     pullPolicy: IfNotPresent
-    # v0.2.5
-    version: "sha256:be8658e2041099a8d5feccda8a8daa2f4cfaf98c15fc310b5fd83d327e38c51e"
+    # v0.2.9
+    version: "sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2"
   fulcioURL: "http://fulcio-server.fulcio-system.svc"
   serviceAccount:
     create: true
