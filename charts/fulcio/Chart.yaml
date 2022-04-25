@@ -4,7 +4,7 @@ description: Fulcio
 
 type: application
 
-version: 0.3.2
+version: 0.3.1
 
 keywords:
   - security
@@ -17,7 +17,7 @@ maintainers:
 
 dependencies:
   - name: ctlog
-    version: 0.2.13
+    version: 0.2.9
     repository: https://sigstore.github.io/helm-charts
     condition: ctlog.enabled
 
@@ -25,6 +25,6 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: fulcio
-      image: gcr.io/projectsigstore/fulcio@sha256:ddaaf5af3ca82b628a716ea8c0dc5f2038c429146d4738f3e6b5524794b28d12
+      image: gcr.io/projectsigstore/fulcio@sha256:4bdb610d80e8ab7decb6e437ce5327568b91e98715a2aa653f51b075447510a7
     - name: createcerts
-      image: ghcr.io/sigstore/scaffolding/createcerts@sha256:063c47d092ed1ce116ad06b3e62169abb250d959ba3eb466d7f25cc11124287a
+      image: ghcr.io/sigstore/scaffolding/createcerts@sha256:720ef9e3e80e0b9a5fb30e6650583351b02ff6a668937f64c9ef3c8e421b24c5
