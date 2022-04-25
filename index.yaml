@@ -400,6 +400,30 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: ct_server
+          image: ghcr.io/sigstore/scaffolding/ct_server@sha256:6f5ec5dbff8f886b3b56ff206b8e836fe564bbd64a1436ac8c5e7ae341163e24
+        - name: createctconfig
+          image: ghcr.io/sigstore/scaffolding/createctconfig@sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2
+        - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree@sha256:b8bbd91bafb1312719ae0d1a59c1deec3c90e74d5f91a16c419841f786b8fc96
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2022-04-25T19:13:49.707730608Z"
+    description: Certificate Log
+    digest: 1be651371b0ea1d820ab777b85f01ef7ac02eef3cecf1757a84512ad83e8c115
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: ctlog
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/ctlog-0.2.14/ctlog-0.2.14.tgz
+    version: 0.2.14
+  - annotations:
+      artifacthub.io/images: |
+        - name: ct_server
           image: ghcr.io/sigstore/scaffolding/ct_server@sha256:1c3a8d959ce6e45593be36c38d3a16ac5a8a5e63bc66f042dbc25507bc0ca223
         - name: createctconfig
           image: ghcr.io/sigstore/scaffolding/createctconfig@sha256:be8658e2041099a8d5feccda8a8daa2f4cfaf98c15fc310b5fd83d327e38c51e
@@ -2631,4 +2655,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.1/trillian-0.1.1.tgz
     version: 0.1.1
-generated: "2022-04-25T17:37:59.150965803Z"
+generated: "2022-04-25T19:13:49.70812691Z"
