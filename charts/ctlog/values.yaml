@@ -44,6 +44,7 @@ server:
   extraArgs: []
   securityContext:
     runAsNonRoot: true
+    runAsUser: 65533
 createtree:
   enabled: true
   name: createtree
@@ -60,6 +61,7 @@ createtree:
     mountToken: true
   securityContext:
     runAsNonRoot: true
+    runAsUser: 65533
 createctconfig:
   enabled: true
   replicaCount: 1
@@ -70,7 +72,7 @@ createctconfig:
     pullPolicy: IfNotPresent
     # v0.2.5
     version: "sha256:be8658e2041099a8d5feccda8a8daa2f4cfaf98c15fc310b5fd83d327e38c51e"
-  fulcioURL: "http://fulcio.fulcio-system.svc"
+  fulcioURL: "http://fulcio-server.fulcio-system.svc"
   serviceAccount:
     create: true
     name: ""
@@ -78,6 +80,7 @@ createctconfig:
     mountToken: true
   securityContext:
     runAsNonRoot: true
+    runAsUser: 65533
 trillian:
   namespace: trillian-system
   logServer:
