@@ -24,6 +24,16 @@ spec:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
       serviceAccountName: {{ template "cosigned.fullname" . }}-webhook
       terminationGracePeriodSeconds: 10
+      # To avoid node becoming SPOF, spread our replicas to different nodes.
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  control-plane: {{ template "cosigned.fullname" . }}-webhook
+              topologyKey: kubernetes.io/hostname
+            weight: 100
       containers:
       - name: {{ template "cosigned.name" . }}-{{ .Values.webhook.name }}
         image: "{{ template "cosigned.image" .Values.webhook.image }}"
