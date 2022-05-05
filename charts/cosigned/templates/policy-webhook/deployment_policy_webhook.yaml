@@ -45,7 +45,7 @@ spec:
           - podAffinityTerm:
               labelSelector:
                 matchLabels:
-                  app: {{ template "cosigned.fullname" . }}-policy-webhook
+                  control-plane: {{ template "cosigned.fullname" . }}-policy-webhook
               topologyKey: kubernetes.io/hostname
             weight: 100
       serviceAccountName: {{ template "cosigned.fullname" . }}-policy-webhook
