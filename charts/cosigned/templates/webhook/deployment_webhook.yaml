@@ -59,7 +59,7 @@ spec:
 {{- end }}
         args:
         {{- if semverCompare ">= 1.8-0" .Chart.AppVersion }}
-        - --webhook-name={{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName }}
+        - -webhook-name={{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName }}
         {{- end }}
         {{- if and .Values.cosign.secretKeyRef }}
         {{- if .Values.cosign.secretKeyRef.name }}
