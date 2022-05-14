@@ -1,0 +1,64 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "namespace": {
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "prometheus": {
+            "type": "object",
+            "properties": {
+                "port": {
+                    "type": "integer"
+                }
+            }
+        },
+        "spec": {
+            "type": "object",
+            "properties": {
+                "args": {
+                    "type": "object",
+                    "properties": {
+                        "frequency": {
+                            "type": "integer"
+                        },
+                        "fulcioHost": {
+                            "type": "string"
+                        },
+                        "rekorHost": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "image": {
+                    "type": "string"
+                },
+                "imagePullPolicy": {
+                    "type": "string"
+                },
+                "matchLabels": {
+                    "type": "object",
+                    "properties": {
+                        "app": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "replicaCount": {
+                    "type": "integer"
+                },
+                "serviceAccountName": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

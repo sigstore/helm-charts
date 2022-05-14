@@ -1,0 +1,22 @@
+apiVersion: v2
+name: sigstore-prober
+description: Sigstore API Endpoint Prober
+
+type: application
+
+version: 0.0.1
+
+keywords:
+  - security
+  - prober
+
+home: https://sigstore.dev/
+
+maintainers:
+  - name: The Sigstore Authors
+
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/images: |
+    - name: sigstore-prober
+      image: gcr.io/priya-chainguard/prober-37ee855f344691c13c5769b1675cc9e0@sha256:a601f7de3c572bb65b2cebd431ee8fc0cbd409b2edb5836718f09973400538c8
