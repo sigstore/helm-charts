@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "sigstore-prober.name" . }}
+  namespace: {{ .Values.namespace.name }}
+spec:
+  replicas: {{ .Values.spec.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "sigstore-prober.common.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "sigstore-prober.common.matchLabels" . | nindent 8 }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "{{ .Values.prometheus.port }}"
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+      - name: {{ template "sigstore-prober.name" . }}
+        image: "{{ .Values.spec.image }}"
+        imagePullPolicy: "{{ .Values.spec.imagePullPolicy }}"
+        args:
+          {{- include "sigstore-prober.args" . | nindent 8 }}
+        ports:
+        - containerPort: {{ .Values.prometheus.port }} # metrics
