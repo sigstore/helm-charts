@@ -2713,6 +2713,28 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/scaffold-0.1.1/scaffold-0.1.1.tgz
     version: 0.1.1
+  sigstore-prober:
+  - annotations:
+      artifacthub.io/images: |
+        - name: sigstore-prober
+          image: gcr.io/priya-chainguard/prober-37ee855f344691c13c5769b1675cc9e0@sha256:a601f7de3c572bb65b2cebd431ee8fc0cbd409b2edb5836718f09973400538c8
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-05-16T06:03:41.20470288Z"
+    description: Sigstore API Endpoint Prober
+    digest: 69f2aa0a6fe2ab1b2f539bc4b4bc340e964f6823c487ce234046eb68abe7eb42
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - prober
+    maintainers:
+    - name: The Sigstore Authors
+    name: sigstore-prober
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/sigstore-prober-0.0.1/sigstore-prober-0.0.1.tgz
+    version: 0.0.1
   trillian:
   - annotations:
       artifacthub.io/images: |
@@ -2882,4 +2904,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.1/trillian-0.1.1.tgz
     version: 0.1.1
-generated: "2022-05-11T12:30:53.028271034Z"
+generated: "2022-05-16T06:03:41.205182189Z"
