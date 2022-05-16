@@ -17,7 +17,7 @@ spec:
         prometheus.io/path: /metrics
         prometheus.io/port: "{{ .Values.prometheus.port }}"
     spec:
-      serviceAccountName: {{ .Values.spec.serviceAccountName }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
       - name: {{ template "sigstore-prober.name" . }}
         image: "{{ .Values.spec.image }}"

@@ -1,9 +1,11 @@
 namespace:
   create: true
   name: sigstore-prober
+serviceAccount:
+  name: default
+  create: false
 spec:
   replicaCount: 1
-  serviceAccountName: default
   # Update once we have a release of this image
   image: gcr.io/priya-chainguard/prober-37ee855f344691c13c5769b1675cc9e0@sha256:a601f7de3c572bb65b2cebd431ee8fc0cbd409b2edb5836718f09973400538c8
   imagePullPolicy: Always
