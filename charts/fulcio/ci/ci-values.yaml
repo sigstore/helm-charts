@@ -4,3 +4,4 @@ server:
     http:
       hosts:
         - host: fulcio.localhost
+          path: /

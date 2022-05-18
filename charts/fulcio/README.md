@@ -98,15 +98,26 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/fulcio"` |  |
 | server.image.version | string | `"sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841"` |  |
-| server.ingress.annotations | object | `{}` |  |
-| server.ingress.enabled | bool | `true` |  |
-| server.ingress.hosts | array | [] |  |
-| server.ingress.hosts.host | string |  |  |
-| server.ingress.hosts.path | string | `"/"` |  |
-| server.ingress.hosts.service_name | string |  |  |
-| server.ingress.tls | array | `[]` |  |
-| server.ingress.tls.hosts | array | `[]` |  |
-| server.ingress.tls.secretName | string | `` |  |
+| server.ingress.grpc.annotations | object | `{}` |  |
+| server.ingress.grpc.className | object | `""` |  |
+| server.ingress.grpc.enabled | bool | `true` |  |
+| server.ingress.grpc.hosts | array | [] |  |
+| server.ingress.grpc.hosts.host | string |  |  |
+| server.ingress.grpc.hosts.path | string | `"/"` |  |
+| server.ingress.grpc.hosts.service_name | string |  |  |
+| server.ingress.grpc.tls | array | `[]` |  |
+| server.ingress.grpc.tls.hosts | array | `[]` |  |
+| server.ingress.grpc.tls.secretName | string | `` |  |
+| server.ingress.http.annotations | object | `{}` |  |
+| server.ingress.http.className | object | `""` |  |
+| server.ingress.http.enabled | bool | `true` |  |
+| server.ingress.http.hosts | array | [] |  |
+| server.ingress.http.hosts.host | string |  |  |
+| server.ingress.http.hosts.path | string | `"/"` |  |
+| server.ingress.http.hosts.service_name | string |  |  |
+| server.ingress.http.tls | array | `[]` |  |
+| server.ingress.http.tls.hosts | array | `[]` |  |
+| server.ingress.http.tls.secretName | string | `` |  |
 | server.replicaCount | int | `1` |  |
 | server.service.ports[0].name | string | `"80-tcp"` |  |
 | server.service.ports[0].port | int | `80` |  |

@@ -146,47 +146,14 @@ Create the name of the secret
 {{/*
 Return the appropriate apiVersion for ingress.
 */}}
-{{- define "ingress.apiVersion" -}}
-{{- if .Values.server.ingress.apiVersion -}}
-{{- .Values.server.ingress.apiVersion -}}
-{{- else if semverCompare "<1.14-0" .Capabilities.KubeVersion.Version -}}
-{{- print "extensions/v1beta1" -}}
-{{- else if semverCompare "<1.19-0" .Capabilities.KubeVersion.Version -}}
-{{- print "networking.k8s.io/v1beta1" -}}
-{{- else -}}
-{{- print "networking.k8s.io/v1" -}}
-{{- end }}
-{{- end }}
-
-{{/*
-Print "true" if the API pathType field is supported
-*/}}
-{{- define "ingress.supportsPathType" -}}
-{{- if (semverCompare "<1.18-0" .Capabilities.KubeVersion.Version) -}}
-{{- print "false" -}}
-{{- else -}}
-{{- print "true" -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Return the appropriate apiVersion for ingress.
-*/}}
 {{- define "fulcio.server.ingress.backend" -}}
 {{- $root := index . 0 -}}
 {{- $local := index . 1 -}}
 {{- $servicePort := index . 2 -}}
-{{- $apiVersion := (include "ingress.apiVersion" $root) -}}
-{{- $serviceName := (default (include "fulcio.fullname" $root) $local.service_name) -}}
-{{- if or (eq $apiVersion "extensions/v1beta1") (eq $apiVersion "networking.k8s.io/v1beta1") -}}
-serviceName: {{ $serviceName }}
-servicePort: {{ $servicePort }}
-{{- else -}}
 service:
-  name: {{ $serviceName }}
+  name: {{ (default (include "fulcio.fullname" $root) $local.service_name) }}
   port:
     number: {{ $servicePort | int }}
-{{- end -}}
 {{- end -}}
 
 {{/*
