@@ -326,44 +326,11 @@ Server Arguments
 {{/*
 Return the appropriate apiVersion for ingress.
 */}}
-{{- define "ingress.apiVersion" -}}
-{{- if .Values.server.ingress.apiVersion -}}
-{{- .Values.server.ingress.apiVersion -}}
-{{- else if semverCompare "<1.14-0" .Capabilities.KubeVersion.Version -}}
-{{- print "extensions/v1beta1" -}}
-{{- else if semverCompare "<1.19-0" .Capabilities.KubeVersion.Version -}}
-{{- print "networking.k8s.io/v1beta1" -}}
-{{- else -}}
-{{- print "networking.k8s.io/v1" -}}
-{{- end }}
-{{- end }}
-
-{{/*
-Print "true" if the API pathType field is supported
-*/}}
-{{- define "ingress.supportsPathType" -}}
-{{- if (semverCompare "<1.18-0" .Capabilities.KubeVersion.Version) -}}
-{{- print "false" -}}
-{{- else -}}
-{{- print "true" -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Return the appropriate apiVersion for ingress.
-*/}}
 {{- define "rekor.server.ingress.backend" -}}
-{{- $apiVersion := (include "ingress.apiVersion" .) -}}
-{{- $serviceName := (include "rekor.server.fullname" .) -}}
-{{- if or (eq $apiVersion "extensions/v1beta1") (eq $apiVersion "networking.k8s.io/v1beta1") -}}
-serviceName: {{ $serviceName }}
-servicePort: {{ (index .Values.server.service.ports 0).port | int }}
-{{- else -}}
 service:
-  name: {{ $serviceName }}
+  name: {{ include "rekor.server.fullname" . }}
   port:
     number: {{ (index .Values.server.service.ports 0).port | int }}
-{{- end -}}
 {{- end -}}
 
 {{/*

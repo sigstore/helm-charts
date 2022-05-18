@@ -68,6 +68,7 @@ server:
     production: false
   ingress:
     enabled: true
+    className: "nginx"
     hosts:
       - path: /
     annotations: {}
