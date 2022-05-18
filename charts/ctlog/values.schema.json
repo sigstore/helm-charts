@@ -390,7 +390,7 @@
                     "title": "The ingress Schema",
                     "required": [
                         "enabled",
-                        "ingressClassName",
+                        "className",
                         "hosts",
                         "annotations",
                         "tls"
@@ -404,10 +404,10 @@
                                 false
                             ]
                         },
-                        "ingressClassName": {
+                        "className": {
                             "type": "string",
                             "default": "",
-                            "title": "The ingressClassName Schema",
+                            "title": "The className Schema",
                             "examples": [
                                 "nginx"
                             ]
@@ -463,7 +463,7 @@
                     },
                     "examples": [{
                         "enabled": false,
-                        "ingressClassName": "nginx",
+                        "className": "nginx",
                         "hosts": [{
                             "path": "/"
                         }],
@@ -556,7 +556,7 @@
                 },
                 "ingress": {
                     "enabled": false,
-                    "ingressClassName": "nginx",
+                    "className": "nginx",
                     "hosts": [{
                         "path": "/"
                     }],
@@ -1071,7 +1071,7 @@
             },
             "ingress": {
                 "enabled": false,
-                "ingressClassName": "nginx",
+                "className": "nginx",
                 "hosts": [{
                     "path": "/"
                 }],
