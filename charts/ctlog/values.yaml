@@ -37,6 +37,7 @@ server:
         targetPort: 6963
   ingress:
     enabled: false
+    ingressClassName: nginx
     hosts:
       - path: /
     annotations: {}
