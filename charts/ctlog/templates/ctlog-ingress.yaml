@@ -9,9 +9,9 @@ metadata:
   annotations:
 {{ toYaml .Values.server.ingress.annotations | indent 4 }}
 spec:
-{{- if .Values.server.ingress.className -}}
+{{- if .Values.server.ingress.className }}
   ingressClassName: {{ .Values.server.ingress.className }}
-{{- end -}}
+{{- end }}
   rules:
     {{- range .Values.server.ingress.hosts }}
     - host: {{ required "An Ingress hostname is required" .host | quote }}
