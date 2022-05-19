@@ -37,7 +37,6 @@ spec:
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
       serviceAccountName: {{ template "cosigned.fullname" . }}-policy-webhook
-      terminationGracePeriodSeconds: 10
       # To avoid node becoming SPOF, spread our replicas to different nodes.
       affinity:
         podAntiAffinity:

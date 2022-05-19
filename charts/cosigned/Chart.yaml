@@ -8,7 +8,7 @@ sources:
 type: application
 
 name: cosigned
-version: 0.1.21
+version: 0.1.22
 appVersion: 1.8.0
 
 maintainers:

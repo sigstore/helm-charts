@@ -23,7 +23,6 @@ spec:
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
       serviceAccountName: {{ template "cosigned.fullname" . }}-webhook
-      terminationGracePeriodSeconds: 10
       # To avoid node becoming SPOF, spread our replicas to different nodes.
       affinity:
         podAntiAffinity:
@@ -109,6 +108,11 @@ spec:
         {{- toYaml . | nindent 10}}
         {{- end }}
       {{- if .Values.webhook.securityContext.enabled }}
+
+      # Our webhook should gracefully terminate by lame ducking first, set this to a sufficiently
+      # high value that we respect whatever value it has configured for the lame duck grace period.
+      terminationGracePeriodSeconds: 300
+
       securityContext:
         {{- with .Values.webhook.securityContext }}
         {{- toYaml . | nindent 8}}
