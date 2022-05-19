@@ -47,7 +47,6 @@ spec:
                   control-plane: {{ template "cosigned.fullname" . }}-policy-webhook
               topologyKey: kubernetes.io/hostname
             weight: 100
-      serviceAccountName: {{ template "cosigned.fullname" . }}-policy-webhook
       containers:
       - name: policy-webhook
         # This is the Go import path for the binary that is containerized
