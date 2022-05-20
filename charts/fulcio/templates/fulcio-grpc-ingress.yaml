@@ -1,5 +1,5 @@
 {{- if .Values.server.ingress.grpc.enabled }}
-apiVersion: {{ include "ingress.apiVersion" .}}
+apiVersion: "networking.k8s.io/v1"
 kind: Ingress
 metadata:
   labels:
@@ -9,15 +9,16 @@ metadata:
   annotations:
 {{ toYaml .Values.server.ingress.grpc.annotations | indent 4 }}
 spec:
+{{- if .Values.server.ingress.grpc.className }}
+  ingressClassName: {{ .Values.server.ingress.grpc.className }}
+{{- end }}
   rules:
     {{- range .Values.server.ingress.grpc.hosts }}
     - host: {{ required "An Ingress hostname is required" .host | quote }}
       http:
         paths:
           - path: {{ .path }}
-            {{- if eq "true" (include "ingress.supportsPathType" $) }}
             pathType: {{ default "Prefix" .pathType }}
-            {{- end }}
             backend: {{- include "fulcio.server.ingress.backend" (list $ . $.Values.server.grpcSvcPort) | nindent 14 }}
     {{- end }}
 {{- if .Values.server.ingress.grpc.tls }}

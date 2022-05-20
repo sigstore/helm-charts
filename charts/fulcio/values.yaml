@@ -48,12 +48,15 @@ server:
   ingress:
     http:
       enabled: true
+      className: "nginx"
       annotations: {}
       hosts:
-        - path: /
+      - path: /
+        host: "fulcio.localhost"
       tls: []
     grpc:
       enabled: false
+      className: ""
       annotations:
         nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
       hosts:
