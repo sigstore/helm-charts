@@ -37,7 +37,6 @@ spec:
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
       serviceAccountName: {{ template "cosigned.fullname" . }}-policy-webhook
-      terminationGracePeriodSeconds: 10
       # To avoid node becoming SPOF, spread our replicas to different nodes.
       affinity:
         podAntiAffinity:
@@ -48,7 +47,6 @@ spec:
                   control-plane: {{ template "cosigned.fullname" . }}-policy-webhook
               topologyKey: kubernetes.io/hostname
             weight: 100
-      serviceAccountName: {{ template "cosigned.fullname" . }}-policy-webhook
       containers:
       - name: policy-webhook
         # This is the Go import path for the binary that is containerized
