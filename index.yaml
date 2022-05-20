@@ -929,6 +929,34 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 0.4.1
+    created: "2022-05-20T20:02:45.210867334Z"
+    dependencies:
+    - condition: ctlog.enabled
+      name: ctlog
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.16
+    description: Fulcio
+    digest: 15cfdc7ecd24824374db08b451c07fe901cff9d5f73ebdc55e32d8059490b87a
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: fulcio
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/fulcio-0.3.5/fulcio-0.3.5.tgz
+    version: 0.3.5
+  - annotations:
+      artifacthub.io/images: |
+        - name: fulcio
+          image: gcr.io/projectsigstore/fulcio@sha256:27efe67be5d1291e7806733e65a868d47723c5bd269e42ee133914b8c609238f
+        - name: createcerts
+          image: ghcr.io/sigstore/scaffolding/createcerts@sha256:063c47d092ed1ce116ad06b3e62169abb250d959ba3eb466d7f25cc11124287a
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.4.1
     created: "2022-05-03T13:08:31.889702029Z"
     dependencies:
     - condition: ctlog.enabled
@@ -3049,4 +3077,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.1/trillian-0.1.1.tgz
     version: 0.1.1
-generated: "2022-05-20T08:57:04.036763474Z"
+generated: "2022-05-20T20:02:45.211356047Z"
