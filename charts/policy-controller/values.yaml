@@ -1,0 +1,94 @@
+cosign:
+  secretKeyRef:
+    name: ""
+  # add the values in base64 encoded
+  cosignPub: ""
+  webhookName: "policy.sigstore.dev"
+
+policywebhook:
+  image:
+    repository: gcr.io/projectsigstore/policy-webhook
+    version: sha256:82940e8c3e0d3d5dd92b4779f4378e664f91b790db0d799b03535648eddc141d
+    pullPolicy: IfNotPresent
+  env: {}
+  extraArgs: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  serviceAccount:
+    annotations: {}
+  securityContext:
+    enabled: false
+    runAsUser: 65532
+  podSecurityContext:
+    enabled: true
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    capabilities:
+      drop:
+        - all
+  service:
+    annotations: {}
+    type: ClusterIP
+    port: 443
+  webhookNames:
+    defaulting: "defaulting.clusterimagepolicy.sigstore.dev"
+    validating: "validating.clusterimagepolicy.sigstore.dev"
+
+webhook:
+  name: webhook
+  image:
+    repository: gcr.io/projectsigstore/policy-controller
+    # crane digest gcr.io/projectsigstore/policy-controller:v1.8.0
+    version: sha256:784518ff3ee755ce42e174e61036094af771c43bdc76b65a8f0e52481ed450ac
+    pullPolicy: IfNotPresent
+  env: {}
+  extraArgs: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  securityContext:
+    enabled: false
+    runAsUser: 65532
+  podSecurityContext:
+    enabled: true
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsUser: 1000
+    capabilities:
+      drop:
+        - all
+  serviceAccount:
+    annotations: {}
+  service:
+    annotations: {}
+    type: ClusterIP
+    port: 443
+    # For nodeport, specify the following:
+    #   type: NodePort
+    #   nodePort: <port-number>
+
+## common node selector for all the pods
+commonNodeSelector: {}
+#  key1: value1
+#  key2: value2
+
+## common tolerations for all the pods
+commonTolerations: []
+# - key: "key"
+#   operator: "Equal"
+#   value: "value"
+#   effect: "NoSchedule"
+
+## serviceMonitor makes policy controller metrics discoverable to prometheus
+serviceMonitor:
+  enabled: false

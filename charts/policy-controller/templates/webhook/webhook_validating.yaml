@@ -1,0 +1,19 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName }}
+webhooks:
+- name: {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName }}
+  namespaceSelector:
+    # The webhook should only apply to things that opt-in
+    matchExpressions:
+    - key: policy.sigstore.dev/include
+      operator: In
+      values: ["true"]
+  admissionReviewVersions: [v1]
+  clientConfig:
+    service:
+      name: webhook
+      namespace: {{ .Release.Namespace }}
+  failurePolicy: Fail
+  sideEffects: None

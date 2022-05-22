@@ -1,0 +1,29 @@
+apiVersion: v2
+description: The Helm chart for Policy  Controller
+home: https://github.com/sigstore/policy-controller
+
+sources:
+  - https://github.com/sigstore/policy-controller
+
+type: application
+
+<<<<<<< HEAD:charts/cosigned/Chart.yaml
+name: cosigned
+version: 0.1.23
+=======
+name: policy-controller
+version: 0.1.22
+>>>>>>> a60ee0a8 (chore: rename cosigned to policy-controller):charts/policy-controller/Chart.yaml
+appVersion: 1.8.0
+
+maintainers:
+  - name: dlorenc
+  - name: hectorj2f
+
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/images: |
+    - name: policy-controller
+      image: gcr.io/projectsigstore/policy-controller:v1.8.0@sha256:784518ff3ee755ce42e174e61036094af771c43bdc76b65a8f0e52481ed450ac
+    - name: policywebhook
+      image: gcr.io/projectsigstore/policy-webhook:v1.8.0@sha256:82940e8c3e0d3d5dd92b4779f4378e664f91b790db0d799b03535648eddc141d
