@@ -25,12 +25,13 @@ policywebhook:
     enabled: false
     runAsUser: 65532
   podSecurityContext:
+    enabled: true
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true
     runAsNonRoot: true
     capabilities:
       drop:
-      - all
+        - all
   service:
     annotations: {}
     type: ClusterIP
@@ -59,6 +60,7 @@ webhook:
     enabled: false
     runAsUser: 65532
   podSecurityContext:
+    enabled: true
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true
     runAsUser: 1000

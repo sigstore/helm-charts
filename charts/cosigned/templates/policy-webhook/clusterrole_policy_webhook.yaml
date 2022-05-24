@@ -31,7 +31,15 @@ rules:
 
   - apiGroups: ["admissionregistration.k8s.io"]
     resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
-    verbs: ["get", "update"]
+    verbs: ["get", "update", "delete"]
+    resourceNames:
+    - {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName | quote }}
+    - {{ required "A valid policywebhook.webhookNames.defaulting is required" .Values.policywebhook.webhookNames.defaulting | quote }}
+    - {{ required "A valid policywebhook.webhookNames.validating is required" .Values.policywebhook.webhookNames.validating | quote }}
+
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources: ["validatingwebhookconfigurations/finalizers", "mutatingwebhookconfigurations/finalizers"]
+    verbs: ["update"]
     resourceNames:
     - {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName | quote }}
     - {{ required "A valid policywebhook.webhookNames.defaulting is required" .Values.policywebhook.webhookNames.defaulting | quote }}
@@ -40,6 +48,13 @@ rules:
   - apiGroups: [""]
     resources: ["namespaces"]
     verbs: ["get", "list"]
+    # The webhook configured the namespace as the OwnerRef on various cluster-scoped resources,
+    # which requires we can Get the system namespace.
+    resourceNames: [ "{{ .Release.Namespace }}" ]
+
+  - apiGroups: [""]
+    resources: ["namespaces/finalizers"]
+    verbs: ["update"]
     # The webhook configured the namespace as the OwnerRef on various cluster-scoped resources,
     # which requires we can Get the system namespace.
     resourceNames: [ "{{ .Release.Namespace }}" ]
