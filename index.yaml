@@ -10,6 +10,29 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 1.8.0
+    created: "2022-05-25T09:57:14.03791715Z"
+    description: The Helm chart for Cosigned
+    digest: f24fda56546f48744f7471b06fdb6b944441560719822d9b1d8b8e0c19c0d4d3
+    home: https://github.com/sigstore/cosign
+    maintainers:
+    - name: dlorenc
+    - name: hectorj2f
+    name: cosigned
+    sources:
+    - https://github.com/sigstore/cosign
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/cosigned-0.1.23/cosigned-0.1.23.tgz
+    version: 0.1.23
+  - annotations:
+      artifacthub.io/images: |
+        - name: cosigned
+          image: gcr.io/projectsigstore/cosigned:v1.8.0@sha256:784518ff3ee755ce42e174e61036094af771c43bdc76b65a8f0e52481ed450ac
+        - name: policywebhook
+          image: gcr.io/projectsigstore/policy-webhook:v1.8.0@sha256:82940e8c3e0d3d5dd92b4779f4378e664f91b790db0d799b03535648eddc141d
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.8.0
     created: "2022-05-20T08:57:04.035957779Z"
     description: The Helm chart for Cosigned
     digest: c49e06ff0cf7bba070740557b3d3bcd64675ec14381e5fde4aa07a3b496489a8
@@ -3077,4 +3100,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.1/trillian-0.1.1.tgz
     version: 0.1.1
-generated: "2022-05-20T20:02:45.211356047Z"
+generated: "2022-05-25T09:57:14.03892978Z"
