@@ -25,6 +25,7 @@
                     "version": "sha256:59fd679d6629fbfa99b4413771dca16cb7891b0a91dd386dc46ea9fac46bcfbc"
                 },
                 "podSecurityContext": {
+                    "enabled": true,
                     "allowPrivilegeEscalation": false,
                     "capabilities": {
                         "drop": [
@@ -74,6 +75,7 @@
                 },
                 "name": "webhook",
                 "podSecurityContext": {
+                    "enabled": true,
                     "allowPrivilegeEscalation": false,
                     "capabilities": {
                         "drop": [
@@ -231,6 +233,7 @@
                         "version": "sha256:59fd679d6629fbfa99b4413771dca16cb7891b0a91dd386dc46ea9fac46bcfbc"
                     },
                     "podSecurityContext": {
+                        "enabled": true,
                         "allowPrivilegeEscalation": false,
                         "capabilities": {
                             "drop": [
@@ -364,6 +367,7 @@
                     "default": {},
                     "examples": [
                         {
+                            "enabled": true,
                             "allowPrivilegeEscalation": false,
                             "capabilities": {
                                 "drop": [
@@ -381,6 +385,16 @@
                         "runAsNonRoot"
                     ],
                     "properties": {
+                        "enabled": {
+                            "$id": "#/properties/policywebhook/properties/podSecurityContext/properties/enabled",
+                            "type": "boolean",
+                            "title": "The enabled schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": true,
+                            "examples": [
+                                true
+                            ]
+                        },
                         "allowPrivilegeEscalation": {
                             "$id": "#/properties/policywebhook/properties/podSecurityContext/properties/allowPrivilegeEscalation",
                             "type": "boolean",
@@ -780,6 +794,7 @@
                     },
                     "name": "webhook",
                     "podSecurityContext": {
+                        "enabled": true,
                         "allowPrivilegeEscalation": false,
                         "capabilities": {
                             "drop": [
@@ -930,12 +945,23 @@
                         }
                     ],
                     "required": [
+                        "enabled",
                         "allowPrivilegeEscalation",
                         "capabilities",
                         "readOnlyRootFilesystem",
                         "runAsUser"
                     ],
                     "properties": {
+                        "enabled": {
+                            "$id": "#/properties/webhook/properties/podSecurityContext/properties/enabled",
+                            "type": "boolean",
+                            "title": "The enabled schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": true,
+                            "examples": [
+                                true
+                            ]
+                        },
                         "allowPrivilegeEscalation": {
                             "$id": "#/properties/webhook/properties/podSecurityContext/properties/allowPrivilegeEscalation",
                             "type": "boolean",

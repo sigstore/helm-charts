@@ -103,10 +103,12 @@ spec:
             httpHeaders:
             - name: k-kubelet-probe
               value: "webhook"
+{{- if .Values.webhook.podSecurityContext.enabled }}
         securityContext:
         {{- with .Values.webhook.podSecurityContext }}
-        {{- toYaml . | nindent 10}}
+        {{- omit . "enabled" | toYaml | nindent 10}}
         {{- end }}
+{{- end }}
       {{- if .Values.webhook.securityContext.enabled }}
 
       # Our webhook should gracefully terminate by lame ducking first, set this to a sufficiently

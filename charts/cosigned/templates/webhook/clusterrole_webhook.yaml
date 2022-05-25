@@ -16,7 +16,7 @@ rules:
 
   - apiGroups: ["admissionregistration.k8s.io"]
     resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
-    verbs: ["get", "update"]
+    verbs: ["get", "update", "delete"]
     resourceNames: [{{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName | quote }}]
 
   - apiGroups: [""]
@@ -24,6 +24,11 @@ rules:
     verbs: ["get", "list"]
     # The webhook configured the namespace as the OwnerRef on various cluster-scoped resources,
     # which requires we can Get the system namespace.
+    resourceNames: [ "{{ .Release.Namespace }}" ]
+
+  - apiGroups: [""]
+    resources: ["namespaces/finalizers"]
+    verbs: ["update"]
     resourceNames: [ "{{ .Release.Namespace }}" ]
 
   # This is needed by k8schain to support fetching pull secrets attached to pod specs
