@@ -39,10 +39,12 @@
                     ]
                 }
             },
-            "examples": [{
-                "create": false,
-                "name": "ctlog-system"
-            }]
+            "examples": [
+                {
+                    "create": false,
+                    "name": "ctlog-system"
+                }
+            ]
         },
         "server": {
             "type": "object",
@@ -104,18 +106,22 @@
                                     ]
                                 }
                             },
-                            "examples": [{
-                                "enabled": false,
-                                "name": "ctlog-config"
-                            }]
+                            "examples": [
+                                {
+                                    "enabled": false,
+                                    "name": "ctlog-config"
+                                }
+                            ]
                         }
                     },
-                    "examples": [{
-                        "secret": {
-                            "enabled": false,
-                            "name": "ctlog-config"
+                    "examples": [
+                        {
+                            "secret": {
+                                "enabled": false,
+                                "name": "ctlog-config"
+                            }
                         }
-                    }]
+                    ]
                 },
                 "image": {
                     "type": "object",
@@ -161,12 +167,14 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "registry": "ghcr.io",
-                        "repository": "sigstore/scaffolding/ct_server",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "sha256:6f5ec5dbff8f886b3b56ff206b8e836fe564bbd64a1436ac8c5e7ae341163e24"
-                    }]
+                    "examples": [
+                        {
+                            "registry": "ghcr.io",
+                            "repository": "sigstore/scaffolding/ct_server",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:6f5ec5dbff8f886b3b56ff206b8e836fe564bbd64a1436ac8c5e7ae341163e24"
+                        }
+                    ]
                 },
                 "serviceAccount": {
                     "type": "object",
@@ -201,7 +209,9 @@
                             "title": "The annotations Schema",
                             "required": [],
                             "properties": {},
-                            "examples": [{}]
+                            "examples": [
+                                {}
+                            ]
                         },
                         "mountToken": {
                             "type": "boolean",
@@ -212,12 +222,14 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "create": true,
-                        "name": "",
-                        "annotations": {},
-                        "mountToken": false
-                    }]
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {},
+                            "mountToken": false
+                        }
+                    ]
                 },
                 "podAnnotations": {
                     "type": "object",
@@ -254,11 +266,13 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "prometheus.io/scrape": "true",
-                        "prometheus.io/path": "/metrics",
-                        "prometheus.io/port": "6963"
-                    }]
+                    "examples": [
+                        {
+                            "prometheus.io/scrape": "true",
+                            "prometheus.io/path": "/metrics",
+                            "prometheus.io/port": "6963"
+                        }
+                    ]
                 },
                 "portHTTP": {
                     "type": "integer",
@@ -339,50 +353,58 @@
                                         ]
                                     }
                                 },
-                                "examples": [{
-                                    "name": "6962-tcp",
-                                    "port": 80,
-                                    "protocol": "TCP",
-                                    "targetPort": 6962
-                                },
-                                {
-                                    "name": "6963-tcp",
-                                    "port": 6963,
-                                    "protocol": "TCP",
-                                    "targetPort": 6963
-                                }]
+                                "examples": [
+                                    {
+                                        "name": "6962-tcp",
+                                        "port": 80,
+                                        "protocol": "TCP",
+                                        "targetPort": 6962
+                                    },
+                                    {
+                                        "name": "6963-tcp",
+                                        "port": 6963,
+                                        "protocol": "TCP",
+                                        "targetPort": 6963
+                                    }
+                                ]
                             },
                             "examples": [
-                                [{
-                                    "name": "6962-tcp",
-                                    "port": 80,
-                                    "protocol": "TCP",
-                                    "targetPort": 6962
-                                },
-                                {
-                                    "name": "6963-tcp",
-                                    "port": 6963,
-                                    "protocol": "TCP",
-                                    "targetPort": 6963
-                                }]
+                                [
+                                    {
+                                        "name": "6962-tcp",
+                                        "port": 80,
+                                        "protocol": "TCP",
+                                        "targetPort": 6962
+                                    },
+                                    {
+                                        "name": "6963-tcp",
+                                        "port": 6963,
+                                        "protocol": "TCP",
+                                        "targetPort": 6963
+                                    }
+                                ]
                             ]
                         }
                     },
-                    "examples": [{
-                        "type": "ClusterIP",
-                        "ports": [{
-                            "name": "6962-tcp",
-                            "port": 80,
-                            "protocol": "TCP",
-                            "targetPort": 6962
-                        },
+                    "examples": [
                         {
-                            "name": "6963-tcp",
-                            "port": 6963,
-                            "protocol": "TCP",
-                            "targetPort": 6963
-                        }]
-                    }]
+                            "type": "ClusterIP",
+                            "ports": [
+                                {
+                                    "name": "6962-tcp",
+                                    "port": 80,
+                                    "protocol": "TCP",
+                                    "targetPort": 6962
+                                },
+                                {
+                                    "name": "6963-tcp",
+                                    "port": 6963,
+                                    "protocol": "TCP",
+                                    "targetPort": 6963
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "ingress": {
                     "type": "object",
@@ -433,14 +455,18 @@
                                         ]
                                     }
                                 },
-                                "examples": [{
-                                    "path": "/"
-                                }]
+                                "examples": [
+                                    {
+                                        "path": "/"
+                                    }
+                                ]
                             },
                             "examples": [
-                                [{
-                                    "path": "/"
-                                }]
+                                [
+                                    {
+                                        "path": "/"
+                                    }
+                                ]
                             ]
                         },
                         "annotations": {
@@ -449,7 +475,9 @@
                             "title": "The annotations Schema",
                             "required": [],
                             "properties": {},
-                            "examples": [{}]
+                            "examples": [
+                                {}
+                            ]
                         },
                         "tls": {
                             "type": "array",
@@ -461,15 +489,19 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "enabled": false,
-                        "className": "nginx",
-                        "hosts": [{
-                            "path": "/"
-                        }],
-                        "annotations": {},
-                        "tls": []
-                    }]
+                    "examples": [
+                        {
+                            "enabled": false,
+                            "className": "nginx",
+                            "hosts": [
+                                {
+                                    "path": "/"
+                                }
+                            ],
+                            "annotations": {},
+                            "tls": []
+                        }
+                    ]
                 },
                 "extraArgs": {
                     "type": "array",
@@ -506,69 +538,77 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "runAsNonRoot": true,
-                        "runAsUser": 65533
-                    }]
+                    "examples": [
+                        {
+                            "runAsNonRoot": true,
+                            "runAsUser": 65533
+                        }
+                    ]
                 }
             },
-            "examples": [{
-                "replicaCount": 1,
-                "config": {
-                    "secret": {
-                        "enabled": false,
-                        "name": "ctlog-config"
-                    }
-                },
-                "image": {
-                    "registry": "ghcr.io",
-                    "repository": "sigstore/scaffolding/ct_server",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "sha256:6f5ec5dbff8f886b3b56ff206b8e836fe564bbd64a1436ac8c5e7ae341163e24"
-                },
-                "serviceAccount": {
-                    "create": true,
-                    "name": "",
-                    "annotations": {},
-                    "mountToken": false
-                },
-                "podAnnotations": {
-                    "prometheus.io/scrape": "true",
-                    "prometheus.io/path": "/metrics",
-                    "prometheus.io/port": "6963"
-                },
-                "portHTTP": 6962,
-                "portHTTPMetrics": 6963,
-                "service": {
-                    "type": "ClusterIP",
-                    "ports": [{
-                        "name": "6962-tcp",
-                        "port": 80,
-                        "protocol": "TCP",
-                        "targetPort": 6962
+            "examples": [
+                {
+                    "replicaCount": 1,
+                    "config": {
+                        "secret": {
+                            "enabled": false,
+                            "name": "ctlog-config"
+                        }
                     },
-                    {
-                        "name": "6963-tcp",
-                        "port": 6963,
-                        "protocol": "TCP",
-                        "targetPort": 6963
-                    }]
-                },
-                "ingress": {
-                    "enabled": false,
-                    "className": "nginx",
-                    "hosts": [{
-                        "path": "/"
-                    }],
-                    "annotations": {},
-                    "tls": []
-                },
-                "extraArgs": [],
-                "securityContext": {
-                    "runAsNonRoot": true,
-                    "runAsUser": 65533
+                    "image": {
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/scaffolding/ct_server",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:6f5ec5dbff8f886b3b56ff206b8e836fe564bbd64a1436ac8c5e7ae341163e24"
+                    },
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
+                        "annotations": {},
+                        "mountToken": false
+                    },
+                    "podAnnotations": {
+                        "prometheus.io/scrape": "true",
+                        "prometheus.io/path": "/metrics",
+                        "prometheus.io/port": "6963"
+                    },
+                    "portHTTP": 6962,
+                    "portHTTPMetrics": 6963,
+                    "service": {
+                        "type": "ClusterIP",
+                        "ports": [
+                            {
+                                "name": "6962-tcp",
+                                "port": 80,
+                                "protocol": "TCP",
+                                "targetPort": 6962
+                            },
+                            {
+                                "name": "6963-tcp",
+                                "port": 6963,
+                                "protocol": "TCP",
+                                "targetPort": 6963
+                            }
+                        ]
+                    },
+                    "ingress": {
+                        "enabled": false,
+                        "className": "nginx",
+                        "hosts": [
+                            {
+                                "path": "/"
+                            }
+                        ],
+                        "annotations": {},
+                        "tls": []
+                    },
+                    "extraArgs": [],
+                    "securityContext": {
+                        "runAsNonRoot": true,
+                        "runAsUser": 65533
+                    }
                 }
-            }]
+            ]
         },
         "createtree": {
             "type": "object",
@@ -642,12 +682,14 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "registry": "ghcr.io",
-                        "repository": "sigstore/scaffolding/createtree",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "sha256:b8bbd91bafb1312719ae0d1a59c1deec3c90e74d5f91a16c419841f786b8fc96"
-                    }]
+                    "examples": [
+                        {
+                            "registry": "ghcr.io",
+                            "repository": "sigstore/scaffolding/createtree",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:b8bbd91bafb1312719ae0d1a59c1deec3c90e74d5f91a16c419841f786b8fc96"
+                        }
+                    ]
                 },
                 "serviceAccount": {
                     "type": "object",
@@ -682,7 +724,9 @@
                             "title": "The annotations Schema",
                             "required": [],
                             "properties": {},
-                            "examples": [{}]
+                            "examples": [
+                                {}
+                            ]
                         },
                         "mountToken": {
                             "type": "boolean",
@@ -693,12 +737,14 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "create": true,
-                        "name": "",
-                        "annotations": {},
-                        "mountToken": true
-                    }]
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {},
+                            "mountToken": true
+                        }
+                    ]
                 },
                 "securityContext": {
                     "type": "object",
@@ -726,32 +772,36 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "runAsNonRoot": true,
-                        "runAsUser": 65533
-                    }]
+                    "examples": [
+                        {
+                            "runAsNonRoot": true,
+                            "runAsUser": 65533
+                        }
+                    ]
                 }
             },
-            "examples": [{
-                "enabled": true,
-                "name": "createtree",
-                "image": {
-                    "registry": "ghcr.io",
-                    "repository": "sigstore/scaffolding/createtree",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "sha256:b8bbd91bafb1312719ae0d1a59c1deec3c90e74d5f91a16c419841f786b8fc96"
-                },
-                "serviceAccount": {
-                    "create": true,
-                    "name": "",
-                    "annotations": {},
-                    "mountToken": true
-                },
-                "securityContext": {
-                    "runAsNonRoot": true,
-                    "runAsUser": 65533
+            "examples": [
+                {
+                    "enabled": true,
+                    "name": "createtree",
+                    "image": {
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/scaffolding/createtree",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:b8bbd91bafb1312719ae0d1a59c1deec3c90e74d5f91a16c419841f786b8fc96"
+                    },
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
+                        "annotations": {},
+                        "mountToken": true
+                    },
+                    "securityContext": {
+                        "runAsNonRoot": true,
+                        "runAsUser": 65533
+                    }
                 }
-            }]
+            ]
         },
         "createctconfig": {
             "type": "object",
@@ -760,6 +810,7 @@
             "required": [
                 "enabled",
                 "replicaCount",
+                "backoffLimit",
                 "name",
                 "image",
                 "fulcioURL",
@@ -781,6 +832,14 @@
                     "title": "The replicaCount Schema",
                     "examples": [
                         1
+                    ]
+                },
+                "backoffLimit": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The backoffLimit Schema",
+                    "examples": [
+                        6
                     ]
                 },
                 "name": {
@@ -835,12 +894,14 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "registry": "ghcr.io",
-                        "repository": "sigstore/scaffolding/createctconfig",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2"
-                    }]
+                    "examples": [
+                        {
+                            "registry": "ghcr.io",
+                            "repository": "sigstore/scaffolding/createctconfig",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2"
+                        }
+                    ]
                 },
                 "fulcioURL": {
                     "type": "string",
@@ -883,7 +944,9 @@
                             "title": "The annotations Schema",
                             "required": [],
                             "properties": {},
-                            "examples": [{}]
+                            "examples": [
+                                {}
+                            ]
                         },
                         "mountToken": {
                             "type": "boolean",
@@ -894,12 +957,14 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "create": true,
-                        "name": "",
-                        "annotations": {},
-                        "mountToken": true
-                    }]
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {},
+                            "mountToken": true
+                        }
+                    ]
                 },
                 "securityContext": {
                     "type": "object",
@@ -927,34 +992,39 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "runAsNonRoot": true,
-                        "runAsUser": 65533
-                    }]
+                    "examples": [
+                        {
+                            "runAsNonRoot": true,
+                            "runAsUser": 65533
+                        }
+                    ]
                 }
             },
-            "examples": [{
-                "enabled": true,
-                "replicaCount": 1,
-                "name": "createctconfig",
-                "image": {
-                    "registry": "ghcr.io",
-                    "repository": "sigstore/scaffolding/createctconfig",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2"
-                },
-                "fulcioURL": "http://fulcio-server.fulcio-system.svc",
-                "serviceAccount": {
-                    "create": true,
-                    "name": "",
-                    "annotations": {},
-                    "mountToken": true
-                },
-                "securityContext": {
-                    "runAsNonRoot": true,
-                    "runAsUser": 65533
+            "examples": [
+                {
+                    "enabled": true,
+                    "replicaCount": 1,
+                    "backoffLimit": 6,
+                    "name": "createctconfig",
+                    "image": {
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/scaffolding/createctconfig",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2"
+                    },
+                    "fulcioURL": "http://fulcio-server.fulcio-system.svc",
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
+                        "annotations": {},
+                        "mountToken": true
+                    },
+                    "securityContext": {
+                        "runAsNonRoot": true,
+                        "runAsUser": 65533
+                    }
                 }
-            }]
+            ]
         },
         "trillian": {
             "type": "object",
@@ -999,19 +1069,23 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "name": "trillian-logserver",
-                        "portRPC": 8091
-                    }]
+                    "examples": [
+                        {
+                            "name": "trillian-logserver",
+                            "portRPC": 8091
+                        }
+                    ]
                 }
             },
-            "examples": [{
-                "namespace": "trillian-system",
-                "logServer": {
-                    "name": "trillian-logserver",
-                    "portRPC": 8091
+            "examples": [
+                {
+                    "namespace": "trillian-system",
+                    "logServer": {
+                        "name": "trillian-logserver",
+                        "portRPC": 8091
+                    }
                 }
-            }]
+            ]
         },
         "forceNamespace": {
             "type": "string",
@@ -1022,117 +1096,124 @@
             ]
         }
     },
-    "examples": [{
-        "namespace": {
-            "create": false,
-            "name": "ctlog-system"
-        },
-        "server": {
-            "replicaCount": 1,
-            "config": {
-                "secret": {
+    "examples": [
+        {
+            "namespace": {
+                "create": false,
+                "name": "ctlog-system"
+            },
+            "server": {
+                "replicaCount": 1,
+                "config": {
+                    "secret": {
+                        "enabled": false,
+                        "name": "ctlog-config"
+                    }
+                },
+                "image": {
+                    "registry": "ghcr.io",
+                    "repository": "sigstore/scaffolding/ct_server",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:6f5ec5dbff8f886b3b56ff206b8e836fe564bbd64a1436ac8c5e7ae341163e24"
+                },
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {},
+                    "mountToken": false
+                },
+                "podAnnotations": {
+                    "prometheus.io/scrape": "true",
+                    "prometheus.io/path": "/metrics",
+                    "prometheus.io/port": "6963"
+                },
+                "portHTTP": 6962,
+                "portHTTPMetrics": 6963,
+                "service": {
+                    "type": "ClusterIP",
+                    "ports": [
+                        {
+                            "name": "6962-tcp",
+                            "port": 80,
+                            "protocol": "TCP",
+                            "targetPort": 6962
+                        },
+                        {
+                            "name": "6963-tcp",
+                            "port": 6963,
+                            "protocol": "TCP",
+                            "targetPort": 6963
+                        }
+                    ]
+                },
+                "ingress": {
                     "enabled": false,
-                    "name": "ctlog-config"
+                    "className": "nginx",
+                    "hosts": [
+                        {
+                            "path": "/"
+                        }
+                    ],
+                    "annotations": {},
+                    "tls": []
+                },
+                "extraArgs": [],
+                "securityContext": {
+                    "runAsNonRoot": true,
+                    "runAsUser": 65533
                 }
             },
-            "image": {
-                "registry": "ghcr.io",
-                "repository": "sigstore/scaffolding/ct_server",
-                "pullPolicy": "IfNotPresent",
-                "version": "sha256:6f5ec5dbff8f886b3b56ff206b8e836fe564bbd64a1436ac8c5e7ae341163e24"
-            },
-            "serviceAccount": {
-                "create": true,
-                "name": "",
-                "annotations": {},
-                "mountToken": false
-            },
-            "podAnnotations": {
-                "prometheus.io/scrape": "true",
-                "prometheus.io/path": "/metrics",
-                "prometheus.io/port": "6963"
-            },
-            "portHTTP": 6962,
-            "portHTTPMetrics": 6963,
-            "service": {
-                "type": "ClusterIP",
-                "ports": [{
-                    "name": "6962-tcp",
-                    "port": 80,
-                    "protocol": "TCP",
-                    "targetPort": 6962
+            "createtree": {
+                "enabled": true,
+                "name": "createtree",
+                "image": {
+                    "registry": "ghcr.io",
+                    "repository": "sigstore/scaffolding/createtree",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:b8bbd91bafb1312719ae0d1a59c1deec3c90e74d5f91a16c419841f786b8fc96"
                 },
-                {
-                    "name": "6963-tcp",
-                    "port": 6963,
-                    "protocol": "TCP",
-                    "targetPort": 6963
-                }]
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {},
+                    "mountToken": true
+                },
+                "securityContext": {
+                    "runAsNonRoot": true,
+                    "runAsUser": 65533
+                }
             },
-            "ingress": {
-                "enabled": false,
-                "className": "nginx",
-                "hosts": [{
-                    "path": "/"
-                }],
-                "annotations": {},
-                "tls": []
+            "createctconfig": {
+                "enabled": true,
+                "replicaCount": 1,
+                "backoffLimit": 6,
+                "name": "createctconfig",
+                "image": {
+                    "registry": "ghcr.io",
+                    "repository": "sigstore/scaffolding/createctconfig",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2"
+                },
+                "fulcioURL": "http://fulcio-server.fulcio-system.svc",
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {},
+                    "mountToken": true
+                },
+                "securityContext": {
+                    "runAsNonRoot": true,
+                    "runAsUser": 65533
+                }
             },
-            "extraArgs": [],
-            "securityContext": {
-                "runAsNonRoot": true,
-                "runAsUser": 65533
-            }
-        },
-        "createtree": {
-            "enabled": true,
-            "name": "createtree",
-            "image": {
-                "registry": "ghcr.io",
-                "repository": "sigstore/scaffolding/createtree",
-                "pullPolicy": "IfNotPresent",
-                "version": "sha256:b8bbd91bafb1312719ae0d1a59c1deec3c90e74d5f91a16c419841f786b8fc96"
+            "trillian": {
+                "namespace": "trillian-system",
+                "logServer": {
+                    "name": "trillian-logserver",
+                    "portRPC": 8091
+                }
             },
-            "serviceAccount": {
-                "create": true,
-                "name": "",
-                "annotations": {},
-                "mountToken": true
-            },
-            "securityContext": {
-                "runAsNonRoot": true,
-                "runAsUser": 65533
-            }
-        },
-        "createctconfig": {
-            "enabled": true,
-            "replicaCount": 1,
-            "name": "createctconfig",
-            "image": {
-                "registry": "ghcr.io",
-                "repository": "sigstore/scaffolding/createctconfig",
-                "pullPolicy": "IfNotPresent",
-                "version": "sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2"
-            },
-            "fulcioURL": "http://fulcio-server.fulcio-system.svc",
-            "serviceAccount": {
-                "create": true,
-                "name": "",
-                "annotations": {},
-                "mountToken": true
-            },
-            "securityContext": {
-                "runAsNonRoot": true,
-                "runAsUser": 65533
-            }
-        },
-        "trillian": {
-            "namespace": "trillian-system",
-            "logServer": {
-                "name": "trillian-logserver",
-                "portRPC": 8091
-            }
-        },
-        "forceNamespace": ""
-    }]
+            "forceNamespace": ""
+        }
+    ]
 }
