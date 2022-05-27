@@ -66,6 +66,7 @@ createtree:
 createctconfig:
   enabled: true
   replicaCount: 1
+  backoffLimit: 6
   name: createctconfig
   image:
     registry: ghcr.io
