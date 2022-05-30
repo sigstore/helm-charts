@@ -100,7 +100,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-| server.image.version | string | `"sha256:516651575db19412c94d4260349a84a9c30b37b5d2635232fba669262c5cbfa6"` | v0.5.0 |
+| server.image.version | string | `"sha256:be82e8097a476846f66ffc12bdeacaa7c371505b27a3a493444f775f437d38cc"` | v0.7.0 |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `nil` |  |
 | server.ingress.enabled | bool | `true` |  |
