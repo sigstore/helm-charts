@@ -172,10 +172,7 @@
                     "required": [
                         "port",
                         "grpcPort",
-                        "certificateAuthority",
-                        "hsm_caroot_id",
-                        "aws_hsm_root_ca_path",
-                        "gcp_private_ca_parent"
+                        "certificateAuthority"
                     ],
                     "properties": {
                         "port": {
