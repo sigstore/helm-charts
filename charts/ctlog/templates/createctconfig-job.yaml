@@ -21,26 +21,13 @@ spec:
             "--configmap={{ template "ctlog.config" . }}",
             "--secret={{ template "ctlog.secret" . }}",
             "--fulcio-url={{ .Values.createctconfig.fulcioURL }}",
-            "--trillian-server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}",
-            "--key-password-file=$("
+            "--trillian-server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}"
           ]
           env:
             - name: NAMESPACE
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-        {{- if .Values.createctconfig.pemPassSecret }}
-          volumeMounts:
-            - mountPath: "/var/createctconfig"
-              name: pem-pass
-              readOnly: true
-        {{- end }}
-    {{- if .Values.createctconfig.pemPassSecret }}
-      volumes:
-        - name: pem-pass
-          secret:
-            secretName: {{ .Values.createctconfig.pemPassSecret }}
-    {{- end }}
     {{- if .Values.createctconfig.securityContext }}
       securityContext:
 {{ toYaml .Values.createctconfig.securityContext | indent 8 }}
