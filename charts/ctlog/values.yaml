@@ -75,6 +75,7 @@ createctconfig:
     # v0.2.9
     version: "sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2"
   fulcioURL: "http://fulcio-server.fulcio-system.svc"
+  pemPassSecret:
   serviceAccount:
     create: true
     name: ""
