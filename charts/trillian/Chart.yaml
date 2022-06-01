@@ -4,7 +4,7 @@ description: Trillian
 
 type: application
 
-version: 0.1.7
+version: 0.1.8
 
 keywords:
   - security
@@ -19,12 +19,12 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: curl
-      image: docker.io/curlimages/curl@sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8
+      image: docker.io/curlimages/curl@sha256:e83fef2d5a036d40df4ded829141e8c0ec41871490d252fb8c81cb4580ebb35b
     - name: netcat
-      image: docker.io/toolbelt/netcat@sha256:99a582fa45fe1b50c97c652c9ada24b96c80d7071283227bd9a9f8eaa1c7a12b
+      image: docker.io/toolbelt/netcat@sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea
     - name: db_server
-      image: gcr.io/trillian-opensource-ci/db_server@sha256:0794abd3bdf44a567f5d6ef18a0b76802f388611b63aae33eaf28c3b0c5964d8
+      image: gcr.io/trillian-opensource-ci/db_server@sha256:ae4043e9c5e4de522fb4958e92d592aa97c7fc294a12849b902fd1facd7122c6
     - name: log_server
-      image: gcr.io/projectsigstore/trillian_log_server@sha256:08e2dfe4e5c683921f699d23732b8894bdc065071389d6fe59044442c16576f2
+      image: gcr.io/projectsigstore/trillian_log_server@sha256:4599a3f037234423d13ff84755679a56da62363e7ed07c70bc556078fd73986d
     - name: log_signer
-      image: gcr.io/projectsigstore/trillian_log_signer@sha256:2b7edf2920595241381ac57d753b04b2a7a06f84fc1bfcf98cb24097bb0f9f7a
+      image: gcr.io/projectsigstore/trillian_log_signer@sha256:87699af429d79440f7e0a487d215c2129bf97b37698370d050a68822996f93f0
