@@ -21,7 +21,8 @@ spec:
             "--configmap={{ template "ctlog.config" . }}",
             "--secret={{ template "ctlog.secret" . }}",
             "--fulcio-url={{ .Values.createctconfig.fulcioURL }}",
-            "--trillian-server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}"
+            "--trillian-server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}",
+            "--log-prefix={{ .Values.createctconfig.logPrefix }}"
           ]
           env:
             - name: NAMESPACE
