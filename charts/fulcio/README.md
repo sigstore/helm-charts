@@ -76,6 +76,7 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | createcerts.serviceAccount.name | string | `""` |  |
 | ctlog.createcerts.fullnameOverride | string | `"ctlog-createcerts"` |  |
 | ctlog.createcerts.name | string | `"ctlog-createcerts"` |  |
+| ctlog.createctconfig.logPrefix | string | `"fulcio"` |  |
 | ctlog.createtree.fullnameOverride | string | `"ctlog-createtree"` |  |
 | ctlog.createtree.name | string | `"ctlog-createtree"` |  |
 | ctlog.enabled | bool | `true` |  |

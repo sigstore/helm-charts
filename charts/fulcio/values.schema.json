@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft/2019-09/schema",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
     "$id": "http://example.com/example.json",
     "type": "object",
     "default": {},
@@ -447,7 +447,7 @@
                                     "default": "",
                                     "title": "The className Schema",
                                     "examples": [
-                                        ""
+                                        "nginx"
                                     ]
                                 },
                                 "annotations": {
@@ -467,18 +467,10 @@
                                         "default": {},
                                         "title": "A Schema",
                                         "required": [
-                                            "host",
-                                            "path"
+                                            "path",
+                                            "host"
                                         ],
                                         "properties": {
-                                            "host": {
-                                                "type": "string",
-                                                "default": "",
-                                                "title": "The host Schema",
-                                                "examples": [
-                                                    "fulcio.localhost"
-                                                ]
-                                            },
                                             "path": {
                                                 "type": "string",
                                                 "default": "",
@@ -486,17 +478,25 @@
                                                 "examples": [
                                                     "/"
                                                 ]
+                                            },
+                                            "host": {
+                                                "type": "string",
+                                                "default": "",
+                                                "title": "The host Schema",
+                                                "examples": [
+                                                    "fulcio.localhost"
+                                                ]
                                             }
                                         },
                                         "examples": [{
-                                            "host": "fulcio.localhost",
-                                            "path": "/"
+                                            "path": "/",
+                                            "host": "fulcio.localhost"
                                         }]
                                     },
                                     "examples": [
                                         [{
-                                            "host": "fulcio.localhost",
-                                            "path": "/"
+                                            "path": "/",
+                                            "host": "fulcio.localhost"
                                         }]
                                     ]
                                 },
@@ -512,11 +512,11 @@
                             },
                             "examples": [{
                                 "enabled": true,
-                                "className": "",
+                                "className": "nginx",
                                 "annotations": {},
                                 "hosts": [{
-                                    "host": "fulcio.localhost",
-                                    "path": "/"
+                                    "path": "/",
+                                    "host": "fulcio.localhost"
                                 }],
                                 "tls": []
                             }]
@@ -690,11 +690,11 @@
                     "examples": [{
                         "http": {
                             "enabled": true,
-                            "className": "",
+                            "className": "nginx",
                             "annotations": {},
                             "hosts": [{
-                                "host": "fulcio.localhost",
-                                "path": "/"
+                                "path": "/",
+                                "host": "fulcio.localhost"
                             }],
                             "tls": []
                         },
@@ -798,11 +798,11 @@
                 "ingress": {
                     "http": {
                         "enabled": true,
-                        "className": "",
+                        "className": "nginx",
                         "annotations": {},
                         "hosts": [{
-                            "host": "fulcio.localhost",
-                            "path": "/"
+                            "path": "/",
+                            "host": "fulcio.localhost"
                         }],
                         "tls": []
                     },
@@ -907,7 +907,7 @@
                             "default": "",
                             "title": "The version Schema",
                             "examples": [
-                                "sha256:063c47d092ed1ce116ad06b3e62169abb250d959ba3eb466d7f25cc11124287a"
+                                "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
                             ]
                         }
                     },
@@ -915,7 +915,7 @@
                         "registry": "ghcr.io",
                         "repository": "sigstore/scaffolding/createcerts",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:063c47d092ed1ce116ad06b3e62169abb250d959ba3eb466d7f25cc11124287a"
+                        "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
                     }]
                 },
                 "serviceAccount": {
@@ -1009,7 +1009,7 @@
                     "registry": "ghcr.io",
                     "repository": "sigstore/scaffolding/createcerts",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:063c47d092ed1ce116ad06b3e62169abb250d959ba3eb466d7f25cc11124287a"
+                    "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
                 },
                 "serviceAccount": {
                     "create": true,
@@ -1034,7 +1034,8 @@
                 "fullnameOverride",
                 "namespace",
                 "createtree",
-                "createcerts"
+                "createcerts",
+                "createctconfig"
             ],
             "properties": {
                 "enabled": {
@@ -1161,6 +1162,27 @@
                         "name": "ctlog-createcerts",
                         "fullnameOverride": "ctlog-createcerts"
                     }]
+                },
+                "createctconfig": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The createctconfig Schema",
+                    "required": [
+                        "logPrefix"
+                    ],
+                    "properties": {
+                        "logPrefix": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The logPrefix Schema",
+                            "examples": [
+                                "fulcio"
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "logPrefix": "fulcio"
+                    }]
                 }
             },
             "examples": [{
@@ -1179,6 +1201,9 @@
                 "createcerts": {
                     "name": "ctlog-createcerts",
                     "fullnameOverride": "ctlog-createcerts"
+                },
+                "createctconfig": {
+                    "logPrefix": "fulcio"
                 }
             }]
         },
@@ -1248,11 +1273,11 @@
             "ingress": {
                 "http": {
                     "enabled": true,
-                    "className": "",
+                    "className": "nginx",
                     "annotations": {},
                     "hosts": [{
-                        "host": "fulcio.localhost",
-                        "path": "/"
+                        "path": "/",
+                        "host": "fulcio.localhost"
                     }],
                     "tls": []
                 },
@@ -1287,7 +1312,7 @@
                 "registry": "ghcr.io",
                 "repository": "sigstore/scaffolding/createcerts",
                 "pullPolicy": "IfNotPresent",
-                "version": "sha256:063c47d092ed1ce116ad06b3e62169abb250d959ba3eb466d7f25cc11124287a"
+                "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
             },
             "serviceAccount": {
                 "create": true,
@@ -1316,6 +1341,9 @@
             "createcerts": {
                 "name": "ctlog-createcerts",
                 "fullnameOverride": "ctlog-createcerts"
+            },
+            "createctconfig": {
+                "logPrefix": "fulcio"
             }
         },
         "forceNamespace": ""
