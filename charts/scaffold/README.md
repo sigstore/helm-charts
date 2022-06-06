@@ -43,12 +43,13 @@ The following table lists the configurable parameters of the scaffold chart and 
 | ctlog.namespace.create | bool | `true` |  |
 | ctlog.namespace.name | string | `"ctlog-system"` |  |
 | fulcio.createcerts.fullnameOverride | string | `"fulcio-createcerts"` |  |
+| fulcio.ctlog.createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | fulcio.ctlog.enabled | bool | `false` |  |
 | fulcio.enabled | bool | `true` |  |
 | fulcio.forceNamespace | string | `"fulcio-system"` |  |
-| fulcio.fullnameOverride | string | `"fulcio"` |  |
 | fulcio.namespace.create | bool | `true` |  |
 | fulcio.namespace.name | string | `"fulcio-system"` |  |
+| fulcio.server.fullnameOverride | string | `"fulcio-server"` |  |
 | rekor.enabled | bool | `true` |  |
 | rekor.forceNamespace | string | `"rekor-system"` |  |
 | rekor.fullnameOverride | string | `"rekor"` |  |

@@ -1,10 +1,702 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
     "$id": "http://example.com/example.json",
     "type": "object",
-    "title": "The root schema",
-    "description": "The root schema comprises the entire JSON document.",
     "default": {},
+    "title": "Root Schema",
+    "required": [
+        "fulcio",
+        "ctlog",
+        "rekor",
+        "trillian"
+    ],
+    "properties": {
+        "fulcio": {
+            "type": "object",
+            "default": {},
+            "title": "The fulcio Schema",
+            "required": [
+                "enabled",
+                "namespace",
+                "forceNamespace",
+                "server",
+                "createcerts",
+                "ctlog"
+            ],
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The enabled Schema",
+                    "examples": [
+                        true
+                    ]
+                },
+                "namespace": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The namespace Schema",
+                    "required": [
+                        "name",
+                        "create"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The name Schema",
+                            "examples": [
+                                "fulcio-system"
+                            ]
+                        },
+                        "create": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The create Schema",
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "fulcio-system",
+                            "create": true
+                        }
+                    ]
+                },
+                "forceNamespace": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The forceNamespace Schema",
+                    "examples": [
+                        "fulcio-system"
+                    ]
+                },
+                "server": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The server Schema",
+                    "required": [
+                        "fullnameOverride"
+                    ],
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The fullnameOverride Schema",
+                            "examples": [
+                                "fulcio-server"
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "fullnameOverride": "fulcio-server"
+                        }
+                    ]
+                },
+                "createcerts": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The createcerts Schema",
+                    "required": [
+                        "fullnameOverride"
+                    ],
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The fullnameOverride Schema",
+                            "examples": [
+                                "fulcio-createcerts"
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "fullnameOverride": "fulcio-createcerts"
+                        }
+                    ]
+                },
+                "ctlog": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The ctlog Schema",
+                    "required": [
+                        "enabled",
+                        "createctconfig"
+                    ],
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The enabled Schema",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "createctconfig": {
+                            "type": "object",
+                            "default": {},
+                            "title": "The createctconfig Schema",
+                            "required": [
+                                "logPrefix"
+                            ],
+                            "properties": {
+                                "logPrefix": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The logPrefix Schema",
+                                    "examples": [
+                                        "sigstorescaffolding"
+                                    ]
+                                }
+                            },
+                            "examples": [
+                                {
+                                    "logPrefix": "sigstorescaffolding"
+                                }
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "enabled": false,
+                            "createctconfig": {
+                                "logPrefix": "sigstorescaffolding"
+                            }
+                        }
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "enabled": true,
+                    "namespace": {
+                        "name": "fulcio-system",
+                        "create": true
+                    },
+                    "forceNamespace": "fulcio-system",
+                    "server": {
+                        "fullnameOverride": "fulcio-server"
+                    },
+                    "createcerts": {
+                        "fullnameOverride": "fulcio-createcerts"
+                    },
+                    "ctlog": {
+                        "enabled": false,
+                        "createctconfig": {
+                            "logPrefix": "sigstorescaffolding"
+                        }
+                    }
+                }
+            ]
+        },
+        "ctlog": {
+            "type": "object",
+            "default": {},
+            "title": "The ctlog Schema",
+            "required": [
+                "enabled",
+                "namespace",
+                "forceNamespace",
+                "fullnameOverride",
+                "createcerts",
+                "createtree"
+            ],
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The enabled Schema",
+                    "examples": [
+                        true
+                    ]
+                },
+                "namespace": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The namespace Schema",
+                    "required": [
+                        "name",
+                        "create"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The name Schema",
+                            "examples": [
+                                "ctlog-system"
+                            ]
+                        },
+                        "create": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The create Schema",
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "ctlog-system",
+                            "create": true
+                        }
+                    ]
+                },
+                "forceNamespace": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The forceNamespace Schema",
+                    "examples": [
+                        "ctlog-system"
+                    ]
+                },
+                "fullnameOverride": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The fullnameOverride Schema",
+                    "examples": [
+                        "ctlog"
+                    ]
+                },
+                "createcerts": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The createcerts Schema",
+                    "required": [
+                        "fullnameOverride"
+                    ],
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The fullnameOverride Schema",
+                            "examples": [
+                                "ctlog-createcerts"
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "fullnameOverride": "ctlog-createcerts"
+                        }
+                    ]
+                },
+                "createtree": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The createtree Schema",
+                    "required": [
+                        "fullnameOverride"
+                    ],
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The fullnameOverride Schema",
+                            "examples": [
+                                "ctlog-createtree"
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "fullnameOverride": "ctlog-createtree"
+                        }
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "enabled": true,
+                    "namespace": {
+                        "name": "ctlog-system",
+                        "create": true
+                    },
+                    "forceNamespace": "ctlog-system",
+                    "fullnameOverride": "ctlog",
+                    "createcerts": {
+                        "fullnameOverride": "ctlog-createcerts"
+                    },
+                    "createtree": {
+                        "fullnameOverride": "ctlog-createtree"
+                    }
+                }
+            ]
+        },
+        "rekor": {
+            "type": "object",
+            "default": {},
+            "title": "The rekor Schema",
+            "required": [
+                "enabled",
+                "namespace",
+                "forceNamespace",
+                "fullnameOverride",
+                "server",
+                "redis",
+                "trillian"
+            ],
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The enabled Schema",
+                    "examples": [
+                        true
+                    ]
+                },
+                "namespace": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The namespace Schema",
+                    "required": [
+                        "name",
+                        "create"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The name Schema",
+                            "examples": [
+                                "rekor-system"
+                            ]
+                        },
+                        "create": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The create Schema",
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "rekor-system",
+                            "create": true
+                        }
+                    ]
+                },
+                "forceNamespace": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The forceNamespace Schema",
+                    "examples": [
+                        "rekor-system"
+                    ]
+                },
+                "fullnameOverride": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The fullnameOverride Schema",
+                    "examples": [
+                        "rekor"
+                    ]
+                },
+                "server": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The server Schema",
+                    "required": [
+                        "fullnameOverride"
+                    ],
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The fullnameOverride Schema",
+                            "examples": [
+                                "rekor-server"
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "fullnameOverride": "rekor-server"
+                        }
+                    ]
+                },
+                "redis": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The redis Schema",
+                    "required": [
+                        "fullnameOverride"
+                    ],
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The fullnameOverride Schema",
+                            "examples": [
+                                "rekor-redis"
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "fullnameOverride": "rekor-redis"
+                        }
+                    ]
+                },
+                "trillian": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The trillian Schema",
+                    "required": [
+                        "enabled"
+                    ],
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The enabled Schema",
+                            "examples": [
+                                false
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "enabled": false
+                        }
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "enabled": true,
+                    "namespace": {
+                        "name": "rekor-system",
+                        "create": true
+                    },
+                    "forceNamespace": "rekor-system",
+                    "fullnameOverride": "rekor",
+                    "server": {
+                        "fullnameOverride": "rekor-server"
+                    },
+                    "redis": {
+                        "fullnameOverride": "rekor-redis"
+                    },
+                    "trillian": {
+                        "enabled": false
+                    }
+                }
+            ]
+        },
+        "trillian": {
+            "type": "object",
+            "default": {},
+            "title": "The trillian Schema",
+            "required": [
+                "enabled",
+                "namespace",
+                "forceNamespace",
+                "fullnameOverride",
+                "logServer",
+                "logSigner",
+                "mysql"
+            ],
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The enabled Schema",
+                    "examples": [
+                        true
+                    ]
+                },
+                "namespace": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The namespace Schema",
+                    "required": [
+                        "name",
+                        "create"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The name Schema",
+                            "examples": [
+                                "trillian-system"
+                            ]
+                        },
+                        "create": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The create Schema",
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "trillian-system",
+                            "create": true
+                        }
+                    ]
+                },
+                "forceNamespace": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The forceNamespace Schema",
+                    "examples": [
+                        "trillian-system"
+                    ]
+                },
+                "fullnameOverride": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The fullnameOverride Schema",
+                    "examples": [
+                        "trillian"
+                    ]
+                },
+                "logServer": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The logServer Schema",
+                    "required": [
+                        "name",
+                        "fullnameOverride",
+                        "portHTTP",
+                        "portRPC"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The name Schema",
+                            "examples": [
+                                "trillian-logserver"
+                            ]
+                        },
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The fullnameOverride Schema",
+                            "examples": [
+                                "trillian-logserver"
+                            ]
+                        },
+                        "portHTTP": {
+                            "type": "integer",
+                            "default": 0,
+                            "title": "The portHTTP Schema",
+                            "examples": [
+                                8090
+                            ]
+                        },
+                        "portRPC": {
+                            "type": "integer",
+                            "default": 0,
+                            "title": "The portRPC Schema",
+                            "examples": [
+                                8091
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "trillian-logserver",
+                            "fullnameOverride": "trillian-logserver",
+                            "portHTTP": 8090,
+                            "portRPC": 8091
+                        }
+                    ]
+                },
+                "logSigner": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The logSigner Schema",
+                    "required": [
+                        "name",
+                        "fullnameOverride"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The name Schema",
+                            "examples": [
+                                "trillian-logsigner"
+                            ]
+                        },
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The fullnameOverride Schema",
+                            "examples": [
+                                "trillian-logsigner"
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "name": "trillian-logsigner",
+                            "fullnameOverride": "trillian-logsigner"
+                        }
+                    ]
+                },
+                "mysql": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The mysql Schema",
+                    "required": [
+                        "fullnameOverride"
+                    ],
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The fullnameOverride Schema",
+                            "examples": [
+                                "trillian-mysql"
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "fullnameOverride": "trillian-mysql"
+                        }
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "enabled": true,
+                    "namespace": {
+                        "name": "trillian-system",
+                        "create": true
+                    },
+                    "forceNamespace": "trillian-system",
+                    "fullnameOverride": "trillian",
+                    "logServer": {
+                        "name": "trillian-logserver",
+                        "fullnameOverride": "trillian-logserver",
+                        "portHTTP": 8090,
+                        "portRPC": 8091
+                    },
+                    "logSigner": {
+                        "name": "trillian-logsigner",
+                        "fullnameOverride": "trillian-logsigner"
+                    },
+                    "mysql": {
+                        "fullnameOverride": "trillian-mysql"
+                    }
+                }
+            ]
+        }
+    },
     "examples": [
         {
             "fulcio": {
@@ -14,12 +706,17 @@
                     "create": true
                 },
                 "forceNamespace": "fulcio-system",
-                "fullnameOverride": "fulcio",
+                "server": {
+                    "fullnameOverride": "fulcio-server"
+                },
                 "createcerts": {
                     "fullnameOverride": "fulcio-createcerts"
                 },
                 "ctlog": {
-                    "enabled": false
+                    "enabled": false,
+                    "createctconfig": {
+                        "logPrefix": "sigstorescaffolding"
+                    }
                 }
             },
             "ctlog": {
@@ -78,703 +775,5 @@
                 }
             }
         }
-    ],
-    "required": [],
-    "properties": {
-        "fulcio": {
-            "$id": "#/properties/fulcio",
-            "type": "object",
-            "title": "The fulcio schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {
-                    "enabled": true,
-                    "namespace": {
-                        "name": "fulcio-system",
-                        "create": true
-                    },
-                    "forceNamespace": "fulcio-system",
-                    "fullnameOverride": "fulcio",
-                    "createcerts": {
-                        "fullnameOverride": "fulcio-createcerts"
-                    },
-                    "ctlog": {
-                        "enabled": false
-                    }
-                }
-            ],
-            "required": [],
-            "properties": {
-                "enabled": {
-                    "$id": "#/properties/fulcio/properties/enabled",
-                    "type": "boolean",
-                    "title": "The enabled schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": false,
-                    "examples": [
-                        true
-                    ]
-                },
-                "namespace": {
-                    "$id": "#/properties/fulcio/properties/namespace",
-                    "type": "object",
-                    "title": "The namespace schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "name": "fulcio-system",
-                            "create": true
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "name": {
-                            "$id": "#/properties/fulcio/properties/namespace/properties/name",
-                            "type": "string",
-                            "title": "The name schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "fulcio-system"
-                            ]
-                        },
-                        "create": {
-                            "$id": "#/properties/fulcio/properties/namespace/properties/create",
-                            "type": "boolean",
-                            "title": "The create schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "forceNamespace": {
-                    "$id": "#/properties/fulcio/properties/forceNamespace",
-                    "type": "string",
-                    "title": "The forceNamespace schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "fulcio-system"
-                    ]
-                },
-                "fullnameOverride": {
-                    "$id": "#/properties/fulcio/properties/fullnameOverride",
-                    "type": "string",
-                    "title": "The fullnameOverride schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "fulcio"
-                    ]
-                },
-                "createcerts": {
-                    "$id": "#/properties/fulcio/properties/createcerts",
-                    "type": "object",
-                    "title": "The createcerts schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "fullnameOverride": "fulcio-createcerts"
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "fullnameOverride": {
-                            "$id": "#/properties/fulcio/properties/createcerts/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "fulcio-createcerts"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "ctlog": {
-                    "$id": "#/properties/fulcio/properties/ctlog",
-                    "type": "object",
-                    "title": "The ctlog schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "enabled": false
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "enabled": {
-                            "$id": "#/properties/fulcio/properties/ctlog/properties/enabled",
-                            "type": "boolean",
-                            "title": "The enabled schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                false
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                }
-            },
-            "additionalProperties": true
-        },
-        "ctlog": {
-            "$id": "#/properties/ctlog",
-            "type": "object",
-            "title": "The ctlog schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {
-                    "enabled": true,
-                    "namespace": {
-                        "name": "ctlog-system",
-                        "create": true
-                    },
-                    "forceNamespace": "ctlog-system",
-                    "fullnameOverride": "ctlog",
-                    "createcerts": {
-                        "fullnameOverride": "ctlog-createcerts"
-                    },
-                    "createtree": {
-                        "fullnameOverride": "ctlog-createtree"
-                    }
-                }
-            ],
-            "required": [],
-            "properties": {
-                "enabled": {
-                    "$id": "#/properties/ctlog/properties/enabled",
-                    "type": "boolean",
-                    "title": "The enabled schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": false,
-                    "examples": [
-                        true
-                    ]
-                },
-                "namespace": {
-                    "$id": "#/properties/ctlog/properties/namespace",
-                    "type": "object",
-                    "title": "The namespace schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "name": "ctlog-system",
-                            "create": true
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "name": {
-                            "$id": "#/properties/ctlog/properties/namespace/properties/name",
-                            "type": "string",
-                            "title": "The name schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "ctlog-system"
-                            ]
-                        },
-                        "create": {
-                            "$id": "#/properties/ctlog/properties/namespace/properties/create",
-                            "type": "boolean",
-                            "title": "The create schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "forceNamespace": {
-                    "$id": "#/properties/ctlog/properties/forceNamespace",
-                    "type": "string",
-                    "title": "The forceNamespace schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "ctlog-system"
-                    ]
-                },
-                "fullnameOverride": {
-                    "$id": "#/properties/ctlog/properties/fullnameOverride",
-                    "type": "string",
-                    "title": "The fullnameOverride schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "ctlog"
-                    ]
-                },
-                "createcerts": {
-                    "$id": "#/properties/ctlog/properties/createcerts",
-                    "type": "object",
-                    "title": "The createcerts schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "fullnameOverride": "ctlog-createcerts"
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "fullnameOverride": {
-                            "$id": "#/properties/ctlog/properties/createcerts/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "ctlog-createcerts"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "createtree": {
-                    "$id": "#/properties/ctlog/properties/createtree",
-                    "type": "object",
-                    "title": "The createtree schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "fullnameOverride": "ctlog-createtree"
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "fullnameOverride": {
-                            "$id": "#/properties/ctlog/properties/createtree/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "ctlog-createtree"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                }
-            },
-            "additionalProperties": true
-        },
-        "rekor": {
-            "$id": "#/properties/rekor",
-            "type": "object",
-            "title": "The rekor schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {
-                    "enabled": true,
-                    "namespace": {
-                        "name": "rekor-system",
-                        "create": true
-                    },
-                    "forceNamespace": "rekor-system",
-                    "fullnameOverride": "rekor",
-                    "server": {
-                        "fullnameOverride": "rekor-server"
-                    },
-                    "redis": {
-                        "fullnameOverride": "rekor-redis"
-                    },
-                    "trillian": {
-                        "enabled": false
-                    }
-                }
-            ],
-            "required": [],
-            "properties": {
-                "enabled": {
-                    "$id": "#/properties/rekor/properties/enabled",
-                    "type": "boolean",
-                    "title": "The enabled schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": false,
-                    "examples": [
-                        true
-                    ]
-                },
-                "namespace": {
-                    "$id": "#/properties/rekor/properties/namespace",
-                    "type": "object",
-                    "title": "The namespace schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "name": "rekor-system",
-                            "create": true
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "name": {
-                            "$id": "#/properties/rekor/properties/namespace/properties/name",
-                            "type": "string",
-                            "title": "The name schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "rekor-system"
-                            ]
-                        },
-                        "create": {
-                            "$id": "#/properties/rekor/properties/namespace/properties/create",
-                            "type": "boolean",
-                            "title": "The create schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "forceNamespace": {
-                    "$id": "#/properties/rekor/properties/forceNamespace",
-                    "type": "string",
-                    "title": "The forceNamespace schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "rekor-system"
-                    ]
-                },
-                "fullnameOverride": {
-                    "$id": "#/properties/rekor/properties/fullnameOverride",
-                    "type": "string",
-                    "title": "The fullnameOverride schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "rekor"
-                    ]
-                },
-                "server": {
-                    "$id": "#/properties/rekor/properties/server",
-                    "type": "object",
-                    "title": "The server schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "fullnameOverride": "rekor-server"
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "fullnameOverride": {
-                            "$id": "#/properties/rekor/properties/server/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "rekor-server"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "redis": {
-                    "$id": "#/properties/rekor/properties/redis",
-                    "type": "object",
-                    "title": "The redis schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "fullnameOverride": "rekor-redis"
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "fullnameOverride": {
-                            "$id": "#/properties/rekor/properties/redis/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "rekor-redis"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "trillian": {
-                    "$id": "#/properties/rekor/properties/trillian",
-                    "type": "object",
-                    "title": "The trillian schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "enabled": false
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "enabled": {
-                            "$id": "#/properties/rekor/properties/trillian/properties/enabled",
-                            "type": "boolean",
-                            "title": "The enabled schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                false
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                }
-            },
-            "additionalProperties": true
-        },
-        "trillian": {
-            "$id": "#/properties/trillian",
-            "type": "object",
-            "title": "The trillian schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-                {
-                    "enabled": true,
-                    "namespace": {
-                        "name": "trillian-system",
-                        "create": true
-                    },
-                    "forceNamespace": "trillian-system",
-                    "fullnameOverride": "trillian",
-                    "logServer": {
-                        "name": "trillian-logserver",
-                        "fullnameOverride": "trillian-logserver",
-                        "portHTTP": 8090,
-                        "portRPC": 8091
-                    },
-                    "logSigner": {
-                        "name": "trillian-logsigner",
-                        "fullnameOverride": "trillian-logsigner"
-                    },
-                    "mysql": {
-                        "fullnameOverride": "trillian-mysql"
-                    }
-                }
-            ],
-            "required": [],
-            "properties": {
-                "enabled": {
-                    "$id": "#/properties/trillian/properties/enabled",
-                    "type": "boolean",
-                    "title": "The enabled schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": false,
-                    "examples": [
-                        true
-                    ]
-                },
-                "namespace": {
-                    "$id": "#/properties/trillian/properties/namespace",
-                    "type": "object",
-                    "title": "The namespace schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "name": "trillian-system",
-                            "create": true
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "name": {
-                            "$id": "#/properties/trillian/properties/namespace/properties/name",
-                            "type": "string",
-                            "title": "The name schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "trillian-system"
-                            ]
-                        },
-                        "create": {
-                            "$id": "#/properties/trillian/properties/namespace/properties/create",
-                            "type": "boolean",
-                            "title": "The create schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "forceNamespace": {
-                    "$id": "#/properties/trillian/properties/forceNamespace",
-                    "type": "string",
-                    "title": "The forceNamespace schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "trillian-system"
-                    ]
-                },
-                "fullnameOverride": {
-                    "$id": "#/properties/trillian/properties/fullnameOverride",
-                    "type": "string",
-                    "title": "The fullnameOverride schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [
-                        "trillian"
-                    ]
-                },
-                "logServer": {
-                    "$id": "#/properties/trillian/properties/logServer",
-                    "type": "object",
-                    "title": "The logServer schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "name": "trillian-logserver",
-                            "fullnameOverride": "trillian-logserver",
-                            "portHTTP": 8090,
-                            "portRPC": 8091
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "name": {
-                            "$id": "#/properties/trillian/properties/logServer/properties/name",
-                            "type": "string",
-                            "title": "The name schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "trillian-logserver"
-                            ]
-                        },
-                        "fullnameOverride": {
-                            "$id": "#/properties/trillian/properties/logServer/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "trillian-logserver"
-                            ]
-                        },
-                        "portHTTP": {
-                            "$id": "#/properties/trillian/properties/logServer/properties/portHTTP",
-                            "type": "integer",
-                            "title": "The portHTTP schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                8090
-                            ]
-                        },
-                        "portRPC": {
-                            "$id": "#/properties/trillian/properties/logServer/properties/portRPC",
-                            "type": "integer",
-                            "title": "The portRPC schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": 0,
-                            "examples": [
-                                8091
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "logSigner": {
-                    "$id": "#/properties/trillian/properties/logSigner",
-                    "type": "object",
-                    "title": "The logSigner schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "name": "trillian-logsigner",
-                            "fullnameOverride": "trillian-logsigner"
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "name": {
-                            "$id": "#/properties/trillian/properties/logSigner/properties/name",
-                            "type": "string",
-                            "title": "The name schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "trillian-logsigner"
-                            ]
-                        },
-                        "fullnameOverride": {
-                            "$id": "#/properties/trillian/properties/logSigner/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "trillian-logsigner"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                },
-                "mysql": {
-                    "$id": "#/properties/trillian/properties/mysql",
-                    "type": "object",
-                    "title": "The mysql schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                        {
-                            "fullnameOverride": "trillian-mysql"
-                        }
-                    ],
-                    "required": [],
-                    "properties": {
-                        "fullnameOverride": {
-                            "$id": "#/properties/trillian/properties/mysql/properties/fullnameOverride",
-                            "type": "string",
-                            "title": "The fullnameOverride schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "trillian-mysql"
-                            ]
-                        }
-                    },
-                    "additionalProperties": true
-                }
-            },
-            "additionalProperties": true
-        }
-    },
-    "additionalProperties": true
+    ]
 }

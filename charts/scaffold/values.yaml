@@ -12,6 +12,8 @@ fulcio:
     fullnameOverride: fulcio-createcerts
   ctlog:
     enabled: false
+    createctconfig:
+      logPrefix: sigstorescaffolding
 # CTLog
 ctlog:
   enabled: true
