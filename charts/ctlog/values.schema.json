@@ -75,7 +75,8 @@
                     "default": {},
                     "title": "The config Schema",
                     "required": [
-                        "secret"
+                        "secret",
+                        "key"
                     ],
                     "properties": {
                         "secret": {
@@ -108,13 +109,31 @@
                                 "enabled": false,
                                 "name": "ctlog-config"
                             }]
+                        },
+                        "key": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The key Schema",
+                            "examples": [
+                                "treeID"
+                            ]
+                        },
+                        "treeID": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The treeID Schema",
+                            "examples": [
+                                ""
+                            ]
                         }
                     },
                     "examples": [{
                         "secret": {
                             "enabled": false,
                             "name": "ctlog-config"
-                        }
+                        },
+                        "key": "treeID",
+                        "treeID": ""
                     }]
                 },
                 "image": {
@@ -518,7 +537,9 @@
                     "secret": {
                         "enabled": false,
                         "name": "ctlog-config"
-                    }
+                    },
+                    "key": "treeID",
+                    "treeID": ""
                 },
                 "image": {
                     "registry": "ghcr.io",
@@ -868,6 +889,14 @@
                         "sigstorescaffolding"
                     ]
                 },
+                "privateKeyPasswordSecretName": {
+                    "type": "null",
+                    "default": null,
+                    "title": "The privateKeyPasswordSecretName Schema",
+                    "examples": [
+                        null
+                    ]
+                },
                 "serviceAccount": {
                     "type": "object",
                     "default": {},
@@ -964,6 +993,7 @@
                 },
                 "fulcioURL": "http://fulcio-server.fulcio-system.svc",
                 "logPrefix": "sigstorescaffolding",
+                "privateKeyPasswordSecretName": null,
                 "serviceAccount": {
                     "create": true,
                     "name": "",
@@ -1053,7 +1083,9 @@
                 "secret": {
                     "enabled": false,
                     "name": "ctlog-config"
-                }
+                },
+                "key": "treeID",
+                "treeID": ""
             },
             "image": {
                 "registry": "ghcr.io",
@@ -1137,6 +1169,7 @@
             },
             "fulcioURL": "http://fulcio-server.fulcio-system.svc",
             "logPrefix": "sigstorescaffolding",
+            "privateKeyPasswordSecretName": null,
             "serviceAccount": {
                 "create": true,
                 "name": "",

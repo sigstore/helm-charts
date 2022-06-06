@@ -22,6 +22,9 @@ spec:
             "--secret={{ template "ctlog.secret" . }}",
             "--fulcio-url={{ .Values.createctconfig.fulcioURL }}",
             "--trillian-server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}",
+          {{- if .Values.createctconfig.privateKeyPasswordSecretName }}
+            "--key-password=$(PRIVATE_KEY_PASSWORD)",
+          {{- end }}
             "--log-prefix={{ .Values.createctconfig.logPrefix }}"
           ]
           env:
@@ -29,6 +32,13 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+          {{- if .Values.createctconfig.privateKeyPasswordSecretName }}
+            - name: PRIVATE_KEY_PASSWORD
+              valueFrom:
+                secretKeyRef
+                  name: {{ .Values.createctconfig.privateKeyPasswordSecretName  }}
+                  key: password
+          {{- end }}
     {{- if .Values.createctconfig.securityContext }}
       securityContext:
 {{ toYaml .Values.createctconfig.securityContext | indent 8 }}
