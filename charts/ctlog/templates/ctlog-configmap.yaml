@@ -11,3 +11,6 @@ data:
     # Just a placeholder so that reapplying this won't overwrite treeID
     # if it already exists. This caused grief, do not remove.
     ###################################################################
+  {{- if .Values.server.config.treeID }}
+  {{ .Values.server.config.key }}: "{{ .Values.server.config.treeID }}"
+  {{- end }}

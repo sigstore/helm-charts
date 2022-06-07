@@ -31,6 +31,7 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createctconfig.image.version | string | `"sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2"` |  |
 | createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | createctconfig.name | string | `"createctconfig"` |  |
+| createctconfig.privateKeyPasswordSecretName | string | `nil` |  |
 | createctconfig.replicaCount | int | `1` |  |
 | createctconfig.securityContext.runAsNonRoot | bool | `true` |  |
 | createctconfig.securityContext.runAsUser | int | `65533` |  |
@@ -53,8 +54,10 @@ The following table lists the configurable parameters of the ctlog chart and the
 | forceNamespace | string | `""` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"ctlog-system"` |  |
+| server.config.key | string | `"treeID"` |  |
 | server.config.secret.enabled | bool | `false` |  |
 | server.config.secret.name | string | `"ctlog-config"` |  |
+| server.config.treeID | string | `""` |  |
 | server.extraArgs | list | `[]` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
