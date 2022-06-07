@@ -67,7 +67,7 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | createcerts.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createcerts.image.registry | string | `"ghcr.io"` |  |
 | createcerts.image.repository | string | `"sigstore/scaffolding/createcerts"` |  |
-| createcerts.image.version | string | `"sha256:46a355b021a9613b4ba578e92743e884e4567407b2b84e401343708c92b8b72e"` |  |
+| createcerts.image.version | string | `"sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"` |  |
 | createcerts.name | string | `"createcerts"` |  |
 | createcerts.replicaCount | int | `1` |  |
 | createcerts.serviceAccount.annotations | object | `{}` |  |
@@ -98,7 +98,7 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/fulcio"` |  |
-| server.image.version | string | `"sha256:66870bd6b111f3c5478703a8fb31c062003f0127b2c2c5e49ccd82abc4ec7841"` |  |
+| server.image.version | string | `"sha256:c0e8d940ec4ca6b474af9f7a04e05787677ec5bb3db12444ba69c89818ecfdd5"` |  |
 | server.ingress.grpc.annotations | object | `{}` |  |
 | server.ingress.grpc.className | object | `""` |  |
 | server.ingress.grpc.enabled | bool | `true` |  |
