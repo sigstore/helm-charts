@@ -78,7 +78,7 @@ createctconfig:
     version: "sha256:2795b42d3b42cdb9eaf3825e0bca742963208a51e30d5a7173f8a68ac6d47732"
   fulcioURL: "http://fulcio-server.fulcio-system.svc"
   logPrefix: sigstorescaffolding
-  privateKeyPasswordSecretName:
+  privateKeyPasswordSecretName: ""
   serviceAccount:
     create: true
     name: ""

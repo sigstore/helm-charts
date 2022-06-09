@@ -76,7 +76,8 @@
                     "title": "The config Schema",
                     "required": [
                         "secret",
-                        "key"
+                        "key",
+                        "treeID"
                     ],
                     "properties": {
                         "secret": {
@@ -786,6 +787,7 @@
                 "image",
                 "fulcioURL",
                 "logPrefix",
+                "privateKeyPasswordSecretName",
                 "serviceAccount",
                 "securityContext"
             ],
@@ -890,11 +892,11 @@
                     ]
                 },
                 "privateKeyPasswordSecretName": {
-                    "type": "null",
-                    "default": null,
+                    "type": "string",
+                    "default": "",
                     "title": "The privateKeyPasswordSecretName Schema",
                     "examples": [
-                        null
+                        ""
                     ]
                 },
                 "serviceAccount": {
@@ -993,7 +995,7 @@
                 },
                 "fulcioURL": "http://fulcio-server.fulcio-system.svc",
                 "logPrefix": "sigstorescaffolding",
-                "privateKeyPasswordSecretName": null,
+                "privateKeyPasswordSecretName": "",
                 "serviceAccount": {
                     "create": true,
                     "name": "",
@@ -1169,7 +1171,7 @@
             },
             "fulcioURL": "http://fulcio-server.fulcio-system.svc",
             "logPrefix": "sigstorescaffolding",
-            "privateKeyPasswordSecretName": null,
+            "privateKeyPasswordSecretName": "",
             "serviceAccount": {
                 "create": true,
                 "name": "",
