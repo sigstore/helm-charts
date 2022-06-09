@@ -52,7 +52,7 @@ NOTE: The public key that was used to sign a particular chart may not be identic
 
 ## Charts
 
-* [cosigned](charts/cosigned)
+* [policy-controller](charts/policy-controller)
 * [ctlog](charts/ctlog)
 * [fulcio](charts/fulcio)
 * [rekor](charts/rekor)
