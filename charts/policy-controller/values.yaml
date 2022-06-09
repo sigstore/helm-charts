@@ -8,7 +8,7 @@ cosign:
 policywebhook:
   image:
     repository: gcr.io/projectsigstore/policy-webhook
-    version: sha256:82940e8c3e0d3d5dd92b4779f4378e664f91b790db0d799b03535648eddc141d
+    version: sha256:5ddc8c4c7f609a6a8396f469fde685e8774f7ee3aa4ef56f18adcb90b546a48c
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
@@ -44,8 +44,8 @@ webhook:
   name: webhook
   image:
     repository: gcr.io/projectsigstore/policy-controller
-    # crane digest gcr.io/projectsigstore/policy-controller:v1.8.0
-    version: sha256:784518ff3ee755ce42e174e61036094af771c43bdc76b65a8f0e52481ed450ac
+    # crane digest gcr.io/projectsigstore/policy-controller:v1.9.0
+    version: sha256:87dffbad3e3d7a7ce9cc4184607240df8f39943db25772e0e4b2800deb7e5134
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}

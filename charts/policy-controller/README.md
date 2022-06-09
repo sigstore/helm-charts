@@ -15,12 +15,12 @@ The following table lists the configurable parameters of the policy-controller c
 | commonTolerations | list | `[]` |  |
 | cosign.cosignPub | string | `""` |  |
 | cosign.secretKeyRef.name | string | `""` |  |
-| cosign.webhookName | string | `"cosigned.sigstore.dev"` |  |
+| cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | policywebhook.env | object | `{}` |  |
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"gcr.io/projectsigstore/policy-webhook"` |  |
-| policywebhook.image.version | string | `"sha256:82940e8c3e0d3d5dd92b4779f4378e664f91b790db0d799b03535648eddc141d"` |  |
+| policywebhook.image.version | string | `"sha256:5ddc8c4c7f609a6a8396f469fde685e8774f7ee3aa4ef56f18adcb90b546a48c"` |  |
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | policywebhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
 | policywebhook.podSecurityContext.enabled | bool | `true` |  |
