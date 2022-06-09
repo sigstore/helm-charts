@@ -83,7 +83,7 @@ spec:
         {{- end }}
         livenessProbe:
           failureThreshold: 6
-          initialDelaySeconds: 20
+          initialDelaySeconds: 30
           periodSeconds: 1
           httpGet:
             port: 8443

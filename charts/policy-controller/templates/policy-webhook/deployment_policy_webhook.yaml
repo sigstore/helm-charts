@@ -103,7 +103,7 @@ spec:
             name: writable-home-dir
         readinessProbe: &probe
           failureThreshold: 6
-          initialDelaySeconds: 20
+          initialDelaySeconds: 30
           periodSeconds: 1
           httpGet:
             scheme: HTTPS
