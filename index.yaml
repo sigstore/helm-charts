@@ -1697,6 +1697,30 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/fulcio-0.2.0/fulcio-0.2.0.tgz
     version: 0.2.0
+  policy-controller:
+  - annotations:
+      artifacthub.io/images: |
+        - name: policy-controller
+          image: gcr.io/projectsigstore/policy-controller:v1.9.0@sha256:87dffbad3e3d7a7ce9cc4184607240df8f39943db25772e0e4b2800deb7e5134
+        - name: policywebhook
+          image: gcr.io/projectsigstore/policy-webhook:v1.9.0@sha256:5ddc8c4c7f609a6a8396f469fde685e8774f7ee3aa4ef56f18adcb90b546a48c
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.9.0
+    created: "2022-06-09T21:15:56.187480887Z"
+    description: The Helm chart for Policy  Controller
+    digest: 17f5cb58b83795275c744e990acb7ed54b224e31791c71e61bd7f97aa494b4ec
+    home: https://github.com/sigstore/policy-controller
+    maintainers:
+    - name: dlorenc
+    - name: hectorj2f
+    name: policy-controller
+    sources:
+    - https://github.com/sigstore/policy-controller
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/policy-controller-0.1.24/policy-controller-0.1.24.tgz
+    version: 0.1.24
   rekor:
   - annotations:
       artifacthub.io/images: |
@@ -3672,4 +3696,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.1/trillian-0.1.1.tgz
     version: 0.1.1
-generated: "2022-06-09T15:45:51.951648966Z"
+generated: "2022-06-09T21:15:56.188260373Z"
