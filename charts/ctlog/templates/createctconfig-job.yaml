@@ -35,7 +35,7 @@ spec:
           {{- if .Values.createctconfig.privateKeyPasswordSecretName }}
             - name: PRIVATE_KEY_PASSWORD
               valueFrom:
-                secretKeyRef
+                secretKeyRef:
                   name: {{ .Values.createctconfig.privateKeyPasswordSecretName  }}
                   key: password
           {{- end }}
