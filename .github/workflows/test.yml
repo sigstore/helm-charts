@@ -21,7 +21,7 @@ jobs:
         with:
           version: v3.8.1
 
-      - uses: actions/setup-python@v3 # pin@v2
+      - uses: actions/setup-python@v4 # pin@v2
         with:
           python-version: 3.7
 
