@@ -784,6 +784,7 @@
                 "replicaCount",
                 "backoffLimit",
                 "name",
+                "initContainerImage",
                 "image",
                 "fulcioURL",
                 "logPrefix",
@@ -823,6 +824,75 @@
                     "examples": [
                         "createctconfig"
                     ]
+                },
+                "initContainerImage": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The initContainerImage Schema",
+                    "required": [
+                        "curl"
+                    ],
+                    "properties": {
+                        "curl": {
+                            "type": "object",
+                            "default": {},
+                            "title": "The curl Schema",
+                            "required": [
+                                "registry",
+                                "repository",
+                                "version",
+                                "imagePullPolicy"
+                            ],
+                            "properties": {
+                                "registry": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The registry Schema",
+                                    "examples": [
+                                        "docker.io"
+                                    ]
+                                },
+                                "repository": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The repository Schema",
+                                    "examples": [
+                                        "curlimages/curl"
+                                    ]
+                                },
+                                "version": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The version Schema",
+                                    "examples": [
+                                        "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"
+                                    ]
+                                },
+                                "imagePullPolicy": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The imagePullPolicy Schema",
+                                    "examples": [
+                                        "IfNotPresent"
+                                    ]
+                                }
+                            },
+                            "examples": [{
+                                "registry": "docker.io",
+                                "repository": "curlimages/curl",
+                                "version": "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498",
+                                "imagePullPolicy": "IfNotPresent"
+                            }]
+                        }
+                    },
+                    "examples": [{
+                        "curl": {
+                            "registry": "docker.io",
+                            "repository": "curlimages/curl",
+                            "version": "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498",
+                            "imagePullPolicy": "IfNotPresent"
+                        }
+                    }]
                 },
                 "image": {
                     "type": "object",
@@ -987,6 +1057,14 @@
                 "replicaCount": 1,
                 "backoffLimit": 6,
                 "name": "createctconfig",
+                "initContainerImage": {
+                    "curl": {
+                        "registry": "docker.io",
+                        "repository": "curlimages/curl",
+                        "version": "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498",
+                        "imagePullPolicy": "IfNotPresent"
+                    }
+                },
                 "image": {
                     "registry": "ghcr.io",
                     "repository": "sigstore/scaffolding/createctconfig",
@@ -1163,6 +1241,14 @@
             "replicaCount": 1,
             "backoffLimit": 6,
             "name": "createctconfig",
+            "initContainerImage": {
+                "curl": {
+                    "registry": "docker.io",
+                    "repository": "curlimages/curl",
+                    "version": "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498",
+                    "imagePullPolicy": "IfNotPresent"
+                }
+            },
             "image": {
                 "registry": "ghcr.io",
                 "repository": "sigstore/scaffolding/createctconfig",

@@ -4,7 +4,7 @@ description: Certificate Log
 
 type: application
 
-version: 0.2.23
+version: 0.2.24
 appVersion: 0.3.0
 
 keywords:
@@ -25,3 +25,5 @@ annotations:
       image: ghcr.io/sigstore/scaffolding/createctconfig@sha256:2795b42d3b42cdb9eaf3825e0bca742963208a51e30d5a7173f8a68ac6d47732
     - name: createtree
       image: ghcr.io/sigstore/scaffolding/createtree@sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c
+    - name: curlimages/curl
+      image: docker.io/curlimages/curl@sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498

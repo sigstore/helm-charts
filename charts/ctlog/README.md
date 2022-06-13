@@ -28,7 +28,11 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createctconfig.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createctconfig.image.registry | string | `"ghcr.io"` |  |
 | createctconfig.image.repository | string | `"sigstore/scaffolding/createctconfig"` |  |
-| createctconfig.image.version | string | `"sha256:7412243415a984b697a630b2f0b322a519285abc5c458053790e4e5f9a4156b2"` |  |
+| createctconfig.image.version | string | `"sha256:2795b42d3b42cdb9eaf3825e0bca742963208a51e30d5a7173f8a68ac6d47732"` |  |
+| createctconfig.initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
+| createctconfig.initContainerImage.curl.registry | string | `"docker.io"` |  |
+| createctconfig.initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
+| createctconfig.initContainerImage.curl.version | string | `"sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"` | 7.82.0 |
 | createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | createctconfig.name | string | `"createctconfig"` |  |
 | createctconfig.privateKeyPasswordSecretName | string | `""` |  |
@@ -43,7 +47,7 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
-| createtree.image.version | string | `"sha256:b8bbd91bafb1312719ae0d1a59c1deec3c90e74d5f91a16c419841f786b8fc96"` |  |
+| createtree.image.version | string | `"sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
 | createtree.securityContext.runAsUser | int | `65533` |  |
@@ -62,7 +66,7 @@ The following table lists the configurable parameters of the ctlog chart and the
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/scaffolding/ct_server"` |  |
-| server.image.version | string | `"sha256:6f5ec5dbff8f886b3b56ff206b8e836fe564bbd64a1436ac8c5e7ae341163e24"` |  |
+| server.image.version | string | `"sha256:7c791d3b7c15e817807f07d4cdb00406529a114702ad448ee857e1d0fc5fb5a9"` |  |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `false` |  |

@@ -70,6 +70,13 @@ createctconfig:
   replicaCount: 1
   backoffLimit: 6
   name: createctconfig
+  initContainerImage:
+    curl:
+      registry: docker.io
+      repository: curlimages/curl
+      # -- 7.82.0
+      version: "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"
+      imagePullPolicy: IfNotPresent
   image:
     registry: ghcr.io
     repository: sigstore/scaffolding/createctconfig
