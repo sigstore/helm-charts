@@ -86,7 +86,7 @@ helm repo add sigstore https://sigstore.github.io/helm-charts
 
 helm repo update
 
-helm install policy-controller -n cosign-system sigstore/policy --devel --set cosign.secretKeyRef.name=mysecret
+helm install policy-controller -n cosign-system sigstore/policy-controller --devel --set cosign.secretKeyRef.name=mysecret
 ```
 
 ### Enabling Admission control
