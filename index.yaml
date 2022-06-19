@@ -1923,6 +1923,29 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 1.9.0
+    created: "2022-06-19T22:32:45.499174062Z"
+    description: The Helm chart for Policy  Controller
+    digest: c8f98ff22cf455bee133b17bb3113ea23576810d67608ddea2ecc3ca66e7b707
+    home: https://github.com/sigstore/policy-controller
+    maintainers:
+    - name: dlorenc
+    - name: hectorj2f
+    name: policy-controller
+    sources:
+    - https://github.com/sigstore/policy-controller
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/policy-controller-0.1.26/policy-controller-0.1.26.tgz
+    version: 0.1.26
+  - annotations:
+      artifacthub.io/images: |
+        - name: policy-controller
+          image: gcr.io/projectsigstore/policy-controller:v1.9.0@sha256:87dffbad3e3d7a7ce9cc4184607240df8f39943db25772e0e4b2800deb7e5134
+        - name: policywebhook
+          image: gcr.io/projectsigstore/policy-webhook:v1.9.0@sha256:5ddc8c4c7f609a6a8396f469fde685e8774f7ee3aa4ef56f18adcb90b546a48c
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.9.0
     created: "2022-06-17T17:53:43.01820158Z"
     description: The Helm chart for Policy  Controller
     digest: 18b2cd49ab0ef8901b178801912cdae189a6bb67bb3a064420315a0214205f99
@@ -4073,4 +4096,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.1/trillian-0.1.1.tgz
     version: 0.1.1
-generated: "2022-06-17T18:00:02.088277811Z"
+generated: "2022-06-19T22:32:45.499850766Z"
