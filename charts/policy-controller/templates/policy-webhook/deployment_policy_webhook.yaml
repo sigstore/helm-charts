@@ -22,6 +22,7 @@ metadata:
     {{- include "policy-controller.labels" . | nindent 4 }}
     control-plane: {{ template "policy-controller.fullname" . }}-policy-webhook
 spec:
+  replicas: {{ .Values.policywebhook.replicaCount }}
   selector:
     matchLabels:
       {{- include "policy-controller.selectorLabels" . | nindent 6 }}

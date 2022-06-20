@@ -21,6 +21,7 @@ The following table lists the configurable parameters of the policy-controller c
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"gcr.io/projectsigstore/policy-webhook"` |  |
 | policywebhook.image.version | string | `"sha256:5ddc8c4c7f609a6a8396f469fde685e8774f7ee3aa4ef56f18adcb90b546a48c"` |  |
+| policywebhook.replicaCount | int | `1` |  |
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | policywebhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
 | policywebhook.podSecurityContext.enabled | bool | `true` |  |
@@ -41,6 +42,7 @@ The following table lists the configurable parameters of the policy-controller c
 | serviceMonitor.enabled | bool | `false` |  |
 | webhook.env | object | `{}` |  |
 | webhook.extraArgs | object | `{}` |  |
+| webhook.replicaCount | int | `1` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"gcr.io/projectsigstore/policy-controller"` |  |
 | webhook.image.version | string | `"sha256:18c7db5051c0d5ac147b1785567ef647f23f7949ae5858776561cfc9cd8cc4b2"` |  |

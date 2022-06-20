@@ -6,6 +6,7 @@ cosign:
   webhookName: "policy.sigstore.dev"
 
 policywebhook:
+  replicaCount: 1
   image:
     repository: gcr.io/projectsigstore/policy-webhook
     version: sha256:5ddc8c4c7f609a6a8396f469fde685e8774f7ee3aa4ef56f18adcb90b546a48c
@@ -41,6 +42,7 @@ policywebhook:
     validating: "validating.clusterimagepolicy.sigstore.dev"
 
 webhook:
+  replicaCount: 1
   name: webhook
   image:
     repository: gcr.io/projectsigstore/policy-controller
