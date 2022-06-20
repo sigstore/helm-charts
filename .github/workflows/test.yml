@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # pin@v3
         with:
           fetch-depth: 0
 
@@ -21,7 +21,7 @@ jobs:
         with:
           version: v3.8.1
 
-      - uses: actions/setup-python@v4 # pin@v2
+      - uses: actions/setup-python@d09bd5e6005b175076f227b13d9730d56e9dcfcb # pin@v4
         with:
           python-version: 3.7
 
