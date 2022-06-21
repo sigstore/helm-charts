@@ -5,6 +5,8 @@ cosign:
   cosignPub: ""
   webhookName: "policy.sigstore.dev"
 
+imagePullSecrets: []
+
 policywebhook:
   replicaCount: 1
   image:
