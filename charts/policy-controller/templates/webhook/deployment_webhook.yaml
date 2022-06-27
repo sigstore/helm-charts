@@ -20,6 +20,10 @@ spec:
     spec:
       nodeSelector:
         {{- toYaml .Values.commonNodeSelector | nindent 8 }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}        
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
       serviceAccountName: {{ template "policy-controller.fullname" . }}-webhook

@@ -13,6 +13,7 @@ The following table lists the configurable parameters of the policy-controller c
 |-----|------|---------|-------------|
 | commonNodeSelector | object | `{}` |  |
 | commonTolerations | list | `[]` |  |
+| imagePullSecrets | string | `nil` |  |
 | cosign.cosignPub | string | `""` |  |
 | cosign.secretKeyRef.name | string | `""` |  |
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
