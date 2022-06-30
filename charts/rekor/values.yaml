@@ -62,8 +62,8 @@ server:
     registry: gcr.io
     repository: projectsigstore/rekor-server
     pullPolicy: IfNotPresent
-    # -- v0.8.2
-    version: "sha256:3461c5f2ba49143639b2550fa19b05d738e0f21f98056c7ccc851dfadb674ceb"
+    # -- v0.9.0
+    version: "sha256:7c8b7b72ef02746c5c5fea62cf5d8daf93d48582250d50040a0596c9e6c25cfb"
   logging:
     production: false
   ingress:
