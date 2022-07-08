@@ -12,8 +12,8 @@ server:
     registry: gcr.io
     repository: projectsigstore/fulcio
     pullPolicy: IfNotPresent
-    # v0.5.0
-    version: "sha256:c0e8d940ec4ca6b474af9f7a04e05787677ec5bb3db12444ba69c89818ecfdd5"
+    # v0.5.1
+    version: "sha256:25893551712438abca37f8499576bcd3de1e5a8f8c7c8ebcd9e2846217b2a959"
   args:
     port: 5555
     grpcPort: 5554
