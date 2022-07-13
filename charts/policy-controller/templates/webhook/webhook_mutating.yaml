@@ -17,3 +17,4 @@ webhooks:
       namespace: {{ .Release.Namespace }}
   failurePolicy: Fail
   sideEffects: None
+  reinvocationPolicy: IfNeeded
