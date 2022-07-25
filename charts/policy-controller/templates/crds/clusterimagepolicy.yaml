@@ -17,13 +17,13 @@ metadata:
   name: clusterimagepolicies.policy.sigstore.dev
 spec:
   conversion:
-      strategy: Webhook
-      webhook:
-        conversionReviewVersions: ["v1beta1", "v1alpha1"]
-        clientConfig:
-          service:
-            name: policy-webhook
-            namespace: {{ .Release.Namespace }}
+    strategy: Webhook
+    webhook:
+      conversionReviewVersions: ["v1beta1", "v1alpha1"]
+      clientConfig:
+        service:
+          name: policy-webhook
+          namespace: {{ .Release.Namespace }}
   group: policy.sigstore.dev
   names:
     kind: ClusterImagePolicy
@@ -133,7 +133,11 @@ spec:
                               properties:
                                 issuer:
                                   type: string
+                                issuerRegExp:
+                                  type: string
                                 subject:
+                                  type: string
+                                subjectRegExp:
                                   type: string
                           url:
                             type: string
@@ -156,6 +160,12 @@ spec:
                                   name:
                                     description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
                                     type: string
+                      static:
+                        type: object
+                        properties:
+                          action:
+                            description: Action defines how to handle a matching policy.
+                            type: string
                 images:
                   type: array
                   items:
@@ -280,7 +290,11 @@ spec:
                               properties:
                                 issuer:
                                   type: string
+                                issuerRegExp:
+                                  type: string
                                 subject:
+                                  type: string
+                                subjectRegExp:
                                   type: string
                           url:
                             type: string
@@ -303,6 +317,12 @@ spec:
                                   name:
                                     description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
                                     type: string
+                      static:
+                        type: object
+                        properties:
+                          action:
+                            description: Action defines how to handle a matching policy.
+                            type: string
                 images:
                   type: array
                   items:
