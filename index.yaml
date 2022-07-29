@@ -2139,6 +2139,42 @@ entries:
         - name: curlimages/curl
           image: docker.io/curlimages/curl@sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498
         - name: rekor-server
+          image: gcr.io/projectsigstore/rekor-server@sha256:851f9d63879655156293cfe501976004ffab0093409596cf7f0f0099867d9d39
+        - name: redis
+          image: docker.io/redis@sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.10.0
+    created: "2022-07-29T12:12:47.758972517Z"
+    dependencies:
+    - condition: trillian.enabled
+      name: trillian
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.1.8
+    description: Part of the sigstore project, Rekor is a timestamping server and
+      transparency log for storing signatures, as well as an API based server for
+      validation
+    digest: 03b554b01a0f0ead50121f33538e34cbfcd958eddbd2669f03603aabf7675b4d
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor
+    sources:
+    - https://github.com/sigstore/rekor
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-0.3.7/rekor-0.3.7.tgz
+    version: 0.3.7
+  - annotations:
+      artifacthub.io/images: |
+        - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree@sha256:f20a73f4c581c0b13daf9ede832b5b6b838acfeb04fe5f2690722c2146d9d8d7
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl@sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498
+        - name: rekor-server
           image: gcr.io/projectsigstore/rekor-server@sha256:6c1b8a9a9254e3bfd8d4f38c0ed1b935b3bc43456ff371d4e62b90618fa2f8a1
         - name: redis
           image: docker.io/redis@sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39
@@ -4522,4 +4558,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.1/trillian-0.1.1.tgz
     version: 0.1.1
-generated: "2022-07-25T14:43:56.166724222Z"
+generated: "2022-07-29T12:12:47.760431616Z"
