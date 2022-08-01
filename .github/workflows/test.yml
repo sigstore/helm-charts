@@ -14,7 +14,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: sigstore/cosign-installer@48866aa521d8bf870604709cd43ec2f602d03ff2 # pin@v2.4.1
+      - uses: sigstore/cosign-installer@09a077b27eb1310dcfb21981bee195b30ce09de0 # pin@v2.5.0
 
       - name: Set up Helm
         uses: azure/setup-helm@18bc76811624f360dbd7f18c2d4ecb32c7b87bab # pin@v1.1
