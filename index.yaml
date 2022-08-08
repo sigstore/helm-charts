@@ -3419,6 +3419,40 @@ entries:
   - annotations:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
+    created: "2022-08-08T21:37:14.675432655Z"
+    dependencies:
+    - condition: fulcio.enabled
+      name: fulcio
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.4.8
+    - condition: rekor.enabled
+      name: rekor
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.3.7
+    - condition: trillian.enabled
+      name: trillian
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.1.9
+    - condition: ctlog.enabled
+      name: ctlog
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.24
+    description: Scaffolding the components of the sigstore architecture
+    digest: 2d68cbad5f20f120b3c215a51ab1f37dfc3e3e275a6dbb58fa93af933a325d33
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: scaffold
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/scaffold-0.3.12/scaffold-0.3.12.tgz
+    version: 0.3.12
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
     created: "2022-07-29T12:32:05.713728029Z"
     dependencies:
     - condition: fulcio.enabled
@@ -4643,4 +4677,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.1/trillian-0.1.1.tgz
     version: 0.1.1
-generated: "2022-08-08T19:09:31.00181155Z"
+generated: "2022-08-08T21:37:14.676702929Z"
