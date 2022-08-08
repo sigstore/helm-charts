@@ -4405,6 +4405,34 @@ entries:
           image: gcr.io/projectsigstore/trillian_log_signer@sha256:87699af429d79440f7e0a487d215c2129bf97b37698370d050a68822996f93f0
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
+    created: "2022-08-08T19:09:31.001061435Z"
+    description: Trillian
+    digest: 360181b215293b5e1dd42b2e1be4ede48ec60f75cd039e9f3733241ce089f9fb
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: trillian
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.9/trillian-0.1.9.tgz
+    version: 0.1.9
+  - annotations:
+      artifacthub.io/images: |
+        - name: curl
+          image: docker.io/curlimages/curl@sha256:e83fef2d5a036d40df4ded829141e8c0ec41871490d252fb8c81cb4580ebb35b
+        - name: netcat
+          image: docker.io/toolbelt/netcat@sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea
+        - name: db_server
+          image: gcr.io/trillian-opensource-ci/db_server@sha256:ae4043e9c5e4de522fb4958e92d592aa97c7fc294a12849b902fd1facd7122c6
+        - name: log_server
+          image: gcr.io/projectsigstore/trillian_log_server@sha256:4599a3f037234423d13ff84755679a56da62363e7ed07c70bc556078fd73986d
+        - name: log_signer
+          image: gcr.io/projectsigstore/trillian_log_signer@sha256:87699af429d79440f7e0a487d215c2129bf97b37698370d050a68822996f93f0
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
     created: "2022-06-01T07:19:43.972514726Z"
     description: Trillian
     digest: 6223c8a045673840dc889816be5518748f1a89a74c9abacb87d9300ef15fe207
@@ -4615,4 +4643,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.1/trillian-0.1.1.tgz
     version: 0.1.1
-generated: "2022-08-04T21:13:43.212377771Z"
+generated: "2022-08-08T19:09:31.00181155Z"
