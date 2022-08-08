@@ -151,15 +151,9 @@ Log Server Arguments
 - {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.logServer.portRPC | int) | quote }}
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.logServer.portHTTP | int) | quote }}
 - "--alsologtostderr"
-{{- if .Values.logServer.extraArgs -}}
-{{- range $key, $value := .Values.logServer.extraArgs }}
-{{- if $value }}
-- {{ printf "%v=%v" $key $value | quote }}
-{{- else }}
-- {{ printf $key | quote }}
-{{- end }}
-{{- end }}
-{{- end -}}
+{{-  range .Values.logServer.extraArgs }}
+- {{ . | quote }}
+{{ end }}
 {{- end -}}
 
 {{/*
@@ -172,15 +166,9 @@ Log Signer Arguments
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.logSigner.portHTTP | int) | quote }}
 - {{ printf "--force_master=%t" (default true .Values.logSigner.forceMaster) | quote }}
 - "--alsologtostderr"
-{{- if .Values.logSigner.extraArgs -}}
-{{- range $key, $value := .Values.logSigner.extraArgs }}
-{{- if $value }}
-- {{ printf "%v=%v" $key $value | quote }}
-{{- else }}
-- {{ printf $key | quote }}
-{{- end }}
-{{- end }}
-{{- end -}}
+{{-  range .Values.logSigner.extraArgs }}
+- {{ . | quote }}
+{{ end }}
 {{- end -}}
 
 
