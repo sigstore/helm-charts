@@ -318,9 +318,9 @@ Server Arguments
 {{- if .Values.server.logging.production }}
 - "--log_type=prod"
 {{- end -}}
-{{- if .Values.server.extraArgs -}}
-{{ toYaml .Values.server.extraArgs }}
-{{- end -}}
+{{-  range .Values.server.extraArgs }}
+- {{ . | quote }}
+{{ end }}
 {{- end -}}
 
 {{/*
