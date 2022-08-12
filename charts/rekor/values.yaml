@@ -140,6 +140,7 @@ server:
     annotations: {}
 createtree:
   name: createtree
+  force: false
   image:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
