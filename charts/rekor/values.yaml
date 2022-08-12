@@ -1,7 +1,7 @@
 namespace:
   create: false
   name: rekor-system
-imagePullSecrets:
+imagePullSecrets: ""
 
 initContainerImage:
   curl:
@@ -71,6 +71,7 @@ server:
     className: "nginx"
     hosts:
       - path: /
+        host: "root"
     annotations: {}
     tls: []
   service:
@@ -140,6 +141,7 @@ server:
     annotations: {}
 createtree:
   name: createtree
+  force: false
   image:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
