@@ -163,6 +163,7 @@ trillian:
     create: true
   forceNamespace: trillian-system
   fullnameOverride: trillian
+  adminServer: ""
   logServer:
     name: trillian-logserver
     fullnameOverride: trillian-logserver

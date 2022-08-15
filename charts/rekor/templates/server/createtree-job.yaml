@@ -17,7 +17,11 @@ spec:
           args: ["--namespace=$(NAMESPACE)",
             "--configmap={{ template "rekor.config" . }}",
             "--display_name=rekortree",
+            {{- if .Values.trillian.adminServer }}
+            "--admin_server={{ .Values.trillian.adminServer }}",
+            {{- else }}
             "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.forceNamespace }}:{{ .Values.trillian.logServer.portRPC}}",
+            {{- end }}
             "--force={{ .Values.createtree.force }}"
           ]
           env:
