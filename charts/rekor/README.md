@@ -30,23 +30,27 @@ The previous command removes the previously installed chart.
 
 The following table lists the configurable parameters of the Rekor chart and their default values.
 
+## Values
+
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| createtree.force | bool | `false` |  |
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
-| createtree.image.version | string | `"sha256:de57091f8b846ad7935b1c70af0a45e55af7fed50508bec30a51f41509ae75f1"` |  |
+| createtree.image.version | string | `"sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"` |  |
 | createtree.name | string | `"createtree"` |  |
+| createtree.securityContext.runAsNonRoot | bool | `true` |  |
+| createtree.securityContext.runAsUser | int | `65533` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
 | createtree.serviceAccount.create | bool | `true` |  |
 | createtree.serviceAccount.name | string | `""` |  |
-| createtree.securityContext | `{}` |  |
 | forceNamespace | string | `""` |  |
 | imagePullSecrets | string | `nil` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
-| initContainerImage.curl.version | string | `"sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8"` | 7.81.0 |
+| initContainerImage.curl.version | string | `"sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"` | 7.82.0 |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"rekor-system"` |  |
 | redis.args[0] | string | `"--bind"` |  |
@@ -58,7 +62,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | redis.image.pullPolicy | string | `"IfNotPresent"` |  |
 | redis.image.registry | string | `"docker.io"` |  |
 | redis.image.repository | string | `"redis"` |  |
-| redis.image.version | string | `"sha256:0a0d563fd6fe5361316dd53f7f0a244656675054302567230e85eb114f683db4"` | 5.0.10 |
+| redis.image.version | string | `"sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39"` | 6.2.6-alpine3.15 |
 | redis.name | string | `"redis"` |  |
 | redis.port | int | `6379` |  |
 | redis.readinessProbe.exec.command[0] | string | `"/bin/sh"` |  |
@@ -92,24 +96,17 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.attestation_storage.persistence.subPath | string | `""` |  |
 | server.config.key | string | `"treeID"` |  |
 | server.config.treeID | string | `""` |  |
-| server.deploymentAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
-| server.deploymentAnnotations."prometheus.io/port" | string | `"2112"` |  |
-| server.deploymentAnnotations."prometheus.io/scrape" | string | `"true"` |  |
 | server.enabled | bool | `true` |  |
 | server.extraArgs | list | `[]` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-| server.image.version | string | `"sha256:a4c7199a2ab244d8d02f5d6c6535ac2dfaefef7e909b9d53e1b254427810a116"` | v0.8.1 |
+| server.image.version | string | `"sha256:851f9d63879655156293cfe501976004ffab0093409596cf7f0f0099867d9d39"` | v0.10.0 |
 | server.ingress.annotations | object | `{}` |  |
-| server.ingress.className | string | `nil` |  |
+| server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |
-| server.ingress.hosts | array | [] |  |
-| server.ingress.hosts.host | string |  |  |
-| server.ingress.hosts.path | string | `"/"` |  |
-| server.ingress.tls | array | `[]` |  |
-| server.ingress.tls.hosts | array | `[]` |  |
-| server.ingress.tls.secretName | string | `` |  |
+| server.ingress.hosts[0].path | string | `"/"` |  |
+| server.ingress.tls | list | `[]` |  |
 | server.livenessProbe.failureThreshold | int | `3` |  |
 | server.livenessProbe.httpGet.path | string | `"/ping"` |  |
 | server.livenessProbe.httpGet.port | int | `3000` |  |
@@ -119,6 +116,9 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.livenessProbe.timeoutSeconds | int | `1` |  |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
+| server.podAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
+| server.podAnnotations."prometheus.io/port" | string | `"2112"` |  |
+| server.podAnnotations."prometheus.io/scrape" | string | `"true"` |  |
 | server.port | int | `3000` |  |
 | server.readinessProbe.failureThreshold | int | `3` |  |
 | server.readinessProbe.httpGet.path | string | `"/ping"` |  |
@@ -130,6 +130,8 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.replicaCount | int | `1` |  |
 | server.resources | object | `{}` |  |
 | server.retrieve_api.enabled | bool | `true` |  |
+| server.securityContext.runAsNonRoot | bool | `true` |  |
+| server.securityContext.runAsUser | int | `65533` |  |
 | server.service.ports[0].name | string | `"3000-tcp"` |  |
 | server.service.ports[0].port | int | `80` |  |
 | server.service.ports[0].protocol | string | `"TCP"` |  |
@@ -142,6 +144,11 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.serviceAccount.annotations | object | `{}` |  |
 | server.serviceAccount.create | bool | `true` |  |
 | server.serviceAccount.name | string | `""` |  |
+| server.sharding.contents | string | `""` |  |
+| server.sharding.filename | string | `"sharding-config.yaml"` |  |
+| server.sharding.mountPath | string | `"/sharding"` |  |
+| server.signer | string | `"memory"` |  |
+| trillian.adminServer | string | `""` |  |
 | trillian.enabled | bool | `true` |  |
 | trillian.forceNamespace | string | `"trillian-system"` |  |
 | trillian.fullnameOverride | string | `"trillian"` |  |
