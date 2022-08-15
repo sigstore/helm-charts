@@ -140,12 +140,13 @@ server:
     annotations: {}
 createtree:
   name: createtree
+  force: false
   image:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.2.6
-    version: "sha256:f20a73f4c581c0b13daf9ede832b5b6b838acfeb04fe5f2690722c2146d9d8d7"
+    # v0.4.2
+    version: "sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"
   serviceAccount:
     create: true
     name: ""
