@@ -1,0 +1,32 @@
+namespace: "rekor-system"
+createtree:
+  name: createtree
+  force: true
+  image:
+    registry: ghcr.io
+    repository: sigstore/scaffolding/createtree
+    pullPolicy: IfNotPresent
+    # v0.4.2
+    version: "sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"
+  serviceAccount:
+    create: false
+    name: "rekor-createtree"
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65533
+  configMap: "rekor-config"
+
+# Configure Trillian dependency
+trillian:
+  enabled: true
+  namespace:
+    name: trillian-system
+    create: true
+  forceNamespace: trillian-system
+  fullnameOverride: trillian
+  adminServer: "trillian-logserver.trillian-system:8091"
+  logServer:
+    name: trillian-logserver
+    fullnameOverride: trillian-logserver
+    portHTTP: 8090
+    portRPC: 8091

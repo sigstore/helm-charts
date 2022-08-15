@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: createtree
+  namespace: {{ .Values.namespace }}
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ template "rekor.serviceAccountName.createtree" . }}
+      restartPolicy: Never
+      automountServiceAccountToken: true
+      containers:
+        - name: createtree
+          image: "{{ template "rekor.image" .Values.createtree.image }}"
+          args: ["--namespace=$(NAMESPACE)",
+            "--configmap={{ .Values.createtree.configMap }}",
+            "--display_name=rekortree",
+            {{- if .Values.trillian.adminServer }}
+            "--admin_server={{ .Values.trillian.adminServer }}",
+            {{- else }}
+            "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.forceNamespace }}:{{ .Values.trillian.logServer.portRPC}}",
+            {{- end }}
+            "--force={{ .Values.createtree.force }}",
+          ]
+          env:
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+    {{- if .Values.createtree.securityContext }}
+      securityContext:
+{{ toYaml .Values.createtree.securityContext | indent 8 }}
+    {{- end }}

@@ -1,0 +1,21 @@
+apiVersion: v2
+name: rekor-createtree
+description: Part of the sigstore project, rekor-createtree is used to create new Trillian trees for Rekor.
+
+type: application
+
+version: 0.0.1
+
+keywords:
+  - security
+  - transparency logs
+
+home: https://sigstore.dev/
+maintainers:
+  - name: The Sigstore Authors
+
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/images: |
+    - name: createtree
+      image: ghcr.io/sigstore/scaffolding/createtree@sha256:f20a73f4c581c0b13daf9ede832b5b6b838acfeb04fe5f2690722c2146d9d8d7
