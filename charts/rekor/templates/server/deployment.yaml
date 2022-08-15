@@ -26,6 +26,7 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/server/configmap.yaml") . | sha256sum }}
+        checksum/sharding_config: {{ include (print $.Template.BasePath "/server/configmap-sharding.yaml") . | sha256sum }}
         {{- if .Values.server.podAnnotations }}
         {{- toYaml .Values.server.podAnnotations | nindent 8 }}
         {{- end }}
