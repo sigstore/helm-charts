@@ -21,6 +21,7 @@ Update the status of an existing Trillian tree
 | namespace.name | string | `"trillian-system"` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `65533` |  |
+| serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `false` |  |
 | serviceAccount.name | string | `"trillian-logserver"` |  |
 | spec.image | string | `"ghcr.io/sigstore/scaffolding/updatetree@sha256:22c653b44aef3dc0de4e1bc398a435699b06a01a9b8fdef7880933cb0d79c8ee"` |  |

@@ -2,6 +2,7 @@ namespace:
   name: trillian-system
 serviceAccount:
   name: trillian-logserver
+  annotations: {}
   create: false
 spec:
   replicaCount: 1
