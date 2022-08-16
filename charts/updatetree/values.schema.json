@@ -1,4 +1,8 @@
 {
+    "enabled": {
+        "type": "boolean",
+        "default": false
+    },
     "namespace": {
         "create": {
             "type": "boolean",

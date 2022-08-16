@@ -1,5 +1,7 @@
+enabled: false
 namespace:
   name: trillian-system
+  create: false
 serviceAccount:
   name: trillian-logserver
   annotations: {}
