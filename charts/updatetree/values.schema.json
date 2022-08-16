@@ -49,7 +49,12 @@
             "type": "string"
         },
         "treeState": {
-            "type": "string"
+            "type": "string",
+            "examples": [
+                "ACTIVE", 
+                "FROZEN",
+                "DRAINING"
+            ]
         }
     },
     "trillian": {
