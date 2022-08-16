@@ -26,7 +26,7 @@ jobs:
           python-version: 3.7
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@09ed88797198755e5031f25be13da255e7e33aad # pin@v2.2.1
+        uses: helm/chart-testing-action@09ed88797198755e5031f25be13da255e7e33aad # pin@v2.3.0
 
       - name: Run chart-testing (lint)
         run: ct lint --config ct.yaml
