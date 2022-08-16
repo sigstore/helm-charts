@@ -1,0 +1,25 @@
+apiVersion: v2
+name: updatetree
+description: Update the status of an existing Trillian tree
+
+type: application
+
+version: 0.0.1
+appVersion: 0.4.3
+
+
+keywords:
+  - security
+  - trillian
+  - updatetree
+
+home: https://sigstore.dev/
+
+maintainers:
+  - name: The Sigstore Authors
+
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/images: |
+    - name: updatetree
+      image: ghcr.io/sigstore/scaffolding/updatetree@sha256:22c653b44aef3dc0de4e1bc398a435699b06a01a9b8fdef7880933cb0d79c8ee

@@ -1,0 +1,11 @@
+{{- if .Values.serviceAccount.create }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    {{- include "sigstore-prober.common.matchLabels" . | nindent 4 }}
+  name: {{ .Values.serviceAccount.name }}
+  namespace: {{ .Values.namespace.name }}
+  annotations:
+{{ toYaml .Values.serviceAccount.annotations | indent 4 }}
+{{- end }}

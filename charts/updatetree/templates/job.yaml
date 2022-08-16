@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "updatetree.name" . }}
+  namespace: {{ .Values.namespace.name }}
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      restartPolicy: Never
+      containers:
+        - name: updatetree
+          image: "{{ .Values.spec.image}}"
+          args: [
+            "--tree_id={{ .Values.args.treeID }}",
+            "--tree_state={{ .Values.args.treeState }}",
+            {{- if .Values.trillian.adminServer }}
+            "--admin_server={{ .Values.trillian.adminServer }}",
+            {{- else }}
+            "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}"
+            {{- end }}
+          ]
+    {{- if .Values.securityContext }}
+      securityContext:
+{{ toYaml .Values.securityContext | indent 8 }}
+    {{- end }}

@@ -1,0 +1,110 @@
+{
+    "namespace": {
+        "create": {
+            "type": "boolean",
+            "default": false
+        },
+        "name": {
+            "type": "string"
+        }
+    },
+    "serviceAccount": {
+        "name": {
+            "type": "string"
+        },
+        "create": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "spec": {
+        "replicaCount": {
+            "type": "integer",
+            "default": 1
+        },
+        "image": {
+            "type": "string"
+        }
+    },
+    "securityContext": {
+        "runAsNonRoot": {
+            "type": "boolean",
+            "default": {
+                "type": "boolean",
+                "default": false
+            }
+        },
+        "runAsUser": {
+            "type": "integer",
+            "default": 65533
+        }
+    },
+    "args": {
+        "type": "object",
+        "required": [
+            "treeID",
+            "treeState"
+        ],
+        "treeID": {
+            "type": "string"
+        },
+        "treeState": {
+            "type": "string"
+        }
+    },
+    "trillian": {
+        "type": "object",
+        "default": {},
+        "title": "The trillian Schema",
+        "required": [
+            "namespace",
+            "logServer"
+        ],
+        "properties": {
+            "adminServer": {
+                "type": "string"
+            },
+            "namespace": {
+                "type": "string",
+                "default": "trillian-system"
+            },
+            "logServer": {
+                "type": "object",
+                "default": {},
+                "title": "The logServer Schema",
+                "required": [
+                    "name",
+                    "fullnameOverride",
+                    "portHTTP",
+                    "portRPC"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "default": "",
+                        "title": "The name Schema",
+                        "examples": [
+                            "trillian-logserver"
+                        ]
+                    },
+                    "portRPC": {
+                        "type": "integer",
+                        "default": 0,
+                        "title": "The portRPC Schema",
+                        "examples": [
+                            8091
+                        ]
+                    }
+                },
+                "examples": [
+                    {
+                        "name": "trillian-logserver",
+                        "fullnameOverride": "trillian-logserver",
+                        "portHTTP": 8090,
+                        "portRPC": 8091
+                    }
+                ]
+            }
+        }
+    }
+}
