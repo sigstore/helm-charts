@@ -30,7 +30,12 @@ The Helm chart for Policy  Controller
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
+<<<<<<< HEAD
 | policywebhook.image.version | string | `"sha256:03f6b9807103c988439741fdc2ec4410a85c13ba62fbad58448a070ac07bb5bc"` | `"v0.4.0"` |
+=======
+| policywebhook.image.version | string | `"sha256:2d8ec2534e903a722a89efd6fe04a52a8a420ca3f8be1703aa697bf5faf418eb"` |  |
+| policywebhook.namespaceOptIn | bool | `true` |  |
+>>>>>>> c616289 (Add ability to disable opt-in)
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | policywebhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
 | policywebhook.podSecurityContext.enabled | bool | `true` |  |
