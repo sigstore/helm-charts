@@ -4,7 +4,7 @@ description: Scaffolding the components of the sigstore architecture
 
 type: application
 
-version: 0.3.14
+version: 0.3.15
 
 keywords:
   - security
@@ -17,7 +17,7 @@ maintainers:
 
 dependencies:
   - name: fulcio
-    version: 0.4.8
+    version: 0.4.9
     repository: https://sigstore.github.io/helm-charts
     condition: fulcio.enabled
   - name: rekor
