@@ -64,7 +64,7 @@ server:
       className: ""
       sslPolicy: fulcio-grpc-ssl-ingress-policy
       httpsRedirect: true
-      annotations:
+      annotations: {}
       hosts:
         - host: fulcio.localhost
           path: /dev.sigstore.fulcio.v2.CA
