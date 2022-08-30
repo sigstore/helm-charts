@@ -68,13 +68,18 @@ server:
     production: false
   ingress:
     enabled: true
-    className: "nginx"
+    className: "gce"
+    sslPolicy: rekor-ssl-ingress-policy
+    httpsRedirect: true
     hosts:
       - path: /
     annotations: {}
     tls: []
   service:
     type: ClusterIP
+    securityPolicy: rekor-gce-security-policy
+    logging: true
+    loggingSampleRate: 1.0
     ports:
       - name: 3000-tcp
         port: 80

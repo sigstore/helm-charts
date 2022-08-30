@@ -1,0 +1,17 @@
+{{- if eq .Values.server.ingress.className "gce" }}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: fulcio-gce-backend-config
+  labels:
+    {{- include "fulcio.labels" . | nindent 4 }}
+{{ include "fulcio.namespace" . | indent 2 }}
+spec:
+  securityPolicy:
+    name: {{ .Values.server.service.securityPolicy | quote }} # note this is where rate-limiting is configured, and is defined in terraform
+  logging:
+    enable: {{ .Values.server.service.logging }}
+    {{- if .Values.server.service.loggingSampleRate }}
+    sampleRate: {{ .Values.server.service.loggingSampleRate }}
+    {{- end }}
+{{- end }}

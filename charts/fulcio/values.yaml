@@ -32,6 +32,9 @@ server:
     mountToken: true
   service:
     type: ClusterIP
+    securityPolicy: fulcio-gce-security-policy
+    logging: true
+    loggingSampleRate: 1.0
     ports:
       - name: http
         port: 80
@@ -48,7 +51,9 @@ server:
   ingress:
     http:
       enabled: true
-      className: "nginx"
+      className: "gce"
+      sslPolicy: fulcio-http-ssl-ingress-policy
+      httpsRedirect: true
       annotations: {}
       hosts:
       - path: /
@@ -57,8 +62,9 @@ server:
     grpc:
       enabled: false
       className: ""
+      sslPolicy: fulcio-grpc-ssl-ingress-policy
+      httpsRedirect: true
       annotations:
-        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
       hosts:
         - host: fulcio.localhost
           path: /dev.sigstore.fulcio.v2.CA
