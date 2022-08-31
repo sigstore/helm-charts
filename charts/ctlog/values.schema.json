@@ -313,6 +313,32 @@
                                 "ClusterIP"
                             ]
                         },
+                        "securityPolicy": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The securityPolicy Schema",
+                            "examples": [
+                                "ctlog-gce-security-policy"
+                            ]
+                        },
+                        "logging": {
+                            "type": "boolean",
+                            "default": true,
+                            "title": "The logging Schema",
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "loggingSampleRate": {
+                            "type": "number",
+                            "default": 0.5,
+                            "minimum": 0,
+                            "maximum": 1,
+                            "title": "The loggingSampleRate Schema",
+                            "examples": [
+                                0.5
+                            ]
+                        },
                         "ports": {
                             "type": "array",
                             "default": [],
@@ -429,7 +455,23 @@
                             "default": "",
                             "title": "The className Schema",
                             "examples": [
-                                "nginx"
+                                "nginx","gce"
+                            ]
+                        },
+                        "sslPolicy": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The sslPolicy Schema",
+                            "examples": [
+                                "ctlog-ssl-ingress-policy"
+                            ]
+                        },
+                        "httpsRedirect": {
+                            "type": "boolean",
+                            "default": true,
+                            "title": "The httpsRedirect Schema",
+                            "examples": [
+                                true
                             ]
                         },
                         "hosts": {

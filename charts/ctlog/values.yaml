@@ -28,6 +28,9 @@ server:
   portHTTPMetrics: 6963
   service:
     type: ClusterIP
+    securityPolicy: ctlog-gce-security-policy
+    logging: true
+    loggingSampleRate: 1.0
     ports:
       - name: 6962-tcp
         port: 80
@@ -39,7 +42,9 @@ server:
         targetPort: 6963
   ingress:
     enabled: false
-    className: nginx
+    className: gce
+    sslPolicy: ctlog-ssl-ingress-policy
+    httpsRedirect: true
     hosts:
       - path: /
     annotations: {}
