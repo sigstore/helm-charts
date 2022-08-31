@@ -9,7 +9,7 @@ metadata:
 {{ include "rekor.namespace" . | indent 2 }}
 spec:
   securityPolicy:
-    name: {{ .Values.server.service.securityPolicy }} # note this is where rate-limiting is configured, and is defined in terraform
+    name: {{ .Values.server.service.securityPolicy | quote }} # note this is where rate-limiting is configured, and is defined in terraform
   logging:
     enable: {{ .Values.server.service.logging }}
     {{- if .Values.server.service.loggingSampleRate }}

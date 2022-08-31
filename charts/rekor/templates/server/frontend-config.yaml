@@ -8,7 +8,7 @@ metadata:
   labels:
     {{- include "rekor.labels" . | nindent 4 }}
 spec:
-  sslPolicy: {{ .Values.server.ingress.sslPolicy }} # note this is defined in terraform
+  sslPolicy: {{ .Values.server.ingress.sslPolicy | quote }} # note this is defined in terraform
   redirectToHttps:
     enabled: {{ .Values.server.ingress.httpsRedirect }}
 {{ end }}
