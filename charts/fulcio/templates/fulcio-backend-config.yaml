@@ -1,4 +1,4 @@
-{{- if or (.Values.server.ingress.http.enabled) (.Values.server.ingress.grpc.enabled }}
+{{- if or (.Values.server.ingress.http.enabled) (.Values.server.ingress.grpc.enabled) }}
 {{- if or (eq .Values.server.ingress.http.className "gce") (eq .Values.server.ingress.grpc.className "gce") }}
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
