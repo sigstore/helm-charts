@@ -68,7 +68,7 @@ server:
     production: false
   ingress:
     enabled: true
-    className: "gce"
+    className: "nginx"
     sslPolicy: rekor-ssl-ingress-policy
     httpsRedirect: true
     hosts:
