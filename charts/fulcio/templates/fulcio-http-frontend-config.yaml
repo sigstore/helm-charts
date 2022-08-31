@@ -1,0 +1,15 @@
+{{- if and (.Values.server.ingress.http.enabled) (eq .Values.server.ingress.http.className "gce" }}
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: fulcio-http-gce-frontend-config
+{{ include "fulcio.namespace" . | indent 2 }}
+  labels:
+    {{- include "fulcio.labels" . | nindent 4 }}
+spec:
+  sslPolicy: {{ .Values.server.ingress.http.sslPolicy | quote }} # note this is defined in terraform
+  redirectToHttps:
+    enabled: {{ .Values.server.ingress.http.httpsRedirect }}
+---
+{{- end }}
+
