@@ -52,7 +52,7 @@ server:
     http:
       enabled: true
       className: "gce"
-      sslPolicy: fulcio-http-ssl-ingress-policy
+      sslPolicy: fulcio-ingress-ssl-policy
       httpsRedirect: true
       annotations: {}
       hosts:
@@ -62,7 +62,7 @@ server:
     grpc:
       enabled: false
       className: ""
-      sslPolicy: fulcio-grpc-ssl-ingress-policy
+      sslPolicy: fulcio-ingress-ssl-policy
       httpsRedirect: true
       annotations: {}
       hosts:

@@ -481,7 +481,7 @@
                                     "default": "",
                                     "title": "The sslPolicy Schema",
                                     "examples": [
-                                        "fulcio-ssl-ingress-policy"
+                                        "fulcio-ingress-ssl-policy"
                                     ]
                                 },
                                 "httpsRedirect": {
@@ -596,7 +596,7 @@
                                     "default": "",
                                     "title": "The sslPolicy Schema",
                                     "examples": [
-                                        "fulcio-ssl-ingress-policy"
+                                        "fulcio-ingress-ssl-policy"
                                     ]
                                 },
                                 "httpsRedirect": {
