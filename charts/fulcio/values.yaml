@@ -51,7 +51,7 @@ server:
   ingress:
     http:
       enabled: true
-      className: "gce"
+      className: "nginx"
       sslPolicy: fulcio-ingress-ssl-policy
       httpsRedirect: true
       annotations: {}
