@@ -69,7 +69,7 @@ server:
   ingress:
     enabled: true
     className: "nginx"
-    sslPolicy: rekor-ssl-ingress-policy
+    sslPolicy: rekor-ingress-ssl-policy
     httpsRedirect: true
     hosts:
       - path: /

@@ -721,7 +721,7 @@
                             "default": "",
                             "title": "The sslPolicy Schema",
                             "examples": [
-                                "rekor-ssl-ingress-policy"
+                                "rekor-ingress-ssl-policy"
                             ]
                         },
                         "httpsRedirect": {
