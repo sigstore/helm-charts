@@ -463,7 +463,7 @@
                             "default": "",
                             "title": "The sslPolicy Schema",
                             "examples": [
-                                "ctlog-ssl-ingress-policy"
+                                "ctlog-ingress-ssl-policy"
                             ]
                         },
                         "httpsRedirect": {
