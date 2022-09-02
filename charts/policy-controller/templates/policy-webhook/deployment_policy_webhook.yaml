@@ -106,7 +106,7 @@ spec:
           # Failing to provide a writable $HOME can cause TUF client initialization to panic
           - mountPath: /home/nonroot
             name: writable-home-dir
-        readinessProbe: &probe
+        readinessProbe:
           failureThreshold: 6
           initialDelaySeconds: 30
           periodSeconds: 1
@@ -116,8 +116,16 @@ spec:
             httpHeaders:
             - name: k-kubelet-probe
               value: "policy-webhook"
-        livenessProbe: *probe
-
+        livenessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 30
+          periodSeconds: 1
+          httpGet:
+            scheme: HTTPS
+            port: 8443
+            httpHeaders:
+            - name: k-kubelet-probe
+              value: "policy-webhook"
       # Our webhook should gracefully terminate by lame ducking first, set this to a sufficiently
       # high value that we respect whatever value it has configured for the lame duck grace period.
       terminationGracePeriodSeconds: 300
