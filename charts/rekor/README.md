@@ -46,7 +46,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | createtree.serviceAccount.create | bool | `true` |  |
 | createtree.serviceAccount.name | string | `""` |  |
 | forceNamespace | string | `""` |  |
-| imagePullSecrets | string | `nil` |  |
+| imagePullSecrets | string | `""` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
@@ -92,7 +92,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.attestation_storage.persistence.existingClaim | string | `""` |  |
 | server.attestation_storage.persistence.mountPath | string | `"/var/lib/mysql"` |  |
 | server.attestation_storage.persistence.size | string | `"5Gi"` |  |
-| server.attestation_storage.persistence.storageClass | string | `nil` |  |
+| server.attestation_storage.persistence.storageClass | string | `""` |  |
 | server.attestation_storage.persistence.subPath | string | `""` |  |
 | server.config.key | string | `"treeID"` |  |
 | server.config.treeID | string | `""` |  |

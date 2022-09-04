@@ -4,4 +4,3 @@ server:
     hosts:
       - host: rekor.localhost
         path: /
-imagePullSecrets: ""
