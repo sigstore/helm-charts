@@ -1,7 +1,7 @@
 namespace:
   create: false
   name: rekor-system
-imagePullSecrets:
+imagePullSecrets: []
 
 initContainerImage:
   curl:
@@ -121,7 +121,7 @@ server:
     persistence:
       enabled: true
       annotations: {}
-      storageClass: null
+      storageClass: ""
       size: 5Gi
       mountPath: /var/lib/mysql
       subPath: ""

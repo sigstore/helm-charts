@@ -81,7 +81,7 @@ spec:
 {{ toYaml .Values.server.resources | indent 12 }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
-{{ toYaml .Values.server | indent 8 }}
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
     {{- end }}
     {{- if .Values.server.nodeSelector }}
       nodeSelector:
