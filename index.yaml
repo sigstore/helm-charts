@@ -2219,6 +2219,42 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 0.11.0
+    created: "2022-09-04T20:35:56.39543449Z"
+    dependencies:
+    - condition: trillian.enabled
+      name: trillian
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.1.8
+    description: Part of the sigstore project, Rekor is a timestamping server and
+      transparency log for storing signatures, as well as an API based server for
+      validation
+    digest: 7ec9037a3c6a1f9a4ffa7582481b420acc1af4e789cef972bd4208339d3dafee
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor
+    sources:
+    - https://github.com/sigstore/rekor
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-0.3.13/rekor-0.3.13.tgz
+    version: 0.3.13
+  - annotations:
+      artifacthub.io/images: |
+        - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree@sha256:f20a73f4c581c0b13daf9ede832b5b6b838acfeb04fe5f2690722c2146d9d8d7
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl@sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498
+        - name: rekor-server
+          image: gcr.io/projectsigstore/rekor-server@sha256:af91aee88c6d8efb3175b441420a4c61691ec5d6a72303c8ef47750c1dfd2325
+        - name: redis
+          image: docker.io/redis@sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.11.0
     created: "2022-08-19T14:17:53.88754714Z"
     dependencies:
     - condition: trillian.enabled
@@ -5076,4 +5112,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2022-09-02T11:53:27.719541975Z"
+generated: "2022-09-04T20:35:56.396400843Z"
