@@ -1,34 +1,26 @@
 # rekor
 
-[Rekor](https://docs.sigstore.dev/rekor/overview/) provides a restful API based server for validation and a transparency log for storage.
+![Version: 0.3.15](https://img.shields.io/badge/Version-0.3.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
 
-The following components are also included as either direct components or through chart dependencies:
+Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
-* [MySQL](https://www.mysql.com)
-* [Redis](https://redis.io)
-* [Trillian Log Server](https://github.com/google/trillian)
-* [Trillian Log Signer](https://github.com/google/trillian)
+**Homepage:** <https://sigstore.dev/>
 
-## Quick Installation
+## Maintainers
 
-```shell
-helm dependency update .
-helm install [RELEASE_NAME] .
-```
+| Name | Email | Url |
+| ---- | ------ | --- |
+| The Sigstore Authors |  |  |
 
-This command deploys the default configuration for the rekor chart. The [Parameters] section describes the various ways in which the chart can be configured.
+## Source Code
 
-## Uninstallation
+* <https://github.com/sigstore/rekor>
 
-```shell
-helm uninstall [RELEASE_NAME]
-```
+## Requirements
 
-The previous command removes the previously installed chart.
-
-## Parameters
-
-The following table lists the configurable parameters of the Rekor chart and their default values.
+| Repository | Name | Version |
+|------------|------|---------|
+| https://sigstore.github.io/helm-charts | trillian | 0.1.8 |
 
 ## Values
 
@@ -46,7 +38,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | createtree.serviceAccount.create | bool | `true` |  |
 | createtree.serviceAccount.name | string | `""` |  |
 | forceNamespace | string | `""` |  |
-| imagePullSecrets | string | `""` |  |
+| imagePullSecrets | list | `[]` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
@@ -101,11 +93,13 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-| server.image.version | string | `"sha256:851f9d63879655156293cfe501976004ffab0093409596cf7f0f0099867d9d39"` | v0.10.0 |
+| server.image.version | string | `"sha256:06adc81497b31200ac76a880698f7a950255841766b19cb8d8e592f63192b59b"` | v0.12.0 |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |
 | server.ingress.hosts[0].path | string | `"/"` |  |
+| server.ingress.httpsRedirect | bool | `true` |  |
+| server.ingress.sslPolicy | string | `"rekor-ingress-ssl-policy"` |  |
 | server.ingress.tls | list | `[]` |  |
 | server.livenessProbe.failureThreshold | int | `3` |  |
 | server.livenessProbe.httpGet.path | string | `"/ping"` |  |
@@ -132,6 +126,8 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.retrieve_api.enabled | bool | `true` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
+| server.service.logging | bool | `true` |  |
+| server.service.loggingSampleRate | float | `1` |  |
 | server.service.ports[0].name | string | `"3000-tcp"` |  |
 | server.service.ports[0].port | int | `80` |  |
 | server.service.ports[0].protocol | string | `"TCP"` |  |
@@ -140,6 +136,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.service.ports[1].port | int | `2112` |  |
 | server.service.ports[1].protocol | string | `"TCP"` |  |
 | server.service.ports[1].targetPort | int | `2112` |  |
+| server.service.securityPolicy | string | `"rekor-gce-security-policy"` |  |
 | server.service.type | string | `"ClusterIP"` |  |
 | server.serviceAccount.annotations | object | `{}` |  |
 | server.serviceAccount.create | bool | `true` |  |
@@ -162,25 +159,3 @@ The following table lists the configurable parameters of the Rekor chart and the
 | trillian.namespace.create | bool | `true` |  |
 | trillian.namespace.name | string | `"trillian-system"` |  |
 
-----------------------------------------------
-
-## MySQL Credentials
-
-Credentials for running (when deployed) and connecting to MySQL are stored in a secret resource. The _passsword_ and _root password_ are automatically generated when not provided.
-
-_Note:_ If you plan to perform an upgrade of the chart, be sure to specify these values explicitly.
-
-An existing secret containing credentials for MySQL can be provided by passing the `mysql.auth.existingSecret` parameter. This secret must have the following keys:
-
-* `mysql-password` - Password for connecting to MySQL
-* `mysql-root-password` - Root Password (required when deploying MySQL)
-
-## Integration with External Components
-
-By Default, the chart deploys all required services. However, configurations can be applied to offload certain services, such as Redis and MySQL externally.
-
-To disable the deployment of Redis or MySQL, pass the `redis.enabled=false` and/or `mysql.enabled=false`. Provide the hostname and port of the external resource using the `<redis|mysql>.hostname` and `<redis|mysql>.port` parameters.
-
-## Ingress
-
-To enabled access from external resources, an Ingress resource is created. The configuration necessary for each Ingress resource is primarily dependent on the specific Ingress Controller being used. In most cases, implementation specific configuration is specified as annotations on the Ingress resources. These can be applied using the `server.ingress.annotations` parameter.
