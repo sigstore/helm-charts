@@ -1,24 +1,18 @@
 # ctlog
 
-## Quick Installation
+![Version: 0.2.26](https://img.shields.io/badge/Version-0.2.26-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
-```shell
-helm install [RELEASE_NAME] .
-```
+Certificate Transparency Log used with Fulcio
 
-This command deploys the default configuration for the ctlog chart. The [Parameters] section describes the various ways in which the chart can be configured.
+**Homepage:** <https://sigstore.dev/>
 
-## Uninstallation
+## Maintainers
 
-```shell
-helm uninstall [RELEASE_NAME]
-```
+| Name | Email | Url |
+| ---- | ------ | --- |
+| The Sigstore Authors |  |  |
 
-The previous command removes the previously installed chart.
-
-## Parameters
-
-The following table lists the configurable parameters of the ctlog chart and their default values.
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -68,9 +62,11 @@ The following table lists the configurable parameters of the ctlog chart and the
 | server.image.repository | string | `"sigstore/scaffolding/ct_server"` |  |
 | server.image.version | string | `"sha256:7c791d3b7c15e817807f07d4cdb00406529a114702ad448ee857e1d0fc5fb5a9"` |  |
 | server.ingress.annotations | object | `{}` |  |
-| server.ingress.className | string | `"nginx"` |  |
+| server.ingress.className | string | `"gce"` |  |
 | server.ingress.enabled | bool | `false` |  |
 | server.ingress.hosts[0].path | string | `"/"` |  |
+| server.ingress.httpsRedirect | bool | `true` |  |
+| server.ingress.sslPolicy | string | `"ctlog-ingress-ssl-policy"` |  |
 | server.ingress.tls | list | `[]` |  |
 | server.podAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
 | server.podAnnotations."prometheus.io/port" | string | `"6963"` |  |
@@ -80,6 +76,8 @@ The following table lists the configurable parameters of the ctlog chart and the
 | server.replicaCount | int | `1` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
+| server.service.logging | bool | `true` |  |
+| server.service.loggingSampleRate | float | `1` |  |
 | server.service.ports[0].name | string | `"6962-tcp"` |  |
 | server.service.ports[0].port | int | `80` |  |
 | server.service.ports[0].protocol | string | `"TCP"` |  |
@@ -88,6 +86,7 @@ The following table lists the configurable parameters of the ctlog chart and the
 | server.service.ports[1].port | int | `6963` |  |
 | server.service.ports[1].protocol | string | `"TCP"` |  |
 | server.service.ports[1].targetPort | int | `6963` |  |
+| server.service.securityPolicy | string | `"ctlog-gce-security-policy"` |  |
 | server.service.type | string | `"ClusterIP"` |  |
 | server.serviceAccount.annotations | object | `{}` |  |
 | server.serviceAccount.create | bool | `true` |  |
@@ -97,4 +96,3 @@ The following table lists the configurable parameters of the ctlog chart and the
 | trillian.logServer.portRPC | int | `8091` |  |
 | trillian.namespace | string | `"trillian-system"` |  |
 
-----------------------------------------------

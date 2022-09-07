@@ -1,6 +1,6 @@
 apiVersion: v2
 name: ctlog
-description: Certificate Log
+description: Certificate Transparency Log used with Fulcio
 
 type: application
 
