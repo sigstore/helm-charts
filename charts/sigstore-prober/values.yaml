@@ -14,5 +14,6 @@ spec:
     fulcioHost: https://fulcio.sigstore.dev
     rekorHost: https://rekor.sigstore.dev
     frequency: 10
+    writeProber: false
 prometheus:
   port: 8080

@@ -24,6 +24,7 @@ Sigstore API Endpoint Prober
 | spec.args.frequency | int | `10` |  |
 | spec.args.fulcioHost | string | `"https://fulcio.sigstore.dev"` |  |
 | spec.args.rekorHost | string | `"https://rekor.sigstore.dev"` |  |
+| spec.args.writeProber | bool | `false` |  |
 | spec.image | string | `"gcr.io/priya-chainguard/prober-37ee855f344691c13c5769b1675cc9e0@sha256:a601f7de3c572bb65b2cebd431ee8fc0cbd409b2edb5836718f09973400538c8"` |  |
 | spec.imagePullPolicy | string | `"Always"` |  |
 | spec.matchLabels.app | string | `"sigstore-prober"` |  |
