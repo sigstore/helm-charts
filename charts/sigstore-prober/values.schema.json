@@ -35,6 +35,9 @@
                         },
                         "rekorHost": {
                             "type": "string"
+                        },
+                        "writeProber": {
+                            "type": "boolean"
                         }
                     }
                 },
