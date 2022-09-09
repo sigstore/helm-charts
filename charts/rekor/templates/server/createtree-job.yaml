@@ -29,6 +29,8 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
+          resources:
+{{ toYaml .Values.createtree.resources | indent 12 }}
     {{- if .Values.createtree.securityContext }}
       securityContext:
 {{ toYaml .Values.createtree.securityContext | indent 8 }}
