@@ -40,6 +40,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
 | createtree.image.version | string | `"sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"` |  |
 | createtree.name | string | `"createtree"` |  |
+| createtree.resources | object | `{}` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
 | createtree.securityContext.runAsUser | int | `65533` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |

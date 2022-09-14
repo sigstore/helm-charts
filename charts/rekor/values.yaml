@@ -154,6 +154,7 @@ createtree:
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
+  resources: {}
 
 # Configure Trillian dependency
 trillian:
