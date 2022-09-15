@@ -21,7 +21,7 @@ The following table lists the configurable parameters of the policy-controller c
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
-| policywebhook.image.version | string | `"sha256:63cd54b877bcd8b3d6d6b7110955e3f773bd8ad5b16d1b6133d4009c26c6da18"` |  |
+| policywebhook.image.version | string | `"sha256:d1e7af59381793687db4673277005276eb73a06cf555503138dd18eaa1ca47d6"` |  |
 | policywebhook.replicaCount | int | `1` |  |
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | policywebhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
@@ -46,7 +46,7 @@ The following table lists the configurable parameters of the policy-controller c
 | webhook.replicaCount | int | `1` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
-| webhook.image.version | string | `"sha256:63cd54b877bcd8b3d6d6b7110955e3f773bd8ad5b16d1b6133d4009c26c6da18"` |  |
+| webhook.image.version | string | `"sha256:dba911635cd4f12ac807d3cd2e9065f6ec131102fa7cf19e75e897d0efe2247f"` |  |
 | webhook.name | string | `"webhook"` |  |
 | webhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | webhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |

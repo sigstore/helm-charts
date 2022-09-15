@@ -19,334 +19,441 @@ spec:
   conversion:
     strategy: Webhook
     webhook:
-      conversionReviewVersions: ["v1beta1", "v1alpha1"]
       clientConfig:
         service:
           name: policy-webhook
-          namespace: {{ .Release.Namespace }}
+          namespace: cosign-system
+      conversionReviewVersions:
+      - v1beta1
+      - v1alpha1
   group: policy.sigstore.dev
   names:
+    categories:
+    - all
+    - sigstore
     kind: ClusterImagePolicy
     plural: clusterimagepolicies
-    singular: clusterimagepolicy
-    categories:
-      - all
-      - sigstore
     shortNames:
-      - cip
+    - cip
+    singular: clusterimagepolicy
   scope: Cluster
   versions:
-    - name: v1alpha1
-      served: true
-      storage: true
-      schema:
-        openAPIV3Schema:
-          type: object
-          properties:
-            spec:
-              description: Spec holds the desired state of the ClusterImagePolicy (from the client).
-              type: object
-              properties:
-                authorities:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      attestations:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              description: Name of the attestation. These can then be referenced at the CIP level policy.
-                              type: string
-                            policy:
-                              type: object
-                              properties:
-                                configMapRef:
-                                  type: object
-                                  properties:
-                                    name:
-                                      description: Name is unique within a namespace to reference a configmap resource.
-                                      type: string
-                                    namespace:
-                                      description: Namespace defines the space within which the configmap name must be unique.
-                                      type: string
-                                data:
-                                  type: string
-                                type:
-                                  description: Which kind of policy this is, currently only rego or cue are supported. Furthermore, only cue is tested :)
-                                  type: string
-                                url:
-                                  type: string
-                            predicateType:
-                              description: Which predicate type to verify. Matches cosign verify-attestation options.
-                              type: string
-                      ctlog:
-                        type: object
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            description: Spec holds the desired state of the ClusterImagePolicy (from
+              the client).
+            properties:
+              authorities:
+                description: Authorities defines the rules for discovering and validating
+                  signatures.
+                items:
+                  properties:
+                    attestations:
+                      description: Attestations is a list of individual attestations
+                        for this authority, once the signature for this authority
+                        has been verified.
+                      items:
                         properties:
-                          url:
+                          name:
+                            description: Name of the attestation. These can then be
+                              referenced at the CIP level policy.
                             type: string
-                      key:
-                        type: object
-                        properties:
-                          data:
-                            description: Data contains the inline public key
-                            type: string
-                          kms:
-                            description: KMS contains the KMS url of the public key Supported formats differ based on the KMS system used.
-                            type: string
-                          secretRef:
-                            type: object
+                          policy:
+                            description: Policy defines all of the matching signatures,
+                              and all of the matching attestations (whose attestations
+                              are verified).
                             properties:
-                              name:
-                                description: Name is unique within a namespace to reference a secret resource.
-                                type: string
-                              namespace:
-                                description: Namespace defines the space within which the secret name must be unique.
-                                type: string
-                      keyless:
-                        type: object
-                        properties:
-                          ca-cert:
-                            type: object
-                            properties:
-                              data:
-                                description: Data contains the inline public key
-                                type: string
-                              kms:
-                                description: KMS contains the KMS url of the public key Supported formats differ based on the KMS system used.
-                                type: string
-                              secretRef:
-                                type: object
+                              configMapRef:
+                                description: ConfigMapRef defines the reference to
+                                  a configMap with the policy definition.
                                 properties:
                                   name:
-                                    description: Name is unique within a namespace to reference a secret resource.
+                                    description: Name is unique within a namespace
+                                      to reference a configmap resource.
                                     type: string
                                   namespace:
-                                    description: Namespace defines the space within which the secret name must be unique.
+                                    description: Namespace defines the space within
+                                      which the configmap name must be unique.
                                     type: string
-                          identities:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                issuer:
-                                  type: string
-                                issuerRegExp:
-                                  type: string
-                                subject:
-                                  type: string
-                                subjectRegExp:
-                                  type: string
-                          url:
-                            type: string
-                      name:
-                        description: Name is the name for this authority. Used by the CIP Policy validator to be able to reference matching signature or attestation verifications. If not specified, the name will be authority-<index in array>
-                        type: string
-                      source:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            oci:
-                              type: string
-                            signaturePullSecrets:
-                              description: SignaturePullSecrets is an optional list of references to secrets in the same namespace as the deploying resource for pulling any of the signatures used by this Source.
-                              type: array
-                              items:
                                 type: object
-                                properties:
-                                  name:
-                                    description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-                                    type: string
-                      static:
-                        type: object
-                        properties:
-                          action:
-                            description: Action defines how to handle a matching policy.
+                              data:
+                                description: Data contains the policy definition.
+                                type: string
+                              type:
+                                description: Which kind of policy this is, currently
+                                  only rego or cue are supported. Furthermore, only
+                                  cue is tested :)
+                                type: string
+                              url:
+                                description: URL to the policy data.
+                                type: string
+                            type: object
+                          predicateType:
+                            description: PredicateType defines which predicate type
+                              to verify. Matches cosign verify-attestation options.
                             type: string
-                images:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      glob:
-                        type: string
-                policy:
-                  description: Policy is an optional policy that can be applied against all the successfully validated Authorities. If no authorities pass, this does not even get evaluated, as the Policy is considered failed.
-                  type: object
-                  properties:
-                    configMapRef:
-                      type: object
+                        type: object
+                      type: array
+                    ctlog:
+                      description: CTLog sets the configuration to verify the authority
+                        against a Rekor instance.
                       properties:
-                        name:
-                          description: Name is unique within a namespace to reference a configmap resource.
+                        url:
+                          description: URL sets the url to the rekor instance (by
+                            default the public rekor.sigstore.dev)
                           type: string
-                        namespace:
-                          description: Namespace defines the space within which the configmap name must be unique.
+                      type: object
+                    key:
+                      description: Key defines the type of key to validate the image.
+                      properties:
+                        data:
+                          description: Data contains the inline public key.
                           type: string
-                    data:
-                      type: string
-                    type:
-                      description: Which kind of policy this is, currently only rego or cue are supported. Furthermore, only cue is tested :)
-                      type: string
-                    url:
-                      type: string
-    - name: v1beta1
-      served: true
-      storage: false
-      schema:
-        openAPIV3Schema:
-          type: object
-          properties:
-            spec:
-              description: Spec holds the desired state of the ClusterImagePolicy (from the client).
-              type: object
-              properties:
-                authorities:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      attestations:
-                        type: array
-                        items:
-                          type: object
+                        kms:
+                          description: KMS contains the KMS url of the public key
+                            Supported formats differ based on the KMS system used.
+                          type: string
+                        secretRef:
+                          description: SecretRef sets a reference to a secret with
+                            the key.
                           properties:
                             name:
-                              description: Name of the attestation. These can then be referenced at the CIP level policy.
+                              description: Name is unique within a namespace to reference
+                                a secret resource.
                               type: string
-                            policy:
-                              type: object
+                            namespace:
+                              description: Namespace defines the space within which
+                                the secret name must be unique.
+                              type: string
+                          type: object
+                      type: object
+                    keyless:
+                      description: Keyless sets the configuration to verify the authority
+                        against a Fulcio instance.
+                      properties:
+                        ca-cert:
+                          description: CACert sets a reference to CA certificate
+                          properties:
+                            data:
+                              description: Data contains the inline public key.
+                              type: string
+                            kms:
+                              description: KMS contains the KMS url of the public
+                                key Supported formats differ based on the KMS system
+                                used.
+                              type: string
+                            secretRef:
+                              description: SecretRef sets a reference to a secret
+                                with the key.
                               properties:
-                                configMapRef:
-                                  type: object
-                                  properties:
-                                    name:
-                                      description: Name is unique within a namespace to reference a configmap resource.
-                                      type: string
-                                    namespace:
-                                      description: Namespace defines the space within which the configmap name must be unique.
-                                      type: string
-                                data:
+                                name:
+                                  description: Name is unique within a namespace to
+                                    reference a secret resource.
                                   type: string
-                                type:
-                                  description: Which kind of policy this is, currently only rego or cue are supported. Furthermore, only cue is tested :)
+                                namespace:
+                                  description: Namespace defines the space within
+                                    which the secret name must be unique.
                                   type: string
-                                url:
-                                  type: string
-                            predicateType:
-                              description: Which predicate type to verify. Matches cosign verify-attestation options.
-                              type: string
-                      ctlog:
-                        type: object
-                        properties:
-                          url:
-                            type: string
-                      key:
-                        type: object
-                        properties:
-                          data:
-                            description: Data contains the inline public key
-                            type: string
-                          kms:
-                            description: KMS contains the KMS url of the public key
-                            type: string
-                          secretRef:
-                            type: object
+                              type: object
+                          type: object
+                        identities:
+                          description: Identities sets a list of identities.
+                          items:
                             properties:
-                              name:
-                                description: Name is unique within a namespace to reference a secret resource.
+                              issuer:
+                                description: Issuer defines the issuer for this identity.
                                 type: string
-                              namespace:
-                                description: Namespace defines the space within which the secret name must be unique.
+                              issuerRegExp:
+                                description: IssuerRegExp specifies a regular expression
+                                  to match the issuer for this identity.
                                 type: string
-                      keyless:
-                        type: object
-                        properties:
-                          ca-cert:
+                              subject:
+                                description: Subject defines the subject for this
+                                  identity.
+                                type: string
+                              subjectRegExp:
+                                description: SubjectRegExp specifies a regular expression
+                                  to match the subject for this identity.
+                                type: string
                             type: object
+                          type: array
+                        url:
+                          description: URL defines a url to the keyless instance.
+                          type: string
+                      type: object
+                    name:
+                      description: Name is the name for this authority. Used by the
+                        CIP Policy validator to be able to reference matching signature
+                        or attestation verifications. If not specified, the name will
+                        be authority-<index in array>
+                      type: string
+                    source:
+                      description: Sources sets the configuration to specify the sources
+                        from where to consume the signatures.
+                      items:
+                        properties:
+                          oci:
+                            description: OCI defines the registry from where to pull
+                              the signatures.
+                            type: string
+                          signaturePullSecrets:
+                            description: SignaturePullSecrets is an optional list
+                              of references to secrets in the same namespace as the
+                              deploying resource for pulling any of the signatures
+                              used by this Source.
+                            items:
+                              properties:
+                                name:
+                                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      type: array
+                    static:
+                      description: Static specifies that signatures / attestations
+                        are not validated but instead a static policy is applied against
+                        matching images.
+                      properties:
+                        action:
+                          description: Action defines how to handle a matching policy.
+                          type: string
+                      type: object
+                  type: object
+                type: array
+              images:
+                description: Images defines the patterns of image names that should
+                  be subject to this policy.
+                items:
+                  properties:
+                    glob:
+                      description: Glob defines a globbing pattern.
+                      type: string
+                  type: object
+                type: array
+              mode:
+                description: Mode controls whether a failing policy will be rejected
+                  (not admitted), or if errors are converted to Warnings. enforce
+                  - Reject (default) warn - allow but warn
+                type: string
+              policy:
+                description: Policy is an optional policy that can be applied against
+                  all the successfully validated Authorities. If no authorities pass,
+                  this does not even get evaluated, as the Policy is considered failed.
+                properties:
+                  configMapRef:
+                    description: ConfigMapRef defines the reference to a configMap
+                      with the policy definition.
+                    properties:
+                      name:
+                        description: Name is unique within a namespace to reference
+                          a configmap resource.
+                        type: string
+                      namespace:
+                        description: Namespace defines the space within which the
+                          configmap name must be unique.
+                        type: string
+                    type: object
+                  data:
+                    description: Data contains the policy definition.
+                    type: string
+                  type:
+                    description: Which kind of policy this is, currently only rego
+                      or cue are supported. Furthermore, only cue is tested :)
+                    type: string
+                  url:
+                    description: URL to the policy data.
+                    type: string
+                type: object
+            type: object
+        type: object
+    served: true
+    storage: true
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            description: Spec holds the desired state of the ClusterImagePolicy (from
+              the client).
+            properties:
+              authorities:
+                items:
+                  properties:
+                    attestations:
+                      items:
+                        properties:
+                          name:
+                            description: Name of the attestation. These can then be
+                              referenced at the CIP level policy.
+                            type: string
+                          policy:
                             properties:
-                              data:
-                                description: Data contains the inline public key
-                                type: string
-                              kms:
-                                description: KMS contains the KMS url of the public key
-                                type: string
-                              secretRef:
-                                type: object
+                              configMapRef:
                                 properties:
                                   name:
-                                    description: Name is unique within a namespace to reference a secret resource.
+                                    description: Name is unique within a namespace
+                                      to reference a configmap resource.
                                     type: string
                                   namespace:
-                                    description: Namespace defines the space within which the secret name must be unique.
+                                    description: Namespace defines the space within
+                                      which the configmap name must be unique.
                                     type: string
-                          identities:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                issuer:
-                                  type: string
-                                issuerRegExp:
-                                  type: string
-                                subject:
-                                  type: string
-                                subjectRegExp:
-                                  type: string
-                          url:
-                            type: string
-                      name:
-                        description: Name is the name for this authority. Used by the CIP Policy validator to be able to reference matching signature or attestation verifications. If not specified, the name will be authority-<index in array>
-                        type: string
-                      source:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            oci:
-                              type: string
-                            signaturePullSecrets:
-                              description: SignaturePullSecrets is an optional list of references to secrets in the same namespace as the deploying resource for pulling any of the signatures used by this Source.
-                              type: array
-                              items:
                                 type: object
-                                properties:
-                                  name:
-                                    description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-                                    type: string
-                      static:
-                        type: object
-                        properties:
-                          action:
-                            description: Action defines how to handle a matching policy.
+                              data:
+                                type: string
+                              type:
+                                description: Which kind of policy this is, currently
+                                  only rego or cue are supported. Furthermore, only
+                                  cue is tested :)
+                                type: string
+                              url:
+                                type: string
+                            type: object
+                          predicateType:
+                            description: Which predicate type to verify. Matches cosign
+                              verify-attestation options.
                             type: string
-                images:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      glob:
-                        type: string
-                policy:
-                  description: Policy is an optional policy that can be applied against all the successfully validated Authorities. If no authorities pass, this does not even get evaluated, as the Policy is considered failed.
-                  type: object
-                  properties:
-                    configMapRef:
-                      type: object
+                        type: object
+                      type: array
+                    ctlog:
                       properties:
-                        name:
-                          description: Name is unique within a namespace to reference a configmap resource.
+                        url:
                           type: string
-                        namespace:
-                          description: Namespace defines the space within which the configmap name must be unique.
+                      type: object
+                    key:
+                      properties:
+                        data:
+                          description: Data contains the inline public key
                           type: string
-                    data:
+                        kms:
+                          description: KMS contains the KMS url of the public key
+                          type: string
+                        secretRef:
+                          properties:
+                            name:
+                              description: Name is unique within a namespace to reference
+                                a secret resource.
+                              type: string
+                            namespace:
+                              description: Namespace defines the space within which
+                                the secret name must be unique.
+                              type: string
+                          type: object
+                      type: object
+                    keyless:
+                      properties:
+                        ca-cert:
+                          properties:
+                            data:
+                              description: Data contains the inline public key
+                              type: string
+                            kms:
+                              description: KMS contains the KMS url of the public
+                                key
+                              type: string
+                            secretRef:
+                              properties:
+                                name:
+                                  description: Name is unique within a namespace to
+                                    reference a secret resource.
+                                  type: string
+                                namespace:
+                                  description: Namespace defines the space within
+                                    which the secret name must be unique.
+                                  type: string
+                              type: object
+                          type: object
+                        identities:
+                          items:
+                            properties:
+                              issuer:
+                                type: string
+                              issuerRegExp:
+                                type: string
+                              subject:
+                                type: string
+                              subjectRegExp:
+                                type: string
+                            type: object
+                          type: array
+                        url:
+                          type: string
+                      type: object
+                    name:
+                      description: Name is the name for this authority. Used by the
+                        CIP Policy validator to be able to reference matching signature
+                        or attestation verifications. If not specified, the name will
+                        be authority-<index in array>
                       type: string
-                    type:
-                      description: Which kind of policy this is, currently only rego or cue are supported. Furthermore, only cue is tested :)
+                    source:
+                      items:
+                        properties:
+                          oci:
+                            type: string
+                          signaturePullSecrets:
+                            description: SignaturePullSecrets is an optional list
+                              of references to secrets in the same namespace as the
+                              deploying resource for pulling any of the signatures
+                              used by this Source.
+                            items:
+                              properties:
+                                name:
+                                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      type: array
+                    static:
+                      properties:
+                        action:
+                          description: Action defines how to handle a matching policy.
+                          type: string
+                      type: object
+                  type: object
+                type: array
+              images:
+                items:
+                  properties:
+                    glob:
                       type: string
-                    url:
-                      type: string
+                  type: object
+                type: array
+              mode:
+                description: Mode controls whether a failing policy will be rejected
+                  (not admitted), or if errors are converted to Warnings. enforce
+                  - Reject (default) warn - allow but warn
+                type: string
+              policy:
+                description: Policy is an optional policy that can be applied against
+                  all the successfully validated Authorities. If no authorities pass,
+                  this does not even get evaluated, as the Policy is considered failed.
+                properties:
+                  configMapRef:
+                    properties:
+                      name:
+                        description: Name is unique within a namespace to reference
+                          a configmap resource.
+                        type: string
+                      namespace:
+                        description: Namespace defines the space within which the
+                          configmap name must be unique.
+                        type: string
+                    type: object
+                  data:
+                    type: string
+                  type:
+                    description: Which kind of policy this is, currently only rego
+                      or cue are supported. Furthermore, only cue is tested :)
+                    type: string
+                  url:
+                    type: string
+                type: object
+            type: object
+        type: object
+    served: true
+    storage: false
