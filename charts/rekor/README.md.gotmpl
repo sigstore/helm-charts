@@ -1,0 +1,59 @@
+{{ template "chart.header" . }}
+
+<!-- This README.md is generated. Please edit README.md.gotmpl -->
+
+{{ template "chart.deprecationWarning" . }}
+
+{{ template "chart.badgesSection" . }}
+
+{{ template "chart.description" . }}
+
+{{ template "chart.homepageLine" . }}
+
+## Quick Installation
+
+To install the helm chart with default values run following command. 
+The [Values](#Values) section describes the configuration options for this chart.
+
+```shell
+helm install [RELEASE_NAME] .
+```
+
+## Uninstallation
+
+To uninstall the Helm chart run following command.
+
+```shell
+helm uninstall [RELEASE_NAME]
+```
+
+{{ template "chart.maintainersSection" . }}
+
+{{ template "chart.sourcesSection" . }}
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}
+
+----------------------------------------------
+
+## MySQL Credentials
+
+Credentials for running (when deployed) and connecting to MySQL are stored in a secret resource. The _passsword_ and _root password_ are automatically generated when not provided.
+
+_Note:_ If you plan to perform an upgrade of the chart, be sure to specify these values explicitly.
+
+An existing secret containing credentials for MySQL can be provided by passing the `mysql.auth.existingSecret` parameter. This secret must have the following keys:
+
+* `mysql-password` - Password for connecting to MySQL
+* `mysql-root-password` - Root Password (required when deploying MySQL)
+
+## Integration with External Components
+
+By Default, the chart deploys all required services. However, configurations can be applied to offload certain services, such as Redis and MySQL externally.
+
+To disable the deployment of Redis or MySQL, pass the `redis.enabled=false` and/or `mysql.enabled=false`. Provide the hostname and port of the external resource using the `<redis|mysql>.hostname` and `<redis|mysql>.port` parameters.
+
+## Ingress
+
+To enabled access from external resources, an Ingress resource is created. The configuration necessary for each Ingress resource is primarily dependent on the specific Ingress Controller being used. In most cases, implementation specific configuration is specified as annotations on the Ingress resources. These can be applied using the `server.ingress.annotations` parameter.

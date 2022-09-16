@@ -31,7 +31,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
-| createtree.image.version | string | `"sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"` |  |
+| createtree.image.version | string | `"sha256:c293fcb546619a71eabba16f231e0262d7614f2bb90fb53dda2713bbef71dac5"` | v0.4.6 |
 | createtree.name | string | `"createtree"` |  |
 | createtree.resources | object | `{}` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
@@ -45,7 +45,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
-| initContainerImage.curl.version | string | `"sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"` | 7.82.0 |
+| initContainerImage.curl.version | string | `"sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5"` | 7.85.0 |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"rekor-system"` |  |
 | redis.args[0] | string | `"--bind"` |  |
@@ -57,7 +57,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | redis.image.pullPolicy | string | `"IfNotPresent"` |  |
 | redis.image.registry | string | `"docker.io"` |  |
 | redis.image.repository | string | `"redis"` |  |
-| redis.image.version | string | `"sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39"` | 6.2.6-alpine3.15 |
+| redis.image.version | string | `"sha256:dc1b954f5a1db78e31b8870966294d2f93fa8a7fba5c1337a1ce4ec55f311bc3"` | 7.0.4-alpine3.16 |
 | redis.name | string | `"redis"` |  |
 | redis.port | int | `6379` |  |
 | redis.readinessProbe.exec.command[0] | string | `"/bin/sh"` |  |

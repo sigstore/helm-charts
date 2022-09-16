@@ -1,6 +1,8 @@
 apiVersion: v2
 name: rekor
-description: Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
+description: |
+  Part of the Sigstore project, Rekor is a timestamping server and transparency
+  log for storing signatures, as well as an API based server for validation.
 
 type: application
 
@@ -14,8 +16,11 @@ keywords:
 home: https://sigstore.dev/
 sources:
   - https://github.com/sigstore/rekor
+  - https://github.com/sigstore/helm-charts/tree/main/charts/rekor
+
 maintainers:
   - name: The Sigstore Authors
+    url: https://sigstore.dev/
 
 dependencies:
   - name: trillian
