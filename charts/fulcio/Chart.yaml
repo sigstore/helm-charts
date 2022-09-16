@@ -1,10 +1,11 @@
 apiVersion: v2
 name: fulcio
-description: Fulcio
+description: |
+  Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
 type: application
 
-version: 0.5.1
+version: 0.5.2
 appVersion: 0.6.0
 
 keywords:
