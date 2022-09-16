@@ -5,13 +5,13 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # 7.83.1
-    version: "sha256:e83fef2d5a036d40df4ded829141e8c0ec41871490d252fb8c81cb4580ebb35b"
+    # -- 7.85.0
+    version: sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5
     imagePullPolicy: IfNotPresent
   netcat:
     registry: docker.io
     repository: toolbelt/netcat
-    # 2022-05-23
+    # -- 2022-05-23
     version: "sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea"
     imagePullPolicy: IfNotPresent
 
@@ -22,7 +22,8 @@ mysql:
     cloudsql:
       registry: gcr.io
       repository: cloudsql-docker/gce-proxy
-      version: "1.29.0"
+      # -- v1.32.2
+      version: sha256:7755f632c090289b8e0fa67218fc9d8b9ab7e0758ea58c48786617a79ff715dc
       resources:
         requests:
           memory: "2Gi"
@@ -45,8 +46,8 @@ mysql:
     registry: gcr.io
     repository: trillian-opensource-ci/db_server
     pullPolicy: IfNotPresent
-    # v1.4.1
-    version: "sha256:ae4043e9c5e4de522fb4958e92d592aa97c7fc294a12849b902fd1facd7122c6"
+    # -- v1.5.0
+    version: sha256:22b7fddcb4bafc5692760d84dca5e86294363a94e8f0ecb8f5c39364d436e6d5
   resources: {}
   args:
     - "--ignore-db-dir=lost+found"
@@ -108,8 +109,8 @@ logServer:
     registry: gcr.io
     repository: projectsigstore/trillian_log_server
     pullPolicy: IfNotPresent
-    # v0.7.0
-    version: "sha256:4599a3f037234423d13ff84755679a56da62363e7ed07c70bc556078fd73986d"
+    # -- v0.9.1
+    version: sha256:75dbbfc4c0b64334b985c4971fe58c30b9dd73d7aa54b15cee61223ff92aebf3
   service:
     type: ClusterIP
     ports:
@@ -140,8 +141,8 @@ logSigner:
     registry: gcr.io
     repository: projectsigstore/trillian_log_signer
     pullPolicy: IfNotPresent
-    # v0.7.0
-    version: "sha256:87699af429d79440f7e0a487d215c2129bf97b37698370d050a68822996f93f0"
+    # -- v0.9.1
+    version: sha256:b56ed0b7b5e9813c91b208ba6041c9342f9a53162d96943374e59b5289090f1f
   service:
     type: ClusterIP
     ports:

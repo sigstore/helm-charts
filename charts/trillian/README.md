@@ -1,26 +1,42 @@
-# Trillian
+# trillian
 
-[Trillian](https://github.com/google/trillian) is a log that stores an accurate, immutable and verifiable history of activity.
+<!-- This README.md is generated. Please edit README.md.gotmpl -->
+
+![Version: 0.1.10](https://img.shields.io/badge/Version-0.1.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+
+Trillian is a log that stores an accurate, immutable and verifiable history of activity.
+
+**Homepage:** <https://sigstore.dev/>
 
 ## Quick Installation
+
+To install the helm chart with default values run following command.
+The [Values](#Values) section describes the configuration options for this chart.
 
 ```shell
 helm install [RELEASE_NAME] .
 ```
 
-This command deploys the default configuration for the trillian chart. The [Parameters] section describes the various ways in which the chart can be configured.
-
 ## Uninstallation
+
+To uninstall the Helm chart run following command.
 
 ```shell
 helm uninstall [RELEASE_NAME]
 ```
 
-The previous command removes the previously installed chart.
+## Maintainers
 
-## Parameters
+| Name | Email | Url |
+| ---- | ------ | --- |
+| The Sigstore Authors |  | <https://sigstore.dev/> |
 
-The following table lists the configurable parameters of the trilian chart and their default values.
+## Source Code
+
+* <https://github.com/google/trillian>
+* <https://github.com/sigstore/helm-charts/tree/main/charts/trillian>
+
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
@@ -28,19 +44,19 @@ The following table lists the configurable parameters of the trilian chart and t
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
-| initContainerImage.curl.version | string | `"sha256:faaba66e89c87fd3fb51336857142ee6ce78fa8d8f023a5713d2bf4957f1aca8"` |  |
+| initContainerImage.curl.version | string | `"sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5"` | 7.85.0 |
 | initContainerImage.netcat.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.netcat.registry | string | `"docker.io"` |  |
 | initContainerImage.netcat.repository | string | `"toolbelt/netcat"` |  |
-| initContainerImage.netcat.version | string | `"sha256:99a582fa45fe1b50c97c652c9ada24b96c80d7071283227bd9a9f8eaa1c7a12b"` |  |
+| initContainerImage.netcat.version | string | `"sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea"` | 2022-05-23 |
 | logServer.enabled | bool | `true` |  |
 | logServer.extraArgs | list | `[]` |  |
 | logServer.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logServer.image.registry | string | `"gcr.io"` |  |
 | logServer.image.repository | string | `"projectsigstore/trillian_log_server"` |  |
-| logServer.image.version | string | `"sha256:f850a0defd089ea844822030c67ae05bc93c91168a7dd4aceb0b6648c39f696b"` |  |
+| logServer.image.version | string | `"sha256:75dbbfc4c0b64334b985c4971fe58c30b9dd73d7aa54b15cee61223ff92aebf3"` | v0.9.1 |
 | logServer.livenessProbe | object | `{}` |  |
-| logServer.name | string | `"trillian-log-server"` |  |
+| logServer.name | string | `"log-server"` |  |
 | logServer.portHTTP | int | `8090` |  |
 | logServer.portRPC | int | `8091` |  |
 | logServer.readinessProbe | object | `{}` |  |
@@ -60,12 +76,13 @@ The following table lists the configurable parameters of the trilian chart and t
 | logServer.serviceAccount.name | string | `""` |  |
 | logSigner.enabled | bool | `true` |  |
 | logSigner.extraArgs | list | `[]` |  |
+| logSigner.forceMaster | bool | `true` |  |
 | logSigner.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logSigner.image.registry | string | `"gcr.io"` |  |
 | logSigner.image.repository | string | `"projectsigstore/trillian_log_signer"` |  |
-| logSigner.image.version | string | `"sha256:fe90d523f6617974f70878918e4b31d49b2b46a86024bb2d6b01d2bbfed8edbf"` |  |
+| logSigner.image.version | string | `"sha256:b56ed0b7b5e9813c91b208ba6041c9342f9a53162d96943374e59b5289090f1f"` | v0.9.1 |
 | logSigner.livenessProbe | object | `{}` |  |
-| logSigner.name | string | `"trillian-log-signer"` |  |
+| logSigner.name | string | `"log-signer"` |  |
 | logSigner.portHTTP | int | `8090` |  |
 | logSigner.portRPC | int | `8091` |  |
 | logSigner.readinessProbe | object | `{}` |  |
@@ -87,14 +104,20 @@ The following table lists the configurable parameters of the trilian chart and t
 | mysql.enabled | bool | `true` |  |
 | mysql.gcp.cloudsql.registry | string | `"gcr.io"` |  |
 | mysql.gcp.cloudsql.repository | string | `"cloudsql-docker/gce-proxy"` |  |
-| mysql.gcp.cloudsql.version | string | `"1.28.1"` |  |
-| mysql.gcp.enabled | string | `""` |  |
+| mysql.gcp.cloudsql.resources.requests.cpu | string | `"1"` |  |
+| mysql.gcp.cloudsql.resources.requests.memory | string | `"2Gi"` |  |
+| mysql.gcp.cloudsql.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| mysql.gcp.cloudsql.securityContext.capabilities.drop[0] | string | `"all"` |  |
+| mysql.gcp.cloudsql.securityContext.readOnlyRootFilesystem | bool | `true` |  |
+| mysql.gcp.cloudsql.securityContext.runAsNonRoot | bool | `true` |  |
+| mysql.gcp.cloudsql.version | string | `"sha256:7755f632c090289b8e0fa67218fc9d8b9ab7e0758ea58c48786617a79ff715dc"` | v1.32.2 |
+| mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
 | mysql.hostname | string | `""` |  |
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
 | mysql.image.repository | string | `"trillian-opensource-ci/db_server"` |  |
-| mysql.image.version | string | `"sha256:0794abd3bdf44a567f5d6ef18a0b76802f388611b63aae33eaf28c3b0c5964d8"` |  |
+| mysql.image.version | string | `"sha256:22b7fddcb4bafc5692760d84dca5e86294363a94e8f0ecb8f5c39364d436e6d5"` | v1.5.0 |
 | mysql.livenessProbe.exec.command[0] | string | `"/etc/init.d/mysql"` |  |
 | mysql.livenessProbe.exec.command[1] | string | `"status"` |  |
 | mysql.livenessProbe.failureThreshold | int | `3` |  |
@@ -133,5 +156,3 @@ The following table lists the configurable parameters of the trilian chart and t
 | mysql.strategy.type | string | `"Recreate"` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"trillian-system"` |  |
-
-----------------------------------------------
