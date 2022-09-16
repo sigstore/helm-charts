@@ -40,4 +40,13 @@ $ crane digest ghcr.io/sigstore/scaffolding/createtree:v0.4.6
 sha256:c293fcb546619a71eabba16f231e0262d7614f2bb90fb53dda2713bbef71dac5
 ```
 
+## Bumping helm chart dependencies
+
+When bumping any dependency in Chart.yaml ensure you also update the Chart.lock file.
+
+```shell
+helm dependecy update charts/«chart-name»
+helm dependecy build charts/«chart-name»
+```
+
 [crane]: https://github.com/google/go-containerregistry/blob/main/cmd/crane/doc/crane.md "Crane is a tool for managing container images"
