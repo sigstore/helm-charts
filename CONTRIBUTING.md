@@ -23,3 +23,21 @@ git pull
 git checkout «your-branch»
 git rebase main
 ```
+
+## Bumping image versions
+
+When bumping image versions it is important you use the image digest as opposed to the tag.
+
+See below a easy workflow to figure out the image digest and latest available tags using [crane][].
+
+```shell
+$ crane ls ghcr.io/sigstore/scaffolding/createtree
+…
+sha256-6c0722e2140d14982a9addbeffd6a5fc6c53ecd44d138138c2eebc14129ab3e8.sbom
+v0.4.6
+sha256-c293fcb546619a71eabba16f231e0262d7614f2bb90fb53dda2713bbef71dac5.sig
+$ crane digest ghcr.io/sigstore/scaffolding/createtree:v0.4.6
+sha256:c293fcb546619a71eabba16f231e0262d7614f2bb90fb53dda2713bbef71dac5
+```
+
+[crane]: https://github.com/google/go-containerregistry/blob/main/cmd/crane/doc/crane.md "Crane is a tool for managing container images"
