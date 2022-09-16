@@ -1,5 +1,4 @@
-charts/*/charts
-charts/*/Chart.lock
+charts/**/charts/*.tgz
 
 # Vim swap files
 *.swp
