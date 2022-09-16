@@ -1,6 +1,7 @@
 apiVersion: v2
 name: trillian
-description: Trillian
+description: |
+  Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
 type: application
 
@@ -11,9 +12,13 @@ keywords:
   - pki
 
 home: https://sigstore.dev/
+sources:
+  - https://github.com/google/trillian
+  - https://github.com/sigstore/helm-charts/tree/main/charts/trillian
 
 maintainers:
   - name: The Sigstore Authors
+    url: https://sigstore.dev/
 
 annotations:
   artifacthub.io/license: Apache-2.0
