@@ -1,0 +1,6 @@
+dependencies:
+- name: trillian
+  repository: https://sigstore.github.io/helm-charts
+  version: 0.1.10
+digest: sha256:e1b80b519cd7607afc221d71d1a502bb38724b4bb8271eee6955d2753cd908f9
+generated: "2022-09-17T15:55:08.979044+02:00"
