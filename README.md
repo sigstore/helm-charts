@@ -52,9 +52,11 @@ NOTE: The public key that was used to sign a particular chart may not be identic
 
 ## Charts
 
-* [policy-controller](charts/policy-controller)
 * [ctlog](charts/ctlog)
 * [fulcio](charts/fulcio)
+* [policy-controller](charts/policy-controller)
 * [rekor](charts/rekor)
 * [scaffold](charts/scaffold)
+* [sigstore-prober](charts/sigstore-prober)
 * [trillian](charts/trillian)
+* [updatetree](charts/updatetree)
