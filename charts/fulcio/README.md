@@ -117,7 +117,7 @@ helm uninstall [RELEASE_NAME]
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/fulcio"` |  |
-| server.image.version | string | `"sha256:5d16364a5be4e75c98672f789d44ab4775554fe189a6217725a63a06de6fbc42"` |  |
+| server.image.version | string | `"sha256:5d16364a5be4e75c98672f789d44ab4775554fe189a6217725a63a06de6fbc42"` | v0.6.0 |
 | server.ingress.grpc.annotations."nginx.ingress.kubernetes.io/backend-protocol" | string | `"GRPC"` |  |
 | server.ingress.grpc.className | string | `""` |  |
 | server.ingress.grpc.enabled | bool | `false` |  |
