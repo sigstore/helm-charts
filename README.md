@@ -11,6 +11,10 @@ Charts are available in the following formats:
 * [Chart Repository](https://helm.sh/docs/topics/chart_repository/)
 * [OCI Artifacts](https://helm.sh/docs/topics/registries/)
 
+## Contribute
+
+:heart: Planning to contribute? Please following our [contributing guidelines](CONTRIBUTING.md) to have your contribution smoothly flowing into this project.
+
 ### Installing from the Chart Repository
 
 The following command can be used to add the chart repository:
