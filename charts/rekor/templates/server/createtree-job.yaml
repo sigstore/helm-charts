@@ -10,6 +10,9 @@ metadata:
 {{- end }}
 {{ include "rekor.namespace" . | indent 2 }}
 spec:
+{{- if .Values.createtree.ttlSecondsAfterFinished }}
+  ttlSecondsAfterFinished: {{ .Values.createtree.ttlSecondsAfterFinished }}
+{{- end }}
   template:
     spec:
       serviceAccountName: {{ template "rekor.serviceAccountName.createtree" . }}
