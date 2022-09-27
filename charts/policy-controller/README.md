@@ -1,33 +1,43 @@
-# Policy Controller
+# policy-controller
 
-## Requirements
+![Version: 0.2.4](https://img.shields.io/badge/Version-0.2.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
-* Kubernetes cluster with rights to install admission webhooks
-* Helm
+The Helm chart for Policy  Controller
 
-## Parameters
+**Homepage:** <https://github.com/sigstore/policy-controller>
 
-The following table lists the configurable parameters of the policy-controller chart and their default values.
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| dlorenc |  |  |
+| hectorj2f |  |  |
+
+## Source Code
+
+* <https://github.com/sigstore/policy-controller>
+
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | commonNodeSelector | object | `{}` |  |
 | commonTolerations | list | `[]` |  |
-| imagePullSecrets | string | `nil` |  |
 | cosign.cosignPub | string | `""` |  |
 | cosign.secretKeyRef.name | string | `""` |  |
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
+| imagePullSecrets | list | `[]` |  |
 | policywebhook.env | object | `{}` |  |
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
 | policywebhook.image.version | string | `"sha256:d1e7af59381793687db4673277005276eb73a06cf555503138dd18eaa1ca47d6"` |  |
-| policywebhook.replicaCount | int | `1` |  |
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | policywebhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
 | policywebhook.podSecurityContext.enabled | bool | `true` |  |
 | policywebhook.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | policywebhook.podSecurityContext.runAsNonRoot | bool | `true` |  |
+| policywebhook.replicaCount | int | `1` |  |
 | policywebhook.resources.limits.cpu | string | `"100m"` |  |
 | policywebhook.resources.limits.memory | string | `"256Mi"` |  |
 | policywebhook.resources.requests.cpu | string | `"100m"` |  |
@@ -43,7 +53,6 @@ The following table lists the configurable parameters of the policy-controller c
 | serviceMonitor.enabled | bool | `false` |  |
 | webhook.env | object | `{}` |  |
 | webhook.extraArgs | object | `{}` |  |
-| webhook.replicaCount | int | `1` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
 | webhook.image.version | string | `"sha256:dba911635cd4f12ac807d3cd2e9065f6ec131102fa7cf19e75e897d0efe2247f"` |  |
@@ -53,6 +62,7 @@ The following table lists the configurable parameters of the policy-controller c
 | webhook.podSecurityContext.enabled | bool | `true` |  |
 | webhook.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | webhook.podSecurityContext.runAsUser | int | `1000` |  |
+| webhook.replicaCount | int | `1` |  |
 | webhook.resources.limits.cpu | string | `"100m"` |  |
 | webhook.resources.limits.memory | string | `"256Mi"` |  |
 | webhook.resources.requests.cpu | string | `"100m"` |  |
