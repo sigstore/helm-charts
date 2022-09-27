@@ -55,7 +55,7 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createctconfig.serviceAccount.create | bool | `true` |  |
 | createctconfig.serviceAccount.mountToken | bool | `true` |  |
 | createctconfig.serviceAccount.name | string | `""` |  |
-| createctconfig.ttlSecondsAfterFinished | int | `180` |  |
+| createctconfig.ttlSecondsAfterFinished | int | `3600` |  |
 | createtree.enabled | bool | `true` |  |
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
@@ -68,7 +68,7 @@ The following table lists the configurable parameters of the ctlog chart and the
 | createtree.serviceAccount.create | bool | `true` |  |
 | createtree.serviceAccount.mountToken | bool | `true` |  |
 | createtree.serviceAccount.name | string | `""` |  |
-| createtree.ttlSecondsAfterFinished | int | `180` |  |
+| createtree.ttlSecondsAfterFinished | int | `3600` |  |
 | forceNamespace | string | `""` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"ctlog-system"` |  |

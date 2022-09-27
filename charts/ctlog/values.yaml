@@ -91,7 +91,7 @@ createctconfig:
   fulcioURL: "http://fulcio-server.fulcio-system.svc"
   logPrefix: sigstorescaffolding
   privateKeyPasswordSecretName: ""
-  ttlSecondsAfterFinished: 180
+  ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
     name: ""
