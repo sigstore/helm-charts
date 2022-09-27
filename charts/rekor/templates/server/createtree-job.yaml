@@ -4,6 +4,10 @@ metadata:
   labels:
     {{- include "rekor.server.labels" . | nindent 4 }}
   name: {{ template "rekor.createtree.fullname" . }}
+{{- if .Values.createtree.annotations }}
+  annotations:
+{{ toYaml .Values.createtree.annotations | indent 4 }}
+{{- end }}
 {{ include "rekor.namespace" . | indent 2 }}
 spec:
   template:

@@ -155,6 +155,7 @@ createtree:
     runAsNonRoot: true
     runAsUser: 65533
   resources: {}
+  annotations: {}
 
 # Configure Trillian dependency
 trillian:
