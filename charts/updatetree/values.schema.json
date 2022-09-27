@@ -177,26 +177,26 @@
             ],
             "properties": {
                 "treeID": {
-                    "type": "null",
-                    "default": null,
+                    "type": "string",
+                    "default": "",
                     "title": "The treeID Schema",
                     "examples": [
-                        null
+                        ""
                     ]
                 },
                 "treeState": {
-                    "type": "null",
-                    "default": null,
+                    "type": "string",
+                    "default": "",
                     "title": "The treeState Schema",
                     "examples": [
-                        null
+                        ""
                     ]
                 }
             },
             "examples": [
                 {
-                    "treeID": null,
-                    "treeState": null
+                    "treeID": "",
+                    "treeState": ""
                 }
             ]
         },
@@ -303,8 +303,8 @@
                 "runAsUser": 65533
             },
             "args": {
-                "treeID": null,
-                "treeState": null
+                "treeID": "",
+                "treeState": ""
             },
             "annotations": {},
             "trillian": {

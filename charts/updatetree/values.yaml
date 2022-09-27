@@ -13,9 +13,9 @@ securityContext:
   runAsNonRoot: true
   runAsUser: 65533
 args:
-  treeID:
+  treeID: ""
    # -- valid tree states are ACTIVE, FROZEN and DRAINING
-  treeState:
+  treeState: ""
 annotations: {}
 
 # Configure Trillian dependency
