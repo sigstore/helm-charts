@@ -10,6 +10,9 @@ metadata:
 {{ toYaml .Values.createctconfig.annotations | indent 4 }}
 {{- end }}
 spec:
+{{- if .Values.createctconfig.ttlSecondsAfterFinished }}
+  ttlSecondsAfterFinished: {{ .Values.createctconfig.ttlSecondsAfterFinished }}
+{{- end }}
   backoffLimit: {{ .Values.createctconfig.backoffLimit }}
   template:
     spec:

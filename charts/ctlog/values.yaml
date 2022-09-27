@@ -59,6 +59,7 @@ createtree:
     pullPolicy: IfNotPresent
     # v0.3.0
     version: "sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"
+  ttlSecondsAfterFinished: 180
   serviceAccount:
     create: true
     name: ""
@@ -90,6 +91,7 @@ createctconfig:
   fulcioURL: "http://fulcio-server.fulcio-system.svc"
   logPrefix: sigstorescaffolding
   privateKeyPasswordSecretName: ""
+  ttlSecondsAfterFinished: 180
   serviceAccount:
     create: true
     name: ""

@@ -10,6 +10,9 @@ metadata:
 {{ toYaml .Values.createtree.annotations | indent 4 }}
 {{- end }}
 spec:
+{{- if .Values.createtree.ttlSecondsAfterFinished }}
+  ttlSecondsAfterFinished: {{ .Values.createtree.ttlSecondsAfterFinished }}
+{{- end }}
   template:
     spec:
       serviceAccountName: {{ template "ctlog.serviceAccountName.createtree" . }}
