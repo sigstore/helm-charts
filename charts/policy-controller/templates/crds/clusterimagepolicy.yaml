@@ -22,7 +22,7 @@ spec:
       clientConfig:
         service:
           name: policy-webhook
-          namespace: {{ .Release.namespace }}
+          namespace: {{ .Release.Namespace }}
       conversionReviewVersions:
       - v1beta1
       - v1alpha1
