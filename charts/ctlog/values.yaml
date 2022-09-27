@@ -1,6 +1,7 @@
 namespace:
   create: false
   name: ctlog-system
+
 server:
   replicaCount: 1
   config:
@@ -48,6 +49,7 @@ server:
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
+
 createtree:
   enabled: true
   name: createtree
@@ -65,6 +67,8 @@ createtree:
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
+  annotations: {}
+
 createctconfig:
   enabled: true
   replicaCount: 1
@@ -94,10 +98,13 @@ createctconfig:
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
+  annotations: {}
+
 trillian:
   namespace: trillian-system
   logServer:
     name: trillian-logserver
     portRPC: 8091
+
 # Force namespace of namespaced resources
 forceNamespace: ""
