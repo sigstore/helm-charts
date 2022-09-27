@@ -34,6 +34,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| createtree.annotations | object | `{}` |  |
 | createtree.force | bool | `false` |  |
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
@@ -47,7 +48,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | createtree.serviceAccount.create | bool | `true` |  |
 | createtree.serviceAccount.name | string | `""` |  |
 | forceNamespace | string | `""` |  |
-| imagePullSecrets | string | `""` |  |
+| imagePullSecrets | list | `[]` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
