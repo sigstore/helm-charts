@@ -1,8 +1,10 @@
 namespace:
   create: false
   name: fulcio-system
+
 config:
   contents: {}
+
 server:
   replicaCount: 1
   name: server
@@ -69,6 +71,7 @@ server:
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
+
 createcerts:
   enabled: true
   replicaCount: 1
@@ -87,6 +90,8 @@ createcerts:
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
+  annotations: {}
+
 # Configure ctlog dependency
 ctlog:
   enabled: true
@@ -104,5 +109,6 @@ ctlog:
     fullnameOverride: ctlog-createcerts
   createctconfig:
     logPrefix: fulcio
+
 # Force namespace of namespaced resources
 forceNamespace: ""

@@ -39,10 +39,12 @@
                     ]
                 }
             },
-            "examples": [{
-                "create": false,
-                "name": "fulcio-system"
-            }]
+            "examples": [
+                {
+                    "create": false,
+                    "name": "fulcio-system"
+                }
+            ]
         },
         "config": {
             "type": "object",
@@ -58,12 +60,16 @@
                     "title": "The contents Schema",
                     "required": [],
                     "properties": {},
-                    "examples": [{}]
+                    "examples": [
+                        {}
+                    ]
                 }
             },
-            "examples": [{
-                "contents": {}
-            }]
+            "examples": [
+                {
+                    "contents": {}
+                }
+            ]
         },
         "server": {
             "type": "object",
@@ -154,16 +160,18 @@
                             "default": "",
                             "title": "The version Schema",
                             "examples": [
-                                "sha256:27efe67be5d1291e7806733e65a868d47723c5bd269e42ee133914b8c609238f"
+                                "sha256:61081295a8f75ed7537b5d1f8c7320e078dc00e4562c0bf605fbefa062c690de"
                             ]
                         }
                     },
-                    "examples": [{
-                        "registry": "gcr.io",
-                        "repository": "projectsigstore/fulcio",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "sha256:27efe67be5d1291e7806733e65a868d47723c5bd269e42ee133914b8c609238f"
-                    }]
+                    "examples": [
+                        {
+                            "registry": "gcr.io",
+                            "repository": "projectsigstore/fulcio",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:61081295a8f75ed7537b5d1f8c7320e078dc00e4562c0bf605fbefa062c690de"
+                        }
+                    ]
                 },
                 "args": {
                     "type": "object",
@@ -172,7 +180,10 @@
                     "required": [
                         "port",
                         "grpcPort",
-                        "certificateAuthority"
+                        "certificateAuthority",
+                        "hsm_caroot_id",
+                        "aws_hsm_root_ca_path",
+                        "gcp_private_ca_parent"
                     ],
                     "properties": {
                         "port": {
@@ -224,14 +235,16 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "port": 5555,
-                        "grpcPort": 5554,
-                        "certificateAuthority": "fileca",
-                        "hsm_caroot_id": null,
-                        "aws_hsm_root_ca_path": null,
-                        "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
-                    }]
+                    "examples": [
+                        {
+                            "port": 5555,
+                            "grpcPort": 5554,
+                            "certificateAuthority": "fileca",
+                            "hsm_caroot_id": null,
+                            "aws_hsm_root_ca_path": null,
+                            "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
+                        }
+                    ]
                 },
                 "serviceAccount": {
                     "type": "object",
@@ -266,7 +279,9 @@
                             "title": "The annotations Schema",
                             "required": [],
                             "properties": {},
-                            "examples": [{}]
+                            "examples": [
+                                {}
+                            ]
                         },
                         "mountToken": {
                             "type": "boolean",
@@ -277,12 +292,14 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "create": true,
-                        "name": "",
-                        "annotations": {},
-                        "mountToken": true
-                    }]
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {},
+                            "mountToken": true
+                        }
+                    ]
                 },
                 "service": {
                     "type": "object",
@@ -350,68 +367,76 @@
                                         ]
                                     }
                                 },
-                                "examples": [{
-                                    "name": "http",
-                                    "port": 80,
-                                    "protocol": "TCP",
-                                    "targetPort": 5555
-                                },
-                                {
-                                    "name": "grpc",
-                                    "port": 5554,
-                                    "protocol": "TCP",
-                                    "targetPort": 5554
-                                },
-                                {
-                                    "name": "2112-tcp",
-                                    "port": 2112,
-                                    "protocol": "TCP",
-                                    "targetPort": 2112
-                                }]
+                                "examples": [
+                                    {
+                                        "name": "http",
+                                        "port": 80,
+                                        "protocol": "TCP",
+                                        "targetPort": 5555
+                                    },
+                                    {
+                                        "name": "grpc",
+                                        "port": 5554,
+                                        "protocol": "TCP",
+                                        "targetPort": 5554
+                                    },
+                                    {
+                                        "name": "2112-tcp",
+                                        "port": 2112,
+                                        "protocol": "TCP",
+                                        "targetPort": 2112
+                                    }
+                                ]
                             },
                             "examples": [
-                                [{
-                                    "name": "http",
-                                    "port": 80,
-                                    "protocol": "TCP",
-                                    "targetPort": 5555
-                                },
-                                {
-                                    "name": "grpc",
-                                    "port": 5554,
-                                    "protocol": "TCP",
-                                    "targetPort": 5554
-                                },
-                                {
-                                    "name": "2112-tcp",
-                                    "port": 2112,
-                                    "protocol": "TCP",
-                                    "targetPort": 2112
-                                }]
+                                [
+                                    {
+                                        "name": "http",
+                                        "port": 80,
+                                        "protocol": "TCP",
+                                        "targetPort": 5555
+                                    },
+                                    {
+                                        "name": "grpc",
+                                        "port": 5554,
+                                        "protocol": "TCP",
+                                        "targetPort": 5554
+                                    },
+                                    {
+                                        "name": "2112-tcp",
+                                        "port": 2112,
+                                        "protocol": "TCP",
+                                        "targetPort": 2112
+                                    }
+                                ]
                             ]
                         }
                     },
-                    "examples": [{
-                        "type": "ClusterIP",
-                        "ports": [{
-                            "name": "http",
-                            "port": 80,
-                            "protocol": "TCP",
-                            "targetPort": 5555
-                        },
+                    "examples": [
                         {
-                            "name": "grpc",
-                            "port": 5554,
-                            "protocol": "TCP",
-                            "targetPort": 5554
-                        },
-                        {
-                            "name": "2112-tcp",
-                            "port": 2112,
-                            "protocol": "TCP",
-                            "targetPort": 2112
-                        }]
-                    }]
+                            "type": "ClusterIP",
+                            "ports": [
+                                {
+                                    "name": "http",
+                                    "port": 80,
+                                    "protocol": "TCP",
+                                    "targetPort": 5555
+                                },
+                                {
+                                    "name": "grpc",
+                                    "port": 5554,
+                                    "protocol": "TCP",
+                                    "targetPort": 5554
+                                },
+                                {
+                                    "name": "2112-tcp",
+                                    "port": 2112,
+                                    "protocol": "TCP",
+                                    "targetPort": 2112
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "ingress": {
                     "type": "object",
@@ -456,7 +481,9 @@
                                     "title": "The annotations Schema",
                                     "required": [],
                                     "properties": {},
-                                    "examples": [{}]
+                                    "examples": [
+                                        {}
+                                    ]
                                 },
                                 "hosts": {
                                     "type": "array",
@@ -488,16 +515,20 @@
                                                 ]
                                             }
                                         },
-                                        "examples": [{
-                                            "path": "/",
-                                            "host": "fulcio.localhost"
-                                        }]
+                                        "examples": [
+                                            {
+                                                "path": "/",
+                                                "host": "fulcio.localhost"
+                                            }
+                                        ]
                                     },
                                     "examples": [
-                                        [{
-                                            "path": "/",
-                                            "host": "fulcio.localhost"
-                                        }]
+                                        [
+                                            {
+                                                "path": "/",
+                                                "host": "fulcio.localhost"
+                                            }
+                                        ]
                                     ]
                                 },
                                 "tls": {
@@ -510,16 +541,20 @@
                                     ]
                                 }
                             },
-                            "examples": [{
-                                "enabled": true,
-                                "className": "nginx",
-                                "annotations": {},
-                                "hosts": [{
-                                    "path": "/",
-                                    "host": "fulcio.localhost"
-                                }],
-                                "tls": []
-                            }]
+                            "examples": [
+                                {
+                                    "enabled": true,
+                                    "className": "nginx",
+                                    "annotations": {},
+                                    "hosts": [
+                                        {
+                                            "path": "/",
+                                            "host": "fulcio.localhost"
+                                        }
+                                    ],
+                                    "tls": []
+                                }
+                            ]
                         },
                         "grpc": {
                             "type": "object",
@@ -566,9 +601,11 @@
                                             ]
                                         }
                                     },
-                                    "examples": [{
-                                        "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
-                                    }]
+                                    "examples": [
+                                        {
+                                            "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
+                                        }
+                                    ]
                                 },
                                 "hosts": {
                                     "type": "array",
@@ -600,16 +637,20 @@
                                                 ]
                                             }
                                         },
-                                        "examples": [{
-                                            "host": "fulcio.localhost",
-                                            "path": "/dev.sigstore.fulcio.v2.CA"
-                                        }]
+                                        "examples": [
+                                            {
+                                                "host": "fulcio.localhost",
+                                                "path": "/dev.sigstore.fulcio.v2.CA"
+                                            }
+                                        ]
                                     },
                                     "examples": [
-                                        [{
-                                            "host": "fulcio.localhost",
-                                            "path": "/dev.sigstore.fulcio.v2.CA"
-                                        }]
+                                        [
+                                            {
+                                                "host": "fulcio.localhost",
+                                                "path": "/dev.sigstore.fulcio.v2.CA"
+                                            }
+                                        ]
                                     ]
                                 },
                                 "tls": {
@@ -647,75 +688,94 @@
                                                 },
                                                 "examples": [
                                                     [
-                                                        "fulcio.localhost"]
+                                                        "fulcio.localhost"
+                                                    ]
                                                 ]
                                             }
                                         },
-                                        "examples": [{
-                                            "secretName": "fulcio-grpc-ingress-tls",
-                                            "hosts": [
-                                                "fulcio.localhost"
-                                            ]
-                                        }]
+                                        "examples": [
+                                            {
+                                                "secretName": "fulcio-grpc-ingress-tls",
+                                                "hosts": [
+                                                    "fulcio.localhost"
+                                                ]
+                                            }
+                                        ]
                                     },
                                     "examples": [
-                                        [{
-                                            "secretName": "fulcio-grpc-ingress-tls",
-                                            "hosts": [
-                                                "fulcio.localhost"
-                                            ]
-                                        }]
+                                        [
+                                            {
+                                                "secretName": "fulcio-grpc-ingress-tls",
+                                                "hosts": [
+                                                    "fulcio.localhost"
+                                                ]
+                                            }
+                                        ]
                                     ]
                                 }
                             },
-                            "examples": [{
+                            "examples": [
+                                {
+                                    "enabled": false,
+                                    "className": "",
+                                    "annotations": {
+                                        "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
+                                    },
+                                    "hosts": [
+                                        {
+                                            "host": "fulcio.localhost",
+                                            "path": "/dev.sigstore.fulcio.v2.CA"
+                                        }
+                                    ],
+                                    "tls": [
+                                        {
+                                            "secretName": "fulcio-grpc-ingress-tls",
+                                            "hosts": [
+                                                "fulcio.localhost"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "http": {
+                                "enabled": true,
+                                "className": "nginx",
+                                "annotations": {},
+                                "hosts": [
+                                    {
+                                        "path": "/",
+                                        "host": "fulcio.localhost"
+                                    }
+                                ],
+                                "tls": []
+                            },
+                            "grpc": {
                                 "enabled": false,
                                 "className": "",
                                 "annotations": {
                                     "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
                                 },
-                                "hosts": [{
-                                    "host": "fulcio.localhost",
-                                    "path": "/dev.sigstore.fulcio.v2.CA"
-                                }],
-                                "tls": [{
-                                    "secretName": "fulcio-grpc-ingress-tls",
-                                    "hosts": [
-                                        "fulcio.localhost"
-                                    ]
-                                }]
-                            }]
-                        }
-                    },
-                    "examples": [{
-                        "http": {
-                            "enabled": true,
-                            "className": "nginx",
-                            "annotations": {},
-                            "hosts": [{
-                                "path": "/",
-                                "host": "fulcio.localhost"
-                            }],
-                            "tls": []
-                        },
-                        "grpc": {
-                            "enabled": false,
-                            "className": "",
-                            "annotations": {
-                                "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
-                            },
-                            "hosts": [{
-                                "host": "fulcio.localhost",
-                                "path": "/dev.sigstore.fulcio.v2.CA"
-                            }],
-                            "tls": [{
-                                "secretName": "fulcio-grpc-ingress-tls",
                                 "hosts": [
-                                    "fulcio.localhost"
+                                    {
+                                        "host": "fulcio.localhost",
+                                        "path": "/dev.sigstore.fulcio.v2.CA"
+                                    }
+                                ],
+                                "tls": [
+                                    {
+                                        "secretName": "fulcio-grpc-ingress-tls",
+                                        "hosts": [
+                                            "fulcio.localhost"
+                                        ]
+                                    }
                                 ]
-                            }]
+                            }
                         }
-                    }]
+                    ]
                 },
                 "securityContext": {
                     "type": "object",
@@ -743,92 +803,104 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "runAsNonRoot": true,
-                        "runAsUser": 65533
-                    }]
+                    "examples": [
+                        {
+                            "runAsNonRoot": true,
+                            "runAsUser": 65533
+                        }
+                    ]
                 }
             },
-            "examples": [{
-                "replicaCount": 1,
-                "name": "server",
-                "svcPort": 80,
-                "grpcSvcPort": 5554,
-                "image": {
-                    "registry": "gcr.io",
-                    "repository": "projectsigstore/fulcio",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "sha256:27efe67be5d1291e7806733e65a868d47723c5bd269e42ee133914b8c609238f"
-                },
-                "args": {
-                    "port": 5555,
-                    "grpcPort": 5554,
-                    "certificateAuthority": "fileca",
-                    "hsm_caroot_id": null,
-                    "aws_hsm_root_ca_path": null,
-                    "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
-                },
-                "serviceAccount": {
-                    "create": true,
-                    "name": "",
-                    "annotations": {},
-                    "mountToken": true
-                },
-                "service": {
-                    "type": "ClusterIP",
-                    "ports": [{
-                        "name": "http",
-                        "port": 80,
-                        "protocol": "TCP",
-                        "targetPort": 5555
+            "examples": [
+                {
+                    "replicaCount": 1,
+                    "name": "server",
+                    "svcPort": 80,
+                    "grpcSvcPort": 5554,
+                    "image": {
+                        "registry": "gcr.io",
+                        "repository": "projectsigstore/fulcio",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:61081295a8f75ed7537b5d1f8c7320e078dc00e4562c0bf605fbefa062c690de"
                     },
-                    {
-                        "name": "grpc",
-                        "port": 5554,
-                        "protocol": "TCP",
-                        "targetPort": 5554
+                    "args": {
+                        "port": 5555,
+                        "grpcPort": 5554,
+                        "certificateAuthority": "fileca",
+                        "hsm_caroot_id": null,
+                        "aws_hsm_root_ca_path": null,
+                        "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
                     },
-                    {
-                        "name": "2112-tcp",
-                        "port": 2112,
-                        "protocol": "TCP",
-                        "targetPort": 2112
-                    }]
-                },
-                "ingress": {
-                    "http": {
-                        "enabled": true,
-                        "className": "nginx",
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
                         "annotations": {},
-                        "hosts": [{
-                            "path": "/",
-                            "host": "fulcio.localhost"
-                        }],
-                        "tls": []
+                        "mountToken": true
                     },
-                    "grpc": {
-                        "enabled": false,
-                        "className": "",
-                        "annotations": {
-                            "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
-                        },
-                        "hosts": [{
-                            "host": "fulcio.localhost",
-                            "path": "/dev.sigstore.fulcio.v2.CA"
-                        }],
-                        "tls": [{
-                            "secretName": "fulcio-grpc-ingress-tls",
+                    "service": {
+                        "type": "ClusterIP",
+                        "ports": [
+                            {
+                                "name": "http",
+                                "port": 80,
+                                "protocol": "TCP",
+                                "targetPort": 5555
+                            },
+                            {
+                                "name": "grpc",
+                                "port": 5554,
+                                "protocol": "TCP",
+                                "targetPort": 5554
+                            },
+                            {
+                                "name": "2112-tcp",
+                                "port": 2112,
+                                "protocol": "TCP",
+                                "targetPort": 2112
+                            }
+                        ]
+                    },
+                    "ingress": {
+                        "http": {
+                            "enabled": true,
+                            "className": "nginx",
+                            "annotations": {},
                             "hosts": [
-                                "fulcio.localhost"
+                                {
+                                    "path": "/",
+                                    "host": "fulcio.localhost"
+                                }
+                            ],
+                            "tls": []
+                        },
+                        "grpc": {
+                            "enabled": false,
+                            "className": "",
+                            "annotations": {
+                                "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
+                            },
+                            "hosts": [
+                                {
+                                    "host": "fulcio.localhost",
+                                    "path": "/dev.sigstore.fulcio.v2.CA"
+                                }
+                            ],
+                            "tls": [
+                                {
+                                    "secretName": "fulcio-grpc-ingress-tls",
+                                    "hosts": [
+                                        "fulcio.localhost"
+                                    ]
+                                }
                             ]
-                        }]
+                        }
+                    },
+                    "securityContext": {
+                        "runAsNonRoot": true,
+                        "runAsUser": 65533
                     }
-                },
-                "securityContext": {
-                    "runAsNonRoot": true,
-                    "runAsUser": 65533
                 }
-            }]
+            ]
         },
         "createcerts": {
             "type": "object",
@@ -840,7 +912,8 @@
                 "name",
                 "image",
                 "serviceAccount",
-                "securityContext"
+                "securityContext",
+                "annotations"
             ],
             "properties": {
                 "enabled": {
@@ -911,12 +984,14 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "registry": "ghcr.io",
-                        "repository": "sigstore/scaffolding/createcerts",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
-                    }]
+                    "examples": [
+                        {
+                            "registry": "ghcr.io",
+                            "repository": "sigstore/scaffolding/createcerts",
+                            "pullPolicy": "IfNotPresent",
+                            "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
+                        }
+                    ]
                 },
                 "serviceAccount": {
                     "type": "object",
@@ -951,7 +1026,9 @@
                             "title": "The annotations Schema",
                             "required": [],
                             "properties": {},
-                            "examples": [{}]
+                            "examples": [
+                                {}
+                            ]
                         },
                         "mountToken": {
                             "type": "boolean",
@@ -962,12 +1039,14 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "create": true,
-                        "name": "",
-                        "annotations": {},
-                        "mountToken": true
-                    }]
+                    "examples": [
+                        {
+                            "create": true,
+                            "name": "",
+                            "annotations": {},
+                            "mountToken": true
+                        }
+                    ]
                 },
                 "securityContext": {
                     "type": "object",
@@ -995,33 +1074,48 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "runAsNonRoot": true,
-                        "runAsUser": 65533
-                    }]
+                    "examples": [
+                        {
+                            "runAsNonRoot": true,
+                            "runAsUser": 65533
+                        }
+                    ]
+                },
+                "annotations": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The annotations Schema",
+                    "required": [],
+                    "properties": {},
+                    "examples": [
+                        {}
+                    ]
                 }
             },
-            "examples": [{
-                "enabled": true,
-                "replicaCount": 1,
-                "name": "createcerts",
-                "image": {
-                    "registry": "ghcr.io",
-                    "repository": "sigstore/scaffolding/createcerts",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
-                },
-                "serviceAccount": {
-                    "create": true,
-                    "name": "",
-                    "annotations": {},
-                    "mountToken": true
-                },
-                "securityContext": {
-                    "runAsNonRoot": true,
-                    "runAsUser": 65533
+            "examples": [
+                {
+                    "enabled": true,
+                    "replicaCount": 1,
+                    "name": "createcerts",
+                    "image": {
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/scaffolding/createcerts",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
+                    },
+                    "serviceAccount": {
+                        "create": true,
+                        "name": "",
+                        "annotations": {},
+                        "mountToken": true
+                    },
+                    "securityContext": {
+                        "runAsNonRoot": true,
+                        "runAsUser": 65533
+                    },
+                    "annotations": {}
                 }
-            }]
+            ]
         },
         "ctlog": {
             "type": "object",
@@ -1096,10 +1190,12 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "name": "ctlog-system",
-                        "create": true
-                    }]
+                    "examples": [
+                        {
+                            "name": "ctlog-system",
+                            "create": true
+                        }
+                    ]
                 },
                 "createtree": {
                     "type": "object",
@@ -1127,10 +1223,12 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "name": "ctlog-createtree",
-                        "fullnameOverride": "ctlog-createtree"
-                    }]
+                    "examples": [
+                        {
+                            "name": "ctlog-createtree",
+                            "fullnameOverride": "ctlog-createtree"
+                        }
+                    ]
                 },
                 "createcerts": {
                     "type": "object",
@@ -1158,10 +1256,12 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "name": "ctlog-createcerts",
-                        "fullnameOverride": "ctlog-createcerts"
-                    }]
+                    "examples": [
+                        {
+                            "name": "ctlog-createcerts",
+                            "fullnameOverride": "ctlog-createcerts"
+                        }
+                    ]
                 },
                 "createctconfig": {
                     "type": "object",
@@ -1180,12 +1280,166 @@
                             ]
                         }
                     },
-                    "examples": [{
-                        "logPrefix": "fulcio"
-                    }]
+                    "examples": [
+                        {
+                            "logPrefix": "fulcio"
+                        }
+                    ]
                 }
             },
-            "examples": [{
+            "examples": [
+                {
+                    "enabled": true,
+                    "name": "ctlog",
+                    "forceNamespace": "ctlog-system",
+                    "fullnameOverride": "ctlog",
+                    "namespace": {
+                        "name": "ctlog-system",
+                        "create": true
+                    },
+                    "createtree": {
+                        "name": "ctlog-createtree",
+                        "fullnameOverride": "ctlog-createtree"
+                    },
+                    "createcerts": {
+                        "name": "ctlog-createcerts",
+                        "fullnameOverride": "ctlog-createcerts"
+                    },
+                    "createctconfig": {
+                        "logPrefix": "fulcio"
+                    }
+                }
+            ]
+        },
+        "forceNamespace": {
+            "type": "string",
+            "default": "",
+            "title": "The forceNamespace Schema",
+            "examples": [
+                ""
+            ]
+        }
+    },
+    "examples": [
+        {
+            "namespace": {
+                "create": false,
+                "name": "fulcio-system"
+            },
+            "config": {
+                "contents": {}
+            },
+            "server": {
+                "replicaCount": 1,
+                "name": "server",
+                "svcPort": 80,
+                "grpcSvcPort": 5554,
+                "image": {
+                    "registry": "gcr.io",
+                    "repository": "projectsigstore/fulcio",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:61081295a8f75ed7537b5d1f8c7320e078dc00e4562c0bf605fbefa062c690de"
+                },
+                "args": {
+                    "port": 5555,
+                    "grpcPort": 5554,
+                    "certificateAuthority": "fileca",
+                    "hsm_caroot_id": null,
+                    "aws_hsm_root_ca_path": null,
+                    "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
+                },
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {},
+                    "mountToken": true
+                },
+                "service": {
+                    "type": "ClusterIP",
+                    "ports": [
+                        {
+                            "name": "http",
+                            "port": 80,
+                            "protocol": "TCP",
+                            "targetPort": 5555
+                        },
+                        {
+                            "name": "grpc",
+                            "port": 5554,
+                            "protocol": "TCP",
+                            "targetPort": 5554
+                        },
+                        {
+                            "name": "2112-tcp",
+                            "port": 2112,
+                            "protocol": "TCP",
+                            "targetPort": 2112
+                        }
+                    ]
+                },
+                "ingress": {
+                    "http": {
+                        "enabled": true,
+                        "className": "nginx",
+                        "annotations": {},
+                        "hosts": [
+                            {
+                                "path": "/",
+                                "host": "fulcio.localhost"
+                            }
+                        ],
+                        "tls": []
+                    },
+                    "grpc": {
+                        "enabled": false,
+                        "className": "",
+                        "annotations": {
+                            "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
+                        },
+                        "hosts": [
+                            {
+                                "host": "fulcio.localhost",
+                                "path": "/dev.sigstore.fulcio.v2.CA"
+                            }
+                        ],
+                        "tls": [
+                            {
+                                "secretName": "fulcio-grpc-ingress-tls",
+                                "hosts": [
+                                    "fulcio.localhost"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "securityContext": {
+                    "runAsNonRoot": true,
+                    "runAsUser": 65533
+                }
+            },
+            "createcerts": {
+                "enabled": true,
+                "replicaCount": 1,
+                "name": "createcerts",
+                "image": {
+                    "registry": "ghcr.io",
+                    "repository": "sigstore/scaffolding/createcerts",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
+                },
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {},
+                    "mountToken": true
+                },
+                "securityContext": {
+                    "runAsNonRoot": true,
+                    "runAsUser": 65533
+                },
+                "annotations": {}
+            },
+            "ctlog": {
                 "enabled": true,
                 "name": "ctlog",
                 "forceNamespace": "ctlog-system",
@@ -1205,147 +1459,8 @@
                 "createctconfig": {
                     "logPrefix": "fulcio"
                 }
-            }]
-        },
-        "forceNamespace": {
-            "type": "string",
-            "default": "",
-            "title": "The forceNamespace Schema",
-            "examples": [
-                ""
-            ]
+            },
+            "forceNamespace": ""
         }
-    },
-    "examples": [{
-        "namespace": {
-            "create": false,
-            "name": "fulcio-system"
-        },
-        "config": {
-            "contents": {}
-        },
-        "server": {
-            "replicaCount": 1,
-            "name": "server",
-            "svcPort": 80,
-            "grpcSvcPort": 5554,
-            "image": {
-                "registry": "gcr.io",
-                "repository": "projectsigstore/fulcio",
-                "pullPolicy": "IfNotPresent",
-                "version": "sha256:27efe67be5d1291e7806733e65a868d47723c5bd269e42ee133914b8c609238f"
-            },
-            "args": {
-                "port": 5555,
-                "grpcPort": 5554,
-                "certificateAuthority": "fileca",
-                "hsm_caroot_id": null,
-                "aws_hsm_root_ca_path": null,
-                "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
-            },
-            "serviceAccount": {
-                "create": true,
-                "name": "",
-                "annotations": {},
-                "mountToken": true
-            },
-            "service": {
-                "type": "ClusterIP",
-                "ports": [{
-                    "name": "http",
-                    "port": 80,
-                    "protocol": "TCP",
-                    "targetPort": 5555
-                },
-                {
-                    "name": "grpc",
-                    "port": 5554,
-                    "protocol": "TCP",
-                    "targetPort": 5554
-                },
-                {
-                    "name": "2112-tcp",
-                    "port": 2112,
-                    "protocol": "TCP",
-                    "targetPort": 2112
-                }]
-            },
-            "ingress": {
-                "http": {
-                    "enabled": true,
-                    "className": "nginx",
-                    "annotations": {},
-                    "hosts": [{
-                        "path": "/",
-                        "host": "fulcio.localhost"
-                    }],
-                    "tls": []
-                },
-                "grpc": {
-                    "enabled": false,
-                    "className": "",
-                    "annotations": {
-                        "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
-                    },
-                    "hosts": [{
-                        "host": "fulcio.localhost",
-                        "path": "/dev.sigstore.fulcio.v2.CA"
-                    }],
-                    "tls": [{
-                        "secretName": "fulcio-grpc-ingress-tls",
-                        "hosts": [
-                            "fulcio.localhost"
-                        ]
-                    }]
-                }
-            },
-            "securityContext": {
-                "runAsNonRoot": true,
-                "runAsUser": 65533
-            }
-        },
-        "createcerts": {
-            "enabled": true,
-            "replicaCount": 1,
-            "name": "createcerts",
-            "image": {
-                "registry": "ghcr.io",
-                "repository": "sigstore/scaffolding/createcerts",
-                "pullPolicy": "IfNotPresent",
-                "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
-            },
-            "serviceAccount": {
-                "create": true,
-                "name": "",
-                "annotations": {},
-                "mountToken": true
-            },
-            "securityContext": {
-                "runAsNonRoot": true,
-                "runAsUser": 65533
-            }
-        },
-        "ctlog": {
-            "enabled": true,
-            "name": "ctlog",
-            "forceNamespace": "ctlog-system",
-            "fullnameOverride": "ctlog",
-            "namespace": {
-                "name": "ctlog-system",
-                "create": true
-            },
-            "createtree": {
-                "name": "ctlog-createtree",
-                "fullnameOverride": "ctlog-createtree"
-            },
-            "createcerts": {
-                "name": "ctlog-createcerts",
-                "fullnameOverride": "ctlog-createcerts"
-            },
-            "createctconfig": {
-                "logPrefix": "fulcio"
-            }
-        },
-        "forceNamespace": ""
-    }]
+    ]
 }
