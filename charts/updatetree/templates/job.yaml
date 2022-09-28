@@ -4,6 +4,10 @@ kind: Job
 metadata:
   name: {{ template "updatetree.name" . }}
   namespace: {{ .Values.namespace.name }}
+{{- if .Values.annotations }}
+  annotations:
+{{ toYaml .Values.annotations | indent 4 }}
+{{- end }}
 spec:
   template:
     spec:
