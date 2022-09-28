@@ -147,6 +147,7 @@ createtree:
     pullPolicy: IfNotPresent
     # v0.4.2
     version: "sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"
+  ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
     name: ""
