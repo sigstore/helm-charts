@@ -134,6 +134,14 @@
                 }
             ]
         },
+        "ttlSecondsAfterFinished": {
+            "type": "integer",
+            "default": 0,
+            "title": "The ttlSecondsAfterFinished Schema",
+            "examples": [
+                3600
+            ]
+        },
         "securityContext": {
             "type": "object",
             "default": {},
