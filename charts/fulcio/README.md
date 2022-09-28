@@ -58,7 +58,7 @@ The previous command removes the previously installed chart.
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | ctlog | 0.2.24 |
+| https://sigstore.github.io/helm-charts | ctlog | 0.2.27 |
 
 ## Parameters
 
