@@ -5,6 +5,10 @@ metadata:
 {{ include "ctlog.namespace" . | indent 2 }}
   labels:
     {{- include "ctlog.labels" . | nindent 4 }}
+{{- if .Values.createctconfig.annotations }}
+  annotations:
+{{ toYaml .Values.createctconfig.annotations | indent 4 }}
+{{- end }}
 spec:
   backoffLimit: {{ .Values.createctconfig.backoffLimit }}
   template:
