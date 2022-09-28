@@ -640,6 +640,7 @@
                 "enabled",
                 "name",
                 "image",
+                "ttlSecondsAfterFinished",
                 "serviceAccount",
                 "securityContext",
                 "annotations"
@@ -712,6 +713,14 @@
                             "pullPolicy": "IfNotPresent",
                             "version": "sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"
                         }
+                    ]
+                },
+                "ttlSecondsAfterFinished": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The ttlSecondsAfterFinished Schema",
+                    "examples": [
+                        3600
                     ]
                 },
                 "serviceAccount": {
@@ -823,6 +832,7 @@
                         "pullPolicy": "IfNotPresent",
                         "version": "sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"
                     },
+                    "ttlSecondsAfterFinished": 3600,
                     "serviceAccount": {
                         "create": true,
                         "name": "",
@@ -851,6 +861,7 @@
                 "fulcioURL",
                 "logPrefix",
                 "privateKeyPasswordSecretName",
+                "ttlSecondsAfterFinished",
                 "serviceAccount",
                 "securityContext",
                 "annotations"
@@ -1038,6 +1049,14 @@
                         ""
                     ]
                 },
+                "ttlSecondsAfterFinished": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The ttlSecondsAfterFinished Schema",
+                    "examples": [
+                        3600
+                    ]
+                },
                 "serviceAccount": {
                     "type": "object",
                     "default": {},
@@ -1160,6 +1179,7 @@
                     "fulcioURL": "http://fulcio-server.fulcio-system.svc",
                     "logPrefix": "sigstorescaffolding",
                     "privateKeyPasswordSecretName": "",
+                    "ttlSecondsAfterFinished": 3600,
                     "serviceAccount": {
                         "create": true,
                         "name": "",
@@ -1322,6 +1342,7 @@
                     "pullPolicy": "IfNotPresent",
                     "version": "sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"
                 },
+                "ttlSecondsAfterFinished": 3600,
                 "serviceAccount": {
                     "create": true,
                     "name": "",
@@ -1356,6 +1377,7 @@
                 "fulcioURL": "http://fulcio-server.fulcio-system.svc",
                 "logPrefix": "sigstorescaffolding",
                 "privateKeyPasswordSecretName": "",
+                "ttlSecondsAfterFinished": 3600,
                 "serviceAccount": {
                     "create": true,
                     "name": "",
