@@ -720,7 +720,7 @@
                     "default": 0,
                     "title": "The ttlSecondsAfterFinished Schema",
                     "examples": [
-                        180
+                        3600
                     ]
                 },
                 "serviceAccount": {
@@ -832,7 +832,7 @@
                         "pullPolicy": "IfNotPresent",
                         "version": "sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"
                     },
-                    "ttlSecondsAfterFinished": 180,
+                    "ttlSecondsAfterFinished": 3600,
                     "serviceAccount": {
                         "create": true,
                         "name": "",
@@ -1054,7 +1054,7 @@
                     "default": 0,
                     "title": "The ttlSecondsAfterFinished Schema",
                     "examples": [
-                        180
+                        3600
                     ]
                 },
                 "serviceAccount": {
