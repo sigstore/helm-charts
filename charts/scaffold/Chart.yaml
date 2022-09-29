@@ -21,7 +21,7 @@ dependencies:
     repository: https://sigstore.github.io/helm-charts
     condition: fulcio.enabled
   - name: rekor
-    version: 0.3.20
+    version: 0.3.21
     repository: https://sigstore.github.io/helm-charts
     condition: rekor.enabled
   - name: trillian
