@@ -1234,6 +1234,34 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 0.5.3
+    created: "2022-09-29T10:12:41.772168263Z"
+    dependencies:
+    - condition: ctlog.enabled
+      name: ctlog
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.27
+    description: Fulcio
+    digest: fe3778b5e1d4cc35cf991b2b17de5b9e9b49445e561fe318cb6cea2a8c85dc0c
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: fulcio
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/fulcio-0.4.11/fulcio-0.4.11.tgz
+    version: 0.4.11
+  - annotations:
+      artifacthub.io/images: |
+        - name: fulcio
+          image: gcr.io/projectsigstore/fulcio@sha256:61081295a8f75ed7537b5d1f8c7320e078dc00e4562c0bf605fbefa062c690de
+        - name: createcerts
+          image: ghcr.io/sigstore/scaffolding/createcerts@sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.5.3
     created: "2022-09-28T09:15:01.003658127Z"
     dependencies:
     - condition: ctlog.enabled
@@ -5772,4 +5800,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2022-09-28T17:46:58.27058123Z"
+generated: "2022-09-29T10:12:41.773237177Z"
