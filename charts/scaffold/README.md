@@ -19,7 +19,7 @@ The following components are also included as either direct components or throug
 | Repository | Name | Version |
 |------------|------|---------|
 | https://sigstore.github.io/helm-charts | ctlog | 0.2.27 |
-| https://sigstore.github.io/helm-charts | fulcio | 0.4.11 |
+| https://sigstore.github.io/helm-charts | fulcio | 0.4.12 |
 | https://sigstore.github.io/helm-charts | rekor | 0.3.21 |
 | https://sigstore.github.io/helm-charts | trillian | 0.1.10 |
 
