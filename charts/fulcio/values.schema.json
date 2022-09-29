@@ -993,6 +993,14 @@
                         }
                     ]
                 },
+                "ttlSecondsAfterFinished": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The ttlSecondsAfterFinished Schema",
+                    "examples": [
+                        3600
+                    ]
+                },
                 "serviceAccount": {
                     "type": "object",
                     "default": {},

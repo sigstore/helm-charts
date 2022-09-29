@@ -82,6 +82,7 @@ createcerts:
     pullPolicy: IfNotPresent
     # v0.3.0
     version: "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
+  ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
     name: ""
