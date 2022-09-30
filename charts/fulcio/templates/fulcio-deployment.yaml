@@ -51,6 +51,9 @@ spec:
             - "--fileca-key-passwd"
             - "$(PASSWORD)"
             {{- end }}
+            {{- if .Values.server.logging.production }}
+            - "--log_type=prod"
+            {{- end -}}
             {{- if eq .Values.server.args.certificateAuthority "kmsca" }}
             - "--kms-resource={{ .Values.server.args.kms_resource }}"
             - "--kms-cert-chain-path=/etc/fulcio-config/chain.pem"

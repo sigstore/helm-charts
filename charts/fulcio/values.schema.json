@@ -112,6 +112,15 @@
                         80
                     ]
                 },
+                "logging": {
+                    "type": "object",
+                    "properties": {
+                        "production": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
                 "grpcSvcPort": {
                     "type": "integer",
                     "default": 0,
