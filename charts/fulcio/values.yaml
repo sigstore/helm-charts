@@ -10,6 +10,8 @@ server:
   name: server
   svcPort: 80
   grpcSvcPort: 5554
+  logging:
+    production: false
   image:
     registry: gcr.io
     repository: projectsigstore/fulcio

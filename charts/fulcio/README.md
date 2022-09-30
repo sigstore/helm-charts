@@ -121,6 +121,7 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | server.ingress.http.hosts[0].host | string | `"fulcio.localhost"` |  |
 | server.ingress.http.hosts[0].path | string | `"/"` |  |
 | server.ingress.http.tls | list | `[]` |  |
+| server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
 | server.replicaCount | int | `1` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
