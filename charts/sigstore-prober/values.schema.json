@@ -41,49 +41,11 @@
                         },
                         "rekorRequests": {
                             "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "endpoint": {
-                                        "type": "string"
-                                    },
-                                    "method": {
-                                        "type": "string"
-                                    },
-                                    "body": {
-                                        "type": "string"
-                                    },
-                                    "queries": {
-                                        "type": "object",
-                                        "additionalProperties": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "items": {"$ref": "#/$defs/proberCheck"}
                         },
                         "fulcioRequests": {
                             "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "endpoint": {
-                                        "type": "string"
-                                    },
-                                    "method": {
-                                        "type": "string"
-                                    },
-                                    "body": {
-                                        "type": "string"
-                                    },
-                                    "queries": {
-                                        "type": "object",
-                                        "additionalProperties": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
+                            "items": {"$ref": "#/$defs/proberCheck"}
                         }
                     }
                 },
@@ -108,6 +70,29 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "$defs": {
+        "proberCheck": {
+            "type": "object",
+            "properties": {
+                "endpoint": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "string"
+                },
+                "queries": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false
         }
     }
 }
