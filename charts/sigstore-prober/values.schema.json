@@ -38,6 +38,14 @@
                         },
                         "writeProber": {
                             "type": "boolean"
+                        },
+                        "rekorRequests": {
+                            "type": "array",
+                            "items": {"$ref": "#/$defs/proberCheck"}
+                        },
+                        "fulcioRequests": {
+                            "type": "array",
+                            "items": {"$ref": "#/$defs/proberCheck"}
                         }
                     }
                 },
@@ -62,6 +70,29 @@
                     "type": "string"
                 }
             }
+        }
+    },
+    "$defs": {
+        "proberCheck": {
+            "type": "object",
+            "properties": {
+                "endpoint": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "string"
+                },
+                "queries": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false
         }
     }
 }
