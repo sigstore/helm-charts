@@ -15,5 +15,7 @@ spec:
     rekorHost: https://rekor.sigstore.dev
     frequency: 10
     writeProber: false
+    rekorRequests: []
+    fulcioRequests: []
 prometheus:
   port: 8080

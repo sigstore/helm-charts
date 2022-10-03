@@ -32,9 +32,9 @@ Create args for sigstore prober components
 - "-write-prober={{ .Values.spec.args.writeProber }}"
 {{- end }}
 {{- if .Values.spec.args.rekorRequests }}
-- "-rekor-requests={{ .Values.spec.args.rekorRequests }}"
+- -rekor-requests={{ .Values.spec.args.rekorRequests|toJson|quote }}
 {{- end }}
 {{- if .Values.spec.args.fulcioRequests }}
-- "-fulcio-requests={{ .Values.spec.args.fulcioRequests }}"
+- -fulcio-requests={{ .Values.spec.args.fulcioRequests|toJson|quote }}
 {{- end }}
 {{- end -}}
