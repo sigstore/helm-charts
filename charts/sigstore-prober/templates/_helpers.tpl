@@ -17,7 +17,7 @@ Create args for sigstore prober components
 */}}
 {{- define "sigstore-prober.args" -}}
 {{- if .Values.spec.args.frequency }}
-- "-frequecy={{ .Values.spec.args.frequency }}"
+- "-frequency={{ .Values.spec.args.frequency }}"
 {{- end }}
 {{- if .Values.prometheus.port }}
 - "-addr=:{{ .Values.prometheus.port }}"
@@ -30,5 +30,11 @@ Create args for sigstore prober components
 {{- end }}
 {{- if .Values.spec.args.writeProber }}
 - "-write-prober={{ .Values.spec.args.writeProber }}"
+{{- end }}
+{{- if .Values.spec.args.rekorRequests }}
+- "-rekor-requests={{ .Values.spec.args.rekorRequests }}"
+{{- end }}
+{{- if .Values.spec.args.fulcioRequests }}
+- "-fulcio-requests={{ .Values.spec.args.fulcioRequests }}"
 {{- end }}
 {{- end -}}
