@@ -18,6 +18,19 @@ spec:
         prometheus.io/port: "{{ .Values.prometheus.port }}"
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
+      {{- if .Values.spec.args.trustRekorAPIPublicKey }}
+      initContainers:
+      - name: public-key-fetcher
+        image: docker.io/curlimages/curl@sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5
+        args:
+          - "--output"
+          - "/var/run/sigstore/public-key.pem"
+          - "{{ .Values.spec.args.rekorHost }}/api/v1/log/publicKey"
+        env:
+        volumeMounts:
+        - name: sigstore
+          mountPath: "/var/run/sigstore"
+      {{- end }}
       containers:
       - name: {{ template "sigstore-prober.name" . }}
         image: "{{ .Values.spec.image }}"
@@ -26,3 +39,15 @@ spec:
           {{- include "sigstore-prober.args" . | nindent 8 }}
         ports:
         - containerPort: {{ .Values.prometheus.port }} # metrics
+      {{- if .Values.spec.args.trustRekorAPIPublicKey }}
+        env:
+        - name: SIGSTORE_REKOR_PUBLIC_KEY
+          value: "/var/run/sigstore/public-key.pem"
+        volumeMounts:
+        - name: sigstore
+          mountPath: "/var/run/sigstore"
+          readOnly: true
+      volumes:
+        - name: sigstore
+          emptyDir: {}
+      {{- end }}

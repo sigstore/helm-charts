@@ -39,6 +39,9 @@
                         "writeProber": {
                             "type": "boolean"
                         },
+                        "trustRekorAPIPublicKey": {
+                            "type": "boolean"
+                        },
                         "rekorRequests": {
                             "type": "array",
                             "items": {"$ref": "#/$defs/proberCheck"}
