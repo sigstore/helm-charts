@@ -93,6 +93,9 @@
                     "additionalProperties": {
                         "type": "string"
                     }
+                },
+                "slo-endpoint": {
+                    "type": "string"
                 }
             },
             "additionalProperties": false
