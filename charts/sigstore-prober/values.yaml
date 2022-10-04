@@ -17,5 +17,6 @@ spec:
     writeProber: false
     rekorRequests: []
     fulcioRequests: []
+    trustRekorAPIPublicKey: false
 prometheus:
   port: 8080
