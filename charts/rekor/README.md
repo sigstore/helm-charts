@@ -1,20 +1,41 @@
 # rekor
 
+<!-- This README.md is generated. Please edit README.md.gotmpl -->
+
 ![Version: 1.0.0-rc.2](https://img.shields.io/badge/Version-1.0.0--rc.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-rc.2](https://img.shields.io/badge/AppVersion-1.0.0--rc.2-informational?style=flat-square)
 
-Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
+Part of the Sigstore project, Rekor is a timestamping server and transparency
+log for storing signatures, as well as an API based server for validation.
 
 **Homepage:** <https://sigstore.dev/>
+
+## Quick Installation
+
+To install the helm chart with default values run following command.
+The [Values](#Values) section describes the configuration options for this chart.
+
+```shell
+helm install [RELEASE_NAME] .
+```
+
+## Uninstallation
+
+To uninstall the Helm chart run following command.
+
+```shell
+helm uninstall [RELEASE_NAME]
+```
 
 ## Maintainers
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| The Sigstore Authors |  |  |
+| The Sigstore Authors |  | <https://sigstore.dev/> |
 
 ## Source Code
 
 * <https://github.com/sigstore/rekor>
+* <https://github.com/sigstore/helm-charts/tree/main/charts/rekor>
 
 ## Requirements
 
@@ -31,7 +52,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
-| createtree.image.version | string | `"sha256:c293fcb546619a71eabba16f231e0262d7614f2bb90fb53dda2713bbef71dac5"` | v0.4.6 |
+| createtree.image.version | string | `"sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.resources | object | `{}` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
@@ -45,7 +66,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
-| initContainerImage.curl.version | string | `"sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5"` | 7.85.0 |
+| initContainerImage.curl.version | string | `"sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"` | 7.82.0 |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"rekor-system"` |  |
 | redis.args[0] | string | `"--bind"` |  |
@@ -57,7 +78,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | redis.image.pullPolicy | string | `"IfNotPresent"` |  |
 | redis.image.registry | string | `"docker.io"` |  |
 | redis.image.repository | string | `"redis"` |  |
-| redis.image.version | string | `"sha256:dc1b954f5a1db78e31b8870966294d2f93fa8a7fba5c1337a1ce4ec55f311bc3"` | 7.0.4-alpine3.16 |
+| redis.image.version | string | `"sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39"` | 6.2.6-alpine3.15 |
 | redis.name | string | `"redis"` |  |
 | redis.port | int | `6379` |  |
 | redis.readinessProbe.exec.command[0] | string | `"/bin/sh"` |  |
@@ -96,7 +117,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-| server.image.version | string | `"sha256:eb351dc8daa63599b41406c4a7eafff6617adf9fc604818349159ccbb60e613a"` | `"v1.0.0-rc.1"` |
+| server.image.version | string | `"sha256:eb351dc8daa63599b41406c4a7eafff6617adf9fc604818349159ccbb60e613a"` |  |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |
