@@ -1,58 +1,71 @@
 # fulcio
 
-![Version: 0.4.11](https://img.shields.io/badge/Version-0.4.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.3](https://img.shields.io/badge/AppVersion-0.5.3-informational?style=flat-square)
+<!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-[Fulcio](https://docs.sigstore.dev/fulcio/overview/) is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
+![Version: 0.5.2](https://img.shields.io/badge/Version-0.5.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.0](https://img.shields.io/badge/AppVersion-0.6.0-informational?style=flat-square)
+
+Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
+
+**Homepage:** <https://sigstore.dev/>
 
 The following components are also included as either direct components or through chart dependencies:
 
-* ctlog
+* [ctlog](https://github.com/sigstore/helm-charts/tree/main/charts/ctlog)
 
-## *NOTE* 0.3.0 NOT backwards compatible
-
-In version 0.3.0, we will be introducing a second ingress in support of the new gRPC endpoint as introduced in v0.4.0 of Fulcio.
-
-The change in particular is the structure of the ingress values.
-
-Previously
-```shell
-server:
-  ingress:
-    enabled: true
-    hosts:
-      - host: fulcio.localhost
-        path: /
-```
-
-Now
-```shell
-server:
-  ingress:
-    http:
-      enabled: true
-      hosts:
-        - host: fulcio.localhost
-          path: /
-    grpc:
-      enabled: false
-```
+> **Note**: `0.3.0` NOT backwards compatible
+>
+> In version `0.3.0`, we will be introducing a second ingress in support of the new gRPC endpoint as introduced in `v0.4.0` of Fulcio.
+>
+> The change in particular is the structure of the ingress values.
+>
+> **Previously**
+>
+> ```shell
+> server:
+>   ingress:
+>     enabled: true
+>     hosts:
+>       - host: fulcio.localhost
+>         path: /
+> ```
+>
+> **Now**
+>
+> ```shell
+> server:
+>   ingress:
+>     http:
+>       enabled: true
+>       hosts:
+>         - host: fulcio.localhost
+>           path: /
+>     grpc:
+>       enabled: false
+> ```
 
 ## Quick Installation
+
+To install the helm chart with default values run following command.
+The [Values](#Values) section describes the configuration options for this chart.
 
 ```shell
 helm dependency update .
 helm install [RELEASE_NAME] .
 ```
 
-This command deploys the default configuration for the Fulcio chart. The [Parameters] section describes the various ways in which the chart can be configured.
-
 ## Uninstallation
+
+To uninstall the Helm chart run following command.
 
 ```shell
 helm uninstall [RELEASE_NAME]
 ```
 
-The previous command removes the previously installed chart.
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| The Sigstore Authors |  |  |
 
 ## Requirements
 
@@ -60,13 +73,12 @@ The previous command removes the previously installed chart.
 |------------|------|---------|
 | https://sigstore.github.io/helm-charts | ctlog | 0.2.27 |
 
-## Parameters
-
-The following table lists the configurable parameters of the Fulcio chart and their default values.
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | config.contents | object | `{}` |  |
+| createcerts.annotations | object | `{}` |  |
 | createcerts.enabled | bool | `true` |  |
 | createcerts.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createcerts.image.registry | string | `"ghcr.io"` |  |
@@ -100,14 +112,12 @@ The following table lists the configurable parameters of the Fulcio chart and th
 | server.args.gcp_private_ca_parent | string | `"projects/test/locations/us-east1/caPools/test"` |  |
 | server.args.grpcPort | int | `5554` |  |
 | server.args.hsm_caroot_id | string | `nil` |  |
-| server.args.kms_resource | string | `nil` | URI for KMS backend if using `kmsca` certificate authority |
-| server.args.kms_cert_chain | string | `nil` | PEM encoded certificate chain if using `kmsca` certificate authority |
 | server.args.port | int | `5555` |  |
 | server.grpcSvcPort | int | `5554` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/fulcio"` |  |
-| server.image.version | string | `"sha256:5d16364a5be4e75c98672f789d44ab4775554fe189a6217725a63a06de6fbc42"` | `v0.6.0` |
+| server.image.version | string | `"sha256:5d16364a5be4e75c98672f789d44ab4775554fe189a6217725a63a06de6fbc42"` | v0.6.0 |
 | server.ingress.grpc.annotations."nginx.ingress.kubernetes.io/backend-protocol" | string | `"GRPC"` |  |
 | server.ingress.grpc.className | string | `""` |  |
 | server.ingress.grpc.enabled | bool | `false` |  |
@@ -151,4 +161,32 @@ The following table lists the configurable parameters of the Fulcio chart and th
 
 To enabled access from external resources, an Ingress resource is created. The configuration necessary for each Ingress resource is primarily dependent on the specific Ingress Controller being used. In most cases, implementation specific configuration is specified as annotations on the Ingress resources. These can be applied using the `server.ingress.annotations` parameter.
 
-Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)
+> **Warning**: versions prior to `0.3.0` of this chart use different ingresses.
+>
+> In version `0.3.0` a second ingress is introduced. This ingress exposes the gRPC endpoint as introduced in v0.4.0 of Fulcio.
+>
+> The change in particular is the structure of the ingress values.
+> Prior to `0.3.0`:
+>
+> ```shell
+> server:
+>   ingress:
+>     enabled: true
+>     hosts:
+>       - host: fulcio.localhost
+>         path: /
+> ```
+>
+> Since `0.3.0`:
+>
+> ```shell
+> server:
+>   ingress:
+>     http:
+>       enabled: true
+>       hosts:
+>         - host: fulcio.localhost
+>           path: /
+>     grpc:
+>       enabled: false
+> ```

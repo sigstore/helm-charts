@@ -1,0 +1,108 @@
+{{ template "chart.header" . }}
+
+<!-- This README.md is generated. Please edit README.md.gotmpl -->
+
+{{ template "chart.deprecationWarning" . }}
+
+{{ template "chart.badgesSection" . }}
+
+{{ template "chart.description" . }}
+
+{{ template "chart.homepageLine" . }}
+
+The following components are also included as either direct components or through chart dependencies:
+
+* [ctlog](https://github.com/sigstore/helm-charts/tree/main/charts/ctlog)
+
+> **Note**: `0.3.0` NOT backwards compatible
+>
+> In version `0.3.0`, we will be introducing a second ingress in support of the new gRPC endpoint as introduced in `v0.4.0` of Fulcio.
+>
+> The change in particular is the structure of the ingress values.
+>
+> **Previously**
+>
+> ```shell
+> server:
+>   ingress:
+>     enabled: true
+>     hosts:
+>       - host: fulcio.localhost
+>         path: /
+> ```
+>
+> **Now**
+>
+> ```shell
+> server:
+>   ingress:
+>     http:
+>       enabled: true
+>       hosts:
+>         - host: fulcio.localhost
+>           path: /
+>     grpc:
+>       enabled: false
+> ```
+
+## Quick Installation
+
+To install the helm chart with default values run following command. 
+The [Values](#Values) section describes the configuration options for this chart.
+
+```shell
+helm dependency update .
+helm install [RELEASE_NAME] .
+```
+
+## Uninstallation
+
+To uninstall the Helm chart run following command.
+
+```shell
+helm uninstall [RELEASE_NAME]
+```
+
+{{ template "chart.maintainersSection" . }}
+
+{{ template "chart.sourcesSection" . }}
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}
+
+----------------------------------------------
+
+## Ingress
+
+To enabled access from external resources, an Ingress resource is created. The configuration necessary for each Ingress resource is primarily dependent on the specific Ingress Controller being used. In most cases, implementation specific configuration is specified as annotations on the Ingress resources. These can be applied using the `server.ingress.annotations` parameter.
+
+> **Warning**: versions prior to `0.3.0` of this chart use different ingresses.
+>
+> In version `0.3.0` a second ingress is introduced. This ingress exposes the gRPC endpoint as introduced in v0.4.0 of Fulcio.
+> 
+> The change in particular is the structure of the ingress values.
+> Prior to `0.3.0`:
+> 
+> ```shell
+> server:
+>   ingress:
+>     enabled: true
+>     hosts:
+>       - host: fulcio.localhost
+>         path: /
+> ```
+> 
+> Since `0.3.0`:
+> 
+> ```shell
+> server:
+>   ingress:
+>     http:
+>       enabled: true
+>       hosts:
+>         - host: fulcio.localhost
+>           path: /
+>     grpc:
+>       enabled: false
+> ```
