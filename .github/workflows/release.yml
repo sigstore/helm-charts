@@ -31,9 +31,14 @@ jobs:
         with:
           version: v3.10.0
 
+      - name: Add dependency chart repos
+        run: |
+          helm repo add sigstore https://sigstore.github.io/helm-charts
+
       - name: Install sigstore Helm plugin
         run: |
           helm plugin install https://github.com/sigstore/helm-sigstore
+
       - name: Install GPG Keys
         run: |
           cat <(echo -e "${{ secrets.GPG_PRIVATE_KEY }}") | gpg --import --batch
