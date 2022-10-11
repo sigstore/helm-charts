@@ -66,13 +66,6 @@ spec:
         {{- if semverCompare ">= 1.8-0" .Chart.AppVersion }}
         - -webhook-name={{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName }}
         {{- end }}
-        {{- if and .Values.cosign.secretKeyRef }}
-        {{- if .Values.cosign.secretKeyRef.name }}
-        - -secret-name={{ .Values.cosign.secretKeyRef.name }}
-        {{- end }}
-        {{- else }}
-        - -secret-name={{ template "policy-controller.fullname" . }}-cosign-key
-        {{- end }}
         {{- range $key, $value := .Values.webhook.extraArgs }}
         - -{{ $key }}={{ $value }}
         {{- end }}

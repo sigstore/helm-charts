@@ -24,14 +24,13 @@ The Helm chart for Policy  Controller
 | commonNodeSelector | object | `{}` |  |
 | commonTolerations | list | `[]` |  |
 | cosign.cosignPub | string | `""` |  |
-| cosign.secretKeyRef.name | string | `""` |  |
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
 | policywebhook.env | object | `{}` |  |
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
-| policywebhook.image.version | string | `"sha256:d1e7af59381793687db4673277005276eb73a06cf555503138dd18eaa1ca47d6"` |  |
+| policywebhook.image.version | string | `"sha256:03f6b9807103c988439741fdc2ec4410a85c13ba62fbad58448a070ac07bb5bc"` | `"v0.4.0"` |
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | policywebhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
 | policywebhook.podSecurityContext.enabled | bool | `true` |  |
@@ -55,7 +54,7 @@ The Helm chart for Policy  Controller
 | webhook.extraArgs | object | `{}` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
-| webhook.image.version | string | `"sha256:dba911635cd4f12ac807d3cd2e9065f6ec131102fa7cf19e75e897d0efe2247f"` |  |
+| webhook.image.version | string | `"sha256:2b1c017535f6a0f672ec38279f3792ca1181555342a2deae53605e202afb9764"` | `"v0.4.0"` |
 | webhook.name | string | `"webhook"` |  |
 | webhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | webhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
@@ -99,7 +98,7 @@ helm repo add sigstore https://sigstore.github.io/helm-charts
 
 helm repo update
 
-helm install policy-controller -n cosign-system sigstore/policy-controller --devel --set cosign.secretKeyRef.name=mysecret
+helm install policy-controller -n cosign-system sigstore/policy-controller --devel
 ```
 
 ### Enabling Admission control
