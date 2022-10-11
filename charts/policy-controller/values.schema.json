@@ -14,14 +14,6 @@
                 "cosignPub": {
                     "type": "string"
                 },
-                "secretKeyRef": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        }
-                    }
-                },
                 "webhookName": {
                     "type": "string"
                 }
