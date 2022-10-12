@@ -91,7 +91,7 @@ kubectl create secret generic mysecret -n \
 cosign-system --from-file=cosign.pub=./cosign.pub
 ```
 
-Install `policy-controller` using Helm and setting the value of the secret key reference to `mysecret` that you created above:
+Install `policy-controller` using Helm:
 
 ```shell
 helm repo add sigstore https://sigstore.github.io/helm-charts
@@ -100,6 +100,26 @@ helm repo update
 
 helm install policy-controller -n cosign-system sigstore/policy-controller --devel
 ```
+
+**IMPORTANT:** The `secretKeyRef` is not supported anymore. You could reuse your secret by creating a `ClusterImagePolicy` that uses it as listed authorities, as shown below. The `policy-controller` enforce images matching the defined list of `ClusterImagePolicy` for the labeled namespaces.
+
+```yaml
+apiVersion: policy.sigstore.dev/v1alpha1
+kind: ClusterImagePolicy
+metadata:
+  name: cip-key-secret
+spec:
+  images:
+  - glob: "**your-desired-value**"
+  authorities:
+  - key:
+      secretRef:
+        name: mysecret
+```
+ 
+Note that, by default, the `policy-controller` offers a configurable behavior defining whether to allow, deny or warn whenever an image does not match a policy. This behavior can be configured using the `config-policy-controller` ConfigMap created under the release namespace, and by adding an entry with the property `no-match-policy` and its value `warn|allow|deny`.
+By default, any image that does not match a policy is rejected whenever `no-match-policy` is not configured in the ConfigMap.
+
 
 ### Enabling Admission control
 
