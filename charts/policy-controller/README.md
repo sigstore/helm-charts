@@ -1,6 +1,6 @@
 # policy-controller
 
-![Version: 0.2.5](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -77,20 +77,6 @@ The Helm chart for Policy  Controller
 
 ### Deploy `policy-controller` Helm Chart
 
-```shell
-export COSIGN_PASSWORD=<my_cosign_password>
-cosign generate-key-pair
-```
-
-The previous command generates two key files `cosign.key` and `cosign.pub`. Next, create a secret to validate the signatures:
-
-```shell
-kubectl create namespace cosign-system
-
-kubectl create secret generic mysecret -n \
-cosign-system --from-file=cosign.pub=./cosign.pub
-```
-
 Install `policy-controller` using Helm:
 
 ```shell
@@ -98,10 +84,31 @@ helm repo add sigstore https://sigstore.github.io/helm-charts
 
 helm repo update
 
+kubectl create namespace cosign-system
+
 helm install policy-controller -n cosign-system sigstore/policy-controller --devel
 ```
 
-**IMPORTANT:** The `secretKeyRef` is not supported anymore. You could reuse your secret by creating a `ClusterImagePolicy` that uses it as listed authorities, as shown below. The `policy-controller` enforce images matching the defined list of `ClusterImagePolicy` for the labeled namespaces.
+The `policy-controller` enforce images matching the defined list of `ClusterImagePolicy` for the labeled namespaces.
+ 
+Note that, by default, the `policy-controller` offers a configurable behavior defining whether to allow, deny or warn whenever an image does not match a policy in a specific namespace. This behavior can be configured using the `config-policy-controller` ConfigMap created under the release namespace, and by adding an entry with the property `no-match-policy` and its value `warn|allow|deny`.
+By default, any image that does not match a policy is rejected whenever `no-match-policy` is not configured in the ConfigMap.
+
+As supported in previous versions, you could create your own key pair:
+
+```shell
+export COSIGN_PASSWORD=<my_cosign_password>
+cosign generate-key-pair
+```
+
+This command generates two key files `cosign.key` and `cosign.pub`. Next, create a secret to validate the signatures:
+
+```shell
+kubectl create secret generic mysecret -n \
+cosign-system --from-file=cosign.pub=./cosign.pub
+```
+
+**IMPORTANT:** The `cosign.secretKeyRef` flag is not supported anymore. Finally, you could reuse your secret `mysecret` by creating a `ClusterImagePolicy` that sets it as listed authorities, as shown below. 
 
 ```yaml
 apiVersion: policy.sigstore.dev/v1alpha1
@@ -115,11 +122,8 @@ spec:
   - key:
       secretRef:
         name: mysecret
-```
- 
-Note that, by default, the `policy-controller` offers a configurable behavior defining whether to allow, deny or warn whenever an image does not match a policy. This behavior can be configured using the `config-policy-controller` ConfigMap created under the release namespace, and by adding an entry with the property `no-match-policy` and its value `warn|allow|deny`.
-By default, any image that does not match a policy is rejected whenever `no-match-policy` is not configured in the ConfigMap.
 
+```
 
 ### Enabling Admission control
 
@@ -156,3 +160,8 @@ Creating a deployment referencing images that are not signed will yield the foll
    kubectl run pod1-signed  --image=< REGISTRY_USER >/nginx:signed -n testns
    pod/pod1-signed created
    ```
+
+
+## More info
+
+You can find more information about the policy-controller in [here](https://docs.sigstore.dev/policy-controller/overview/).
