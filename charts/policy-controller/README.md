@@ -1,6 +1,6 @@
 # policy-controller
 
-![Version: 0.2.5](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -24,14 +24,13 @@ The Helm chart for Policy  Controller
 | commonNodeSelector | object | `{}` |  |
 | commonTolerations | list | `[]` |  |
 | cosign.cosignPub | string | `""` |  |
-| cosign.secretKeyRef.name | string | `""` |  |
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
 | policywebhook.env | object | `{}` |  |
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
-| policywebhook.image.version | string | `"sha256:d1e7af59381793687db4673277005276eb73a06cf555503138dd18eaa1ca47d6"` |  |
+| policywebhook.image.version | string | `"sha256:03f6b9807103c988439741fdc2ec4410a85c13ba62fbad58448a070ac07bb5bc"` | `"v0.4.0"` |
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | policywebhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
 | policywebhook.podSecurityContext.enabled | bool | `true` |  |
@@ -55,7 +54,7 @@ The Helm chart for Policy  Controller
 | webhook.extraArgs | object | `{}` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
-| webhook.image.version | string | `"sha256:dba911635cd4f12ac807d3cd2e9065f6ec131102fa7cf19e75e897d0efe2247f"` |  |
+| webhook.image.version | string | `"sha256:2b1c017535f6a0f672ec38279f3792ca1181555342a2deae53605e202afb9764"` | `"v0.4.0"` |
 | webhook.name | string | `"webhook"` |  |
 | webhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | webhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
@@ -78,28 +77,52 @@ The Helm chart for Policy  Controller
 
 ### Deploy `policy-controller` Helm Chart
 
-```shell
-export COSIGN_PASSWORD=<my_cosign_password>
-cosign generate-key-pair
-```
-
-The previous command generates two key files `cosign.key` and `cosign.pub`. Next, create a secret to validate the signatures:
-
-```shell
-kubectl create namespace cosign-system
-
-kubectl create secret generic mysecret -n \
-cosign-system --from-file=cosign.pub=./cosign.pub
-```
-
-Install `policy-controller` using Helm and setting the value of the secret key reference to `mysecret` that you created above:
+Install `policy-controller` using Helm:
 
 ```shell
 helm repo add sigstore https://sigstore.github.io/helm-charts
 
 helm repo update
 
-helm install policy-controller -n cosign-system sigstore/policy-controller --devel --set cosign.secretKeyRef.name=mysecret
+kubectl create namespace cosign-system
+
+helm install policy-controller -n cosign-system sigstore/policy-controller --devel
+```
+
+The `policy-controller` enforce images matching the defined list of `ClusterImagePolicy` for the labeled namespaces.
+ 
+Note that, by default, the `policy-controller` offers a configurable behavior defining whether to allow, deny or warn whenever an image does not match a policy in a specific namespace. This behavior can be configured using the `config-policy-controller` ConfigMap created under the release namespace, and by adding an entry with the property `no-match-policy` and its value `warn|allow|deny`.
+By default, any image that does not match a policy is rejected whenever `no-match-policy` is not configured in the ConfigMap.
+
+As supported in previous versions, you could create your own key pair:
+
+```shell
+export COSIGN_PASSWORD=<my_cosign_password>
+cosign generate-key-pair
+```
+
+This command generates two key files `cosign.key` and `cosign.pub`. Next, create a secret to validate the signatures:
+
+```shell
+kubectl create secret generic mysecret -n \
+cosign-system --from-file=cosign.pub=./cosign.pub
+```
+
+**IMPORTANT:** The `cosign.secretKeyRef` flag is not supported anymore. Finally, you could reuse your secret `mysecret` by creating a `ClusterImagePolicy` that sets it as listed authorities, as shown below. 
+
+```yaml
+apiVersion: policy.sigstore.dev/v1alpha1
+kind: ClusterImagePolicy
+metadata:
+  name: cip-key-secret
+spec:
+  images:
+  - glob: "**your-desired-value**"
+  authorities:
+  - key:
+      secretRef:
+        name: mysecret
+
 ```
 
 ### Enabling Admission control
@@ -137,3 +160,8 @@ Creating a deployment referencing images that are not signed will yield the foll
    kubectl run pod1-signed  --image=< REGISTRY_USER >/nginx:signed -n testns
    pod/pod1-signed created
    ```
+
+
+## More info
+
+You can find more information about the policy-controller in [here](https://docs.sigstore.dev/policy-controller/overview/).

@@ -1,6 +1,4 @@
 cosign:
-  secretKeyRef:
-    name: ""
   # add the values in base64 encoded
   cosignPub: ""
   webhookName: "policy.sigstore.dev"
@@ -11,8 +9,8 @@ policywebhook:
   replicaCount: 1
   image:
     repository: ghcr.io/sigstore/policy-controller/policy-webhook
-    # crane digest ghcr.io/sigstore/policy-controller/policy-webhook:v0.3.0
-    version: sha256:d1e7af59381793687db4673277005276eb73a06cf555503138dd18eaa1ca47d6
+    # crane digest ghcr.io/sigstore/policy-controller/policy-webhook:v0.4.0
+    version: sha256:03f6b9807103c988439741fdc2ec4410a85c13ba62fbad58448a070ac07bb5bc
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
@@ -49,8 +47,8 @@ webhook:
   name: webhook
   image:
     repository: ghcr.io/sigstore/policy-controller/policy-controller
-    # crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.3.0
-    version: sha256:dba911635cd4f12ac807d3cd2e9065f6ec131102fa7cf19e75e897d0efe2247f
+    # crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.4.0
+    version: sha256:2b1c017535f6a0f672ec38279f3792ca1181555342a2deae53605e202afb9764
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
