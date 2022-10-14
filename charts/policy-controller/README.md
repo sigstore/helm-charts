@@ -1,6 +1,6 @@
 # policy-controller
 
-![Version: 0.3.0](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.0](https://img.shields.io/badge/AppVersion-0.4.0-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -73,8 +73,6 @@ The Helm chart for Policy  Controller
 | webhook.service.type | string | `"ClusterIP"` |  |
 | webhook.serviceAccount.annotations | object | `{}` |  |
 
-----------------------------------------------
-
 ### Deploy `policy-controller` Helm Chart
 
 Install `policy-controller` using Helm:
@@ -90,7 +88,7 @@ helm install policy-controller -n cosign-system sigstore/policy-controller --dev
 ```
 
 The `policy-controller` enforce images matching the defined list of `ClusterImagePolicy` for the labeled namespaces.
- 
+
 Note that, by default, the `policy-controller` offers a configurable behavior defining whether to allow, deny or warn whenever an image does not match a policy in a specific namespace. This behavior can be configured using the `config-policy-controller` ConfigMap created under the release namespace, and by adding an entry with the property `no-match-policy` and its value `warn|allow|deny`.
 By default, any image that does not match a policy is rejected whenever `no-match-policy` is not configured in the ConfigMap.
 
@@ -108,7 +106,7 @@ kubectl create secret generic mysecret -n \
 cosign-system --from-file=cosign.pub=./cosign.pub
 ```
 
-**IMPORTANT:** The `cosign.secretKeyRef` flag is not supported anymore. Finally, you could reuse your secret `mysecret` by creating a `ClusterImagePolicy` that sets it as listed authorities, as shown below. 
+**IMPORTANT:** The `cosign.secretKeyRef` flag is not supported anymore. Finally, you could reuse your secret `mysecret` by creating a `ClusterImagePolicy` that sets it as listed authorities, as shown below.
 
 ```yaml
 apiVersion: policy.sigstore.dev/v1alpha1
