@@ -1,34 +1,26 @@
 # rekor
 
-[Rekor](https://docs.sigstore.dev/rekor/overview/) provides a restful API based server for validation and a transparency log for storage.
+![Version: 1.0.0-rc.2](https://img.shields.io/badge/Version-1.0.0--rc.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-rc.2](https://img.shields.io/badge/AppVersion-1.0.0--rc.2-informational?style=flat-square)
 
-The following components are also included as either direct components or through chart dependencies:
+Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
-* [MySQL](https://www.mysql.com)
-* [Redis](https://redis.io)
-* [Trillian Log Server](https://github.com/google/trillian)
-* [Trillian Log Signer](https://github.com/google/trillian)
+**Homepage:** <https://sigstore.dev/>
 
-## Quick Installation
+## Maintainers
 
-```shell
-helm dependency update .
-helm install [RELEASE_NAME] .
-```
+| Name | Email | Url |
+| ---- | ------ | --- |
+| The Sigstore Authors |  |  |
 
-This command deploys the default configuration for the rekor chart. The [Parameters] section describes the various ways in which the chart can be configured.
+## Source Code
 
-## Uninstallation
+* <https://github.com/sigstore/rekor>
 
-```shell
-helm uninstall [RELEASE_NAME]
-```
+## Requirements
 
-The previous command removes the previously installed chart.
-
-## Parameters
-
-The following table lists the configurable parameters of the Rekor chart and their default values.
+| Repository | Name | Version |
+|------------|------|---------|
+| https://sigstore.github.io/helm-charts | trillian | 0.1.10 |
 
 ## Values
 
@@ -104,7 +96,7 @@ The following table lists the configurable parameters of the Rekor chart and the
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-| server.image.version | string | `"sha256:sha256:eb351dc8daa63599b41406c4a7eafff6617adf9fc604818349159ccbb60e613a"` | v1.0.0-rc.1 |
+| server.image.version | string | `"sha256:eb351dc8daa63599b41406c4a7eafff6617adf9fc604818349159ccbb60e613a"` | `"v1.0.0-rc.1"` |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |
