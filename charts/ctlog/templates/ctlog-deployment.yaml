@@ -9,7 +9,7 @@ spec:
   replicas: {{ .Values.server.replicaCount }}
   selector:
     matchLabels:
-      {{- include "ctlog.selectorLabels" . | nindent 6 }}
+      {{- include "ctlog.matchLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:

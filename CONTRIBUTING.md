@@ -45,8 +45,8 @@ sha256:c293fcb546619a71eabba16f231e0262d7614f2bb90fb53dda2713bbef71dac5
 When bumping any dependency in Chart.yaml ensure you also update the Chart.lock file.
 
 ```shell
-helm dependecy update charts/«chart-name»
-helm dependecy build charts/«chart-name»
+helm dependency update charts/«chart-name»
+helm dependency build charts/«chart-name»
 ```
 
 ## Generating documentation

@@ -16,5 +16,5 @@ spec:
   ports:
     {{- tpl (toYaml .Values.server.service.ports) . | nindent 4 }}
   selector:
-    {{- include "ctlog.selectorLabels" . | nindent 4 }}
+    {{- include "ctlog.matchLabels" . | nindent 4 }}
   type: "{{ .Values.server.service.type }}"

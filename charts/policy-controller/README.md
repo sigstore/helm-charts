@@ -79,11 +79,8 @@ Install `policy-controller` using Helm:
 
 ```shell
 helm repo add sigstore https://sigstore.github.io/helm-charts
-
 helm repo update
-
 kubectl create namespace cosign-system
-
 helm install policy-controller -n cosign-system sigstore/policy-controller --devel
 ```
 
@@ -91,6 +88,18 @@ The `policy-controller` enforce images matching the defined list of `ClusterImag
 
 Note that, by default, the `policy-controller` offers a configurable behavior defining whether to allow, deny or warn whenever an image does not match a policy in a specific namespace. This behavior can be configured using the `config-policy-controller` ConfigMap created under the release namespace, and by adding an entry with the property `no-match-policy` and its value `warn|allow|deny`.
 By default, any image that does not match a policy is rejected whenever `no-match-policy` is not configured in the ConfigMap.
+
+As supported in previous versions, you could create your own key pair:
+
+```shell
+export COSIGN_PASSWORD=<my_cosign_password>
+cosign generate-key-pair
+```
+
+This command generates two key files `cosign.key` and `cosign.pub`. Next, create a secret to validate the signatures:
+
+```shell
+kubectl create secret generic mysecret -n \
 
 As supported in previous versions, you could create your own key pair:
 
@@ -120,7 +129,6 @@ spec:
   - key:
       secretRef:
         name: mysecret
-
 ```
 
 ### Enabling Admission control
@@ -147,17 +155,17 @@ spec:
 1. Using Unsigned Images:
 Creating a deployment referencing images that are not signed will yield the following error and no resources will be created:
 
-    ```shell
-    kubectl apply -f my-deployment.yaml
-    Error from server (BadRequest): error when creating "my-deployment.yaml": admission webhook "policy.sigstore.dev" denied the request: validation failed: invalid image signature: spec.template.spec.containers[0].image
-    ```
+```shell
+kubectl apply -f my-deployment.yaml
+Error from server (BadRequest): error when creating "my-deployment.yaml": admission webhook "policy.sigstore.dev" denied the request: validation failed: invalid image signature: spec.template.spec.containers[0].image
+```
 
 2. Using Signed Images: Assuming a signed `nginx` image with a tag `signed` exists on a registry, the resource will be successfully created.
 
-   ```shell
-   kubectl run pod1-signed  --image=< REGISTRY_USER >/nginx:signed -n testns
-   pod/pod1-signed created
-   ```
+```shell
+kubectl run pod1-signed  --image=< REGISTRY_USER >/nginx:signed -n testns
+pod/pod1-signed created
+```
 
 
 ## More info
