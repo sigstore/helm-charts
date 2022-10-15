@@ -104,13 +104,6 @@ app.kubernetes.io/component: {{ include "ctlog.name" . }}
 {{- end }}
 
 {{/*
-Match labels
-*/}}
-{{- define "ctlog.matchLabels" -}}
-app.kubernetes.io/component: {{ include "ctlog.name" . }}
-{{- end -}}
-
-{{/*
 Server Arguments
 */}}
 {{- define "ctlog.server.args" -}}
