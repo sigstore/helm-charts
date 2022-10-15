@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 1.0.0-rc.2](https://img.shields.io/badge/Version-1.0.0--rc.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-rc.2](https://img.shields.io/badge/AppVersion-1.0.0--rc.2-informational?style=flat-square)
+![Version: 1.0.0-rc.3](https://img.shields.io/badge/Version-1.0.0--rc.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.0.0-rc.1](https://img.shields.io/badge/AppVersion-v1.0.0--rc.1-informational?style=flat-square)
 
 Part of the Sigstore project, Rekor is a timestamping server and transparency
 log for storing signatures, as well as an API based server for validation.
@@ -117,7 +117,7 @@ helm uninstall [RELEASE_NAME]
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-| server.image.version | string | `"sha256:eb351dc8daa63599b41406c4a7eafff6617adf9fc604818349159ccbb60e613a"` |  |
+| server.image.version | string | `"sha256:eb351dc8daa63599b41406c4a7eafff6617adf9fc604818349159ccbb60e613a"` | v1.0.0-rc.1 |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |

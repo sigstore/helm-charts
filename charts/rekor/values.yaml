@@ -65,6 +65,7 @@ server:
     repository: projectsigstore/rekor-server
     pullPolicy: IfNotPresent
     # crane digest gcr.io/projectsigstore/rekor-server:v1.0.0-rc.1
+    # -- v1.0.0-rc.1
     version: sha256:eb351dc8daa63599b41406c4a7eafff6617adf9fc604818349159ccbb60e613a
   logging:
     production: false
