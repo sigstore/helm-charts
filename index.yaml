@@ -2634,6 +2634,42 @@ entries:
         - name: curlimages/curl
           image: docker.io/curlimages/curl@sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498
         - name: rekor-server
+          image: gcr.io/projectsigstore/rekor-server:v1.0.0@sha256:441da6a9c40ace07f72ed88790f2248a64c266a7e56ccfd7914080ee61432342
+        - name: redis
+          image: docker.io/redis@sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-10-17T21:48:53.985034458Z"
+    dependencies:
+    - condition: trillian.enabled
+      name: trillian
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.1.10
+    description: Part of the sigstore project, Rekor is a timestamping server and
+      transparency log for storing signatures, as well as an API based server for
+      validation
+    digest: 423259348f22db66bf8690eae31bed4ef711411e02a86234365cad57a757dc1c
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor
+    sources:
+    - https://github.com/sigstore/rekor
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-1.0.0/rekor-1.0.0.tgz
+    version: 1.0.0
+  - annotations:
+      artifacthub.io/images: |
+        - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree@sha256:0c6a1a49f906da6e59e7cfbba08a473778fc0296abdf8b86115861d5f3556ed4
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl@sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498
+        - name: rekor-server
           image: gcr.io/projectsigstore/rekor-server:v1.0.0-rc.1@sha256:eb351dc8daa63599b41406c4a7eafff6617adf9fc604818349159ccbb60e613a
         - name: redis
           image: docker.io/redis@sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39
@@ -6529,4 +6565,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2022-10-17T21:30:23.091992376Z"
+generated: "2022-10-17T21:48:53.985705465Z"
