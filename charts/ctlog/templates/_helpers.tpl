@@ -100,7 +100,6 @@ Selector labels
 {{- define "ctlog.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "ctlog.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-app.kubernetes.io/component: {{ include "ctlog.name" . }}
 {{- end }}
 
 {{/*
