@@ -159,6 +159,7 @@ logSigner:
     name: ""
     annotations: {}
 createdb:
+  enabled: true
   dbname: trillian
   ttlSecondsAfterFinished: 3600
   name: createdb
