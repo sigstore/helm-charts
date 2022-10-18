@@ -92,6 +92,10 @@ createctconfig:
   logPrefix: sigstorescaffolding
   privateKeyPasswordSecretName: ""
   ttlSecondsAfterFinished: 3600
+  pubkeysecret: "ctlog-public-key"
+  # If there's an existing private key that should be used for ctlog, specify
+  # here. This is important if a key has been created and imported into TUF.
+  privateSecret: ""
   serviceAccount:
     create: true
     name: ""

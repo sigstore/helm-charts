@@ -37,6 +37,12 @@ spec:
             "--namespace=$(NAMESPACE)",
             "--configmap={{ template "ctlog.config" . }}",
             "--secret={{ template "ctlog.secret" . }}",
+          {{- if .Values.createctconfig.privateSecret }}
+            "--private-secret={{ .Values.createctconfig.privateSecret }}",
+          {{- end }}
+          {{- if .Values.createctconfig.pubkeysecret }}
+            "--pubkeysecret={{ .Values.createctconfig.pubkeysecret }}",
+          {{- end }}
             "--fulcio-url={{ .Values.createctconfig.fulcioURL }}",
             "--trillian-server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}",
           {{- if .Values.createctconfig.privateKeyPasswordSecretName }}

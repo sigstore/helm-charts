@@ -1,6 +1,6 @@
 # ctlog
 
-![Version: 0.2.29](https://img.shields.io/badge/Version-0.2.29-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.2.30](https://img.shields.io/badge/Version-0.2.30-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
 Certificate Log
 
@@ -31,6 +31,8 @@ Certificate Log
 | createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | createctconfig.name | string | `"createctconfig"` |  |
 | createctconfig.privateKeyPasswordSecretName | string | `""` |  |
+| createctconfig.privateSecret | string | `""` |  |
+| createctconfig.pubkeysecret | string | `"ctlog-public-key"` |  |
 | createctconfig.replicaCount | int | `1` |  |
 | createctconfig.securityContext.runAsNonRoot | bool | `true` |  |
 | createctconfig.securityContext.runAsUser | int | `65533` |  |
