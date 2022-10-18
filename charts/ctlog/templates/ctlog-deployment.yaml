@@ -58,7 +58,7 @@ spec:
         - name: config
           {{- if .Values.server.config.secret.enabled }}
           secret:
-            secretName: {{ .Values.server.config.secret.name }}
+            secretName: {{ template "ctlog.secret" . }}
             items:
               - key: config
                 path: ct_server.cfg
