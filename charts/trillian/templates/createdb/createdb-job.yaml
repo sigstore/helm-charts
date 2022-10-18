@@ -1,0 +1,71 @@
+{{- if .Values.createdb.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "trillian.createdb.fullname" . }}
+{{ include "trillian.namespace" . | indent 2 }}
+  labels:
+    {{- include "trillian.mysql.labels" . | nindent 4 }}
+{{- if .Values.createdb.annotations }}
+  annotations:
+{{ toYaml .Values.createdb.annotations | indent 4 }}
+{{- end }}
+spec:
+{{- if .Values.createdb.ttlSecondsAfterFinished }}
+  ttlSecondsAfterFinished: {{ .Values.createdb.ttlSecondsAfterFinished }}
+{{- end }}
+  template:
+    spec:
+      serviceAccountName: {{ template "trillian.serviceAccountName.logServer" . }}
+      restartPolicy: Never
+      automountServiceAccountToken: {{ .Values.createdb.serviceAccount.mountToken }}
+      containers:
+        {{- if .Values.mysql.gcp.enabled }}
+        - name: cloud-sql-proxy
+          image: "{{ template "trillian.image" .Values.mysql.gcp.cloudsql }}"
+          command:
+            - "/cloud_sql_proxy"
+            - "-instances={{ .Values.mysql.gcp.instance }}=tcp:{{ .Values.mysql.port }}"
+    {{- if .Values.mysql.gcp.cloudsql.securityContext }}
+          securityContext:
+{{ toYaml .Values.mysql.gcp.cloudsql.securityContext | indent 12 }}
+    {{- end }}
+          resources:
+{{ toYaml .Values.mysql.gcp.cloudsql.resources | indent 12 }}
+        {{- end }}
+        - name: {{ template "trillian.createdb.fullname" . }}
+          image: "{{ template "trillian.image" .Values.createdb.image }}"
+          imagePullPolicy: "{{ .Values.createdb.image.pullPolicy }}"
+          env:
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "mysql.secretName" . }}
+                key: mysql-user
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "mysql.secretName" . }}
+                key: mysql-password
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "mysql.secretName" . }}
+                key: mysql-database
+          - name: MYSQL_HOSTNAME
+            value: {{ template "mysql.hostname" . }}
+          - name: MYSQL_PORT
+            value: {{ .Values.mysql.port | quote }}
+          args: [
+            "--db_name=$(MYSQL_DATABASE)",
+            "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):3306)/$(MYSQL_DATABASE)"
+          ]
+    {{- if .Values.createdb.securityContext }}
+      securityContext:
+{{ toYaml .Values.createdb.securityContext | indent 8 }}
+    {{- end }}
+{{- end }}

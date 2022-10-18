@@ -158,5 +158,20 @@ logSigner:
     create: true
     name: ""
     annotations: {}
+createdb:
+  enabled: true
+  dbname: trillian
+  ttlSecondsAfterFinished: 3600
+  name: createdb
+  image:
+    registry: ghcr.io
+    repository: sigstore/scaffolding/createdb
+    pullPolicy: IfNotPresent
+    # -- v0.4.11
+    version: sha256:5ec1b95581d238dfbbd8e412422500cc242123078de8aaad23e5f9c65eaf2ba5
+  serviceAccount:
+    create: false
+    name: ""
+    annotations: {}
 # Force namespace of namespaced resources
 forceNamespace: ""

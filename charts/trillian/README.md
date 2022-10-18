@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.1.10](https://img.shields.io/badge/Version-0.1.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.11](https://img.shields.io/badge/Version-0.1.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -40,6 +40,14 @@ helm uninstall [RELEASE_NAME]
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| createdb.dbname | string | `"trillian"` |  |
+| createdb.image.pullPolicy | string | `"IfNotPresent"` |  |
+| createdb.image.registry | string | `"ghcr.io"` |  |
+| createdb.image.repository | string | `"sigstore/scaffolding/createdb"` |  |
+| createdb.image.version | string | `"sha256:5ec1b95581d238dfbbd8e412422500cc242123078de8aaad23e5f9c65eaf2ba5"` | v0.4.11 |
+| createdb.serviceAccount.annotations | object | `{}` |  |
+| createdb.serviceAccount.create | bool | `false` |  |
+| createdb.serviceAccount.name | string | `""` |  |
 | forceNamespace | string | `""` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
