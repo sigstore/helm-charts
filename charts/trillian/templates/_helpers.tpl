@@ -54,6 +54,22 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 {{- end -}}
 
+{{/*
+Create a fully qualified createdb job name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "trillian.createdb.fullname" -}}
+{{- if .Values.createdb.fullnameOverride -}}
+{{- .Values.createdb.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- printf "%s-%s" .Release.Name .Values.createdb.name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s-%s" .Release.Name $name .Values.createdb.name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
 
 {{/*
 Create a fully qualified Log Server name.
@@ -117,6 +133,17 @@ Create the name of the service account to use for the mysql component
     {{ default (include "trillian.mysql.fullname" .) .Values.mysql.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.mysql.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Create the name of the service account to use for the Trillian createdb job.
+*/}}
+{{- define "trillian.serviceAccountName.createdb" -}}
+{{- if .Values.createdb.serviceAccount.create -}}
+    {{ default (include "trillian.createdb.fullname" .) .Values.createdb.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.createdb.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
 
