@@ -160,6 +160,8 @@ logSigner:
     annotations: {}
 createdb:
   dbname: trillian
+  ttlSecondsAfterFinished: 3600
+  name: createdb
   image:
     registry: ghcr.io
     repository: sigstore/scaffolding/createdb

@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "trillian.mysql.fullname" . }}
+  name: {{ template "trillian.createdb.fullname" . }}
 {{ include "trillian.namespace" . | indent 2 }}
   labels:
     {{- include "trillian.mysql.labels" . | nindent 4 }}
