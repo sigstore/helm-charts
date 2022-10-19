@@ -6,7 +6,6 @@ server:
   replicaCount: 1
   config:
     secret:
-      enabled: false
       name: ctlog-config
     key: treeID
     treeID: ""
