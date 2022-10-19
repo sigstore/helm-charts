@@ -34,7 +34,6 @@ spec:
           image: "{{ template "ctlog.image" .Values.createctconfig.image }}"
           imagePullPolicy: "{{ .Values.createctconfig.image.pullPolicy }}"
           args: [
-            "--namespace=$(NAMESPACE)",
             "--configmap={{ template "ctlog.config" . }}",
             "--secret={{ template "ctlog.secret" . }}",
           {{- if .Values.createctconfig.privateSecret }}
