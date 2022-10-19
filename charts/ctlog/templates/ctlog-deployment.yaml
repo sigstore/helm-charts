@@ -31,9 +31,6 @@ spec:
             - name: keys
               mountPath: "/ctfe-keys"
               readOnly: true
-            - name: config
-              mountPath: "/ctfe-config"
-              readOnly: true
           ports:
 {{- include "ctlog.containerPorts" .Values.server.service.ports | indent 12 }}
     {{- if .Values.server.resources }}
@@ -48,24 +45,3 @@ spec:
         - name: keys
           secret:
             secretName: {{ template "ctlog.secret" . }}
-            items:
-              - key: private
-                path: privkey.pem
-              - key: public
-                path: pubkey.pem
-              - key: rootca
-                path: roots.pem
-        - name: config
-          {{- if .Values.server.config.secret.enabled }}
-          secret:
-            secretName: {{ template "ctlog.secret" . }}
-            items:
-              - key: config
-                path: ct_server.cfg
-          {{ else }}
-          configMap:
-            name: {{ template "ctlog.config" . }}
-            items:
-              - key: config
-                path: ct_server.cfg
-          {{- end }}

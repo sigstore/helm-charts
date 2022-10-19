@@ -77,44 +77,10 @@
                     "default": {},
                     "title": "The config Schema",
                     "required": [
-                        "secret",
                         "key",
                         "treeID"
                     ],
                     "properties": {
-                        "secret": {
-                            "type": "object",
-                            "default": {},
-                            "title": "The secret Schema",
-                            "required": [
-                                "enabled",
-                                "name"
-                            ],
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean",
-                                    "default": false,
-                                    "title": "The enabled Schema",
-                                    "examples": [
-                                        false
-                                    ]
-                                },
-                                "name": {
-                                    "type": "string",
-                                    "default": "",
-                                    "title": "The name Schema",
-                                    "examples": [
-                                        "ctlog-config"
-                                    ]
-                                }
-                            },
-                            "examples": [
-                                {
-                                    "enabled": false,
-                                    "name": "ctlog-config"
-                                }
-                            ]
-                        },
                         "key": {
                             "type": "string",
                             "default": "",
@@ -134,10 +100,6 @@
                     },
                     "examples": [
                         {
-                            "secret": {
-                                "enabled": false,
-                                "name": "ctlog-config"
-                            },
                             "key": "treeID",
                             "treeID": ""
                         }
@@ -570,10 +532,6 @@
                 {
                     "replicaCount": 1,
                     "config": {
-                        "secret": {
-                            "enabled": false,
-                            "name": "ctlog-config"
-                        },
                         "key": "treeID",
                         "treeID": ""
                     },
@@ -1273,10 +1231,6 @@
             "server": {
                 "replicaCount": 1,
                 "config": {
-                    "secret": {
-                        "enabled": false,
-                        "name": "ctlog-config"
-                    },
                     "key": "treeID",
                     "treeID": ""
                 },
