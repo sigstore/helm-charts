@@ -5,8 +5,6 @@ namespace:
 server:
   replicaCount: 1
   config:
-    secret:
-      name: ctlog-config
     key: treeID
     treeID: ""
   image:

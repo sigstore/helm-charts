@@ -60,7 +60,6 @@ Certificate Log
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"ctlog-system"` |  |
 | server.config.key | string | `"treeID"` |  |
-| server.config.secret.name | string | `"ctlog-config"` |  |
 | server.config.treeID | string | `""` |  |
 | server.extraArgs | list | `[]` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
