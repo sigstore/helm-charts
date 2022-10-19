@@ -30,7 +30,7 @@ spec:
           args: [
             "--namespace=$(NAMESPACE)",
             "--configmap={{ template "ctlog.config" . }}",
-            "--display_name={{ template "ctlog.createtree.fullname" . }}",
+            "--display_name={{ .Values.createtree.displayName }}",
             "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}"
           ]
     {{- if .Values.createtree.securityContext }}
