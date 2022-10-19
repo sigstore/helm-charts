@@ -88,8 +88,8 @@ createctconfig:
     registry: ghcr.io
     repository: sigstore/scaffolding/createctconfig
     pullPolicy: IfNotPresent
-    # v0.3.0
-    version: "sha256:2795b42d3b42cdb9eaf3825e0bca742963208a51e30d5a7173f8a68ac6d47732"
+    # -- v0.4.12
+    version: "sha256:7e201c9b32d8be3c002341e8626ae5b8d64e02bfe47ffe697bd7febdf51ad9a1"
   fulcioURL: "http://fulcio-server.fulcio-system.svc"
   logPrefix: sigstorescaffolding
   privateKeyPasswordSecretName: ""
