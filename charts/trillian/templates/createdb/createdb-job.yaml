@@ -62,7 +62,7 @@ spec:
             value: {{ .Values.mysql.port | quote }}
           args: [
             "--db_name=$(MYSQL_DATABASE)",
-            "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):3306)/$(MYSQL_DATABASE)"
+            "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/"
           ]
     {{- if .Values.createdb.securityContext }}
       securityContext:
