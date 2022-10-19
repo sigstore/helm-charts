@@ -1,6 +1,6 @@
 # scaffold
 
-![Version: 0.3.32](https://img.shields.io/badge/Version-0.3.32-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.3.33](https://img.shields.io/badge/Version-0.3.33-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Scaffolding the components of the sigstore architecture
 
@@ -16,7 +16,7 @@ Scaffolding the components of the sigstore architecture
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | ctlog | 0.2.31 |
+| https://sigstore.github.io/helm-charts | ctlog | 0.2.32 |
 | https://sigstore.github.io/helm-charts | fulcio | 1.0.0 |
 | https://sigstore.github.io/helm-charts | rekor | 1.0.0 |
 | https://sigstore.github.io/helm-charts | trillian | 0.1.12 |
