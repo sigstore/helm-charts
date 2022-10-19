@@ -108,7 +108,7 @@ Server Arguments
 {{- define "ctlog.server.args" -}}
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.server.portHTTP | int) | quote }}
 - {{ printf "--metrics_endpoint=0.0.0.0:%d" (.Values.server.portHTTPMetrics | int) | quote }}
-- "--log_config=/ctfe-config/ct_server.cfg"
+- "--log_config=/ctfe-keys/config"
 - "--alsologtostderr"
 {{- if .Values.server.extraArgs -}}
 {{- range $key, $value := .Values.server.extraArgs }}
