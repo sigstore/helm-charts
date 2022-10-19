@@ -1,6 +1,6 @@
 # scaffold
 
-![Version: 0.3.31](https://img.shields.io/badge/Version-0.3.31-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.3.32](https://img.shields.io/badge/Version-0.3.32-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Scaffolding the components of the sigstore architecture
 
@@ -16,7 +16,7 @@ Scaffolding the components of the sigstore architecture
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | ctlog | 0.2.30 |
+| https://sigstore.github.io/helm-charts | ctlog | 0.2.31 |
 | https://sigstore.github.io/helm-charts | fulcio | 1.0.0 |
 | https://sigstore.github.io/helm-charts | rekor | 1.0.0 |
 | https://sigstore.github.io/helm-charts | trillian | 0.1.12 |
@@ -52,6 +52,7 @@ The following table lists the configurable parameters of the scaffold chart and 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | ctlog.createcerts.fullnameOverride | string | `"ctlog-createcerts"` |  |
+| ctlog.createtree.displayName | string | `"ctlog-tree"` |  |
 | ctlog.createtree.fullnameOverride | string | `"ctlog-createtree"` |  |
 | ctlog.enabled | bool | `true` |  |
 | ctlog.forceNamespace | string | `"ctlog-system"` |  |

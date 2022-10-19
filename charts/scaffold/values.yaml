@@ -26,6 +26,7 @@ ctlog:
     fullnameOverride: ctlog-createcerts
   createtree:
     fullnameOverride: ctlog-createtree
+    displayName: ctlog-tree
 # Rekor
 rekor:
   enabled: true
