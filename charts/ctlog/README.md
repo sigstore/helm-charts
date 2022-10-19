@@ -1,6 +1,6 @@
 # ctlog
 
-![Version: 0.2.30](https://img.shields.io/badge/Version-0.2.30-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.2.31](https://img.shields.io/badge/Version-0.2.31-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
 Certificate Log
 
@@ -42,6 +42,7 @@ Certificate Log
 | createctconfig.serviceAccount.name | string | `""` |  |
 | createctconfig.ttlSecondsAfterFinished | int | `3600` |  |
 | createtree.annotations | object | `{}` |  |
+| createtree.displayName | string | `"ctlog-tree"` |  |
 | createtree.enabled | bool | `true` |  |
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |

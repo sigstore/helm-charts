@@ -53,6 +53,8 @@ server:
 createtree:
   enabled: true
   name: createtree
+  # This must be < 20 characters
+  displayName: ctlog-tree
   image:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
