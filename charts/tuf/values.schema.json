@@ -1,0 +1,140 @@
+
+
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "namespace": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "imagePullSecrets": {
+        "type": "array",
+        "items": {}
+      },
+      "tufDeployment": {
+        "type": "object",
+        "properties": {
+          "replicas": {
+            "type": "integer"
+          },
+          "registry": {
+            "type": "string"
+          },
+          "repository": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "imagePullPolicy": {
+            "type": "string"
+          },
+          "port": {
+            "type": "integer"
+          }
+        }
+      },
+      "copySecretJob": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "registry": {
+            "type": "string"
+          },
+          "repository": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "imagePullPolicy": {
+            "type": "string"
+          }
+        }
+      },
+      "tufSecrets": {
+        "type": "object",
+        "properties": {
+          "rekor": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "sourceNamespace": {
+                "type": "string"
+              }
+            }
+          },
+          "fulcio": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "sourceNamespace": {
+                "type": "string"
+              }
+            }
+          },
+          "ctlog": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "sourceNamespace": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ingress": {
+        "type": "object",
+        "properties": {
+          "className": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "tlsSecretName": {
+            "type": "string"
+          },
+          "annotations": {
+            "type": "object",
+            "properties": {
+              "certManager.io/cluster-issuer": {
+                "type": "string"
+              },
+              "certManager.io/common-name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  

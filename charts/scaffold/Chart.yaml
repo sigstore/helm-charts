@@ -4,8 +4,7 @@ description: Scaffolding the components of the sigstore architecture
 
 type: application
 
-version: 0.3.35
-
+version: 0.4.0
 keywords:
   - security
   - pki
@@ -32,6 +31,10 @@ dependencies:
     version: 0.2.34
     repository: https://sigstore.github.io/helm-charts
     condition: ctlog.enabled
+  - name: tuf
+    version: 0.1.0
+    repository: https://sigstore.github.io/helm-charts
+    condition: tuf.enabled
 
 annotations:
   artifacthub.io/license: Apache-2.0
