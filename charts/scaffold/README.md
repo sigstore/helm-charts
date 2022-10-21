@@ -1,8 +1,16 @@
 # scaffold
 
-![Version: 0.3.35](https://img.shields.io/badge/Version-0.3.35-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Scaffolding the components of the sigstore architecture
+
+**Homepage:** <https://sigstore.dev/>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| The Sigstore Authors |  |  |
 
 **Homepage:** <https://sigstore.dev/>
 
@@ -20,6 +28,7 @@ Scaffolding the components of the sigstore architecture
 | https://sigstore.github.io/helm-charts | fulcio | 1.0.0 |
 | https://sigstore.github.io/helm-charts | rekor | 1.0.0 |
 | https://sigstore.github.io/helm-charts | trillian | 0.1.12 |
+| https://sigstore.github.io/helm-charts | tuf | 0.1.0 |
 
 ## Quick Installation
 
@@ -47,10 +56,17 @@ er being used. In most cases, implementation specific configuration is specified
 
 The following table lists the configurable parameters of the scaffold chart and their default values.
 
-## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| copySecretJob.backoffLimit | int | `6` |  |
+| copySecretJob.enabled | bool | `false` |  |
+| copySecretJob.imagePullPolicy | string | `"IfNotPresent"` |  |
+| copySecretJob.name | string | `"copy-secrets-job"` |  |
+| copySecretJob.registry | string | `"docker.io"` |  |
+| copySecretJob.repository | string | `"alpine/k8s"` |  |
+| copySecretJob.serviceaccount | string | `"tuf-secret-copy-job"` |  |
+| copySecretJob.version | string | `"sha256:fb0d2db81fb0f98abb1adf5246d6f0f4d19f34031afe4759cb7ad8e2eb8d2c01"` |  |
 | ctlog.createcerts.fullnameOverride | string | `"ctlog-createcerts"` |  |
 | ctlog.createtree.displayName | string | `"ctlog-tree"` |  |
 | ctlog.createtree.fullnameOverride | string | `"ctlog-createtree"` |  |
@@ -87,4 +103,17 @@ The following table lists the configurable parameters of the scaffold chart and 
 | trillian.mysql.fullnameOverride | string | `"trillian-mysql"` |  |
 | trillian.namespace.create | bool | `true` |  |
 | trillian.namespace.name | string | `"trillian-system"` |  |
-
+| tuf.enabled | bool | `true` |  |
+| tuf.forceNamespace | string | `"tuf-system"` |  |
+| tuf.fullnameOverride | string | `"tuf"` |  |
+| tuf.namespace.create | bool | `true` |  |
+| tuf.namespace.name | string | `"tuf-system"` |  |
+| tuf.secrets.ctlog.name | string | `"ctlog-public-key"` |  |
+| tuf.secrets.ctlog.path | string | `"ctlog-pubkey"` |  |
+| tuf.secrets.ctlog.sourceNamespace | string | `"ctlog-system"` |  |
+| tuf.secrets.fulcio.name | string | `"fulcio-server-secret"` |  |
+| tuf.secrets.fulcio.path | string | `"fulcio-cert"` |  |
+| tuf.secrets.fulcio.sourceNamespace | string | `"fulcio-system"` |  |
+| tuf.secrets.rekor.name | string | `"rekor-public-key"` |  |
+| tuf.secrets.rekor.path | string | `"rekor-pubkey"` |  |
+| tuf.secrets.rekor.sourceNamespace | string | `"rekor-system"` |  |

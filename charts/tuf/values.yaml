@@ -1,0 +1,42 @@
+forceNamespace: ""
+imagePullSecrets: []
+serviceAccountName: tuf
+roleName: tuf
+roleBindingName: tuf
+fullnameOverride: tuf
+
+deployment:
+  name: tuf
+  replicas: 1
+  registry: ghcr.io
+  repository: sigstore/scaffolding/server
+  version: sha256:719ea3fe44c52af5a5fedab2168429872e37e97b9f063977fc164d60a5a14b53
+  imagePullPolicy: IfNotPresent
+  port: 8080
+
+secrets:
+  rekor:
+    name: rekor-public-key
+    path: rekor-pubkey
+  fulcio:
+    name: fulcio-server-secret
+    path: fulcio-cert
+  ctlog:
+    name: ctlog-public-key
+    path: ctlog-pubkey
+
+ingress:
+  name: tuf-server
+  className: nginx
+  http:
+    hosts:
+    - path: /
+      host: "tuf.localhost"
+
+service:
+  name: tuf-server
+  port: 80
+
+namespace:
+  create: false
+  name: fulcio-system

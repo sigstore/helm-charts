@@ -14,6 +14,7 @@ fulcio:
     enabled: false
     createctconfig:
       logPrefix: sigstorescaffolding
+
 # CTLog
 ctlog:
   enabled: true
@@ -41,6 +42,7 @@ rekor:
     fullnameOverride: rekor-redis
   trillian:
     enabled: false
+
 # Trillian
 trillian:
   enabled: true
@@ -59,3 +61,38 @@ trillian:
     fullnameOverride: trillian-logsigner
   mysql:
     fullnameOverride: trillian-mysql
+
+tuf:
+  enabled: true
+  namespace:
+    name: tuf-system
+    create: true
+  forceNamespace: tuf-system
+  fullnameOverride: tuf
+
+  secrets:
+    rekor:
+      name: rekor-public-key
+      path: rekor-pubkey
+      # should be the same as rekor.namespace.name
+      sourceNamespace: rekor-system
+    fulcio:
+      name: fulcio-server-secret
+      path: fulcio-cert
+      # should be the same as fulcio.namespace.name
+      sourceNamespace: fulcio-system
+    ctlog:
+      name: ctlog-public-key
+      path: ctlog-pubkey
+      # should be the same as ctlog.namespace.name
+      sourceNamespace: ctlog-system
+
+copySecretJob:
+  enabled: false
+  name: copy-secrets-job
+  registry: docker.io
+  repository: alpine/k8s
+  version: sha256:fb0d2db81fb0f98abb1adf5246d6f0f4d19f34031afe4759cb7ad8e2eb8d2c01
+  imagePullPolicy: IfNotPresent
+  serviceaccount: tuf-secret-copy-job
+  backoffLimit: 6

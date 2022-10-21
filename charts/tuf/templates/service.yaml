@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.name }}
+{{ include "tuf.namespace" . | indent 2 }}
+spec:
+  ports:
+  - name: {{ .Values.deployment.port }}-tcp
+    port: {{ .Values.service.port }}
+    protocol: TCP
+    targetPort: {{ .Values.deployment.port }}
+  selector:
+    {{- include "tuf.matchLabels" . | nindent 4 }}
+  type: ClusterIP

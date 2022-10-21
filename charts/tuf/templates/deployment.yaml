@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "tuf.deployment.fullname" . }}
+{{ include "tuf.namespace" . | indent 2 }}
+{{- if .Values.deployment.annotations }}
+  annotations:
+    {{- toYaml .Values.deployment.annotations | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "tuf.metaLabels" . | nindent 4 }}
+    {{- include "tuf.matchLabels" . | nindent 4 }}
+
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      {{- include "tuf.matchLabels" . | nindent 6 }}
+
+{{- if .Values.deployment.strategy }}
+  strategy:
+{{ toYaml .Values.deployment.strategy | trim | indent 4 }}
+    {{ if eq .Values.deployment.strategy.type "Recreate" }}rollingUpdate: null{{ end }}
+{{- end }}
+  template:
+    metadata:
+      labels:
+        {{- include "tuf.metaLabels" . | nindent 8 }}
+        {{- include "tuf.matchLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      containers:
+      - image: {{ template "tuf.image" .Values.deployment }}
+        name: {{ .Values.deployment.name }}
+        ports:
+          - containerPort: {{ .Values.deployment.port }}
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+
+        volumeMounts:
+          - name: tuf-secrets
+            mountPath: "/var/run/tuf-secrets"
+            readOnly: true
+      volumes:
+      - name: tuf-secrets
+        projected:
+          sources: 
+          - secret:
+              name: {{ .Values.secrets.ctlog.name }}
+              items:
+              - key: public
+                path: {{ .Values.secrets.ctlog.path }}
+          - secret:
+              name: {{ .Values.secrets.fulcio.name }}
+              items:
+              - key: cert
+                path: {{ .Values.secrets.fulcio.path }}
+          - secret:
+              name: {{ .Values.secrets.rekor.name }}
+              items:
+              - key: key
+                path: {{ .Values.secrets.rekor.path }}
+    {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+    {{- end }}
