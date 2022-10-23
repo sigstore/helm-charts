@@ -136,7 +136,7 @@
                         }
                     }
                 },
-                "namespaceOptIn": {
+                "namespaceSelectorDisabled": {
                     "type": "boolean"
                 },
                 "webhookNames": {

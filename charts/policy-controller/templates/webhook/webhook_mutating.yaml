@@ -4,7 +4,7 @@ metadata:
   name: {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName }}
 webhooks:
 - name: {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName }}
-  {{- if .Values.policywebhook.namespaceOptIn }}
+  {{- if not .Values.policywebhook.namespaceSelectorDisabled }}
   namespaceSelector:
     # The webhook should only apply to things that opt-in
     matchExpressions:
