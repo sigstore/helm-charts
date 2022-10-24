@@ -10,6 +10,7 @@ server:
   name: server
   svcPort: 80
   grpcSvcPort: 5554
+  secret: fulcio-server-secret
   logging:
     production: false
   image:

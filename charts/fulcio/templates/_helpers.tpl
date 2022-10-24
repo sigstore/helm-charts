@@ -137,13 +137,6 @@ Create the name of the config
 {{- end }}
 
 {{/*
-Create the name of the secret
-*/}}
-{{- define "fulcio.secret" -}}
-{{ printf "%s-secret" (include "fulcio.fullname" .) }}
-{{- end }}
-
-{{/*
 Return the appropriate apiVersion for ingress.
 */}}
 {{- define "fulcio.server.ingress.backend" -}}
