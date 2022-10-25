@@ -15,17 +15,20 @@ deployment:
   port: 8080
 
 secrets:
-  create: true
+  create: false
   rekor:
     name: rekor-public-key
+    key: public
     path: rekor-pubkey
     value: b3B0aW9uYWw=
   fulcio:
     name: fulcio-server-secret
+    key: cert
     path: fulcio-cert
     value: b3B0aW9uYWw=
   ctlog:
     name: ctlog-public-key
+    key: key
     path: ctlog-pubkey
     value: b3B0aW9uYWw=
 
