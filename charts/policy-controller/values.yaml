@@ -33,7 +33,7 @@ policywebhook:
     runAsNonRoot: true
     capabilities:
       drop:
-        - all
+        - ALL
   service:
     annotations: {}
     type: ClusterIP
@@ -69,7 +69,7 @@ webhook:
     runAsUser: 1000
     capabilities:
       drop:
-        - all
+        - ALL
   serviceAccount:
     annotations: {}
   service:
