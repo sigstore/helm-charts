@@ -32,7 +32,7 @@ The Helm chart for Policy  Controller
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
 | policywebhook.image.version | string | `"sha256:03f6b9807103c988439741fdc2ec4410a85c13ba62fbad58448a070ac07bb5bc"` | `"v0.4.0"` |
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
-| policywebhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
+| policywebhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | policywebhook.podSecurityContext.enabled | bool | `true` |  |
 | policywebhook.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | policywebhook.podSecurityContext.runAsNonRoot | bool | `true` |  |
@@ -57,7 +57,7 @@ The Helm chart for Policy  Controller
 | webhook.image.version | string | `"sha256:2b1c017535f6a0f672ec38279f3792ca1181555342a2deae53605e202afb9764"` | `"v0.4.0"` |
 | webhook.name | string | `"webhook"` |  |
 | webhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
-| webhook.podSecurityContext.capabilities.drop[0] | string | `"all"` |  |
+| webhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | webhook.podSecurityContext.enabled | bool | `true` |  |
 | webhook.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | webhook.podSecurityContext.runAsUser | int | `1000` |  |
