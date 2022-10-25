@@ -1,140 +1,232 @@
-
-
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "type": "object",
-    "properties": {
-      "namespace": {
-        "type": "object",
-        "properties": {
-          "create": {
-            "type": "boolean"
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/Welcome1",
+  "definitions": {
+      "Welcome1": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "forceNamespace": {
+                  "type": "string"
+              },
+              "imagePullSecrets": {
+                  "type": "array",
+                  "items": {}
+              },
+              "serviceAccountName": {
+                  "type": "string"
+              },
+              "roleName": {
+                  "type": "string"
+              },
+              "roleBindingName": {
+                  "type": "string"
+              },
+              "fullnameOverride": {
+                  "type": "string"
+              },
+              "deployment": {
+                  "$ref": "#/definitions/Deployment"
+              },
+              "secrets": {
+                  "$ref": "#/definitions/Secrets"
+              },
+              "ingress": {
+                  "$ref": "#/definitions/Ingress"
+              },
+              "service": {
+                  "$ref": "#/definitions/Service"
+              },
+              "namespace": {
+                  "$ref": "#/definitions/Namespace"
+              }
           },
-          "name": {
-            "type": "string"
-          }
-        }
+          "required": [
+              "deployment",
+              "imagePullSecrets",
+              "ingress",
+              "namespace",
+              "roleBindingName",
+              "roleName",
+              "secrets",
+              "service",
+              "serviceAccountName"
+          ],
+          "title": "Welcome1"
       },
-      "imagePullSecrets": {
-        "type": "array",
-        "items": {}
-      },
-      "tufDeployment": {
-        "type": "object",
-        "properties": {
-          "replicas": {
-            "type": "integer"
-          },
-          "registry": {
-            "type": "string"
-          },
-          "repository": {
-            "type": "string"
-          },
-          "version": {
-            "type": "string"
-          },
-          "imagePullPolicy": {
-            "type": "string"
-          },
-          "port": {
-            "type": "integer"
-          }
-        }
-      },
-      "copySecretJob": {
-        "type": "object",
-        "properties": {
-          "enabled": {
-            "type": "boolean"
-          },
-          "registry": {
-            "type": "string"
-          },
-          "repository": {
-            "type": "string"
-          },
-          "version": {
-            "type": "string"
-          },
-          "imagePullPolicy": {
-            "type": "string"
-          }
-        }
-      },
-      "tufSecrets": {
-        "type": "object",
-        "properties": {
-          "rekor": {
-            "type": "object",
-            "properties": {
+      "Deployment": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
               "name": {
-                "type": "string"
+                  "type": "string"
+              },
+              "replicas": {
+                  "type": "integer"
+              },
+              "registry": {
+                  "type": "string"
+              },
+              "repository": {
+                  "type": "string"
+              },
+              "version": {
+                  "type": "string"
+              },
+              "imagePullPolicy": {
+                  "type": "string"
+              },
+              "port": {
+                  "type": "integer"
+              }
+          },
+          "required": [
+              "imagePullPolicy",
+              "name",
+              "port",
+              "registry",
+              "replicas",
+              "repository",
+              "version"
+          ],
+          "title": "Deployment"
+      },
+      "Ingress": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "name": {
+                  "type": "string"
+              },
+              "className": {
+                  "type": "string"
+              },
+              "http": {
+                  "$ref": "#/definitions/HTTP"
+              }
+          },
+          "required": [
+              "className",
+              "http",
+              "name"
+          ],
+          "title": "Ingress"
+      },
+      "HTTP": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "hosts": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/Host"
+                  }
+              }
+          },
+          "required": [
+              "hosts"
+          ],
+          "title": "HTTP"
+      },
+      "Host": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "path": {
+                  "type": "string"
+              },
+              "host": {
+                  "type": "string"
+              }
+          },
+          "required": [
+              "host",
+              "path"
+          ],
+          "title": "Host"
+      },
+      "Namespace": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "create": {
+                  "type": "boolean"
+              },
+              "name": {
+                  "type": "string"
+              }
+          },
+          "required": [
+              "create",
+              "name"
+          ],
+          "title": "Namespace"
+      },
+      "Secrets": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "create": {
+                  "type": "boolean"
+              },
+              "rekor": {
+                  "$ref": "#/definitions/Ctlog"
+              },
+              "fulcio": {
+                  "$ref": "#/definitions/Ctlog"
+              },
+              "ctlog": {
+                  "$ref": "#/definitions/Ctlog"
+              }
+          },
+          "required": [
+              "ctlog",
+              "fulcio",
+              "rekor"
+          ],
+          "title": "Secrets"
+      },
+      "Ctlog": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "name": {
+                  "type": "string"
+              },
+              "key": {
+                  "type": "string"
               },
               "path": {
-                "type": "string"
+                  "type": "string"
               },
-              "sourceNamespace": {
-                "type": "string"
+              "value": {
+                  "type": "string"
               }
-            }
           },
-          "fulcio": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "path": {
-                "type": "string"
-              },
-              "sourceNamespace": {
-                "type": "string"
-              }
-            }
-          },
-          "ctlog": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "path": {
-                "type": "string"
-              },
-              "sourceNamespace": {
-                "type": "string"
-              }
-            }
-          }
-        }
+          "required": [
+              "key",
+              "name",
+              "path",
+              "value"
+          ],
+          "title": "Ctlog"
       },
-      "ingress": {
-        "type": "object",
-        "properties": {
-          "className": {
-            "type": "string"
-          },
-          "domain": {
-            "type": "string"
-          },
-          "tlsSecretName": {
-            "type": "string"
-          },
-          "annotations": {
-            "type": "object",
-            "properties": {
-              "certManager.io/cluster-issuer": {
-                "type": "string"
+      "Service": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "name": {
+                  "type": "string"
               },
-              "certManager.io/common-name": {
-                "type": "string"
+              "port": {
+                  "type": "integer"
               }
-            }
-          }
-        }
+          },
+          "required": [
+              "name",
+              "port"
+          ],
+          "title": "Service"
       }
-    }
   }
-  
-  
+}
