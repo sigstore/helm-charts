@@ -15,7 +15,7 @@ deployment:
   port: 8080
 
 secrets:
-  create: false
+  create: true
   rekor:
     name: rekor-public-key
     path: rekor-pubkey
