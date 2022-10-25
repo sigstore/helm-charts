@@ -34,7 +34,7 @@ mysql:
         runAsNonRoot: true
         capabilities:
           drop:
-          - all
+          - ALL
   enabled: true
   replicaCount: 1
   name: mysql
