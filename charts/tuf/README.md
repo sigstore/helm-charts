@@ -38,19 +38,21 @@ A framework for securing software update systems - the scaffolding implementatio
 | namespace.name | string | `"fulcio-system"` |  |
 | roleBindingName | string | `"tuf"` |  |
 | roleName | string | `"tuf"` |  |
-| secrets.create | bool | `false` |  |
 | secrets.ctlog.key | string | `"key"` |  |
 | secrets.ctlog.name | string | `"ctlog-public-key"` |  |
 | secrets.ctlog.path | string | `"ctlog-pubkey"` |  |
-| secrets.ctlog.value | string | `"b3B0aW9uYWw="` |  |
+| secrets.ctlog.value | string |  |  |
+| secrets.ctlog.create | boolean | `false` |  |
 | secrets.fulcio.key | string | `"cert"` |  |
 | secrets.fulcio.name | string | `"fulcio-server-secret"` |  |
 | secrets.fulcio.path | string | `"fulcio-cert"` |  |
-| secrets.fulcio.value | string | `"b3B0aW9uYWw="` |  |
+| secrets.fulcio.value | string |  |  |
+| secrets.fulcio.create | boolean | `false` |  |
 | secrets.rekor.key | string | `"public"` |  |
 | secrets.rekor.name | string | `"rekor-public-key"` |  |
 | secrets.rekor.path | string | `"rekor-pubkey"` |  |
-| secrets.rekor.value | string | `"b3B0aW9uYWw="` |  |
+| secrets.rekor.value | string |  |  |
+| secrets.rekor.create | boolean | `false` |  |
 | service.name | string | `"tuf-server"` |  |
 | service.port | int | `80` |  |
 | serviceAccountName | string | `"tuf"` |  |

@@ -15,22 +15,21 @@ deployment:
   port: 8080
 
 secrets:
-  create: false
   rekor:
+    create: false
     name: rekor-public-key
     key: public
     path: rekor-pubkey
-    value: b3B0aW9uYWw=
   fulcio:
+    create: false
     name: fulcio-server-secret
     key: cert
     path: fulcio-cert
-    value: b3B0aW9uYWw=
   ctlog:
+    create: false
     name: ctlog-public-key
     key: key
     path: ctlog-pubkey
-    value: b3B0aW9uYWw=
 
 ingress:
   name: tuf-server

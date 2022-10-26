@@ -164,11 +164,8 @@
       },
       "Secrets": {
           "type": "object",
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
-              "create": {
-                  "type": "boolean"
-              },
               "rekor": {
                   "$ref": "#/definitions/Ctlog"
               },
@@ -201,13 +198,16 @@
               },
               "value": {
                   "type": "string"
+              },
+              "create": {
+                  "type": "boolean"
               }
           },
           "required": [
               "key",
               "name",
               "path",
-              "value"
+              "create"
           ],
           "title": "Ctlog"
       },
