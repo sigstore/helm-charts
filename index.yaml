@@ -6658,24 +6658,44 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/sigstore-prober-0.0.1/sigstore-prober-0.0.1.tgz
     version: 0.0.1
-  tuf:
-  - annotations:
-      artifacthub.io/license: Apache-2.0
-      artifacthub.io/images: |
-        - name: scaffolding-tuf
-          image: ghcr.io/sigstore/scaffolding/server@sha256:719ea3fe44c52af5a5fedab2168429872e37e97b9f063977fc164d60a5a14b53
-        - name: k8s-tools
-          image: docker.io/alpine/k8s@sha256:fb0d2db81fb0f98abb1adf5246d6f0f4d19f34031afe4759cb7ad8e2eb8d2c01
-    apiVersion: v2
-    name: tuf
-    description: A framework for securing software update systems - the scaffolding implementation
-    type: application
-    created: "2022-10-27T10:49:41.959694591Z"
-    version: 0.1.1
-    appVersion: "0.4.6"
-    urls:
-    - https://github.com/sigstore/helm-charts/releases/download/tuf-0.1.1/tuf-0.1.1.tgz
   trillian:
+  - annotations:
+      artifacthub.io/images: |
+        - name: curl
+          image: docker.io/curlimages/curl@sha256:e83fef2d5a036d40df4ded829141e8c0ec41871490d252fb8c81cb4580ebb35b
+        - name: netcat
+          image: docker.io/toolbelt/netcat@sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea
+        - name: db_server
+          image: gcr.io/trillian-opensource-ci/db_server@sha256:ae4043e9c5e4de522fb4958e92d592aa97c7fc294a12849b902fd1facd7122c6
+        - name: log_server
+          image: gcr.io/projectsigstore/trillian_log_server@sha256:4599a3f037234423d13ff84755679a56da62363e7ed07c70bc556078fd73986d
+        - name: log_signer
+          image: gcr.io/projectsigstore/trillian_log_signer@sha256:87699af429d79440f7e0a487d215c2129bf97b37698370d050a68822996f93f0
+        - name: cloud_proxy
+          image: gcr.io/cloudsql-docker/gce-proxy@sha256:7755f632c090289b8e0fa67218fc9d8b9ab7e0758ea58c48786617a79ff715dc
+        - name: createdb
+          image: ghcr.io/sigstore/scaffolding/createdb@sha256:5ec1b95581d238dfbbd8e412422500cc242123078de8aaad23e5f9c65eaf2ba5
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2022-10-27T18:48:42.529702028Z"
+    description: 'Trillian is a log that stores an accurate, immutable and verifiable
+      history of activity. '
+    digest: 9e7bbb7423088486b0e624d8a023d5b23f1d2e64086afafcd4cfbc880a895afd
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+      url: https://sigstore.dev/
+    name: trillian
+    sources:
+    - https://github.com/google/trillian
+    - https://github.com/sigstore/helm-charts/tree/main/charts/trillian
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.13/trillian-0.1.13.tgz
+    version: 0.1.13
   - annotations:
       artifacthub.io/images: |
         - name: curl
@@ -7037,6 +7057,24 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/trillian-0.1.1/trillian-0.1.1.tgz
     version: 0.1.1
+  tuf:
+  - annotations:
+      artifacthub.io/images: |
+        - name: scaffolding-tuf
+          image: ghcr.io/sigstore/scaffolding/server@sha256:719ea3fe44c52af5a5fedab2168429872e37e97b9f063977fc164d60a5a14b53
+        - name: k8s-tools
+          image: docker.io/alpine/k8s@sha256:fb0d2db81fb0f98abb1adf5246d6f0f4d19f34031afe4759cb7ad8e2eb8d2c01
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.4.6
+    created: "2022-10-27T10:49:41.959694591Z"
+    description: A framework for securing software update systems - the scaffolding
+      implementation
+    name: tuf
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/tuf-0.1.1/tuf-0.1.1.tgz
+    version: 0.1.1
   updatetree:
   - annotations:
       artifacthub.io/images: |
@@ -7126,4 +7164,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2022-10-27T10:49:41.959694591Z"
+generated: "2022-10-27T18:48:42.530373336Z"
