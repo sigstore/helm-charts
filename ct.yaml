@@ -6,4 +6,4 @@ target-branch: main
 chart-repos:
   - sigstore=https://sigstore.github.io/helm-charts
 excluded-charts:
-  - scaffolding
+  - scaffold
