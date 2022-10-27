@@ -1,0 +1,11 @@
+---
+secrets:
+  rekor:
+    create: true
+    value: foo
+  fulcio:
+    create: true
+    value: bar
+  ctlog:
+    create: true
+    value: baz

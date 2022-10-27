@@ -51,17 +51,17 @@ spec:
           - secret:
               name: {{ .Values.secrets.ctlog.name }}
               items:
-              - key: public
+              - key: {{ .Values.secrets.ctlog.key }}
                 path: {{ .Values.secrets.ctlog.path }}
           - secret:
               name: {{ .Values.secrets.fulcio.name }}
               items:
-              - key: cert
+              - key: {{ .Values.secrets.fulcio.key }}
                 path: {{ .Values.secrets.fulcio.path }}
           - secret:
               name: {{ .Values.secrets.rekor.name }}
               items:
-              - key: key
+              - key: {{ .Values.secrets.rekor.key }}
                 path: {{ .Values.secrets.rekor.path }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
