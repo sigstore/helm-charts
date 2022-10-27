@@ -63,7 +63,7 @@ trillian:
     fullnameOverride: trillian-mysql
 
 tuf:
-  enabled: true
+  enabled: false
   namespace:
     name: tuf-system
     create: true
@@ -74,18 +74,12 @@ tuf:
     rekor:
       name: rekor-public-key
       path: rekor-pubkey
-      # should be the same as rekor.namespace.name
-      sourceNamespace: rekor-system
     fulcio:
       name: fulcio-server-secret
       path: fulcio-cert
-      # should be the same as fulcio.namespace.name
-      sourceNamespace: fulcio-system
     ctlog:
       name: ctlog-public-key
       path: ctlog-pubkey
-      # should be the same as ctlog.namespace.name
-      sourceNamespace: ctlog-system
 
 copySecretJob:
   enabled: false
