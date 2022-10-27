@@ -4,6 +4,7 @@ serviceAccountName: tuf
 roleName: tuf
 roleBindingName: tuf
 fullnameOverride: tuf
+enabled: true
 
 deployment:
   name: tuf

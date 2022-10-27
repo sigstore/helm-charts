@@ -25,6 +25,10 @@
               "fullnameOverride": {
                   "type": "string"
               },
+              "enabled": {
+                "description": "Usually used when using tuf as a subchart.",
+                "type": "boolean"
+              },
               "deployment": {
                   "$ref": "#/definitions/Deployment"
               },
