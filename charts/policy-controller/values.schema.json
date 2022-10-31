@@ -136,6 +136,9 @@
                         }
                     }
                 },
+                "namespaceSelectorDisabled": {
+                    "type": "boolean"
+                },
                 "webhookNames": {
                     "type": "object",
                     "properties": {

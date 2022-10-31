@@ -4,12 +4,14 @@ metadata:
   name: {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName }}
 webhooks:
 - name: {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName }}
+  {{- if not .Values.policywebhook.namespaceSelectorDisabled }}
   namespaceSelector:
     # The webhook should only apply to things that opt-in
     matchExpressions:
     - key: policy.sigstore.dev/include
       operator: In
       values: ["true"]
+  {{- end }}
   admissionReviewVersions: [v1]
   clientConfig:
     service:

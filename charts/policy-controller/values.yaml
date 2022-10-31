@@ -10,6 +10,7 @@ policywebhook:
   image:
     repository: ghcr.io/sigstore/policy-controller/policy-webhook
     # crane digest ghcr.io/sigstore/policy-controller/policy-webhook:v0.4.0
+    # -- `"v0.4.0"`
     version: sha256:03f6b9807103c988439741fdc2ec4410a85c13ba62fbad58448a070ac07bb5bc
     pullPolicy: IfNotPresent
   env: {}
@@ -38,6 +39,7 @@ policywebhook:
     annotations: {}
     type: ClusterIP
     port: 443
+  namespaceSelectorDisabled: false
   webhookNames:
     defaulting: "defaulting.clusterimagepolicy.sigstore.dev"
     validating: "validating.clusterimagepolicy.sigstore.dev"
@@ -48,6 +50,7 @@ webhook:
   image:
     repository: ghcr.io/sigstore/policy-controller/policy-controller
     # crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.4.0
+    # -- `"v0.4.0"`
     version: sha256:2b1c017535f6a0f672ec38279f3792ca1181555342a2deae53605e202afb9764
     pullPolicy: IfNotPresent
   env: {}
