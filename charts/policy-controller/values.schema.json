@@ -22,6 +22,9 @@
         "imagePullSecrets": {
             "type": "array"
         },
+        "installCRDs": {
+            "type": "boolean"
+        },
         "policywebhook": {
             "type": "object",
             "properties": {

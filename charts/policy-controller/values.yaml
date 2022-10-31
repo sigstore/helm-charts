@@ -3,6 +3,8 @@ cosign:
   cosignPub: ""
   webhookName: "policy.sigstore.dev"
 
+installCRDs: true
+
 imagePullSecrets: []
 
 policywebhook:
