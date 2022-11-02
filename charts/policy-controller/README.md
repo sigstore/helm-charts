@@ -30,7 +30,7 @@ The Helm chart for Policy  Controller
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
-| policywebhook.image.version | string | `"sha256:03f6b9807103c988439741fdc2ec4410a85c13ba62fbad58448a070ac07bb5bc"` | `"v0.4.0"` |
+| policywebhook.image.version | string | `"sha256:47c96a74c31c48c5a082100ec94d766bb668ec015b74558bc37619781351c798"` | `"v0.4.1"` |
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | policywebhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | policywebhook.podSecurityContext.enabled | bool | `true` |  |
@@ -54,7 +54,7 @@ The Helm chart for Policy  Controller
 | webhook.extraArgs | object | `{}` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
-| webhook.image.version | string | `"sha256:2b1c017535f6a0f672ec38279f3792ca1181555342a2deae53605e202afb9764"` | `"v0.4.0"` |
+| webhook.image.version | string | `"sha256:4c38700ec69f82b405fdd6cbc38a0eeb7ca3482dfe2d21f1be2929f845fb7bd7"` | `"v0.4.1"` |
 | webhook.name | string | `"webhook"` |  |
 | webhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | webhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
