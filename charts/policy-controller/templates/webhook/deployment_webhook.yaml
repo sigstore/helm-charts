@@ -112,6 +112,9 @@ spec:
           # Failing to provide a writable $HOME can cause TUF client initialization to panic
           - mountPath: /home/nonroot
             name: writable-home-dir
+          {{- with .Values.webhook.volumeMounts }}
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
       {{- if .Values.webhook.securityContext.enabled }}
 
       # Our webhook should gracefully terminate by lame ducking first, set this to a sufficiently
@@ -126,3 +129,6 @@ spec:
       volumes:
       - emptyDir: {}
         name: writable-home-dir
+      {{- with .Values.webhook.volumes }}
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
