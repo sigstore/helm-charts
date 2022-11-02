@@ -9,8 +9,8 @@ policywebhook:
   replicaCount: 1
   image:
     repository: ghcr.io/sigstore/policy-controller/policy-webhook
-    # crane digest ghcr.io/sigstore/policy-controller/policy-webhook:v0.4.0
-    version: sha256:03f6b9807103c988439741fdc2ec4410a85c13ba62fbad58448a070ac07bb5bc
+    # crane digest ghcr.io/sigstore/policy-controller/policy-webhook:v0.4.1
+    version: sha256:47c96a74c31c48c5a082100ec94d766bb668ec015b74558bc37619781351c798
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
@@ -47,8 +47,8 @@ webhook:
   name: webhook
   image:
     repository: ghcr.io/sigstore/policy-controller/policy-controller
-    # crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.4.0
-    version: sha256:2b1c017535f6a0f672ec38279f3792ca1181555342a2deae53605e202afb9764
+    # crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.4.1
+    version: sha256:4c38700ec69f82b405fdd6cbc38a0eeb7ca3482dfe2d21f1be2929f845fb7bd7
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
