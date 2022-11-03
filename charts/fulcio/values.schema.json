@@ -85,7 +85,8 @@
                 "serviceAccount",
                 "service",
                 "ingress",
-                "securityContext"
+                "securityContext",
+                "secret"
             ],
             "properties": {
                 "replicaCount": {
@@ -815,6 +816,10 @@
                             "runAsUser": 65533
                         }
                     ]
+                },
+                "secret": {
+                    "type": "string",
+                    "title": "The name of the secret containing the fulcio keys, password and PEM"
                 }
             },
             "examples": [

@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 1.0.0-rc.1](https://img.shields.io/badge/Version-1.0.0--rc.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-rc.1](https://img.shields.io/badge/AppVersion-1.0.0--rc.1-informational?style=flat-square)
+![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -134,6 +134,7 @@ helm uninstall [RELEASE_NAME]
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
 | server.replicaCount | int | `1` |  |
+| server.secret | string | `"fulcio-server-secret"` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
 | server.service.ports[0].name | string | `"http"` |  |
