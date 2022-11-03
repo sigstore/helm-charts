@@ -79,6 +79,8 @@ webhook:
     # For nodeport, specify the following:
     #   type: NodePort
     #   nodePort: <port-number>
+  volumeMounts: []
+  volumes: []
 
 ## common node selector for all the pods
 commonNodeSelector: {}
