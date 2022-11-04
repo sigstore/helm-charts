@@ -942,7 +942,8 @@
                     "type": "string",
                     "default": "",
                     "examples": [
-                        "memory"
+                        "memory",
+                        "/key/private"
                     ]
                 },
                 "readinessProbe": {
@@ -1538,6 +1539,42 @@
                             "annotations": {}
                         }
                     ]
+                },
+                "signerFileSecretOptions": {
+                    "title": "The signerFileSecretOptions Schema",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                        "secretName",
+                        "secretMountPath",
+                        "privateKeySecretKey"
+                    ],
+                    "properties": {
+                        "secretName": {
+                            "title": "Name of the secret containing the private key",
+                            "type": "string",
+                            "default": "",
+                            "examples": [
+                                "rekor-private-key"
+                            ]
+                        },
+                        "secretMountPath": {
+                            "title": "Where to mount the scret inside the container",
+                            "type": "string",
+                            "default": "",
+                            "examples": [
+                                "/key"
+                            ]
+                        },
+                        "privateKeySecretKey": {
+                            "title": "The key of the private key inside the secret",
+                            "type": "string",
+                            "default": "",
+                            "examples": [
+                                "private"
+                            ]
+                        }
+                    }
                 }
             },
             "examples": [
