@@ -69,6 +69,11 @@ spec:
             - name: storage
               mountPath: {{ template "rekor.server.fileAttestationStorage.path" . }}
 {{- end -}}
+{{- if .Values.server.signerFileSecretOptions }}
+            - name: {{ .Values.server.signerFileSecretOptions.secretName }}-volume
+              mountPath: {{ .Values.server.signerFileSecretOptions.secretMountPath }}                                                                                                                      │
+              readOnly: true
+{{- end }}
 {{- if .Values.server.livenessProbe }}
           livenessProbe:
 {{ toYaml .Values.server.livenessProbe | indent 12 }}
@@ -120,4 +125,11 @@ spec:
           persistentVolumeClaim:
             claimName: {{ template "rekor.server.fullname" . }}
   {{- end }}
+{{- end }}
+{{- if .Values.server.signerFileSecretOptions }}
+        - name: {{ .Values.server.signerFileSecretOptions.secretName }}-volume
+          secret:
+            secretName: {{ .Values.server.signerFileSecretOptions.secretName }}
+            items:
+            - key: {{ .Values.server.signerFileSecretOptions.privateKeySecretKey }}
 {{- end }}
