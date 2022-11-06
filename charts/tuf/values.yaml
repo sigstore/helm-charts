@@ -19,7 +19,7 @@ secrets:
   rekor:
     create: false
     name: rekor-public-key
-    key: public
+    key: key
     path: rekor-pubkey
   fulcio:
     create: false
@@ -29,12 +29,13 @@ secrets:
   ctlog:
     create: false
     name: ctlog-public-key
-    key: key
+    key: public
     path: ctlog-pubkey
 
 ingress:
   name: tuf-server
   className: nginx
+  annotations: {}
   http:
     hosts:
     - path: /
