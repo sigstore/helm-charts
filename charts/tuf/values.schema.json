@@ -1,236 +1,408 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
-  "$ref": "#/definitions/Welcome1",
-  "definitions": {
-      "Welcome1": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "forceNamespace": {
-                  "type": "string"
-              },
-              "imagePullSecrets": {
-                  "type": "array",
-                  "items": {}
-              },
-              "serviceAccountName": {
-                  "type": "string"
-              },
-              "roleName": {
-                  "type": "string"
-              },
-              "roleBindingName": {
-                  "type": "string"
-              },
-              "fullnameOverride": {
-                  "type": "string"
-              },
-              "enabled": {
-                "description": "Usually used when using tuf as a subchart.",
-                "type": "boolean"
-              },
-              "deployment": {
-                  "$ref": "#/definitions/Deployment"
-              },
-              "secrets": {
-                  "$ref": "#/definitions/Secrets"
-              },
-              "ingress": {
-                  "$ref": "#/definitions/Ingress"
-              },
-              "service": {
-                  "$ref": "#/definitions/Service"
-              },
-              "namespace": {
-                  "$ref": "#/definitions/Namespace"
-              }
-          },
-          "required": [
-              "deployment",
-              "imagePullSecrets",
-              "ingress",
-              "namespace",
-              "roleBindingName",
-              "roleName",
-              "secrets",
-              "service",
-              "serviceAccountName"
-          ],
-          "title": "Welcome1"
-      },
-      "Deployment": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "name": {
-                  "type": "string"
-              },
-              "replicas": {
-                  "type": "integer"
-              },
-              "registry": {
-                  "type": "string"
-              },
-              "repository": {
-                  "type": "string"
-              },
-              "version": {
-                  "type": "string"
-              },
-              "imagePullPolicy": {
-                  "type": "string"
-              },
-              "port": {
-                  "type": "integer"
-              }
-          },
-          "required": [
-              "imagePullPolicy",
-              "name",
-              "port",
-              "registry",
-              "replicas",
-              "repository",
-              "version"
-          ],
-          "title": "Deployment"
-      },
-      "Ingress": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "name": {
-                  "type": "string"
-              },
-              "className": {
-                  "type": "string"
-              },
-              "http": {
-                  "$ref": "#/definitions/HTTP"
-              }
-          },
-          "required": [
-              "className",
-              "http",
-              "name"
-          ],
-          "title": "Ingress"
-      },
-      "HTTP": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "hosts": {
-                  "type": "array",
-                  "items": {
-                      "$ref": "#/definitions/Host"
-                  }
-              }
-          },
-          "required": [
-              "hosts"
-          ],
-          "title": "HTTP"
-      },
-      "Host": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "path": {
-                  "type": "string"
-              },
-              "host": {
-                  "type": "string"
-              }
-          },
-          "required": [
-              "host",
-              "path"
-          ],
-          "title": "Host"
-      },
-      "Namespace": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "create": {
-                  "type": "boolean"
-              },
-              "name": {
-                  "type": "string"
-              }
-          },
-          "required": [
-              "create",
-              "name"
-          ],
-          "title": "Namespace"
-      },
-      "Secrets": {
-          "type": "object",
-          "additionalProperties": true,
-          "properties": {
-              "rekor": {
-                  "$ref": "#/definitions/Ctlog"
-              },
-              "fulcio": {
-                  "$ref": "#/definitions/Ctlog"
-              },
-              "ctlog": {
-                  "$ref": "#/definitions/Ctlog"
-              }
-          },
-          "required": [
-              "ctlog",
-              "fulcio",
-              "rekor"
-          ],
-          "title": "Secrets"
-      },
-      "Ctlog": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "name": {
-                  "type": "string"
-              },
-              "key": {
-                  "type": "string"
-              },
-              "path": {
-                  "type": "string"
-              },
-              "value": {
-                  "type": "string"
-              },
-              "create": {
-                  "type": "boolean"
-              }
-          },
-          "required": [
-              "key",
-              "name",
-              "path",
-              "create"
-          ],
-          "title": "Ctlog"
-      },
-      "Service": {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-              "name": {
-                  "type": "string"
-              },
-              "port": {
-                  "type": "integer"
-              }
-          },
-          "required": [
-              "name",
-              "port"
-          ],
-          "title": "Service"
-      }
-  }
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "properties": {
+        "forceNamespace": {
+            "type": "string",
+            "examples": [
+                ""
+            ]
+        },
+        "imagePullSecrets": {
+            "type": "array",
+            "items": {},
+            "examples": [
+                []
+            ]
+        },
+        "serviceAccountName": {
+            "type": "string",
+            "examples": [
+                "tuf"
+            ]
+        },
+        "roleName": {
+            "type": "string",
+            "examples": [
+                "tuf"
+            ]
+        },
+        "roleBindingName": {
+            "type": "string",
+            "examples": [
+                "tuf"
+            ]
+        },
+        "fullnameOverride": {
+            "type": "string",
+            "examples": [
+                "tuf"
+            ]
+        },
+        "enabled": {
+            "type": "boolean",
+            "examples": [
+                true
+            ]
+        },
+        "deployment": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "examples": [
+                        "tuf"
+                    ]
+                },
+                "replicas": {
+                    "type": "integer",
+                    "examples": [
+                        1
+                    ]
+                },
+                "registry": {
+                    "type": "string",
+                    "examples": [
+                        "ghcr.io"
+                    ]
+                },
+                "repository": {
+                    "type": "string",
+                    "examples": [
+                        "sigstore/scaffolding/server"
+                    ]
+                },
+                "version": {
+                    "type": "string",
+                    "examples": [
+                        "sha256:719ea3fe44c52af5a5fedab2168429872e37e97b9f063977fc164d60a5a14b53"
+                    ]
+                },
+                "imagePullPolicy": {
+                    "type": "string",
+                    "examples": [
+                        "IfNotPresent"
+                    ]
+                },
+                "port": {
+                    "type": "integer",
+                    "examples": [
+                        8080
+                    ]
+                }
+            },
+            "examples": [{
+                "name": "tuf",
+                "replicas": 1,
+                "registry": "ghcr.io",
+                "repository": "sigstore/scaffolding/server",
+                "version": "sha256:719ea3fe44c52af5a5fedab2168429872e37e97b9f063977fc164d60a5a14b53",
+                "imagePullPolicy": "IfNotPresent",
+                "port": 8080
+            }]
+        },
+        "secrets": {
+            "type": "object",
+            "properties": {
+                "rekor": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "name": {
+                            "type": "string",
+                            "examples": [
+                                "rekor-public-key"
+                            ]
+                        },
+                        "key": {
+                            "type": "string",
+                            "examples": [
+                                "public"
+                            ]
+                        },
+                        "path": {
+                            "type": "string",
+                            "examples": [
+                                "rekor-pubkey"
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "create": false,
+                        "name": "rekor-public-key",
+                        "key": "public",
+                        "path": "rekor-pubkey"
+                    }]
+                },
+                "fulcio": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "name": {
+                            "type": "string",
+                            "examples": [
+                                "fulcio-server-secret"
+                            ]
+                        },
+                        "key": {
+                            "type": "string",
+                            "examples": [
+                                "cert"
+                            ]
+                        },
+                        "path": {
+                            "type": "string",
+                            "examples": [
+                                "fulcio-cert"
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "create": false,
+                        "name": "fulcio-server-secret",
+                        "key": "cert",
+                        "path": "fulcio-cert"
+                    }]
+                },
+                "ctlog": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "name": {
+                            "type": "string",
+                            "examples": [
+                                "ctlog-public-key"
+                            ]
+                        },
+                        "key": {
+                            "type": "string",
+                            "examples": [
+                                "key"
+                            ]
+                        },
+                        "path": {
+                            "type": "string",
+                            "examples": [
+                                "ctlog-pubkey"
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "create": false,
+                        "name": "ctlog-public-key",
+                        "key": "key",
+                        "path": "ctlog-pubkey"
+                    }]
+                }
+            },
+            "examples": [{
+                "rekor": {
+                    "create": false,
+                    "name": "rekor-public-key",
+                    "key": "public",
+                    "path": "rekor-pubkey"
+                },
+                "fulcio": {
+                    "create": false,
+                    "name": "fulcio-server-secret",
+                    "key": "cert",
+                    "path": "fulcio-cert"
+                },
+                "ctlog": {
+                    "create": false,
+                    "name": "ctlog-public-key",
+                    "key": "key",
+                    "path": "ctlog-pubkey"
+                }
+            }]
+        },
+        "ingress": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "examples": [
+                        "tuf-server"
+                    ]
+                },
+                "className": {
+                    "type": "string",
+                    "examples": [
+                        "nginx"
+                    ]
+                },
+                "annotations": {
+                    "type": "object",
+                    "properties": {},
+                    "examples": [{}]
+                },
+                "http": {
+                    "type": "object",
+                    "properties": {
+                        "hosts": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "path": {
+                                        "type": "string",
+                                        "examples": [
+                                            "/"
+                                        ]
+                                    },
+                                    "host": {
+                                        "type": "string",
+                                        "examples": [
+                                            "tuf.localhost"
+                                        ]
+                                    }
+                                },
+                                "examples": [{
+                                    "path": "/",
+                                    "host": "tuf.localhost"
+                                }]
+                            },
+                            "examples": [
+                                [{
+                                    "path": "/",
+                                    "host": "tuf.localhost"
+                                }]
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "hosts": [{
+                            "path": "/",
+                            "host": "tuf.localhost"
+                        }]
+                    }]
+                }
+            },
+            "examples": [{
+                "name": "tuf-server",
+                "className": "nginx",
+                "annotations": {},
+                "http": {
+                    "hosts": [{
+                        "path": "/",
+                        "host": "tuf.localhost"
+                    }]
+                }
+            }]
+        },
+        "service": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "examples": [
+                        "tuf-server"
+                    ]
+                },
+                "port": {
+                    "type": "integer",
+                    "examples": [
+                        80
+                    ]
+                }
+            },
+            "examples": [{
+                "name": "tuf-server",
+                "port": 80
+            }]
+        },
+        "namespace": {
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "boolean",
+                    "examples": [
+                        false
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "examples": [
+                        "fulcio-system"
+                    ]
+                }
+            },
+            "examples": [{
+                "create": false,
+                "name": "fulcio-system"
+            }]
+        }
+    },
+    "examples": [{
+        "forceNamespace": "",
+        "imagePullSecrets": [],
+        "serviceAccountName": "tuf",
+        "roleName": "tuf",
+        "roleBindingName": "tuf",
+        "fullnameOverride": "tuf",
+        "enabled": true,
+        "deployment": {
+            "name": "tuf",
+            "replicas": 1,
+            "registry": "ghcr.io",
+            "repository": "sigstore/scaffolding/server",
+            "version": "sha256:719ea3fe44c52af5a5fedab2168429872e37e97b9f063977fc164d60a5a14b53",
+            "imagePullPolicy": "IfNotPresent",
+            "port": 8080
+        },
+        "secrets": {
+            "rekor": {
+                "create": false,
+                "name": "rekor-public-key",
+                "key": "public",
+                "path": "rekor-pubkey"
+            },
+            "fulcio": {
+                "create": false,
+                "name": "fulcio-server-secret",
+                "key": "cert",
+                "path": "fulcio-cert"
+            },
+            "ctlog": {
+                "create": false,
+                "name": "ctlog-public-key",
+                "key": "key",
+                "path": "ctlog-pubkey"
+            }
+        },
+        "ingress": {
+            "name": "tuf-server",
+            "className": "nginx",
+            "annotations": {},
+            "http": {
+                "hosts": [{
+                    "path": "/",
+                    "host": "tuf.localhost"
+                }]
+            }
+        },
+        "service": {
+            "name": "tuf-server",
+            "port": 80
+        },
+        "namespace": {
+            "create": false,
+            "name": "fulcio-system"
+        }
+    }]
 }
