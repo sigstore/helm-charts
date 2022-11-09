@@ -25,6 +25,17 @@
         "policywebhook": {
             "type": "object",
             "properties": {
+                "configData": {
+                    "type": "object",
+                    "properties": {
+                        "fail-one-empty-authorities": {
+                            "type": "string"
+                        },
+                        "no-match-policy": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "env": {
                     "type": "object"
                 },
@@ -275,16 +286,10 @@
                     }
                 },
                 "volumeMounts": {
-                    "type": [
-                        "null",
-                        "array"
-                    ]
+                    "type": "array"
                 },
                 "volumes": {
-                    "type": [
-                        "null",
-                        "array"
-                    ]
+                    "type": "array"
                 }
             }
         }
