@@ -6,6 +6,7 @@ cosign:
 imagePullSecrets: []
 
 policywebhook:
+  configData: {}
   replicaCount: 1
   image:
     repository: ghcr.io/sigstore/policy-controller/policy-webhook

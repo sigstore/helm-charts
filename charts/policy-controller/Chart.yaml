@@ -8,7 +8,7 @@ sources:
 type: application
 
 name: policy-controller
-version: 0.3.5
+version: 0.3.6
 appVersion: 0.4.2
 
 maintainers:
