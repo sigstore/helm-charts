@@ -27,6 +27,7 @@ The Helm chart for Policy  Controller
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
 | policywebhook.env | object | `{}` |  |
+| policywebhook.configData | object | `{}` | Set the data of the `policy-config-controller` configmap |
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
