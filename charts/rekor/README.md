@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.0.0-rc.2](https://img.shields.io/badge/Version-1.0.0--rc.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0-rc.2](https://img.shields.io/badge/AppVersion-1.0.0--rc.2-informational?style=flat-square)
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -26,6 +26,19 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| backfillredis.enabled | bool | `false` |  |
+| backfillredis.endIndex | int | `-1` |  |
+| backfillredis.image.pullPolicy | string | `"IfNotPresent"` |  |
+| backfillredis.image.registry | string | `"ghcr.io"` |  |
+| backfillredis.image.repository | string | `"sigstore/rekor/backfill-redis"` |  |
+| backfillredis.image.version | string | `"sha256:15f070c4b853f38773d253ebd39957de5c3beffc1699ba574db98e3679336af1"` | `"v1.0.1"` |
+| backfillredis.name | string | `"backfillredis"` |  |
+| backfillredis.rekorAddress | string | `"rekor.rekor-system.svc"` |  |
+| backfillredis.resources | object | `{}` |  |
+| backfillredis.securityContext.runAsNonRoot | bool | `true` |  |
+| backfillredis.securityContext.runAsUser | int | `65533` |  |
+| backfillredis.startIndex | int | `-1` |  |
+| backfillredis.ttlSecondsAfterFinished | int | `3600` |  |
 | createtree.annotations | object | `{}` |  |
 | createtree.force | bool | `false` |  |
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -96,7 +109,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-| server.image.version | string | `"sha256:441da6a9c40ace07f72ed88790f2248a64c266a7e56ccfd7914080ee61432342"` | `"v1.0.0"` |
+| server.image.version | string | `"sha256:f7e6975041b9b6f3afdc7d6a1a87de43098ce8d83eb1958ea097ebfcb5537658"` | `"v1.0.1"` |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |
@@ -178,4 +191,4 @@ To disable the deployment of Redis or MySQL, pass the `redis.enabled=false` and/
 
 ## Ingress
 
-To enabled access from external resources, an Ingress resource is created. The configuration necessary for each Ingress resource is primarily dependent on the specific Ingress Controller being used. In most cases, implementation specific configuration is specified as annotations on the Ingress resources. These can be applied using the `server.ingress.annotations` parameter.
+To enable access from external resources, an Ingress resource is created. The configuration necessary for each Ingress resource is primarily dependent on the specific Ingress Controller being used. In most cases, implementation specific configuration is specified as annotations on the Ingress resources. These can be applied using the `server.ingress.annotations` parameter.

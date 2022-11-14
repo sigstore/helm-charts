@@ -157,6 +157,24 @@ createtree:
     runAsUser: 65533
   resources: {}
   annotations: {}
+# Configure backfillredis to repair indices that were not inserted into Redis.
+backfillredis:
+  name: backfillredis
+  enabled: false
+  image:
+    registry: ghcr.io
+    repository: sigstore/rekor/backfill-redis
+    pullPolicy: IfNotPresent
+    # v1.0.1
+    version: "sha256:15f070c4b853f38773d253ebd39957de5c3beffc1699ba574db98e3679336af1"
+  ttlSecondsAfterFinished: 3600
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65533
+  rekorAddress: rekor.rekor-system.svc
+  startIndex: -1
+  endIndex: -1
+  resources: {}
 
 # Configure Trillian dependency
 trillian:

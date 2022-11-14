@@ -47,6 +47,23 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 {{- end -}}
 
+{{/*
+Create a fully qualified Rekor backfillredis name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "rekor.backfillredis.fullname" -}}
+{{- if .Values.backfillredis.fullnameOverride -}}
+{{- .Values.backfillredis.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- printf "%s-%s" .Release.Name .Values.backfillredis.name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s-%s" .Release.Name $name .Values.backfillredis.name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
 
 {{/*
 Create a fully qualified Rekor server name.
@@ -117,7 +134,7 @@ Return the hostname for redis
 */}}
 {{- define "redis.hostname" -}}
 {{- default (include "rekor.redis.fullname" .) .Values.redis.hostname }}
-{{- end -}} 
+{{- end -}}
 
 {{/*
 Create labels for rekor components
@@ -226,8 +243,6 @@ Create the name of the service account to use for the createtree component
     {{ default "default" .Values.createtree.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
-
-
 
 {{/*
 Create the name of the service account to use for the server component
