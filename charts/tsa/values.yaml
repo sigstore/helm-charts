@@ -12,7 +12,7 @@ server:
     production: false
   image:
     registry: ghcr.io
-    repository: sigstore/timestamp-server 
+    repository: sigstore/timestamp-server
     pullPolicy: IfNotPresent
     # crane digest ghcr.io/sigstore/timestamp-server:v0.1.2
     # -- v0.1.2
