@@ -1,0 +1,60 @@
+namespace:
+  create: false
+  name: tsa-system
+
+server:
+  replicaCount: 1
+  name: server
+  svcPort: 80
+  grpcSvcPort: 5554
+  secret: tsa-server-secret
+  logging:
+    production: false
+  image:
+    registry: ghcr.io
+    repository: sigstore/timestamp-server 
+    pullPolicy: IfNotPresent
+    # crane digest ghcr.io/sigstore/timestamp-server:v0.1.2
+    # -- v0.1.2
+    version: sha256:6d923276ff81b814c99d8c901184ebb8b9a0411eacf61d9fe0b26fce68e5a5ee
+  args:
+    port: 5555
+    # Valid values: tink, kms, file
+    signer: tink
+    # PEM encoded cert chain here. Order from active intermedate first to root last
+    cert_chain:
+    tink_enc_keyset:
+    tink_key_resource:
+    tink_hcvault_token:
+    kms_key_resource: gcpkms://resource
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    mountToken: true
+  service:
+    type: ClusterIP
+    ports:
+      - name: http
+        port: 80
+        protocol: TCP
+        targetPort: 5555
+      - name: 2112-tcp
+        port: 2112
+        protocol: TCP
+        targetPort: 2112
+  ingress:
+    http:
+      enabled: true
+      className: "nginx"
+      annotations: {}
+      hosts:
+      - path: /
+        host: "timestamp.localhost"
+      tls: []
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65533
+
+# Force namespace of namespaced resources
+forceNamespace: ""

@@ -1,0 +1,7 @@
+---
+server:
+  ingress:
+    http:
+      hosts:
+        - host: timestamp.localhost
+          path: /
