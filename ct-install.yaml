@@ -1,6 +1,7 @@
 chart-dirs:
   - charts
 excluded-charts:
+  - common
   - ctlog
   - fulcio
   - scaffold

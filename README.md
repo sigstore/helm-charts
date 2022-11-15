@@ -56,6 +56,7 @@ NOTE: The public key that was used to sign a particular chart may not be identic
 
 ## Charts
 
+* [common](charts/common)
 * [ctlog](charts/ctlog)
 * [fulcio](charts/fulcio)
 * [policy-controller](charts/policy-controller)

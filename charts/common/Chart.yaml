@@ -1,0 +1,21 @@
+apiVersion: v2
+name: common
+description: A Library Helm Chart containing common logic for use by Sigstore charts
+
+type: library
+
+version: 0.1.0
+
+keywords:
+  - common
+  - helper
+  - template
+  - function
+
+home: https://sigstore.dev/
+
+maintainers:
+  - name: The Sigstore Authors
+
+annotations:
+  artifacthub.io/license: Apache-2.0
