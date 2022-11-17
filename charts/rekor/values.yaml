@@ -71,6 +71,7 @@ server:
     className: "nginx"
     hosts:
       - path: /
+        host: root
     annotations: {}
     tls: []
   service:
