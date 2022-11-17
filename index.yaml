@@ -2977,6 +2977,44 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 1.0.2
+    created: "2022-11-17T23:49:40.088046935Z"
+    dependencies:
+    - condition: trillian.enabled
+      name: trillian
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.1.10
+    description: Part of the sigstore project, Rekor is a timestamping server and
+      transparency log for storing signatures, as well as an API based server for
+      validation
+    digest: da5511fd9a95501f3c17e9f1b755e3354c1691c044126fe6653d403ae9ea7e8d
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor
+    sources:
+    - https://github.com/sigstore/rekor
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-1.0.3/rekor-1.0.3.tgz
+    version: 1.0.3
+  - annotations:
+      artifacthub.io/images: |
+        - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree@sha256:0c6a1a49f906da6e59e7cfbba08a473778fc0296abdf8b86115861d5f3556ed4
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl@sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498
+        - name: rekor-server
+          image: gcr.io/projectsigstore/rekor-server:v1.0.1@sha256:f7e6975041b9b6f3afdc7d6a1a87de43098ce8d83eb1958ea097ebfcb5537658
+        - name: redis
+          image: docker.io/redis@sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39
+        - name: backfill-redis
+          image: ghcr.io/sigstore/rekor/backfill-redis@sha256:15f070c4b853f38773d253ebd39957de5c3beffc1699ba574db98e3679336af1
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.0.2
     created: "2022-11-14T20:47:14.637476121Z"
     dependencies:
     - condition: trillian.enabled
@@ -7633,4 +7671,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2022-11-17T23:49:32.746646796Z"
+generated: "2022-11-17T23:49:40.09382857Z"
