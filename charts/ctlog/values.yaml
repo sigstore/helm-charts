@@ -71,6 +71,7 @@ createtree:
 
 createctconfig:
   enabled: true
+  secret: ctlog-secret-233
   replicaCount: 1
   backoffLimit: 6
   name: createctconfig

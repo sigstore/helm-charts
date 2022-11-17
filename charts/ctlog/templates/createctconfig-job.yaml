@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: "{{ .Values.createctconfig.image.pullPolicy }}"
           args: [
             "--configmap={{ template "ctlog.config" . }}",
-            "--secret={{ template "ctlog.secret" . }}",
+            "--secret={{ .Values.createctconfig.secret}}",
           {{- if .Values.createctconfig.privateSecret }}
             "--private-secret={{ .Values.createctconfig.privateSecret }}",
           {{- end }}

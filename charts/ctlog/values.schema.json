@@ -833,6 +833,11 @@
                         true
                     ]
                 },
+               "secret":  {
+                    "type": "string",
+                    "default": "ctlog-secret",
+                    "title": "The secret passed in to the createctconfig job via the --secret flag"
+                },
                 "replicaCount": {
                     "type": "integer",
                     "default": 0,
