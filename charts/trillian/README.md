@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.1.12](https://img.shields.io/badge/Version-0.1.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.13](https://img.shields.io/badge/Version-0.1.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -167,3 +167,5 @@ helm uninstall [RELEASE_NAME]
 | mysql.strategy.type | string | `"Recreate"` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"trillian-system"` |  |
+| storageSystem.driver | string | `"mysql"` |  |
+| storageSystem.envCredentials | string | `nil` |  |
