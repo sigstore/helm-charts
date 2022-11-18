@@ -75,6 +75,9 @@ The Helm chart for Policy  Controller
 | webhook.serviceAccount.annotations | object | `{}` |  |
 | webhook.volumeMounts | list | `[]` |  |
 | webhook.volumes | list | `[]` |  |
+| webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
+| webhook.namespaceSelector.matchExpressions[0].operator | string | `"In"` |  |
+| webhook.namespaceSelector.matchExpressions[0].values[0] | string | `"true"` |  |
 
 ### Deploy `policy-controller` Helm Chart
 
