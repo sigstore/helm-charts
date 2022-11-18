@@ -126,3 +126,16 @@ Create the image path for the passed in policy-webhook image field
 {{- printf "%s:%s" .repository .version -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+*/}}
+{{- define "policy-controller.webhook.namespaceSelector" -}}
+{{- if .Values.webhook.namespaceSelector }}
+{{ toYaml .Values.webhook.namespaceSelector }}
+{{- else }}
+matchExpressions:
+  - key: policy.sigstore.dev/include
+    operator: In
+    values: ["true"]
+{{- end }}
+{{- end -}}

@@ -290,6 +290,9 @@
                 },
                 "volumes": {
                     "type": "array"
+                },
+                "namespaceSelector": {
+                    "type": "object"
                 }
             }
         }

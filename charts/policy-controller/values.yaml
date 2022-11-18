@@ -82,6 +82,11 @@ webhook:
     #   nodePort: <port-number>
   volumeMounts: []
   volumes: []
+  namespaceSelector:
+    matchExpressions:
+      - key: policy.sigstore.dev/include
+        operator: In
+        values: ["true"]
 
 ## common node selector for all the pods
 commonNodeSelector: {}
