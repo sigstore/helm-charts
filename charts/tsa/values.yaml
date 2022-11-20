@@ -26,7 +26,7 @@ server:
     tink_enc_keyset:
     tink_key_resource:
     tink_hcvault_token:
-    kms_key_resource: gcpkms://resource
+    kms_key_resource:
   serviceAccount:
     create: true
     name: ""

@@ -34,13 +34,13 @@ spec:
             - "--port={{ .Values.server.args.port }}"
             - "--timestamp-signer={{ .Values.server.args.signer }}"
             {{- if eq .Values.server.args.signer "tink" }}
-            - "--tink-key-resource={{ .Values.server.args.tink_key_resource }}"
+            - "--tink-key-resource={{ required "Tink key for signing timestamp responses is required" .Values.server.args.tink_key_resource }}"
             - "--tink-keyset-path=/etc/tsa-config/tink.keyset.enc"
             - "--certificate-chain-path=/etc/tsa-config/chain.pem"
-            - "--tink-hcvault-token={{ .Values.server.args.tink_hcvault_token }}"
+            - "--tink-hcvault-token={{ required "Tink authentication token for Hashicorp Vault API is required" .Values.server.args.tink_hcvault_token }}"
             {{- end }}
             {{- if eq .Values.server.args.signer "kms" }}
-            - "--kms-key-resource={{ .Values.server.args.kms_key_resource }}"
+            - "--kms-key-resource={{ required "KMS key for signing timestamp responses is required" .Values.server.args.kms_key_resource }}"
             - "--certificate-chain-path=/etc/tsa-config/chain.pem"
             {{- end }}
             {{- if eq .Values.server.args.signer "file" }}
