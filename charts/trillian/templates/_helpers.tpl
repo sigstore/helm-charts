@@ -24,10 +24,17 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 
 {{/*
-Return the 
+Return the configured storage system
 */}}
 {{- define "trillian.storageSystem" -}}
 {{- default "mysql" .Values.storageSystem.driver }}
+{{- end -}}
+
+{{/*
+Return the configured quota system
+*/}}
+{{- define "trillian.quotaSystem" -}}
+{{- default "mysql" .Values.quotaSystem.driver }}
 {{- end -}}
 
 {{/*
@@ -181,6 +188,7 @@ Log Server Arguments
 */}}
 {{- define "trillian.logServer.args" -}}
 - {{ printf "--storage_system=%s" (include "trillian.storageSystem" .) | quote }}
+- {{ printf "--quota_system=%s" (include "trillian.quotaSystem" .) | quote }}
 {{- if eq (include "trillian.storageSystem" .) "mysql" }}
 - "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
 {{- end }}
@@ -197,6 +205,7 @@ Log Signer Arguments
 */}}
 {{- define "trillian.logSigner.args" -}}
 - {{ printf "--storage_system=%s" (include "trillian.storageSystem" .) | quote }}
+- {{ printf "--quota_system=%s" (include "trillian.quotaSystem" .) | quote }}
 {{- if eq (include "trillian.storageSystem" .) "mysql" }}
 - "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
 {{- end }}
