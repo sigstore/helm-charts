@@ -167,5 +167,6 @@ helm uninstall [RELEASE_NAME]
 | mysql.strategy.type | string | `"Recreate"` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"trillian-system"` |  |
+| quotaSystem.driver | string | `"mysql"` |  |
 | storageSystem.driver | string | `"mysql"` |  |
 | storageSystem.envCredentials | string | `nil` |  |

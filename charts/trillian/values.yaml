@@ -18,6 +18,8 @@ initContainerImage:
 storageSystem:
   driver: mysql
   envCredentials: null
+quotaSystem:
+  driver: mysql
 mysql:
   gcp:
     enabled: false
