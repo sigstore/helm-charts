@@ -27,10 +27,11 @@ The Helm chart for Policy  Controller
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
 | policywebhook.env | object | `{}` |  |
+| policywebhook.configData | object | `{}` | Set the data of the `policy-config-controller` configmap |
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
-| policywebhook.image.version | string | `"sha256:47c96a74c31c48c5a082100ec94d766bb668ec015b74558bc37619781351c798"` | `"v0.4.1"` |
+| policywebhook.image.version | string | `"sha256:7ed0b012751d9941cb7b969ab2c37f5633d4dba2b2b445a6e6e23a91de554d6b"` | `"v0.4.2"` |
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | policywebhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | policywebhook.podSecurityContext.enabled | bool | `true` |  |
@@ -54,7 +55,7 @@ The Helm chart for Policy  Controller
 | webhook.extraArgs | object | `{}` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
-| webhook.image.version | string | `"sha256:4c38700ec69f82b405fdd6cbc38a0eeb7ca3482dfe2d21f1be2929f845fb7bd7"` | `"v0.4.1"` |
+| webhook.image.version | string | `"sha256:435373b2bde7ed3fe133ff0d59bb4a23a0e15762320c9547fe6d1d042ab50c6c"` | `"v0.4.2"` |
 | webhook.name | string | `"webhook"` |  |
 | webhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | webhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
@@ -74,6 +75,9 @@ The Helm chart for Policy  Controller
 | webhook.serviceAccount.annotations | object | `{}` |  |
 | webhook.volumeMounts | list | `[]` |  |
 | webhook.volumes | list | `[]` |  |
+| webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
+| webhook.namespaceSelector.matchExpressions[0].operator | string | `"In"` |  |
+| webhook.namespaceSelector.matchExpressions[0].values[0] | string | `"true"` |  |
 
 ### Deploy `policy-controller` Helm Chart
 

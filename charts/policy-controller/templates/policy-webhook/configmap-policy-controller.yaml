@@ -18,6 +18,7 @@ metadata:
   name: config-policy-controller
   namespace: {{ .Release.Namespace }}
 data:
+  {{- if not .Values.policywebhook.configData }}
   _example: |
     ################################
     #                              #
@@ -25,3 +26,7 @@ data:
     #                              #
     ################################
     no-match-policy: warn
+  {{- else if .Values.policywebhook.configData }}
+{{ toYaml .Values.policywebhook.configData | indent 4 }}
+  {{- end }}
+

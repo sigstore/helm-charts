@@ -68,25 +68,7 @@ spec:
           args:
 {{  include "trillian.logServer.args" . | indent 12 }}
           env:
-            - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mysql.secretName" . }}
-                  key: mysql-user
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mysql.secretName" . }}
-                  key: mysql-password
-            - name: MYSQL_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mysql.secretName" . }}
-                  key: mysql-database
-            - name: MYSQL_HOSTNAME
-              value: {{ template "mysql.hostname" . }}
-            - name: MYSQL_PORT
-              value: {{ .Values.mysql.port | quote }}
+{{- include "trillian.storageSystem.envCredentials" . | indent 12}}
           ports:
 {{- include "trillian.containerPorts" .Values.logServer.service.ports | indent 12 }}
 {{- if .Values.logServer.livenessProbe }}

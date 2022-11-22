@@ -24,6 +24,20 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 
 {{/*
+Return the configured storage system
+*/}}
+{{- define "trillian.storageSystem" -}}
+{{- default "mysql" .Values.storageSystem.driver }}
+{{- end -}}
+
+{{/*
+Return the configured quota system
+*/}}
+{{- define "trillian.quotaSystem" -}}
+{{- default "mysql" .Values.quotaSystem.driver }}
+{{- end -}}
+
+{{/*
 Return the hostname for mysql
 */}}
 {{- define "mysql.hostname" -}}
@@ -173,8 +187,11 @@ Create the name of the service account to use for the Trillian Log Signer compon
 Log Server Arguments
 */}}
 {{- define "trillian.logServer.args" -}}
-- "--storage_system=mysql"
+- {{ printf "--storage_system=%s" (include "trillian.storageSystem" .) | quote }}
+- {{ printf "--quota_system=%s" (include "trillian.quotaSystem" .) | quote }}
+{{- if eq (include "trillian.storageSystem" .) "mysql" }}
 - "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
+{{- end }}
 - {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.logServer.portRPC | int) | quote }}
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.logServer.portHTTP | int) | quote }}
 - "--alsologtostderr"
@@ -187,8 +204,11 @@ Log Server Arguments
 Log Signer Arguments
 */}}
 {{- define "trillian.logSigner.args" -}}
-- "--storage_system=mysql"
+- {{ printf "--storage_system=%s" (include "trillian.storageSystem" .) | quote }}
+- {{ printf "--quota_system=%s" (include "trillian.quotaSystem" .) | quote }}
+{{- if eq (include "trillian.storageSystem" .) "mysql" }}
 - "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
+{{- end }}
 - {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.logSigner.portRPC | int) | quote }}
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.logSigner.portHTTP | int) | quote }}
 - {{ printf "--force_master=%t" (default true .Values.logSigner.forceMaster) | quote }}
@@ -310,4 +330,33 @@ Create Container Ports based on Service Ports
 - containerPort: {{ (ternary .port .targetPort (empty .targetPort)) | int }}
   protocol: {{ default "TCP" .protocol }}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Place default environment credentials setup
+*/}}
+{{- define "trillian.storageSystem.envCredentials" -}}
+{{- if .Values.storageSystem.envCredentials }}
+{{ toYaml .Values.storageSystem.envCredentials }}
+{{- else }}
+- name: MYSQL_USER
+  valueFrom:
+    secretKeyRef:
+        name: {{ template "mysql.secretName" . }}
+        key: mysql-user
+- name: MYSQL_PASSWORD
+  valueFrom:
+    secretKeyRef:
+        name: {{ template "mysql.secretName" . }}
+        key: mysql-password
+- name: MYSQL_DATABASE
+  valueFrom:
+    secretKeyRef:
+        name: {{ template "mysql.secretName" . }}
+        key: mysql-database
+- name: MYSQL_HOSTNAME
+  value: {{ template "mysql.hostname" . }}
+- name: MYSQL_PORT
+  value: {{ .Values.mysql.port | quote }}
+{{- end }}
 {{- end -}}

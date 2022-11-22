@@ -15,6 +15,11 @@ initContainerImage:
     version: "sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea"
     imagePullPolicy: IfNotPresent
 
+storageSystem:
+  driver: mysql
+  envCredentials: null
+quotaSystem:
+  driver: mysql
 mysql:
   gcp:
     enabled: false
