@@ -26,6 +26,7 @@ The Helm chart for Policy  Controller
 | cosign.cosignPub | string | `""` |  |
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
+| installCRDs | bool | `true` |  |
 | policywebhook.env | object | `{}` |  |
 | policywebhook.configData | object | `{}` | Set the data of the `policy-config-controller` configmap |
 | policywebhook.extraArgs | object | `{}` |  |
