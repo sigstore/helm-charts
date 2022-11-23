@@ -39,7 +39,7 @@ server:
         port: 80
         protocol: TCP
         targetPort: 5555
-      - name: 2112-tcp
+      - name: metrics
         port: 2112
         protocol: TCP
         targetPort: 2112

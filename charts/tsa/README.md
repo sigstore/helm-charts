@@ -67,7 +67,7 @@ helm uninstall [RELEASE_NAME]
 | server.service.ports[0].port | int | `80` |  |
 | server.service.ports[0].protocol | string | `"TCP"` |  |
 | server.service.ports[0].targetPort | int | `5555` |  |
-| server.service.ports[1].name | string | `"2112-tcp"` |  |
+| server.service.ports[1].name | string | `"metrics"` |  |
 | server.service.ports[1].port | int | `2112` |  |
 | server.service.ports[1].protocol | string | `"TCP"` |  |
 | server.service.ports[1].targetPort | int | `2112` |  |
