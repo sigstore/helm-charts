@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.1.15](https://img.shields.io/badge/Version-0.1.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.1.16](https://img.shields.io/badge/Version-0.1.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -68,6 +68,7 @@ helm uninstall [RELEASE_NAME]
 | logServer.image.version | string | `"sha256:75dbbfc4c0b64334b985c4971fe58c30b9dd73d7aa54b15cee61223ff92aebf3"` | v0.9.1 |
 | logServer.livenessProbe | object | `{}` |  |
 | logServer.name | string | `"log-server"` |  |
+| logServer.nodeSelector | object | `{"kubernetes.io/arch":"amd64"}` | Trillian images currently only support amd64 due to the toolbelt/netcat container |
 | logServer.portHTTP | int | `8090` |  |
 | logServer.portRPC | int | `8091` |  |
 | logServer.readinessProbe | object | `{}` |  |
@@ -94,6 +95,7 @@ helm uninstall [RELEASE_NAME]
 | logSigner.image.version | string | `"sha256:b56ed0b7b5e9813c91b208ba6041c9342f9a53162d96943374e59b5289090f1f"` | v0.9.1 |
 | logSigner.livenessProbe | object | `{}` |  |
 | logSigner.name | string | `"log-signer"` |  |
+| logSigner.nodeSelector | object | `{"kubernetes.io/arch":"amd64"}` | Trillian images currently only support amd64 due to the toolbelt/netcat container |
 | logSigner.portHTTP | int | `8090` |  |
 | logSigner.portRPC | int | `8091` |  |
 | logSigner.readinessProbe | object | `{}` |  |
