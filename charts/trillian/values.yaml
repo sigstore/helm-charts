@@ -20,6 +20,7 @@ storageSystem:
   envCredentials: null
 quotaSystem:
   driver: mysql
+
 mysql:
   gcp:
     enabled: false
@@ -104,6 +105,7 @@ mysql:
     create: true
     name: ""
     annotations: {}
+
 logServer:
   enabled: true
   replicaCount: 1
@@ -116,6 +118,11 @@ logServer:
     pullPolicy: IfNotPresent
     # -- v0.9.1
     version: sha256:75dbbfc4c0b64334b985c4971fe58c30b9dd73d7aa54b15cee61223ff92aebf3
+
+  # -- Trillian images currently only support amd64 due to the toolbelt/netcat container
+  nodeSelector:
+    kubernetes.io/arch: amd64
+
   service:
     type: ClusterIP
     ports:
@@ -135,6 +142,7 @@ logServer:
     create: true
     name: ""
     annotations: {}
+
 logSigner:
   enabled: true
   replicaCount: 1
@@ -148,6 +156,11 @@ logSigner:
     pullPolicy: IfNotPresent
     # -- v0.9.1
     version: sha256:b56ed0b7b5e9813c91b208ba6041c9342f9a53162d96943374e59b5289090f1f
+
+  # -- Trillian images currently only support amd64 due to the toolbelt/netcat container
+  nodeSelector:
+    kubernetes.io/arch: amd64
+
   service:
     type: ClusterIP
     ports:
@@ -163,6 +176,7 @@ logSigner:
     create: true
     name: ""
     annotations: {}
+
 createdb:
   enabled: true
   dbname: trillian
