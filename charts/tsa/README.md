@@ -94,3 +94,21 @@ To enabled access from external resources, an Ingress resource is created. The c
 >         - host: timestamp.localhost
 >           path: /
 > ```
+
+## Quick Installation
+
+To install the helm chart with default values run following command.
+The [Values](#Values) section describes the configuration options for this chart.
+
+```shell
+helm dependency update .
+helm install [RELEASE_NAME] . --set server.args.tink_key_resource=<TINK_KEY_RESOURCE>
+```
+
+## Uninstallation
+
+To uninstall the Helm chart run following command.
+
+```shell
+helm uninstall [RELEASE_NAME]
+```
