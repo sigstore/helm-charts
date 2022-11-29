@@ -571,6 +571,33 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 0.3.0
+    created: "2022-11-29T22:39:22.607317549Z"
+    description: Certificate Log
+    digest: 9d5c9596124972d749fa905e1c6c959f55fe9d8da0f4993dff5640bee074db13
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: ctlog
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/ctlog-0.2.38/ctlog-0.2.38.tgz
+    version: 0.2.38
+  - annotations:
+      artifacthub.io/images: |
+        - name: ct_server
+          image: ghcr.io/sigstore/scaffolding/ct_server@sha256:91d23363c34ca0a8ec1fb89129815fb32f851eb8986bfbf7b2aed85c98411f04
+        - name: createctconfig
+          image: ghcr.io/sigstore/scaffolding/createctconfig@sha256:024e3451af712070a807124f82c5a8a9c84343c17ec17a2d2832229a6ac0cb0e
+        - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree@sha256:0c6a1a49f906da6e59e7cfbba08a473778fc0296abdf8b86115861d5f3556ed4
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl@sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.3.0
     created: "2022-11-29T21:17:30.907948417Z"
     description: Certificate Log
     digest: a34bd65394b598c982df212f2abfcd785f8830abd927b3810439d9f1217f7a44
@@ -8025,4 +8052,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2022-11-29T22:02:31.939573318Z"
+generated: "2022-11-29T22:39:22.608139443Z"
