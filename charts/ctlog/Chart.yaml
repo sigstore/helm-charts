@@ -4,7 +4,7 @@ description: Certificate Log
 
 type: application
 
-version: 0.2.35
+version: 0.2.36
 appVersion: 0.3.0
 
 keywords:
@@ -22,7 +22,7 @@ annotations:
     - name: ct_server
       image: ghcr.io/sigstore/scaffolding/ct_server@sha256:91d23363c34ca0a8ec1fb89129815fb32f851eb8986bfbf7b2aed85c98411f04
     - name: createctconfig
-      image: ghcr.io/sigstore/scaffolding/createctconfig@sha256:7e201c9b32d8be3c002341e8626ae5b8d64e02bfe47ffe697bd7febdf51ad9a1
+      image: ghcr.io/sigstore/scaffolding/createctconfig@sha256:024e3451af712070a807124f82c5a8a9c84343c17ec17a2d2832229a6ac0cb0e
     - name: createtree
       image: ghcr.io/sigstore/scaffolding/createtree@sha256:0c6a1a49f906da6e59e7cfbba08a473778fc0296abdf8b86115861d5f3556ed4
     - name: curlimages/curl

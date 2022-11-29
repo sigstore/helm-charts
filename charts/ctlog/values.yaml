@@ -71,7 +71,6 @@ createtree:
 
 createctconfig:
   enabled: true
-  secret: ctlog-secret-233
   replicaCount: 1
   backoffLimit: 6
   name: createctconfig
@@ -86,8 +85,8 @@ createctconfig:
     registry: ghcr.io
     repository: sigstore/scaffolding/createctconfig
     pullPolicy: IfNotPresent
-    # -- v0.4.12
-    version: "sha256:7e201c9b32d8be3c002341e8626ae5b8d64e02bfe47ffe697bd7febdf51ad9a1"
+    # -- v0.5.2
+    version: "sha256:024e3451af712070a807124f82c5a8a9c84343c17ec17a2d2832229a6ac0cb0e"
   fulcioURL: "http://fulcio-server.fulcio-system.svc"
   logPrefix: sigstorescaffolding
   privateKeyPasswordSecretName: ""
