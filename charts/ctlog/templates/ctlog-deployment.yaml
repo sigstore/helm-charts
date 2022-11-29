@@ -44,4 +44,4 @@ spec:
       volumes:
         - name: keys
           secret:
-            secretName: {{ template "ctlog.secret" . }}
+            secretName: {{ .Values.createctconfig.secret | default (printf "%s-secret" (include "ctlog.fullname" .)) }}
