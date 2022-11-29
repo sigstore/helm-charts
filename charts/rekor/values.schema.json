@@ -1547,7 +1547,8 @@
                     "required": [
                         "secretName",
                         "secretMountPath",
-                        "privateKeySecretKey"
+                        "privateKeySecretKey",
+                        "secretMountSubPath"
                     ],
                     "properties": {
                         "secretName": {
@@ -1563,7 +1564,15 @@
                             "type": "string",
                             "default": "",
                             "examples": [
-                                "/key"
+                                "/directory"
+                            ]
+                        },
+                        "secretMountSubPath": {
+                            "title": "Where to place the secret *inside* of the mounting directory",
+                            "type": "string",
+                            "default": "",
+                            "examples": [
+                                "some/sub-folder"
                             ]
                         },
                         "privateKeySecretKey": {

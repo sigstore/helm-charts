@@ -132,4 +132,5 @@ spec:
             secretName: {{ .Values.server.signerFileSecretOptions.secretName }}
             items:
             - key: {{ .Values.server.signerFileSecretOptions.privateKeySecretKey }}
+              path: {{ .Values.server.signerFileSecretOptions.secretMountSubPath }}
 {{- end }}
