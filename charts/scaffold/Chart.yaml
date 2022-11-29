@@ -4,7 +4,7 @@ description: Scaffolding the components of the sigstore architecture
 
 type: application
 
-version: 0.4.6
+version: 0.4.7
 keywords:
   - security
   - pki
@@ -28,7 +28,7 @@ dependencies:
     repository: https://sigstore.github.io/helm-charts
     condition: trillian.enabled
   - name: ctlog
-    version: 0.2.36
+    version: 0.2.37
     repository: https://sigstore.github.io/helm-charts
     condition: ctlog.enabled
   - name: tuf
