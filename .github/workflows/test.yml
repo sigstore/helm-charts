@@ -61,6 +61,18 @@ jobs:
         run: ../../.github/helm-docs.sh .
         working-directory: ${{ matrix.chart }}
 
+      - name: Print job summary
+        if: failure()
+        run: |
+          echo '### Linting summary:' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo 'Please check our CONTRIBUTING.md sections:' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo "- [Bumping helm chart dependencies](${REPO_URL}/blob/main/CONTRIBUTING.md#bumping-helm-chart-dependencies)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Generating documentation](${REPO_URL}/blob/main/CONTRIBUTING.md#generating-documentation)" >> $GITHUB_STEP_SUMMARY
+        env:
+          REPO_URL: github.com/${{ github.repository }}
+
   test:
     runs-on: ubuntu-latest
     steps:
