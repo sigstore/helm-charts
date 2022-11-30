@@ -10,6 +10,7 @@ server:
   secret: tsa-server-secret
   logging:
     production: false
+  env: {}
   image:
     registry: ghcr.io
     repository: sigstore/timestamp-server

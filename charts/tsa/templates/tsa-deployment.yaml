@@ -52,14 +52,27 @@ spec:
             {{- if .Values.server.logging.production }}
             - "--log_type=prod"
             {{- end -}}
-          {{- if eq .Values.server.args.signer "file" }}
+{{- if .Values.server.env }}
           env:
-            - name: PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.server.secret }}
-                  key: password
-          {{- end }}
+{{- range $key, $value := .Values.server.env }}
+          - name: "{{ $key }}"
+            value: "{{ $value }}"
+{{- end }}
+{{- if eq .Values.server.args.signer "file" }}
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.server.secret }}
+                key: password
+{{- end }}
+{{- else if eq .Values.server.args.signer "file" }}
+          env:
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.server.secret }}
+                key: password
+{{- end }}
           volumeMounts:
             - name: tsa-config
               mountPath: /etc/tsa-config

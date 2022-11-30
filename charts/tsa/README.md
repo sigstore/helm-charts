@@ -39,6 +39,7 @@ helm uninstall [RELEASE_NAME]
 | forceNamespace | string | `""` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"tsa-system"` |  |
+| server.env | object | `{}` |  |
 | server.args.cert_chain | string | `nil` |  |
 | server.args.kms_key_resource | string | `"gcpkms://resource"` |  |
 | server.args.port | int | `5555` |  |
