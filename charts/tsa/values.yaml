@@ -23,11 +23,11 @@ server:
     # Valid values: tink, kms, file
     signer: tink
     # PEM encoded cert chain here. Order from active intermedate first to root last
-    cert_chain:
-    tink_enc_keyset:
-    tink_key_resource:
-    tink_hcvault_token:
-    kms_key_resource:
+    cert_chain: chain
+    tink_enc_keyset: keyset
+    tink_key_resource: resource
+    tink_hcvault_token: token
+    kms_key_resource: resource
   serviceAccount:
     create: true
     name: ""
