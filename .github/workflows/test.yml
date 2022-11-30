@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - ".github/workflows/test.yml"
+      - ".github/helm-docs.sh"
       - "charts/**"
 
 jobs:
@@ -54,6 +55,10 @@ jobs:
         run: |
           helm dependency update . && helm dependency build .
           git diff --exit-code
+        working-directory: ${{ matrix.chart }}
+
+      - name: Check docs updated
+        run: ../../.github/helm-docs.sh .
         working-directory: ${{ matrix.chart }}
 
   test:
