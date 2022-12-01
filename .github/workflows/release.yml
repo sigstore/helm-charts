@@ -62,13 +62,9 @@ jobs:
       - name: Login to GitHub Container Registry
         run: |
           helm registry login --username ${GITHUB_ACTOR} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
-        env:
-          HELM_EXPERIMENTAL_OCI: 1
 
       - name: Publish OCI Charts
         run: |
           for chart in `find .cr-release-packages -name '*.tgz' -print`; do
             helm push ${chart} oci://ghcr.io/${GITHUB_REPOSITORY}
           done
-        env:
-          HELM_EXPERIMENTAL_OCI: 1
