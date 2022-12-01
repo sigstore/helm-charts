@@ -10,14 +10,15 @@ server:
   secret: tsa-server-secret
   logging:
     production: false
-  env: {}
+  env:
+    GOOGLE_APPLICATION_CREDENTIALS: /etc/tsa-config/cloud_credentials
   image:
     registry: ghcr.io
     repository: sigstore/timestamp-server
     pullPolicy: IfNotPresent
-    # crane digest ghcr.io/sigstore/timestamp-server:v0.1.2
-    # -- v0.1.2
-    version: sha256:6d923276ff81b814c99d8c901184ebb8b9a0411eacf61d9fe0b26fce68e5a5ee
+    # crane digest ghcr.io/sigstore/timestamp-server:v0.1.3
+    # -- v0.1.3
+    version: sha256:09ecc219c4b279d6b5652a80d4d2201f55178e2cb233462da085ef3799acb823
   args:
     port: 5555
     # Valid values: tink, kms, file
