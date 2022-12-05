@@ -71,7 +71,7 @@ spec:
 {{- end -}}
 {{- if .Values.server.signerFileSecretOptions }}
             - name: {{ .Values.server.signerFileSecretOptions.secretName }}-volume
-              mountPath: {{ .Values.server.signerFileSecretOptions.secretMountPath }}                                                                                                                      │
+              mountPath: {{ .Values.server.signerFileSecretOptions.secretMountPath }}
               readOnly: true
 {{- end }}
 {{- if .Values.server.livenessProbe }}
