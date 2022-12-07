@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "tsa.config" . }}
+{{ include "tsa.namespace" . | indent 2 }}
+  labels:
+    {{- include "tsa.labels" . | nindent 4 }}
+data:
+  {{- if (eq .Values.server.args.signer "tink")}}
+  chain.pem: {{ required "Tink PEM-encoded certificate chain is required" .Values.server.args.cert_chain | quote }}
+  tink.keyset.enc: {{ required "Tink authentication token for Hashicorp Vault API is required" .Values.server.args.tink_enc_keyset | quote }}
+  {{- end }}
+  {{- if (eq .Values.server.args.signer "kms")}}
+  chain.pem: {{ required "KMS PEM-encoded certificate chain is required" .Values.server.args.cert_chain | quote }}
+  {{- end }}
+  {{- if (eq .Values.server.args.signer "file")}}
+  chain.pem: {{.Values.server.args.cert_chain | quote }}
+  {{- end }}
+  cloud_credentials: {{.Values.server.args.creds | quote }}

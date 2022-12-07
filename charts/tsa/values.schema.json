@@ -1,0 +1,720 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "namespace",
+        "server",
+        "forceNamespace"
+    ],
+    "properties": {
+        "namespace": {
+            "type": "object",
+            "default": {},
+            "title": "The namespace Schema",
+            "required": [
+                "create",
+                "name"
+            ],
+            "properties": {
+                "create": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The create Schema",
+                    "examples": [
+                        false
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The name Schema",
+                    "examples": [
+                        "tsa-system"
+                    ]
+                }
+            },
+            "examples": [{
+                "create": false,
+                "name": "tsa-system"
+            }]
+        },
+        "server": {
+            "type": "object",
+            "default": {},
+            "title": "The server Schema",
+            "required": [
+                "replicaCount",
+                "name",
+                "svcPort",
+                "grpcSvcPort",
+                "secret",
+                "logging",
+                "env",
+                "image",
+                "args",
+                "serviceAccount",
+                "service",
+                "ingress",
+                "securityContext"
+            ],
+            "properties": {
+                "replicaCount": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The replicaCount Schema",
+                    "examples": [
+                        1
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The name Schema",
+                    "examples": [
+                        "server"
+                    ]
+                },
+                "svcPort": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The svcPort Schema",
+                    "examples": [
+                        80
+                    ]
+                },
+                "grpcSvcPort": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The grpcSvcPort Schema",
+                    "examples": [
+                        5554
+                    ]
+                },
+                "secret": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The secret Schema",
+                    "examples": [
+                        "tsa-server-secret"
+                    ]
+                },
+                "logging": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The logging Schema",
+                    "required": [
+                        "production"
+                    ],
+                    "properties": {
+                        "production": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The production Schema",
+                            "examples": [
+                                false
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "production": false
+                    }]
+                },
+                "env": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The env Schema",
+                    "required": [],
+                    "properties": {},
+                    "examples": [{}]
+                },
+                "image": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The image Schema",
+                    "required": [
+                        "registry",
+                        "repository",
+                        "pullPolicy",
+                        "version"
+                    ],
+                    "properties": {
+                        "registry": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The registry Schema",
+                            "examples": [
+                                "ghcr.io"
+                            ]
+                        },
+                        "repository": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The repository Schema",
+                            "examples": [
+                                "sigstore/timestamp-server"
+                            ]
+                        },
+                        "pullPolicy": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The pullPolicy Schema",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        },
+                        "version": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The version Schema",
+                            "examples": [
+                                "sha256:6d923276ff81b814c99d8c901184ebb8b9a0411eacf61d9fe0b26fce68e5a5ee"
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/timestamp-server",
+                        "pullPolicy": "IfNotPresent",
+                        "version": "sha256:6d923276ff81b814c99d8c901184ebb8b9a0411eacf61d9fe0b26fce68e5a5ee"
+                    }]
+                },
+                "args": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The args Schema",
+                    "required": [
+                        "port",
+                        "signer",
+                        "cert_chain",
+                        "tink_enc_keyset",
+                        "tink_key_resource",
+                        "tink_hcvault_token",
+                        "kms_key_resource"
+                    ],
+                    "properties": {
+                        "port": {
+                            "type": "integer",
+                            "default": 0,
+                            "title": "The port Schema",
+                            "examples": [
+                                5555
+                            ]
+                        },
+                        "signer": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The signer Schema",
+                            "examples": [
+                                "tink"
+                            ]
+                        },
+                        "cert_chain": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The cert_chain Schema",
+                            "examples": [
+                                "chain"
+                            ]
+                        },
+                        "tink_enc_keyset": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The tink_enc_keyset Schema",
+                            "examples": [
+                                "keyset"
+                            ]
+                        },
+                        "tink_key_resource": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The tink_key_resource Schema",
+                            "examples": [
+                                "resource"
+                            ]
+                        },
+                        "tink_hcvault_token": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The tink_hcvault_token Schema",
+                            "examples": [
+                                "token"
+                            ]
+                        },
+                        "kms_key_resource": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The kms_key_resource Schema",
+                            "examples": [
+                                "resource"
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "port": 5555,
+                        "signer": "tink",
+                        "cert_chain": "chain",
+                        "tink_enc_keyset": "keyset",
+                        "tink_key_resource": "resource",
+                        "tink_hcvault_token": "token",
+                        "kms_key_resource": "resource"
+                    }]
+                },
+                "serviceAccount": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The serviceAccount Schema",
+                    "required": [
+                        "create",
+                        "name",
+                        "annotations",
+                        "mountToken"
+                    ],
+                    "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The create Schema",
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "name": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The name Schema",
+                            "examples": [
+                                ""
+                            ]
+                        },
+                        "annotations": {
+                            "type": "object",
+                            "default": {},
+                            "title": "The annotations Schema",
+                            "required": [],
+                            "properties": {},
+                            "examples": [{}]
+                        },
+                        "mountToken": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The mountToken Schema",
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "create": true,
+                        "name": "",
+                        "annotations": {},
+                        "mountToken": true
+                    }]
+                },
+                "service": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The service Schema",
+                    "required": [
+                        "type",
+                        "ports"
+                    ],
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The type Schema",
+                            "examples": [
+                                "ClusterIP"
+                            ]
+                        },
+                        "ports": {
+                            "type": "array",
+                            "default": [],
+                            "title": "The ports Schema",
+                            "items": {
+                                "type": "object",
+                                "title": "A Schema",
+                                "required": [
+                                    "name",
+                                    "port",
+                                    "protocol",
+                                    "targetPort"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "title": "The name Schema",
+                                        "examples": [
+                                            "http",
+                                            "metrics"
+                                        ]
+                                    },
+                                    "port": {
+                                        "type": "integer",
+                                        "title": "The port Schema",
+                                        "examples": [
+                                            80,
+                                            2112
+                                        ]
+                                    },
+                                    "protocol": {
+                                        "type": "string",
+                                        "title": "The protocol Schema",
+                                        "examples": [
+                                            "TCP"
+                                        ]
+                                    },
+                                    "targetPort": {
+                                        "type": "integer",
+                                        "title": "The targetPort Schema",
+                                        "examples": [
+                                            5555,
+                                            2112
+                                        ]
+                                    }
+                                },
+                                "examples": [{
+                                    "name": "http",
+                                    "port": 80,
+                                    "protocol": "TCP",
+                                    "targetPort": 5555
+                                },
+                                {
+                                    "name": "metrics",
+                                    "port": 2112,
+                                    "protocol": "TCP",
+                                    "targetPort": 2112
+                                }]
+                            },
+                            "examples": [
+                                [{
+                                    "name": "http",
+                                    "port": 80,
+                                    "protocol": "TCP",
+                                    "targetPort": 5555
+                                },
+                                {
+                                    "name": "metrics",
+                                    "port": 2112,
+                                    "protocol": "TCP",
+                                    "targetPort": 2112
+                                }]
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "type": "ClusterIP",
+                        "ports": [{
+                            "name": "http",
+                            "port": 80,
+                            "protocol": "TCP",
+                            "targetPort": 5555
+                        },
+                        {
+                            "name": "metrics",
+                            "port": 2112,
+                            "protocol": "TCP",
+                            "targetPort": 2112
+                        }]
+                    }]
+                },
+                "ingress": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The ingress Schema",
+                    "required": [
+                        "http"
+                    ],
+                    "properties": {
+                        "http": {
+                            "type": "object",
+                            "default": {},
+                            "title": "The http Schema",
+                            "required": [
+                                "enabled",
+                                "className",
+                                "annotations",
+                                "hosts",
+                                "tls"
+                            ],
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "title": "The enabled Schema",
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "className": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The className Schema",
+                                    "examples": [
+                                        "nginx"
+                                    ]
+                                },
+                                "annotations": {
+                                    "type": "object",
+                                    "default": {},
+                                    "title": "The annotations Schema",
+                                    "required": [],
+                                    "properties": {},
+                                    "examples": [{}]
+                                },
+                                "hosts": {
+                                    "type": "array",
+                                    "default": [],
+                                    "title": "The hosts Schema",
+                                    "items": {
+                                        "type": "object",
+                                        "default": {},
+                                        "title": "A Schema",
+                                        "required": [
+                                            "path",
+                                            "host"
+                                        ],
+                                        "properties": {
+                                            "path": {
+                                                "type": "string",
+                                                "default": "",
+                                                "title": "The path Schema",
+                                                "examples": [
+                                                    "/"
+                                                ]
+                                            },
+                                            "host": {
+                                                "type": "string",
+                                                "default": "",
+                                                "title": "The host Schema",
+                                                "examples": [
+                                                    "timestamp.localhost"
+                                                ]
+                                            }
+                                        },
+                                        "examples": [{
+                                            "path": "/",
+                                            "host": "timestamp.localhost"
+                                        }]
+                                    },
+                                    "examples": [
+                                        [{
+                                            "path": "/",
+                                            "host": "timestamp.localhost"
+                                        }]
+                                    ]
+                                },
+                                "tls": {
+                                    "type": "array",
+                                    "default": [],
+                                    "title": "The tls Schema",
+                                    "items": {},
+                                    "examples": [
+                                        []
+                                    ]
+                                }
+                            },
+                            "examples": [{
+                                "enabled": true,
+                                "className": "nginx",
+                                "annotations": {},
+                                "hosts": [{
+                                    "path": "/",
+                                    "host": "timestamp.localhost"
+                                }],
+                                "tls": []
+                            }]
+                        }
+                    },
+                    "examples": [{
+                        "http": {
+                            "enabled": true,
+                            "className": "nginx",
+                            "annotations": {},
+                            "hosts": [{
+                                "path": "/",
+                                "host": "timestamp.localhost"
+                            }],
+                            "tls": []
+                        }
+                    }]
+                },
+                "securityContext": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The securityContext Schema",
+                    "required": [
+                        "runAsNonRoot",
+                        "runAsUser"
+                    ],
+                    "properties": {
+                        "runAsNonRoot": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The runAsNonRoot Schema",
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "runAsUser": {
+                            "type": "integer",
+                            "default": 0,
+                            "title": "The runAsUser Schema",
+                            "examples": [
+                                65533
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "runAsNonRoot": true,
+                        "runAsUser": 65533
+                    }]
+                }
+            },
+            "examples": [{
+                "replicaCount": 1,
+                "name": "server",
+                "svcPort": 80,
+                "grpcSvcPort": 5554,
+                "secret": "tsa-server-secret",
+                "logging": {
+                    "production": false
+                },
+                "env": {},
+                "image": {
+                    "registry": "ghcr.io",
+                    "repository": "sigstore/timestamp-server",
+                    "pullPolicy": "IfNotPresent",
+                    "version": "sha256:6d923276ff81b814c99d8c901184ebb8b9a0411eacf61d9fe0b26fce68e5a5ee"
+                },
+                "args": {
+                    "port": 5555,
+                    "signer": "tink",
+                    "cert_chain": "chain",
+                    "tink_enc_keyset": "keyset",
+                    "tink_key_resource": "resource",
+                    "tink_hcvault_token": "token",
+                    "kms_key_resource": "resource"
+                },
+                "serviceAccount": {
+                    "create": true,
+                    "name": "",
+                    "annotations": {},
+                    "mountToken": true
+                },
+                "service": {
+                    "type": "ClusterIP",
+                    "ports": [{
+                        "name": "http",
+                        "port": 80,
+                        "protocol": "TCP",
+                        "targetPort": 5555
+                    },
+                    {
+                        "name": "metrics",
+                        "port": 2112,
+                        "protocol": "TCP",
+                        "targetPort": 2112
+                    }]
+                },
+                "ingress": {
+                    "http": {
+                        "enabled": true,
+                        "className": "nginx",
+                        "annotations": {},
+                        "hosts": [{
+                            "path": "/",
+                            "host": "timestamp.localhost"
+                        }],
+                        "tls": []
+                    }
+                },
+                "securityContext": {
+                    "runAsNonRoot": true,
+                    "runAsUser": 65533
+                }
+            }]
+        },
+        "forceNamespace": {
+            "type": "string",
+            "default": "",
+            "title": "The forceNamespace Schema",
+            "examples": [
+                ""
+            ]
+        }
+    },
+    "examples": [{
+        "namespace": {
+            "create": false,
+            "name": "tsa-system"
+        },
+        "server": {
+            "replicaCount": 1,
+            "name": "server",
+            "svcPort": 80,
+            "grpcSvcPort": 5554,
+            "secret": "tsa-server-secret",
+            "logging": {
+                "production": false
+            },
+            "env": {},
+            "image": {
+                "registry": "ghcr.io",
+                "repository": "sigstore/timestamp-server",
+                "pullPolicy": "IfNotPresent",
+                "version": "sha256:6d923276ff81b814c99d8c901184ebb8b9a0411eacf61d9fe0b26fce68e5a5ee"
+            },
+            "args": {
+                "port": 5555,
+                "signer": "tink",
+                "cert_chain": "chain",
+                "tink_enc_keyset": "keyset",
+                "tink_key_resource": "resource",
+                "tink_hcvault_token": "token",
+                "kms_key_resource": "resource"
+            },
+            "serviceAccount": {
+                "create": true,
+                "name": "",
+                "annotations": {},
+                "mountToken": true
+            },
+            "service": {
+                "type": "ClusterIP",
+                "ports": [{
+                    "name": "http",
+                    "port": 80,
+                    "protocol": "TCP",
+                    "targetPort": 5555
+                },
+                {
+                    "name": "metrics",
+                    "port": 2112,
+                    "protocol": "TCP",
+                    "targetPort": 2112
+                }]
+            },
+            "ingress": {
+                "http": {
+                    "enabled": true,
+                    "className": "nginx",
+                    "annotations": {},
+                    "hosts": [{
+                        "path": "/",
+                        "host": "timestamp.localhost"
+                    }],
+                    "tls": []
+                }
+            },
+            "securityContext": {
+                "runAsNonRoot": true,
+                "runAsUser": 65533
+            }
+        },
+        "forceNamespace": ""
+    }]
+}

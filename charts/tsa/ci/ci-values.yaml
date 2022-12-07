@@ -1,0 +1,10 @@
+---
+server:
+  args:
+    port: 3000
+    signer: memory
+  ingress:
+    http:
+      hosts:
+        - host: timestamp.localhost
+          path: /

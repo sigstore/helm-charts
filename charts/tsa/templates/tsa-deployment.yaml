@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "tsa.fullname" . }}
+{{ include "tsa.namespace" . | indent 2 }}
+  labels:
+    {{- include "tsa.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.server.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "tsa.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/tsa-configmap.yaml") . | sha256sum }}
+        {{- if .Values.server.podAnnotations }}
+        {{- toYaml .Values.server.podAnnotations | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "tsa.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ template "tsa.serviceAccountName" . }}
+      # This doesn't actually use Kubernetes credentials, so don't mount them in.
+      automountServiceAccountToken: {{ .Values.server.serviceAccount.mountToken }}
+      containers:
+        - name: {{ template "tsa.fullname" . }}
+          image: "{{ template "tsa.image" .Values.server.image }}"
+          imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
+          ports:
+{{- include "tsa.containerPorts" .Values.server.service.ports | indent 12 }}
+          args:
+            - "serve"
+            - "--host=0.0.0.0"
+            - "--port={{ .Values.server.args.port }}"
+            - "--timestamp-signer={{ .Values.server.args.signer }}"
+            {{- if eq .Values.server.args.signer "tink" }}
+            - "--tink-key-resource={{ required "Tink key for signing timestamp responses is required" .Values.server.args.tink_key_resource }}"
+            - "--tink-keyset-path=/etc/tsa-config/tink.keyset.enc"
+            - "--certificate-chain-path=/etc/tsa-config/chain.pem"
+            - "--tink-hcvault-token={{ required "Tink authentication token for Hashicorp Vault API is required" .Values.server.args.tink_hcvault_token }}"
+            {{- end }}
+            {{- if eq .Values.server.args.signer "kms" }}
+            - "--kms-key-resource={{ required "KMS key for signing timestamp responses is required" .Values.server.args.kms_key_resource }}"
+            - "--certificate-chain-path=/etc/tsa-config/chain.pem"
+            {{- end }}
+            {{- if eq .Values.server.args.signer "file" }}
+            - "--file-signer-key-path=/var/run/tsa-secrets/key.pem"
+            - "--file-signer-passwd=$(PASSWORD)"
+            - "--certificate-chain-path=/etc/tsa-config/chain.pem"
+            {{- end }}
+            {{- if .Values.server.logging.production }}
+            - "--log_type=prod"
+            {{- end -}}
+{{- if .Values.server.env }}
+          env:
+{{- range $key, $value := .Values.server.env }}
+          - name: "{{ $key }}"
+            value: "{{ $value }}"
+{{- end }}
+{{- if eq .Values.server.args.signer "file" }}
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.server.secret }}
+                key: password
+{{- end }}
+{{- else if eq .Values.server.args.signer "file" }}
+          env:
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.server.secret }}
+                key: password
+{{- end }}
+          volumeMounts:
+            - name: tsa-config
+              mountPath: /etc/tsa-config
+           {{- if eq .Values.server.args.signer "file" }}
+            - name: tsa-key 
+              mountPath: "/var/run/tsa-secrets"
+              readOnly: true
+           {{- end }}
+    {{- if .Values.server.resources }}
+          resources:
+{{ toYaml .Values.server.resources | indent 12 }}
+    {{- end }}
+    {{- if .Values.server.securityContext }}
+      securityContext:
+{{ toYaml .Values.server.securityContext | indent 8 }}
+    {{- end }}
+      volumes:
+        - name: tsa-config
+          configMap:
+            name: {{ template "tsa.config" . }}
+        {{- if eq .Values.server.args.signer "file" }}
+        - name: tsa-key
+          secret:
+            secretName: {{ .Values.server.secret }}
+            items:
+              - key: private
+                path: key.pem
+        {{- end }}
