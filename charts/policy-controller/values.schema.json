@@ -29,15 +29,7 @@
             "type": "object",
             "properties": {
                 "configData": {
-                    "type": "object",
-                    "properties": {
-                        "fail-one-empty-authorities": {
-                            "type": "string"
-                        },
-                        "no-match-policy": {
-                            "type": "string"
-                        }
-                    }
+                    "type": "object"
                 },
                 "env": {
                     "type": "object"
@@ -197,6 +189,31 @@
                 "name": {
                     "type": "string"
                 },
+                "namespaceSelector": {
+                    "type": "object",
+                    "properties": {
+                        "matchExpressions": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "type": "string"
+                                    },
+                                    "operator": {
+                                        "type": "string"
+                                    },
+                                    "values": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "podSecurityContext": {
                     "type": "object",
                     "properties": {
@@ -293,9 +310,6 @@
                 },
                 "volumes": {
                     "type": "array"
-                },
-                "namespaceSelector": {
-                    "type": "object"
                 }
             }
         }
