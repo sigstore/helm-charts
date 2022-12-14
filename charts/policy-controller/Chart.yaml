@@ -8,8 +8,8 @@ sources:
 type: application
 
 name: policy-controller
-version: 0.3.8
-appVersion: 0.4.2
+version: 0.3.9
+appVersion: 0.5.2
 
 maintainers:
   - name: dlorenc
@@ -19,6 +19,6 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: policy-controller
-      image: ghcr.io/sigstore/policy-controller/policy-controller:v0.4.2@sha256:435373b2bde7ed3fe133ff0d59bb4a23a0e15762320c9547fe6d1d042ab50c6c
+      image: ghcr.io/sigstore/policy-controller/policy-controller:v0.5.2@sha256:f23a23910f873d01864c01122120666adf78a1dbb43f674c4d423d5fe480a718
     - name: policywebhook
-      image: ghcr.io/sigstore/policy-controller/policy-webhook:v0.4.2@sha256:7ed0b012751d9941cb7b969ab2c37f5633d4dba2b2b445a6e6e23a91de554d6b
+      image: ghcr.io/sigstore/policy-controller/policy-webhook:v0.5.2@sha256:ae3d5b549c269c8b2a9b208d812365b6fc610d7a21c9ced8dc7eaae0a1914c09
