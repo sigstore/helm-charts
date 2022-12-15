@@ -52,8 +52,8 @@ mysql:
     registry: gcr.io
     repository: trillian-opensource-ci/db_server
     pullPolicy: IfNotPresent
-    # -- v1.5.0
-    version: sha256:22b7fddcb4bafc5692760d84dca5e86294363a94e8f0ecb8f5c39364d436e6d5
+    # -- v1.5.1
+    version: sha256:20a4b9b9532f466936ca2bb186251a0a21d34f89b78b12bb2bb1c2aae5e8e339
   resources: {}
   args:
     - "--ignore-db-dir=lost+found"
@@ -114,10 +114,10 @@ logServer:
   portHTTP: 8090
   image:
     registry: gcr.io
-    repository: projectsigstore/trillian_log_server
+    repository: trillian-opensource-ci/log_server
     pullPolicy: IfNotPresent
-    # -- v0.9.1
-    version: sha256:75dbbfc4c0b64334b985c4971fe58c30b9dd73d7aa54b15cee61223ff92aebf3
+    # -- v1.5.1
+    version: sha256:fd2d6d1faca6397b9bcd07aaaf5c9c13ef059c05e4514e70efd950966bebf54f
 
   # -- Trillian images currently only support amd64 due to the toolbelt/netcat container
   nodeSelector:
@@ -152,10 +152,10 @@ logSigner:
   portHTTP: 8090
   image:
     registry: gcr.io
-    repository: projectsigstore/trillian_log_signer
+    repository: trillian-opensource-ci/log_signer
     pullPolicy: IfNotPresent
-    # -- v0.9.1
-    version: sha256:b56ed0b7b5e9813c91b208ba6041c9342f9a53162d96943374e59b5289090f1f
+    # -- vl.5.1
+    version: sha256:dd518223c32cf7124e513efa2d1ed91ce0d2c9538a0d26b6fcb651b72c909b67
 
   # -- Trillian images currently only support amd64 due to the toolbelt/netcat container
   nodeSelector:
