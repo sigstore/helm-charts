@@ -10,7 +10,8 @@
         "rekor",
         "trillian",
         "tuf",
-        "copySecretJob"
+        "copySecretJob",
+        "tsa"
     ],
     "properties": {
         "fulcio": {
@@ -970,6 +971,98 @@
                 "serviceaccount": "tuf-secret-copy-job",
                 "backoffLimit": 6
             }]
+        },
+        "tsa": {
+            "type": "object",
+            "default": {},
+            "title": "The tsa Schema",
+            "required": [
+                "enabled",
+                "namespace",
+                "forceNamespace",
+                "server"
+            ],
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The enabled Schema",
+                    "examples": [
+                        true
+                    ]
+                },
+                "namespace": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The namespace Schema",
+                    "required": [
+                        "name",
+                        "create"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The name Schema",
+                            "examples": [
+                                "tsa-system"
+                            ]
+                        },
+                        "create": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The create Schema",
+                            "examples": [
+                                true
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "name": "tsa-system",
+                        "create": true
+                    }]
+                },
+                "forceNamespace": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The forceNamespace Schema",
+                    "examples": [
+                        "tsa-system"
+                    ]
+                },
+                "server": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The server Schema",
+                    "required": [
+                        "fullnameOverride"
+                    ],
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The fullnameOverride Schema",
+                            "examples": [
+                                "tsa-server"
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "fullnameOverride": "tsa-server"
+                    }]
+                }
+            },
+            "examples": [{
+                "enabled": true,
+                "namespace": {
+                    "name": "tsa-system",
+                    "create": true
+                },
+                "forceNamespace": "tsa-system",
+                "server": {
+                    "fullnameOverride": "tsa-server"
+                }
+            }]
         }
     },
     "examples": [{
@@ -1081,6 +1174,17 @@
             "imagePullPolicy": "IfNotPresent",
             "serviceaccount": "tuf-secret-copy-job",
             "backoffLimit": 6
+        },
+        "tsa": {
+            "enabled": true,
+            "namespace": {
+                "name": "tsa-system",
+                "create": true
+            },
+            "forceNamespace": "tsa-system",
+            "server": {
+                "fullnameOverride": "tsa-server"
+            }
         }
     }]
 }
