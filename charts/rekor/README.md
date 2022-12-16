@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -156,6 +156,10 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.sharding.filename | string | `"sharding-config.yaml"` |  |
 | server.sharding.mountPath | string | `"/sharding"` |  |
 | server.signer | string | `"memory"` |  |
+| server.signerFileSecretOptions.secretName | string | `none` |  |
+| server.signerFileSecretOptions.secretMountPath | string | `none` | The `signer` option needs to be set to `secretMountPath + secretMountSubPath` if a file-based secret is to be used |
+| server.signerFileSecretOptions.privateKeySecretKey | string | `none` |  |
+| server.signerFileSecretOptions.secretMountSubPath | string | `none` |  |
 | trillian.adminServer | string | `""` |  |
 | trillian.enabled | bool | `true` |  |
 | trillian.forceNamespace | string | `"trillian-system"` |  |

@@ -942,7 +942,8 @@
                     "type": "string",
                     "default": "",
                     "examples": [
-                        "memory"
+                        "memory",
+                        "/key/private"
                     ]
                 },
                 "readinessProbe": {
@@ -1538,6 +1539,51 @@
                             "annotations": {}
                         }
                     ]
+                },
+                "signerFileSecretOptions": {
+                    "title": "The signerFileSecretOptions Schema",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                        "secretName",
+                        "secretMountPath",
+                        "privateKeySecretKey",
+                        "secretMountSubPath"
+                    ],
+                    "properties": {
+                        "secretName": {
+                            "title": "Name of the secret containing the private key",
+                            "type": "string",
+                            "default": "",
+                            "examples": [
+                                "rekor-private-key"
+                            ]
+                        },
+                        "secretMountPath": {
+                            "title": "Where to mount the scret inside the container",
+                            "type": "string",
+                            "default": "",
+                            "examples": [
+                                "/directory"
+                            ]
+                        },
+                        "secretMountSubPath": {
+                            "title": "Where to place the secret *inside* of the mounting directory",
+                            "type": "string",
+                            "default": "",
+                            "examples": [
+                                "some/sub-folder"
+                            ]
+                        },
+                        "privateKeySecretKey": {
+                            "title": "The key of the private key inside the secret",
+                            "type": "string",
+                            "default": "",
+                            "examples": [
+                                "private"
+                            ]
+                        }
+                    }
                 }
             },
             "examples": [
