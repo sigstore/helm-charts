@@ -28,8 +28,8 @@ mysql:
     cloudsql:
       registry: gcr.io
       repository: cloudsql-docker/gce-proxy
-      # -- v1.32.2
-      version: sha256:7755f632c090289b8e0fa67218fc9d8b9ab7e0758ea58c48786617a79ff715dc
+      # -- v1.33.1
+      version: sha256:7f53fe219f6815e275301561e2f8819e59e38eca5a93de644a287452f841fab7
       resources:
         requests:
           memory: "2Gi"

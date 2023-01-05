@@ -24,7 +24,7 @@
             "cloudsql": {
                 "registry": "gcr.io",
                 "repository": "cloudsql-docker/gce-proxy",
-                "version": "1.28.1"
+                "version": "1.33.1"
             }
         },
         "enabled": true,
