@@ -41,6 +41,10 @@ spec:
           image: "{{ template "trillian.image" .Values.initContainerImage.netcat }}"
           imagePullPolicy: {{ .Values.initContainerImage.netcat.imagePullPolicy }}
           command: ["sh", "-c", "until nc -z -w 10 {{ template "mysql.hostname" . }} {{ .Values.mysql.port }}; do echo waiting for {{ template "mysql.hostname" . }}; sleep 5; done;"]
+      {{- if .Values.initContainerResources }}
+          resources:
+{{ toYaml .Values.initContainerResources | indent 12 }}
+      {{- end }}
       {{- if .Values.logSigner.extraInitContainers }}
 {{ toYaml .Values.logSigner.extraInitContainers | indent 8 }}
       {{- end }}

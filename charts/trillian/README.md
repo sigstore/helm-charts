@@ -47,11 +47,13 @@ helm uninstall [RELEASE_NAME]
 | createdb.image.repository | string | `"sigstore/scaffolding/createdb"` |  |
 | createdb.image.version | string | `"sha256:5ec1b95581d238dfbbd8e412422500cc242123078de8aaad23e5f9c65eaf2ba5"` | v0.4.11 |
 | createdb.name | string | `"createdb"` |  |
+| createdb.resources | string | `""` |  |
 | createdb.serviceAccount.annotations | object | `{}` |  |
 | createdb.serviceAccount.create | bool | `false` |  |
 | createdb.serviceAccount.name | string | `""` |  |
 | createdb.ttlSecondsAfterFinished | int | `3600` |  |
 | forceNamespace | string | `""` |  |
+| initContainerResources | string | `""` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
