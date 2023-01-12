@@ -33,6 +33,10 @@ spec:
             "--display_name={{ .Values.createtree.displayName }}",
             "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}"
           ]
+    {{- if .Values.createtree.resources }}
+          resources:
+{{ toYaml .Values.createtree.resources | indent 12 }}
+    {{- end }}
     {{- if .Values.createtree.securityContext }}
       securityContext:
 {{ toYaml .Values.createtree.securityContext | indent 8 }}

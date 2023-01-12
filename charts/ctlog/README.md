@@ -51,6 +51,7 @@ Certificate Log
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
 | createtree.image.version | string | `"sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"` |  |
 | createtree.name | string | `"createtree"` |  |
+| createtree.resources | string | `""` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
 | createtree.securityContext.runAsUser | int | `65533` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
