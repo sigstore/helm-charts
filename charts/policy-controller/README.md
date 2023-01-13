@@ -130,6 +130,34 @@ spec:
         name: mysecret
 
 ```
+#### Configuring Custom Certificate Authorities (CA)
+
+The `policy-controller` can be configured to use custom CAs to communicate to container registries, for example, when you have a private registry with a self-signed TLS certificate.
+
+To configure `policy-controller` to use custom CAs, follow these steps:
+
+1. Make sure the `policy-controller` namespace exists:
+
+    ```shell
+    kubectl create namespace cosign-system
+    ```
+
+2. Create a bundle file with all the root and intermediate certificates and name it `ca-bundle.crt`.
+
+3. Create a `ConfigMap` from the bundle:
+    ```shell
+    kubectl -n cosign-system create cm ca-bundle-config \
+      --from-file=ca-bundle.crt="ca-bundle.crt"
+    ```
+
+4. Install the `policy-controller`:
+
+    ```shell
+    helm install -n cosign-system \
+      --set webhook.registryCaBundle.name=ca-bundle-config \
+      --set webhook.registryCaBundle.key=ca-bundle.crt \
+      policy-controller sigstore/policy-controller
+    ```
 
 ### Enabling Admission control
 
