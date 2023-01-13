@@ -89,6 +89,7 @@ webhook:
       - key: policy.sigstore.dev/include
         operator: In
         values: ["true"]
+  registryCaBundle: {}
 
 ## common node selector for all the pods
 commonNodeSelector: {}

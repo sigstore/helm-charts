@@ -63,6 +63,7 @@ The Helm chart for Policy  Controller
 | webhook.podSecurityContext.enabled | bool | `true` |  |
 | webhook.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | webhook.podSecurityContext.runAsUser | int | `1000` |  |
+| webhook.registryCaBundle | object | `{}` |  |
 | webhook.replicaCount | int | `1` |  |
 | webhook.resources.limits.cpu | string | `"100m"` |  |
 | webhook.resources.limits.memory | string | `"256Mi"` |  |

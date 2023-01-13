@@ -310,6 +310,17 @@
                 },
                 "volumes": {
                     "type": "array"
+                },
+                "registryCaBundle": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "key": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         }
