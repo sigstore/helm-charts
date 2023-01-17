@@ -25,6 +25,22 @@ mysql:
   gcp:
     enabled: false
     instance: ""
+    scaffoldSQLProxy:
+      registry: ghcr.io
+      repository: sigstore/scaffolding/cloudsqlproxy
+      # -- v0.6.0
+      version: sha256:4e83d63dee76e34e12bdb7c8ffe1635d40805a227a4b014a135a60a635122540
+      resources:
+        requests:
+          memory: "2Gi"
+          cpu: "1"
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - ALL
     cloudsql:
       registry: gcr.io
       repository: cloudsql-docker/gce-proxy
