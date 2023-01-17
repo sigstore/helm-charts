@@ -29,6 +29,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+    {{- if .Values.createctconfig.initContainerResources }}
+          resources:
+{{ toYaml .Values.createctconfig.initContainerResources | indent 12 }}
+    {{- end }}
       containers:
         - name: {{ template "ctlog.createctconfig.fullname" . }}
           image: "{{ template "ctlog.image" .Values.createctconfig.image }}"
@@ -61,6 +65,10 @@ spec:
                   name: {{ .Values.createctconfig.privateKeyPasswordSecretName  }}
                   key: password
           {{- end }}
+    {{- if .Values.createctconfig.resources }}
+          resources:
+{{ toYaml .Values.createctconfig.resources | indent 12 }}
+    {{- end }}
     {{- if .Values.createctconfig.securityContext }}
       securityContext:
 {{ toYaml .Values.createctconfig.securityContext | indent 8 }}
