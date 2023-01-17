@@ -22,50 +22,64 @@ spec:
       containers:
         {{- if .Values.mysql.gcp.enabled }}
         - name: cloud-sql-proxy
-          image: "{{ template "trillian.image" .Values.mysql.gcp.cloudsql }}"
-          command:
-            - "/cloud_sql_proxy"
-            - "-instances={{ .Values.mysql.gcp.instance }}=tcp:{{ .Values.mysql.port }}"
-    {{- if .Values.mysql.gcp.cloudsql.securityContext }}
+          image: "{{ template "trillian.image" .Values.mysql.gcp.scaffoldSQLProxy }}"
+          args: [
+            "-instances={{ .Values.mysql.gcp.instance }}=tcp:{{ .Values.mysql.port }}"
+          ]
+          env:
+            - name: EXIT_DIR
+              value: "/var/exitdir"
+          volumeMounts:
+            - name: exit-dir
+              mountPath: "/var/exitdir"
+    {{- if .Values.mysql.gcp.scaffoldSQLProxy.securityContext }}
           securityContext:
-{{ toYaml .Values.mysql.gcp.cloudsql.securityContext | indent 12 }}
+{{ toYaml .Values.mysql.gcp.scaffoldSQLProxy.securityContext | indent 12 }}
     {{- end }}
           resources:
-{{ toYaml .Values.mysql.gcp.cloudsql.resources | indent 12 }}
+{{ toYaml .Values.mysql.gcp.scaffoldSQLProxy.resources | indent 12 }}
         {{- end }}
         - name: {{ template "trillian.createdb.fullname" . }}
           image: "{{ template "trillian.image" .Values.createdb.image }}"
           imagePullPolicy: "{{ .Values.createdb.image.pullPolicy }}"
           env:
-          - name: NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
-          - name: MYSQL_USER
-            valueFrom:
-              secretKeyRef:
-                name: {{ template "mysql.secretName" . }}
-                key: mysql-user
-          - name: MYSQL_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: {{ template "mysql.secretName" . }}
-                key: mysql-password
-          - name: MYSQL_DATABASE
-            valueFrom:
-              secretKeyRef:
-                name: {{ template "mysql.secretName" . }}
-                key: mysql-database
-          - name: MYSQL_HOSTNAME
-            value: {{ template "mysql.hostname" . }}
-          - name: MYSQL_PORT
-            value: {{ .Values.mysql.port | quote }}
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-database
+            - name: MYSQL_HOSTNAME
+              value: {{ template "mysql.hostname" . }}
+            - name: MYSQL_PORT
+              value: {{ .Values.mysql.port | quote }}
+            - name: EXIT_DIR
+              value: "/var/exitdir"
           args: [
             "--db_name=$(MYSQL_DATABASE)",
             "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/"
           ]
+          volumeMounts:
+            - name: exit-dir
+              mountPath: "/var/exitdir"
     {{- if .Values.createdb.securityContext }}
       securityContext:
 {{ toYaml .Values.createdb.securityContext | indent 8 }}
     {{- end }}
+      volumes:
+        - name: exit-dir
+          emptyDir: {}
 {{- end }}

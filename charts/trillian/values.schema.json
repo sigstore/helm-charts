@@ -21,6 +21,11 @@
         "gcp": {
             "enabled": "",
             "instance": "",
+            "scaffoldSQLProxy": {
+                "registry": "ghcr.io",
+                "repository": "sigstore/scaffolding/cloudsqlproxy",
+                "version": "v0.6.0"
+            },
             "cloudsql": {
                 "registry": "gcr.io",
                 "repository": "cloudsql-docker/gce-proxy",
