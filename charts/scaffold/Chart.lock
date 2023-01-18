@@ -7,12 +7,12 @@ dependencies:
   version: 1.1.1
 - name: trillian
   repository: https://sigstore.github.io/helm-charts
-  version: 0.2.1
+  version: 0.2.2
 - name: ctlog
   repository: https://sigstore.github.io/helm-charts
   version: 0.2.38
 - name: tuf
   repository: https://sigstore.github.io/helm-charts
   version: 0.1.4
-digest: sha256:9903a03a61fcd359cd86a6aa3ca5446a25b54c4a1671b65778aabcfa934a3eb5
-generated: "2023-01-18T09:14:14.370153+02:00"
+digest: sha256:b69f1df50fe188818a52763e3344f074571e26368186322f8f0635de6c92366e
+generated: "2023-01-18T11:53:43.993991+02:00"
