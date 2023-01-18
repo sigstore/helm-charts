@@ -7779,6 +7779,45 @@ entries:
         - name: cloud_proxy
           image: gcr.io/cloudsql-docker/gce-proxy@sha256:7f53fe219f6815e275301561e2f8819e59e38eca5a93de644a287452f841fab7
         - name: scaffold_cloud_proxy
+          image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:@sha256:2c818523a9060cdefca10af0804c8f60549bdc1744e71008f9849b23605c4ccf
+        - name: createdb
+          image: ghcr.io/sigstore/scaffolding/createdb@sha256:9aa98492115c465b0cecfd6dbb04411a40c0d2d7e5d7c510f5646bd1d825e3c7
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2023-01-18T09:52:46.20997327Z"
+    description: 'Trillian is a log that stores an accurate, immutable and verifiable
+      history of activity. '
+    digest: d35b80bf931c7794c751f5e45d69df302e9a1eafdb1ac787ae4372569523caac
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+      url: https://sigstore.dev/
+    name: trillian
+    sources:
+    - https://github.com/google/trillian
+    - https://github.com/sigstore/helm-charts/tree/main/charts/trillian
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/trillian-0.2.2/trillian-0.2.2.tgz
+    version: 0.2.2
+  - annotations:
+      artifacthub.io/images: |
+        - name: curl
+          image: docker.io/curlimages/curl@sha256:e83fef2d5a036d40df4ded829141e8c0ec41871490d252fb8c81cb4580ebb35b
+        - name: netcat
+          image: docker.io/toolbelt/netcat@sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea
+        - name: db_server
+          image: gcr.io/trillian-opensource-ci/db_server@sha256:ae4043e9c5e4de522fb4958e92d592aa97c7fc294a12849b902fd1facd7122c6
+        - name: log_server
+          image: gcr.io/projectsigstore/trillian_log_server@sha256:4599a3f037234423d13ff84755679a56da62363e7ed07c70bc556078fd73986d
+        - name: log_signer
+          image: gcr.io/projectsigstore/trillian_log_signer@sha256:87699af429d79440f7e0a487d215c2129bf97b37698370d050a68822996f93f0
+        - name: cloud_proxy
+          image: gcr.io/cloudsql-docker/gce-proxy@sha256:7f53fe219f6815e275301561e2f8819e59e38eca5a93de644a287452f841fab7
+        - name: scaffold_cloud_proxy
           image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:@sha256:83107528ae06d5e1a0e9c00faa02fcd40f60e880f31b3e7633eca1c75790e570
         - name: createdb
           image: ghcr.io/sigstore/scaffolding/createdb@sha256:df5a8cfba6dffc5df327877f283ee96942f9154d3db1932f0d7d95a20894ba11
@@ -8590,4 +8629,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2023-01-18T07:18:47.991034645Z"
+generated: "2023-01-18T09:52:46.210515073Z"
