@@ -28,8 +28,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.6.1
-      version: sha256:83107528ae06d5e1a0e9c00faa02fcd40f60e880f31b3e7633eca1c75790e570
+      # -- v0.6.2
+      version: sha256:2c818523a9060cdefca10af0804c8f60549bdc1744e71008f9849b23605c4ccf
       resources:
         requests:
           memory: "2Gi"
@@ -202,8 +202,8 @@ createdb:
     registry: ghcr.io
     repository: sigstore/scaffolding/createdb
     pullPolicy: IfNotPresent
-    # -- v0.6.1
-    version: sha256:df5a8cfba6dffc5df327877f283ee96942f9154d3db1932f0d7d95a20894ba11
+    # -- v0.6.2
+    version: sha256:9aa98492115c465b0cecfd6dbb04411a40c0d2d7e5d7c510f5646bd1d825e3c7
   serviceAccount:
     create: false
     name: ""
