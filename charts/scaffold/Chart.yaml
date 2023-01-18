@@ -4,7 +4,7 @@ description: Scaffolding the components of the sigstore architecture
 
 type: application
 
-version: 0.5.0
+version: 0.5.2
 keywords:
   - security
   - pki
@@ -24,7 +24,7 @@ dependencies:
     repository: https://sigstore.github.io/helm-charts
     condition: rekor.enabled
   - name: trillian
-    version: 0.2.0
+    version: 0.2.2
     repository: https://sigstore.github.io/helm-charts
     condition: trillian.enabled
   - name: ctlog

@@ -28,11 +28,13 @@ Certificate Log
 | createctconfig.initContainerImage.curl.registry | string | `"docker.io"` |  |
 | createctconfig.initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
 | createctconfig.initContainerImage.curl.version | string | `"sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"` | 7.82.0 |
+| createctconfig.initContainerResources | string | `""` | |
 | createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | createctconfig.name | string | `"createctconfig"` |  |
 | createctconfig.privateKeyPasswordSecretName | string | `""` |  |
 | createctconfig.privateSecret | string | `""` |  |
 | createctconfig.pubkeysecret | string | `"ctlog-public-key"` |  |
+| createctconfig.resources | string | `""` |  |
 | createctconfig.replicaCount | int | `1` |  |
 | createctconfig.securityContext.runAsNonRoot | bool | `true` |  |
 | createctconfig.securityContext.runAsUser | int | `65533` |  |
@@ -49,6 +51,7 @@ Certificate Log
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
 | createtree.image.version | string | `"sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"` |  |
 | createtree.name | string | `"createtree"` |  |
+| createtree.resources | string | `""` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
 | createtree.securityContext.runAsUser | int | `65533` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
@@ -76,6 +79,7 @@ Certificate Log
 | server.podAnnotations."prometheus.io/scrape" | string | `"true"` |  |
 | server.portHTTP | int | `6962` |  |
 | server.portHTTPMetrics | int | `6963` |  |
+| server.resources | string | `""` |  |
 | server.replicaCount | int | `1` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |

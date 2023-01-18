@@ -24,7 +24,7 @@
             "scaffoldSQLProxy": {
                 "registry": "ghcr.io",
                 "repository": "sigstore/scaffolding/cloudsqlproxy",
-                "version": "v0.6.0"
+                "version": "v0.6.1"
             },
             "cloudsql": {
                 "registry": "gcr.io",
@@ -190,9 +190,9 @@
         "name": "createdb",
         "image": {
             "registry": "ghcr.io",
-            "repository": "vaikas/createdb",
+            "repository": "sigstore/scaffolding/createdb",
             "pullPolicy": "IfNotPresent",
-            "version": "sha256:e167e5849c1f6fbd1d2b5f3debb58e6f6a541c68350ea06540bc2c8823036506"
+            "version": "sha256:df5a8cfba6dffc5df327877f283ee96942f9154d3db1932f0d7d95a20894ba11"
         },
         "serviceAccount": {
             "create": true,
