@@ -75,6 +75,10 @@ spec:
           volumeMounts:
             - name: exit-dir
               mountPath: "/var/exitdir"
+    {{- if .Values.createdb.resources }}
+          resources:
+{{ toYaml .Values.createdb.resources | indent 12 }}
+    {{- end }}
     {{- if .Values.createdb.securityContext }}
       securityContext:
 {{ toYaml .Values.createdb.securityContext | indent 8 }}
