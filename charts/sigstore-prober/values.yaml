@@ -10,6 +10,13 @@ spec:
   imagePullPolicy: Always
   matchLabels:
     app: sigstore-prober
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "50m"
+    limits:
+      memory: "128Mi"
+      cpu: "200m"
   args:
     fulcioHost: https://fulcio.sigstore.dev
     rekorHost: https://rekor.sigstore.dev
