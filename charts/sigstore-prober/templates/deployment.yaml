@@ -35,12 +35,9 @@ spec:
       - name: {{ template "sigstore-prober.name" . }}
         image: "{{ .Values.spec.image }}"
         resources:
-          requests:
-            memory: "64Mi"
-            cpu: "50m"
-          limits:
-            memory: "128Mi"
-            cpu: "200m"
+        {{- with .Values.spec.resources }}
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         imagePullPolicy: "{{ .Values.spec.imagePullPolicy }}"
         args:
           {{- include "sigstore-prober.args" . | nindent 8 }}
