@@ -24,4 +24,6 @@ spec:
 {{- if .Values.server.attestation_storage.persistence.storageClass }}
   storageClassName: {{ .Values.server.attestation_storage.persistence.storageClass }}
 {{- end }}
+  persistentVolumeReclaimPolicy: {{ .Values.server.attestation_storage.persistence.reclaimPolicy }}
+
 {{- end }}
