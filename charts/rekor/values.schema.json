@@ -1318,7 +1318,8 @@
                                 "mountPath",
                                 "subPath",
                                 "existingClaim",
-                                "accessModes"
+                                "accessModes",
+                                "reclaimPolicy"
                             ],
                             "properties": {
                                 "enabled": {
@@ -1395,6 +1396,16 @@
                                         [
                                             "ReadWriteOnce"
                                         ]
+                                    ]
+                                },
+                                "reclaimPolicy": {
+                                    "title": "Control whether the volume gets purged or retained",
+                                    "type": "string",
+                                    "default": "Delete",
+                                    "examples": [
+                                        "Delete",
+                                        "Retain",
+                                        "Recycle"
                                     ]
                                 }
                             },
