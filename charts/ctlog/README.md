@@ -1,6 +1,6 @@
 # ctlog
 
-![Version: 0.2.38](https://img.shields.io/badge/Version-0.2.38-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.2.40](https://img.shields.io/badge/Version-0.2.40-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
 Certificate Log
 
@@ -23,18 +23,16 @@ Certificate Log
 | createctconfig.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createctconfig.image.registry | string | `"ghcr.io"` |  |
 | createctconfig.image.repository | string | `"sigstore/scaffolding/createctconfig"` |  |
-| createctconfig.image.version | string | `"sha256:024e3451af712070a807124f82c5a8a9c84343c17ec17a2d2832229a6ac0cb0e"` | v0.5.2 |
+| createctconfig.image.version | string | `"sha256:b3dae896ddb7b01b3257c668bc1e87f15aafe97f30a767f99426f557fa33e44c"` | v0.6.3 |
 | createctconfig.initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | createctconfig.initContainerImage.curl.registry | string | `"docker.io"` |  |
 | createctconfig.initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
 | createctconfig.initContainerImage.curl.version | string | `"sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"` | 7.82.0 |
-| createctconfig.initContainerResources | string | `""` | |
 | createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | createctconfig.name | string | `"createctconfig"` |  |
 | createctconfig.privateKeyPasswordSecretName | string | `""` |  |
 | createctconfig.privateSecret | string | `""` |  |
 | createctconfig.pubkeysecret | string | `"ctlog-public-key"` |  |
-| createctconfig.resources | string | `""` |  |
 | createctconfig.replicaCount | int | `1` |  |
 | createctconfig.securityContext.runAsNonRoot | bool | `true` |  |
 | createctconfig.securityContext.runAsUser | int | `65533` |  |
@@ -51,7 +49,6 @@ Certificate Log
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
 | createtree.image.version | string | `"sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"` |  |
 | createtree.name | string | `"createtree"` |  |
-| createtree.resources | string | `""` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
 | createtree.securityContext.runAsUser | int | `65533` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
@@ -79,7 +76,6 @@ Certificate Log
 | server.podAnnotations."prometheus.io/scrape" | string | `"true"` |  |
 | server.portHTTP | int | `6962` |  |
 | server.portHTTPMetrics | int | `6963` |  |
-| server.resources | string | `""` |  |
 | server.replicaCount | int | `1` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
