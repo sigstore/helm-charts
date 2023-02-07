@@ -23,7 +23,7 @@ spec:
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}
-      {{- end }}        
+      {{- end }}
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
       serviceAccountName: {{ template "policy-controller.fullname" . }}-webhook
@@ -56,6 +56,10 @@ spec:
           value: webhook
         - name: HOME
           value: /home/nonroot
+        {{- if .Values.webhook.registryCaBundle.name }}
+        - name: SSL_CERT_DIR
+          value: /etc/custom-ca:/etc/ssl/certs
+        {{- end }}
 {{- if .Values.webhook.env }}
 {{- range $key, $value := .Values.webhook.env }}
         - name: "{{ $key }}"
@@ -115,6 +119,11 @@ spec:
           {{- with .Values.webhook.volumeMounts }}
             {{- toYaml . | nindent 10 }}
           {{- end }}
+          {{- if .Values.webhook.registryCaBundle.name }}
+          - mountPath: /etc/custom-ca
+            name: custom-ca
+            readOnly: true
+          {{- end }}
       {{- if .Values.webhook.securityContext.enabled }}
 
       # Our webhook should gracefully terminate by lame ducking first, set this to a sufficiently
@@ -131,4 +140,12 @@ spec:
         name: writable-home-dir
       {{- with .Values.webhook.volumes }}
         {{- toYaml . | nindent 6 }}
+      {{- end }}
+      {{- if .Values.webhook.registryCaBundle.name }}
+      - name: custom-ca
+        configMap:
+          name: {{ .Values.webhook.registryCaBundle.name }}
+          items:
+            - key: {{ .Values.webhook.registryCaBundle.key }}
+              path: {{ .Values.webhook.registryCaBundle.key }}
       {{- end }}
