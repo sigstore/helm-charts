@@ -86,6 +86,7 @@ helm uninstall [RELEASE_NAME]
 | createcerts.image.version | string | `"sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"` |  |
 | createcerts.name | string | `"createcerts"` |  |
 | createcerts.replicaCount | int | `1` |  |
+| createcerts.resources | string | `""` |  |
 | createcerts.securityContext.runAsNonRoot | bool | `true` |  |
 | createcerts.securityContext.runAsUser | int | `65533` |  |
 | createcerts.serviceAccount.annotations | object | `{}` |  |
@@ -134,6 +135,7 @@ helm uninstall [RELEASE_NAME]
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
 | server.replicaCount | int | `1` |  |
+| server.resources | string | `""` |  |
 | server.secret | string | `"fulcio-server-secret"` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
