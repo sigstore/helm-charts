@@ -23,7 +23,7 @@ spec:
       clientConfig:
         service:
           name: policy-webhook
-          namespace: cosign-system
+          namespace: {{ .Release.Namespace }}
   group: policy.sigstore.dev
   names:
     kind: ClusterImagePolicy
