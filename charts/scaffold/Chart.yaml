@@ -38,7 +38,7 @@ dependencies:
   - name: tsa
     version: 0.1.0
     repository: https://sigstore.github.io/helm-charts
-    condition: tuf.enabled
+    condition: tsa.enabled
 
 annotations:
   artifacthub.io/license: Apache-2.0
