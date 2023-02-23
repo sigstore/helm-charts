@@ -41,6 +41,7 @@ helm uninstall [RELEASE_NAME]
 | https://sigstore.github.io/helm-charts | rekor | 1.1.1 |
 | https://sigstore.github.io/helm-charts | trillian | 0.2.2 |
 | https://sigstore.github.io/helm-charts | tuf | 0.1.4 |
+| https://sigstore.github.io/helm-charts | tsa | 0.1.0 |
 
 ## Values
 
@@ -90,6 +91,11 @@ helm uninstall [RELEASE_NAME]
 | trillian.mysql.fullnameOverride | string | `"trillian-mysql"` |  |
 | trillian.namespace.create | bool | `true` |  |
 | trillian.namespace.name | string | `"trillian-system"` |  |
+| tsa.enabled | bool | `true` |  |
+| tsa.forceNamespace | string | `"tsa-system"` |  |
+| tsa.namespace.create | bool | `true` |  |
+| tsa.namespace.name | string | `"tsa-system"` |  |
+| tsa.server.fullnameOverride | string | `"tsa-server"` |  |
 | tuf.enabled | bool | `false` |  |
 | tuf.forceNamespace | string | `"tuf-system"` |  |
 | tuf.fullnameOverride | string | `"tuf"` |  |
