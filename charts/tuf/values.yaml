@@ -16,7 +16,7 @@ deployment:
   port: 8080
 
 server:
-  serviceLinks:
+  serviceLinks: {}
 
 secrets:
   rekor:
