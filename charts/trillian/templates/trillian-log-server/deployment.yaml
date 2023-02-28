@@ -101,6 +101,9 @@ spec:
       securityContext:
 {{ toYaml .Values.logServer.securityContext | indent 8 }}
     {{- end }}
+    {{- if .Values.logServer.serviceLinks }}
+      enableServiceLinks: {{ .Values.logServer.serviceLinks.enabled }}
+    {{- end }}
     {{- if .Values.logServer.tolerations }}
       tolerations:
 {{ toYaml .Values.logServer.tolerations | indent 8 }}

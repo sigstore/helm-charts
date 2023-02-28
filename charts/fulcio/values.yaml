@@ -11,6 +11,7 @@ server:
   svcPort: 80
   grpcSvcPort: 5554
   secret: fulcio-server-secret
+  serviceLinks: {}
   logging:
     production: false
   image:

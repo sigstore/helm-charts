@@ -106,6 +106,9 @@ spec:
       affinity:
 {{ toYaml .Values.mysql.affinity | indent 8 }}
     {{- end }}
+    {{- if .Values.mysql.serviceLinks }}
+      enableServiceLinks: {{ .Values.mysql.serviceLinks.enabled }}
+    {{- end }}
       volumes:
   {{- if not .Values.mysql.persistence.enabled }}
         - name: storage

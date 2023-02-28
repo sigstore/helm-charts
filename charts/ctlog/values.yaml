@@ -3,7 +3,7 @@ namespace:
   name: ctlog-system
 
 server:
-  replicaCount: 1
+  replicaCount: 3
   config:
     key: treeID
     treeID: ""
@@ -43,6 +43,7 @@ server:
     annotations: {}
     tls: []
   extraArgs: []
+  serviceLinks: {}
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533

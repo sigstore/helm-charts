@@ -15,6 +15,9 @@ deployment:
   imagePullPolicy: IfNotPresent
   port: 8080
 
+server:
+  serviceLinks:
+
 secrets:
   rekor:
     create: false

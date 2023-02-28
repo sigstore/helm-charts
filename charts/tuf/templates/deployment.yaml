@@ -29,6 +29,9 @@ spec:
         {{- include "tuf.matchLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
+      {{- if .Values.server.serviceLinks }}
+      enableServiceLinks: {{ .Values.server.serviceLinks.enabled }}
+      {{- end }}
       containers:
       - image: {{ template "tuf.image" .Values.deployment }}
         name: {{ .Values.deployment.name }}
