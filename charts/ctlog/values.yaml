@@ -3,7 +3,7 @@ namespace:
   name: ctlog-system
 
 server:
-  replicaCount: 3
+  replicaCount: 1
   config:
     key: treeID
     treeID: ""
