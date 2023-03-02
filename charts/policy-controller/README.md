@@ -1,6 +1,6 @@
 # policy-controller
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.2](https://img.shields.io/badge/AppVersion-0.5.2-informational?style=flat-square)
+![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.2](https://img.shields.io/badge/AppVersion-0.5.2-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -27,8 +27,8 @@ The Helm chart for Policy  Controller
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
-| policywebhook.env | object | `{}` |  |
 | policywebhook.configData | object | `{}` | Set the data of the `policy-config-controller` configmap |
+| policywebhook.env | object | `{}` |  |
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
@@ -49,6 +49,8 @@ The Helm chart for Policy  Controller
 | policywebhook.service.port | int | `443` |  |
 | policywebhook.service.type | string | `"ClusterIP"` |  |
 | policywebhook.serviceAccount.annotations | object | `{}` |  |
+| policywebhook.volumeMounts | list | `[]` |  |
+| policywebhook.volumes | list | `[]` |  |
 | policywebhook.webhookNames.defaulting | string | `"defaulting.clusterimagepolicy.sigstore.dev"` |  |
 | policywebhook.webhookNames.validating | string | `"validating.clusterimagepolicy.sigstore.dev"` |  |
 | serviceMonitor.enabled | bool | `false` |  |
@@ -58,6 +60,9 @@ The Helm chart for Policy  Controller
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
 | webhook.image.version | string | `"sha256:f23a23910f873d01864c01122120666adf78a1dbb43f674c4d423d5fe480a718"` | `"v0.5.2"` |
 | webhook.name | string | `"webhook"` |  |
+| webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
+| webhook.namespaceSelector.matchExpressions[0].operator | string | `"In"` |  |
+| webhook.namespaceSelector.matchExpressions[0].values[0] | string | `"true"` |  |
 | webhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | webhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | webhook.podSecurityContext.enabled | bool | `true` |  |
@@ -77,9 +82,6 @@ The Helm chart for Policy  Controller
 | webhook.serviceAccount.annotations | object | `{}` |  |
 | webhook.volumeMounts | list | `[]` |  |
 | webhook.volumes | list | `[]` |  |
-| webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
-| webhook.namespaceSelector.matchExpressions[0].operator | string | `"In"` |  |
-| webhook.namespaceSelector.matchExpressions[0].values[0] | string | `"true"` |  |
 
 ### Deploy `policy-controller` Helm Chart
 
@@ -87,11 +89,8 @@ Install `policy-controller` using Helm:
 
 ```shell
 helm repo add sigstore https://sigstore.github.io/helm-charts
-
 helm repo update
-
 kubectl create namespace cosign-system
-
 helm install policy-controller -n cosign-system sigstore/policy-controller --devel
 ```
 
@@ -128,7 +127,6 @@ spec:
   - key:
       secretRef:
         name: mysecret
-
 ```
 #### Configuring Custom Certificate Authorities (CA)
 
