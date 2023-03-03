@@ -38,3 +38,7 @@ rules:
     resources: ["configmaps"]
     resourceNames: ["config-image-policies"]
     verbs: ["get", "list", "create", "update", "patch", "watch"]
+
+  - apiGroups: ["policy.sigstore.dev"]
+    resources: ["trustroots"]
+    verbs: ["get", "list"]
