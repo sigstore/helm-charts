@@ -16,7 +16,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: config-sigstore-keys
-  namespace: cosign-system
+  namespace: {{ .Release.Namespace }}
 
 data:
   _example: |

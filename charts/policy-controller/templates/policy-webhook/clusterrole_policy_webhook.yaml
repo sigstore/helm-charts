@@ -69,9 +69,18 @@ rules:
 
   # Allow reconciliation of the ClusterImagePolic CRDs.
   - apiGroups: ["policy.sigstore.dev"]
-    resources: ["clusterimagepolicies"]
+    resources: ["clusterimagepolicies", "clusterimagepolicies/status"]
     verbs: ["get", "list", "update", "watch", "patch"]
 
   - apiGroups: ["apiextensions.k8s.io"]
     resources: ["customresourcedefinitions"]
     verbs: ["get", "list", "watch", "update"]
+
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions"]
+    verbs: ["get", "update", "list"]
+    resourceNames: ["trustroots.policy.sigstore.dev"]
+
+  - apiGroups: ["policy.sigstore.dev"]
+    resources: ["trustroots", "trustroots/status"]
+    verbs: ["get", "list", "update", "watch", "patch"]
