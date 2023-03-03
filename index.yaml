@@ -2741,6 +2741,29 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: policy-controller
+          image: ghcr.io/sigstore/policy-controller/policy-controller:v0.7.0@sha256:947693aa3a536992bc89f3c7ded8a7707b26cd4518972f293edd3e57e112438e
+        - name: policywebhook
+          image: ghcr.io/sigstore/policy-controller/policy-webhook:v0.7.0@sha256:3a3581032ff69991ddd9f19faf8acd059c8fb0ba8d3b0164a13b99a096880c84
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.7.0
+    created: "2023-03-03T21:43:17.113982588Z"
+    description: The Helm chart for Policy  Controller
+    digest: eafdb10423d97f58bbf3f4686902d5a05892a8ad2a3c6525672ec8f2941f01b0
+    home: https://github.com/sigstore/policy-controller
+    maintainers:
+    - name: dlorenc
+    - name: hectorj2f
+    name: policy-controller
+    sources:
+    - https://github.com/sigstore/policy-controller
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/policy-controller-0.5.0/policy-controller-0.5.0.tgz
+    version: 0.5.0
+  - annotations:
+      artifacthub.io/images: |
+        - name: policy-controller
           image: ghcr.io/sigstore/policy-controller/policy-controller:v0.5.2@sha256:f23a23910f873d01864c01122120666adf78a1dbb43f674c4d423d5fe480a718
         - name: policywebhook
           image: ghcr.io/sigstore/policy-controller/policy-webhook:v0.5.2@sha256:ae3d5b549c269c8b2a9b208d812365b6fc610d7a21c9ced8dc7eaae0a1914c09
@@ -8985,4 +9008,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2023-03-02T18:07:57.995667158Z"
+generated: "2023-03-03T21:43:17.115505772Z"
