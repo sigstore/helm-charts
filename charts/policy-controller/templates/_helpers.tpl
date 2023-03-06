@@ -51,13 +51,24 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Create the name of the service account to use
+Create the name of the service account to use for policy-controller
 */}}
-{{- define "policy-controller.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "policy-controller.fullname" .) .Values.serviceAccount.name }}
+{{- define "policywebhook.serviceAccountName" -}}
+{{- if .Values.policywebhook.serviceAccount.create }}
+{{- default ( print (include "policy-controller.fullname" .) "-policy-webhook" ) .Values.policywebhook.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.serviceAccount.name }}
+{{- default "default" .Values.policywebhook.serviceAccount.name }}
+{{- end }}
+{{- end }}
+
+{{/*
+Create the name of the service account to use for webhook
+*/}}
+{{- define "webhook.serviceAccountName" -}}
+{{- if .Values.webhook.serviceAccount.create }}
+{{- default ( print (include "policy-controller.fullname" .) "-webhook" ) .Values.webhook.serviceAccount.name }}
+{{- else }}
+{{- default "default" .Values.webhook.serviceAccount.name }}
 {{- end }}
 {{- end }}
 

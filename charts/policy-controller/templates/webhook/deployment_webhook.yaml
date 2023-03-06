@@ -26,7 +26,7 @@ spec:
       {{- end }}
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
-      serviceAccountName: {{ template "policy-controller.fullname" . }}-webhook
+      serviceAccountName: {{ include "webhook.serviceAccountName" . }}
       # To avoid node becoming SPOF, spread our replicas to different nodes.
       affinity:
         podAntiAffinity:

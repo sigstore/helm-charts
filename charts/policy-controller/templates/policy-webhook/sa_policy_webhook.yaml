@@ -13,15 +13,17 @@
 # limitations under the License.
 
 ---
+{{- if .Values.policywebhook.serviceAccount.create }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
     {{- include "policy-controller.labels" . | nindent 4 }}
     control-plane: {{ template "policy-controller.fullname" . }}-policy-webhook
-  name: {{ template "policy-controller.fullname" . }}-policy-webhook
+  name: {{ include "policywebhook.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
   {{- with .Values.policywebhook.serviceAccount.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
+{{- end }}

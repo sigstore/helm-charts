@@ -38,10 +38,10 @@ spec:
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}
-      {{- end }}         
+      {{- end }}
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
-      serviceAccountName: {{ template "policy-controller.fullname" . }}-policy-webhook
+      serviceAccountName: {{ include "policywebhook.serviceAccountName" . }}
       # To avoid node becoming SPOF, spread our replicas to different nodes.
       affinity:
         podAntiAffinity:
