@@ -32,7 +32,7 @@ The Helm chart for Policy  Controller
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
-| policywebhook.image.version | string | `"sha256:3a3581032ff69991ddd9f19faf8acd059c8fb0ba8d3b0164a13b99a096880c84"` |  |
+| policywebhook.image.version | string | `"sha256:3a3581032ff69991ddd9f19faf8acd059c8fb0ba8d3b0164a13b99a096880c84"` | `"v0.7.0"` |
 | policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | policywebhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | policywebhook.podSecurityContext.enabled | bool | `true` |  |
