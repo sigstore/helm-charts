@@ -27,7 +27,7 @@ The Helm chart for Policy  Controller
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
-| policywebhook.configData | object | `{}` |  |
+| policywebhook.configData | object | `{}` | Set the data of the `policy-config-controller` configmap |
 | policywebhook.env | object | `{}` |  |
 | policywebhook.extraArgs | object | `{}` |  |
 | policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -60,7 +60,7 @@ The Helm chart for Policy  Controller
 | webhook.extraArgs | object | `{}` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
-| webhook.image.version | string | `"sha256:947693aa3a536992bc89f3c7ded8a7707b26cd4518972f293edd3e57e112438e"` |  |
+| webhook.image.version | string | `"sha256:947693aa3a536992bc89f3c7ded8a7707b26cd4518972f293edd3e57e112438e"` | `"v0.7.0"` |
 | webhook.name | string | `"webhook"` |  |
 | webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
 | webhook.namespaceSelector.matchExpressions[0].operator | string | `"In"` |  |
