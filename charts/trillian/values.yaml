@@ -150,8 +150,26 @@ logServer:
         port: 8090
         protocol: TCP
         targetPort: 8090
-  livenessProbe: {}
-  readinessProbe: {}
+  livenessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+    httpGet:
+      path: /healthz
+      port: 8090
+      scheme: HTTP
+  readinessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+    httpGet:
+      path: /healthz
+      port: 8090
+      scheme: HTTP
   resources: {}
   extraArgs: []
   serviceAccount:
@@ -184,8 +202,26 @@ logSigner:
         port: 8091
         protocol: TCP
         targetPort: 8091
-  livenessProbe: {}
-  readinessProbe: {}
+  livenessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+    httpGet:
+      path: /healthz
+      port: 8090
+      scheme: HTTP
+  readinessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+    httpGet:
+      path: /healthz
+      port: 8090
+      scheme: HTTP
   resources: {}
   extraArgs: []
   serviceAccount:

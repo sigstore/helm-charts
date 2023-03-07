@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.2](https://img.shields.io/badge/Version-0.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.2.4](https://img.shields.io/badge/Version-0.2.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -47,13 +47,11 @@ helm uninstall [RELEASE_NAME]
 | createdb.image.repository | string | `"sigstore/scaffolding/createdb"` |  |
 | createdb.image.version | string | `"sha256:9aa98492115c465b0cecfd6dbb04411a40c0d2d7e5d7c510f5646bd1d825e3c7"` | v0.6.2 |
 | createdb.name | string | `"createdb"` |  |
-| createdb.resources | string | `""` |  |
 | createdb.serviceAccount.annotations | object | `{}` |  |
 | createdb.serviceAccount.create | bool | `false` |  |
 | createdb.serviceAccount.name | string | `""` |  |
 | createdb.ttlSecondsAfterFinished | int | `3600` |  |
 | forceNamespace | string | `""` |  |
-| initContainerResources | string | `""` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
@@ -68,12 +66,26 @@ helm uninstall [RELEASE_NAME]
 | logServer.image.registry | string | `"gcr.io"` |  |
 | logServer.image.repository | string | `"projectsigstore/trillian_log_server"` |  |
 | logServer.image.version | string | `"sha256:75dbbfc4c0b64334b985c4971fe58c30b9dd73d7aa54b15cee61223ff92aebf3"` | v0.9.1 |
-| logServer.livenessProbe | object | `{}` |  |
+| logServer.livenessProbe.failureThreshold | int | `3` |  |
+| logServer.livenessProbe.httpGet.path | string | `"/healthz"` |  |
+| logServer.livenessProbe.httpGet.port | int | `8090` |  |
+| logServer.livenessProbe.httpGet.scheme | string | `"HTTP"` |  |
+| logServer.livenessProbe.initialDelaySeconds | int | `5` |  |
+| logServer.livenessProbe.periodSeconds | int | `10` |  |
+| logServer.livenessProbe.successThreshold | int | `1` |  |
+| logServer.livenessProbe.timeoutSeconds | int | `1` |  |
 | logServer.name | string | `"log-server"` |  |
 | logServer.nodeSelector | object | `{"kubernetes.io/arch":"amd64"}` | Trillian images currently only support amd64 due to the toolbelt/netcat container |
 | logServer.portHTTP | int | `8090` |  |
 | logServer.portRPC | int | `8091` |  |
-| logServer.readinessProbe | object | `{}` |  |
+| logServer.readinessProbe.failureThreshold | int | `3` |  |
+| logServer.readinessProbe.httpGet.path | string | `"/healthz"` |  |
+| logServer.readinessProbe.httpGet.port | int | `8090` |  |
+| logServer.readinessProbe.httpGet.scheme | string | `"HTTP"` |  |
+| logServer.readinessProbe.initialDelaySeconds | int | `5` |  |
+| logServer.readinessProbe.periodSeconds | int | `10` |  |
+| logServer.readinessProbe.successThreshold | int | `1` |  |
+| logServer.readinessProbe.timeoutSeconds | int | `1` |  |
 | logServer.replicaCount | int | `1` |  |
 | logServer.resources | object | `{}` |  |
 | logServer.service.ports[0].name | string | `"8091-tcp"` |  |
@@ -95,12 +107,26 @@ helm uninstall [RELEASE_NAME]
 | logSigner.image.registry | string | `"gcr.io"` |  |
 | logSigner.image.repository | string | `"projectsigstore/trillian_log_signer"` |  |
 | logSigner.image.version | string | `"sha256:b56ed0b7b5e9813c91b208ba6041c9342f9a53162d96943374e59b5289090f1f"` | v0.9.1 |
-| logSigner.livenessProbe | object | `{}` |  |
+| logSigner.livenessProbe.failureThreshold | int | `3` |  |
+| logSigner.livenessProbe.httpGet.path | string | `"/healthz"` |  |
+| logSigner.livenessProbe.httpGet.port | int | `8090` |  |
+| logSigner.livenessProbe.httpGet.scheme | string | `"HTTP"` |  |
+| logSigner.livenessProbe.initialDelaySeconds | int | `5` |  |
+| logSigner.livenessProbe.periodSeconds | int | `10` |  |
+| logSigner.livenessProbe.successThreshold | int | `1` |  |
+| logSigner.livenessProbe.timeoutSeconds | int | `1` |  |
 | logSigner.name | string | `"log-signer"` |  |
 | logSigner.nodeSelector | object | `{"kubernetes.io/arch":"amd64"}` | Trillian images currently only support amd64 due to the toolbelt/netcat container |
 | logSigner.portHTTP | int | `8090` |  |
 | logSigner.portRPC | int | `8091` |  |
-| logSigner.readinessProbe | object | `{}` |  |
+| logSigner.readinessProbe.failureThreshold | int | `3` |  |
+| logSigner.readinessProbe.httpGet.path | string | `"/healthz"` |  |
+| logSigner.readinessProbe.httpGet.port | int | `8090` |  |
+| logSigner.readinessProbe.httpGet.scheme | string | `"HTTP"` |  |
+| logSigner.readinessProbe.initialDelaySeconds | int | `5` |  |
+| logSigner.readinessProbe.periodSeconds | int | `10` |  |
+| logSigner.readinessProbe.successThreshold | int | `1` |  |
+| logSigner.readinessProbe.timeoutSeconds | int | `1` |  |
 | logSigner.replicaCount | int | `1` |  |
 | logSigner.resources | object | `{}` |  |
 | logSigner.service.ports[0].name | string | `"8091-tcp"` |  |
