@@ -11,5 +11,5 @@ roleRef:
   name: {{ template "policy-controller.fullname" . }}-webhook
 subjects:
 - kind: ServiceAccount
-  name: {{ template "policy-controller.fullname" . }}-webhook
+  name: {{ include "webhook.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}

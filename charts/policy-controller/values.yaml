@@ -26,6 +26,8 @@ policywebhook:
       memory: 128Mi
   serviceAccount:
     annotations: {}
+    create: true
+    name: ""
   securityContext:
     enabled: false
     runAsUser: 65532
@@ -77,6 +79,8 @@ webhook:
         - ALL
   serviceAccount:
     annotations: {}
+    create: true
+    name: ""
   service:
     annotations: {}
     type: ClusterIP
