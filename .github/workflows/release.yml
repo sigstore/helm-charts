@@ -80,4 +80,4 @@ jobs:
             cosign sign "ghcr.io/${GITHUB_REPOSITORY}/${chart_name}@${digest}"
           done
         env:
-          COSIGN_EXPERIMENTAL: 1
+          COSIGN_YES: true 
