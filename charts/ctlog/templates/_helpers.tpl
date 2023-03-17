@@ -1,47 +1,4 @@
 {{/*
-Expand the name of the chart.
-*/}}
-{{- define "ctlog.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
-{{- end }}
-
-{{/*
-Create a default fully qualified app name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-If release name contains chart name it will be used as a full name.
-*/}}
-{{- define "ctlog.fullname" -}}
-{{- if .Values.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- $name := default .Chart.Name .Values.nameOverride }}
-{{- if contains $name .Release.Name }}
-{{- .Release.Name | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
-{{- end }}
-{{- end }}
-{{- end }}
-
-{{/*
-Define the raw ctlog.namespace template if set with forceNamespace or .Release.Namespace is set
-*/}}
-{{- define "ctlog.rawnamespace" -}}
-{{- if .Values.forceNamespace -}}
-{{ print .Values.forceNamespace }}
-{{- else -}}
-{{ print .Release.Namespace }}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Define the ctlog.namespace template if set with forceNamespace or .Release.Namespace is set
-*/}}
-{{- define "ctlog.namespace" -}}
-{{ printf "namespace: %s" (include "ctlog.rawnamespace" .) }}
-{{- end -}}
-
-{{/*
 Create a fully qualified createctconfig name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
@@ -75,32 +32,7 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 {{- end -}}
 
-{{/*
-Create chart name and version as used by the chart label.
-*/}}
-{{- define "ctlog.chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
-{{- end }}
 
-{{/*
-Common labels
-*/}}
-{{- define "ctlog.labels" -}}
-helm.sh/chart: {{ include "ctlog.chart" . }}
-{{ include "ctlog.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels
-*/}}
-{{- define "ctlog.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "ctlog.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
 
 {{/*
 Server Arguments
@@ -126,7 +58,7 @@ Create the name of the service account to use
 */}}
 {{- define "ctlog.serviceAccountName" -}}
 {{- if .Values.server.serviceAccount.create }}
-{{- default (include "ctlog.fullname" .) .Values.server.serviceAccount.name }}
+{{- default (include "common.names.fullname" .) .Values.server.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.server.serviceAccount.name }}
 {{- end }}
@@ -154,29 +86,33 @@ Create the name of the service account to use for the createtree component
 {{- end -}}
 {{- end -}}
 
-{{/*
-Create the image path for the passed in image field
-*/}}
-{{- define "ctlog.image" -}}
-{{- if eq (substr 0 7 .version) "sha256:" -}}
-{{- printf "%s/%s@%s" .registry .repository .version -}}
-{{- else -}}
-{{- printf "%s/%s:%s" .registry .repository .version -}}
-{{- end -}}
-{{- end -}}
 
 {{/*
 Create the name of the config
 */}}
 {{- define "ctlog.config" -}}
-{{ printf "%s-config" (include "ctlog.fullname" .) }}
+{{ include "common.names.fullnameSuffix" (dict "suffix" "config" "context" $) }}
 {{- end }}
 
 {{/*
 Create the name of the secret
 */}}
 {{- define "ctlog.secret" -}}
-{{ printf "%s-secret" (include "ctlog.fullname" .) }}
+{{ include "common.names.fullnameSuffix" (dict "suffix" "secret" "context" $) }}
+{{- end }}
+
+{{/*
+Create the name of the secret operator
+*/}}
+{{- define "ctlog.secret-operator" -}}
+{{ include "common.names.fullnameSuffix" (dict "suffix" "secret-operator" "context" $) }}
+{{- end }}
+
+{{/*
+Create the name of the cm operator
+*/}}
+{{- define "ctlog.cm-operator" -}}
+{{ include "common.names.fullnameSuffix" (dict "suffix" "cm-operator" "context" $) }}
 {{- end }}
 
 {{/*

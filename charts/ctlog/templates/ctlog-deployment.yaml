@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "ctlog.fullname" . }}
-{{ include "ctlog.namespace" . | indent 2 }}
+  name: {{ template "common.names.fullname" . }}
+{{ include "common.names.namespace" . | indent 2 }}
   labels:
-    {{- include "ctlog.labels" . | nindent 4 }}
+    {{- include "common.labels.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.server.replicaCount }}
   selector:
     matchLabels:
-      {{- include "ctlog.selectorLabels" . | nindent 6 }}
+      {{- include "common.labels.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
@@ -18,12 +18,12 @@ spec:
         {{- toYaml .Values.server.podAnnotations | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "ctlog.labels" . | nindent 8 }}
+        {{- include "common.labels.selectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ template "ctlog.serviceAccountName" . }}
       containers:
-        - name: {{ template "ctlog.fullname" . }}
-          image: "{{ template "ctlog.image" .Values.server.image }}"
+        - name: {{ template "common.names.fullname" . }}
+          image: "{{ template "common.images.image" .Values.server.image }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
           args:
 {{  include "ctlog.server.args" . | indent 12 }}
@@ -52,4 +52,4 @@ spec:
       volumes:
         - name: keys
           secret:
-            secretName: {{ .Values.createctconfig.secret | default (printf "%s-secret" (include "ctlog.fullname" .)) }}
+            secretName: {{ .Values.createctconfig.secret | default (include "ctlog.secret" .) }}

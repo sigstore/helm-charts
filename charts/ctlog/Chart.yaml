@@ -4,7 +4,7 @@ description: Certificate Log
 
 type: application
 
-version: 0.2.44
+version: 0.3.0
 appVersion: 0.3.0
 
 keywords:
@@ -16,14 +16,19 @@ home: https://sigstore.dev/
 maintainers:
   - name: The Sigstore Authors
 
+dependencies:
+  - name: common
+    version: 0.1.0
+    repository: https://sigstore.github.io/helm-charts
+
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: ct_server
-      image: ghcr.io/sigstore/scaffolding/ct_server@sha256:91d23363c34ca0a8ec1fb89129815fb32f851eb8986bfbf7b2aed85c98411f04
+      image: ghcr.io/sigstore/scaffolding/ct_server@sha256:2ea576af6b64e154b718b058cd03b74fac8399affcf93c4251ab2234704ca432
     - name: createctconfig
       image: ghcr.io/sigstore/scaffolding/createctconfig@sha256:b3dae896ddb7b01b3257c668bc1e87f15aafe97f30a767f99426f557fa33e44c
     - name: createtree
-      image: ghcr.io/sigstore/scaffolding/createtree@sha256:0c6a1a49f906da6e59e7cfbba08a473778fc0296abdf8b86115861d5f3556ed4
+      image: ghcr.io/sigstore/scaffolding/createtree@sha256:2da5284bb29e18d125e4565d47256d0ded82c3a7001b44a4d152e2475ca1166c
     - name: curlimages/curl
-      image: docker.io/curlimages/curl@sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498
+      image: docker.io/curlimages/curl@sha256:48318407b8d98e8c7d5bd4741c88e8e1a5442de660b47f63ba656e5c910bc3da
