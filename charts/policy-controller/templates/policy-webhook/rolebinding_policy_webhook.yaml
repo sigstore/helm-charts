@@ -23,7 +23,7 @@ metadata:
     control-plane: {{ template "policy-controller.fullname" . }}-policy-webhook
 subjects:
 - kind: ServiceAccount
-  name: {{ template "policy-controller.fullname" . }}-policy-webhook
+  name: {{ include "policywebhook.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: Role

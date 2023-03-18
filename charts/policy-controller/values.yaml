@@ -12,8 +12,8 @@ policywebhook:
   replicaCount: 1
   image:
     repository: ghcr.io/sigstore/policy-controller/policy-webhook
-    # crane digest ghcr.io/sigstore/policy-controller/policy-webhook:v0.5.2
-    version: sha256:ae3d5b549c269c8b2a9b208d812365b6fc610d7a21c9ced8dc7eaae0a1914c09
+    # crane digest ghcr.io/sigstore/policy-controller/policy-webhook:v0.7.0
+    version: sha256:3a3581032ff69991ddd9f19faf8acd059c8fb0ba8d3b0164a13b99a096880c84
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
@@ -26,6 +26,8 @@ policywebhook:
       memory: 128Mi
   serviceAccount:
     annotations: {}
+    create: true
+    name: ""
   securityContext:
     enabled: false
     runAsUser: 65532
@@ -41,6 +43,8 @@ policywebhook:
     annotations: {}
     type: ClusterIP
     port: 443
+  volumeMounts: []
+  volumes: []
   webhookNames:
     defaulting: "defaulting.clusterimagepolicy.sigstore.dev"
     validating: "validating.clusterimagepolicy.sigstore.dev"
@@ -50,8 +54,8 @@ webhook:
   name: webhook
   image:
     repository: ghcr.io/sigstore/policy-controller/policy-controller
-    # crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.5.2
-    version: sha256:f23a23910f873d01864c01122120666adf78a1dbb43f674c4d423d5fe480a718
+    # crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.7.0
+    version: sha256:947693aa3a536992bc89f3c7ded8a7707b26cd4518972f293edd3e57e112438e
     pullPolicy: IfNotPresent
   env: {}
   extraArgs: {}
@@ -75,6 +79,8 @@ webhook:
         - ALL
   serviceAccount:
     annotations: {}
+    create: true
+    name: ""
   service:
     annotations: {}
     type: ClusterIP

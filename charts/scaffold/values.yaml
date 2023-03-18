@@ -90,3 +90,12 @@ copySecretJob:
   imagePullPolicy: IfNotPresent
   serviceaccount: tuf-secret-copy-job
   backoffLimit: 6
+
+tsa:
+  enabled: true
+  namespace:
+    name: tsa-system
+    create: true
+  forceNamespace: tsa-system
+  server:
+    fullnameOverride: tsa-server

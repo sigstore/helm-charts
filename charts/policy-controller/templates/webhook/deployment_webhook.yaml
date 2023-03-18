@@ -26,7 +26,7 @@ spec:
       {{- end }}
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
-      serviceAccountName: {{ template "policy-controller.fullname" . }}-webhook
+      serviceAccountName: {{ include "webhook.serviceAccountName" . }}
       # To avoid node becoming SPOF, spread our replicas to different nodes.
       affinity:
         podAntiAffinity:
@@ -130,9 +130,10 @@ spec:
       # high value that we respect whatever value it has configured for the lame duck grace period.
       terminationGracePeriodSeconds: 300
 
+      {{- if .Values.webhook.securityContext.enabled }}
       securityContext:
         {{- with .Values.webhook.securityContext }}
-        {{- toYaml . | nindent 8}}
+        {{- omit . "enabled" | toYaml | nindent 8}}
         {{- end }}
       {{- end }}
       volumes:
