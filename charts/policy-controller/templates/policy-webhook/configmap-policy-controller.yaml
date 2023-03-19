@@ -24,8 +24,9 @@ data:
     #                              #
     #    EXAMPLE CONFIGURATION     #
     #                              #
+    #                              #
+    #    no-match-policy: warn     #
     ################################
-    no-match-policy: warn
   {{- else if .Values.policywebhook.configData }}
 {{ toYaml .Values.policywebhook.configData | indent 4 }}
   {{- end }}
