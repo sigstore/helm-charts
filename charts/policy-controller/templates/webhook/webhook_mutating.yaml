@@ -11,6 +11,6 @@ webhooks:
     service:
       name: webhook
       namespace: {{ .Release.Namespace }}
-  failurePolicy: Fail
+  failurePolicy: {{ .Values.webhook.failurePolicy }}
   sideEffects: None
   reinvocationPolicy: IfNeeded

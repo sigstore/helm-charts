@@ -69,6 +69,7 @@ webhook:
   securityContext:
     enabled: false
     runAsUser: 65532
+  failurePolicy: Fail
   podSecurityContext:
     enabled: true
     allowPrivilegeEscalation: false

@@ -139,8 +139,20 @@
                     "properties": {
                         "annotations": {
                             "type": "object"
+                        },
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "name": {
+                            "type": "string"
                         }
                     }
+                },
+                "volumeMounts": {
+                    "type": "array"
+                },
+                "volumes": {
+                    "type": "array"
                 },
                 "webhookNames": {
                     "type": "object",
@@ -171,6 +183,9 @@
                 },
                 "extraArgs": {
                     "type": "object"
+                },
+                "failurePolicy": {
+                    "type": "string"
                 },
                 "image": {
                     "type": "object",
@@ -242,6 +257,9 @@
                         }
                     }
                 },
+                "registryCaBundle": {
+                    "type": "object"
+                },
                 "replicaCount": {
                     "type": "integer"
                 },
@@ -302,6 +320,12 @@
                     "properties": {
                         "annotations": {
                             "type": "object"
+                        },
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "name": {
+                            "type": "string"
                         }
                     }
                 },
@@ -310,17 +334,6 @@
                 },
                 "volumes": {
                     "type": "array"
-                },
-                "registryCaBundle": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        },
-                        "key": {
-                            "type": "string"
-                        }
-                    }
                 }
             }
         }
