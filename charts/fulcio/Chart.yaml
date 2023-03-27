@@ -27,6 +27,6 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: fulcio
-      image: gcr.io/projectsigstore/fulcio@sha256:9d336102d89c021ef2241fbce912ff06ab1fea77542d44e16b3ca2031554af08
+      image: gcr.io/projectsigstore/fulcio@sha256:17ae9911f54892224c85355a1f8559cfecf75343093f2eaeea1a5c4724283d12
     - name: createcerts
       image: ghcr.io/sigstore/scaffolding/createcerts@sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1
