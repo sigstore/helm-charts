@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -31,7 +31,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | backfillredis.image.pullPolicy | string | `"IfNotPresent"` |  |
 | backfillredis.image.registry | string | `"ghcr.io"` |  |
 | backfillredis.image.repository | string | `"sigstore/rekor/backfill-redis"` |  |
-| backfillredis.image.version | string | `"sha256:15f070c4b853f38773d253ebd39957de5c3beffc1699ba574db98e3679336af1"` | `"v1.0.1"` |
+| backfillredis.image.version | string | `"sha256:15f070c4b853f38773d253ebd39957de5c3beffc1699ba574db98e3679336af1"` |  |
 | backfillredis.name | string | `"backfillredis"` |  |
 | backfillredis.rekorAddress | string | `"rekor.rekor-system.svc"` |  |
 | backfillredis.resources | object | `{}` |  |
@@ -99,6 +99,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.attestation_storage.persistence.enabled | bool | `true` |  |
 | server.attestation_storage.persistence.existingClaim | string | `""` |  |
 | server.attestation_storage.persistence.mountPath | string | `"/var/lib/mysql"` |  |
+| server.attestation_storage.persistence.reclaimPolicy | string | `"Delete"` |  |
 | server.attestation_storage.persistence.size | string | `"5Gi"` |  |
 | server.attestation_storage.persistence.storageClass | string | `""` |  |
 | server.attestation_storage.persistence.subPath | string | `""` |  |
@@ -109,10 +110,11 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-| server.image.version | string | `"sha256:f7e6975041b9b6f3afdc7d6a1a87de43098ce8d83eb1958ea097ebfcb5537658"` | `"v1.0.1"` |
+| server.image.version | string | `"sha256:3a267e8ae59e3f5d41eba10303964efb396b7774b4021fd01334c6ee6b23a631"` |  |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |
+| server.ingress.hosts[0].host | string | `"root"` |  |
 | server.ingress.hosts[0].path | string | `"/"` |  |
 | server.ingress.tls | list | `[]` |  |
 | server.livenessProbe.failureThreshold | int | `3` |  |
@@ -156,10 +158,6 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.sharding.filename | string | `"sharding-config.yaml"` |  |
 | server.sharding.mountPath | string | `"/sharding"` |  |
 | server.signer | string | `"memory"` |  |
-| server.signerFileSecretOptions.secretName | string | `none` |  |
-| server.signerFileSecretOptions.secretMountPath | string | `none` | The `signer` option needs to be set to `secretMountPath + secretMountSubPath` if a file-based secret is to be used |
-| server.signerFileSecretOptions.privateKeySecretKey | string | `none` |  |
-| server.signerFileSecretOptions.secretMountSubPath | string | `none` |  |
 | trillian.adminServer | string | `""` |  |
 | trillian.enabled | bool | `true` |  |
 | trillian.forceNamespace | string | `"trillian-system"` |  |
@@ -174,25 +172,3 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | trillian.namespace.create | bool | `true` |  |
 | trillian.namespace.name | string | `"trillian-system"` |  |
 
-----------------------------------------------
-
-## MySQL Credentials
-
-Credentials for running (when deployed) and connecting to MySQL are stored in a secret resource. The _passsword_ and _root password_ are automatically generated when not provided.
-
-_Note:_ If you plan to perform an upgrade of the chart, be sure to specify these values explicitly.
-
-An existing secret containing credentials for MySQL can be provided by passing the `mysql.auth.existingSecret` parameter. This secret must have the following keys:
-
-* `mysql-password` - Password for connecting to MySQL
-* `mysql-root-password` - Root Password (required when deploying MySQL)
-
-## Integration with External Components
-
-By Default, the chart deploys all required services. However, configurations can be applied to offload certain services, such as Redis and MySQL externally.
-
-To disable the deployment of Redis or MySQL, pass the `redis.enabled=false` and/or `mysql.enabled=false`. Provide the hostname and port of the external resource using the `<redis|mysql>.hostname` and `<redis|mysql>.port` parameters.
-
-## Ingress
-
-To enable access from external resources, an Ingress resource is created. The configuration necessary for each Ingress resource is primarily dependent on the specific Ingress Controller being used. In most cases, implementation specific configuration is specified as annotations on the Ingress resources. These can be applied using the `server.ingress.annotations` parameter.
