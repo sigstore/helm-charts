@@ -62,8 +62,8 @@ server:
     registry: gcr.io
     repository: projectsigstore/rekor-server
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/rekor-server:v1.0.1
-    version: "sha256:f7e6975041b9b6f3afdc7d6a1a87de43098ce8d83eb1958ea097ebfcb5537658"
+    # crane digest gcr.io/projectsigstore/rekor-server:v1.1.0
+    version: "sha256:3a267e8ae59e3f5d41eba10303964efb396b7774b4021fd01334c6ee6b23a631"
   logging:
     production: false
   ingress:
