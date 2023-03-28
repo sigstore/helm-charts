@@ -92,7 +92,7 @@ copySecretJob:
   backoffLimit: 6
 
 tsa:
-  enabled: true
+  enabled: false
   namespace:
     name: tsa-system
     create: true
