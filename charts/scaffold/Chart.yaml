@@ -4,7 +4,7 @@ description: Scaffolding the components of the sigstore architecture
 
 type: application
 
-version: 0.5.6
+version: 0.6.0
 keywords:
   - security
   - pki

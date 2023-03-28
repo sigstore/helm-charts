@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.5.6](https://img.shields.io/badge/Version-0.5.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Scaffolding the components of the sigstore architecture
 
@@ -91,7 +91,7 @@ helm uninstall [RELEASE_NAME]
 | trillian.mysql.fullnameOverride | string | `"trillian-mysql"` |  |
 | trillian.namespace.create | bool | `true` |  |
 | trillian.namespace.name | string | `"trillian-system"` |  |
-| tsa.enabled | bool | `true` |  |
+| tsa.enabled | bool | `false` |  |
 | tsa.forceNamespace | string | `"tsa-system"` |  |
 | tsa.namespace.create | bool | `true` |  |
 | tsa.namespace.name | string | `"tsa-system"` |  |
