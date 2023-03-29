@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
+![Version: 1.3.1](https://img.shields.io/badge/Version-1.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -99,7 +99,6 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.attestation_storage.persistence.enabled | bool | `true` |  |
 | server.attestation_storage.persistence.existingClaim | string | `""` |  |
 | server.attestation_storage.persistence.mountPath | string | `"/var/lib/mysql"` |  |
-| server.attestation_storage.persistence.reclaimPolicy | string | `"Delete"` |  |
 | server.attestation_storage.persistence.size | string | `"5Gi"` |  |
 | server.attestation_storage.persistence.storageClass | string | `""` |  |
 | server.attestation_storage.persistence.subPath | string | `""` |  |

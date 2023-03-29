@@ -129,7 +129,6 @@ server:
       existingClaim: ""
       accessModes:
         - ReadWriteOnce
-      reclaimPolicy: Delete
   podAnnotations:
     prometheus.io/scrape: "true"
     prometheus.io/path: /metrics
