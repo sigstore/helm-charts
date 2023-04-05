@@ -200,5 +200,6 @@ createdb:
     create: false
     name: ""
     annotations: {}
+  resources: {}
 # Force namespace of namespaced resources
 forceNamespace: ""
