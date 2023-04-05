@@ -23,7 +23,7 @@ spec:
         - name: {{ template "fulcio.createcerts.fullname" . }}
           image: "{{ template "fulcio.image" .Values.createcerts.image }}"
           imagePullPolicy: "{{ .Values.createcerts.image.pullPolicy }}"
-          args: ["--secret={{ .Values.server.secret }}"]
+          args: ["--secret={{ .Values.server.secret.name }}"]
           env:
             - name: NAMESPACE
               valueFrom:
