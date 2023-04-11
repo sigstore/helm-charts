@@ -78,7 +78,7 @@ spec:
 {{- if .Values.logSigner.lifecycle }}
           lifecycle:
 {{ toYaml .Values.logSigner.lifecycle | indent 12 }}
-{{- end }
+{{- end }}
 {{- if .Values.logSigner.livenessProbe }}
           livenessProbe:
 {{ toYaml .Values.logSigner.livenessProbe | indent 12 }}
