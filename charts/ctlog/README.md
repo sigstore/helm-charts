@@ -1,6 +1,6 @@
 # ctlog
 
-![Version: 0.2.41](https://img.shields.io/badge/Version-0.2.41-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
+![Version: 0.2.42](https://img.shields.io/badge/Version-0.2.42-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
 Certificate Log
 
@@ -71,11 +71,17 @@ Certificate Log
 | server.ingress.enabled | bool | `false` |  |
 | server.ingress.hosts[0].path | string | `"/"` |  |
 | server.ingress.tls | list | `[]` |  |
+| server.livenessProbe.httpGet.path | string | `"/healthz"` |  |
+| server.livenessProbe.httpGet.port | int | `6962` |  |
+| server.livenessProbe.initialDelaySeconds | int | `10` |  |
 | server.podAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
 | server.podAnnotations."prometheus.io/port" | string | `"6963"` |  |
 | server.podAnnotations."prometheus.io/scrape" | string | `"true"` |  |
 | server.portHTTP | int | `6962` |  |
 | server.portHTTPMetrics | int | `6963` |  |
+| server.readinessProbe.httpGet.path | string | `"/healthz"` |  |
+| server.readinessProbe.httpGet.port | int | `6962` |  |
+| server.readinessProbe.initialDelaySeconds | int | `10` |  |
 | server.replicaCount | int | `1` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
