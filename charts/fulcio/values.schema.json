@@ -240,6 +240,15 @@
                             "examples": [
                                 "projects/test/locations/us-east1/caPools/test"
                             ]
+                        },
+                        "ct_log_url": {
+                            "type": "string",
+                            "default": "",
+                            "title": "URL of the CT log to submit to",
+                            "description": "If set, Fulcio will submit issued certificates to the specified CT log. If ctlog.enabled is set to true, this value will be ignored and the Helm-generated CT log will be used.",
+                            "examples": [
+                                "https://ct.example.com/"
+                            ]
                         }
                     },
                     "examples": [
