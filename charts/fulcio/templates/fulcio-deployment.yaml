@@ -67,6 +67,14 @@ spec:
                   name: {{ .Values.server.secret }}
                   key: password
           {{- end }}
+          {{- if .Values.server.livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.server.livenessProbe | indent 12 }}
+          {{- end }}
+          {{- if .Values.server.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.server.readinessProbe | indent 12 }}
+          {{- end }}
           volumeMounts:
             - name: fulcio-config
               mountPath: /etc/fulcio-config

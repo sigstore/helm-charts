@@ -51,6 +51,16 @@ server:
         port: 2112
         protocol: TCP
         targetPort: 2112
+  livenessProbe:
+    initialDelaySeconds: 10
+    httpGet:
+      path: /api/v1/rootCert
+      port: http
+  readinessProbe:
+    initialDelaySeconds: 10
+    httpGet:
+      path: /api/v1/rootCert
+      port: http
   ingress:
     http:
       enabled: true

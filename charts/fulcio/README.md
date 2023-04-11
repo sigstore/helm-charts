@@ -131,8 +131,14 @@ helm uninstall [RELEASE_NAME]
 | server.ingress.http.hosts[0].host | string | `"fulcio.localhost"` |  |
 | server.ingress.http.hosts[0].path | string | `"/"` |  |
 | server.ingress.http.tls | list | `[]` |  |
+| server.livenessProbe.httpGet.path | string | `"/api/v1/rootCert"` |  |
+| server.livenessProbe.httpGet.port | string | `"http"` |  |
+| server.livenessProbe.initialDelaySeconds | int | `10` |  |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
+| server.readinessProbe.httpGet.path | string | `"/api/v1/rootCert"` |  |
+| server.readinessProbe.httpGet.port | string | `"http"` |  |
+| server.readinessProbe.initialDelaySeconds | int | `10` |  |
 | server.replicaCount | int | `1` |  |
 | server.secret | string | `"fulcio-server-secret"` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
