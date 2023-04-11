@@ -1,3 +1,4 @@
+{{- if .Values.createctconfig.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -73,3 +74,4 @@ spec:
       securityContext:
 {{ toYaml .Values.createctconfig.securityContext | indent 8 }}
     {{- end }}
+{{- end }}
