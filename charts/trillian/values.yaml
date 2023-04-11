@@ -150,6 +150,7 @@ logServer:
         port: 8090
         protocol: TCP
         targetPort: 8090
+  lifecycle: {}
   livenessProbe: {}
   readinessProbe: {}
   resources: {}
@@ -184,6 +185,7 @@ logSigner:
         port: 8091
         protocol: TCP
         targetPort: 8091
+  lifecycle: {}
   livenessProbe: {}
   readinessProbe: {}
   resources: {}

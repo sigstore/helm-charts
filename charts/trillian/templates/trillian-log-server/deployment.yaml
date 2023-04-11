@@ -75,6 +75,10 @@ spec:
 {{- include "trillian.storageSystem.envCredentials" . | indent 12}}
           ports:
 {{- include "trillian.containerPorts" .Values.logServer.service.ports | indent 12 }}
+{{- if .Values.logServer.lifecycle }}
+          lifecycle:
+{{ toYaml .Values.logServer.lifecycle | indent 12 }}
+{{- end }
 {{- if .Values.logServer.livenessProbe }}
           livenessProbe:
 {{ toYaml .Values.logServer.livenessProbe | indent 12 }}
