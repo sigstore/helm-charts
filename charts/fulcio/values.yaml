@@ -54,12 +54,12 @@ server:
   livenessProbe:
     initialDelaySeconds: 10
     httpGet:
-      path: /api/v1/rootCert
+      path: /api/v2/trustBundle
       port: http
   readinessProbe:
     initialDelaySeconds: 10
     httpGet:
-      path: /api/v1/rootCert
+      path: /api/v2/trustBundle
       port: http
   ingress:
     http:
