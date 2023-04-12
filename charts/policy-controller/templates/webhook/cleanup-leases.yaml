@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: leases-cleanup
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "policy-controller.labels" . | nindent 4 }}
+    control-plane: {{ template "policy-controller.fullname" . }}-webhook
+  annotations:
+    "helm.sh/hook": pre-delete
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      name: leases-cleanup
+    spec:
+      serviceAccountName: {{ template "webhook.serviceAccountName" . }}
+      containers:
+        - name: kubectl
+          image: cgr.dev/chainguard/kubectl:1.26.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - kubectl delete leases --all --ignore-not-found -n {{ .Release.Namespace }}
+      restartPolicy: OnFailure
