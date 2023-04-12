@@ -1,3 +1,4 @@
+{{- if .Values.createtree.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -41,3 +42,4 @@ spec:
       securityContext:
 {{ toYaml .Values.createtree.securityContext | indent 8 }}
     {{- end }}
+{{- end }}
