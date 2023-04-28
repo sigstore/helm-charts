@@ -31,6 +31,7 @@ server:
     hsm_caroot_id:
     aws_hsm_root_ca_path:
     gcp_private_ca_parent: projects/test/locations/us-east1/caPools/test
+    ct_log_url: ""
   serviceAccount:
     create: true
     name: ""

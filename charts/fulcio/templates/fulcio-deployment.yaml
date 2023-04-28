@@ -58,7 +58,7 @@ spec:
             - "--kms-resource={{ .Values.server.args.kms_resource }}"
             - "--kms-cert-chain-path=/etc/fulcio-config/chain.pem"
             {{- end }}
-            - "--ct-log-url=http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/{{ .Values.ctlog.createctconfig.logPrefix }}"
+            - "--ct-log-url={{ if .Values.ctlog.enabled }}http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/{{ .Values.ctlog.createctconfig.logPrefix }}{{ else }}{{ .Values.server.args.ct_log_url }}{{ end }}"
           {{- if eq .Values.server.args.certificateAuthority "fileca" }}
           env:
             - name: PASSWORD
