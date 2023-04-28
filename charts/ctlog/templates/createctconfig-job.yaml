@@ -3,9 +3,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ template "ctlog.createctconfig.fullname" . }}
-{{ include "ctlog.namespace" . | indent 2 }}
+{{ include "common.names.namespace" . | indent 2 }}
   labels:
-    {{- include "ctlog.labels" . | nindent 4 }}
+    {{- include "common.labels.labels" . | nindent 4 }}
 {{- if .Values.createctconfig.annotations }}
   annotations:
 {{ toYaml .Values.createctconfig.annotations | indent 4 }}
@@ -22,7 +22,7 @@ spec:
       automountServiceAccountToken: {{ .Values.createctconfig.serviceAccount.mountToken }}
       initContainers:
         - name: "wait-for-createtree-configmap"
-          image: "{{ template "ctlog.image" .Values.createctconfig.initContainerImage.curl }}"
+          image: "{{ template "common.images.image" .Values.createctconfig.initContainerImage.curl }}"
           imagePullPolicy: {{ .Values.createctconfig.initContainerImage.curl.imagePullPolicy }}
           command: ["sh", "-c", "until curl --fail --header \"Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)\" --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --max-time 10 https://kubernetes.default.svc/api/v1/namespaces/$(NAMESPACE)/configmaps/{{ template "ctlog.config" . }} | grep '\"treeID\":'; do echo waiting for Configmap {{ template "ctlog.config" . }}; sleep 5; done;"]
           env:
@@ -36,7 +36,7 @@ spec:
     {{- end }}
       containers:
         - name: {{ template "ctlog.createctconfig.fullname" . }}
-          image: "{{ template "ctlog.image" .Values.createctconfig.image }}"
+          image: "{{ template "common.images.image" .Values.createctconfig.image }}"
           imagePullPolicy: "{{ .Values.createctconfig.image.pullPolicy }}"
           args: [
             "--configmap={{ template "ctlog.config" . }}",

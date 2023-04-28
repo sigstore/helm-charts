@@ -3,9 +3,9 @@ apiVersion: "networking.k8s.io/v1"
 kind: Ingress
 metadata:
   labels:
-    {{- include "ctlog.labels" . | nindent 4 }}
-  name: {{ template "ctlog.fullname" . }}
-{{ include "ctlog.namespace" . | indent 2 }}
+    {{- include "common.labels.labels" . | nindent 4 }}
+  name: {{ template "common.names.fullname" . }}
+{{ include "common.names.namespace" . | indent 2 }}
   annotations:
 {{ toYaml .Values.server.ingress.annotations | indent 4 }}
 spec:

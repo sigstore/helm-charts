@@ -3,9 +3,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ template "ctlog.createtree.fullname" . }}
-{{ include "ctlog.namespace" . | indent 2 }}
+{{ include "common.names.namespace" . | indent 2 }}
   labels:
-    {{- include "ctlog.labels" . | nindent 4 }}
+    {{- include "common.labels.labels" . | nindent 4 }}
 {{- if .Values.createtree.annotations }}
   annotations:
 {{ toYaml .Values.createtree.annotations | indent 4 }}
@@ -21,7 +21,7 @@ spec:
       automountServiceAccountToken: {{ .Values.createtree.serviceAccount.mountToken }}
       containers:
         - name: {{ template "ctlog.createtree.fullname" . }}
-          image: "{{ template "ctlog.image" .Values.createtree.image }}"
+          image: "{{ template "common.images.image" .Values.createtree.image }}"
           imagePullPolicy: "{{ .Values.createtree.image.pullPolicy }}"
           env:
           - name: NAMESPACE
