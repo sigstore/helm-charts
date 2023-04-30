@@ -44,8 +44,8 @@ mysql:
     cloudsql:
       registry: gcr.io
       repository: cloudsql-docker/gce-proxy
-      # -- v1.33.1
-      version: sha256:7f53fe219f6815e275301561e2f8819e59e38eca5a93de644a287452f841fab7
+      # -- v1.33.6
+      version: sha256:cbd474b0424a86df61834e60e8be5bbf19d771a387a0e5bb5c4686507b23ef7f
       resources:
         requests:
           memory: "2Gi"
@@ -56,7 +56,7 @@ mysql:
         runAsNonRoot: true
         capabilities:
           drop:
-          - ALL
+            - ALL
   enabled: true
   replicaCount: 1
   name: mysql
@@ -68,8 +68,8 @@ mysql:
     registry: gcr.io
     repository: trillian-opensource-ci/db_server
     pullPolicy: IfNotPresent
-    # -- v1.5.0
-    version: sha256:22b7fddcb4bafc5692760d84dca5e86294363a94e8f0ecb8f5c39364d436e6d5
+    # -- v1.5.1
+    version: sha256:20a4b9b9532f466936ca2bb186251a0a21d34f89b78b12bb2bb1c2aae5e8e339
   resources: {}
   args:
     - "--ignore-db-dir=lost+found"
