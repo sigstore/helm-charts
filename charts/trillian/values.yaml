@@ -68,8 +68,8 @@ mysql:
     registry: gcr.io
     repository: trillian-opensource-ci/db_server
     pullPolicy: IfNotPresent
-    # -- v1.5.0
-    version: sha256:22b7fddcb4bafc5692760d84dca5e86294363a94e8f0ecb8f5c39364d436e6d5
+    # -- v1.5.1
+    version: sha256:20a4b9b9532f466936ca2bb186251a0a21d34f89b78b12bb2bb1c2aae5e8e339
   resources: {}
   args:
     - "--ignore-db-dir=lost+found"

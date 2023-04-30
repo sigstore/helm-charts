@@ -141,7 +141,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
 | mysql.image.repository | string | `"trillian-opensource-ci/db_server"` |  |
-| mysql.image.version | string | `"sha256:22b7fddcb4bafc5692760d84dca5e86294363a94e8f0ecb8f5c39364d436e6d5"` | v1.5.0 |
+| mysql.image.version | string | `"sha256:20a4b9b9532f466936ca2bb186251a0a21d34f89b78b12bb2bb1c2aae5e8e339"` | v1.5.1 |
 | mysql.livenessProbe.exec.command[0] | string | `"/etc/init.d/mysql"` |  |
 | mysql.livenessProbe.exec.command[1] | string | `"status"` |  |
 | mysql.livenessProbe.failureThreshold | int | `3` |  |
