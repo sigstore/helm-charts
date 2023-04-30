@@ -44,8 +44,8 @@ mysql:
     cloudsql:
       registry: gcr.io
       repository: cloudsql-docker/gce-proxy
-      # -- v1.33.1
-      version: sha256:7f53fe219f6815e275301561e2f8819e59e38eca5a93de644a287452f841fab7
+      # -- v1.33.6
+      version: sha256:cbd474b0424a86df61834e60e8be5bbf19d771a387a0e5bb5c4686507b23ef7f
       resources:
         requests:
           memory: "2Gi"
@@ -56,7 +56,7 @@ mysql:
         runAsNonRoot: true
         capabilities:
           drop:
-          - ALL
+            - ALL
   enabled: true
   replicaCount: 1
   name: mysql
