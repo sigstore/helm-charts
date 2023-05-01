@@ -135,7 +135,10 @@ helm uninstall [RELEASE_NAME]
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
 | server.replicaCount | int | `1` |  |
-| server.secret | string | `"fulcio-server-secret"` |  |
+| server.secret.certificateKey | string | `"cert"` |  |
+| server.secret.name | string | `"fulcio-server-secret"` |  |
+| server.secret.passwordKey | string | `"password"` |  |
+| server.secret.privateKey | string | `"private"` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
 | server.service.ports[0].name | string | `"http"` |  |

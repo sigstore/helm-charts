@@ -10,7 +10,11 @@ server:
   name: server
   svcPort: 80
   grpcSvcPort: 5554
-  secret: fulcio-server-secret
+  secret:
+    name: fulcio-server-secret
+    privateKey: private
+    passwordKey: password
+    certificateKey: cert
   logging:
     production: false
   image:

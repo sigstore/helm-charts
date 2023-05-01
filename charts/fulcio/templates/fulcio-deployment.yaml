@@ -64,8 +64,9 @@ spec:
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.server.secret }}
-                  key: password
+                  name: {{ .Values.server.secret.name }}
+                  key: {{ .Values.server.secret.passwordKey }}
+                  optional: true
           {{- end }}
           volumeMounts:
             - name: fulcio-config
@@ -101,10 +102,10 @@ spec:
         {{- if eq .Values.server.args.certificateAuthority "fileca" }}
         - name: fulcio-cert
           secret:
-            secretName: {{ .Values.server.secret }}
+            secretName: {{ .Values.server.secret.name }}
             items:
-              - key: private
+              - key: {{ .Values.server.secret.privateKey }}
                 path: key.pem
-              - key: cert
+              - key: {{ .Values.server.secret.certificateKey }}
                 path: cert.pem
         {{- end }}

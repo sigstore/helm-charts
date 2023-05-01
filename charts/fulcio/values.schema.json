@@ -827,8 +827,42 @@
                     ]
                 },
                 "secret": {
-                    "type": "string",
-                    "title": "The name of the secret containing the fulcio keys, password and PEM"
+                    "type": "object",
+                    "default": {},
+                    "title": "The secret containing the fulcio sever keys, certificate",
+                    "required": [
+                        "name",
+                        "privateKey",
+                        "certificateKey"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "default": "fulcio-server-cert",
+                            "title": "The name of the fulcio secret containing the keys, password, pem",
+                            "examples": [
+                                "fulcio-server-cert"
+                            ]
+                        },
+                        "privateKey": {
+                            "type": "string",
+                            "default": "private",
+                            "title": "The key path for private key in secret",
+                            "examples": [
+                                "private",
+                                "tls.key"
+                            ]
+                        },
+                        "certificateKey": {
+                            "type": "string",
+                            "default": "cert",
+                            "title": "The key path for certificate PEM in secret",
+                            "examples": [
+                                "cert",
+                                "tls.cert"
+                            ]
+                        }
+                    }
                 }
             },
             "examples": [
