@@ -241,11 +241,21 @@
                                 "projects/test/locations/us-east1/caPools/test"
                             ]
                         },
+                        "disable_ct_log": {
+                            "type": "bool",
+                            "default": false,
+                            "title": "Disable CT log submission",
+                            "description": "If set, Fulcio will not submit issued certificates to a CT log.",
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
                         "ct_log_url": {
                             "type": "string",
                             "default": "",
                             "title": "URL of the CT log to submit to",
-                            "description": "If set, Fulcio will submit issued certificates to the specified CT log. If ctlog.enabled is set to true, this value will be ignored and the Helm-generated CT log will be used.",
+                            "description": "If set, Fulcio will submit issued certificates to the specified CT log instead of the default in-cluster CT Log.",
                             "examples": [
                                 "https://ct.example.com/"
                             ]
