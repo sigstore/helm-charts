@@ -242,7 +242,7 @@
                             ]
                         },
                         "disable_ct_log": {
-                            "type": "bool",
+                            "type": "boolean",
                             "default": false,
                             "title": "Disable CT log submission",
                             "description": "If set, Fulcio will not submit issued certificates to a CT log.",
