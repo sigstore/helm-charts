@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.2.1](https://img.shields.io/badge/Version-2.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0](https://img.shields.io/badge/AppVersion-1.2.0-informational?style=flat-square)
+![Version: 2.3.0](https://img.shields.io/badge/Version-2.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.0](https://img.shields.io/badge/AppVersion-1.3.0-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -109,7 +109,7 @@ helm uninstall [RELEASE_NAME]
 | namespace.name | string | `"fulcio-system"` |  |
 | server.args.aws_hsm_root_ca_path | string | `nil` |  |
 | server.args.certificateAuthority | string | `"fileca"` |  |
-| server.args.ct_log_url | string | `nil` |  |
+| server.args.ct_log_url | string | `""` |  |
 | server.args.gcp_private_ca_parent | string | `"projects/test/locations/us-east1/caPools/test"` |  |
 | server.args.grpcPort | int | `5554` |  |
 | server.args.hsm_caroot_id | string | `nil` |  |
@@ -118,7 +118,7 @@ helm uninstall [RELEASE_NAME]
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/fulcio"` |  |
-| server.image.version | string | `"sha256:17ae9911f54892224c85355a1f8559cfecf75343093f2eaeea1a5c4724283d12"` | v1.2.0 |
+| server.image.version | string | `"sha256:29194a0b72f6e23e884ee4fef7aaa8d0dafefbf2e0f42bbb94f935da373e74be"` | v1.3.0 |
 | server.ingress.grpc.annotations."nginx.ingress.kubernetes.io/backend-protocol" | string | `"GRPC"` |  |
 | server.ingress.grpc.className | string | `""` |  |
 | server.ingress.grpc.enabled | bool | `false` |  |
