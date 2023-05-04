@@ -143,6 +143,7 @@
                 }
             ]
         },
+        "lifecycle": {},
         "livenessProbe": {},
         "readinessProbe": {},
         "resources": {},
@@ -176,6 +177,7 @@
                 }
             ]
         },
+        "lifecycle": {},
         "livenessProbe": {},
         "readinessProbe": {},
         "resources": {},
