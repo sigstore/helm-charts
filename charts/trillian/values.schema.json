@@ -12,8 +12,8 @@
         },
         "netcat": {
             "registry": "docker.io",
-            "repository": "toolbelt/netcat",
-            "version": "sha256:99a582fa45fe1b50c97c652c9ada24b96c80d7071283227bd9a9f8eaa1c7a12b",
+            "repository": "alpine",
+            "version": "sha256:69665d02cb32192e52e07644d76bc6f25abeb5410edc1c7a81a10ba3f0efb90a",
             "imagePullPolicy": "IfNotPresent"
         }
     },

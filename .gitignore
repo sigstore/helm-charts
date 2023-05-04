@@ -3,3 +3,6 @@ charts/*/Chart.lock
 
 # Vim swap files
 *.swp
+
+# OS-generated files
+.DS_Store

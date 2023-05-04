@@ -25,8 +25,8 @@ annotations:
   artifacthub.io/images: |
     - name: curl
       image: docker.io/curlimages/curl@sha256:e83fef2d5a036d40df4ded829141e8c0ec41871490d252fb8c81cb4580ebb35b
-    - name: netcat
-      image: docker.io/toolbelt/netcat@sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea
+    - name: alpine
+      image: docker.io/alpine@sha256:69665d02cb32192e52e07644d76bc6f25abeb5410edc1c7a81a10ba3f0efb90a
     - name: db_server
       image: gcr.io/trillian-opensource-ci/db_server@sha256:20a4b9b9532f466936ca2bb186251a0a21d34f89b78b12bb2bb1c2aae5e8e339
     - name: log_server
