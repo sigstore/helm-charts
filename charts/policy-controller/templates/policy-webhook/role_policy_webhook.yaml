@@ -39,6 +39,13 @@ rules:
     resourceNames: ["config-image-policies"]
     verbs: ["get", "list", "create", "update", "patch", "watch"]
 
+  # This is needed to create / patch ConfigMap that is created by the reconciler
+  # to consolidate various TrustRoot configuration into SigstoreKeys ConfigMap.
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    resourceNames: ["config-sigstore-keys"]
+    verbs: ["get", "list", "create", "update", "patch", "watch"]
+
   - apiGroups: ["policy.sigstore.dev"]
     resources: ["trustroots"]
     verbs: ["get", "list"]
