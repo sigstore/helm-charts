@@ -24,3 +24,6 @@ data:
   chain.pem: {{ .Values.server.args.tink_kms_cert_chain | quote }}
   tink.keyset.enc: {{ .Values.server.args.tink_enc_keyset | quote }}
   {{- end }}
+  {{- if .Values.server.args.cloud_credential_config }}
+  cloud_credential_config: {{.Values.server.args.cloud_credential_config | quote }}
+  {{- end }}
