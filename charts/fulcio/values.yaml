@@ -23,9 +23,14 @@ server:
     # crane digest gcr.io/projectsigstore/fulcio:v1.6.0
     # -- v1.6.0
     version: sha256:9030be23f59405100bc8d24ce2ca493b9d430639ef49b448541a840b3bfd7771
+  env:
+    # Valid values: path to workload identity config or service account key JSON file
+    GOOGLE_APPLICATION_CREDENTIALS: /etc/fulcio-config/cloud_credentials
   args:
     port: 5555
     grpcPort: 5554
+    # valid values: GCP workload identity config json for trusted external cloud providers
+    creds: ""
     # Valid values: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca
     certificateAuthority: fileca
     # kms_resource: gcpkms://....
