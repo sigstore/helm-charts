@@ -11,3 +11,4 @@ data:
   {{- if (eq .Values.server.args.certificateAuthority "kmsca")}}
   chain.pem: {{.Values.server.args.kms_cert_chain | quote }}
   {{- end }}
+  cloud_credentials: {{.Values.server.args.creds | quote }}
