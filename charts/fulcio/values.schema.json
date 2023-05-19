@@ -82,7 +82,6 @@
                 "grpcSvcPort",
                 "image",
                 "args",
-                "env",
                 "serviceAccount",
                 "service",
                 "ingress",
@@ -285,7 +284,6 @@
                     "type": "object",
                     "default": {},
                     "title": "The env Schema",
-                    "required": [],
                     "properties": {},
                     "examples": [
                         {
