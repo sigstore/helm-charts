@@ -122,7 +122,7 @@ helm uninstall [RELEASE_NAME]
 | server.args.grpcPort | int | `5554` |  |
 | server.args.hsm_caroot_id | string | `nil` |  |
 | server.args.port | int | `5555` |  |
-| server.env.GOOGLE_APPLICATION_CREDENTIALS | string | `"/etc/fulcio-config/cloud_credentials"` |  |
+| server.env | object | `{}` |  |
 | server.grpcSvcPort | int | `5554` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |

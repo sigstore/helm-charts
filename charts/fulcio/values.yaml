@@ -23,9 +23,7 @@ server:
     # crane digest gcr.io/projectsigstore/fulcio:v1.6.0
     # -- v1.6.0
     version: sha256:9030be23f59405100bc8d24ce2ca493b9d430639ef49b448541a840b3bfd7771
-  # env:
-  #   # Valid values: path to workload identity config or service account key JSON file
-  #   GOOGLE_APPLICATION_CREDENTIALS: /etc/fulcio-config/cloud_credentials
+  env: {}
   args:
     port: 5555
     grpcPort: 5554
