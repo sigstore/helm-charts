@@ -28,7 +28,7 @@ server:
     port: 5555
     grpcPort: 5554
     # valid values: GCP workload identity config json for trusted external cloud providers
-    creds: ""
+    cloud_credential_config: ""
     # Valid values: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca
     certificateAuthority: fileca
     # kms_resource: gcpkms://....

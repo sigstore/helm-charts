@@ -115,7 +115,7 @@ helm uninstall [RELEASE_NAME]
 | server.affinity | object | `{}` |  |
 | server.args.aws_hsm_root_ca_path | string | `nil` |  |
 | server.args.certificateAuthority | string | `"fileca"` |  |
-| server.args.creds | string | `""` |  |
+| server.args.cloud_credential_config | string | `""` |  |
 | server.args.ct_log_url | string | `""` |  |
 | server.args.disable_ct_log | bool | `false` |  |
 | server.args.gcp_private_ca_parent | string | `"projects/test/locations/us-east1/caPools/test"` |  |
