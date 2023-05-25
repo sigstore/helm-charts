@@ -260,7 +260,7 @@
                                 "https://ct.example.com/"
                             ]
                         },
-                        "creds": {
+                        "cloud_credential_config": {
                             "type": "string",
                             "default": "",
                             "title": "Google Cloud Web Identity JSON config / Service Account token key json",
@@ -287,7 +287,7 @@
                     "properties": {},
                     "examples": [
                         {
-                            "GOOGLE_APPLICATION_CREDENTIALS": "/etc/fulcio-config/cloud_credentials"
+                            "GOOGLE_APPLICATION_CREDENTIALS": "/etc/fulcio-config/cloud_credential_config"
                         }
                     ]
                 },
