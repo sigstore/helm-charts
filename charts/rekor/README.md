@@ -109,11 +109,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-<<<<<<< HEAD
 | server.image.version | string | `"sha256:54c15f1e73d113539753a570f48d8680a4c48a5b1698f9fe0e41c6a6a3a29b3c"` |  |
-=======
-| server.image.version | string | `"sha256:1c14a1b7fb5220826fc8cbeb60118a613c8702d73129e543050b51039b9afe28"` |  |
->>>>>>> upstream/main
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |
