@@ -125,7 +125,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.gcp.cloudsql.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mysql.gcp.cloudsql.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | mysql.gcp.cloudsql.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.cloudsql.version | string | `"sha256:cbd474b0424a86df61834e60e8be5bbf19d771a387a0e5bb5c4686507b23ef7f"` | v1.33.6 |
+| mysql.gcp.cloudsql.version | string | `"sha256:c378a623353ee9c592795c0ad9e448bdc7e26c7635ba982968a60d0e3bb4d575"` | v1.33.7 |
 | mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
 | mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
@@ -141,7 +141,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
 | mysql.image.repository | string | `"trillian-opensource-ci/db_server"` |  |
-| mysql.image.version | string | `"sha256:20a4b9b9532f466936ca2bb186251a0a21d34f89b78b12bb2bb1c2aae5e8e339"` | v1.5.1 |
+| mysql.image.version | string | `"sha256:c04753ed44eac715e3191dad16fb0848a06714ddcb00c6f7768bf065485e1f8d"` | v1.5.2 |
 | mysql.livenessProbe.exec.command[0] | string | `"/etc/init.d/mysql"` |  |
 | mysql.livenessProbe.exec.command[1] | string | `"status"` |  |
 | mysql.livenessProbe.failureThreshold | int | `3` |  |
