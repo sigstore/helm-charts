@@ -158,6 +158,14 @@
                         }
                     ]
                 },
+                "livenessProbe": {
+                    "description": "Liveness probe configuration",
+                    "$ref": "https://kubernetesjsonschema.dev/v1.18.1/_definitions.json#/definitions/io.k8s.api.core.v1.Probe"
+                },
+                "readinessProbe": {
+                    "description": "Readiness probe configuration",
+                    "$ref": "https://kubernetesjsonschema.dev/v1.18.1/_definitions.json#/definitions/io.k8s.api.core.v1.Probe"
+                },
                 "serviceAccount": {
                     "type": "object",
                     "default": {},

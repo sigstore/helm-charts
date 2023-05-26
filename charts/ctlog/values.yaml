@@ -13,6 +13,16 @@ server:
     pullPolicy: IfNotPresent
     # v0.3.0
     version: "sha256:7c791d3b7c15e817807f07d4cdb00406529a114702ad448ee857e1d0fc5fb5a9"
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 6962
+    initialDelaySeconds: 10
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: 6962
+    initialDelaySeconds: 10
   serviceAccount:
     create: true
     name: ""

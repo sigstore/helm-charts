@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.3.1](https://img.shields.io/badge/Version-1.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
+![Version: 1.3.3](https://img.shields.io/badge/Version-1.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -99,7 +99,6 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.attestation_storage.persistence.enabled | bool | `true` |  |
 | server.attestation_storage.persistence.existingClaim | string | `""` |  |
 | server.attestation_storage.persistence.mountPath | string | `"/var/lib/mysql"` |  |
-| server.attestation_storage.persistence.reclaimPolicy | string | `"Delete"` |  |
 | server.attestation_storage.persistence.size | string | `"5Gi"` |  |
 | server.attestation_storage.persistence.storageClass | string | `""` |  |
 | server.attestation_storage.persistence.subPath | string | `""` |  |
@@ -110,7 +109,11 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
+<<<<<<< HEAD
 | server.image.version | string | `"sha256:54c15f1e73d113539753a570f48d8680a4c48a5b1698f9fe0e41c6a6a3a29b3c"` |  |
+=======
+| server.image.version | string | `"sha256:1c14a1b7fb5220826fc8cbeb60118a613c8702d73129e543050b51039b9afe28"` |  |
+>>>>>>> upstream/main
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |

@@ -17,9 +17,9 @@ server:
     registry: gcr.io
     repository: projectsigstore/fulcio
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/fulcio:v1.2.0
-    # -- v1.2.0
-    version: sha256:17ae9911f54892224c85355a1f8559cfecf75343093f2eaeea1a5c4724283d12
+    # crane digest gcr.io/projectsigstore/fulcio:v1.3.1
+    # -- v1.3.1
+    version: sha256:c920be2d367214562cda7d53d3af3529edf2dfd9326b24909ece450092b97b18
   args:
     port: 5555
     grpcPort: 5554
@@ -31,6 +31,8 @@ server:
     hsm_caroot_id:
     aws_hsm_root_ca_path:
     gcp_private_ca_parent: projects/test/locations/us-east1/caPools/test
+    ct_log_url: ""
+    disable_ct_log: false
   serviceAccount:
     create: true
     name: ""

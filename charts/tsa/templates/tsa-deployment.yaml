@@ -50,7 +50,7 @@ spec:
             - "--certificate-chain-path=/etc/tsa-config/chain.pem"
             {{- end }}
             {{- if .Values.server.logging.production }}
-            - "--log_type=prod"
+            - "--log-type=prod"
             {{- end -}}
 {{- if .Values.server.env }}
           env:
