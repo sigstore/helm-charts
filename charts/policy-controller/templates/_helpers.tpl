@@ -139,6 +139,13 @@ Create the image path for the passed in policy-webhook image field
 {{- end -}}
 
 {{/*
+Create the image path for the passed in leases-cleanup image field
+*/}}
+{{- define "leases-cleanup.image" -}}
+{{- printf "%s:%s" .repository .version -}}
+{{- end -}}
+
+{{/*
 */}}
 {{- define "policy-controller.webhook.namespaceSelector" -}}
 {{- if .Values.webhook.namespaceSelector }}

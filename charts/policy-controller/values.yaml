@@ -98,6 +98,12 @@ webhook:
         values: ["true"]
   registryCaBundle: {}
 
+leasescleanup:
+  image:
+    repository: cgr.dev/chainguard/kubectl
+    version: 1.26.0
+    pullPolicy: IfNotPresent
+
 ## common node selector for all the pods
 commonNodeSelector: {}
 #  key1: value1
