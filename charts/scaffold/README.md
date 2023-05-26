@@ -39,7 +39,7 @@ helm uninstall [RELEASE_NAME]
 | https://sigstore.github.io/helm-charts | ctlog | 0.2.40 |
 | https://sigstore.github.io/helm-charts | fulcio | 2.3.2 |
 | https://sigstore.github.io/helm-charts | rekor | 1.3.2 |
-| https://sigstore.github.io/helm-charts | trillian | 0.2.4 |
+| https://sigstore.github.io/helm-charts | trillian | 0.2.5 |
 | https://sigstore.github.io/helm-charts | tsa | 0.1.0 |
 | https://sigstore.github.io/helm-charts | tuf | 0.1.4 |
 

@@ -7,7 +7,7 @@ dependencies:
   version: 1.3.2
 - name: trillian
   repository: https://sigstore.github.io/helm-charts
-  version: 0.2.4
+  version: 0.2.5
 - name: ctlog
   repository: https://sigstore.github.io/helm-charts
   version: 0.2.40
@@ -17,5 +17,5 @@ dependencies:
 - name: tsa
   repository: https://sigstore.github.io/helm-charts
   version: 0.1.0
-digest: sha256:50a711ceff37f9efe187824c95002b34189a399a1db3e4fc5641c02e2565f1e8
-generated: "2023-05-04T07:10:12.083391-07:00"
+digest: sha256:3ee7a70aeaf02ee03061be52a8731ef76e9996ab5b52d7dd86db0e02c8bf3835
+generated: "2023-05-26T10:10:08.070642+02:00"
