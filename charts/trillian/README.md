@@ -125,7 +125,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.gcp.cloudsql.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mysql.gcp.cloudsql.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | mysql.gcp.cloudsql.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.cloudsql.version | string | `"sha256:cbd474b0424a86df61834e60e8be5bbf19d771a387a0e5bb5c4686507b23ef7f"` | v1.33.6 |
+| mysql.gcp.cloudsql.version | string | `"sha256:c378a623353ee9c592795c0ad9e448bdc7e26c7635ba982968a60d0e3bb4d575"` | v1.33.7 |
 | mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
 | mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
