@@ -18,8 +18,8 @@ spec:
       serviceAccountName: {{ template "webhook.serviceAccountName" . }}-cleanup
       containers:
         - name: kubectl
-          image: cgr.dev/chainguard/kubectl:1.26.0
-          imagePullPolicy: IfNotPresent
+          image: "{{ template "leases-cleanup.image" .Values.leasescleanup.image }}"
+          imagePullPolicy: "{{ .Values.leasescleanup.image.pullPolicy }}"
           command:
             - /bin/sh
             - -c
@@ -37,7 +37,7 @@ metadata:
   annotations:
     "helm.sh/hook": post-delete
     "helm.sh/hook-weight": "1"
-    "helm.sh/hook-delete-policy": hook-succeeded    
+    "helm.sh/hook-delete-policy": hook-succeeded
 subjects:
 - kind: ServiceAccount
   name: {{ include "webhook.serviceAccountName" . }}-cleanup
