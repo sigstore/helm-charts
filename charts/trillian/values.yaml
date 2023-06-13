@@ -111,6 +111,7 @@ mysql:
     enabled: true
     annotations: {}
     storageClass: null
+    volumneName: null
     size: 5Gi
     mountPath: /var/lib/mysql
     subPath: ""

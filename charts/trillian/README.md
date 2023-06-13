@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.2](https://img.shields.io/badge/Version-0.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -47,13 +47,11 @@ helm uninstall [RELEASE_NAME]
 | createdb.image.repository | string | `"sigstore/scaffolding/createdb"` |  |
 | createdb.image.version | string | `"sha256:9aa98492115c465b0cecfd6dbb04411a40c0d2d7e5d7c510f5646bd1d825e3c7"` | v0.6.2 |
 | createdb.name | string | `"createdb"` |  |
-| createdb.resources | string | `""` |  |
 | createdb.serviceAccount.annotations | object | `{}` |  |
 | createdb.serviceAccount.create | bool | `false` |  |
 | createdb.serviceAccount.name | string | `""` |  |
 | createdb.ttlSecondsAfterFinished | int | `3600` |  |
 | forceNamespace | string | `""` |  |
-| initContainerResources | string | `""` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
@@ -125,7 +123,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.gcp.cloudsql.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mysql.gcp.cloudsql.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | mysql.gcp.cloudsql.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.cloudsql.version | string | `"sha256:c378a623353ee9c592795c0ad9e448bdc7e26c7635ba982968a60d0e3bb4d575"` | v1.33.7 |
+| mysql.gcp.cloudsql.version | string | `"sha256:c378a623353ee9c592795c0ad9e448bdc7e26c7635ba982968a60d0e3bb4d575"` | crane digest gcr.io/cloudsql-docker/gce-proxy:1.33.7 |
 | mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
 | mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
@@ -141,7 +139,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
 | mysql.image.repository | string | `"trillian-opensource-ci/db_server"` |  |
-| mysql.image.version | string | `"sha256:c04753ed44eac715e3191dad16fb0848a06714ddcb00c6f7768bf065485e1f8d"` | v1.5.2 |
+| mysql.image.version | string | `"sha256:c04753ed44eac715e3191dad16fb0848a06714ddcb00c6f7768bf065485e1f8d"` | crane digest gcr.io/trillian-opensource-ci/db_server:v1.5.2 |
 | mysql.livenessProbe.exec.command[0] | string | `"/etc/init.d/mysql"` |  |
 | mysql.livenessProbe.exec.command[1] | string | `"status"` |  |
 | mysql.livenessProbe.failureThreshold | int | `3` |  |
@@ -158,6 +156,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.persistence.size | string | `"5Gi"` |  |
 | mysql.persistence.storageClass | string | `nil` |  |
 | mysql.persistence.subPath | string | `""` |  |
+| mysql.persistence.volumneName | string | `nil` |  |
 | mysql.port | int | `3306` |  |
 | mysql.readinessProbe.exec.command[0] | string | `"/etc/init.d/mysql"` |  |
 | mysql.readinessProbe.exec.command[1] | string | `"status"` |  |

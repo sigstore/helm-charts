@@ -24,4 +24,7 @@ spec:
 {{- if .Values.mysql.persistence.storageClass }}
   storageClassName: {{ .Values.mysql.persistence.storageClass }}
 {{- end }}
+{{- if .Values.mysql.persistence.volumeName }}
+  volumeName: {{ .Values.mysql.persistence.volumeName }}
+{{- end }}
 {{- end }}
