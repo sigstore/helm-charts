@@ -123,6 +123,7 @@ server:
       enabled: true
       annotations: {}
       storageClass: ""
+      volumeName: ""
       size: 5Gi
       mountPath: /var/lib/mysql
       subPath: ""

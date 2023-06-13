@@ -24,4 +24,7 @@ spec:
 {{- if .Values.server.attestation_storage.persistence.storageClass }}
   storageClassName: {{ .Values.server.attestation_storage.persistence.storageClass }}
 {{- end }}
+{{- if .Values.server.attestation_storage.persistence.volumeName }}
+  volumeName: {{ .Values.server.attestation_storage.persistence.volumeName }}
+{{- end }}
 {{- end }}
