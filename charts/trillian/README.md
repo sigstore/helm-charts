@@ -59,9 +59,9 @@ helm uninstall [RELEASE_NAME]
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
 | initContainerImage.curl.version | string | `"sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5"` | 7.85.0 |
 | initContainerImage.netcat.imagePullPolicy | string | `"IfNotPresent"` |  |
-| initContainerImage.netcat.registry | string | `"docker.io"` |  |
-| initContainerImage.netcat.repository | string | `"toolbelt/netcat"` |  |
-| initContainerImage.netcat.version | string | `"sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea"` | 2022-05-23 |
+| initContainerImage.netcat.registry | string | `"cgr.dev"` |  |
+| initContainerImage.netcat.repository | string | `"chainguard/netcat"` |  |
+| initContainerImage.netcat.version | string | `"sha256:7243b469d34bd28969fa2c764a12d91084c427209540bb68645629d635b3f143"` | 2022-05-23 |
 | logServer.enabled | bool | `true` |  |
 | logServer.extraArgs | list | `[]` |  |
 | logServer.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -70,7 +70,7 @@ helm uninstall [RELEASE_NAME]
 | logServer.image.version | string | `"sha256:75dbbfc4c0b64334b985c4971fe58c30b9dd73d7aa54b15cee61223ff92aebf3"` | v0.9.1 |
 | logServer.livenessProbe | object | `{}` |  |
 | logServer.name | string | `"log-server"` |  |
-| logServer.nodeSelector | object | `{"kubernetes.io/arch":"amd64"}` | Trillian images currently only support amd64 due to the toolbelt/netcat container |
+| logServer.nodeSelector | object | `{}` | logServer nodeSelector |
 | logServer.portHTTP | int | `8090` |  |
 | logServer.portRPC | int | `8091` |  |
 | logServer.readinessProbe | object | `{}` |  |
@@ -97,7 +97,7 @@ helm uninstall [RELEASE_NAME]
 | logSigner.image.version | string | `"sha256:b56ed0b7b5e9813c91b208ba6041c9342f9a53162d96943374e59b5289090f1f"` | v0.9.1 |
 | logSigner.livenessProbe | object | `{}` |  |
 | logSigner.name | string | `"log-signer"` |  |
-| logSigner.nodeSelector | object | `{"kubernetes.io/arch":"amd64"}` | Trillian images currently only support amd64 due to the toolbelt/netcat container |
+| logSigner.nodeSelector | object | `{}` | logSigner nodeSelector |
 | logSigner.portHTTP | int | `8090` |  |
 | logSigner.portRPC | int | `8091` |  |
 | logSigner.readinessProbe | object | `{}` |  |

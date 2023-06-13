@@ -11,9 +11,9 @@
             "imagePullPolicy": "IfNotPresent"
         },
         "netcat": {
-            "registry": "docker.io",
-            "repository": "toolbelt/netcat",
-            "version": "sha256:99a582fa45fe1b50c97c652c9ada24b96c80d7071283227bd9a9f8eaa1c7a12b",
+            "registry": "cgr.dev",
+            "repository": "chainguard/netcat",
+            "version": "sha256:7243b469d34bd28969fa2c764a12d91084c427209540bb68645629d635b3f143",
             "imagePullPolicy": "IfNotPresent"
         }
     },

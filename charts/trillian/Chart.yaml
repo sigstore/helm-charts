@@ -26,7 +26,7 @@ annotations:
     - name: curl
       image: docker.io/curlimages/curl@sha256:e83fef2d5a036d40df4ded829141e8c0ec41871490d252fb8c81cb4580ebb35b
     - name: netcat
-      image: docker.io/toolbelt/netcat@sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea
+      image: cgr.dev/chainguard/netcat@sha256:7243b469d34bd28969fa2c764a12d91084c427209540bb68645629d635b3f143
     - name: db_server
       image: gcr.io/trillian-opensource-ci/db_server@sha256:c04753ed44eac715e3191dad16fb0848a06714ddcb00c6f7768bf065485e1f8d
     - name: log_server

@@ -9,10 +9,10 @@ initContainerImage:
     version: sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5
     imagePullPolicy: IfNotPresent
   netcat:
-    registry: docker.io
-    repository: toolbelt/netcat
-    # -- 2022-05-23
-    version: "sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea"
+    registry: cgr.dev
+    repository: chainguard/netcat
+    # -- 2023-06-13
+    version: "sha256:7243b469d34bd28969fa2c764a12d91084c427209540bb68645629d635b3f143"
     imagePullPolicy: IfNotPresent
 
 storageSystem:
@@ -135,9 +135,7 @@ logServer:
     # -- v0.9.1
     version: sha256:75dbbfc4c0b64334b985c4971fe58c30b9dd73d7aa54b15cee61223ff92aebf3
 
-  # -- Trillian images currently only support amd64 due to the toolbelt/netcat container
-  nodeSelector:
-    kubernetes.io/arch: amd64
+  nodeSelector: {}
 
   service:
     type: ClusterIP
@@ -173,9 +171,7 @@ logSigner:
     # -- v0.9.1
     version: sha256:b56ed0b7b5e9813c91b208ba6041c9342f9a53162d96943374e59b5289090f1f
 
-  # -- Trillian images currently only support amd64 due to the toolbelt/netcat container
-  nodeSelector:
-    kubernetes.io/arch: amd64
+  nodeSelector: {}
 
   service:
     type: ClusterIP
