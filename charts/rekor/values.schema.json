@@ -1314,6 +1314,7 @@
                                 "enabled",
                                 "annotations",
                                 "storageClass",
+                                "volumeName",
                                 "size",
                                 "mountPath",
                                 "subPath",
@@ -1345,6 +1346,14 @@
                                     "default": "",
                                     "examples": [
                                         ""
+                                    ]
+                                },
+                                "volumeName": {
+                                    "title": "The volumeName Schema",
+                                    "type": "string",
+                                    "default": "",
+                                    "examples": [
+                                        "pvc-rekor-server"
                                     ]
                                 },
                                 "size": {
@@ -1403,6 +1412,7 @@
                                     "enabled": true,
                                     "annotations": {},
                                     "storageClass": "",
+                                    "volumeName": "",
                                     "size": "5Gi",
                                     "mountPath": "/var/lib/mysql",
                                     "subPath": "",
@@ -1422,6 +1432,7 @@
                                 "enabled": true,
                                 "annotations": {},
                                 "storageClass": "",
+                                "volumeName": "",
                                 "size": "5Gi",
                                 "mountPath": "/var/lib/mysql",
                                 "subPath": "",
@@ -1675,6 +1686,7 @@
                             "enabled": true,
                             "annotations": {},
                             "storageClass": "",
+                            "volumeName": "",
                             "size": "5Gi",
                             "mountPath": "/var/lib/mysql",
                             "subPath": "",
@@ -2292,6 +2304,7 @@
                         "enabled": true,
                         "annotations": {},
                         "storageClass": "",
+                        "volumeName": "",
                         "size": "5Gi",
                         "mountPath": "/var/lib/mysql",
                         "subPath": "",
