@@ -5,7 +5,7 @@ description: |
 
 type: application
 
-version: 0.2.5
+version: 0.2.6
 
 keywords:
   - security
@@ -34,7 +34,7 @@ annotations:
     - name: log_signer
       image: gcr.io/projectsigstore/trillian_log_signer@sha256:87699af429d79440f7e0a487d215c2129bf97b37698370d050a68822996f93f0
     - name: cloud_proxy
-      image: gcr.io/cloudsql-docker/gce-proxy@sha256:c378a623353ee9c592795c0ad9e448bdc7e26c7635ba982968a60d0e3bb4d575
+      image: gcr.io/cloudsql-docker/gce-proxy@sha256:ec2858d78ac2b4d7945020589f6f86d151704a4617322f6c4196bafd952bf827
     - name: scaffold_cloud_proxy
       image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:@sha256:2c818523a9060cdefca10af0804c8f60549bdc1744e71008f9849b23605c4ccf
     - name: createdb
