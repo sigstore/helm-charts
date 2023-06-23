@@ -25,18 +25,9 @@
         "installCRDs": {
             "type": "boolean"
         },
-        "policywebhook": {
+        "leasescleanup": {
             "type": "object",
             "properties": {
-                "configData": {
-                    "type": "object"
-                },
-                "env": {
-                    "type": "object"
-                },
-                "extraArgs": {
-                    "type": "object"
-                },
                 "image": {
                     "type": "object",
                     "properties": {
@@ -47,120 +38,6 @@
                             "type": "string"
                         },
                         "version": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "podSecurityContext": {
-                    "type": "object",
-                    "properties": {
-                        "allowPrivilegeEscalation": {
-                            "type": "boolean"
-                        },
-                        "capabilities": {
-                            "type": "object",
-                            "properties": {
-                                "drop": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "readOnlyRootFilesystem": {
-                            "type": "boolean"
-                        },
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "replicaCount": {
-                    "type": "integer"
-                },
-                "resources": {
-                    "type": "object",
-                    "properties": {
-                        "limits": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "requests": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                },
-                "securityContext": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "runAsUser": {
-                            "type": "integer"
-                        }
-                    }
-                },
-                "service": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        },
-                        "port": {
-                            "type": "integer"
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        },
-                        "create": {
-                            "type": "boolean"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "volumeMounts": {
-                    "type": "array"
-                },
-                "volumes": {
-                    "type": "array"
-                },
-                "webhookNames": {
-                    "type": "object",
-                    "properties": {
-                        "defaulting": {
-                            "type": "string"
-                        },
-                        "validating": {
                             "type": "string"
                         }
                     }
@@ -178,6 +55,9 @@
         "webhook": {
             "type": "object",
             "properties": {
+                "configData": {
+                    "type": "object"
+                },
                 "env": {
                     "type": "object"
                 },
@@ -334,22 +214,14 @@
                 },
                 "volumes": {
                     "type": "array"
-                }
-            }
-        },
-        "leasescleanup": {
-            "type": "object",
-            "properties": {
-                "image": {
+                },
+                "webhookNames": {
                     "type": "object",
                     "properties": {
-                        "pullPolicy": {
+                        "defaulting": {
                             "type": "string"
                         },
-                        "repository": {
-                            "type": "string"
-                        },
-                        "version": {
+                        "validating": {
                             "type": "string"
                         }
                     }

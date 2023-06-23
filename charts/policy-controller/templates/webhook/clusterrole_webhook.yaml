@@ -8,7 +8,7 @@ metadata:
 rules:
   - apiGroups: [""]
     resources: ["events"]
-    verbs: ["create"]
+    verbs: ["create", "patch"]
   # Allow the reconciliation of exactly our validating webhook.
   - apiGroups: ["admissionregistration.k8s.io"]
     resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
@@ -17,7 +17,10 @@ rules:
   - apiGroups: ["admissionregistration.k8s.io"]
     resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
     verbs: ["get", "update", "delete"]
-    resourceNames: [{{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName | quote }}]
+    resourceNames:
+    - {{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName | quote }}
+    - {{ required "A valid webhook.webhookNames.defaulting is required" .Values.webhook.webhookNames.defaulting | quote }}
+    - {{ required "A valid webhook.webhookNames.validating is required" .Values.webhook.webhookNames.validating | quote }}
 
   - apiGroups: [""]
     resources: ["namespaces"]
@@ -38,3 +41,21 @@ rules:
   - apiGroups: [""]
     resources: ["serviceaccounts", "secrets"]
     verbs: ["get"]
+
+  # Allow reconciliation of the ClusterImagePolic CRDs.
+  - apiGroups: ["policy.sigstore.dev"]
+    resources: ["clusterimagepolicies", "clusterimagepolicies/status"]
+    verbs: ["get", "list", "update", "watch", "patch"]
+
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions"]
+    verbs: ["get", "list", "watch", "update"]
+
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions"]
+    verbs: ["get", "update", "list"]
+    resourceNames: ["trustroots.policy.sigstore.dev"]
+
+  - apiGroups: ["policy.sigstore.dev"]
+    resources: ["trustroots", "trustroots/status"]
+    verbs: ["get", "list", "update", "watch", "patch"]
