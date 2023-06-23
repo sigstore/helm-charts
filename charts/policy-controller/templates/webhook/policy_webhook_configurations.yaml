@@ -16,31 +16,31 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
-  name: {{ required "A valid policywebhook.webhookNames.defaulting is required" .Values.policywebhook.webhookNames.defaulting }}
+  name: {{ required "A valid webhook.webhookNames.defaulting is required" .Values.webhook.webhookNames.defaulting }}
 webhooks:
   - admissionReviewVersions:
       - v1
     clientConfig:
       service:
-        name: policy-webhook
+        name: webhook
         namespace: {{ .Release.Namespace }}
     failurePolicy: Fail
     matchPolicy: Equivalent
-    name: {{ required "A valid policywebhook.webhookNames.defaulting is required" .Values.policywebhook.webhookNames.defaulting }}
+    name: {{ required "A valid webhook.webhookNames.defaulting is required" .Values.webhook.webhookNames.defaulting }}
     sideEffects: None
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: {{ required "A valid policywebhook.webhookNames.validating is required" .Values.policywebhook.webhookNames.validating }}
+  name: {{ required "A valid webhook.webhookNames.validating is required" .Values.webhook.webhookNames.validating }}
 webhooks:
   - admissionReviewVersions:
       - v1
     clientConfig:
       service:
-        name: policy-webhook
+        name: webhook
         namespace: {{ .Release.Namespace }}
     failurePolicy: Fail
     matchPolicy: Equivalent
-    name: {{ required "A valid policywebhook.webhookNames.validating is required" .Values.policywebhook.webhookNames.validating }}
+    name: {{ required "A valid webhook.webhookNames.validating is required" .Values.webhook.webhookNames.validating }}
     sideEffects: None
