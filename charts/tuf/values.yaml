@@ -33,6 +33,7 @@ secrets:
     path: ctlog-pubkey
 
 ingress:
+  create: true
   name: tuf-server
   className: nginx
   annotations: {}

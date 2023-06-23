@@ -33,6 +33,7 @@ A framework for securing software update systems - the scaffolding implementatio
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `"nginx"` |  |
+| ingress.create | bool | `true` |  |
 | ingress.http.hosts[0].host | string | `"tuf.localhost"` |  |
 | ingress.http.hosts[0].path | string | `"/"` |  |
 | ingress.name | string | `"tuf-server"` |  |
