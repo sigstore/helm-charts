@@ -1,0 +1,14 @@
+{{- range .Values.server.ingresses }}
+{{- if and (.enabled) (eq .className "gce") (.frontendConfigSpec) }}
+apiVersion: "networking.gke.io/v1beta1"
+kind: FrontendConfig
+metadata:
+  name: {{ include "rekor.server.fullname" $ -}}-{{- .name }}
+  labels:
+    {{- include "rekor.server.labels" $ | nindent 4 }}
+{{ include "rekor.namespace" $ | indent 2 }}
+spec:
+{{ toYaml .frontendConfigSpec | indent 2 }}
+---
+{{- end }}
+{{- end }}

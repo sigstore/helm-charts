@@ -4,3 +4,20 @@ server:
     hosts:
       - host: rekor.localhost
         path: /
+  ingresses:
+    - name: gce-ingress
+      enabled: false
+      className: gce
+      hosts:
+        - host: rekor.sigstoretest.dev
+          path: /
+          pathType: Prefix
+      tls: []
+      annotations: {}
+      staticGlobalIP: lb-ext-ip
+      frontendConfigSpec:
+        redirectToHttps:
+          enabled: false
+      backendConfigSpec:
+        logging:
+          enable: true

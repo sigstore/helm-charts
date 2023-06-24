@@ -601,6 +601,7 @@
                 "image",
                 "logging",
                 "ingress",
+                "ingresses",
                 "service",
                 "signer",
                 "readinessProbe",
@@ -811,6 +812,141 @@
                         {
                             "enabled": true,
                             "className": "nginx",
+                            "hosts": [
+                                {
+                                    "path": "/"
+                                }
+                            ],
+                            "annotations": {},
+                            "tls": []
+                        }
+                    ]
+                },
+                "ingresses": {
+                    "title": "The ingresses Schema",
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                        "title": "An ingress Schema",
+                        "default": {},
+                        "required": [
+                            "enabled",
+                            "name",
+                            "className",
+                            "hosts",
+                            "tls"
+                        ],
+                        "properties": {
+                            "enabled": {
+                                "title": "The enabled Schema",
+                                "type": "boolean",
+                                "default": false,
+                                "examples": [
+                                    true
+                                ]
+                            },
+                            "name": {
+                                "title": "The name for the ingress (and dependent objects)",
+                                "type": "string",
+                                "default": "",
+                                "examples": [
+                                    "gce-ingress"
+                                ]
+                            },
+                            "className": {
+                                "title": "The className Schema",
+                                "type": "string",
+                                "default": "",
+                                "examples": [
+                                    "gce"
+                                ]
+                            },
+                            "hosts": {
+                                "title": "The hosts Schema",
+                                "type": "array",
+                                "default": [],
+                                "items": {
+                                    "title": "A Schema",
+                                    "type": "object",
+                                    "default": {},
+                                    "required": [
+                                        "path"
+                                    ],
+                                    "properties": {
+                                        "path": {
+                                            "title": "The path Schema",
+                                            "type": "string",
+                                            "default": "",
+                                            "examples": [
+                                                "/"
+                                            ]
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "path": "/"
+                                        }
+                                    ]
+                                },
+                                "examples": [
+                                    [
+                                        {
+                                            "path": "/"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "annotations": {
+                                "title": "The annotations Schema",
+                                "type": "object",
+                                "default": {},
+                                "required": [],
+                                "properties": {},
+                                "examples": [
+                                    {}
+                                ]
+                            },
+                            "tls": {
+                                "title": "The tls Schema",
+                                "type": "array",
+                                "default": [],
+                                "items": {},
+                                "examples": [
+                                    []
+                                ]
+                            },
+                            "staticGlobalIP": {
+                                "title": "The name of a GCP static IP address object to be assigned to the ingress-created load balancer",
+                                "type": "string",
+                                "default": "",
+                                "examples": [
+                                    "lb-ext-ip"
+                                ]
+                            },
+                            "frontendConfigSpec": {
+                                "title": "The frontendConfigSpec Schema - refers to values for networking.gke.io/v1beta1 FrontendConfig",
+                                "type": "object",
+                                "default": {},
+                                "required": [],
+                                "examples": [
+                                    {}
+                                ]
+                            },
+                            "backendConfigSpec": {
+                                "title": "The backendConfigSpec Schema - refers to values for cloud.google.com/v1 BackendConfig",
+                                "type": "object",
+                                "default": {},
+                                "required": [],
+                                "examples": [
+                                    {}
+                                ]
+                            }
+                        }
+                    },
+                    "examples": [
+                        {
+                            "enabled": true,
+                            "className": "gce",
                             "hosts": [
                                 {
                                     "path": "/"
@@ -2229,6 +2365,21 @@
                     "annotations": {},
                     "tls": []
                 },
+                "ingresses": [
+                    {
+                        "enabled": false,
+                        "className": "gce",
+                        "hosts": [
+                            {
+                                "path": "/"
+                            }
+                        ],
+                        "annotations": {},
+                        "tls": [],
+                        "securityPolicy": "rekor",
+                        "sslPolicy": "rekor"
+                    }
+                ],
                 "service": {
                     "type": "ClusterIP",
                     "ports": [

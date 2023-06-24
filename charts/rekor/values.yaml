@@ -74,6 +74,25 @@ server:
         host: root
     annotations: {}
     tls: []
+  ingresses:
+    - enabled: false
+      name: "gce-ingress"
+      className: "gce"
+      hosts:
+        - path: /
+          host: root
+      annotations: {}
+      tls: []
+      staticGlobalIP: lb-ext-ip
+      frontendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_frontendconfig_parameters
+        sslPolicy: rekor-ssl-policy
+        redirectToHttps:
+          enabled: true
+      backendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_backendconfig_parameters
+        securityPolicy:
+          name: rekor-security-policy
+        logging:
+          enable: true
   service:
     type: ClusterIP
     ports:
