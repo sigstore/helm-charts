@@ -1,0 +1,14 @@
+{{- range .Values.server.ingresses }}
+{{- if and (.enabled) (eq .className "gce") (.backendConfigSpec) }}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: {{ include "rekor.server.fullname" $ -}}-{{- .name }}
+  labels:
+    {{- include "rekor.server.labels" $ | nindent 4 }}
+{{ include "rekor.namespace" $ | indent 2 }}
+spec:
+{{ toYaml .backendConfigSpec | indent 2 }}
+---
+{{- end }}
+{{- end }}

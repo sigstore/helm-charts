@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.3.3](https://img.shields.io/badge/Version-1.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
+![Version: 1.3.4](https://img.shields.io/badge/Version-1.3.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -116,6 +116,18 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.ingress.hosts[0].host | string | `"root"` |  |
 | server.ingress.hosts[0].path | string | `"/"` |  |
 | server.ingress.tls | list | `[]` |  |
+| server.ingresses[0].annotations | object | `{}` |  |
+| server.ingresses[0].backendConfigSpec.logging.enable | bool | `true` |  |
+| server.ingresses[0].backendConfigSpec.securityPolicy.name | string | `"rekor-security-policy"` |  |
+| server.ingresses[0].className | string | `"gce"` |  |
+| server.ingresses[0].enabled | bool | `false` |  |
+| server.ingresses[0].frontendConfigSpec.redirectToHttps.enabled | bool | `true` |  |
+| server.ingresses[0].frontendConfigSpec.sslPolicy | string | `"rekor-ssl-policy"` |  |
+| server.ingresses[0].hosts[0].host | string | `"root"` |  |
+| server.ingresses[0].hosts[0].path | string | `"/"` |  |
+| server.ingresses[0].name | string | `"gce-ingress"` |  |
+| server.ingresses[0].staticGlobalIP | string | `"lb-ext-ip"` |  |
+| server.ingresses[0].tls | list | `[]` |  |
 | server.livenessProbe.failureThreshold | int | `3` |  |
 | server.livenessProbe.httpGet.path | string | `"/ping"` |  |
 | server.livenessProbe.httpGet.port | int | `3000` |  |

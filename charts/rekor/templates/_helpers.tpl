@@ -339,13 +339,20 @@ Server Arguments
 {{- end -}}
 
 {{/*
+Return the port for the external service listener
+*/}}
+{{- define "rekor.server.port" -}}
+{{ (index .Values.server.service.ports 0).port | int }}
+{{- end -}}
+
+{{/*
 Return the appropriate apiVersion for ingress.
 */}}
 {{- define "rekor.server.ingress.backend" -}}
 service:
   name: {{ include "rekor.server.fullname" . }}
   port:
-    number: {{ (index .Values.server.service.ports 0).port | int }}
+    number: {{ include "rekor.server.port" . }}
 {{- end -}}
 
 {{/*
