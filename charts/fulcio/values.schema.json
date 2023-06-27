@@ -259,7 +259,15 @@
                             "examples": [
                                 "https://ct.example.com/"
                             ]
+                        },
+                        "cloud_credential_config": {
+                            "type": "string",
+                            "default": "",
+                            "title": "Google Cloud Web Identity JSON config / Service Account token key json",
+                            "description": "If set, Fulcio will use these credentials to impersonate GCP service account from trusted external cloud providers",
+                            "examples": []
                         }
+
                     },
                     "examples": [
                         {
@@ -269,6 +277,17 @@
                             "hsm_caroot_id": null,
                             "aws_hsm_root_ca_path": null,
                             "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
+                        }
+                    ]
+                },
+                "env": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The env Schema",
+                    "properties": {},
+                    "examples": [
+                        {
+                            "GOOGLE_APPLICATION_CREDENTIALS": "/etc/fulcio-config/cloud_credential_config"
                         }
                     ]
                 },
