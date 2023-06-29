@@ -74,6 +74,27 @@ server:
         - secretName: fulcio-grpc-ingress-tls
           hosts:
             - fulcio.localhost
+  ingresses:
+    - enabled: false
+      grpc: true
+      http: true
+      name: "gce-ingress"
+      className: "gce"
+      hosts:
+        - path: /
+          host: fulcio.localhost
+      annotations: {}
+      tls: []
+      staticGlobalIP: lb-ext-ip
+      frontendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_frontendconfig_parameters
+        sslPolicy: fulcio-ssl-policy
+        redirectToHttps:
+          enabled: true
+      backendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_backendconfig_parameters
+        securityPolicy:
+          name: fulcio-security-policy
+        logging:
+          enable: true
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
