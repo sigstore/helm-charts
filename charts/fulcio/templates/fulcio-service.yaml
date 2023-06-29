@@ -1,9 +1,20 @@
 apiVersion: v1
 kind: Service
 metadata:
-{{- if .Values.server.service.annotations }}
   annotations:
+{{- $backendConfigName := include "fulcio.fullname" . -}}
+{{ if .Values.server.service.annotations }}
 {{ toYaml .Values.server.service.annotations | indent 4 }}
+{{ end }}
+{{- range .Values.server.ingresses }}
+{{- if and (.enabled) (eq .className "gce") }}
+  {{- if .backendConfigSpec }}
+    cloud.google.com/backend-config: '{"ports": {"{{- $.Values.server.svcPort -}}":"{{- printf "%v-%v" $backendConfigName .name -}}","{{- $.Values.server.grpcSvcPort -}}":"{{- printf "%v-%v" $backendConfigName .name -}}"}}'
+  {{- end }}
+    cloud.google.com/neg: '{"ingress": true}'
+    cloud.google.com/app-protocols: '{"grpc":"HTTP2","http":"HTTP"}'
+{{- break -}}
+{{- end }}
 {{- end }}
   labels:
     {{- include "fulcio.labels" . | nindent 4 }}

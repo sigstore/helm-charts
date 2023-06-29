@@ -803,6 +803,161 @@
                         }
                     ]
                 },
+                "ingresses": {
+                    "title": "The ingresses Schema",
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                        "title": "An ingress Schema",
+                        "default": {},
+                        "required": [
+                            "enabled",
+                            "name",
+                            "className",
+                            "http",
+                            "grpc",
+                            "hosts",
+                            "tls"
+                        ],
+                        "properties": {
+                            "enabled": {
+                                "title": "The enabled Schema",
+                                "type": "boolean",
+                                "default": false,
+                                "examples": [
+                                    true
+                                ]
+                            },
+                            "name": {
+                                "title": "The name for the ingress (and dependent objects)",
+                                "type": "string",
+                                "default": "",
+                                "examples": [
+                                    "gce-ingress"
+                                ]
+                            },
+                            "className": {
+                                "title": "The className Schema",
+                                "type": "string",
+                                "default": "",
+                                "examples": [
+                                    "gce"
+                                ]
+                            },
+                            "grpc": {
+                                "title": "grpc enabled",
+                                "type": "boolean",
+                                "default": false,
+                                "examples": [
+                                    true
+                                ]
+                            },
+                            "http": {
+                                "title": "http enabled",
+                                "type": "boolean",
+                                "default": true,
+                                "examples": [
+                                    true
+                                ]
+                            },
+                            "hosts": {
+                                "title": "The hosts Schema",
+                                "type": "array",
+                                "default": [],
+                                "items": {
+                                    "title": "A Schema",
+                                    "type": "object",
+                                    "default": {},
+                                    "required": [
+                                        "path"
+                                    ],
+                                    "properties": {
+                                        "path": {
+                                            "title": "The path Schema",
+                                            "type": "string",
+                                            "default": "",
+                                            "examples": [
+                                                "/"
+                                            ]
+                                        }
+                                    },
+                                    "examples": [
+                                        {
+                                            "path": "/"
+                                        }
+                                    ]
+                                },
+                                "examples": [
+                                    [
+                                        {
+                                            "path": "/"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "annotations": {
+                                "title": "The annotations Schema",
+                                "type": "object",
+                                "default": {},
+                                "required": [],
+                                "properties": {},
+                                "examples": [
+                                    {}
+                                ]
+                            },
+                            "tls": {
+                                "title": "The tls Schema",
+                                "type": "array",
+                                "default": [],
+                                "items": {},
+                                "examples": [
+                                    []
+                                ]
+                            },
+                            "staticGlobalIP": {
+                                "title": "The name of a GCP static IP address object to be assigned to the ingress-created load balancer",
+                                "type": "string",
+                                "default": "",
+                                "examples": [
+                                    "lb-ext-ip"
+                                ]
+                            },
+                            "frontendConfigSpec": {
+                                "title": "The frontendConfigSpec Schema - refers to values for networking.gke.io/v1beta1 FrontendConfig",
+                                "type": "object",
+                                "default": {},
+                                "required": [],
+                                "examples": [
+                                    {}
+                                ]
+                            },
+                            "backendConfigSpec": {
+                                "title": "The backendConfigSpec Schema - refers to values for cloud.google.com/v1 BackendConfig",
+                                "type": "object",
+                                "default": {},
+                                "required": [],
+                                "examples": [
+                                    {}
+                                ]
+                            }
+                        }
+                    },
+                    "examples": [
+                        {
+                            "enabled": true,
+                            "grpc": false,
+                            "http": true,
+                            "className": "gce",
+                            "hosts": [
+                                {
+                                    "path": "/"
+                                }
+                            ],
+                            "annotations": {},
+                            "tls": []
+                        }
+                    ]
+                },
                 "securityContext": {
                     "type": "object",
                     "default": {},
