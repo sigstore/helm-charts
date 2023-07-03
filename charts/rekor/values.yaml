@@ -62,8 +62,8 @@ server:
     registry: gcr.io
     repository: projectsigstore/rekor-server
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/rekor-server:v1.1.0
-    version: "sha256:3a267e8ae59e3f5d41eba10303964efb396b7774b4021fd01334c6ee6b23a631"
+    # crane digest gcr.io/projectsigstore/rekor-server:v1.2.2
+    version: "sha256:23213617ad2b63305064b2a2be0ffe8038c2dc9c4f69b22ffe85ed83f65f54c7"
   logging:
     production: false
   ingress:
@@ -74,6 +74,25 @@ server:
         host: root
     annotations: {}
     tls: []
+  ingresses:
+    - enabled: false
+      name: "gce-ingress"
+      className: "gce"
+      hosts:
+        - path: /
+          host: root
+      annotations: {}
+      tls: []
+      staticGlobalIP: lb-ext-ip
+      frontendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_frontendconfig_parameters
+        sslPolicy: rekor-ssl-policy
+        redirectToHttps:
+          enabled: true
+      backendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_backendconfig_parameters
+        securityPolicy:
+          name: rekor-security-policy
+        logging:
+          enable: true
   service:
     type: ClusterIP
     ports:
@@ -166,8 +185,8 @@ backfillredis:
     registry: ghcr.io
     repository: sigstore/rekor/backfill-redis
     pullPolicy: IfNotPresent
-    # v1.0.1
-    version: "sha256:15f070c4b853f38773d253ebd39957de5c3beffc1699ba574db98e3679336af1"
+    # v1.2.2
+    version: "sha256:04b43cd3f2d8e165adf072fed494c3c784ee345993048c47c8037b20a3fc6efb"
   ttlSecondsAfterFinished: 3600
   securityContext:
     runAsNonRoot: true

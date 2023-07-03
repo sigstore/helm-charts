@@ -1,6 +1,6 @@
 # policy-controller
 
-![Version: 0.5.1](https://img.shields.io/badge/Version-0.5.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.0](https://img.shields.io/badge/AppVersion-0.7.0-informational?style=flat-square)
+![Version: 0.5.8](https://img.shields.io/badge/Version-0.5.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.0](https://img.shields.io/badge/AppVersion-0.7.0-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -27,40 +27,15 @@ The Helm chart for Policy  Controller
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
-| policywebhook.configData | object | `{}` | Set the data of the `policy-config-controller` configmap |
-| policywebhook.env | object | `{}` |  |
-| policywebhook.extraArgs | object | `{}` |  |
-| policywebhook.image.pullPolicy | string | `"IfNotPresent"` |  |
-| policywebhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-webhook"` |  |
-| policywebhook.image.version | string | `"sha256:3a3581032ff69991ddd9f19faf8acd059c8fb0ba8d3b0164a13b99a096880c84"` | `"v0.7.0"` |
-| policywebhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
-| policywebhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| policywebhook.podSecurityContext.enabled | bool | `true` |  |
-| policywebhook.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
-| policywebhook.podSecurityContext.runAsNonRoot | bool | `true` |  |
-| policywebhook.replicaCount | int | `1` |  |
-| policywebhook.resources.limits.cpu | string | `"100m"` |  |
-| policywebhook.resources.limits.memory | string | `"256Mi"` |  |
-| policywebhook.resources.requests.cpu | string | `"100m"` |  |
-| policywebhook.resources.requests.memory | string | `"128Mi"` |  |
-| policywebhook.securityContext.enabled | bool | `false` |  |
-| policywebhook.securityContext.runAsUser | int | `65532` |  |
-| policywebhook.service.annotations | object | `{}` |  |
-| policywebhook.service.port | int | `443` |  |
-| policywebhook.service.type | string | `"ClusterIP"` |  |
-| policywebhook.serviceAccount.annotations | object | `{}` |  |
-| policywebhook.serviceAccount.create | bool | `true` |  |
-| policywebhook.serviceAccount.name | string | `""` |  |
-| policywebhook.volumeMounts | list | `[]` |  |
-| policywebhook.volumes | list | `[]` |  |
-| policywebhook.webhookNames.defaulting | string | `"defaulting.clusterimagepolicy.sigstore.dev"` |  |
-| policywebhook.webhookNames.validating | string | `"validating.clusterimagepolicy.sigstore.dev"` |  |
+| webhook.configData | object | `{}` | Set the data of the `policy-config-controller` configmap |
+| webhook.webhookNames.defaulting | string | `"defaulting.clusterimagepolicy.sigstore.dev"` |  |
+| webhook.webhookNames.validating | string | `"validating.clusterimagepolicy.sigstore.dev"` |  |
 | serviceMonitor.enabled | bool | `false` |  |
 | webhook.env | object | `{}` |  |
 | webhook.extraArgs | object | `{}` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
-| webhook.image.version | string | `"sha256:947693aa3a536992bc89f3c7ded8a7707b26cd4518972f293edd3e57e112438e"` | `"v0.7.0"` |
+| webhook.image.version | string | `"sha256:e91bcd954394b414d3b80adfc2cefdae84dd7985fb938a895471eb34aac57744"` | `"v0.8.0"` |
 | webhook.name | string | `"webhook"` |  |
 | webhook.failurePolicy | string | `"Fail"` |  |
 | webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
@@ -87,6 +62,9 @@ The Helm chart for Policy  Controller
 | webhook.serviceAccount.name | string | `""` |  |
 | webhook.volumeMounts | list | `[]` |  |
 | webhook.volumes | list | `[]` |  |
+| leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
+| leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
+| leasescleanup.image.version | string | `"1.26.0"` |  |
 
 ### Deploy `policy-controller` Helm Chart
 

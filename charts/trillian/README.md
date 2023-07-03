@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.2](https://img.shields.io/badge/Version-0.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.2.7](https://img.shields.io/badge/Version-0.2.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -47,21 +47,19 @@ helm uninstall [RELEASE_NAME]
 | createdb.image.repository | string | `"sigstore/scaffolding/createdb"` |  |
 | createdb.image.version | string | `"sha256:9aa98492115c465b0cecfd6dbb04411a40c0d2d7e5d7c510f5646bd1d825e3c7"` | v0.6.2 |
 | createdb.name | string | `"createdb"` |  |
-| createdb.resources | string | `""` |  |
 | createdb.serviceAccount.annotations | object | `{}` |  |
 | createdb.serviceAccount.create | bool | `false` |  |
 | createdb.serviceAccount.name | string | `""` |  |
 | createdb.ttlSecondsAfterFinished | int | `3600` |  |
 | forceNamespace | string | `""` |  |
-| initContainerResources | string | `""` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
 | initContainerImage.curl.version | string | `"sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5"` | 7.85.0 |
 | initContainerImage.netcat.imagePullPolicy | string | `"IfNotPresent"` |  |
-| initContainerImage.netcat.registry | string | `"docker.io"` |  |
-| initContainerImage.netcat.repository | string | `"toolbelt/netcat"` |  |
-| initContainerImage.netcat.version | string | `"sha256:7d921b6d368fb1736cb0832c6f57e426c161593c075847af3378eb3185801cea"` | 2022-05-23 |
+| initContainerImage.netcat.registry | string | `"cgr.dev"` |  |
+| initContainerImage.netcat.repository | string | `"chainguard/netcat"` |  |
+| initContainerImage.netcat.version | string | `"sha256:7243b469d34bd28969fa2c764a12d91084c427209540bb68645629d635b3f143"` | 2023-06-13 |
 | logServer.enabled | bool | `true` |  |
 | logServer.extraArgs | list | `[]` |  |
 | logServer.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -70,7 +68,7 @@ helm uninstall [RELEASE_NAME]
 | logServer.image.version | string | `"sha256:75dbbfc4c0b64334b985c4971fe58c30b9dd73d7aa54b15cee61223ff92aebf3"` | v0.9.1 |
 | logServer.livenessProbe | object | `{}` |  |
 | logServer.name | string | `"log-server"` |  |
-| logServer.nodeSelector | object | `{"kubernetes.io/arch":"amd64"}` | Trillian images currently only support amd64 due to the toolbelt/netcat container |
+| logServer.nodeSelector | object | `{}` |  |
 | logServer.portHTTP | int | `8090` |  |
 | logServer.portRPC | int | `8091` |  |
 | logServer.readinessProbe | object | `{}` |  |
@@ -97,7 +95,7 @@ helm uninstall [RELEASE_NAME]
 | logSigner.image.version | string | `"sha256:b56ed0b7b5e9813c91b208ba6041c9342f9a53162d96943374e59b5289090f1f"` | v0.9.1 |
 | logSigner.livenessProbe | object | `{}` |  |
 | logSigner.name | string | `"log-signer"` |  |
-| logSigner.nodeSelector | object | `{"kubernetes.io/arch":"amd64"}` | Trillian images currently only support amd64 due to the toolbelt/netcat container |
+| logSigner.nodeSelector | object | `{}` |  |
 | logSigner.portHTTP | int | `8090` |  |
 | logSigner.portRPC | int | `8091` |  |
 | logSigner.readinessProbe | object | `{}` |  |
@@ -125,7 +123,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.gcp.cloudsql.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mysql.gcp.cloudsql.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | mysql.gcp.cloudsql.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.cloudsql.version | string | `"sha256:7f53fe219f6815e275301561e2f8819e59e38eca5a93de644a287452f841fab7"` | v1.33.1 |
+| mysql.gcp.cloudsql.version | string | `"sha256:ec2858d78ac2b4d7945020589f6f86d151704a4617322f6c4196bafd952bf827"` | crane digest gcr.io/cloudsql-docker/gce-proxy:1.33.8 |
 | mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
 | mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
@@ -141,7 +139,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
 | mysql.image.repository | string | `"trillian-opensource-ci/db_server"` |  |
-| mysql.image.version | string | `"sha256:22b7fddcb4bafc5692760d84dca5e86294363a94e8f0ecb8f5c39364d436e6d5"` | v1.5.0 |
+| mysql.image.version | string | `"sha256:c04753ed44eac715e3191dad16fb0848a06714ddcb00c6f7768bf065485e1f8d"` | crane digest gcr.io/trillian-opensource-ci/db_server:v1.5.2 |
 | mysql.livenessProbe.exec.command[0] | string | `"/etc/init.d/mysql"` |  |
 | mysql.livenessProbe.exec.command[1] | string | `"status"` |  |
 | mysql.livenessProbe.failureThreshold | int | `3` |  |

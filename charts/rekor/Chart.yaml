@@ -4,8 +4,8 @@ description: Part of the sigstore project, Rekor is a timestamping server and tr
 
 type: application
 
-version: 1.3.1
-appVersion: 1.1.0
+version: 1.3.5
+appVersion: 1.2.2
 
 keywords:
   - security
@@ -31,8 +31,8 @@ annotations:
     - name: curlimages/curl
       image: docker.io/curlimages/curl@sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498
     - name: rekor-server
-      image: gcr.io/projectsigstore/rekor-server:v1.1.0@sha256:3a267e8ae59e3f5d41eba10303964efb396b7774b4021fd01334c6ee6b23a631
+      image: gcr.io/projectsigstore/rekor-server:v1.2.2@sha256:23213617ad2b63305064b2a2be0ffe8038c2dc9c4f69b22ffe85ed83f65f54c7
     - name: redis
       image: docker.io/redis@sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39
     - name: backfill-redis
-      image: gcr.io/projectsigstore/backfill-redis:v1.1.0@sha256:386eb094c0bd7416e1274cace4f1df2c7b3b1799c2a4f35afa02189196f3a078
+      image: gcr.io/projectsigstore/backfill-redis:v1.2.2@sha256:04b43cd3f2d8e165adf072fed494c3c784ee345993048c47c8037b20a3fc6efb

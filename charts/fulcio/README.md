@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.2.1](https://img.shields.io/badge/Version-2.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0](https://img.shields.io/badge/AppVersion-1.2.0-informational?style=flat-square)
+![Version: 2.3.5](https://img.shields.io/badge/Version-2.3.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.2](https://img.shields.io/badge/AppVersion-1.3.2-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -71,7 +71,7 @@ helm uninstall [RELEASE_NAME]
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | ctlog | 0.2.37 |
+| https://sigstore.github.io/helm-charts | ctlog | 0.2.43 |
 
 ## Values
 
@@ -109,6 +109,8 @@ helm uninstall [RELEASE_NAME]
 | namespace.name | string | `"fulcio-system"` |  |
 | server.args.aws_hsm_root_ca_path | string | `nil` |  |
 | server.args.certificateAuthority | string | `"fileca"` |  |
+| server.args.ct_log_url | string | `""` |  |
+| server.args.disable_ct_log | bool | `false` |  |
 | server.args.gcp_private_ca_parent | string | `"projects/test/locations/us-east1/caPools/test"` |  |
 | server.args.grpcPort | int | `5554` |  |
 | server.args.hsm_caroot_id | string | `nil` |  |
@@ -117,7 +119,7 @@ helm uninstall [RELEASE_NAME]
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/fulcio"` |  |
-| server.image.version | string | `"sha256:17ae9911f54892224c85355a1f8559cfecf75343093f2eaeea1a5c4724283d12"` | v1.2.0 |
+| server.image.version | string | `"sha256:16fdf8f0198c58b20faad20f2891b65e00761d66695466ea0dbf1981d1e08120"` | v1.3.2 |
 | server.ingress.grpc.annotations."nginx.ingress.kubernetes.io/backend-protocol" | string | `"GRPC"` |  |
 | server.ingress.grpc.className | string | `""` |  |
 | server.ingress.grpc.enabled | bool | `false` |  |
@@ -134,6 +136,20 @@ helm uninstall [RELEASE_NAME]
 | server.livenessProbe.httpGet.path | string | `"/api/v2/trustBundle"` |  |
 | server.livenessProbe.httpGet.port | string | `"http"` |  |
 | server.livenessProbe.initialDelaySeconds | int | `10` |  |
+| server.ingresses[0].annotations | object | `{}` |  |
+| server.ingresses[0].backendConfigSpec.logging.enable | bool | `true` |  |
+| server.ingresses[0].backendConfigSpec.securityPolicy.name | string | `"fulcio-security-policy"` |  |
+| server.ingresses[0].className | string | `"gce"` |  |
+| server.ingresses[0].enabled | bool | `false` |  |
+| server.ingresses[0].frontendConfigSpec.redirectToHttps.enabled | bool | `true` |  |
+| server.ingresses[0].frontendConfigSpec.sslPolicy | string | `"fulcio-ssl-policy"` |  |
+| server.ingresses[0].grpc | bool | `true` |  |
+| server.ingresses[0].hosts[0].host | string | `"fulcio.localhost"` |  |
+| server.ingresses[0].hosts[0].path | string | `"/"` |  |
+| server.ingresses[0].http | bool | `true` |  |
+| server.ingresses[0].name | string | `"gce-ingress"` |  |
+| server.ingresses[0].staticGlobalIP | string | `"lb-ext-ip"` |  |
+| server.ingresses[0].tls | list | `[]` |  |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
 | server.readinessProbe.httpGet.path | string | `"/api/v2/trustBundle"` |  |

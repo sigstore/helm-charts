@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.3.1](https://img.shields.io/badge/Version-1.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
+![Version: 1.3.5](https://img.shields.io/badge/Version-1.3.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.2](https://img.shields.io/badge/AppVersion-1.2.2-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -31,7 +31,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | backfillredis.image.pullPolicy | string | `"IfNotPresent"` |  |
 | backfillredis.image.registry | string | `"ghcr.io"` |  |
 | backfillredis.image.repository | string | `"sigstore/rekor/backfill-redis"` |  |
-| backfillredis.image.version | string | `"sha256:15f070c4b853f38773d253ebd39957de5c3beffc1699ba574db98e3679336af1"` |  |
+| backfillredis.image.version | string | `"sha256:04b43cd3f2d8e165adf072fed494c3c784ee345993048c47c8037b20a3fc6efb"` |  |
 | backfillredis.name | string | `"backfillredis"` |  |
 | backfillredis.rekorAddress | string | `"rekor.rekor-system.svc"` |  |
 | backfillredis.resources | object | `{}` |  |
@@ -109,13 +109,25 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-| server.image.version | string | `"sha256:3a267e8ae59e3f5d41eba10303964efb396b7774b4021fd01334c6ee6b23a631"` |  |
+| server.image.version | string | `"sha256:23213617ad2b63305064b2a2be0ffe8038c2dc9c4f69b22ffe85ed83f65f54c7"` |  |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |
 | server.ingress.hosts[0].host | string | `"root"` |  |
 | server.ingress.hosts[0].path | string | `"/"` |  |
 | server.ingress.tls | list | `[]` |  |
+| server.ingresses[0].annotations | object | `{}` |  |
+| server.ingresses[0].backendConfigSpec.logging.enable | bool | `true` |  |
+| server.ingresses[0].backendConfigSpec.securityPolicy.name | string | `"rekor-security-policy"` |  |
+| server.ingresses[0].className | string | `"gce"` |  |
+| server.ingresses[0].enabled | bool | `false` |  |
+| server.ingresses[0].frontendConfigSpec.redirectToHttps.enabled | bool | `true` |  |
+| server.ingresses[0].frontendConfigSpec.sslPolicy | string | `"rekor-ssl-policy"` |  |
+| server.ingresses[0].hosts[0].host | string | `"root"` |  |
+| server.ingresses[0].hosts[0].path | string | `"/"` |  |
+| server.ingresses[0].name | string | `"gce-ingress"` |  |
+| server.ingresses[0].staticGlobalIP | string | `"lb-ext-ip"` |  |
+| server.ingresses[0].tls | list | `[]` |  |
 | server.livenessProbe.failureThreshold | int | `3` |  |
 | server.livenessProbe.httpGet.path | string | `"/ping"` |  |
 | server.livenessProbe.httpGet.port | int | `3000` |  |

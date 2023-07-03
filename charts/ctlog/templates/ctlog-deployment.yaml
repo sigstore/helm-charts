@@ -18,7 +18,7 @@ spec:
         {{- toYaml .Values.server.podAnnotations | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "ctlog.selectorLabels" . | nindent 8 }}
+        {{- include "ctlog.labels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ template "ctlog.serviceAccountName" . }}
       containers:
@@ -27,6 +27,14 @@ spec:
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
           args:
 {{  include "ctlog.server.args" . | indent 12 }}
+          {{- if .Values.server.livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.server.livenessProbe | indent 12 }}
+          {{- end }}
+          {{- if .Values.server.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.server.readinessProbe | indent 12 }}
+          {{- end }}
           volumeMounts:
             - name: keys
               mountPath: "/ctfe-keys"

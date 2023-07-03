@@ -17,9 +17,9 @@ server:
     registry: gcr.io
     repository: projectsigstore/fulcio
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/fulcio:v1.2.0
-    # -- v1.2.0
-    version: sha256:17ae9911f54892224c85355a1f8559cfecf75343093f2eaeea1a5c4724283d12
+    # crane digest gcr.io/projectsigstore/fulcio:v1.3.2
+    # -- v1.3.2
+    version: sha256:16fdf8f0198c58b20faad20f2891b65e00761d66695466ea0dbf1981d1e08120
   args:
     port: 5555
     grpcPort: 5554
@@ -31,6 +31,8 @@ server:
     hsm_caroot_id:
     aws_hsm_root_ca_path:
     gcp_private_ca_parent: projects/test/locations/us-east1/caPools/test
+    ct_log_url: ""
+    disable_ct_log: false
   serviceAccount:
     create: true
     name: ""
@@ -82,6 +84,27 @@ server:
         - secretName: fulcio-grpc-ingress-tls
           hosts:
             - fulcio.localhost
+  ingresses:
+    - enabled: false
+      grpc: true
+      http: true
+      name: "gce-ingress"
+      className: "gce"
+      hosts:
+        - path: /
+          host: fulcio.localhost
+      annotations: {}
+      tls: []
+      staticGlobalIP: lb-ext-ip
+      frontendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_frontendconfig_parameters
+        sslPolicy: fulcio-ssl-policy
+        redirectToHttps:
+          enabled: true
+      backendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_backendconfig_parameters
+        securityPolicy:
+          name: fulcio-security-policy
+        logging:
+          enable: true
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533

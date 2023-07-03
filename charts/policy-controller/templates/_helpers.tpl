@@ -51,17 +51,6 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Create the name of the service account to use for policy-controller
-*/}}
-{{- define "policywebhook.serviceAccountName" -}}
-{{- if .Values.policywebhook.serviceAccount.create }}
-{{- default ( print (include "policy-controller.fullname" .) "-policy-webhook" ) .Values.policywebhook.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.policywebhook.serviceAccount.name }}
-{{- end }}
-{{- end }}
-
-{{/*
 Create the name of the service account to use for webhook
 */}}
 {{- define "webhook.serviceAccountName" -}}
@@ -127,15 +116,12 @@ Create the image path for the passed in image field
 {{- end -}}
 {{- end -}}
 
+
 {{/*
-Create the image path for the passed in policy-webhook image field
+Create the image path for the passed in leases-cleanup image field
 */}}
-{{- define "policywebhook.image" -}}
-{{- if eq (substr 0 7 .version) "sha256:" -}}
-{{- printf "%s@%s" .repository .version -}}
-{{- else -}}
+{{- define "leases-cleanup.image" -}}
 {{- printf "%s:%s" .repository .version -}}
-{{- end -}}
 {{- end -}}
 
 {{/*

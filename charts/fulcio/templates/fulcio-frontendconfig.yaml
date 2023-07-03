@@ -1,0 +1,14 @@
+{{- range .Values.server.ingresses }}
+{{- if and (.enabled) (eq .className "gce") (.frontendConfigSpec) }}
+apiVersion: "networking.gke.io/v1beta1"
+kind: FrontendConfig
+metadata:
+  name: {{ template "fulcio.fullname" $ -}}-{{- .name }}
+  labels:
+    {{- include "fulcio.labels" $ | nindent 4 }}
+{{ include "fulcio.namespace" $ | indent 2 }}
+spec:
+{{ toYaml .frontendConfigSpec | indent 2 }}
+---
+{{- end }}
+{{- end }}
