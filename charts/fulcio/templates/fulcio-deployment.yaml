@@ -59,6 +59,9 @@ spec:
             - "--kms-cert-chain-path=/etc/fulcio-config/chain.pem"
             {{- end }}
             - "--ct-log-url={{ if .Values.server.args.disable_ct_log }}{{ else if .Values.server.args.ct_log_url }}{{ .Values.server.args.ct_log_url }}{{ else }}http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/{{ .Values.ctlog.createctconfig.logPrefix }}{{ end }}"
+            {{- range .Values.server.extraArgs }}
+            - {{ . | quote }}
+            {{- end }}
           {{- if eq .Values.server.args.certificateAuthority "fileca" }}
           env:
             - name: PASSWORD
@@ -67,6 +70,24 @@ spec:
                   name: {{ .Values.server.secret }}
                   key: password
           {{- end }}
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: {{ .Values.server.args.port }}
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: {{ .Values.server.args.port }}
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
           volumeMounts:
             - name: fulcio-config
               mountPath: /etc/fulcio-config

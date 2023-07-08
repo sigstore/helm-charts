@@ -37,6 +37,16 @@
                     "examples": [
                         "fulcio-system"
                     ]
+                },
+                "labels": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The labels Schema",
+                    "required": [],
+                    "properties": {},
+                    "examples": [
+                        {}
+                    ]
                 }
             },
             "examples": [
@@ -270,6 +280,15 @@
                             "aws_hsm_root_ca_path": null,
                             "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
                         }
+                    ]
+                },
+                "extraArgs": {
+                    "title": "The extraArgs Schema",
+                    "type": "array",
+                    "default": [],
+                    "items": {},
+                    "examples": [
+                        []
                     ]
                 },
                 "serviceAccount": {
