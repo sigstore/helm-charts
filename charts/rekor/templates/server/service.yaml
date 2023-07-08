@@ -7,13 +7,14 @@ metadata:
 {{ if .Values.server.service.annotations }}
 {{ toYaml .Values.server.service.annotations | indent 4 }}
 {{ end }}
+{{- $printed := false -}}
 {{- range .Values.server.ingresses }}
-{{- if and (.enabled) (eq .className "gce") }}
+{{- if and (.enabled) (eq .className "gce") (not $printed) }}
   {{- if .backendConfigSpec }}
     cloud.google.com/backend-config: '{"ports": {"{{- printf "%v" $port -}}": "{{- printf "%v-%v" $backendConfigName .name -}}"}}'
   {{- end }}
     cloud.google.com/neg: '{"ingress": true}'
-{{- break -}}
+  {{- $printed = true -}}
 {{- end }}
 {{- end }}
   labels:
