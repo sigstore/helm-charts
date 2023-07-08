@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.3.4](https://img.shields.io/badge/Version-2.3.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.3](https://img.shields.io/badge/AppVersion-1.3.3-informational?style=flat-square)
+![Version: 2.3.5](https://img.shields.io/badge/Version-2.3.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.3](https://img.shields.io/badge/AppVersion-1.3.3-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -133,6 +133,20 @@ helm uninstall [RELEASE_NAME]
 | server.ingress.http.hosts[0].host | string | `"fulcio.localhost"` |  |
 | server.ingress.http.hosts[0].path | string | `"/"` |  |
 | server.ingress.http.tls | list | `[]` |  |
+| server.ingresses[0].annotations | object | `{}` |  |
+| server.ingresses[0].backendConfigSpec.logging.enable | bool | `true` |  |
+| server.ingresses[0].backendConfigSpec.securityPolicy.name | string | `"fulcio-security-policy"` |  |
+| server.ingresses[0].className | string | `"gce"` |  |
+| server.ingresses[0].enabled | bool | `false` |  |
+| server.ingresses[0].frontendConfigSpec.redirectToHttps.enabled | bool | `true` |  |
+| server.ingresses[0].frontendConfigSpec.sslPolicy | string | `"fulcio-ssl-policy"` |  |
+| server.ingresses[0].grpc | bool | `true` |  |
+| server.ingresses[0].hosts[0].host | string | `"fulcio.localhost"` |  |
+| server.ingresses[0].hosts[0].path | string | `"/"` |  |
+| server.ingresses[0].http | bool | `true` |  |
+| server.ingresses[0].name | string | `"gce-ingress"` |  |
+| server.ingresses[0].staticGlobalIP | string | `"lb-ext-ip"` |  |
+| server.ingresses[0].tls | list | `[]` |  |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
 | server.replicaCount | int | `1` |  |

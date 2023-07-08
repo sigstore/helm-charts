@@ -5,3 +5,22 @@ server:
       hosts:
         - host: fulcio.localhost
           path: /
+  ingresses:
+    - name: gce-ingress
+      enabled: false
+      http: true
+      grpc: true
+      className: gce
+      hosts:
+        - host: fulcio.sigstoretest.dev
+          path: /
+          pathType: Prefix
+      tls: []
+      annotations: {}
+      staticGlobalIP: lb-ext-ip
+      frontendConfigSpec:
+        redirectToHttps:
+          enabled: false
+      backendConfigSpec:
+        logging:
+          enable: true

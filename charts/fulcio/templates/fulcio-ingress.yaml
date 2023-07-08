@@ -1,0 +1,58 @@
+{{- range .Values.server.ingresses }}
+{{- if and (.enabled) }}
+---
+apiVersion: "networking.k8s.io/v1"
+kind: Ingress
+metadata:
+  labels:
+    {{- include "fulcio.labels" $ | nindent 4 }}
+  name: {{ template "fulcio.fullname" $ }}-{{ .name }}
+{{ include "fulcio.namespace" $ | indent 2 }}
+  annotations:
+{{- if eq .className "gce"}}
+    kubernetes.io/ingress.class: "gce"
+    {{- if .frontendConfigSpec }}
+    networking.gke.io/v1beta1.FrontendConfig: "{{ template "fulcio.fullname" $ }}-{{ .name }}"
+    {{- end }}
+    {{- if .staticGlobalIP }}
+    kubernetes.io/ingress.global-static-ip-name: {{ .staticGlobalIP | quote }}
+    {{- end }}
+{{- end }}
+{{- with .annotations }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+{{- if and (.className) (not (eq .className "gce")) }}
+  ingressClassName: {{ .className }}
+{{- end }}
+  rules:
+    {{- $ingress := . }}
+    {{- range $idx, $host := .hosts }}
+    {{- with $ingress }}
+    - host: {{ required "An Ingress hostname is required" $host.host | quote }}
+      http:
+        paths:
+        {{- if .http }}
+          - path: /
+            pathType: {{ default "Prefix" $host.pathType }}
+            backend: {{- include "fulcio.server.ingress.backend" (list $ $host $.Values.server.svcPort) | nindent 14 }}
+        {{- end }}
+        {{- if .grpc }}
+          - path: /dev.sigstore.fulcio.v2.CA
+            pathType: {{ default "Prefix" $host.pathType }}
+            backend: {{- include "fulcio.server.ingress.backend" (list $ $host $.Values.server.grpcSvcPort) | nindent 14 }}
+        {{- end }}
+    {{- end }}
+    {{- end }}
+{{- if .tls }}
+  tls:
+    {{- range .tls }}
+    - hosts:
+      {{- range .hosts }}
+      - {{ . | quote }}
+      {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
