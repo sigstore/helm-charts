@@ -8,7 +8,7 @@ metadata:
 {{ end }}
 {{- $printed := false -}}
 {{- range .Values.server.ingresses }}
-{{- if and (.enabled) (eq .className "gce") }}
+{{- if and (.enabled) (eq .className "gce") (not $printed) }}
   {{- if .backendConfigSpec }}
     cloud.google.com/backend-config: '{"ports": {"{{- $.Values.server.svcPort -}}":"{{- printf "%v-%v" $backendConfigName .name -}}","{{- $.Values.server.grpcSvcPort -}}":"{{- printf "%v-%v" $backendConfigName .name -}}"}}'
   {{- end }}
