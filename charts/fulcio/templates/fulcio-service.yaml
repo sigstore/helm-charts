@@ -6,14 +6,15 @@ metadata:
 {{ if .Values.server.service.annotations }}
 {{ toYaml .Values.server.service.annotations | indent 4 }}
 {{ end }}
+{{- $printed := false -}}
 {{- range .Values.server.ingresses }}
-{{- if and (.enabled) (eq .className "gce") }}
+{{- if and (.enabled) (eq .className "gce") (not $printed) }}
   {{- if .backendConfigSpec }}
     cloud.google.com/backend-config: '{"ports": {"{{- $.Values.server.svcPort -}}":"{{- printf "%v-%v" $backendConfigName .name -}}","{{- $.Values.server.grpcSvcPort -}}":"{{- printf "%v-%v" $backendConfigName .name -}}"}}'
   {{- end }}
     cloud.google.com/neg: '{"ingress": true}'
-    cloud.google.com/app-protocols: '{"grpc":"HTTP2","http":"HTTP"}'
-{{- break -}}
+    cloud.google.com/app-protocols: '{"grpc":"HTTP2"}'
+  {{- $printed = true -}}
 {{- end }}
 {{- end }}
   labels:
