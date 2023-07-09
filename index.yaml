@@ -6259,6 +6259,48 @@ entries:
   - annotations:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
+    created: "2023-07-09T11:29:02.804714007Z"
+    dependencies:
+    - condition: fulcio.enabled
+      name: fulcio
+      repository: https://sigstore.github.io/helm-charts
+      version: 2.3.5
+    - condition: rekor.enabled
+      name: rekor
+      repository: https://sigstore.github.io/helm-charts
+      version: 1.3.6
+    - condition: trillian.enabled
+      name: trillian
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.6
+    - condition: ctlog.enabled
+      name: ctlog
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.43
+    - condition: tuf.enabled
+      name: tuf
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.1.4
+    - condition: tsa.enabled
+      name: tsa
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.1.0
+    description: Scaffolding the components of the sigstore architecture
+    digest: f67ca240ae91daca7a1fabb7ece8ed4940dd5229b49b7b1131ee9905782e3163
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: scaffold
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/scaffold-0.6.17/scaffold-0.6.17.tgz
+    version: 0.6.17
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
     created: "2023-07-08T12:47:39.175247615Z"
     dependencies:
     - condition: fulcio.enabled
@@ -10773,4 +10815,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2023-07-09T11:01:51.44160616Z"
+generated: "2023-07-09T11:29:02.805406406Z"
