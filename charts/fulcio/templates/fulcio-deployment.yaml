@@ -59,6 +59,10 @@ spec:
             - "--kms-cert-chain-path=/etc/fulcio-config/chain.pem"
             {{- end }}
             - "--ct-log-url={{ if .Values.server.args.disable_ct_log }}{{ else if .Values.server.args.ct_log_url }}{{ .Values.server.args.ct_log_url }}{{ else }}http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/{{ .Values.ctlog.createctconfig.logPrefix }}{{ end }}"
+            {{- if .Values.server.grpcSvcTLS }}
+            - "--grpc-tls-certificate=/var/run/grpc-tls/cert.pem"
+            - "--grpc-tls-key=/var/run/grpc-tls/key.pem"
+            {{- end }}
             {{- range .Values.server.extraArgs }}
             - {{ . | quote }}
             {{- end }}
@@ -98,6 +102,11 @@ spec:
               mountPath: "/var/run/fulcio-secrets"
               readOnly: true
            {{- end }}
+           {{- if .Values.server.grpcSvcTLS }}
+            - name: grpc-tls
+              mountPath: "/var/run/grpc-tls"
+              readOnly: true
+           {{- end }}
     {{- if .Values.server.resources }}
           resources:
 {{ toYaml .Values.server.resources | indent 12 }}
@@ -128,4 +137,14 @@ spec:
                 path: key.pem
               - key: cert
                 path: cert.pem
+        {{- end }}
+        {{- if .Values.server.grpcSvcTLS }}
+        - name: grpc-tls
+          secret:
+            secretName: {{ .Values.server.grpcSvcTLS.secretName }}
+            items:
+              - key: {{ .Values.server.grpcSvcTLS.certField }}
+                path: cert.pem
+              - key: {{ .Values.server.grpcSvcTLS.keyField }}
+                path: key.pem
         {{- end }}
