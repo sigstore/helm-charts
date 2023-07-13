@@ -140,6 +140,49 @@
                         5554
                     ]
                 },
+                "grpcSvcTLS": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The grpcSvcTLS Schema",
+                    "required": [
+                        "secretName",
+                        "keyField",
+                        "certField"
+                    ],
+                    "properties": {
+                        "secretName": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The secretName Schema",
+                            "examples": [
+                                "fulcio-grpc-tls"
+                            ]
+                        },
+                        "keyField": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The keyField Schema",
+                            "examples": [
+                                "tls.key"
+                            ]
+                        },
+                        "certField": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The certField Schema",
+                            "examples": [
+                                "tls.crt"
+                            ]
+                        }
+                    },
+                    "examples": [
+                        {
+                            "secretName": "fulcio-grpc-tls",
+                            "keyField": "tls.key",
+                            "certField": "tls.crt"
+                        }
+                    ]
+                },
                 "image": {
                     "type": "object",
                     "default": {},
