@@ -10,12 +10,12 @@ dependencies:
   version: 0.2.6
 - name: ctlog
   repository: https://sigstore.github.io/helm-charts
-  version: 0.2.43
+  version: 0.2.44
 - name: tuf
   repository: https://sigstore.github.io/helm-charts
   version: 0.1.4
 - name: tsa
   repository: https://sigstore.github.io/helm-charts
   version: 0.1.0
-digest: sha256:454cc288661ddbdf64635170058c796fd7c1cc907f54af3d89cee475b06ffea3
-generated: "2023-07-13T16:05:16.967617562-04:00"
+digest: sha256:236d2f3581b8b4cbcf2195ac13e2ae54a84a221a68dc004838d58d3e474b1539
+generated: "2023-07-14T09:16:37.94405243-04:00"
