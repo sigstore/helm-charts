@@ -1,0 +1,12 @@
+{{- if .Values.server.service.backendConfig }}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: {{ .Values.server.service.backendConfig.name }}
+  labels:
+    {{- include "ctlog.labels" $ | nindent 4 }}
+{{ include "ctlog.namespace" $ | indent 2 }}
+spec:
+{{ toYaml .Values.server.service.backendConfig.spec | indent 2 }}
+---
+{{- end }}

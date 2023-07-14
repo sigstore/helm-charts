@@ -1,10 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-{{- if .Values.server.service.annotations }}
   annotations:
+{{- if .Values.server.service.annotations }}
 {{ toYaml .Values.server.service.annotations | indent 4 }}
 {{- end }}
+  {{- $port := include "ctlog.server.port" . -}}
+  {{- if .Values.server.service.backendConfig }}
+    cloud.google.com/backend-config: '{"ports": {"{{- printf "%v" $port -}}": "{{- .Values.server.service.backendConfig.name -}}"}}'
+    cloud.google.com/neg: '{"ingress": true}'
+  {{- end }}
   labels:
     {{- include "ctlog.labels" . | nindent 4 }}
 {{- if .Values.server.service.labels }}
