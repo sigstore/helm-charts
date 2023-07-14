@@ -35,6 +35,17 @@ server:
   portHTTP: 6962
   portHTTPMetrics: 6963
   service:
+#    backendConfig:
+#      name: ctlog-backend-config
+#      spec: # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_backendconfig_parameters
+#        securityPolicy:
+#          name: ctlog-security-policy
+#        logging:
+#          enable: true
+#        healthCheck:
+#          port: 6962
+#          requestPath: "/healthz"
+#          type: HTTP
     type: ClusterIP
     ports:
       - name: 6962-tcp
@@ -52,6 +63,24 @@ server:
       - path: /
     annotations: {}
     tls: []
+  ingresses:
+    - enabled: false
+      name: "gce-ingress"
+      className: "gce"
+      hosts:
+        - host: fulcio.localhost
+          paths:
+            - path: /test
+              pathType: Prefix
+            - path: /other-shard
+              serviceName: other-shard
+      annotations: {}
+      tls: []
+      staticGlobalIP: lb-ext-ip
+      frontendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_frontendconfig_parameters
+        sslPolicy: ctlog-ssl-policy
+        redirectToHttps:
+          enabled: true
   extraArgs: []
   securityContext:
     runAsNonRoot: true

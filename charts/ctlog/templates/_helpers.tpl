@@ -190,11 +190,18 @@ Create Container Ports based on Service Ports
 {{- end -}}
 
 {{/*
+Return the port for the external service listener
+*/}}
+{{- define "ctlog.server.port" -}}
+{{ (index .Values.server.service.ports 0).port | int }}
+{{- end -}}
+
+{{/*
 Return the appropriate apiVersion for ingress.
 */}}
 {{- define "ctlog.server.ingress.backend" -}}
 service:
-  name: {{ template "ctlog.fullname" . }}
+  name: {{ default (include "ctlog.fullname" .root) .serviceName }}
   port:
-    number: {{ (index .Values.server.service.ports 0).port | int }}
+    number: {{ include "ctlog.server.port" .root }}
 {{- end -}}
