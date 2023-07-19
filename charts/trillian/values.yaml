@@ -44,8 +44,8 @@ mysql:
     cloudsql:
       registry: gcr.io
       repository: cloudsql-docker/gce-proxy
-      # -- crane digest gcr.io/cloudsql-docker/gce-proxy:1.33.8
-      version: sha256:ec2858d78ac2b4d7945020589f6f86d151704a4617322f6c4196bafd952bf827
+      # -- crane digest gcr.io/cloudsql-docker/gce-proxy:1.33.9
+      version: sha256:2c7789354d9063e5a910c1c40c8d5c91736d564e9f41d69f7ac4d785fd3333d7
       resources:
         requests:
           memory: "2Gi"

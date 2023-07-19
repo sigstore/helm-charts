@@ -123,7 +123,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.gcp.cloudsql.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mysql.gcp.cloudsql.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | mysql.gcp.cloudsql.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.cloudsql.version | string | `"sha256:ec2858d78ac2b4d7945020589f6f86d151704a4617322f6c4196bafd952bf827"` | crane digest gcr.io/cloudsql-docker/gce-proxy:1.33.8 |
+| mysql.gcp.cloudsql.version | string | `"sha256:2c7789354d9063e5a910c1c40c8d5c91736d564e9f41d69f7ac4d785fd3333d7"` | crane digest gcr.io/cloudsql-docker/gce-proxy:1.33.9 |
 | mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
 | mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
