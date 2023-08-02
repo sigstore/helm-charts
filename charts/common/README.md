@@ -1,6 +1,6 @@
 # common
 
-![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
 
 A Library Helm Chart containing common logic for use by Sigstore charts
 
@@ -29,6 +29,7 @@ A Library Helm Chart containing common logic for use by Sigstore charts
 |--------------------------------|---------------------------------------------|-----------------------|
 | `common.labels.labels`         | Returns standard Kubernetes labels          | `.` Chart context     |
 | `common.labels.selectorLabels` | Returns specific labels used for selectors  | `.` Chart context     |
+| `common.labels.labelsNameSuffix` | Returns the provided set of labels give the label key `app.kubernetes.io/name` appended with a provided suffix  | `dict "labels" "labels-content "suffix" "suffix-value"`     |
 
 ### Names
 
@@ -41,13 +42,6 @@ A Library Helm Chart containing common logic for use by Sigstore charts
 | `common.names.fullnameSuffix`     | Returns the fully qualified application name appended by a provided suffix                        | `dict "suffix" "suffix-value "context" $`            |
 | `common.names.rawnamespace`       | Returns the raw namespace if set with forceNamespace or .Release.Namespace is set                 | `.` Chart context                                    |
 | `common.names.serviceAccountName` | Returns the name of the Service account. See [ServiceAccount](#serviceaccount) for the structure. | `.Values.serviceAccount` Reference to ServiceAccount |
-
-### Networking
-
-| Name                              | Description                                                                                       | Expected Input                                       |
-|-----------------------------------|---------------------------------------------------------------------------------------------------|------------------------------------------------------|
-| `common.network.containerPorts`               | Returns the `containerPort` and `protocol` fields                                                                     | `.` Service ports definition                                    |
-
 
 ## Input Schemas 
 
