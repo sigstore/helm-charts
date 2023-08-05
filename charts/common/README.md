@@ -43,6 +43,13 @@ A Library Helm Chart containing common logic for use by Sigstore charts
 | `common.names.rawnamespace`       | Returns the raw namespace if set with forceNamespace or .Release.Namespace is set                 | `.` Chart context                                    |
 | `common.names.serviceAccountName` | Returns the name of the Service account. See [ServiceAccount](#serviceaccount) for the structure. | `.Values.serviceAccount` Reference to ServiceAccount |
 
+### Network
+
+| Name                           | Description                                 | Expected Input        |
+|--------------------------------|---------------------------------------------|-----------------------|
+| `common.network.containerPorts`         | Returns the `containerPorts` property of a PodSpec         | `dict` containing `port`, `targetPort` and optional `protocol`     |
+
+
 ## Input Schemas 
 
 The following are a set of schemas that are expected within applicable Named Templates
