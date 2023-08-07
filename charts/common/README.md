@@ -29,6 +29,7 @@ A Library Helm Chart containing common logic for use by Sigstore charts
 |--------------------------------|---------------------------------------------|-----------------------|
 | `common.labels.labels`         | Returns standard Kubernetes labels          | `.` Chart context     |
 | `common.labels.selectorLabels` | Returns specific labels used for selectors  | `.` Chart context     |
+| `common.labels.labelsNameSuffix` | Returns the provided set of labels give the label key `app.kubernetes.io/name` appended with a provided suffix  | `dict "labels" "labels-content "suffix" "suffix-value"`     |
 
 ### Names
 
@@ -41,6 +42,13 @@ A Library Helm Chart containing common logic for use by Sigstore charts
 | `common.names.fullnameSuffix`     | Returns the fully qualified application name appended by a provided suffix                        | `dict "suffix" "suffix-value "context" $`            |
 | `common.names.rawnamespace`       | Returns the raw namespace if set with forceNamespace or .Release.Namespace is set                 | `.` Chart context                                    |
 | `common.names.serviceAccountName` | Returns the name of the Service account. See [ServiceAccount](#serviceaccount) for the structure. | `.Values.serviceAccount` Reference to ServiceAccount |
+
+### Network
+
+| Name                           | Description                                 | Expected Input        |
+|--------------------------------|---------------------------------------------|-----------------------|
+| `common.network.containerPorts`         | Returns the `containerPorts` property of a PodSpec         | `dict` containing `port`, `targetPort` and optional `protocol`     |
+
 
 ## Input Schemas 
 

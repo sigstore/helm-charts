@@ -17,3 +17,11 @@ Selector labels
 app.kubernetes.io/name: {{ include "common.names.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Updating the name of provided set of labels with a provided suffix
+*/}}
+{{- define "common.names.labelsNameSuffix" -}}
+{{- $labels := .labels | fromYaml -}}
+{{- (set $labels "app.kubernetes.io/name" (printf "%s-%s" (get $labels "app.kubernetes.io/name") .suffix  )) | toYaml -}}
+{{- end }}
