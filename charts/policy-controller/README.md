@@ -1,6 +1,6 @@
 # policy-controller
 
-![Version: 0.5.8](https://img.shields.io/badge/Version-0.5.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.0](https://img.shields.io/badge/AppVersion-0.7.0-informational?style=flat-square)
+![Version: 0.6.2](https://img.shields.io/badge/Version-0.6.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.2](https://img.shields.io/badge/AppVersion-0.8.2-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -27,17 +27,19 @@ The Helm chart for Policy  Controller
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
-| webhook.configData | object | `{}` | Set the data of the `policy-config-controller` configmap |
-| webhook.webhookNames.defaulting | string | `"defaulting.clusterimagepolicy.sigstore.dev"` |  |
-| webhook.webhookNames.validating | string | `"validating.clusterimagepolicy.sigstore.dev"` |  |
+| leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
+| leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
+| leasescleanup.image.version | string | `"1.26.0"` |  |
+| leasescleanup.securityContext.enabled | bool | `false` |  |
 | serviceMonitor.enabled | bool | `false` |  |
+| webhook.configData | object | `{}` |  |
 | webhook.env | object | `{}` |  |
 | webhook.extraArgs | object | `{}` |  |
+| webhook.failurePolicy | string | `"Fail"` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
-| webhook.image.version | string | `"sha256:e91bcd954394b414d3b80adfc2cefdae84dd7985fb938a895471eb34aac57744"` | `"v0.8.0"` |
+| webhook.image.version | string | `"sha256:e91bcd954394b414d3b80adfc2cefdae84dd7985fb938a895471eb34aac57744"` | `"v0.8.2"` |
 | webhook.name | string | `"webhook"` |  |
-| webhook.failurePolicy | string | `"Fail"` |  |
 | webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
 | webhook.namespaceSelector.matchExpressions[0].operator | string | `"In"` |  |
 | webhook.namespaceSelector.matchExpressions[0].values[0] | string | `"true"` |  |
@@ -48,8 +50,8 @@ The Helm chart for Policy  Controller
 | webhook.podSecurityContext.runAsUser | int | `1000` |  |
 | webhook.registryCaBundle | object | `{}` |  |
 | webhook.replicaCount | int | `1` |  |
-| webhook.resources.limits.cpu | string | `"100m"` |  |
-| webhook.resources.limits.memory | string | `"256Mi"` |  |
+| webhook.resources.limits.cpu | string | `"200m"` |  |
+| webhook.resources.limits.memory | string | `"512Mi"` |  |
 | webhook.resources.requests.cpu | string | `"100m"` |  |
 | webhook.resources.requests.memory | string | `"128Mi"` |  |
 | webhook.securityContext.enabled | bool | `false` |  |
@@ -62,9 +64,8 @@ The Helm chart for Policy  Controller
 | webhook.serviceAccount.name | string | `""` |  |
 | webhook.volumeMounts | list | `[]` |  |
 | webhook.volumes | list | `[]` |  |
-| leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
-| leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
-| leasescleanup.image.version | string | `"1.26.0"` |  |
+| webhook.webhookNames.defaulting | string | `"defaulting.clusterimagepolicy.sigstore.dev"` |  |
+| webhook.webhookNames.validating | string | `"validating.clusterimagepolicy.sigstore.dev"` |  |
 
 ### Deploy `policy-controller` Helm Chart
 
