@@ -82,6 +82,7 @@ server:
         redirectToHttps:
           enabled: true
   extraArgs: []
+  serviceLinks: {}
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533

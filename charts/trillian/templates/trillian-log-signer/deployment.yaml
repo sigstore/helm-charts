@@ -109,3 +109,6 @@ spec:
       affinity:
 {{ toYaml .Values.logSigner.affinity | indent 8 }}
     {{- end }}
+    {{- if .Values.logSigner.serviceLinks }}
+      enableServiceLinks: {{ .Values.logSigner.serviceLinks.enabled }}
+    {{- end }}

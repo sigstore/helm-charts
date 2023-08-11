@@ -90,6 +90,9 @@ spec:
       affinity:
 {{ toYaml .Values.redis.affinity | indent 8 }}
     {{- end }}
+    {{- if .Values.redis.serviceLinks }}
+      enableServiceLinks: {{ .Values.redis.serviceLinks.enabled }}
+    {{- end }}
       volumes:
         - name: storage
           emptyDir: {}

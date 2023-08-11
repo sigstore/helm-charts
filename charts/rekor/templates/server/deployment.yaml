@@ -108,6 +108,9 @@ spec:
       affinity:
 {{ toYaml .Values.server.affinity | indent 8 }}
     {{- end }}
+    {{- if .Values.server.serviceLinks }}
+      enableServiceLinks: {{ .Values.server.serviceLinks.enabled }}
+    {{- end }}
       volumes:
         - name: {{ template "rekor.sharding-config" . }}
           configMap:

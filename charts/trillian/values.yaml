@@ -100,6 +100,7 @@ mysql:
       command:
         - /etc/init.d/mysql
         - status
+  serviceLinks: {}
   secret:
     annotations: {}
   auth:
@@ -150,6 +151,7 @@ logServer:
         targetPort: 8090
   livenessProbe: {}
   readinessProbe: {}
+  serviceLinks: {}
   resources: {}
   extraArgs: []
   serviceAccount:
@@ -182,6 +184,7 @@ logSigner:
         targetPort: 8091
   livenessProbe: {}
   readinessProbe: {}
+  serviceLinks: {}
   resources: {}
   extraArgs: []
   serviceAccount:

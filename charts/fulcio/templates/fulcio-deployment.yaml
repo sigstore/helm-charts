@@ -115,6 +115,9 @@ spec:
       securityContext:
 {{ toYaml .Values.server.securityContext | indent 8 }}
     {{- end }}
+    {{- if .Values.server.serviceLinks }}
+      enableServiceLinks: {{ .Values.server.serviceLinks.enabled }}
+    {{- end }}
       volumes:
         - name: fulcio-config
           configMap:
