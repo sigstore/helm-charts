@@ -1,55 +1,83 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "ctlog.fullname" . }}
-{{ include "ctlog.namespace" . | indent 2 }}
+  name: {{ template "common.names.fullname" . }}
+{{ include "common.names.namespace" . | indent 2 }}
   labels:
-    {{- include "ctlog.labels" . | nindent 4 }}
+    {{- include "common.labels.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.server.replicaCount }}
   selector:
     matchLabels:
-      {{- include "ctlog.selectorLabels" . | nindent 6 }}
+      {{- include "common.labels.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/ctlog-configmap.yaml") . | sha256sum }}
         {{- if .Values.server.podAnnotations }}
-        {{- toYaml .Values.server.podAnnotations | nindent 8 }}
+        {{- tpl (toYaml .Values.server.podAnnotations) . | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "ctlog.labels" . | nindent 8 }}
+        {{- include "common.labels.selectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ template "ctlog.serviceAccountName" . }}
       containers:
-        - name: {{ template "ctlog.fullname" . }}
-          image: "{{ template "ctlog.image" .Values.server.image }}"
-          imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
+        - name: {{ template "common.names.fullname" . }}
+          image: "{{ template "common.images.image" .Values.server.image }}"
+          imagePullPolicy: "{{ .Values.server.image.imagePullPolicy }}"
+          {{- include "common.images.imagePullSecrets" (dict "pullSecrets" (list .Values.server.image.imagePullSecrets) "context" $) | indent 10 }}
           args:
 {{  include "ctlog.server.args" . | indent 12 }}
+          {{- if .Values.server.extraEnvVars }}
+          env:
+{{ tpl (toYaml .Values.server.extraEnvVars) . | indent 12 }}
+          {{- end }}
+          {{- if or .Values.server.extraEnvVarsCM .Values.server.extraEnvVarsSecret }}
+          envFrom:
+          {{- if or .Values.server.extraEnvVarsCM }}
+            - configMapRef:
+               name: {{ .Values.server.extraEnvVarsCM }}
+          {{- end }}
+          {{- if or .Values.server.extraEnvVarsSecret }}
+            - secretRef:
+               name: {{ .Values.server.extraEnvVarsSecret }}
+          {{- end }}
+          {{- end }}
           {{- if .Values.server.livenessProbe }}
           livenessProbe:
 {{ toYaml .Values.server.livenessProbe | indent 12 }}
           {{- end }}
           {{- if .Values.server.readinessProbe }}
           readinessProbe:
-{{ toYaml .Values.server.readinessProbe | indent 12 }}
+{{ tpl (toYaml .Values.server.readinessProbe) . | indent 12 }}
           {{- end }}
           volumeMounts:
             - name: keys
               mountPath: "/ctfe-keys"
               readOnly: true
           ports:
-{{- include "ctlog.containerPorts" .Values.server.service.ports | indent 12 }}
+{{- include "common.network.containerPorts" .Values.server.service.ports | indent 12 }}
     {{- if .Values.server.resources }}
           resources:
-{{ toYaml .Values.server.resources | indent 12 }}
+{{ tpl (toYaml .Values.server.resources .) | indent 12 }}
     {{- end }}
-    {{- if .Values.server.securityContext }}
+    {{- if .Values.server.containerSecurityContext }}
+          securityContext:
+{{ tpl (omit .Values.server.containerSecurityContext "enabled" | toYaml) . | indent 12 }}
+    {{- end }}
+    {{- if .Values.server.podSecurityContext.enabled }}
       securityContext:
-{{ toYaml .Values.server.securityContext | indent 8 }}
+{{ tpl (omit .Values.server.podSecurityContext "enabled" | toYaml) . | indent 8 }}
+    {{- end }}
+    {{- if .Values.server.tolerations }}
+      tolerations:
+{{ tpl (toYaml .Values.server.tolerations) . | indent 8 }}
+    {{- end }}
+    {{- if .Values.server.nodeSelector }}
+      tolerations:
+{{ tpl (toYaml .Values.server.nodeSelector) . | indent 8 }}
     {{- end }}
       volumes:
         - name: keys
           secret:
-            secretName: {{ .Values.createctconfig.secret | default (printf "%s-secret" (include "ctlog.fullname" .)) }}
+            secretName: {{ .Values.createctconfig.secret | default (printf "%s-secret" (include "common.names.fullname" .)) }}

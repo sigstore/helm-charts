@@ -3,9 +3,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ template "ctlog.createtree.fullname" . }}
-{{ include "ctlog.namespace" . | indent 2 }}
+{{ include "common.names.namespace" . | indent 2 }}
   labels:
-    {{- include "ctlog.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ include "ctlog.createtree.name" . }}
+    {{- include "common.labels.labels" . | nindent 4 }}
 {{- if .Values.createtree.annotations }}
   annotations:
 {{ toYaml .Values.createtree.annotations | indent 4 }}
@@ -21,25 +22,52 @@ spec:
       automountServiceAccountToken: {{ .Values.createtree.serviceAccount.mountToken }}
       containers:
         - name: {{ template "ctlog.createtree.fullname" . }}
-          image: "{{ template "ctlog.image" .Values.createtree.image }}"
-          imagePullPolicy: "{{ .Values.createtree.image.pullPolicy }}"
+          image: "{{ template "common.images.image" .Values.createtree.image }}"
+          imagePullPolicy: "{{ .Values.createtree.image.imagePullPolicy }}"
+          {{- include "common.images.imagePullSecrets" (dict "pullSecrets" (list .Values.createtree.image.imagePullSecrets) "context" $) | indent 10 }}
           env:
           - name: NAMESPACE
-            valueFrom:
+            valueFrom:  
               fieldRef:
                 fieldPath: metadata.namespace
+          {{- if .Values.createtree.extraEnvVars }}
+{{ tpl (toYaml .Values.createtree.extraEnvVars) . | indent 12 }}
+          {{- end }}
+          {{- if or .Values.createtree.extraEnvVarsCM .Values.createtree.extraEnvVarsSecret }}
+          envFrom:
+          {{- if or .Values.createtree.extraEnvVarsCM }}
+            - configMapRef:
+               name: {{ .Values.createtree.extraEnvVarsCM }}
+          {{- end }}
+          {{- if or .Values.createtree.extraEnvVarsSecret }}
+            - secretRef:
+               name: {{ .Values.createtree.extraEnvVarsSecret }}
+          {{- end }}
+          {{- end }}
           args: [
             "--namespace=$(NAMESPACE)",
             "--configmap={{ template "ctlog.config" . }}",
             "--display_name={{ .Values.createtree.displayName }}",
-            "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}"
+            "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace.name }}:{{ .Values.trillian.logServer.portRPC}}"
           ]
     {{- if .Values.createtree.resources }}
           resources:
-{{ toYaml .Values.createtree.resources | indent 12 }}
+{{ tpl (toYaml .Values.createtree.resources) . | indent 12 }}
     {{- end }}
-    {{- if .Values.createtree.securityContext }}
+    {{- if .Values.createtree.containerSecurityContext }}
+          securityContext:
+{{ tpl (omit .Values.createtree.containerSecurityContext "enabled" | toYaml) . | indent 12 }}
+    {{- end }}
+    {{- if .Values.createtree.podSecurityContext }}
       securityContext:
-{{ toYaml .Values.createtree.securityContext | indent 8 }}
+{{ tpl (omit .Values.createtree.podSecurityContext "enabled" | toYaml) . | indent 8 }}
+    {{- end }}
+    {{- if .Values.createtree.tolerations }}
+      tolerations:
+{{ tpl (toYaml .Values.createtree.tolerations) . | indent 8 }}
+    {{- end }}
+    {{- if .Values.createtree.nodeSelector }}
+      tolerations:
+{{ tpl (toYaml .Values.createtree.nodeSelector) . | indent 8 }}
     {{- end }}
 {{- end }}

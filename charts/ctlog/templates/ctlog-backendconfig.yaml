@@ -4,8 +4,8 @@ kind: BackendConfig
 metadata:
   name: {{ .Values.server.service.backendConfig.name }}
   labels:
-    {{- include "ctlog.labels" $ | nindent 4 }}
-{{ include "ctlog.namespace" $ | indent 2 }}
+    {{- include "common.labels.labels" $ | nindent 4 }}
+{{ include "common.names.namespace" $ | indent 2 }}
 spec:
 {{ toYaml .Values.server.service.backendConfig.spec | indent 2 }}
 ---

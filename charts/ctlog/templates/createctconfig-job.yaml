@@ -3,9 +3,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ template "ctlog.createctconfig.fullname" . }}
-{{ include "ctlog.namespace" . | indent 2 }}
+{{ include "common.names.namespace" . | indent 2 }}
   labels:
-    {{- include "ctlog.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ include "ctlog.createctconfig.name" . }}
+    {{- include "common.labels.labels" . | nindent 4 }}
 {{- if .Values.createctconfig.annotations }}
   annotations:
 {{ toYaml .Values.createctconfig.annotations | indent 4 }}
@@ -22,25 +23,45 @@ spec:
       automountServiceAccountToken: {{ .Values.createctconfig.serviceAccount.mountToken }}
       initContainers:
         - name: "wait-for-createtree-configmap"
-          image: "{{ template "ctlog.image" .Values.createctconfig.initContainerImage.curl }}"
-          imagePullPolicy: {{ .Values.createctconfig.initContainerImage.curl.imagePullPolicy }}
+          image: "{{ template "common.images.image" .Values.createctconfig.initContainers.curl.image }}"
+          imagePullPolicy: {{ .Values.createctconfig.initContainers.curl.image.imagePullPolicy }}
+          {{- include "common.images.imagePullSecrets" (dict "pullSecrets" (list .Values.createctconfig.initContainers.curl.image.imagePullSecrets) "context" $) | indent 10 }}
           command: ["sh", "-c", "until curl --fail --header \"Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)\" --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --max-time 10 https://kubernetes.default.svc/api/v1/namespaces/$(NAMESPACE)/configmaps/{{ template "ctlog.config" . }} | grep '\"treeID\":'; do echo waiting for Configmap {{ template "ctlog.config" . }}; sleep 5; done;"]
           env:
             - name: NAMESPACE
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-    {{- if .Values.createctconfig.initContainerResources }}
+          {{- if .Values.createctconfig.initContainers.curl.extraEnvVars }}
+{{ tpl (toYaml .Values.createctconfig.initContainers.curl.extraEnvVars) . | indent 12 }}
+          {{- end }}
+          {{- if or .Values.createctconfig.initContainers.curl.extraEnvVarsCM .Values.createctconfig.initContainers.curl.extraEnvVarsSecret }}
+          envFrom:
+          {{- if or .Values.createctconfig.initContainers.curl.extraEnvVarsCM }}
+            - configMapRef:
+               name: {{ .Values.createctconfig.initContainers.curl.extraEnvVarsCM }}
+          {{- end }}
+          {{- if or .Values.createctconfig.initContainers.curl.extraEnvVarsSecret }}
+            - secretRef:
+               name: {{ .Values.createctconfig.initContainers.curl.extraEnvVarsSecret }}
+          {{- end }}
+          {{- end }}
+    {{- if .Values.createctconfig.initContainers.curl.resources }}
           resources:
-{{ toYaml .Values.createctconfig.initContainerResources | indent 12 }}
+{{ tpl (toYaml .Values.createctconfig.initContainers.curl.resources) . | indent 12 }}
+    {{- end }}
+    {{- if .Values.createctconfig.initContainers.curl.containerSecurityContext }}
+          securityContext:
+{{ tpl (omit .Values.createctconfig.initContainers.curl.containerSecurityContext "enabled" | toYaml) . | indent 12 }}
     {{- end }}
       containers:
         - name: {{ template "ctlog.createctconfig.fullname" . }}
-          image: "{{ template "ctlog.image" .Values.createctconfig.image }}"
-          imagePullPolicy: "{{ .Values.createctconfig.image.pullPolicy }}"
+          image: "{{ template "common.images.image" .Values.createctconfig.image }}"
+          {{- include "common.images.imagePullSecrets" (dict "pullSecrets" (list .Values.createctconfig.image.imagePullSecrets) "context" $) | indent 10 }}
+          imagePullPolicy: "{{ .Values.createctconfig.image.imagePullPolicy }}"
           args: [
             "--configmap={{ template "ctlog.config" . }}",
-            "--secret={{ .Values.createctconfig.secret | default (printf "%s-secret" (include "ctlog.fullname" .)) }}",
+            "--secret={{ .Values.createctconfig.secret | default (printf "%s-secret" (include "common.names.fullname" .)) }}",
           {{- if .Values.createctconfig.privateSecret }}
             "--private-secret={{ .Values.createctconfig.privateSecret }}",
           {{- end }}
@@ -48,7 +69,7 @@ spec:
             "--pubkeysecret={{ .Values.createctconfig.pubkeysecret }}",
           {{- end }}
             "--fulcio-url={{ .Values.createctconfig.fulcioURL }}",
-            "--trillian-server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}",
+            "--trillian-server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace.name }}:{{ .Values.trillian.logServer.portRPC}}",
           {{- if .Values.createctconfig.privateKeyPasswordSecretName }}
             "--key-password=$(PRIVATE_KEY_PASSWORD)",
           {{- end }}
@@ -65,13 +86,39 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.createctconfig.privateKeyPasswordSecretName  }}
                   key: password
+          {{- if .Values.createctconfig.extraEnvVars }}
+{{ tpl (toYaml .Values.createctconfig.extraEnvVars) . | indent 12 }}
+          {{- end }}
+          {{- if or .Values.createctconfig.extraEnvVarsCM .Values.createctconfig.extraEnvVarsSecret }}
+          envFrom:
+          {{- if or .Values.createctconfig.extraEnvVarsCM }}
+            - configMapRef:
+               name: {{ .Values.createctconfig.extraEnvVarsCM }}
+          {{- end }}
+          {{- if or .Values.createctconfig.extraEnvVarsSecret }}
+            - secretRef:
+               name: {{ .Values.createctconfig.extraEnvVarsSecret }}
+          {{- end }}
+          {{- end }}
           {{- end }}
     {{- if .Values.createctconfig.resources }}
           resources:
-{{ toYaml .Values.createctconfig.resources | indent 12 }}
+{{ tpl (toYaml .Values.createctconfig.resources) . | indent 12 }}
     {{- end }}
-    {{- if .Values.createctconfig.securityContext }}
+    {{- if .Values.createctconfig.containerSecurityContext }}
+          securityContext:
+{{ tpl (omit .Values.createctconfig.containerSecurityContext "enabled" | toYaml) . | indent 12 }}
+    {{- end }}
+    {{- if .Values.createctconfig.podSecurityContext.enabled }}
       securityContext:
-{{ toYaml .Values.createctconfig.securityContext | indent 8 }}
+{{ tpl (omit .Values.createctconfig.podSecurityContext "enabled" | toYaml) . | indent 8 }}
+    {{- end }}
+    {{- if .Values.createctconfig.tolerations }}
+      tolerations:
+{{ tpl (toYaml .Values.createctconfig.tolerations) . | indent 8 }}
+    {{- end }}
+    {{- if .Values.createctconfig.nodeSelector }}
+      tolerations:
+{{ tpl (toYaml .Values.createctconfig.nodeSelector) . | indent 8 }}
     {{- end }}
 {{- end }}

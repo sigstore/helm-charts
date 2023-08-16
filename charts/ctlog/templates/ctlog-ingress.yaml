@@ -3,9 +3,9 @@ apiVersion: "networking.k8s.io/v1"
 kind: Ingress
 metadata:
   labels:
-    {{- include "ctlog.labels" . | nindent 4 }}
-  name: {{ template "ctlog.fullname" . }}
-{{ include "ctlog.namespace" . | indent 2 }}
+    {{- include "common.labels.labels" . | nindent 4 }}
+  name: {{ template "common.names.fullname" . }}
+{{ include "common.names.namespace" . | indent 2 }}
   annotations:
 {{ toYaml .Values.server.ingress.annotations | indent 4 }}
 spec:
@@ -19,7 +19,7 @@ spec:
         paths:
           - path: {{ .path }}
             pathType: {{ default "Prefix" .pathType }}
-            backend: {{- include "ctlog.server.ingress.backend" (dict "root" $) | nindent 14 }}
+            backend: {{- include "common.network.ingress.backend" (dict "global" $ "context" . "port" $.Values.server.portHTTP ) | nindent 14 }}
     {{- end }}
 {{- if .Values.server.ingress.tls }}
   tls:
@@ -39,14 +39,14 @@ apiVersion: "networking.k8s.io/v1"
 kind: Ingress
 metadata:
   labels:
-    {{- include "ctlog.labels" $ | nindent 4 }}
-  name: {{ include "ctlog.fullname" $ }}-{{ .name }}
-{{ include "ctlog.namespace" $ | indent 2 }}
+    {{- include "common.labels.labels" $ | nindent 4 }}
+  name: {{ include "common.names.fullname" $ }}-{{ .name }}
+{{ include "common.names.namespace" $ | indent 2 }}
   annotations:
 {{- if eq .className "gce"}}
     kubernetes.io/ingress.class: "gce"
     {{- if .frontendConfigSpec }}
-    networking.gke.io/v1beta1.FrontendConfig: "{{ include "ctlog.fullname" $ }}-{{ .name }}"
+    networking.gke.io/v1beta1.FrontendConfig: "{{ include "common.names.fullname" $ }}-{{ .name }}"
     {{- end }}
     {{- if .staticGlobalIP }}
     kubernetes.io/ingress.global-static-ip-name: {{ .staticGlobalIP | quote }}
@@ -67,7 +67,7 @@ spec:
         {{- range .paths }}
           - path: {{ .path }}
             pathType: {{ default "Prefix" .pathType }}
-            backend: {{- include "ctlog.server.ingress.backend" (dict "root" $ "serviceName" .serviceName) | nindent 14 }}
+            backend: {{- include "common.network.ingress.backend" (dict "global" $ "context" . "port" $.Values.server.portHTTP ) | nindent 14 }}
         {{- end }}
     {{- end }}
 {{- if .tls }}
