@@ -35,11 +35,11 @@ spec:
           {{- end }}
           {{- if or .Values.createtree.extraEnvVarsCM .Values.createtree.extraEnvVarsSecret }}
           envFrom:
-          {{- if or .Values.createtree.extraEnvVarsCM }}
+          {{- if .Values.createtree.extraEnvVarsCM }}
             - configMapRef:
                name: {{ .Values.createtree.extraEnvVarsCM }}
           {{- end }}
-          {{- if or .Values.createtree.extraEnvVarsSecret }}
+          {{- if .Values.createtree.extraEnvVarsSecret }}
             - secretRef:
                name: {{ .Values.createtree.extraEnvVarsSecret }}
           {{- end }}
@@ -58,6 +58,9 @@ spec:
           securityContext:
 {{ tpl (omit .Values.createtree.containerSecurityContext "enabled" | toYaml) . | indent 12 }}
     {{- end }}
+          {{- if .Values.createtree.extraVolumeMounts }}
+{{ tpl (toYaml .Values.createtree.extraVolumeMounts) . | indent 12 }}
+          {{- end }}
     {{- if .Values.createtree.podSecurityContext }}
       securityContext:
 {{ tpl (omit .Values.createtree.podSecurityContext "enabled" | toYaml) . | indent 8 }}
@@ -69,5 +72,8 @@ spec:
     {{- if .Values.createtree.nodeSelector }}
       tolerations:
 {{ tpl (toYaml .Values.createtree.nodeSelector) . | indent 8 }}
+    {{- end }}
+    {{- if .Values.createtree.extraVolumes }}
+{{ tpl (toYaml .Values.createtree.extraVolumes) . | indent 8 }}
     {{- end }}
 {{- end }}

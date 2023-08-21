@@ -41,6 +41,8 @@ server:
   extraEnvVars: []
   extraEnvVarsCM: ""
   extraEnvVarsSecret: ""
+  extraVolumes: []
+  extraVolumeMounts: []
   portHTTP: 6962
   portHTTPMetrics: 6963
   service:
@@ -130,7 +132,8 @@ createtree:
   extraEnvVars: []
   extraEnvVarsCM: ""
   extraEnvVarsSecret: ""
-
+  extraVolumes: []
+  extraVolumeMounts: []
 
 createctconfig:
   enabled: true
@@ -151,6 +154,7 @@ createctconfig:
       extraEnvVars: []
       extraEnvVarsCM: ""
       extraEnvVarsSecret: ""
+      extraVolumeMounts: []
 
   image:
     registry: ghcr.io
@@ -184,7 +188,8 @@ createctconfig:
   extraEnvVars: []
   extraEnvVarsCM: ""
   extraEnvVarsSecret: ""
-
+  extraVolumes: []
+  extraVolumeMounts: []
 
 trillian:
   namespace:

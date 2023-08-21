@@ -23,8 +23,11 @@ Certificate Log
 | createctconfig.extraEnvVars | list | `[]` |  |
 | createctconfig.extraEnvVarsCM | string | `""` |  |
 | createctconfig.extraEnvVarsSecret | string | `""` |  |
+| createctconfig.extraVolumeMounts | list | `[]` |  |
+| createctconfig.extraVolumes | list | `[]` |  |
 | createctconfig.fulcioURL | string | `"http://fulcio-server.fulcio-system.svc"` |  |
 | createctconfig.image.imagePullPolicy | string | `"IfNotPresent"` |  |
+| createctconfig.image.imagePullSecrets | list | `[]` |  |
 | createctconfig.image.registry | string | `"ghcr.io"` |  |
 | createctconfig.image.repository | string | `"sigstore/scaffolding/createctconfig"` |  |
 | createctconfig.image.version | string | `"sha256:2d8072d832370a8dbbe96536eaf479a5bf3a738c997394c888fed8ddcbe84a1b"` | v0.6.5 |
@@ -32,7 +35,9 @@ Certificate Log
 | createctconfig.initContainers.curl.extraEnvVars | list | `[]` |  |
 | createctconfig.initContainers.curl.extraEnvVarsCM | string | `""` |  |
 | createctconfig.initContainers.curl.extraEnvVarsSecret | string | `""` |  |
+| createctconfig.initContainers.curl.extraVolumeMounts | list | `[]` |  |
 | createctconfig.initContainers.curl.image.imagePullPolicy | string | `"IfNotPresent"` |  |
+| createctconfig.initContainers.curl.image.imagePullSecrets | list | `[]` |  |
 | createctconfig.initContainers.curl.image.registry | string | `"docker.io"` |  |
 | createctconfig.initContainers.curl.image.repository | string | `"curlimages/curl"` |  |
 | createctconfig.initContainers.curl.image.version | string | `"sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"` | 7.88.1 |
@@ -59,7 +64,10 @@ Certificate Log
 | createtree.extraEnvVars | list | `[]` |  |
 | createtree.extraEnvVarsCM | string | `""` |  |
 | createtree.extraEnvVarsSecret | string | `""` |  |
+| createtree.extraVolumeMounts | list | `[]` |  |
+| createtree.extraVolumes | list | `[]` |  |
 | createtree.image.imagePullPolicy | string | `"IfNotPresent"` |  |
+| createtree.image.imagePullSecrets | list | `[]` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
 | createtree.image.version | string | `"sha256:47206322c1d6002ffc737d94852924fae0f749aa3a64c1899eee11f502f609a6"` |  |
@@ -85,7 +93,10 @@ Certificate Log
 | server.extraEnvVars | list | `[]` |  |
 | server.extraEnvVarsCM | string | `""` |  |
 | server.extraEnvVarsSecret | string | `""` |  |
+| server.extraVolumeMounts | list | `[]` |  |
+| server.extraVolumes | list | `[]` |  |
 | server.image.imagePullPolicy | string | `"IfNotPresent"` |  |
+| server.image.imagePullSecrets | list | `[]` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/scaffolding/ct_server"` |  |
 | server.image.version | string | `"sha256:1ef2480cf8ddb1f99da0d931283f3c55babb84d79bf36f66d7bed29985bcca7e"` |  |

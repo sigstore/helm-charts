@@ -34,11 +34,11 @@ spec:
           {{- end }}
           {{- if or .Values.server.extraEnvVarsCM .Values.server.extraEnvVarsSecret }}
           envFrom:
-          {{- if or .Values.server.extraEnvVarsCM }}
+          {{- if .Values.server.extraEnvVarsCM }}
             - configMapRef:
                name: {{ .Values.server.extraEnvVarsCM }}
           {{- end }}
-          {{- if or .Values.server.extraEnvVarsSecret }}
+          {{- if .Values.server.extraEnvVarsSecret }}
             - secretRef:
                name: {{ .Values.server.extraEnvVarsSecret }}
           {{- end }}
@@ -55,6 +55,9 @@ spec:
             - name: keys
               mountPath: "/ctfe-keys"
               readOnly: true
+          {{- if .Values.server.extraVolumeMounts }}
+{{ tpl (toYaml .Values.server.extraVolumeMounts) . | indent 12 }}
+          {{- end }}
           ports:
 {{- include "common.network.containerPorts" .Values.server.service.ports | indent 12 }}
     {{- if .Values.server.resources }}
@@ -81,3 +84,6 @@ spec:
         - name: keys
           secret:
             secretName: {{ .Values.createctconfig.secret | default (printf "%s-secret" (include "common.names.fullname" .)) }}
+    {{- if .Values.server.extraVolumes }}
+{{ tpl (toYaml .Values.server.extraVolumes) . | indent 8 }}
+    {{- end }}
