@@ -44,6 +44,10 @@ spec:
           - name: tuf-secrets
             mountPath: "/var/run/tuf-secrets"
             readOnly: true
+    {{- if .Values.deployment.resources }}
+        resources:
+{{ toYaml .Values.deployment.resources | indent 10 }}
+    {{- end }}
       volumes:
       - name: tuf-secrets
         projected:

@@ -26,6 +26,7 @@ A framework for securing software update systems - the scaffolding implementatio
 | deployment.registry | string | `"ghcr.io"` |  |
 | deployment.replicas | int | `1` |  |
 | deployment.repository | string | `"sigstore/scaffolding/server"` |  |
+| deployment.resources | string | `""` |  |
 | deployment.version | string | `"sha256:719ea3fe44c52af5a5fedab2168429872e37e97b9f063977fc164d60a5a14b53"` |  |
 | enabled | bool | `true` |  |
 | forceNamespace | string | `""` |  |
