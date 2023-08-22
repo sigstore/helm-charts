@@ -3,3 +3,5 @@ charts/*/Chart.lock
 
 # Vim swap files
 *.swp
+
+.github/bin
