@@ -105,6 +105,7 @@ helm uninstall [RELEASE_NAME]
 | ctlog.namespace.create | bool | `true` |  |
 | ctlog.namespace.name | string | `"ctlog-system"` |  |
 | forceNamespace | string | `""` |  |
+| imagePullSecrets | list | `[]` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"fulcio-system"` |  |
 | server.args.aws_hsm_root_ca_path | string | `nil` |  |

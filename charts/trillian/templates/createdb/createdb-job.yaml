@@ -19,6 +19,10 @@ spec:
       serviceAccountName: {{ template "trillian.serviceAccountName.logServer" . }}
       restartPolicy: Never
       automountServiceAccountToken: {{ .Values.createdb.serviceAccount.mountToken }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
         {{- if .Values.mysql.gcp.enabled }}
         - name: cloud-sql-proxy

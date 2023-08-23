@@ -2,6 +2,8 @@ namespace:
   create: false
   name: ctlog-system
 
+imagePullSecrets: []
+
 server:
   replicaCount: 1
   config:

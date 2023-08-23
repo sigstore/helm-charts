@@ -3,6 +3,9 @@
         "create": false,
         "name": "trillian-system"
     },
+    "imagePullSecrets": {
+        "type": "array"
+    },
     "initContainerImage": {
         "curl": {
             "registry": "docker.io",

@@ -19,6 +19,10 @@ spec:
       serviceAccountName: {{ template "ctlog.serviceAccountName.createtree" . }}
       restartPolicy: Never
       automountServiceAccountToken: {{ .Values.createtree.serviceAccount.mountToken }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
         - name: {{ template "ctlog.createtree.fullname" . }}
           image: "{{ template "ctlog.image" .Values.createtree.image }}"

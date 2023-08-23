@@ -57,6 +57,7 @@ Certificate Log
 | createtree.serviceAccount.name | string | `""` |  |
 | createtree.ttlSecondsAfterFinished | int | `3600` |  |
 | forceNamespace | string | `""` |  |
+| imagePullSecrets | list | `[]` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"ctlog-system"` |  |
 | server.config.key | string | `"treeID"` |  |

@@ -52,6 +52,7 @@ helm uninstall [RELEASE_NAME]
 | createdb.serviceAccount.name | string | `""` |  |
 | createdb.ttlSecondsAfterFinished | int | `3600` |  |
 | forceNamespace | string | `""` |  |
+| imagePullSecrets | list | `[]` |  |
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
