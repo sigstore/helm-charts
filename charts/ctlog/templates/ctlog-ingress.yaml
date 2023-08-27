@@ -3,32 +3,32 @@ apiVersion: "networking.k8s.io/v1"
 kind: Ingress
 metadata:
   labels:
-    {{- include "common.labels.labels" . | nindent 4 }}
-  name: {{ template "common.names.fullname" . }}
-{{ include "common.names.namespace" . | indent 2 }}
+    {{- tpl (include "common.labels.labels" $) $ | nindent 4 }}
+  name: {{ tpl (include "common.names.fullname" $) $ }}
+{{ tpl (include "common.names.namespace" $) $ | indent 2 }}
   annotations:
-{{ toYaml .Values.server.ingress.annotations | indent 4 }}
+{{ tpl (toYaml .Values.server.ingress.annotations) $ | indent 4 }}
 spec:
 {{- if .Values.server.ingress.className }}
-  ingressClassName: {{ .Values.server.ingress.className }}
+  ingressClassName: {{ tpl (.Values.server.ingress.className) $ }}
 {{- end }}
   rules:
     {{- range .Values.server.ingress.hosts }}
-    - host: {{ required "An Ingress hostname is required" .host | quote }}
+    - host: {{ required "An Ingress hostname is required" (tpl (.host) $) | quote }}
       http:
         paths:
           - path: {{ .path }}
-            pathType: {{ default "Prefix" .pathType }}
-            backend: {{- include "common.network.ingress.backend" (dict "global" $ "context" . "port" $.Values.server.portHTTP ) | nindent 14 }}
+            pathType: {{ tpl (default "Prefix" .pathType) $ }}
+            backend: {{- tpl (include "common.network.ingress.backend" (dict "global" $ "context" . "port" $.Values.server.portHTTP )) $ | nindent 14 }}
     {{- end }}
 {{- if .Values.server.ingress.tls }}
   tls:
     {{- range .Values.server.ingress.tls }}
     - hosts:
       {{- range .hosts }}
-      - {{ . | quote }}
+      - {{ (tpl (.) $) | quote }}
       {{- end }}
-      secretName: {{ .secretName }}
+      secretName: {{ tpl (.secretName) $ }}
     {{- end }}
 {{- end -}}
 {{- end }}
@@ -39,35 +39,35 @@ apiVersion: "networking.k8s.io/v1"
 kind: Ingress
 metadata:
   labels:
-    {{- include "common.labels.labels" $ | nindent 4 }}
-  name: {{ include "common.names.fullname" $ }}-{{ .name }}
-{{ include "common.names.namespace" $ | indent 2 }}
+    {{- tpl (include "common.labels.labels" $) $ | nindent 4 }}
+  name: {{ tpl (include "common.names.fullname" $) $ }}-{{ tpl (.name) . }}
+{{ tpl (include "common.names.namespace" $) $ | indent 2 }}
   annotations:
 {{- if eq .className "gce"}}
     kubernetes.io/ingress.class: "gce"
     {{- if .frontendConfigSpec }}
-    networking.gke.io/v1beta1.FrontendConfig: "{{ include "common.names.fullname" $ }}-{{ .name }}"
+    networking.gke.io/v1beta1.FrontendConfig: "{{ tpl (include "common.names.fullname" $) $ }}-{{ tpl (.name) . }}"
     {{- end }}
     {{- if .staticGlobalIP }}
-    kubernetes.io/ingress.global-static-ip-name: {{ .staticGlobalIP | quote }}
+    kubernetes.io/ingress.global-static-ip-name: {{ tpl (.staticGlobalIP) $ | quote }}
     {{- end }}
 {{- end }}
 {{- with .annotations }}
-{{ toYaml . | indent 4 }}
+{{ tpl (toYaml .) $ | indent 4 }}
 {{- end }}
 spec:
 {{- if and (.className) (not (eq .className "gce")) }}
-  ingressClassName: {{ .className }}
+  ingressClassName: {{ tpl (.className) $ }}
 {{- end }}
   rules:
     {{- range .hosts }}
-    - host: {{ required "An Ingress hostname is required" .host | quote }}
+    - host: {{ required "An Ingress hostname is required" (tpl (.host) $) | quote }}
       http:
         paths:
         {{- range .paths }}
-          - path: {{ .path }}
-            pathType: {{ default "Prefix" .pathType }}
-            backend: {{- include "common.network.ingress.backend" (dict "global" $ "context" . "port" $.Values.server.portHTTP ) | nindent 14 }}
+          - path: {{ tpl (.path) $ }}
+            pathType: {{ tpl (default "Prefix" .pathType) $ }}
+            backend: {{- tpl (include "common.network.ingress.backend" (dict "global" $ "context" . "port" $.Values.server.portHTTP )) $ | nindent 14 }}
         {{- end }}
     {{- end }}
 {{- if .tls }}
@@ -75,9 +75,9 @@ spec:
     {{- range .tls }}
     - hosts:
       {{- range .hosts }}
-      - {{ . | quote }}
+      - {{ tpl (.) $ | quote }}
       {{- end }}
-      secretName: {{ .secretName }}
+      secretName: {{ tpl (.secretName) $ }}
     {{- end }}
 {{- end }}
 {{- end }}

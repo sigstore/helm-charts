@@ -2,29 +2,29 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "ctlog.createtree.fullname" . }}
-{{ include "common.names.namespace" . | indent 2 }}
+  name: {{ tpl (include "ctlog.createtree.fullname" $) $ }}
+{{ tpl (include "common.names.namespace" $) $ | indent 2 }}
   labels:
-    app.kubernetes.io/component: {{ include "ctlog.createtree.name" . }}
-    {{- include "common.labels.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ tpl (include "ctlog.createtree.name" $) $ }}
+    {{- tpl (include "common.labels.labels" $) $ | nindent 4 }}
 {{- if .Values.createtree.annotations }}
   annotations:
-{{ toYaml .Values.createtree.annotations | indent 4 }}
+{{ tpl (toYaml .Values.createtree.annotations) $ | indent 4 }}
 {{- end }}
 spec:
 {{- if .Values.createtree.ttlSecondsAfterFinished }}
-  ttlSecondsAfterFinished: {{ .Values.createtree.ttlSecondsAfterFinished }}
+  ttlSecondsAfterFinished: {{ (tpl (.Values.createtree.ttlSecondsAfterFinished | toString) $) | int64 }}
 {{- end }}
   template:
     spec:
-      serviceAccountName: {{ template "ctlog.serviceAccountName.createtree" . }}
+      serviceAccountName: {{ tpl (include "ctlog.serviceAccountName.createtree" $) $ }}
       restartPolicy: Never
-      automountServiceAccountToken: {{ .Values.createtree.serviceAccount.mountToken }}
+      automountServiceAccountToken: {{ tpl (.Values.createtree.serviceAccount.mountToken | toString) $ }}
       containers:
-        - name: {{ template "ctlog.createtree.fullname" . }}
-          image: "{{ template "common.images.image" .Values.createtree.image }}"
-          imagePullPolicy: "{{ .Values.createtree.image.imagePullPolicy }}"
-          {{- include "common.images.imagePullSecrets" (dict "pullSecrets" (list .Values.createtree.image.imagePullSecrets) "context" $) | indent 10 }}
+        - name: {{ tpl (include "ctlog.createtree.fullname" $) $ }}
+          image: "{{ tpl (include "common.images.image" .Values.createtree.image) $ }}"
+          imagePullPolicy: "{{ tpl (.Values.createtree.image.imagePullPolicy) $ }}"
+          {{- tpl (include "common.images.imagePullSecrets" (dict "pullSecrets" (list .Values.createtree.image.imagePullSecrets) "context" $)) $ | indent 10 }}
           env:
           - name: NAMESPACE
             valueFrom:  
@@ -37,18 +37,18 @@ spec:
           envFrom:
           {{- if .Values.createtree.extraEnvVarsCM }}
             - configMapRef:
-               name: {{ .Values.createtree.extraEnvVarsCM }}
+               name: {{ tpl (.Values.createtree.extraEnvVarsCM) $ }}
           {{- end }}
           {{- if .Values.createtree.extraEnvVarsSecret }}
             - secretRef:
-               name: {{ .Values.createtree.extraEnvVarsSecret }}
+               name: {{ tpl (.Values.createtree.extraEnvVarsSecret) $ }}
           {{- end }}
           {{- end }}
           args: [
             "--namespace=$(NAMESPACE)",
-            "--configmap={{ template "ctlog.config" . }}",
-            "--display_name={{ .Values.createtree.displayName }}",
-            "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace.name }}:{{ .Values.trillian.logServer.portRPC}}"
+            "--configmap={{ tpl (include "ctlog.config" $) $ }}",
+            "--display_name={{ tpl (.Values.createtree.displayName) $ }}",
+            "--admin_server={{ tpl (.Values.trillian.logServer.name) $ }}.{{ tpl (.Values.trillian.namespace.name) $ }}:{{ tpl (.Values.trillian.logServer.portRPC | toString) $}}"
           ]
     {{- if .Values.createtree.resources }}
           resources:

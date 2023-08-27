@@ -3,12 +3,12 @@
 apiVersion: "networking.gke.io/v1beta1"
 kind: FrontendConfig
 metadata:
-  name: {{ include "common.names.fullname" $ -}}-{{- .name }}
+  name: {{ tpl (include "common.names.fullname" $) $ -}}-{{- .name }}
   labels:
-    {{- include "common.labels.labels" $ | nindent 4 }}
-{{ include "common.names.namespace" $ | indent 2 }}
+    {{- tpl (include "common.labels.labels" $) $ | nindent 4 }}
+{{ tpl (include "common.names.namespace" $) $ | indent 2 }}
 spec:
-{{ toYaml .frontendConfigSpec | indent 2 }}
+{{ tpl (toYaml .frontendConfigSpec) $ | indent 2 }}
 ---
 {{- end }}
 {{- end }}

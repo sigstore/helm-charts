@@ -1,13 +1,13 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ template "ctlog.cm-operator" . }}
-{{ include "common.names.namespace" . | indent 2 }}
+  name: {{ tpl (include "ctlog.cm-operator" $) $ }}
+{{ tpl (include "common.names.namespace" $) $ | indent 2 }}
   labels:
-    app.kubernetes.io/component: {{ include "ctlog.createtree.name" . }}
-    {{- include "common.labels.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ tpl (include "ctlog.createtree.name" $) $ }}
+    {{- tpl (include "common.labels.labels" $) $ | nindent 4 }}
 rules:
   - apiGroups: [""] # "" indicates the core API group
     resources: ["configmaps"]
-    resourceNames: ["{{ template "ctlog.config" . }}"]
+    resourceNames: ["{{ tpl (include "ctlog.config" $) $ }}"]
     verbs: ["get", "update"]

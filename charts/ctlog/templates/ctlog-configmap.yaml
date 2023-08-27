@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "ctlog.config" . }}
+  name: {{ tpl (include "ctlog.config" $) $ }}
 {{ include "common.names.namespace" . | indent 2 }}
   labels:
-    {{- include "common.labels.labels" . | nindent 4 }}
+    {{- tpl (include "common.labels.labels" $) $ | nindent 4 }}
 data:
   __placeholder: |
     ###################################################################
@@ -12,5 +12,5 @@ data:
     # if it already exists. This caused grief, do not remove.
     ###################################################################
   {{- if .Values.server.config.treeID }}
-  {{ .Values.server.config.key }}: "{{ .Values.server.config.treeID }}"
+  {{ tpl (.Values.server.config.key) $ }}: "{{ tpl (.Values.server.config.treeID) $ }}"
   {{- end }}

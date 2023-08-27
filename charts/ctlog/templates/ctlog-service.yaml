@@ -3,23 +3,23 @@ kind: Service
 metadata:
   annotations:
 {{- if .Values.server.service.annotations }}
-{{ toYaml .Values.server.service.annotations | indent 4 }}
+{{ tpl (toYaml .Values.server.service.annotations $) . | indent 4 }}
 {{- end }}
   {{- $port := include "ctlog.server.port" . -}}
   {{- if .Values.server.service.backendConfig }}
-    cloud.google.com/backend-config: '{"ports": {"{{- printf "%v" $port -}}": "{{- .Values.server.service.backendConfig.name -}}"}}'
+    cloud.google.com/backend-config: '{"ports": {"{{- tpl (printf "%v" $port) $ -}}": "{{- tpl (.Values.server.service.backendConfig.name) $ -}}"}}'
     cloud.google.com/neg: '{"ingress": true}'
   {{- end }}
   labels:
-    {{- include "common.labels.labels" . | nindent 4 }}
+    {{- tpl (include "common.labels.labels" $) $ | nindent 4 }}
 {{- if .Values.server.service.labels }}
-{{ toYaml .Values.server.service.labels | indent 4 }}
+{{ tpl (toYaml .Values.server.service.labels) $ | indent 4 }}
 {{- end }}
-  name: {{ template "common.names.fullname" . }}
-{{ include "common.names.namespace" . | indent 2 }}
+  name: {{ tpl (include "common.names.fullname" $) $ }}
+{{ tpl (include "common.names.namespace" $) $ | indent 2 }}
 spec:
   ports:
-    {{- tpl (toYaml .Values.server.service.ports) . | nindent 4 }}
+    {{- tpl (toYaml .Values.server.service.ports) $ | nindent 4 }}
   selector:
-    {{- include "common.labels.selectorLabels" . | nindent 4 }}
-  type: "{{ .Values.server.service.type }}"
+    {{- tpl (include "common.labels.selectorLabels" $) $ | nindent 4 }}
+  type: "{{ tpl (.Values.server.service.type) $ }}"

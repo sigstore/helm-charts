@@ -1,16 +1,16 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ template "ctlog.cm-operator" . }}
-{{ include "common.names.namespace" . | indent 2 }}
+  name: {{ tpl (include "ctlog.cm-operator" $) $ }}
+{{ tpl (include "common.names.namespace" $) $ | indent 2 }}
   labels:
-    app.kubernetes.io/component: {{ include "ctlog.createtree.name" . }}
-    {{- include "common.labels.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ tpl (include "ctlog.createtree.name" $) $ }}
+    {{- tpl (include "common.labels.labels" $) $ | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ template "ctlog.cm-operator" . }}
+  name: {{ tpl (include "ctlog.cm-operator" $) $ }}
 subjects:
   - kind: ServiceAccount
-    name: {{ template "ctlog.serviceAccountName.createtree" . }}
-{{ include "common.names.namespace" . | indent 4 }}
+    name: {{ tpl (include "ctlog.serviceAccountName.createtree" $) $ }}
+{{ tpl (include "common.names.namespace" $) $ | indent 4 }}
