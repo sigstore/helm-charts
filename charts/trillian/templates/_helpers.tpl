@@ -190,7 +190,11 @@ Log Server Arguments
 - {{ printf "--storage_system=%s" (include "trillian.storageSystem" .) | quote }}
 - {{ printf "--quota_system=%s" (include "trillian.quotaSystem" .) | quote }}
 {{- if eq (include "trillian.storageSystem" .) "mysql" }}
+{{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+- {{ printf "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+{{- else }}
 - "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
+{{- end }}
 {{- end }}
 - {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.logServer.portRPC | int) | quote }}
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.logServer.portHTTP | int) | quote }}
@@ -207,7 +211,11 @@ Log Signer Arguments
 - {{ printf "--storage_system=%s" (include "trillian.storageSystem" .) | quote }}
 - {{ printf "--quota_system=%s" (include "trillian.quotaSystem" .) | quote }}
 {{- if eq (include "trillian.storageSystem" .) "mysql" }}
+{{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+- {{ printf "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+{{- else }}
 - "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
+{{- end }}
 {{- end }}
 - {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.logSigner.portRPC | int) | quote }}
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.logSigner.portHTTP | int) | quote }}
