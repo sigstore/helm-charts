@@ -57,14 +57,26 @@ spec:
         - name: cloud-sql-proxy
           image: "{{ template "trillian.image" .Values.mysql.gcp.cloudsql }}"
           command:
-            - "/cloud_sql_proxy"
-            - "-instances={{ .Values.mysql.gcp.instance }}=tcp:{{ .Values.mysql.port }}"
+            - "/cloud-sql-proxy"
+            {{- if .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled }}
+            - "--unix-socket"
+            - {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path | quote }}
+            {{- end }}
+            {{- range .Values.mysql.gcp.cloudsql.extraArgs | default list }}
+            - {{ . | quote }}
+            {{- end }}
+            - "{{ .Values.mysql.gcp.instance }}"
     {{- if .Values.mysql.gcp.cloudsql.securityContext }}
           securityContext:
 {{ toYaml .Values.mysql.gcp.cloudsql.securityContext | indent 12 }}
     {{- end }}
           resources:
 {{ toYaml .Values.mysql.gcp.cloudsql.resources | indent 12 }}
+          {{- if .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled }}
+          volumeMounts:
+            - mountPath: {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path }}
+              name: cloud-sql-proxy-unix-domain-socket
+          {{- end }}
         {{- end }}
         - name: {{ template "trillian.name" . }}-{{ .Values.logServer.name }}
           image: "{{ template "trillian.image" .Values.logServer.image }}"
@@ -85,6 +97,11 @@ spec:
 {{- end }}
           resources:
 {{ toYaml .Values.logServer.resources | indent 12 }}
+{{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+          volumeMounts:
+            - mountPath: {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path }}
+              name: cloud-sql-proxy-unix-domain-socket
+{{- end }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}
@@ -108,4 +125,9 @@ spec:
     {{- if .Values.logServer.affinity }}
       affinity:
 {{ toYaml .Values.logServer.affinity | indent 8 }}
+    {{- end }}
+    {{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+      volumes:
+      - name: cloud-sql-proxy-unix-domain-socket
+        emptyDir: {}
     {{- end }}

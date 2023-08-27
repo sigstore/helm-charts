@@ -28,8 +28,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.6.2
-      version: sha256:2c818523a9060cdefca10af0804c8f60549bdc1744e71008f9849b23605c4ccf
+      # -- v0.6.6 which is based on cloud-sql-proxy:2.6.0-alpine
+      version: sha256:e29cb16f09223880f3c40758d6efb227bd0318d0bba2ce7cc9cc6bd799ca2f76
       resources:
         requests:
           memory: "2Gi"
@@ -43,9 +43,9 @@ mysql:
             - ALL
     cloudsql:
       registry: gcr.io
-      repository: cloudsql-docker/gce-proxy
-      # -- crane digest gcr.io/cloudsql-docker/gce-proxy:1.33.9
-      version: sha256:2c7789354d9063e5a910c1c40c8d5c91736d564e9f41d69f7ac4d785fd3333d7
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.6.1-alpine
+      # -- crane digest cloud-sql-connectors/cloud-sql-proxy:2.6.1-alpine
+      version: sha256:b0aee6522475a236254394e573bae95693c02f8a07bceccb110f4e90336a1722
       resources:
         requests:
           memory: "2Gi"
@@ -57,6 +57,9 @@ mysql:
         capabilities:
           drop:
             - ALL
+      unixDomainSocket:
+        enabled: false
+        path: /cloudsql
   enabled: true
   replicaCount: 1
   name: mysql
