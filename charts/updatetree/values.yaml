@@ -1,4 +1,5 @@
 enabled: false
+imagePullSecrets: []
 namespace:
   name: trillian-system
   create: false

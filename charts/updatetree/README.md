@@ -19,6 +19,7 @@ Update the status of an existing Trillian tree
 | args.treeID | string | `nil` |  |
 | args.treeState | string | `nil` | valid tree states are ACTIVE, FROZEN and DRAINING |
 | enabled | bool | `false` |  |
+| imagePullSecrets | list | `[]` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"trillian-system"` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
