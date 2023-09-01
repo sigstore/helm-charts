@@ -904,6 +904,9 @@
                         false
                     ]
                 },
+                "imagePullSecrets": {
+                    "type": "array"
+                },
                 "name": {
                     "type": "string",
                     "default": "",

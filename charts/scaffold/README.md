@@ -50,6 +50,7 @@ helm uninstall [RELEASE_NAME]
 | copySecretJob.backoffLimit | int | `6` |  |
 | copySecretJob.enabled | bool | `false` |  |
 | copySecretJob.imagePullPolicy | string | `"IfNotPresent"` |  |
+| copySecretJob.imagePullSecrets | list | `[]` | |
 | copySecretJob.name | string | `"copy-secrets-job"` |  |
 | copySecretJob.registry | string | `"docker.io"` |  |
 | copySecretJob.repository | string | `"alpine/k8s"` |  |
