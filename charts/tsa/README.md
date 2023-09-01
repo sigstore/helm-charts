@@ -37,6 +37,7 @@ helm uninstall [RELEASE_NAME]
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | forceNamespace | string | `""` |  |
+| imagePullSecrets | list | `[]` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"tsa-system"` |  |
 | server.env | object | `{}` |  |

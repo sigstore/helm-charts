@@ -41,6 +41,9 @@
                 "name": "tsa-system"
             }]
         },
+        "imagePullSecrets": {
+            "type": "array"
+        },
         "server": {
             "type": "object",
             "default": {},

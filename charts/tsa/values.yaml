@@ -2,6 +2,8 @@ namespace:
   create: false
   name: tsa-system
 
+imagePullSecrets: []
+
 server:
   replicaCount: 1
   name: server
