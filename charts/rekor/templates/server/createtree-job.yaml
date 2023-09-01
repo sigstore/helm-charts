@@ -18,6 +18,10 @@ spec:
       serviceAccountName: {{ template "rekor.serviceAccountName.createtree" . }}
       restartPolicy: Never
       automountServiceAccountToken: true
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+    {{- end }}
       containers:
         - name: {{ template "rekor.createtree.fullname" . }}
           image: "{{ template "rekor.image" .Values.createtree.image }}"
