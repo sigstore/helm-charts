@@ -82,6 +82,18 @@ spec:
             - mountPath: {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path }}
               name: cloud-sql-proxy-unix-domain-socket
           {{- end }}
+{{- if .Values.mysql.gcp.cloudsql.startupProbe }}
+          startupProbe:
+{{ toYaml .Values.mysql.gcp.cloudsql.startupProbe | indent 12 }}
+{{- end }}
+{{- if .Values.mysql.gcp.cloudsql.livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.mysql.gcp.cloudsql.livenessProbe | indent 12 }}
+{{- end }}
+{{- if .Values.mysql.gcp.cloudsql.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.mysql.gcp.cloudsql.readinessProbe | indent 12 }}
+{{- end }}
         - name: {{ template "trillian.name" . }}-{{ .Values.logSigner.name }}
           image: "{{ template "trillian.image" .Values.logSigner.image }}"
           imagePullPolicy: "{{ .Values.logSigner.image.pullPolicy }}"
@@ -91,6 +103,10 @@ spec:
 {{- include "trillian.storageSystem.envCredentials" . | indent 12}}
           ports:
 {{- include "trillian.containerPorts" .Values.logSigner.service.ports | indent 12 }}
+{{- if .Values.logSigner.startupProbe }}
+          startupProbe:
+{{ toYaml .Values.logSigner.startupProbe | indent 12 }}
+{{- end }}
 {{- if .Values.logSigner.livenessProbe }}
           livenessProbe:
 {{ toYaml .Values.logSigner.livenessProbe | indent 12 }}
