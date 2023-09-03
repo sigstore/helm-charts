@@ -77,6 +77,18 @@ spec:
             - mountPath: {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path }}
               name: cloud-sql-proxy-unix-domain-socket
           {{- end }}
+{{- if .Values.mysql.gcp.cloudsql.startupProbe }}
+          startupProbe:
+{{ toYaml .Values.mysql.gcp.cloudsql.startupProbe | indent 12 }}
+{{- end }}
+{{- if .Values.mysql.gcp.cloudsql.livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.mysql.gcp.cloudsql.livenessProbe | indent 12 }}
+{{- end }}
+{{- if .Values.mysql.gcp.cloudsql.readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.mysql.gcp.cloudsql.readinessProbe | indent 12 }}
+{{- end }}
         {{- end }}
         - name: {{ template "trillian.name" . }}-{{ .Values.logServer.name }}
           image: "{{ template "trillian.image" .Values.logServer.image }}"
@@ -87,6 +99,10 @@ spec:
 {{- include "trillian.storageSystem.envCredentials" . | indent 12}}
           ports:
 {{- include "trillian.containerPorts" .Values.logServer.service.ports | indent 12 }}
+{{- if .Values.logServer.startupProbe }}
+          startupProbe:
+{{ toYaml .Values.logServer.startupProbe | indent 12 }}
+{{- end }}
 {{- if .Values.logServer.livenessProbe }}
           livenessProbe:
 {{ toYaml .Values.logServer.livenessProbe | indent 12 }}
