@@ -67,33 +67,34 @@ server:
         port: 6963
         protocol: TCP
         targetPort: 6963
-  ingress:
-    enabled: false
-    className: nginx
-    hosts:
-      - path: /
-    annotations: {}
-    tls: []
-  ingresses:
-    - enabled: false
-      name: "gce-ingress"
-      className: "gce"
-      hosts:
-        - host: fulcio.localhost
-          paths:
-            - path: /test
-              pathType: Prefix
-              serviceName: ""
-            - path: /other-shard
-              pathType: Prefix
-              serviceName: other-shard
-      annotations: {}
-      tls: []
-      staticGlobalIP: lb-ext-ip
-      frontendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_frontendconfig_parameters
-        sslPolicy: ctlog-ssl-policy
-        redirectToHttps:
-          enabled: true
+  # Note: Ingress is deprecated. Use ingresses
+  ingress: {}
+    # enabled: false
+    # className: nginx
+    # hosts:
+    #   - path: /
+    # annotations: {}
+    # tls: []
+  ingresses: []
+    # - enabled: false
+    #   name: "gce-ingress"
+    #   className: "gce"
+    #   hosts:
+    #     - host: fulcio.localhost
+    #       paths:
+    #         - path: /test
+    #           pathType: Prefix
+    #           serviceName: ""
+    #         - path: /other-shard
+    #           pathType: Prefix
+    #           serviceName: other-shard
+    #   annotations: {}
+    #   tls: []
+    #   staticGlobalIP: lb-ext-ip
+    #   frontendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_frontendconfig_parameters
+    #     sslPolicy: ctlog-ssl-policy
+    #     redirectToHttps:
+    #       enabled: true
   extraArgs: []
   containerSecurityContext:
     enabled: false

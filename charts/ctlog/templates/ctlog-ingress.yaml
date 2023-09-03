@@ -1,52 +1,23 @@
-{{- if .Values.server.ingress.enabled }}
-apiVersion: "networking.k8s.io/v1"
-kind: Ingress
-metadata:
-  labels:
-    {{- tpl (include "common.labels.labels" $) $ | nindent 4 }}
-  name: {{ tpl (include "common.names.fullname" $) $ }}
-{{ tpl (include "common.names.namespace" $) $ | indent 2 }}
-  annotations:
-{{ tpl (toYaml .Values.server.ingress.annotations) $ | indent 4 }}
-spec:
-{{- if .Values.server.ingress.className }}
-  ingressClassName: {{ tpl (.Values.server.ingress.className) $ }}
-{{- end }}
-  rules:
-    {{- range .Values.server.ingress.hosts }}
-    - host: {{ required "An Ingress hostname is required" (tpl (.host) $) | quote }}
-      http:
-        paths:
-          - path: {{ .path }}
-            pathType: {{ tpl (default "Prefix" .pathType) $ }}
-            backend: {{- tpl (include "common.network.ingress.backend" (dict "global" $ "context" . "port" $.Values.server.portHTTP )) $ | nindent 14 }}
-    {{- end }}
-{{- if .Values.server.ingress.tls }}
-  tls:
-    {{- range .Values.server.ingress.tls }}
-    - hosts:
-      {{- range .hosts }}
-      - {{ (tpl (.) $) | quote }}
-      {{- end }}
-      secretName: {{ tpl (.secretName) $ }}
-    {{- end }}
-{{- end -}}
-{{- end }}
-{{- range .Values.server.ingresses }}
+{{- $ingresses := append .Values.server.ingresses .Values.server.ingress }}
+{{- range $ingresses }}
 {{- if .enabled }}
+{{- if and (gt ($ingresses | len) 1) (not .name)}}
+{{- fail "Name of Ingress must be provided if more than one ingress specified" }}
+{{- end }}
+{{- $name := (gt ($ingresses | len) 1) | ternary (printf "%s-%s" (tpl (include "common.names.fullname" $) $) (tpl (default "" .name) $)) (tpl (include "common.names.fullname" $) $) }}
 ---
 apiVersion: "networking.k8s.io/v1"
 kind: Ingress
 metadata:
   labels:
     {{- tpl (include "common.labels.labels" $) $ | nindent 4 }}
-  name: {{ tpl (include "common.names.fullname" $) $ }}-{{ tpl (.name) . }}
+  name: {{ $name }}
 {{ tpl (include "common.names.namespace" $) $ | indent 2 }}
   annotations:
 {{- if eq .className "gce"}}
     kubernetes.io/ingress.class: "gce"
     {{- if .frontendConfigSpec }}
-    networking.gke.io/v1beta1.FrontendConfig: "{{ tpl (include "common.names.fullname" $) $ }}-{{ tpl (.name) . }}"
+    networking.gke.io/v1beta1.FrontendConfig: "{{ $name }}"
     {{- end }}
     {{- if .staticGlobalIP }}
     kubernetes.io/ingress.global-static-ip-name: {{ tpl (.staticGlobalIP) $ | quote }}
@@ -64,8 +35,9 @@ spec:
     - host: {{ required "An Ingress hostname is required" (tpl (.host) $) | quote }}
       http:
         paths:
-        {{- range .paths }}
-          - path: {{ tpl (.path) $ }}
+        {{- $paths :=  .paths | default (list (dict)) }}
+        {{- range $paths }}
+          - path: {{ tpl (default "/" .path) $ }}
             pathType: {{ tpl (default "Prefix" .pathType) $ }}
             backend: {{- tpl (include "common.network.ingress.backend" (dict "global" $ "context" . "port" $.Values.server.portHTTP )) $ | nindent 14 }}
         {{- end }}
