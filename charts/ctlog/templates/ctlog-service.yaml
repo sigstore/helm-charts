@@ -11,15 +11,15 @@ metadata:
     cloud.google.com/neg: '{"ingress": true}'
   {{- end }}
   labels:
-    {{- include "ctlog.labels" . | nindent 4 }}
+    {{- include "common.labels.labels" . | nindent 4 }}
 {{- if .Values.server.service.labels }}
 {{ toYaml .Values.server.service.labels | indent 4 }}
 {{- end }}
-  name: {{ template "ctlog.fullname" . }}
-{{ include "ctlog.namespace" . | indent 2 }}
+  name: {{ template "common.names.fullname" . }}
+{{ include "common.names.namespace" . | indent 2 }}
 spec:
   ports:
     {{- tpl (toYaml .Values.server.service.ports) . | nindent 4 }}
   selector:
-    {{- include "ctlog.selectorLabels" . | nindent 4 }}
+    {{- include "common.labels.selectorLabels" . | nindent 4 }}
   type: "{{ .Values.server.service.type }}"

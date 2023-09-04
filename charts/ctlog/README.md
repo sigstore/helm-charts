@@ -23,11 +23,11 @@ Certificate Log
 | createctconfig.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createctconfig.image.registry | string | `"ghcr.io"` |  |
 | createctconfig.image.repository | string | `"sigstore/scaffolding/createctconfig"` |  |
-| createctconfig.image.version | string | `"sha256:b3dae896ddb7b01b3257c668bc1e87f15aafe97f30a767f99426f557fa33e44c"` | v0.6.3 |
+| createctconfig.image.version | string | `"sha256:2d8072d832370a8dbbe96536eaf479a5bf3a738c997394c888fed8ddcbe84a1b"` | v0.6.5 |
 | createctconfig.initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | createctconfig.initContainerImage.curl.registry | string | `"docker.io"` |  |
 | createctconfig.initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
-| createctconfig.initContainerImage.curl.version | string | `"sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"` | 7.82.0 |
+| createctconfig.initContainerImage.curl.version | string | `"sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"` | 7.88.1 |
 | createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | createctconfig.name | string | `"createctconfig"` |  |
 | createctconfig.privateKeyPasswordSecretName | string | `""` |  |
@@ -47,7 +47,7 @@ Certificate Log
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
-| createtree.image.version | string | `"sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"` |  |
+| createtree.image.version | string | `"sha256:47206322c1d6002ffc737d94852924fae0f749aa3a64c1899eee11f502f609a6"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
 | createtree.securityContext.runAsUser | int | `65533` |  |
@@ -65,7 +65,7 @@ Certificate Log
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/scaffolding/ct_server"` |  |
-| server.image.version | string | `"sha256:7c791d3b7c15e817807f07d4cdb00406529a114702ad448ee857e1d0fc5fb5a9"` |  |
+| server.image.version | string | `"sha256:1ef2480cf8ddb1f99da0d931283f3c55babb84d79bf36f66d7bed29985bcca7e"` |  |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `false` |  |
@@ -77,9 +77,10 @@ Certificate Log
 | server.ingresses[0].frontendConfigSpec.redirectToHttps.enabled | bool | `true` |  |
 | server.ingresses[0].frontendConfigSpec.sslPolicy | string | `"ctlog-ssl-policy"` |  |
 | server.ingresses[0].hosts[0].host | string | `"fulcio.localhost"` |  |
-| server.ingresses[0].hosts[0].path | string | `"/test"` |  |
-| server.ingresses[0].hosts[1].host | string | `"fulcio.localhost"` |  |
-| server.ingresses[0].hosts[1].path | string | `"/other-shard"` |  |
+| server.ingresses[0].hosts[0].paths[0].path | string | `"/test"` |  |
+| server.ingresses[0].hosts[0].paths[0].pathType | string | `"Prefix"` |  |
+| server.ingresses[0].hosts[0].paths[1].path | string | `"/other-shard"` |  |
+| server.ingresses[0].hosts[0].paths[1].serviceName | string | `"other-shard"` |  |
 | server.ingresses[0].name | string | `"gce-ingress"` |  |
 | server.ingresses[0].staticGlobalIP | string | `"lb-ext-ip"` |  |
 | server.ingresses[0].tls | list | `[]` |  |
@@ -97,12 +98,6 @@ Certificate Log
 | server.replicaCount | int | `1` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
-| server.service.backendConfig.name | string | `"ctlog-backend-config"` |  |
-| server.service.backendConfig.spec.healthCheck.port | int | `6962` |  |
-| server.service.backendConfig.spec.healthCheck.requestPath | string | `"/healthz"` |  |
-| server.service.backendConfig.spec.healthCheck.type | string | `"HTTP"` |  |
-| server.service.backendConfig.spec.logging.enable | bool | `true` |  |
-| server.service.backendConfig.spec.securityPolicy.name | string | `"ctlog-security-policy"` |  |
 | server.service.ports[0].name | string | `"6962-tcp"` |  |
 | server.service.ports[0].port | int | `80` |  |
 | server.service.ports[0].protocol | string | `"TCP"` |  |
@@ -120,3 +115,4 @@ Certificate Log
 | trillian.logServer.portRPC | int | `8091` |  |
 | trillian.namespace | string | `"trillian-system"` |  |
 
+----------------------------------------------
