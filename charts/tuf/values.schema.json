@@ -75,7 +75,7 @@
                 "version": {
                     "type": "string",
                     "examples": [
-                        "sha256:719ea3fe44c52af5a5fedab2168429872e37e97b9f063977fc164d60a5a14b53"
+                        "sha256:c77d098e0e62f791cc87b63ae43a5fea505225e0ec38686c4a392c0cad7238bf"
                     ]
                 },
                 "imagePullPolicy": {
@@ -96,7 +96,7 @@
                 "replicas": 1,
                 "registry": "ghcr.io",
                 "repository": "sigstore/scaffolding/server",
-                "version": "sha256:719ea3fe44c52af5a5fedab2168429872e37e97b9f063977fc164d60a5a14b53",
+                "version": "sha256:c77d098e0e62f791cc87b63ae43a5fea505225e0ec38686c4a392c0cad7238bf",
                 "imagePullPolicy": "IfNotPresent",
                 "port": 8080
             }]
@@ -367,7 +367,7 @@
             "replicas": 1,
             "registry": "ghcr.io",
             "repository": "sigstore/scaffolding/server",
-            "version": "sha256:719ea3fe44c52af5a5fedab2168429872e37e97b9f063977fc164d60a5a14b53",
+            "version": "sha256:c77d098e0e62f791cc87b63ae43a5fea505225e0ec38686c4a392c0cad7238bf",
             "imagePullPolicy": "IfNotPresent",
             "port": 8080
         },
