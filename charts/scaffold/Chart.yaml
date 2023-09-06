@@ -24,7 +24,7 @@ dependencies:
     repository: https://sigstore.github.io/helm-charts
     condition: rekor.enabled
   - name: trillian
-    version: 0.2.10
+    version: 0.2.11
     repository: https://sigstore.github.io/helm-charts
     condition: trillian.enabled
   - name: ctlog
