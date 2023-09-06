@@ -145,7 +145,7 @@
                             "default": "",
                             "title": "The version Schema",
                             "examples": [
-                                "sha256:7c791d3b7c15e817807f07d4cdb00406529a114702ad448ee857e1d0fc5fb5a9"
+                                "sha256:742411d74fcd3cdb327dd1a449356623cb8f6be6097197393d44c5d48a334e61"
                             ]
                         }
                     },
@@ -154,7 +154,7 @@
                             "registry": "ghcr.io",
                             "repository": "sigstore/scaffolding/ct_server",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:7c791d3b7c15e817807f07d4cdb00406529a114702ad448ee857e1d0fc5fb5a9"
+                            "version": "sha256:742411d74fcd3cdb327dd1a449356623cb8f6be6097197393d44c5d48a334e61"
                         }
                     ]
                 },
@@ -752,7 +752,7 @@
                         "registry": "ghcr.io",
                         "repository": "sigstore/scaffolding/ct_server",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:7c791d3b7c15e817807f07d4cdb00406529a114702ad448ee857e1d0fc5fb5a9"
+                        "version": "sha256:742411d74fcd3cdb327dd1a449356623cb8f6be6097197393d44c5d48a334e61"
                     },
                     "serviceAccount": {
                         "create": true,
@@ -873,7 +873,7 @@
                             "default": "",
                             "title": "The version Schema",
                             "examples": [
-                                "sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"
+                                "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
                             ]
                         }
                     },
@@ -882,7 +882,7 @@
                             "registry": "ghcr.io",
                             "repository": "sigstore/scaffolding/createtree",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"
+                            "version": "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
                         }
                     ]
                 },
@@ -1001,7 +1001,7 @@
                         "registry": "ghcr.io",
                         "repository": "sigstore/scaffolding/createtree",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"
+                        "version": "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
                     },
                     "ttlSecondsAfterFinished": 3600,
                     "serviceAccount": {
@@ -1188,7 +1188,7 @@
                             "default": "",
                             "title": "The version Schema",
                             "examples": [
-                                "sha256:2795b42d3b42cdb9eaf3825e0bca742963208a51e30d5a7173f8a68ac6d47732"
+                                "sha256:23a57a0a16dace4bd75168290952694335f7ab57f6d65ab836ac719816936e30"
                             ]
                         }
                     },
@@ -1197,7 +1197,7 @@
                             "registry": "ghcr.io",
                             "repository": "sigstore/scaffolding/createctconfig",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:2795b42d3b42cdb9eaf3825e0bca742963208a51e30d5a7173f8a68ac6d47732"
+                            "version": "sha256:23a57a0a16dace4bd75168290952694335f7ab57f6d65ab836ac719816936e30"
                         }
                     ]
                 },
@@ -1350,7 +1350,7 @@
                         "registry": "ghcr.io",
                         "repository": "sigstore/scaffolding/createctconfig",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:2795b42d3b42cdb9eaf3825e0bca742963208a51e30d5a7173f8a68ac6d47732"
+                        "version": "sha256:23a57a0a16dace4bd75168290952694335f7ab57f6d65ab836ac719816936e30"
                     },
                     "fulcioURL": "http://fulcio-server.fulcio-system.svc",
                     "logPrefix": "sigstorescaffolding",
@@ -1456,7 +1456,7 @@
                     "registry": "ghcr.io",
                     "repository": "sigstore/scaffolding/ct_server",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:7c791d3b7c15e817807f07d4cdb00406529a114702ad448ee857e1d0fc5fb5a9"
+                    "version": "sha256:742411d74fcd3cdb327dd1a449356623cb8f6be6097197393d44c5d48a334e61"
                 },
                 "serviceAccount": {
                     "create": true,
@@ -1512,7 +1512,7 @@
                     "registry": "ghcr.io",
                     "repository": "sigstore/scaffolding/createtree",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:d5776d8a43632291e1c5a22a9266608db0daa0a11663445d701e327f2205974c"
+                    "version": "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
                 },
                 "ttlSecondsAfterFinished": 3600,
                 "serviceAccount": {
@@ -1544,7 +1544,7 @@
                     "registry": "ghcr.io",
                     "repository": "sigstore/scaffolding/createctconfig",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:2795b42d3b42cdb9eaf3825e0bca742963208a51e30d5a7173f8a68ac6d47732"
+                    "version": "sha256:23a57a0a16dace4bd75168290952694335f7ab57f6d65ab836ac719816936e30"
                 },
                 "fulcioURL": "http://fulcio-server.fulcio-system.svc",
                 "logPrefix": "sigstorescaffolding",
