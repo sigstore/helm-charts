@@ -28,7 +28,7 @@ spec:
         - name: cloud-sql-proxy
           image: "{{ template "trillian.image" .Values.mysql.gcp.scaffoldSQLProxy }}"
           args: [
-            "-instances={{ .Values.mysql.gcp.instance }}=tcp:{{ .Values.mysql.port }}"
+            "{{ .Values.mysql.gcp.instance }}"
           ]
           env:
             - name: EXIT_DIR
