@@ -5,7 +5,7 @@ description: |
 
 type: application
 
-version: 0.2.11
+version: 0.2.12
 
 keywords:
   - security
@@ -36,6 +36,6 @@ annotations:
     - name: cloud_proxy
       image: gcr.io/cloud-sql-connectors/cloud-sql-proxy@sha256:b0aee6522475a236254394e573bae95693c02f8a07bceccb110f4e90336a1722
     - name: scaffold_cloud_proxy
-      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:@sha256:2c818523a9060cdefca10af0804c8f60549bdc1744e71008f9849b23605c4ccf
+      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.6.7@sha256:e11cad1e3d64efced50f5af7dc068a524634eb01464fcfe6fc9440f281c9a01f
     - name: createdb
       image: ghcr.io/sigstore/scaffolding/createdb@sha256:9aa98492115c465b0cecfd6dbb04411a40c0d2d7e5d7c510f5646bd1d825e3c7
