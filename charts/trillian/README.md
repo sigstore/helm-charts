@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.11](https://img.shields.io/badge/Version-0.2.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.2.12](https://img.shields.io/badge/Version-0.2.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -45,7 +45,7 @@ helm uninstall [RELEASE_NAME]
 | createdb.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createdb.image.registry | string | `"ghcr.io"` |  |
 | createdb.image.repository | string | `"sigstore/scaffolding/createdb"` |  |
-| createdb.image.version | string | `"sha256:9aa98492115c465b0cecfd6dbb04411a40c0d2d7e5d7c510f5646bd1d825e3c7"` | v0.6.2 |
+| createdb.image.version | string | `"sha256:3720511269d5b01f386ac6650e26309a54abd5f13bb41597a0849501cf727e51"` | v0.6.7 |
 | createdb.name | string | `"createdb"` |  |
 | createdb.serviceAccount.annotations | object | `{}` |  |
 | createdb.serviceAccount.create | bool | `false` |  |
@@ -65,7 +65,7 @@ helm uninstall [RELEASE_NAME]
 | logServer.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logServer.image.registry | string | `"gcr.io"` |  |
 | logServer.image.repository | string | `"projectsigstore/trillian_log_server"` |  |
-| logServer.image.version | string | `"sha256:75dbbfc4c0b64334b985c4971fe58c30b9dd73d7aa54b15cee61223ff92aebf3"` | v0.9.1 |
+| logServer.image.version | string | `"sha256:ab60d5e16675fc15783ec8dbc99a335b68b9a0dd6dd4495ecc300c5f8aa58b72"` | v1.3.0 from rekor build |
 | logServer.livenessProbe | object | `{}` |  |
 | logServer.name | string | `"log-server"` |  |
 | logServer.nodeSelector | object | `{}` |  |
@@ -92,7 +92,7 @@ helm uninstall [RELEASE_NAME]
 | logSigner.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logSigner.image.registry | string | `"gcr.io"` |  |
 | logSigner.image.repository | string | `"projectsigstore/trillian_log_signer"` |  |
-| logSigner.image.version | string | `"sha256:b56ed0b7b5e9813c91b208ba6041c9342f9a53162d96943374e59b5289090f1f"` | v0.9.1 |
+| logSigner.image.version | string | `"sha256:54a75e22beb4cb90b7aef63a28ac9e33fee60b35a66a2b9e7d6444a40e2b6a79"` | v1.3.0 from rekor build |
 | logSigner.livenessProbe | object | `{}` |  |
 | logSigner.name | string | `"log-signer"` |  |
 | logSigner.nodeSelector | object | `{}` |  |
@@ -136,7 +136,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.gcp.scaffoldSQLProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mysql.gcp.scaffoldSQLProxy.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | mysql.gcp.scaffoldSQLProxy.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:e29cb16f09223880f3c40758d6efb227bd0318d0bba2ce7cc9cc6bd799ca2f76"` | v0.6.6 which is based on cloud-sql-proxy:2.6.0-alpine |
+| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:e11cad1e3d64efced50f5af7dc068a524634eb01464fcfe6fc9440f281c9a01f"` | v0.6.7 which is based on cloud-sql-proxy:2.6.1-alpine |
 | mysql.hostname | string | `""` |  |
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
