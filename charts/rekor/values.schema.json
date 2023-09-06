@@ -1905,7 +1905,7 @@
                             "type": "string",
                             "default": "",
                             "examples": [
-                                "sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"
+                                "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
                             ]
                         }
                     },
@@ -1914,7 +1914,7 @@
                             "registry": "ghcr.io",
                             "repository": "sigstore/scaffolding/createtree",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"
+                            "version": "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
                         }
                     ]
                 },
@@ -2033,7 +2033,7 @@
                         "registry": "ghcr.io",
                         "repository": "sigstore/scaffolding/createtree",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"
+                        "version": "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
                     },
                     "serviceAccount": {
                         "create": true,
@@ -2472,7 +2472,7 @@
                     "registry": "ghcr.io",
                     "repository": "sigstore/scaffolding/createtree",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:03e7b3b068e61f65a730b7a95f498c76a02ddecb4f7a65e09b2753b66ac8399f"
+                    "version": "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
                 },
                 "serviceAccount": {
                     "create": true,
