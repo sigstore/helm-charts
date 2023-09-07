@@ -1227,7 +1227,7 @@
                             "default": "",
                             "title": "The version Schema",
                             "examples": [
-                                "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
+                                "sha256:e1b6ff1951d3ab074cd4755f0cfedffe8706ea4780b777afdfbf6d30c29750a1"
                             ]
                         }
                     },
@@ -1236,7 +1236,7 @@
                             "registry": "ghcr.io",
                             "repository": "sigstore/scaffolding/createcerts",
                             "pullPolicy": "IfNotPresent",
-                            "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
+                            "version": "sha256:e1b6ff1951d3ab074cd4755f0cfedffe8706ea4780b777afdfbf6d30c29750a1"
                         }
                     ]
                 },
@@ -1356,7 +1356,7 @@
                         "registry": "ghcr.io",
                         "repository": "sigstore/scaffolding/createcerts",
                         "pullPolicy": "IfNotPresent",
-                        "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
+                        "version": "sha256:e1b6ff1951d3ab074cd4755f0cfedffe8706ea4780b777afdfbf6d30c29750a1"
                     },
                     "serviceAccount": {
                         "create": true,
@@ -1680,7 +1680,7 @@
                     "registry": "ghcr.io",
                     "repository": "sigstore/scaffolding/createcerts",
                     "pullPolicy": "IfNotPresent",
-                    "version": "sha256:73e7ac35d0e5169bd14a5cb6caed2e7d44277dec3d1de92e08f4d055523089a1"
+                    "version": "sha256:e1b6ff1951d3ab074cd4755f0cfedffe8706ea4780b777afdfbf6d30c29750a1"
                 },
                 "serviceAccount": {
                     "create": true,
