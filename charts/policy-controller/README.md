@@ -54,6 +54,9 @@ The Helm chart for Policy  Controller
 | webhook.resources.requests.memory | string | `"128Mi"` |  |
 | webhook.securityContext.enabled | bool | `false` |  |
 | webhook.securityContext.runAsUser | int | `65532` |  |
+| webhook.podDisruptionBudget.enabled | bool | `true` |  |
+| webhook.podDisruptionBudget.minAvailable | int | `1` |  |
+| webhook.podDisruptionBudget.maxUnavailable | int | `null` |  |
 | webhook.service.annotations | object | `{}` |  |
 | webhook.service.port | int | `443` |  |
 | webhook.service.type | string | `"ClusterIP"` |  |
