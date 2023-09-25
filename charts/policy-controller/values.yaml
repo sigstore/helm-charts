@@ -69,6 +69,15 @@ leasescleanup:
     repository: cgr.dev/chainguard/kubectl
     version: 1.26.0
     pullPolicy: IfNotPresent
+  ## set pod security context options to harden the pod or allow exceptions
+  securityContext:
+    enabled: false
+    # allowPrivilegeEscalation: false
+    # readOnlyRootFilesystem: true
+    # runAsUser: 1000
+    # capabilities:
+    #   drop:
+    #     - ALL
 
 ## common node selector for all the pods
 commonNodeSelector: {}

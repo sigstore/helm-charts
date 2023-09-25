@@ -42,6 +42,14 @@
                         }
                     }
                 }
+            },
+            "securityContext": {
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "type": "boolean"
+                    }
+                }
             }
         },
         "serviceMonitor": {
