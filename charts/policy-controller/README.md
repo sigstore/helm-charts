@@ -67,7 +67,7 @@ The Helm chart for Policy  Controller
 | webhook.volumes | list | `[]` |  |
 | leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
 | leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
-| leasescleanup.image.version | string | `"1.26.0"` |  |
+| leasescleanup.image.version | string | `"latest"` |  |
 
 ### Deploy `policy-controller` Helm Chart
 
