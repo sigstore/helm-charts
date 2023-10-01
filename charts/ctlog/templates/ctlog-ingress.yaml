@@ -32,7 +32,7 @@ spec:
 {{- end }}
   rules:
     {{- range .hosts }}
-    - host: {{ required "An Ingress hostname is required" (tpl (.host) $) | quote }}
+    - host: {{ tpl (required "An Ingress hostname is required" .host) $ | quote }}
       http:
         paths:
         {{- $paths :=  .paths | default (list (dict)) }}
