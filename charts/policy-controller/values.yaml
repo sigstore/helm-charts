@@ -82,6 +82,9 @@ commonTolerations: []
 #   value: "value"
 #   effect: "NoSchedule"
 
+## This will set some annotations in config maps and secrets. Use case: Disable versioning to deploy helm chart using spinnaker
+commonAnnotations: {}
+
 ## serviceMonitor makes policy controller metrics discoverable to prometheus
 serviceMonitor:
   enabled: false
