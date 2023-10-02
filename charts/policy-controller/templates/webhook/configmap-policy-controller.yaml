@@ -17,6 +17,10 @@ kind: ConfigMap
 metadata:
   name: config-policy-controller
   namespace: {{ .Release.Namespace }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- toYaml .Values.commonAnnotations | nindent 4 }}
+  {{- end }}
 data:
   {{- if not .Values.webhook.configData }}
   _example: |

@@ -6,6 +6,10 @@ metadata:
     control-plane: {{ template "policy-controller.fullname" . }}-webhook
   name: {{ template "policy-controller.fullname" . }}-webhook-logging
   namespace: {{ .Release.Namespace }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- toYaml .Values.commonAnnotations | nindent 4 }}
+  {{- end }}
 data:
   zap-logger-config: |-
     {
@@ -42,6 +46,10 @@ metadata:
     control-plane: {{ template "policy-controller.fullname" . }}-webhook
   name: {{ template "policy-controller.fullname" . }}-webhook-observability
   namespace: {{ .Release.Namespace }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+{{- toYaml .Values.commonAnnotations | nindent 4 }}
+  {{- end }}
 data:
   metrics.backend-destination: prometheus
   metrics.request-metrics-backend-destination: prometheus
