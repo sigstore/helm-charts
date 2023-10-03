@@ -18,6 +18,10 @@ kind: ConfigMap
 metadata:
   name: config-image-policies
   namespace: {{ .Release.Namespace }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- toYaml .Values.commonAnnotations | nindent 4 }}
+  {{- end }}
 data:
   _example: |
     #######################################

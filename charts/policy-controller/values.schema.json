@@ -8,6 +8,9 @@
         "commonTolerations": {
             "type": "array"
         },
+        "commonAnnotations": {
+            "type": "object"
+        },
         "cosign": {
             "type": "object",
             "properties": {
