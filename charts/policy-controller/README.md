@@ -1,6 +1,6 @@
 # policy-controller
 
-![Version: 0.6.4](https://img.shields.io/badge/Version-0.6.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.2](https://img.shields.io/badge/AppVersion-0.8.2-informational?style=flat-square)
+![Version: 0.6.5](https://img.shields.io/badge/Version-0.6.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.2](https://img.shields.io/badge/AppVersion-0.8.2-informational?style=flat-square)
 
 The Helm chart for Policy Controller
 
@@ -68,7 +68,7 @@ The Helm chart for Policy Controller
 | webhook.volumes | list | `[]` |  |
 | leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
 | leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
-| leasescleanup.image.version | string | `"latest"` |  |
+| leasescleanup.image.version | string | `"latest-dev"` | `"NOTE: use latest-dev tag because leases cleanup job needs /bin/sh, not present in latest tag"` |
 
 ### Deploy `policy-controller` Helm Chart
 
