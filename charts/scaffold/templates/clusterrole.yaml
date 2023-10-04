@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: tuf-secret-copy-job-role
+  name: {{ .Values.copySecretJob.serviceaccount }}-role
 rules:
   - apiGroups: [""]
     resources: ["secrets"]
