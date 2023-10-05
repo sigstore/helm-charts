@@ -19,7 +19,7 @@ maintainers:
 dependencies:
   - name: common
     version: 0.1.2
-    repository: https://sigstore.github.io/helm-charts
+    repository: https://repo-securesign-helm-v2.apps.open-svc-sts.k1wl.p1.openshiftapps.com/helm-charts
 
 annotations:
   artifacthub.io/license: Apache-2.0
