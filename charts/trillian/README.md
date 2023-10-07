@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.13](https://img.shields.io/badge/Version-0.2.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.2.14](https://img.shields.io/badge/Version-0.2.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -45,7 +45,7 @@ helm uninstall [RELEASE_NAME]
 | createdb.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createdb.image.registry | string | `"ghcr.io"` |  |
 | createdb.image.repository | string | `"sigstore/scaffolding/createdb"` |  |
-| createdb.image.version | string | `"sha256:3720511269d5b01f386ac6650e26309a54abd5f13bb41597a0849501cf727e51"` | v0.6.7 |
+| createdb.image.version | string | `"sha256:387712639e1390f93d1e787f76846d2868a5bd76c53eb7982c3a98c98ed6920f"` | v0.6.8 |
 | createdb.name | string | `"createdb"` |  |
 | createdb.serviceAccount.annotations | object | `{}` |  |
 | createdb.serviceAccount.create | bool | `false` |  |
@@ -117,7 +117,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.auth.username | string | `"mysql"` |  |
 | mysql.enabled | bool | `true` |  |
 | mysql.gcp.cloudsql.registry | string | `"gcr.io"` |  |
-| mysql.gcp.cloudsql.repository | string | `"cloud-sql-connectors/cloud-sql-proxy:2.6.1-alpine"` |  |
+| mysql.gcp.cloudsql.repository | string | `"cloud-sql-connectors/cloud-sql-proxy:2.7.0-alpine"` |  |
 | mysql.gcp.cloudsql.resources.requests.cpu | string | `"1"` |  |
 | mysql.gcp.cloudsql.resources.requests.memory | string | `"2Gi"` |  |
 | mysql.gcp.cloudsql.securityContext.allowPrivilegeEscalation | bool | `false` |  |
@@ -126,7 +126,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.gcp.cloudsql.securityContext.runAsNonRoot | bool | `true` |  |
 | mysql.gcp.cloudsql.unixDomainSocket.enabled | bool | `false` |  |
 | mysql.gcp.cloudsql.unixDomainSocket.path | string | `"/cloudsql"` |  |
-| mysql.gcp.cloudsql.version | string | `"sha256:b0aee6522475a236254394e573bae95693c02f8a07bceccb110f4e90336a1722"` | crane digest cloud-sql-connectors/cloud-sql-proxy:2.6.1-alpine |
+| mysql.gcp.cloudsql.version | string | `"sha256:cfcaa4f1d84b15c146deafad2802ae7ad4c33cef7b8c0fb23f266565276c4f5d"` | crane digest cloud-sql-connectors/cloud-sql-proxy:2.7.0-alpine |
 | mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
 | mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
@@ -137,7 +137,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.gcp.scaffoldSQLProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mysql.gcp.scaffoldSQLProxy.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | mysql.gcp.scaffoldSQLProxy.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:e11cad1e3d64efced50f5af7dc068a524634eb01464fcfe6fc9440f281c9a01f"` | v0.6.7 which is based on cloud-sql-proxy:2.6.1-alpine |
+| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:47ab697b71b8645532bd8a8e0e87b0caedb56700581f6b1c4141f4424cb682ac"` | v0.6.8 which is based on cloud-sql-proxy:2.7.0-alpine |
 | mysql.hostname | string | `""` |  |
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
