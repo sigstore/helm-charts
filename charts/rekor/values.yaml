@@ -7,8 +7,8 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # -- 7.82.0
-    version: "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"
+    # -- 8.3.0
+    version: "sha256:961cf9e2a1939ea380b3f16e313a581b5d4681dd9dc4b1ace060eb396a71df0d"
     imagePullPolicy: IfNotPresent
 
 redis:
@@ -26,8 +26,8 @@ redis:
     registry: docker.io
     repository: redis
     pullPolicy: IfNotPresent
-    # -- 6.2.6-alpine3.15
-    version: "sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39"
+    # -- 6.2.13-alpine3.18
+    version: "sha256:e582909983ce92291977d864b5a7b2a46bee680c2e515bd12c0ab3415a410b33"
   resources: {}
   readinessProbe:
     initialDelaySeconds: 5
@@ -62,8 +62,8 @@ server:
     registry: gcr.io
     repository: projectsigstore/rekor-server
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/rekor-server:v1.3.0
-    version: "sha256:1cf8618112dd67113a49c93f717488e45c5fc765eb03484870123404d9e9f00c"
+    # crane digest gcr.io/projectsigstore/rekor-server:v1.3.1
+    version: "sha256:cd64f7bee5d976cd0994f0aabe89233a2b48d36ebfaf54365fce197f5505fb86"
   logging:
     production: false
   ingress:
@@ -165,8 +165,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.6.7
-    version: "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
+    # v0.6.8
+    version: "sha256:91469016755f8d1c13c893240178a2397ad08b39d33ec529ff9eaa0e7c916108"
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
@@ -185,8 +185,8 @@ backfillredis:
     registry: ghcr.io
     repository: sigstore/rekor/backfill-redis
     pullPolicy: IfNotPresent
-    # v1.2.2
-    version: "sha256:04b43cd3f2d8e165adf072fed494c3c784ee345993048c47c8037b20a3fc6efb"
+    # v1.3.1
+    version: "sha256:06b89a5e8aaa325c36263a980959de9cf1cc559975e2a185f06d2f7b102956cc"
   ttlSecondsAfterFinished: 3600
   securityContext:
     runAsNonRoot: true
