@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.3.9](https://img.shields.io/badge/Version-1.3.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
+![Version: 1.3.10](https://img.shields.io/badge/Version-1.3.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.2](https://img.shields.io/badge/AppVersion-1.3.2-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -31,7 +31,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | backfillredis.image.pullPolicy | string | `"IfNotPresent"` |  |
 | backfillredis.image.registry | string | `"ghcr.io"` |  |
 | backfillredis.image.repository | string | `"sigstore/rekor/backfill-redis"` |  |
-| backfillredis.image.version | string | `"sha256:06b89a5e8aaa325c36263a980959de9cf1cc559975e2a185f06d2f7b102956cc"` |  |
+| backfillredis.image.version | string | `"sha256:f7cdad65d7b25eac4521cb0072ac9e3a015af8326c578c10961733abd53d12c7"` |  |
 | backfillredis.name | string | `"backfillredis"` |  |
 | backfillredis.rekorAddress | string | `"rekor.rekor-system.svc"` |  |
 | backfillredis.resources | object | `{}` |  |
@@ -109,7 +109,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/rekor-server"` |  |
-| server.image.version | string | `"sha256:cd64f7bee5d976cd0994f0aabe89233a2b48d36ebfaf54365fce197f5505fb86"` |  |
+| server.image.version | string | `"sha256:82ae401d5a34754b27cab1b2b4530451048cb320cc8c2e33952156d8bc0f6124"` |  |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |
