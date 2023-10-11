@@ -5,8 +5,8 @@ description: |
 
 type: application
 
-version: 2.3.10
-appVersion: 1.4.1
+version: 2.3.11
+appVersion: 1.4.3
 
 keywords:
   - security
@@ -27,6 +27,6 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: fulcio
-      image: gcr.io/projectsigstore/fulcio@sha256:78f0f4394facc045cdf47e80a85d03494fb61f08ae1458cb66127960725cd157
+      image: gcr.io/projectsigstore/fulcio@sha256:157cebfc0ed9c81bd40e5705ca267713ec5184b2226ec0a4aa9f5c52698124d2
     - name: createcerts
       image: ghcr.io/sigstore/scaffolding/createcerts:v0.6.8@sha256:d58192fd45058e99a3fc41151008d8ff91269d67370ea61849d4b8e75516e2c4
