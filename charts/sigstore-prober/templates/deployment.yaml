@@ -21,7 +21,7 @@ spec:
       {{- if .Values.spec.args.trustRekorAPIPublicKey }}
       initContainers:
       - name: public-key-fetcher
-        image: docker.io/curlimages/curl@sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5
+        image: docker.io/curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af
         args:
           - "--output"
           - "/var/run/sigstore/public-key.pem"
@@ -30,6 +30,10 @@ spec:
         volumeMounts:
         - name: sigstore
           mountPath: "/var/run/sigstore"
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+          allowPrivilegeEscalation: false
       {{- end }}
       containers:
       - name: {{ template "sigstore-prober.name" . }}
@@ -51,6 +55,10 @@ spec:
         - name: sigstore
           mountPath: "/var/run/sigstore"
           readOnly: true
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+          allowPrivilegeEscalation: false
       volumes:
         - name: sigstore
           emptyDir: {}
