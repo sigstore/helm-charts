@@ -47,6 +47,10 @@ spec:
           {{- include "sigstore-prober.args" . | nindent 8 }}
         ports:
         - containerPort: {{ .Values.prometheus.port }} # metrics
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+          allowPrivilegeEscalation: false
       {{- if .Values.spec.args.trustRekorAPIPublicKey }}
         env:
         - name: SIGSTORE_REKOR_PUBLIC_KEY
@@ -55,10 +59,6 @@ spec:
         - name: sigstore
           mountPath: "/var/run/sigstore"
           readOnly: true
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 65534
-          allowPrivilegeEscalation: false
       volumes:
         - name: sigstore
           emptyDir: {}
