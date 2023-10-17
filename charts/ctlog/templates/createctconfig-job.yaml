@@ -34,6 +34,10 @@ spec:
           resources:
 {{ toYaml .Values.createctconfig.initContainerResources | indent 12 }}
     {{- end }}
+    {{- if .Values.createctconfig.initContainerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.createctconfig.initContainerSecurityContext | indent 12 }}
+    {{- end }}
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}
@@ -73,6 +77,10 @@ spec:
     {{- if .Values.createctconfig.resources }}
           resources:
 {{ toYaml .Values.createctconfig.resources | indent 12 }}
+    {{- end }}
+    {{- if .Values.createctconfig.containerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.createctconfig.containerSecurityContext | indent 12 }}
     {{- end }}
     {{- if .Values.createctconfig.securityContext }}
       securityContext:
