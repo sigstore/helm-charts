@@ -86,6 +86,10 @@ spec:
             - name: storage
               mountPath: {{ .Values.mysql.persistence.mountPath }}
               subPath: {{ .Values.mysql.persistence.subPath }}
+    {{- if .Values.mysql.containerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.mysql.containerSecurityContext | indent 12 }}
+    {{- end }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}

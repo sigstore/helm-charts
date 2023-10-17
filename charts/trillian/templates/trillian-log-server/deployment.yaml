@@ -45,6 +45,10 @@ spec:
           resources:
 {{ toYaml .Values.initContainerResources | indent 12 }}
       {{- end }}
+      {{- if .Values.initContainerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.initContainerSecurityContext | indent 12 }}
+      {{- end }}
       {{- if .Values.logServer.extraInitContainers }}
 {{ toYaml .Values.logServer.extraInitContainers | indent 8 }}
       {{- end }}
@@ -121,6 +125,10 @@ spec:
           volumeMounts:
             - mountPath: {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path }}
               name: cloud-sql-proxy-unix-domain-socket
+{{- end }}
+{{- if .Values.logServer.containerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.logServer.containerSecurityContext | indent 12 }}
 {{- end }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:

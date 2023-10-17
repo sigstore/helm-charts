@@ -86,6 +86,10 @@ spec:
           resources:
 {{ toYaml .Values.createdb.resources | indent 12 }}
     {{- end }}
+    {{- if .Values.createdb.containerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.createdb.containerSecurityContext | indent 12 }}
+    {{- end }}
     {{- if .Values.createdb.securityContext }}
       securityContext:
 {{ toYaml .Values.createdb.securityContext | indent 8 }}
