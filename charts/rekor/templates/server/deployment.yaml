@@ -42,6 +42,10 @@ spec:
           image: "{{ template "rekor.image" .Values.initContainerImage.curl }}"
           imagePullPolicy: {{ .Values.initContainerImage.curl.imagePullPolicy }}
           command: ["sh", "-c", "until curl --max-time 10 http://{{ .Values.trillian.logServer.name }}.{{ .Values.trillian.forceNamespace }}:{{ .Values.trillian.logServer.portHTTP}}; do echo waiting for {{ .Values.trillian.logServer.name }}; sleep 5; done;"]
+{{- if .Values.server.initContainerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.server.initContainerSecurityContext | indent 12 }}
+{{- end }}
       {{- if .Values.server.extraInitContainers }}
 {{ toYaml .Values.server.extraInitContainers | indent 8 }}
       {{- end }}
@@ -84,6 +88,10 @@ spec:
 {{- end }}
           resources:
 {{ toYaml .Values.server.resources | indent 12 }}
+{{- if .Values.server.containerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.server.containerSecurityContext | indent 12 }}
+{{- end }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}

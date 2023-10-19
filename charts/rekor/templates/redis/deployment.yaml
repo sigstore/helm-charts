@@ -66,6 +66,10 @@ spec:
           volumeMounts:
             - name: storage
               mountPath: /data
+{{- if .Values.redis.containerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.redis.containerSecurityContext | indent 12 }}
+{{- end }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}
