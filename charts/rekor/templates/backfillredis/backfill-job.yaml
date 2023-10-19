@@ -29,6 +29,10 @@ spec:
             "--start={{ .Values.backfillredis.startIndex }}",
             "--end={{ .Values.backfillredis.endIndex }}",
           ]
+    {{- if .Values.backfillredis.containerSecurityContext }}
+          securityContext:
+{{ toYaml .Values.backfillredis.containerSecurityContext | indent 12 }}
+    {{- end }}
     {{- if .Values.backfillredis.securityContext }}
       securityContext:
 {{ toYaml .Values.backfillredis.securityContext | indent 8 }}
