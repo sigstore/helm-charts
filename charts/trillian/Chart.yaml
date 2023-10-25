@@ -5,7 +5,7 @@ description: |
 
 type: application
 
-version: 0.2.15
+version: 0.2.16
 
 keywords:
   - security
@@ -24,7 +24,7 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: curl
-      image: docker.io/curlimages/curl@sha256:e83fef2d5a036d40df4ded829141e8c0ec41871490d252fb8c81cb4580ebb35b
+      image: docker.io/curlimages/curl:8.4.0@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af
     - name: netcat
       image: cgr.dev/chainguard/netcat@sha256:7243b469d34bd28969fa2c764a12d91084c427209540bb68645629d635b3f143
     - name: db_server
@@ -34,8 +34,8 @@ annotations:
     - name: log_signer
       image: gcr.io/projectsigstore/trillian_log_signer@sha256:54a75e22beb4cb90b7aef63a28ac9e33fee60b35a66a2b9e7d6444a40e2b6a79
     - name: cloud_proxy
-      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.7.0-alpine@sha256:cfcaa4f1d84b15c146deafad2802ae7ad4c33cef7b8c0fb23f266565276c4f5d
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.7.1-alpine@sha256:38b31e81da387542027b9d4b67c6c83704e12e6766c5c5ad3013aaf51e4cf540
     - name: scaffold_cloud_proxy
-      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.6.8@sha256:47ab697b71b8645532bd8a8e0e87b0caedb56700581f6b1c4141f4424cb682ac
+      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.6.9@sha256:3c6bf9b6bfc299d8a96de7771b5226a5f7bcce1b7893c039393f1dec5e66c799
     - name: createdb
-      image: ghcr.io/sigstore/scaffolding/createdb:v0.6.8@sha256:387712639e1390f93d1e787f76846d2868a5bd76c53eb7982c3a98c98ed6920f
+      image: ghcr.io/sigstore/scaffolding/createdb:v0.6.9@sha256:b4a79c60c0dc9019e25d9b2d41d62c5fbd16be56d73df980b0ab3491a2bcb8c8
