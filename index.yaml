@@ -4267,6 +4267,44 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree:v0.6.9@sha256:acd6f2bc2ad9bac400f86fc08d7c1042e0727fe6d0360a36b958ca25208d627a
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl:8.4.0@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af
+        - name: rekor-server
+          image: gcr.io/projectsigstore/rekor-server:v1.3.2@sha256:82ae401d5a34754b27cab1b2b4530451048cb320cc8c2e33952156d8bc0f6124
+        - name: redis
+          image: docker.io/redis:6.2.13-alpine3.18@sha256:e582909983ce92291977d864b5a7b2a46bee680c2e515bd12c0ab3415a410b33
+        - name: backfill-redis
+          image: ghcr.io/sigstore/rekor/backfill-redis:v1.3.2@sha256:f7cdad65d7b25eac4521cb0072ac9e3a015af8326c578c10961733abd53d12c7
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.3.2
+    created: "2023-10-26T00:30:03.149937601Z"
+    dependencies:
+    - condition: trillian.enabled
+      name: trillian
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.16
+    description: Part of the sigstore project, Rekor is a timestamping server and
+      transparency log for storing signatures, as well as an API based server for
+      validation
+    digest: 995f99b6b7405e1f782e3b6a926787b5d707cb91f259e4bf8adbfde1200a4547
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor
+    sources:
+    - https://github.com/sigstore/rekor
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-1.3.12/rekor-1.3.12.tgz
+    version: 1.3.12
+  - annotations:
+      artifacthub.io/images: |
+        - name: createtree
           image: ghcr.io/sigstore/scaffolding/createtree:v0.6.8@sha256:91469016755f8d1c13c893240178a2397ad08b39d33ec529ff9eaa0e7c916108
         - name: curlimages/curl
           image: docker.io/curlimages/curl:8.4.0@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af
@@ -12611,4 +12649,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2023-10-25T23:57:30.920921664Z"
+generated: "2023-10-26T00:30:03.150911908Z"
