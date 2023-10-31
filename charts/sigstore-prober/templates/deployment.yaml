@@ -51,10 +51,15 @@ spec:
           runAsNonRoot: true
           runAsUser: 65534
           allowPrivilegeEscalation: false
-      {{- if .Values.spec.args.trustRekorAPIPublicKey }}
         env:
+          # TUF_ROOT set to /tmp since the home dir for user 65534 is set to /nonexistant
+        - name: TUF_ROOT
+          value: "/tmp"
+      {{- if .Values.spec.args.trustRekorAPIPublicKey }}
         - name: SIGSTORE_REKOR_PUBLIC_KEY
           value: "/var/run/sigstore/public-key.pem"
+      {{- end }}
+      {{- if .Values.spec.args.trustRekorAPIPublicKey }}
         volumeMounts:
         - name: sigstore
           mountPath: "/var/run/sigstore"
