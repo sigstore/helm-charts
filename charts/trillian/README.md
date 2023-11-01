@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.16](https://img.shields.io/badge/Version-0.2.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.2.17](https://img.shields.io/badge/Version-0.2.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.3](https://img.shields.io/badge/AppVersion-1.5.3-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -66,7 +66,7 @@ helm uninstall [RELEASE_NAME]
 | logServer.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logServer.image.registry | string | `"gcr.io"` |  |
 | logServer.image.repository | string | `"projectsigstore/trillian_log_server"` |  |
-| logServer.image.version | string | `"sha256:ab60d5e16675fc15783ec8dbc99a335b68b9a0dd6dd4495ecc300c5f8aa58b72"` | v1.3.0 from rekor build |
+| logServer.image.version | string | `"sha256:0570f8561677e6140a73cb2d7e04e19cf52eb955efe40297e23402694d19489b"` | v1.5.3 from rekor v1.3.3 build |
 | logServer.livenessProbe | object | `{}` |  |
 | logServer.name | string | `"log-server"` |  |
 | logServer.nodeSelector | object | `{}` |  |
@@ -93,7 +93,7 @@ helm uninstall [RELEASE_NAME]
 | logSigner.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logSigner.image.registry | string | `"gcr.io"` |  |
 | logSigner.image.repository | string | `"projectsigstore/trillian_log_signer"` |  |
-| logSigner.image.version | string | `"sha256:54a75e22beb4cb90b7aef63a28ac9e33fee60b35a66a2b9e7d6444a40e2b6a79"` | v1.3.0 from rekor build |
+| logSigner.image.version | string | `"sha256:948291659bb9910708900aad33dd18669d001ea5e93b85404634bab8e38c83d7"` | v1.5.3 from rekor v1.3.3 build |
 | logSigner.livenessProbe | object | `{}` |  |
 | logSigner.name | string | `"log-signer"` |  |
 | logSigner.nodeSelector | object | `{}` |  |
@@ -142,7 +142,7 @@ helm uninstall [RELEASE_NAME]
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
 | mysql.image.repository | string | `"trillian-opensource-ci/db_server"` |  |
-| mysql.image.version | string | `"sha256:c04753ed44eac715e3191dad16fb0848a06714ddcb00c6f7768bf065485e1f8d"` | crane digest gcr.io/trillian-opensource-ci/db_server:v1.5.2 |
+| mysql.image.version | string | `"sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461"` | crane digest gcr.io/trillian-opensource-ci/db_server:v1.5.3 |
 | mysql.livenessProbe.exec.command[0] | string | `"/etc/init.d/mysql"` |  |
 | mysql.livenessProbe.exec.command[1] | string | `"status"` |  |
 | mysql.livenessProbe.failureThreshold | int | `3` |  |
