@@ -105,6 +105,7 @@ server:
         protocol: TCP
         targetPort: 2112
   signer: memory
+  signerPassword: ""
   readinessProbe:
     initialDelaySeconds: 10
     periodSeconds: 10

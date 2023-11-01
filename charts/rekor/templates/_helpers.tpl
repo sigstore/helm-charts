@@ -322,6 +322,7 @@ Server Arguments
 - {{ printf "--redis_server.port=%d" (.Values.redis.port | int) | quote }}
 - "--rekor_server.address=0.0.0.0"
 - {{ printf "--rekor_server.signer=%s" (.Values.server.signer) | quote }}
+- {{ printf "--rekor_server.signer-passwd=%s" (.Values.server.signerPassword) | quote }}
 {{- if .Values.server.retrieve_api.enabled }}
 - "--enable_retrieve_api=true"
 {{- end }}

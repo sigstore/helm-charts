@@ -604,6 +604,7 @@
                 "ingresses",
                 "service",
                 "signer",
+                "signerPassword",
                 "readinessProbe",
                 "sharding",
                 "livenessProbe",
@@ -1080,6 +1081,14 @@
                     "examples": [
                         "memory",
                         "/key/private"
+                    ]
+                },
+                "signerPassword": {
+                    "title": "The signerPassword Schema",
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                        "password"
                     ]
                 },
                 "readinessProbe": {
@@ -1766,6 +1775,7 @@
                         ]
                     },
                     "signer": "memory",
+                    "signerPassword": "",
                     "readinessProbe": {
                         "initialDelaySeconds": 10,
                         "periodSeconds": 10,
@@ -2398,6 +2408,7 @@
                     ]
                 },
                 "signer": "memory",
+                "signerPassword": "",
                 "readinessProbe": {
                     "initialDelaySeconds": 10,
                     "periodSeconds": 10,

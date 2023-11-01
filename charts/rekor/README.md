@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.3.12](https://img.shields.io/badge/Version-1.3.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.2](https://img.shields.io/badge/AppVersion-1.3.2-informational?style=flat-square)
+![Version: 1.3.13](https://img.shields.io/badge/Version-1.3.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.2](https://img.shields.io/badge/AppVersion-1.3.2-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -169,6 +169,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.sharding.filename | string | `"sharding-config.yaml"` |  |
 | server.sharding.mountPath | string | `"/sharding"` |  |
 | server.signer | string | `"memory"` |  |
+| server.signerPassword | string | `""` |  |
 | trillian.adminServer | string | `""` |  |
 | trillian.enabled | bool | `true` |  |
 | trillian.forceNamespace | string | `"trillian-system"` |  |
