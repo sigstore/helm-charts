@@ -11228,6 +11228,46 @@ entries:
         - name: netcat
           image: cgr.dev/chainguard/netcat@sha256:7243b469d34bd28969fa2c764a12d91084c427209540bb68645629d635b3f143
         - name: db_server
+          image: gcr.io/trillian-opensource-ci/db_server:v1.5.3@sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461
+        - name: log_server
+          image: gcr.io/projectsigstore/trillian_log_server@sha256:0570f8561677e6140a73cb2d7e04e19cf52eb955efe40297e23402694d19489b
+        - name: log_signer
+          image: gcr.io/projectsigstore/trillian_log_signer@sha256:948291659bb9910708900aad33dd18669d001ea5e93b85404634bab8e38c83d7
+        - name: cloud_proxy
+          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.7.1-alpine@sha256:38b31e81da387542027b9d4b67c6c83704e12e6766c5c5ad3013aaf51e4cf540
+        - name: scaffold_cloud_proxy
+          image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.6.9@sha256:3c6bf9b6bfc299d8a96de7771b5226a5f7bcce1b7893c039393f1dec5e66c799
+        - name: createdb
+          image: ghcr.io/sigstore/scaffolding/createdb:v0.6.9@sha256:b4a79c60c0dc9019e25d9b2d41d62c5fbd16be56d73df980b0ab3491a2bcb8c8
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.5.3
+    created: "2023-11-01T22:49:16.760682809Z"
+    description: 'Trillian is a log that stores an accurate, immutable and verifiable
+      history of activity. '
+    digest: 2fe122c34a72fd0d743ac85a92e1cdc62921880f7e26c7a3b94c20dbba5fe0b9
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+      url: https://sigstore.dev/
+    name: trillian
+    sources:
+    - https://github.com/google/trillian
+    - https://github.com/sigstore/helm-charts/tree/main/charts/trillian
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/trillian-0.2.17/trillian-0.2.17.tgz
+    version: 0.2.17
+  - annotations:
+      artifacthub.io/images: |
+        - name: curl
+          image: docker.io/curlimages/curl:8.4.0@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af
+        - name: netcat
+          image: cgr.dev/chainguard/netcat@sha256:7243b469d34bd28969fa2c764a12d91084c427209540bb68645629d635b3f143
+        - name: db_server
           image: gcr.io/trillian-opensource-ci/db_server@sha256:c04753ed44eac715e3191dad16fb0848a06714ddcb00c6f7768bf065485e1f8d
         - name: log_server
           image: gcr.io/projectsigstore/trillian_log_server@sha256:ab60d5e16675fc15783ec8dbc99a335b68b9a0dd6dd4495ecc300c5f8aa58b72
@@ -12790,4 +12830,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2023-10-31T15:32:29.842343336Z"
+generated: "2023-11-01T22:49:16.762521331Z"
