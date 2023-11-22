@@ -31,8 +31,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.6.9 which is based on cloud-sql-proxy:2.7.1-alpine
-      version: sha256:3c6bf9b6bfc299d8a96de7771b5226a5f7bcce1b7893c039393f1dec5e66c799
+      # -- v0.6.10 which is based on cloud-sql-proxy:2.7.2-alpine
+      version: sha256:7aca1e897b40958fa30bdf41161095c48ae1fc2a8b31f0e9c7742acbf182a125
       resources:
         requests:
           memory: "2Gi"
@@ -46,9 +46,9 @@ mysql:
             - ALL
     cloudsql:
       registry: gcr.io
-      repository: cloud-sql-connectors/cloud-sql-proxy:2.7.1-alpine
-      # -- crane digest cloud-sql-connectors/cloud-sql-proxy:2.7.1-alpine
-      version: sha256:38b31e81da387542027b9d4b67c6c83704e12e6766c5c5ad3013aaf51e4cf540
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.7.2-alpine
+      # -- crane digest cloud-sql-connectors/cloud-sql-proxy:2.7.2-alpine
+      version: sha256:2514634b2b398db63ba7bf2222dc243a84f281285d3b5a406fc1a19f9c0b816b
       resources:
         requests:
           memory: "2Gi"
@@ -204,8 +204,8 @@ createdb:
     registry: ghcr.io
     repository: sigstore/scaffolding/createdb
     pullPolicy: IfNotPresent
-    # -- v0.6.9
-    version: sha256:b4a79c60c0dc9019e25d9b2d41d62c5fbd16be56d73df980b0ab3491a2bcb8c8
+    # -- v0.6.10
+    version: sha256:f9442ce8323163ffe876e9b10da196b361074d8865a0ef963f3879c61863595b
   serviceAccount:
     create: false
     name: ""
