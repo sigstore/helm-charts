@@ -13,8 +13,8 @@ server:
     registry: ghcr.io
     repository: sigstore/scaffolding/ct_server
     pullPolicy: IfNotPresent
-    # v0.6.9
-    version: "sha256:e1e93f11c8bde87d7160891bd409020d1941972b61ec356f671af1e4f7261ac8"
+    # v0.6.10
+    version: "sha256:ef9ed3f5b9dd4f886c658505bff63c020063f96cd4634a5ddae2e66dad1c3264"
   livenessProbe:
     httpGet:
       path: /healthz
@@ -97,8 +97,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.6.9
-    version: "sha256:acd6f2bc2ad9bac400f86fc08d7c1042e0727fe6d0360a36b958ca25208d627a"
+    # v0.6.10
+    version: "sha256:1c8c06786a981344b5643443a4f62580e36a49e02f08783511a2766d5e0081ad"
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
@@ -126,8 +126,8 @@ createctconfig:
     registry: ghcr.io
     repository: sigstore/scaffolding/createctconfig
     pullPolicy: IfNotPresent
-    # -- v0.6.9
-    version: "sha256:7a045f84363ca16aa2f4e68db30590fd700e7e3b3b7179bc5a43ffc742d119ba"
+    # -- v0.6.10
+    version: "sha256:bc093cafb95a87461ac3215d7ce3ef7d0a1fa2d0db17e119415061f781d7848d"
   fulcioURL: "http://fulcio-server.fulcio-system.svc"
   logPrefix: sigstorescaffolding
   privateKeyPasswordSecretName: ""
