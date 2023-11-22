@@ -1,6 +1,6 @@
 # tuf
 
-![Version: 0.1.7](https://img.shields.io/badge/Version-0.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.9](https://img.shields.io/badge/AppVersion-0.6.9-informational?style=flat-square)
+![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.10](https://img.shields.io/badge/AppVersion-0.6.10-informational?style=flat-square)
 
 A framework for securing software update systems - the scaffolding implementation
 
@@ -26,7 +26,7 @@ A framework for securing software update systems - the scaffolding implementatio
 | deployment.registry | string | `"ghcr.io"` |  |
 | deployment.replicas | int | `1` |  |
 | deployment.repository | string | `"sigstore/scaffolding/server"` |  |
-| deployment.version | string | `"sha256:ce3a26f3cb86a370c12316f43660ec58f6954c359d4ae5daa209141d9e52df67"` |  |
+| deployment.version | string | `"sha256:5e0c4500fb8c93a2f93787af5a4e9620d4905ef99d587ec7ce1119d904de58c9"` |  |
 | enabled | bool | `true` |  |
 | forceNamespace | string | `""` |  |
 | fullnameOverride | string | `"tuf"` |  |
