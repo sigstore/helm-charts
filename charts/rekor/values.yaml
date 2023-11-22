@@ -165,8 +165,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.6.9
-    version: "sha256:acd6f2bc2ad9bac400f86fc08d7c1042e0727fe6d0360a36b958ca25208d627a"
+    # v0.6.10
+    version: "sha256:1c8c06786a981344b5643443a4f62580e36a49e02f08783511a2766d5e0081ad"
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
