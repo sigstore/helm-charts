@@ -113,8 +113,8 @@ createcerts:
     registry: ghcr.io
     repository: sigstore/scaffolding/createcerts
     pullPolicy: IfNotPresent
-    # v0.6.9
-    version: "sha256:cf6543a87fd72482ccff3f14c3532e3703157b4cc10800d41edd974450b7f40b"
+    # v0.6.10
+    version: "sha256:408f5f93378d892df1d4888ce1248cc3ff3e96288f857ea8918a8c5f8fd0fbf9"
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true

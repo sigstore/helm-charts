@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.3.13](https://img.shields.io/badge/Version-2.3.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.3](https://img.shields.io/badge/AppVersion-1.4.3-informational?style=flat-square)
+![Version: 2.3.14](https://img.shields.io/badge/Version-2.3.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.3](https://img.shields.io/badge/AppVersion-1.4.3-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -71,7 +71,7 @@ helm uninstall [RELEASE_NAME]
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | ctlog | 0.2.47 |
+| https://sigstore.github.io/helm-charts | ctlog | 0.2.48 |
 
 ## Values
 
@@ -83,7 +83,7 @@ helm uninstall [RELEASE_NAME]
 | createcerts.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createcerts.image.registry | string | `"ghcr.io"` |  |
 | createcerts.image.repository | string | `"sigstore/scaffolding/createcerts"` |  |
-| createcerts.image.version | string | `"sha256:cf6543a87fd72482ccff3f14c3532e3703157b4cc10800d41edd974450b7f40b"` |  |
+| createcerts.image.version | string | `"sha256:408f5f93378d892df1d4888ce1248cc3ff3e96288f857ea8918a8c5f8fd0fbf9"` |  |
 | createcerts.name | string | `"createcerts"` |  |
 | createcerts.replicaCount | int | `1` |  |
 | createcerts.securityContext.runAsNonRoot | bool | `true` |  |
