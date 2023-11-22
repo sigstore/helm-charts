@@ -5,7 +5,7 @@ description: |
 
 type: application
 
-version: 0.2.17
+version: 0.2.18
 appVersion: 1.5.3
 
 keywords:
@@ -35,8 +35,8 @@ annotations:
     - name: log_signer
       image: gcr.io/projectsigstore/trillian_log_signer@sha256:948291659bb9910708900aad33dd18669d001ea5e93b85404634bab8e38c83d7
     - name: cloud_proxy
-      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.7.1-alpine@sha256:38b31e81da387542027b9d4b67c6c83704e12e6766c5c5ad3013aaf51e4cf540
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.7.2-alpine@sha256:2514634b2b398db63ba7bf2222dc243a84f281285d3b5a406fc1a19f9c0b816b
     - name: scaffold_cloud_proxy
-      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.6.9@sha256:3c6bf9b6bfc299d8a96de7771b5226a5f7bcce1b7893c039393f1dec5e66c799
+      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.6.10@sha256:7aca1e897b40958fa30bdf41161095c48ae1fc2a8b31f0e9c7742acbf182a125
     - name: createdb
-      image: ghcr.io/sigstore/scaffolding/createdb:v0.6.9@sha256:b4a79c60c0dc9019e25d9b2d41d62c5fbd16be56d73df980b0ab3491a2bcb8c8
+      image: ghcr.io/sigstore/scaffolding/createdb:v0.6.10@sha256:f9442ce8323163ffe876e9b10da196b361074d8865a0ef963f3879c61863595b
