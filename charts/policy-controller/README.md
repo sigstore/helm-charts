@@ -66,6 +66,7 @@ The Helm chart for Policy Controller
 | webhook.serviceAccount.name | string | `""` |  |
 | webhook.volumeMounts | list | `[]` |  |
 | webhook.volumes | list | `[]` |  |
+| webhook.customLabels | list | `[]` | |
 | leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
 | leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
 | leasescleanup.image.version | string | `"latest-dev"` | `"NOTE: use latest-dev tag because leases cleanup job needs /bin/sh, not present in latest tag"` |
