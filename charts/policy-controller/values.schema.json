@@ -2,14 +2,14 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+        "commonAnnotations": {
+            "type": "object"
+        },
         "commonNodeSelector": {
             "type": "object"
         },
         "commonTolerations": {
             "type": "array"
-        },
-        "commonAnnotations": {
-            "type": "object"
         },
         "cosign": {
             "type": "object",
@@ -61,6 +61,9 @@
                 "configData": {
                     "type": "object"
                 },
+                "customLabels": {
+                    "type": "array"
+                },
                 "env": {
                     "type": "object"
                 },
@@ -109,6 +112,17 @@
                                     }
                                 }
                             }
+                        }
+                    }
+                },
+                "podDisruptionBudget": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "minAvailable": {
+                            "type": "integer"
                         }
                     }
                 },
