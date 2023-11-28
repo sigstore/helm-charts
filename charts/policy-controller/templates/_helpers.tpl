@@ -40,10 +40,8 @@ helm.sh/chart: {{ include "policy-controller.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- if .Values.webhook.customLabels -}}
-{{- range $key, $val := .Values.webhook.customLabels }}
-{{ $key }}: {{ $val | quote }}
-{{- end}}
+{{- range $key, $value := .Values.webhook.customLabels }}
+{{ $key }}: {{ $value }}
 {{- end }}
 {{- end }}
 
