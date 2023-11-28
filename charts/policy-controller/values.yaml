@@ -8,6 +8,7 @@ installCRDs: true
 imagePullSecrets: []
 
 webhook:
+  customLabels: []
   configData: {}
   replicaCount: 1
   name: webhook

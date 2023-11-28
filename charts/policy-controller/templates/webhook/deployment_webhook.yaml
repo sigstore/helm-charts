@@ -17,6 +17,7 @@ spec:
       labels:
         {{- include "policy-controller.selectorLabels" . | nindent 8 }}
         control-plane: {{ template "policy-controller.fullname" . }}-webhook
+        {{- include "policy-controller.labels" . | nindent 8 }}
     spec:
       nodeSelector:
         {{- toYaml .Values.commonNodeSelector | nindent 8 }}
