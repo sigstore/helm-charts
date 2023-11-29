@@ -4,7 +4,7 @@ description: Update the status of an existing Trillian tree
 
 type: application
 
-version: 0.0.6
+version: 0.0.7
 appVersion: 0.6.10
 
 
