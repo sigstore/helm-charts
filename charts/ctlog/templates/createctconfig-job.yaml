@@ -38,6 +38,10 @@ spec:
           securityContext:
 {{ toYaml .Values.createctconfig.initContainerSecurityContext | indent 12 }}
     {{- end }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
         - name: {{ template "ctlog.createctconfig.fullname" . }}
           image: "{{ template "ctlog.image" .Values.createctconfig.image }}"

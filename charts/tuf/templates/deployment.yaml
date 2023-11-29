@@ -29,6 +29,10 @@ spec:
         {{- include "tuf.matchLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
       - image: {{ template "tuf.image" .Values.deployment }}
         name: {{ .Values.deployment.name }}

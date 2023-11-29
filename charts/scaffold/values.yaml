@@ -90,6 +90,7 @@ copySecretJob:
   imagePullPolicy: IfNotPresent
   serviceaccount: tuf-secret-copy-job
   backoffLimit: 6
+  imagePullSecrets: []
 
 tsa:
   enabled: false

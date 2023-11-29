@@ -19,6 +19,10 @@ spec:
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       {{- if .Values.spec.args.trustRekorAPIPublicKey }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       initContainers:
       - name: public-key-fetcher
         image: docker.io/curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af

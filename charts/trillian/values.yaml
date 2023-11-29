@@ -1,6 +1,9 @@
 namespace:
   create: false
   name: trillian-system
+
+imagePullSecrets: []
+
 initContainerImage:
   curl:
     registry: docker.io

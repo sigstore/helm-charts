@@ -35,6 +35,9 @@
                         true
                     ]
                 },
+                "imagePullSecrets": {
+                    "type": "array"
+                },
                 "namespace": {
                     "type": "object",
                     "default": {},

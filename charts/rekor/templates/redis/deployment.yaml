@@ -43,6 +43,10 @@ spec:
 {{- if .Values.redis.priorityClassName }}
       priorityClassName: "{{ .Values.redis.priorityClassName }}"
 {{- end }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
         - name: {{ template "rekor.name" . }}-{{ .Values.redis.name }}
           image: "{{ template "rekor.image" .Values.redis.image }}"
