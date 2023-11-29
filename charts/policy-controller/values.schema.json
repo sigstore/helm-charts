@@ -62,7 +62,7 @@
                     "type": "object"
                 },
                 "customLabels": {
-                    "type": "array"
+                    "type": "object"
                 },
                 "env": {
                     "type": "object"
