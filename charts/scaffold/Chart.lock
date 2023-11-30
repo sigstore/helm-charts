@@ -13,9 +13,9 @@ dependencies:
   version: 0.2.48
 - name: tuf
   repository: https://sigstore.github.io/helm-charts
-  version: 0.1.8
+  version: 0.1.9
 - name: tsa
   repository: https://sigstore.github.io/helm-charts
   version: 1.0.1
-digest: sha256:764c2101bcd21f733cfe2246feac15796ca116e6d76c66771b093cf5bc90edf9
-generated: "2023-11-22T13:23:42.601016616-05:00"
+digest: sha256:78e091f804e8602e862b1df9ffc5a0f6e78686567a743406105c392fdb258a0d
+generated: "2023-11-30T07:19:31.051837-06:00"
