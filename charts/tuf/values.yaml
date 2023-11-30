@@ -21,17 +21,17 @@ secrets:
     create: false
     name: rekor-public-key
     key: key
-    path: rekor-pubkey
+    path: rekor.pub
   fulcio:
     create: false
     name: fulcio-server-secret
     key: cert
-    path: fulcio-cert
+    path: fulcio_v1.crt.pem
   ctlog:
     create: false
     name: ctlog-public-key
     key: public
-    path: ctlog-pubkey
+    path: ctfe.pub
 
 ingress:
   create: true
