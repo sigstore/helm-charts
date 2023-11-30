@@ -1,6 +1,6 @@
 # tuf
 
-![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.10](https://img.shields.io/badge/AppVersion-0.6.10-informational?style=flat-square)
+![Version: 0.1.9](https://img.shields.io/badge/Version-0.1.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.10](https://img.shields.io/badge/AppVersion-0.6.10-informational?style=flat-square)
 
 A framework for securing software update systems - the scaffolding implementation
 
@@ -44,15 +44,15 @@ A framework for securing software update systems - the scaffolding implementatio
 | secrets.ctlog.create | bool | `false` |  |
 | secrets.ctlog.key | string | `"public"` |  |
 | secrets.ctlog.name | string | `"ctlog-public-key"` |  |
-| secrets.ctlog.path | string | `"ctlog-pubkey"` |  |
+| secrets.ctlog.path | string | `"ctfe.pub"` |  |
 | secrets.fulcio.create | bool | `false` |  |
 | secrets.fulcio.key | string | `"cert"` |  |
 | secrets.fulcio.name | string | `"fulcio-server-secret"` |  |
-| secrets.fulcio.path | string | `"fulcio-cert"` |  |
+| secrets.fulcio.path | string | `"fulcio_v1.crt.pem"` |  |
 | secrets.rekor.create | bool | `false` |  |
 | secrets.rekor.key | string | `"key"` |  |
 | secrets.rekor.name | string | `"rekor-public-key"` |  |
-| secrets.rekor.path | string | `"rekor-pubkey"` |  |
+| secrets.rekor.path | string | `"rekor.pub"` |  |
 | service.name | string | `"tuf-server"` |  |
 | service.port | int | `80` |  |
 | serviceAccountName | string | `"tuf"` |  |

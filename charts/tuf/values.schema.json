@@ -128,7 +128,7 @@
                         "path": {
                             "type": "string",
                             "examples": [
-                                "rekor-pubkey"
+                                "rekor.pub"
                             ]
                         }
                     },
@@ -136,7 +136,7 @@
                         "create": false,
                         "name": "rekor-public-key",
                         "key": "public",
-                        "path": "rekor-pubkey"
+                        "path": "rekor.pub"
                     }]
                 },
                 "fulcio": {
@@ -163,7 +163,7 @@
                         "path": {
                             "type": "string",
                             "examples": [
-                                "fulcio-cert"
+                                "fulcio_v1.crt.pem"
                             ]
                         }
                     },
@@ -171,7 +171,7 @@
                         "create": false,
                         "name": "fulcio-server-secret",
                         "key": "cert",
-                        "path": "fulcio-cert"
+                        "path": "fulcio_v1.crt.pem"
                     }]
                 },
                 "ctlog": {
@@ -198,7 +198,7 @@
                         "path": {
                             "type": "string",
                             "examples": [
-                                "ctlog-pubkey"
+                                "ctfe.pub"
                             ]
                         }
                     },
@@ -206,7 +206,7 @@
                         "create": false,
                         "name": "ctlog-public-key",
                         "key": "key",
-                        "path": "ctlog-pubkey"
+                        "path": "ctfe.pub"
                     }]
                 }
             },
@@ -215,19 +215,19 @@
                     "create": false,
                     "name": "rekor-public-key",
                     "key": "public",
-                    "path": "rekor-pubkey"
+                    "path": "rekor.pub"
                 },
                 "fulcio": {
                     "create": false,
                     "name": "fulcio-server-secret",
                     "key": "cert",
-                    "path": "fulcio-cert"
+                    "path": "fulcio_v1.crt.pem"
                 },
                 "ctlog": {
                     "create": false,
                     "name": "ctlog-public-key",
                     "key": "key",
-                    "path": "ctlog-pubkey"
+                    "path": "ctfe.pub"
                 }
             }]
         },
@@ -376,19 +376,19 @@
                 "create": false,
                 "name": "rekor-public-key",
                 "key": "public",
-                "path": "rekor-pubkey"
+                "path": "rekor.pub"
             },
             "fulcio": {
                 "create": false,
                 "name": "fulcio-server-secret",
                 "key": "cert",
-                "path": "fulcio-cert"
+                "path": "fulcio_v1.crt.pem"
             },
             "ctlog": {
                 "create": false,
                 "name": "ctlog-public-key",
                 "key": "key",
-                "path": "ctlog-pubkey"
+                "path": "ctfe.pub"
             }
         },
         "ingress": {
