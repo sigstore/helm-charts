@@ -62,8 +62,8 @@ server:
     registry: gcr.io
     repository: projectsigstore/rekor-server
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/rekor-server:v1.3.3
-    version: "sha256:48c206d669a71783dd0013a75420813cbd63a300975d3b4c32237d6cf76d1182"
+    # crane digest gcr.io/projectsigstore/rekor-server:v1.3.4
+    version: "sha256:bafe388dd66097f06516bc67cf9c0fc5da629798f60a2326e8c4b4584c82ed4f"
   logging:
     production: false
   ingress:
@@ -185,8 +185,8 @@ backfillredis:
     registry: ghcr.io
     repository: sigstore/rekor/backfill-redis
     pullPolicy: IfNotPresent
-    # v1.3.3
-    version: "sha256:7616a8808140274ccde39e6a41e2bf5e5f5c83b9e57d83feddf0308428ea40c9"
+    # v1.3.4
+    version: "sha256:21a9b240cb5e30f04b701b72e67554d0d1904f96a42ef361f1bde3e57274d05e"
   ttlSecondsAfterFinished: 3600
   securityContext:
     runAsNonRoot: true
