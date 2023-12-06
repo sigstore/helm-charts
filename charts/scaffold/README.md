@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.6.38](https://img.shields.io/badge/Version-0.6.38-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.6.39](https://img.shields.io/badge/Version-0.6.39-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Scaffolding the components of the sigstore architecture
 
@@ -102,11 +102,11 @@ helm uninstall [RELEASE_NAME]
 | tuf.namespace.create | bool | `true` |  |
 | tuf.namespace.name | string | `"tuf-system"` |  |
 | tuf.secrets.ctlog.name | string | `"ctlog-public-key"` |  |
-| tuf.secrets.ctlog.path | string | `"ctlog-pubkey"` |  |
+| tuf.secrets.ctlog.path | string | `"ctfe.pub"` |  |
 | tuf.secrets.fulcio.name | string | `"fulcio-server-secret"` |  |
-| tuf.secrets.fulcio.path | string | `"fulcio-cert"` |  |
+| tuf.secrets.fulcio.path | string | `"fulcio_v1.crt.pem"` |  |
 | tuf.secrets.rekor.name | string | `"rekor-public-key"` |  |
-| tuf.secrets.rekor.path | string | `"rekor-pubkey"` |  |
+| tuf.secrets.rekor.path | string | `"rekor.pub"` |  |
 
 ----------------------------------------------
 
