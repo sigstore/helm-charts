@@ -65,3 +65,4 @@ NOTE: The public key that was used to sign a particular chart may not be identic
 * [sigstore-prober](charts/sigstore-prober)
 * [trillian](charts/trillian)
 * [updatetree](charts/updatetree)
+
