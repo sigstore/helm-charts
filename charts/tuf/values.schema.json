@@ -208,6 +208,41 @@
                         "key": "key",
                         "path": "ctfe.pub"
                     }]
+                },
+                "tsa": {
+                    "type": "object",
+                    "properties": {
+                        "create": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "name": {
+                            "type": "string",
+                            "examples": [
+                                "tsa-cert-chain"
+                            ]
+                        },
+                        "key": {
+                            "type": "string",
+                            "examples": [
+                                "cert-chain"
+                            ]
+                        },
+                        "path": {
+                            "type": "string",
+                            "examples": [
+                                "tsa.certchain.pem"
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "create": false,
+                        "name": "tsa-cert-chain",
+                        "key": "cert-chain",
+                        "path": "tsa.certchain.pem"
+                    }]
                 }
             },
             "examples": [{
@@ -228,6 +263,12 @@
                     "name": "ctlog-public-key",
                     "key": "key",
                     "path": "ctfe.pub"
+                },
+                "tsa": {
+                    "create": false,
+                    "name": "tsa-cert-chain",
+                    "key": "cert-chain",
+                    "path": "tsa.certchain.pem"
                 }
             }]
         },
@@ -389,6 +430,12 @@
                 "name": "ctlog-public-key",
                 "key": "key",
                 "path": "ctfe.pub"
+            },
+            "tsa": {
+                "create": false,
+                "name": "tsa-cert-chain",
+                "key": "key",
+                "path": "tsa.certchain.pem"
             }
         },
         "ingress": {

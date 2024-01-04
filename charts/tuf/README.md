@@ -1,6 +1,6 @@
 # tuf
 
-![Version: 0.1.9](https://img.shields.io/badge/Version-0.1.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.10](https://img.shields.io/badge/AppVersion-0.6.10-informational?style=flat-square)
+![Version: 0.1.10](https://img.shields.io/badge/Version-0.1.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.6.10](https://img.shields.io/badge/AppVersion-0.6.10-informational?style=flat-square)
 
 A framework for securing software update systems - the scaffolding implementation
 
@@ -53,6 +53,10 @@ A framework for securing software update systems - the scaffolding implementatio
 | secrets.rekor.key | string | `"key"` |  |
 | secrets.rekor.name | string | `"rekor-public-key"` |  |
 | secrets.rekor.path | string | `"rekor.pub"` |  |
+| secrets.tsa.create | bool | `false` |  |
+| secrets.tsa.key | string | `"cert-chain"` |  |
+| secrets.tsa.name | string | `"tsa-cert-chain"` |  |
+| secrets.tsa.path | string | `"tsa.certchain.pem"` |  |
 | service.name | string | `"tuf-server"` |  |
 | service.port | int | `80` |  |
 | serviceAccountName | string | `"tuf"` |  |
