@@ -4,7 +4,7 @@ description: Scaffolding the components of the sigstore architecture
 
 type: application
 
-version: 0.6.39
+version: 0.6.40
 keywords:
   - security
   - pki
@@ -36,7 +36,7 @@ dependencies:
     repository: https://sigstore.github.io/helm-charts
     condition: tuf.enabled
   - name: tsa
-    version: 1.0.1
+    version: 1.0.2
     repository: https://sigstore.github.io/helm-charts
     condition: tsa.enabled
 
