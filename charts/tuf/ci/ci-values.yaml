@@ -9,3 +9,6 @@ secrets:
   ctlog:
     create: true
     value: baz
+  tsa:
+    create: true
+    value: qux

@@ -63,6 +63,11 @@ spec:
               items:
               - key: {{ .Values.secrets.rekor.key }}
                 path: {{ .Values.secrets.rekor.path }}
+          - secret:
+              name: {{ .Values.secrets.tsa.name }}
+              items:
+              - key: {{ .Values.secrets.tsa.key }}
+                path: {{ .Values.secrets.tsa.path }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}
