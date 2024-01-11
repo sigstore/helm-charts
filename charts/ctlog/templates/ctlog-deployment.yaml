@@ -21,6 +21,10 @@ spec:
         {{- include "ctlog.labels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ template "ctlog.serviceAccountName" . }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
         - name: {{ template "ctlog.fullname" . }}
           image: "{{ template "ctlog.image" .Values.server.image }}"
