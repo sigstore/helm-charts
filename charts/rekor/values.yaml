@@ -7,8 +7,8 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # -- 8.4.0
-    version: "sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af"
+    # -- 8.5.0
+    version: "sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"
     imagePullPolicy: IfNotPresent
 
 redis:
@@ -26,8 +26,8 @@ redis:
     registry: docker.io
     repository: redis
     pullPolicy: IfNotPresent
-    # -- 6.2.14-alpine3.18
-    version: "sha256:452b7655bda0e270a6376b71d22fcb30662e745dcb4728f99fa87f01287b465d"
+    # -- 6.2.14-alpine3.19
+    version: "sha256:c5a607fb6e1bb15d32bbcf14db22787d19e428d59e31a5da67511b49bb0f1ccc"
   resources: {}
   readinessProbe:
     initialDelaySeconds: 5
@@ -165,8 +165,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.6.10
-    version: "sha256:1c8c06786a981344b5643443a4f62580e36a49e02f08783511a2766d5e0081ad"
+    # v0.6.14
+    version: "sha256:fe4f41981fce2d6497b9f6a8e9dbdf3b0f3a5396feda6341090f363020ffb8bb"
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true

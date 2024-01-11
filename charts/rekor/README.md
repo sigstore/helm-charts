@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.3.15](https://img.shields.io/badge/Version-1.3.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.4](https://img.shields.io/badge/AppVersion-1.3.4-informational?style=flat-square)
+![Version: 1.3.16](https://img.shields.io/badge/Version-1.3.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.4](https://img.shields.io/badge/AppVersion-1.3.4-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -20,7 +20,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | trillian | 0.2.18 |
+| https://sigstore.github.io/helm-charts | trillian | 0.2.19 |
 
 ## Values
 
@@ -44,7 +44,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
-| createtree.image.version | string | `"sha256:1c8c06786a981344b5643443a4f62580e36a49e02f08783511a2766d5e0081ad"` |  |
+| createtree.image.version | string | `"sha256:fe4f41981fce2d6497b9f6a8e9dbdf3b0f3a5396feda6341090f363020ffb8bb"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.resources | object | `{}` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
@@ -58,7 +58,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
-| initContainerImage.curl.version | string | `"sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af"` | 8.4.0 |
+| initContainerImage.curl.version | string | `"sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"` | 8.5.0 |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"rekor-system"` |  |
 | redis.args[0] | string | `"--bind"` |  |
@@ -70,7 +70,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | redis.image.pullPolicy | string | `"IfNotPresent"` |  |
 | redis.image.registry | string | `"docker.io"` |  |
 | redis.image.repository | string | `"redis"` |  |
-| redis.image.version | string | `"sha256:452b7655bda0e270a6376b71d22fcb30662e745dcb4728f99fa87f01287b465d"` | 6.2.14-alpine3.18 |
+| redis.image.version | string | `"sha256:c5a607fb6e1bb15d32bbcf14db22787d19e428d59e31a5da67511b49bb0f1ccc"` | 6.2.14-alpine3.19 |
 | redis.name | string | `"redis"` |  |
 | redis.port | int | `6379` |  |
 | redis.readinessProbe.exec.command[0] | string | `"/bin/sh"` |  |
