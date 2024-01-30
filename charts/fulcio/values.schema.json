@@ -13,6 +13,9 @@
         "forceNamespace"
     ],
     "properties": {
+        "imagePullSecrets": {
+            "type": "array"
+        },
         "namespace": {
             "type": "object",
             "default": {},

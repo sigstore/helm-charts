@@ -2,6 +2,8 @@ namespace:
   create: false
   name: fulcio-system
 
+imagePullSecrets: []
+
 config:
   contents: {}
 

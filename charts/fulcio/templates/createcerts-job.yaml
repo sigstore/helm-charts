@@ -19,6 +19,10 @@ spec:
       serviceAccountName: {{ template "fulcio.serviceAccountName.createcerts" . }}
       restartPolicy: Never
       automountServiceAccountToken: {{ .Values.createcerts.serviceAccount.mountToken }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
         - name: {{ template "fulcio.createcerts.fullname" . }}
           image: "{{ template "fulcio.image" .Values.createcerts.image }}"
