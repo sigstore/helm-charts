@@ -18,6 +18,10 @@ spec:
     spec:
       serviceAccountName: {{ template "rekor.serviceAccountName.server" . }}
       restartPolicy: Never
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
         - name: {{ template "rekor.backfillredis.fullname" . }}
           image: "{{ template "rekor.image" .Values.backfillredis.image }}"
