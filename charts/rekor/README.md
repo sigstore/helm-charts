@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.3.17](https://img.shields.io/badge/Version-1.3.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.4](https://img.shields.io/badge/AppVersion-1.3.4-informational?style=flat-square)
+![Version: 1.3.18](https://img.shields.io/badge/Version-1.3.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.4](https://img.shields.io/badge/AppVersion-1.3.4-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -20,7 +20,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | trillian | 0.2.19 |
+| https://sigstore.github.io/helm-charts | trillian | 0.2.21 |
 
 ## Values
 
@@ -44,7 +44,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
-| createtree.image.version | string | `"sha256:fe4f41981fce2d6497b9f6a8e9dbdf3b0f3a5396feda6341090f363020ffb8bb"` |  |
+| createtree.image.version | string | `"sha256:bdffe48121354c475f29be316bd31d7149c215b23c4cd2b36093832193adad09"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.resources | object | `{}` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
