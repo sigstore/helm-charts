@@ -5,8 +5,8 @@ description: |
 
 type: application
 
-version: 0.2.20
-appVersion: 1.5.3
+version: 0.2.21
+appVersion: 1.6.0
 
 keywords:
   - security
@@ -31,12 +31,12 @@ annotations:
     - name: db_server
       image: gcr.io/trillian-opensource-ci/db_server:v1.5.3@sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461
     - name: log_server
-      image: gcr.io/projectsigstore/trillian_log_server@sha256:0570f8561677e6140a73cb2d7e04e19cf52eb955efe40297e23402694d19489b
+      image: ghcr.io/sigstore/scaffolding/trillian_log_server@sha256:beffee16bb07b5cb051dc4e476d3a1063521ed5ae0b670efc7fe6f3507d94d2b
     - name: log_signer
-      image: gcr.io/projectsigstore/trillian_log_signer@sha256:948291659bb9910708900aad33dd18669d001ea5e93b85404634bab8e38c83d7
+      image: ghcr.io/sigstore/scaffolding/trillian_log_signer@sha256:79d57af375cfa997ed5452cc0c02c0396d909fcc91d11065586f119490aa9214
     - name: cloud_proxy
-      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.1-alpine@sha256:d6206eff656e7266d55dd9a1ecd21a78ad34286d6920d51e1e91ec7480707dbc
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.2-alpine@sha256:2ae72bc8c4613bb3bcc4d539f3207785358d22497e44913795b74d91d7ba7133
     - name: scaffold_cloud_proxy
-      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.6.14@sha256:e9ce05dfd1ebec55be5b82abc3aa63cc2f31b99dae5f1c49bdd579de6797b816
+      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.6.16@sha256:0d0034dee1dbdc73a4bdb4700914716c87767fe2a9f73a9290baf41273de47cf
     - name: createdb
-      image: ghcr.io/sigstore/scaffolding/createdb:v0.6.14@sha256:1578238b579a3e51426523fe3357cb1c5bc5121d71ba86fa0f101cc5f65ddf33
+      image: ghcr.io/sigstore/scaffolding/createdb:v0.6.16@sha256:ca545d7bc877be4083bd64ac66c9337b1eb1b9f58eef1e7b3b0a41898362ec36
