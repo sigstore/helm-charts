@@ -56,6 +56,10 @@ spec:
 {{- if .Values.logServer.priorityClassName }}
       priorityClassName: "{{ .Values.logServer.priorityClassName }}"
 {{- end }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
         {{- if .Values.mysql.gcp.enabled }}
         - name: cloud-sql-proxy
