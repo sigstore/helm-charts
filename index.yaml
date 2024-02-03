@@ -4564,6 +4564,44 @@ entries:
         - name: curlimages/curl
           image: docker.io/curlimages/curl:8.5.0@sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac
         - name: rekor-server
+          image: gcr.io/projectsigstore/rekor-server:v1.3.5@sha256:392610f51948daa0efe0c05bc088f2af0ca1b7411c9c9c571146cfd40df23af8
+        - name: redis
+          image: docker.io/redis:6.2.14-alpine3.19@sha256:c5a607fb6e1bb15d32bbcf14db22787d19e428d59e31a5da67511b49bb0f1ccc
+        - name: backfill-redis
+          image: ghcr.io/sigstore/rekor/backfill-redis:v1.3.5@sha256:3a38936c02a6fb7087643dedaff1e4c3b90d028630a93a3bf8c1c690319c3a81
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.3.5
+    created: "2024-02-03T00:58:01.5400506Z"
+    dependencies:
+    - condition: trillian.enabled
+      name: trillian
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.21
+    description: Part of the sigstore project, Rekor is a timestamping server and
+      transparency log for storing signatures, as well as an API based server for
+      validation
+    digest: 55d72301a985f554d203eb9265d55eb4b39e4c58143432ecfb36f4ac7b7161bb
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor
+    sources:
+    - https://github.com/sigstore/rekor
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-1.3.19/rekor-1.3.19.tgz
+    version: 1.3.19
+  - annotations:
+      artifacthub.io/images: |
+        - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree:v0.6.16@sha256:bdffe48121354c475f29be316bd31d7149c215b23c4cd2b36093832193adad09
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl:8.5.0@sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac
+        - name: rekor-server
           image: gcr.io/projectsigstore/rekor-server:v1.3.4@sha256:bafe388dd66097f06516bc67cf9c0fc5da629798f60a2326e8c4b4584c82ed4f
         - name: redis
           image: docker.io/redis:6.2.14-alpine3.19@sha256:c5a607fb6e1bb15d32bbcf14db22787d19e428d59e31a5da67511b49bb0f1ccc
@@ -14008,4 +14046,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2024-01-31T18:23:27.36496239Z"
+generated: "2024-02-03T00:58:01.541381485Z"
