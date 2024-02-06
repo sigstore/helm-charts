@@ -80,6 +80,9 @@ tuf:
     ctlog:
       name: ctlog-public-key
       path: ctfe.pub
+    tsa:
+      name: tsa-cert-chain
+      path: tsa.certchain.pem
 
 copySecretJob:
   enabled: false

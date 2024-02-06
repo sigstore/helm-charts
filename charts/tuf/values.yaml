@@ -35,7 +35,7 @@ secrets:
   tsa:
     create: false
     name: tsa-cert-chain
-    key: cert-chain
+    key: key
     path: tsa.certchain.pem
 
 ingress:
