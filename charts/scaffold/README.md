@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.6.43](https://img.shields.io/badge/Version-0.6.43-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.6.45](https://img.shields.io/badge/Version-0.6.45-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Scaffolding the components of the sigstore architecture
 
@@ -37,7 +37,7 @@ helm uninstall [RELEASE_NAME]
 | Repository | Name | Version |
 |------------|------|---------|
 | https://sigstore.github.io/helm-charts | ctlog | 0.2.51 |
-| https://sigstore.github.io/helm-charts | fulcio | 2.3.16 |
+| https://sigstore.github.io/helm-charts | fulcio | 2.3.17 |
 | https://sigstore.github.io/helm-charts | rekor | 1.3.19 |
 | https://sigstore.github.io/helm-charts | trillian | 0.2.21 |
 | https://sigstore.github.io/helm-charts | tsa | 1.0.2 |
@@ -107,6 +107,8 @@ helm uninstall [RELEASE_NAME]
 | tuf.secrets.fulcio.path | string | `"fulcio_v1.crt.pem"` |  |
 | tuf.secrets.rekor.name | string | `"rekor-public-key"` |  |
 | tuf.secrets.rekor.path | string | `"rekor.pub"` |  |
+| tuf.secrets.tsa.name | string | `"tsa-cert-chain"` |  |
+| tuf.secrets.tsa.path | string | `"tsa.certchain.pem"` |  |
 
 ----------------------------------------------
 
