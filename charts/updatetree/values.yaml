@@ -8,7 +8,7 @@ serviceAccount:
   create: false
 spec:
   replicaCount: 1
-  image: ghcr.io/sigstore/scaffolding/updatetree:v0.6.16@sha256:228756bc47ebc1eabe8a889484a5443f936817ae591afee9b1712f5219323628
+  image: ghcr.io/sigstore/scaffolding/updatetree:v0.6.17@sha256:9fe03dde7324490cc7a84c75dfa3f1de267fc71c1a473fc67491c690e22c32ab
 ttlSecondsAfterFinished: 3600
 securityContext:
   runAsNonRoot: true

@@ -4,8 +4,8 @@ description: Update the status of an existing Trillian tree
 
 type: application
 
-version: 0.0.8
-appVersion: 0.6.16
+version: 0.0.9
+appVersion: 0.6.17
 
 
 keywords:
@@ -22,4 +22,4 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: updatetree
-      image: ghcr.io/sigstore/scaffolding/updatetree:v0.6.16@sha256:228756bc47ebc1eabe8a889484a5443f936817ae591afee9b1712f5219323628
+      image: ghcr.io/sigstore/scaffolding/updatetree:v0.6.17@sha256:9fe03dde7324490cc7a84c75dfa3f1de267fc71c1a473fc67491c690e22c32ab
