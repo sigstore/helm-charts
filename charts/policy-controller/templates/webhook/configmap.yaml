@@ -13,7 +13,7 @@ metadata:
 data:
   zap-logger-config: |-
     {
-      "level": "info",
+      "level": "{{ .Values.loglevel }}",
       "development": false,
       "outputPaths": ["stdout"],
       "errorOutputPaths": ["stderr"],
@@ -34,8 +34,8 @@ data:
     }
   # Log level overrides
   # Changes are be picked up immediately.
-  loglevel.controller: "info"
-  loglevel.webhook: "info"
+  loglevel.controller: "{{ .Values.loglevel }}"
+  loglevel.webhook: "{{ .Values.loglevel }}"
 {{- if .Values.serviceMonitor.enabled }}
 ---
 apiVersion: v1

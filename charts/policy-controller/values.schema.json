@@ -47,6 +47,9 @@
                 }
             }
         },
+        "loglevel": {
+            "type": "string"
+        },
         "serviceMonitor": {
             "type": "object",
             "properties": {
