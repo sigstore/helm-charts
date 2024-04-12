@@ -8,8 +8,8 @@ sources:
 type: application
 
 name: policy-controller
-version: 0.6.8
-appVersion: 0.8.2
+version: 0.7.0-alpha1
+appVersion: 0.9.0-alpha1
 
 maintainers:
   - name: dlorenc
