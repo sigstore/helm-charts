@@ -130,10 +130,6 @@ spec:
           securityContext:
 {{ toYaml .Values.logSigner.containerSecurityContext | indent 12 }}
 {{- end }}
-    {{- if .Values.imagePullSecrets }}
-      imagePullSecrets:
-{{ toYaml .Values.imagePullSecrets | indent 8 }}
-    {{- end }}
     {{- if .Values.logSigner.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.logSigner.nodeSelector | indent 8 }}
