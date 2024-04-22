@@ -218,6 +218,12 @@
                                 false
                             ]
                         },
+                        "existingSecret": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
                         "name": {
                             "type": "string",
                             "examples": [

@@ -34,6 +34,7 @@ secrets:
     path: ctfe.pub
   tsa:
     create: false
+    existingSecret: true
     name: tsa-cert-chain
     key: cert-chain
     path: tsa.certchain.pem
