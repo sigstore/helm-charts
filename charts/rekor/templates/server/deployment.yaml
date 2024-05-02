@@ -53,6 +53,43 @@ spec:
       priorityClassName: "{{ .Values.server.priorityClassName }}"
 {{- end }}
       containers:
+        {{- if ((.Values.mysql).gcp).enabled }}
+        - name: cloud-sql-proxy
+          image: "{{ template "rekor.image" .Values.mysql.gcp.cloudsql }}"
+          command:
+            - "/cloud-sql-proxy"
+            {{- if ((((.Values.mysql).gcp).cloudsql).unixDomainSocket).enabled }}
+            - "--unix-socket"
+            - {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path | quote }}
+            {{- end }}
+            {{- range (((.Values.mysql).gcp).cloudsql).extraArgs | default list }}
+            - {{ . | quote }}
+            {{- end }}
+            - "{{ .Values.mysql.gcp.instance }}"
+    {{- if (((.Values.mysql).gcp).cloudsql).securityContext }}
+          securityContext:
+{{ toYaml .Values.mysql.gcp.cloudsql.securityContext | indent 12 }}
+    {{- end }}
+          resources:
+{{ toYaml (((.Values.mysql).gcp).cloudsql).resources | indent 12 }}
+          {{- if ((((.Values.mysql).gcp).cloudsql).unixDomainSocket).enabled }}
+          volumeMounts:
+            - mountPath: {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path }}
+              name: cloud-sql-proxy-unix-domain-socket
+          {{- end }}
+{{- if (((.Values.mysql).gcp).cloudsql).startupProbe }}
+          startupProbe:
+{{ toYaml .Values.mysql.gcp.cloudsql.startupProbe | indent 12 }}
+{{- end }}
+{{- if (((.Values.mysql).gcp).cloudsql).livenessProbe }}
+          livenessProbe:
+{{ toYaml .Values.mysql.gcp.cloudsql.livenessProbe | indent 12 }}
+{{- end }}
+{{- if (((.Values.mysql).gcp).cloudsql).readinessProbe }}
+          readinessProbe:
+{{ toYaml .Values.mysql.gcp.cloudsql.readinessProbe | indent 12 }}
+{{- end }}
+        {{- end }}
         - name: {{ template "rekor.name" . }}-{{ .Values.server.name }}
           image: "{{ template "rekor.image" .Values.server.image }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
@@ -62,6 +99,9 @@ spec:
                 configMapKeyRef:
                   name: {{ template "rekor.config" . }}
                   key: {{ .Values.server.config.key }}
+{{- if eq (.Values.server.searchIndex).storageProvider "mysql" }}
+{{- include "searchIndex.mysql.envCredentials" . | indent 12 }}
+{{- end }}
           args:
 {{  include "rekor.server.args" . | indent 12 }}
           ports:
@@ -77,6 +117,10 @@ spec:
             - name: {{ .Values.server.signerFileSecretOptions.secretName }}-volume
               mountPath: {{ .Values.server.signerFileSecretOptions.secretMountPath }}
               readOnly: true
+{{- end }}
+{{- if and (((.Values.mysql).gcp).enabled) (((((.Values.mysql).gcp).cloudsql).unixDomainSocket).enabled) }}
+            - mountPath: {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path }}
+              name: cloud-sql-proxy-unix-domain-socket
 {{- end }}
 {{- if .Values.server.livenessProbe }}
           livenessProbe:
@@ -141,4 +185,8 @@ spec:
             items:
             - key: {{ .Values.server.signerFileSecretOptions.privateKeySecretKey }}
               path: {{ .Values.server.signerFileSecretOptions.secretMountSubPath }}
+{{- end }}
+{{- if and (((.Values.mysql).gcp).enabled) (((((.Values.mysql).gcp).cloudsql).unixDomainSocket).enabled) }}
+        - name: cloud-sql-proxy-unix-domain-socket
+          emptyDir: {}
 {{- end }}

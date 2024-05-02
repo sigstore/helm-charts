@@ -1,0 +1,136 @@
+{{- if (.Values.mysql).enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+{{- if (.Values.mysql).deploymentAnnotations }}
+  annotations:
+    {{ toYaml (.Values.mysql).deploymentAnnotations | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "rekor.mysql.labels" . | nindent 4 }}
+  name: {{ template "rekor.mysql.fullname" . }}
+{{ include "rekor.namespace" . | indent 2 }}
+spec:
+  selector:
+    {{- if .Values.schedulerName }}
+    schedulerName: "{{ .Values.schedulerName }}"
+    {{- end }}
+    matchLabels:
+      {{- include "rekor.mysql.matchLabels" . | nindent 6 }}
+  replicas: {{ (.Values.mysql).replicaCount }}
+  {{- if (.Values.mysql).strategy }}
+  strategy:
+{{ toYaml (.Values.mysql).strategy | trim | indent 4 }}
+    {{ if eq (.Values.mysql).strategy.type "Recreate" }}rollingUpdate: null{{ end }}
+{{- end }}
+  template:
+    metadata:
+    {{- if (.Values.mysql).podAnnotations }}
+      annotations:
+        {{ toYaml (.Values.mysql).podAnnotations | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "rekor.mysql.labels" . | nindent 8 }}
+        {{- if (.Values.mysql).podLabels}}
+        {{ toYaml (.Values.mysql).podLabels | nindent 8 }}
+        {{- end}}
+    spec:
+      serviceAccountName: {{ template "rekor.serviceAccountName.mysql" . }}
+      {{- if (.Values.mysql).extraInitContainers }}
+      initContainers:
+{{ toYaml (.Values.mysql).extraInitContainers | indent 8 }}
+      {{- end }}
+{{- if (.Values.mysql).priorityClassName }}
+      priorityClassName: "{{ (.Values.mysql).priorityClassName }}"
+{{- end }}
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ template "rekor.name" . }}-{{ (.Values.mysql).name }}
+          image: "{{ template "rekor.image" (.Values.mysql).image }}"
+          imagePullPolicy: "{{ (.Values.mysql).image.pullPolicy }}"
+        {{- if (.Values.mysql).args }}
+          args:
+{{ toYaml (.Values.mysql).args | indent 12 }}
+        {{- end }}
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-root-password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mysql.secretName" . }}
+                  key: mysql-database
+          ports:
+{{- include "rekor.containerPorts" (.Values.mysql).service.ports | indent 12 }}
+{{- if (.Values.mysql).livenessProbe }}
+          livenessProbe:
+{{ toYaml (.Values.mysql).livenessProbe | indent 12 }}
+{{- end }}
+{{- if (.Values.mysql).readinessProbe }}
+          readinessProbe:
+{{ toYaml (.Values.mysql).readinessProbe | indent 12 }}
+{{- end }}
+          resources:
+{{ toYaml (.Values.mysql).resources | indent 12 }}
+          volumeMounts:
+            - name: storage
+              mountPath: {{ (.Values.mysql).persistence.mountPath }}
+              subPath: {{ (.Values.mysql).persistence.subPath }}
+    {{- if (.Values.mysql).containerSecurityContext }}
+          securityContext:
+{{ toYaml (.Values.mysql).containerSecurityContext | indent 12 }}
+    {{- end }}
+    {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+    {{- end }}
+    {{- if (.Values.mysql).nodeSelector }}
+      nodeSelector:
+{{ toYaml (.Values.mysql).nodeSelector | indent 8 }}
+    {{- end }}
+    {{- with (.Values.mysql).dnsConfig }}
+      dnsConfig:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- if (.Values.mysql).securityContext }}
+      securityContext:
+{{ toYaml (.Values.mysql).securityContext | indent 8 }}
+    {{- end }}
+    {{- if (.Values.mysql).tolerations }}
+      tolerations:
+{{ toYaml (.Values.mysql).tolerations | indent 8 }}
+    {{- end }}
+    {{- if (.Values.mysql).affinity }}
+      affinity:
+{{ toYaml (.Values.mysql).affinity | indent 8 }}
+    {{- end }}
+      volumes:
+  {{- if not (.Values.mysql).persistence.enabled }}
+        - name: storage
+          emptyDir: {}
+  {{- else if (.Values.mysql).persistence.existingClaim }}
+        - name: storage
+          persistentVolumeClaim:
+            claimName: {{ (.Values.mysql).persistence.existingClaim }}
+  {{- else }}
+        - name: storage
+          persistentVolumeClaim:
+            claimName: {{ template "rekor.mysql.fullname" . }}
+  {{- end }}
+  {{- end }}
