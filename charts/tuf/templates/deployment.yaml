@@ -63,7 +63,7 @@ spec:
               items:
               - key: {{ .Values.secrets.rekor.key }}
                 path: {{ .Values.secrets.rekor.path }}
-          {{- if or (.Values.secrets.tsa.existingSecret) (.Values.secrets.tsa.create) }}
+          {{- if or (.Values.secrets.tsa.enabled) (.Values.secrets.tsa.create) }}
           - secret:
               name: {{ .Values.secrets.tsa.name }}
               items:
