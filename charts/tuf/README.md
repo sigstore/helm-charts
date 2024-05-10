@@ -42,14 +42,17 @@ A framework for securing software update systems - the scaffolding implementatio
 | roleBindingName | string | `"tuf"` |  |
 | roleName | string | `"tuf"` |  |
 | secrets.ctlog.create | bool | `false` |  |
+| secrets.ctlog.enabled | bool | `false` |  |
 | secrets.ctlog.key | string | `"public"` |  |
 | secrets.ctlog.name | string | `"ctlog-public-key"` |  |
 | secrets.ctlog.path | string | `"ctfe.pub"` |  |
 | secrets.fulcio.create | bool | `false` |  |
+| secrets.fulcio.enabled | bool | `false` |  |
 | secrets.fulcio.key | string | `"cert"` |  |
 | secrets.fulcio.name | string | `"fulcio-server-secret"` |  |
 | secrets.fulcio.path | string | `"fulcio_v1.crt.pem"` |  |
 | secrets.rekor.create | bool | `false` |  |
+| secrets.rekor.enabled | bool | `false` |  |
 | secrets.rekor.key | string | `"key"` |  |
 | secrets.rekor.name | string | `"rekor-public-key"` |  |
 | secrets.rekor.path | string | `"rekor.pub"` |  |
