@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.3.21](https://img.shields.io/badge/Version-1.3.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.6](https://img.shields.io/badge/AppVersion-1.3.6-informational?style=flat-square)
+![Version: 1.4.0](https://img.shields.io/badge/Version-1.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.6](https://img.shields.io/badge/AppVersion-1.3.6-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -59,6 +59,37 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
 | initContainerImage.curl.version | string | `"sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"` | 8.5.0 |
+| mysql.enabled | bool | `false` |  |
+| mysql.gcp.cloudsql.registry | string | `"gcr.io"` |  |
+| mysql.gcp.cloudsql.repository | string | `"cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine"` |  |
+| mysql.gcp.cloudsql.resources.requests.cpu | string | `"1"` |  |
+| mysql.gcp.cloudsql.resources.requests.memory | string | `"2Gi"` |  |
+| mysql.gcp.cloudsql.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| mysql.gcp.cloudsql.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| mysql.gcp.cloudsql.securityContext.readOnlyRootFilesystem | bool | `true` |  |
+| mysql.gcp.cloudsql.securityContext.runAsNonRoot | bool | `true` |  |
+| mysql.gcp.cloudsql.unixDomainSocket.enabled | bool | `false` |  |
+| mysql.gcp.cloudsql.unixDomainSocket.path | string | `"/cloudsql"` |  |
+| mysql.gcp.cloudsql.version | string | `"sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9"` | crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine |
+| mysql.gcp.enabled | bool | `false` |  |
+| mysql.gcp.instance | string | `""` |  |
+| mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
+| mysql.gcp.scaffoldSQLProxy.repository | string | `"sigstore/scaffolding/cloudsqlproxy"` |  |
+| mysql.gcp.scaffoldSQLProxy.resources.requests.cpu | string | `"1"` |  |
+| mysql.gcp.scaffoldSQLProxy.resources.requests.memory | string | `"2Gi"` |  |
+| mysql.gcp.scaffoldSQLProxy.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| mysql.gcp.scaffoldSQLProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| mysql.gcp.scaffoldSQLProxy.securityContext.readOnlyRootFilesystem | bool | `true` |  |
+| mysql.gcp.scaffoldSQLProxy.securityContext.runAsNonRoot | bool | `true` |  |
+| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2"` | v0.6.17 which is based on cloud-sql-proxy:2.9.0-alpine |
+| mysql.hostname | string | `""` |  |
+| mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
+| mysql.image.registry | string | `"gcr.io"` |  |
+| mysql.image.repository | string | `"trillian-opensource-ci/db_server"` |  |
+| mysql.name | string | `"mysql"` |  |
+| mysql.port | int | `3306` |  |
+| mysql.replicaCount | int | `1` |  |
+| mysql.strategy.type | string | `"Recreate"` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"rekor-system"` |  |
 | redis.args[0] | string | `"--bind"` |  |
@@ -151,6 +182,8 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.replicaCount | int | `1` |  |
 | server.resources | object | `{}` |  |
 | server.retrieve_api.enabled | bool | `true` |  |
+| server.searchIndex.mysql | object | `{}` |  |
+| server.searchIndex.storageProvider | string | `""` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
 | server.service.ports[0].name | string | `"3000-tcp"` |  |

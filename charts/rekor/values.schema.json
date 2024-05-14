@@ -589,6 +589,675 @@
                 }
             ]
         },
+        "mysql": {
+            "type": "object",
+            "default": {},
+            "title": "The mysql Schema",
+            "required": [
+                "gcp",
+                "enabled",
+                "replicaCount",
+                "name",
+                "hostname",
+                "port",
+                "strategy",
+                "image"
+            ],
+            "properties": {
+                "gcp": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The gcp Schema",
+                    "required": [
+                        "enabled",
+                        "instance",
+                        "scaffoldSQLProxy",
+                        "cloudsql"
+                    ],
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "default": false,
+                            "title": "The enabled Schema",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "instance": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The instance Schema",
+                            "examples": [
+                                ""
+                            ]
+                        },
+                        "scaffoldSQLProxy": {
+                            "type": "object",
+                            "default": {},
+                            "title": "The scaffoldSQLProxy Schema",
+                            "required": [
+                                "registry",
+                                "repository",
+                                "version",
+                                "resources",
+                                "securityContext"
+                            ],
+                            "properties": {
+                                "registry": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The registry Schema",
+                                    "examples": [
+                                        "ghcr.io"
+                                    ]
+                                },
+                                "repository": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The repository Schema",
+                                    "examples": [
+                                        "sigstore/scaffolding/cloudsqlproxy"
+                                    ]
+                                },
+                                "version": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The version Schema",
+                                    "examples": [
+                                        "sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2"
+                                    ]
+                                },
+                                "resources": {
+                                    "type": "object",
+                                    "default": {},
+                                    "title": "The resources Schema",
+                                    "required": [
+                                        "requests"
+                                    ],
+                                    "properties": {
+                                        "requests": {
+                                            "type": "object",
+                                            "default": {},
+                                            "title": "The requests Schema",
+                                            "required": [
+                                                "memory",
+                                                "cpu"
+                                            ],
+                                            "properties": {
+                                                "memory": {
+                                                    "type": "string",
+                                                    "default": "",
+                                                    "title": "The memory Schema",
+                                                    "examples": [
+                                                        "2Gi"
+                                                    ]
+                                                },
+                                                "cpu": {
+                                                    "type": "string",
+                                                    "default": "",
+                                                    "title": "The cpu Schema",
+                                                    "examples": [
+                                                        "1"
+                                                    ]
+                                                }
+                                            },
+                                            "examples": [{
+                                                "memory": "2Gi",
+                                                "cpu": "1"
+                                            }]
+                                        }
+                                    },
+                                    "examples": [{
+                                        "requests": {
+                                            "memory": "2Gi",
+                                            "cpu": "1"
+                                        }
+                                    }]
+                                },
+                                "securityContext": {
+                                    "type": "object",
+                                    "default": {},
+                                    "title": "The securityContext Schema",
+                                    "required": [
+                                        "allowPrivilegeEscalation",
+                                        "readOnlyRootFilesystem",
+                                        "runAsNonRoot",
+                                        "capabilities"
+                                    ],
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "title": "The allowPrivilegeEscalation Schema",
+                                            "examples": [
+                                                false
+                                            ]
+                                        },
+                                        "readOnlyRootFilesystem": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "title": "The readOnlyRootFilesystem Schema",
+                                            "examples": [
+                                                true
+                                            ]
+                                        },
+                                        "runAsNonRoot": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "title": "The runAsNonRoot Schema",
+                                            "examples": [
+                                                true
+                                            ]
+                                        },
+                                        "capabilities": {
+                                            "type": "object",
+                                            "default": {},
+                                            "title": "The capabilities Schema",
+                                            "required": [
+                                                "drop"
+                                            ],
+                                            "properties": {
+                                                "drop": {
+                                                    "type": "array",
+                                                    "default": [],
+                                                    "title": "The drop Schema",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "default": "",
+                                                        "title": "A Schema",
+                                                        "examples": [
+                                                            "ALL"
+                                                        ]
+                                                    },
+                                                    "examples": [
+                                                        [
+                                                            "ALL"]
+                                                    ]
+                                                }
+                                            },
+                                            "examples": [{
+                                                "drop": [
+                                                    "ALL"
+                                                ]
+                                            }]
+                                        }
+                                    },
+                                    "examples": [{
+                                        "allowPrivilegeEscalation": false,
+                                        "readOnlyRootFilesystem": true,
+                                        "runAsNonRoot": true,
+                                        "capabilities": {
+                                            "drop": [
+                                                "ALL"
+                                            ]
+                                        }
+                                    }]
+                                }
+                            },
+                            "examples": [{
+                                "registry": "ghcr.io",
+                                "repository": "sigstore/scaffolding/cloudsqlproxy",
+                                "version": "sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2",
+                                "resources": {
+                                    "requests": {
+                                        "memory": "2Gi",
+                                        "cpu": "1"
+                                    }
+                                },
+                                "securityContext": {
+                                    "allowPrivilegeEscalation": false,
+                                    "readOnlyRootFilesystem": true,
+                                    "runAsNonRoot": true,
+                                    "capabilities": {
+                                        "drop": [
+                                            "ALL"
+                                        ]
+                                    }
+                                }
+                            }]
+                        },
+                        "cloudsql": {
+                            "type": "object",
+                            "default": {},
+                            "title": "The cloudsql Schema",
+                            "required": [
+                                "registry",
+                                "repository",
+                                "version",
+                                "resources",
+                                "securityContext",
+                                "unixDomainSocket"
+                            ],
+                            "properties": {
+                                "registry": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The registry Schema",
+                                    "examples": [
+                                        "gcr.io"
+                                    ]
+                                },
+                                "repository": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The repository Schema",
+                                    "examples": [
+                                        "cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine"
+                                    ]
+                                },
+                                "version": {
+                                    "type": "string",
+                                    "default": "",
+                                    "title": "The version Schema",
+                                    "examples": [
+                                        "sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9"
+                                    ]
+                                },
+                                "resources": {
+                                    "type": "object",
+                                    "default": {},
+                                    "title": "The resources Schema",
+                                    "required": [
+                                        "requests"
+                                    ],
+                                    "properties": {
+                                        "requests": {
+                                            "type": "object",
+                                            "default": {},
+                                            "title": "The requests Schema",
+                                            "required": [
+                                                "memory",
+                                                "cpu"
+                                            ],
+                                            "properties": {
+                                                "memory": {
+                                                    "type": "string",
+                                                    "default": "",
+                                                    "title": "The memory Schema",
+                                                    "examples": [
+                                                        "2Gi"
+                                                    ]
+                                                },
+                                                "cpu": {
+                                                    "type": "string",
+                                                    "default": "",
+                                                    "title": "The cpu Schema",
+                                                    "examples": [
+                                                        "1"
+                                                    ]
+                                                }
+                                            },
+                                            "examples": [{
+                                                "memory": "2Gi",
+                                                "cpu": "1"
+                                            }]
+                                        }
+                                    },
+                                    "examples": [{
+                                        "requests": {
+                                            "memory": "2Gi",
+                                            "cpu": "1"
+                                        }
+                                    }]
+                                },
+                                "securityContext": {
+                                    "type": "object",
+                                    "default": {},
+                                    "title": "The securityContext Schema",
+                                    "required": [
+                                        "allowPrivilegeEscalation",
+                                        "readOnlyRootFilesystem",
+                                        "runAsNonRoot",
+                                        "capabilities"
+                                    ],
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "title": "The allowPrivilegeEscalation Schema",
+                                            "examples": [
+                                                false
+                                            ]
+                                        },
+                                        "readOnlyRootFilesystem": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "title": "The readOnlyRootFilesystem Schema",
+                                            "examples": [
+                                                true
+                                            ]
+                                        },
+                                        "runAsNonRoot": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "title": "The runAsNonRoot Schema",
+                                            "examples": [
+                                                true
+                                            ]
+                                        },
+                                        "capabilities": {
+                                            "type": "object",
+                                            "default": {},
+                                            "title": "The capabilities Schema",
+                                            "required": [
+                                                "drop"
+                                            ],
+                                            "properties": {
+                                                "drop": {
+                                                    "type": "array",
+                                                    "default": [],
+                                                    "title": "The drop Schema",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "default": "",
+                                                        "title": "A Schema",
+                                                        "examples": [
+                                                            "ALL"
+                                                        ]
+                                                    },
+                                                    "examples": [
+                                                        [
+                                                            "ALL"]
+                                                    ]
+                                                }
+                                            },
+                                            "examples": [{
+                                                "drop": [
+                                                    "ALL"
+                                                ]
+                                            }]
+                                        }
+                                    },
+                                    "examples": [{
+                                        "allowPrivilegeEscalation": false,
+                                        "readOnlyRootFilesystem": true,
+                                        "runAsNonRoot": true,
+                                        "capabilities": {
+                                            "drop": [
+                                                "ALL"
+                                            ]
+                                        }
+                                    }]
+                                },
+                                "unixDomainSocket": {
+                                    "type": "object",
+                                    "default": {},
+                                    "title": "The unixDomainSocket Schema",
+                                    "required": [
+                                        "enabled",
+                                        "path"
+                                    ],
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean",
+                                            "default": false,
+                                            "title": "The enabled Schema",
+                                            "examples": [
+                                                false
+                                            ]
+                                        },
+                                        "path": {
+                                            "type": "string",
+                                            "default": "",
+                                            "title": "The path Schema",
+                                            "examples": [
+                                                "/cloudsql"
+                                            ]
+                                        }
+                                    },
+                                    "examples": [{
+                                        "enabled": false,
+                                        "path": "/cloudsql"
+                                    }]
+                                }
+                            },
+                            "examples": [{
+                                "registry": "gcr.io",
+                                "repository": "cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine",
+                                "version": "sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9",
+                                "resources": {
+                                    "requests": {
+                                        "memory": "2Gi",
+                                        "cpu": "1"
+                                    }
+                                },
+                                "securityContext": {
+                                    "allowPrivilegeEscalation": false,
+                                    "readOnlyRootFilesystem": true,
+                                    "runAsNonRoot": true,
+                                    "capabilities": {
+                                        "drop": [
+                                            "ALL"
+                                        ]
+                                    }
+                                },
+                                "unixDomainSocket": {
+                                    "enabled": false,
+                                    "path": "/cloudsql"
+                                }
+                            }]
+                        }
+                    },
+                    "examples": [{
+                        "enabled": false,
+                        "instance": "",
+                        "scaffoldSQLProxy": {
+                            "registry": "ghcr.io",
+                            "repository": "sigstore/scaffolding/cloudsqlproxy",
+                            "version": "sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2",
+                            "resources": {
+                                "requests": {
+                                    "memory": "2Gi",
+                                    "cpu": "1"
+                                }
+                            },
+                            "securityContext": {
+                                "allowPrivilegeEscalation": false,
+                                "readOnlyRootFilesystem": true,
+                                "runAsNonRoot": true,
+                                "capabilities": {
+                                    "drop": [
+                                        "ALL"
+                                    ]
+                                }
+                            }
+                        },
+                        "cloudsql": {
+                            "registry": "gcr.io",
+                            "repository": "cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine",
+                            "version": "sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9",
+                            "resources": {
+                                "requests": {
+                                    "memory": "2Gi",
+                                    "cpu": "1"
+                                }
+                            },
+                            "securityContext": {
+                                "allowPrivilegeEscalation": false,
+                                "readOnlyRootFilesystem": true,
+                                "runAsNonRoot": true,
+                                "capabilities": {
+                                    "drop": [
+                                        "ALL"
+                                    ]
+                                }
+                            },
+                            "unixDomainSocket": {
+                                "enabled": false,
+                                "path": "/cloudsql"
+                            }
+                        }
+                    }]
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The enabled Schema",
+                    "examples": [
+                        false
+                    ]
+                },
+                "replicaCount": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The replicaCount Schema",
+                    "examples": [
+                        1
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The name Schema",
+                    "examples": [
+                        "mysql"
+                    ]
+                },
+                "hostname": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The hostname Schema",
+                    "examples": [
+                        ""
+                    ]
+                },
+                "port": {
+                    "type": "integer",
+                    "default": 0,
+                    "title": "The port Schema",
+                    "examples": [
+                        3306
+                    ]
+                },
+                "strategy": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The strategy Schema",
+                    "required": [
+                        "type"
+                    ],
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The type Schema",
+                            "examples": [
+                                "Recreate"
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "type": "Recreate"
+                    }]
+                },
+                "image": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The image Schema",
+                    "required": [
+                        "registry",
+                        "repository",
+                        "pullPolicy"
+                    ],
+                    "properties": {
+                        "registry": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The registry Schema",
+                            "examples": [
+                                "gcr.io"
+                            ]
+                        },
+                        "repository": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The repository Schema",
+                            "examples": [
+                                "trillian-opensource-ci/db_server"
+                            ]
+                        },
+                        "pullPolicy": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The pullPolicy Schema",
+                            "examples": [
+                                "IfNotPresent"
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "registry": "gcr.io",
+                        "repository": "trillian-opensource-ci/db_server",
+                        "pullPolicy": "IfNotPresent"
+                    }]
+                }
+            },
+            "examples": [{
+                "gcp": {
+                    "enabled": false,
+                    "instance": "",
+                    "scaffoldSQLProxy": {
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/scaffolding/cloudsqlproxy",
+                        "version": "sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2",
+                        "resources": {
+                            "requests": {
+                                "memory": "2Gi",
+                                "cpu": "1"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "readOnlyRootFilesystem": true,
+                            "runAsNonRoot": true,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            }
+                        }
+                    },
+                    "cloudsql": {
+                        "registry": "gcr.io",
+                        "repository": "cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine",
+                        "version": "sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9",
+                        "resources": {
+                            "requests": {
+                                "memory": "2Gi",
+                                "cpu": "1"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "readOnlyRootFilesystem": true,
+                            "runAsNonRoot": true,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            }
+                        },
+                        "unixDomainSocket": {
+                            "enabled": false,
+                            "path": "/cloudsql"
+                        }
+                    }
+                },
+                "enabled": false,
+                "replicaCount": 1,
+                "name": "mysql",
+                "hostname": "",
+                "port": 3306,
+                "strategy": {
+                    "type": "Recreate"
+                },
+                "image": {
+                    "registry": "gcr.io",
+                    "repository": "trillian-opensource-ci/db_server",
+                    "pullPolicy": "IfNotPresent"
+                }
+            }]
+        },
         "server": {
             "title": "The server Schema",
             "type": "object",
@@ -1676,6 +2345,37 @@
                         }
                     ]
                 },
+                "searchIndex": {
+                    "type": "object",
+                    "default": {},
+                    "title": "The searchIndex Schema",
+                    "required": [
+                        "storageProvider",
+                        "mysql"
+                    ],
+                    "properties": {
+                        "storageProvider": {
+                            "type": "string",
+                            "default": "",
+                            "title": "The storageProvider Schema",
+                            "examples": [
+                                ""
+                            ]
+                        },
+                        "mysql": {
+                            "type": "object",
+                            "default": {},
+                            "title": "The mysql Schema",
+                            "required": [],
+                            "properties": {},
+                            "examples": [{}]
+                        }
+                    },
+                    "examples": [{
+                        "storageProvider": "",
+                        "mysql": {}
+                    }]
+                },
                 "signerFileSecretOptions": {
                     "title": "The signerFileSecretOptions Schema",
                     "type": "object",
@@ -1831,6 +2531,10 @@
                         "create": true,
                         "name": "",
                         "annotations": {}
+                    },
+                    "searchIndex": {
+                        "storageProvider": "",
+                        "mysql": {}
                     }
                 }
             ]
@@ -2340,6 +3044,71 @@
                     "annotations": {}
                 }
             },
+            "mysql": {
+                "gcp": {
+                    "enabled": false,
+                    "instance": "",
+                    "scaffoldSQLProxy": {
+                        "registry": "ghcr.io",
+                        "repository": "sigstore/scaffolding/cloudsqlproxy",
+                        "version": "sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2",
+                        "resources": {
+                            "requests": {
+                                "memory": "2Gi",
+                                "cpu": "1"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "readOnlyRootFilesystem": true,
+                            "runAsNonRoot": true,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            }
+                        }
+                    },
+                    "cloudsql": {
+                        "registry": "gcr.io",
+                        "repository": "cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine",
+                        "version": "sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9",
+                        "resources": {
+                            "requests": {
+                                "memory": "2Gi",
+                                "cpu": "1"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "readOnlyRootFilesystem": true,
+                            "runAsNonRoot": true,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            }
+                        },
+                        "unixDomainSocket": {
+                            "enabled": false,
+                            "path": "/cloudsql"
+                        }
+                    }
+                },
+                "enabled": false,
+                "replicaCount": 1,
+                "name": "mysql",
+                "hostname": "",
+                "port": 3306,
+                "strategy": {
+                    "type": "Recreate"
+                },
+                "image": {
+                    "registry": "gcr.io",
+                    "repository": "trillian-opensource-ci/db_server",
+                    "pullPolicy": "IfNotPresent"
+                }
+            },
             "server": {
                 "enabled": true,
                 "replicaCount": 1,
@@ -2463,6 +3232,12 @@
                     "create": true,
                     "name": "",
                     "annotations": {}
+                },
+                "server": {
+                    "searchIndex": {
+                        "storageProvider": "",
+                        "mysql": {}
+                    }
                 }
             },
             "createtree": {

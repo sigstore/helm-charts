@@ -53,6 +53,57 @@ redis:
     name: ""
     annotations: {}
 
+mysql:
+  gcp:
+    enabled: false
+    instance: ""
+    scaffoldSQLProxy:
+      registry: ghcr.io
+      repository: sigstore/scaffolding/cloudsqlproxy
+      # -- v0.6.17 which is based on cloud-sql-proxy:2.9.0-alpine
+      version: sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2
+      resources:
+        requests:
+          memory: "2Gi"
+          cpu: "1"
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - ALL
+    cloudsql:
+      registry: gcr.io
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine
+      version: sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9
+      resources:
+        requests:
+          memory: "2Gi"
+          cpu: "1"
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - ALL
+      unixDomainSocket:
+        enabled: false
+        path: /cloudsql
+  enabled: false
+  replicaCount: 1
+  name: mysql
+  hostname: ""
+  port: 3306
+  strategy:
+    type: Recreate
+  image:
+    registry: gcr.io
+    repository: trillian-opensource-ci/db_server
+    pullPolicy: IfNotPresent
+
 server:
   enabled: true
   replicaCount: 1
@@ -158,6 +209,10 @@ server:
     create: true
     name: ""
     annotations: {}
+  searchIndex:
+    storageProvider: ""
+    mysql: {}
+
 createtree:
   name: createtree
   force: false
