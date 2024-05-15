@@ -43,10 +43,6 @@ spec:
 {{- if .Values.mysql.priorityClassName }}
       priorityClassName: "{{ .Values.mysql.priorityClassName }}"
 {{- end }}
-      {{- if .Values.imagePullSecrets }}
-      imagePullSecrets:
-{{ toYaml .Values.imagePullSecrets | indent 8 }}
-      {{- end }}
       containers:
         - name: {{ template "trillian.name" . }}-{{ .Values.mysql.name }}
           image: "{{ template "trillian.image" .Values.mysql.image }}"

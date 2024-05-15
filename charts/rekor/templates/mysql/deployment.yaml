@@ -43,10 +43,6 @@ spec:
 {{- if (.Values.mysql).priorityClassName }}
       priorityClassName: "{{ (.Values.mysql).priorityClassName }}"
 {{- end }}
-      {{- if .Values.imagePullSecrets }}
-      imagePullSecrets:
-{{ toYaml .Values.imagePullSecrets | indent 8 }}
-      {{- end }}
       containers:
         - name: {{ template "rekor.name" . }}-{{ (.Values.mysql).name }}
           image: "{{ template "rekor.image" (.Values.mysql).image }}"
