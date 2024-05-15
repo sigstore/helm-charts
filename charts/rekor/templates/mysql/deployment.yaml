@@ -96,10 +96,6 @@ spec:
           securityContext:
 {{ toYaml (.Values.mysql).containerSecurityContext | indent 12 }}
     {{- end }}
-    {{- if .Values.imagePullSecrets }}
-      imagePullSecrets:
-{{ toYaml .Values.imagePullSecrets | indent 8 }}
-    {{- end }}
     {{- if (.Values.mysql).nodeSelector }}
       nodeSelector:
 {{ toYaml (.Values.mysql).nodeSelector | indent 8 }}
