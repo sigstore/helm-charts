@@ -104,6 +104,9 @@ server:
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 createcerts:
   enabled: true
@@ -125,6 +128,9 @@ createcerts:
     runAsNonRoot: true
     runAsUser: 65533
   annotations: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 # Configure ctlog dependency
 ctlog:

@@ -14,6 +14,9 @@ fulcio:
     enabled: false
     createctconfig:
       logPrefix: sigstorescaffolding
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 # CTLog
 ctlog:
@@ -28,6 +31,10 @@ ctlog:
   createtree:
     fullnameOverride: ctlog-createtree
     displayName: ctlog-tree
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
+
 # Rekor
 rekor:
   enabled: true
@@ -42,6 +49,9 @@ rekor:
     fullnameOverride: rekor-redis
   trillian:
     enabled: false
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 # Trillian
 trillian:
@@ -61,6 +71,9 @@ trillian:
     fullnameOverride: trillian-logsigner
   mysql:
     fullnameOverride: trillian-mysql
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 tuf:
   enabled: false
@@ -69,6 +82,9 @@ tuf:
     create: true
   forceNamespace: tuf-system
   fullnameOverride: tuf
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
   secrets:
     rekor:
@@ -93,6 +109,9 @@ copySecretJob:
   imagePullPolicy: IfNotPresent
   serviceaccount: tuf-secret-copy-job
   backoffLimit: 6
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 tsa:
   enabled: false
@@ -102,3 +121,7 @@ tsa:
   forceNamespace: tsa-system
   server:
     fullnameOverride: tsa-server
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
+

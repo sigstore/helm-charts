@@ -52,6 +52,9 @@ redis:
     create: true
     name: ""
     annotations: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 mysql:
   gcp:
@@ -212,6 +215,9 @@ server:
   searchIndex:
     storageProvider: ""
     mysql: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 createtree:
   name: createtree
@@ -232,6 +238,10 @@ createtree:
     runAsUser: 65533
   resources: {}
   annotations: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
+
 # Configure backfillredis to repair indices that were not inserted into Redis.
 backfillredis:
   name: backfillredis
@@ -250,6 +260,9 @@ backfillredis:
   startIndex: -1
   endIndex: -1
   resources: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 # Configure Trillian dependency
 trillian:

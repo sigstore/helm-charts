@@ -57,6 +57,10 @@ server:
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 # Force namespace of namespaced resources
 forceNamespace: ""
+

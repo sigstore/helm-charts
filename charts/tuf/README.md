@@ -20,12 +20,15 @@ A framework for securing software update systems - the scaffolding implementatio
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| deployment.affinity | object | `{}` |  |
 | deployment.imagePullPolicy | string | `"IfNotPresent"` |  |
 | deployment.name | string | `"tuf"` |  |
+| deployment.nodeSelector | object | `{}` |  |
 | deployment.port | int | `8080` |  |
 | deployment.registry | string | `"ghcr.io"` |  |
 | deployment.replicas | int | `1` |  |
 | deployment.repository | string | `"sigstore/scaffolding/server"` |  |
+| deployment.tolerations | list | `[]` |  |
 | deployment.version | string | `"sha256:496b443c82be2c4a14a6e3dfbfa9ccae5b6eaedd7a3aca58b84ddae9492d9906"` |  |
 | enabled | bool | `true` |  |
 | forceNamespace | string | `""` |  |
@@ -60,4 +63,3 @@ A framework for securing software update systems - the scaffolding implementatio
 | service.name | string | `"tuf-server"` |  |
 | service.port | int | `80` |  |
 | serviceAccountName | string | `"tuf"` |  |
-

@@ -16,8 +16,10 @@ Sigstore API Endpoint Prober
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| affinity | object | `{}` |  |
 | namespace.create | bool | `true` |  |
 | namespace.name | string | `"sigstore-prober"` |  |
+| nodeSelector | object | `{}` |  |
 | prometheus.port | int | `8080` |  |
 | serviceAccount.create | bool | `false` |  |
 | serviceAccount.name | string | `"default"` |  |
@@ -36,4 +38,4 @@ Sigstore API Endpoint Prober
 | spec.resources.limits.memory | string | `"128Mi"` |  |
 | spec.resources.requests.cpu | string | `"50m"` |  |
 | spec.resources.requests.memory | string | `"64Mi"` |  |
-
+| tolerations | list | `[]` |  |

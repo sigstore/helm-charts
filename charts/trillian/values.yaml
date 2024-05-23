@@ -142,6 +142,8 @@ logServer:
     version: sha256:34a87140ff88da3f8b83ef8f12575a5dc684afc79af880f148f45ca27f16e60e
 
   nodeSelector: {}
+  tolerations: []
+  affinity: {}
 
   service:
     type: ClusterIP
@@ -178,6 +180,8 @@ logSigner:
     version: sha256:ab97f7591e96e7ae1dbfea3bcc4b5f4b8ad13857e04779d8c6c2309cc432e5ce
 
   nodeSelector: {}
+  tolerations: []
+  affinity: {}
 
   service:
     type: ClusterIP

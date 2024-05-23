@@ -47,14 +47,18 @@ helm uninstall [RELEASE_NAME]
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| copySecretJob.affinity | object | `{}` |  |
 | copySecretJob.backoffLimit | int | `6` |  |
 | copySecretJob.enabled | bool | `false` |  |
 | copySecretJob.imagePullPolicy | string | `"IfNotPresent"` |  |
 | copySecretJob.name | string | `"copy-secrets-job"` |  |
+| copySecretJob.nodeSelector | object | `{}` |  |
 | copySecretJob.registry | string | `"docker.io"` |  |
 | copySecretJob.repository | string | `"alpine/k8s"` |  |
 | copySecretJob.serviceaccount | string | `"tuf-secret-copy-job"` |  |
+| copySecretJob.tolerations | list | `[]` |  |
 | copySecretJob.version | string | `"sha256:fb0d2db81fb0f98abb1adf5246d6f0f4d19f34031afe4759cb7ad8e2eb8d2c01"` |  |
+| ctlog.affinity | object | `{}` |  |
 | ctlog.createcerts.fullnameOverride | string | `"ctlog-createcerts"` |  |
 | ctlog.createtree.displayName | string | `"ctlog-tree"` |  |
 | ctlog.createtree.fullnameOverride | string | `"ctlog-createtree"` |  |
@@ -63,6 +67,9 @@ helm uninstall [RELEASE_NAME]
 | ctlog.fullnameOverride | string | `"ctlog"` |  |
 | ctlog.namespace.create | bool | `true` |  |
 | ctlog.namespace.name | string | `"ctlog-system"` |  |
+| ctlog.nodeSelector | object | `{}` |  |
+| ctlog.tolerations | list | `[]` |  |
+| fulcio.affinity | object | `{}` |  |
 | fulcio.createcerts.fullnameOverride | string | `"fulcio-createcerts"` |  |
 | fulcio.ctlog.createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | fulcio.ctlog.enabled | bool | `false` |  |
@@ -70,15 +77,21 @@ helm uninstall [RELEASE_NAME]
 | fulcio.forceNamespace | string | `"fulcio-system"` |  |
 | fulcio.namespace.create | bool | `true` |  |
 | fulcio.namespace.name | string | `"fulcio-system"` |  |
+| fulcio.nodeSelector | object | `{}` |  |
 | fulcio.server.fullnameOverride | string | `"fulcio-server"` |  |
+| fulcio.tolerations | list | `[]` |  |
+| rekor.affinity | object | `{}` |  |
 | rekor.enabled | bool | `true` |  |
 | rekor.forceNamespace | string | `"rekor-system"` |  |
 | rekor.fullnameOverride | string | `"rekor"` |  |
 | rekor.namespace.create | bool | `true` |  |
 | rekor.namespace.name | string | `"rekor-system"` |  |
+| rekor.nodeSelector | object | `{}` |  |
 | rekor.redis.fullnameOverride | string | `"rekor-redis"` |  |
 | rekor.server.fullnameOverride | string | `"rekor-server"` |  |
+| rekor.tolerations | list | `[]` |  |
 | rekor.trillian.enabled | bool | `false` |  |
+| trillian.affinity | object | `{}` |  |
 | trillian.enabled | bool | `true` |  |
 | trillian.forceNamespace | string | `"trillian-system"` |  |
 | trillian.fullnameOverride | string | `"trillian"` |  |
@@ -91,16 +104,23 @@ helm uninstall [RELEASE_NAME]
 | trillian.mysql.fullnameOverride | string | `"trillian-mysql"` |  |
 | trillian.namespace.create | bool | `true` |  |
 | trillian.namespace.name | string | `"trillian-system"` |  |
+| trillian.nodeSelector | object | `{}` |  |
+| trillian.tolerations | list | `[]` |  |
+| tsa.affinity | object | `{}` |  |
 | tsa.enabled | bool | `false` |  |
 | tsa.forceNamespace | string | `"tsa-system"` |  |
 | tsa.namespace.create | bool | `true` |  |
 | tsa.namespace.name | string | `"tsa-system"` |  |
+| tsa.nodeSelector | object | `{}` |  |
 | tsa.server.fullnameOverride | string | `"tsa-server"` |  |
+| tsa.tolerations | list | `[]` |  |
+| tuf.affinity | object | `{}` |  |
 | tuf.enabled | bool | `false` |  |
 | tuf.forceNamespace | string | `"tuf-system"` |  |
 | tuf.fullnameOverride | string | `"tuf"` |  |
 | tuf.namespace.create | bool | `true` |  |
 | tuf.namespace.name | string | `"tuf-system"` |  |
+| tuf.nodeSelector | object | `{}` |  |
 | tuf.secrets.ctlog.name | string | `"ctlog-public-key"` |  |
 | tuf.secrets.ctlog.path | string | `"ctfe.pub"` |  |
 | tuf.secrets.fulcio.name | string | `"fulcio-server-secret"` |  |
@@ -109,6 +129,7 @@ helm uninstall [RELEASE_NAME]
 | tuf.secrets.rekor.path | string | `"rekor.pub"` |  |
 | tuf.secrets.tsa.name | string | `"tsa-cert-chain"` |  |
 | tuf.secrets.tsa.path | string | `"tsa.certchain.pem"` |  |
+| tuf.tolerations | list | `[]` |  |
 
 ----------------------------------------------
 
