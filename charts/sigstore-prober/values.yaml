@@ -27,3 +27,6 @@ spec:
     trustRekorAPIPublicKey: false
 prometheus:
   port: 8080
+tolerations: []
+nodeSelector: {}
+affinity: {}
