@@ -1,462 +1,196 @@
 {
-    "$schema": "https://json-schema.org/draft-07/schema",
-    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
-        "forceNamespace": {
-            "type": "string",
-            "examples": [
-                ""
-            ]
-        },
-        "imagePullSecrets": {
-            "type": "array",
-            "items": {},
-            "examples": [
-                []
-            ]
-        },
-        "serviceAccountName": {
-            "type": "string",
-            "examples": [
-                "tuf"
-            ]
-        },
-        "roleName": {
-            "type": "string",
-            "examples": [
-                "tuf"
-            ]
-        },
-        "roleBindingName": {
-            "type": "string",
-            "examples": [
-                "tuf"
-            ]
-        },
-        "fullnameOverride": {
-            "type": "string",
-            "examples": [
-                "tuf"
-            ]
-        },
-        "enabled": {
-            "type": "boolean",
-            "examples": [
-                true
-            ]
-        },
         "deployment": {
-            "type": "object",
             "properties": {
-                "name": {
-                    "type": "string",
-                    "examples": [
-                        "tuf"
-                    ]
-                },
-                "replicas": {
-                    "type": "integer",
-                    "examples": [
-                        1
-                    ]
-                },
-                "registry": {
-                    "type": "string",
-                    "examples": [
-                        "ghcr.io"
-                    ]
-                },
-                "repository": {
-                    "type": "string",
-                    "examples": [
-                        "sigstore/scaffolding/server"
-                    ]
-                },
-                "version": {
-                    "type": "string",
-                    "examples": [
-                        "sha256:c77d098e0e62f791cc87b63ae43a5fea505225e0ec38686c4a392c0cad7238bf"
-                    ]
+                "affinity": {
+                    "properties": {},
+                    "type": "object"
                 },
                 "imagePullPolicy": {
-                    "type": "string",
-                    "examples": [
-                        "IfNotPresent"
-                    ]
-                },
-                "port": {
-                    "type": "integer",
-                    "examples": [
-                        8080
-                    ]
-                }
-            },
-            "examples": [{
-                "name": "tuf",
-                "replicas": 1,
-                "registry": "ghcr.io",
-                "repository": "sigstore/scaffolding/server",
-                "version": "sha256:c77d098e0e62f791cc87b63ae43a5fea505225e0ec38686c4a392c0cad7238bf",
-                "imagePullPolicy": "IfNotPresent",
-                "port": 8080
-            }]
-        },
-        "secrets": {
-            "type": "object",
-            "properties": {
-                "rekor": {
-                    "type": "object",
-                    "properties": {
-                        "create": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
-                        },
-                        "name": {
-                            "type": "string",
-                            "examples": [
-                                "rekor-public-key"
-                            ]
-                        },
-                        "key": {
-                            "type": "string",
-                            "examples": [
-                                "public"
-                            ]
-                        },
-                        "path": {
-                            "type": "string",
-                            "examples": [
-                                "rekor.pub"
-                            ]
-                        }
-                    },
-                    "examples": [{
-                        "create": false,
-                        "name": "rekor-public-key",
-                        "key": "public",
-                        "path": "rekor.pub"
-                    }]
-                },
-                "fulcio": {
-                    "type": "object",
-                    "properties": {
-                        "create": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
-                        },
-                        "name": {
-                            "type": "string",
-                            "examples": [
-                                "fulcio-server-secret"
-                            ]
-                        },
-                        "key": {
-                            "type": "string",
-                            "examples": [
-                                "cert"
-                            ]
-                        },
-                        "path": {
-                            "type": "string",
-                            "examples": [
-                                "fulcio_v1.crt.pem"
-                            ]
-                        }
-                    },
-                    "examples": [{
-                        "create": false,
-                        "name": "fulcio-server-secret",
-                        "key": "cert",
-                        "path": "fulcio_v1.crt.pem"
-                    }]
-                },
-                "ctlog": {
-                    "type": "object",
-                    "properties": {
-                        "create": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
-                        },
-                        "name": {
-                            "type": "string",
-                            "examples": [
-                                "ctlog-public-key"
-                            ]
-                        },
-                        "key": {
-                            "type": "string",
-                            "examples": [
-                                "key"
-                            ]
-                        },
-                        "path": {
-                            "type": "string",
-                            "examples": [
-                                "ctfe.pub"
-                            ]
-                        }
-                    },
-                    "examples": [{
-                        "create": false,
-                        "name": "ctlog-public-key",
-                        "key": "key",
-                        "path": "ctfe.pub"
-                    }]
-                },
-                "tsa": {
-                    "type": "object",
-                    "properties": {
-                        "create": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
-                        },
-                        "name": {
-                            "type": "string",
-                            "examples": [
-                                "tsa-cert-chain"
-                            ]
-                        },
-                        "key": {
-                            "type": "string",
-                            "examples": [
-                                "cert-chain"
-                            ]
-                        },
-                        "path": {
-                            "type": "string",
-                            "examples": [
-                                "tsa.certchain.pem"
-                            ]
-                        }
-                    },
-                    "examples": [{
-                        "create": false,
-                        "name": "tsa-cert-chain",
-                        "key": "cert-chain",
-                        "path": "tsa.certchain.pem"
-                    }]
-                }
-            },
-            "examples": [{
-                "rekor": {
-                    "create": false,
-                    "name": "rekor-public-key",
-                    "key": "public",
-                    "path": "rekor.pub"
-                },
-                "fulcio": {
-                    "create": false,
-                    "name": "fulcio-server-secret",
-                    "key": "cert",
-                    "path": "fulcio_v1.crt.pem"
-                },
-                "ctlog": {
-                    "create": false,
-                    "name": "ctlog-public-key",
-                    "key": "key",
-                    "path": "ctfe.pub"
-                },
-                "tsa": {
-                    "create": false,
-                    "name": "tsa-cert-chain",
-                    "key": "cert-chain",
-                    "path": "tsa.certchain.pem"
-                }
-            }]
-        },
-        "ingress": {
-            "type": "object",
-            "properties": {
-                "create": {
-                    "type": "boolean",
-                    "examples": [
-                        true
-                    ]
+                    "type": "string"
                 },
                 "name": {
-                    "type": "string",
-                    "examples": [
-                        "tuf-server"
-                    ]
+                    "type": "string"
+                },
+                "nodeSelector": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "port": {
+                    "type": "integer"
+                },
+                "registry": {
+                    "type": "string"
+                },
+                "replicas": {
+                    "type": "integer"
+                },
+                "repository": {
+                    "type": "string"
+                },
+                "tolerations": {
+                    "type": "array"
+                },
+                "version": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "enabled": {
+            "type": "boolean"
+        },
+        "forceNamespace": {
+            "type": "string"
+        },
+        "fullnameOverride": {
+            "type": "string"
+        },
+        "imagePullSecrets": {
+            "type": "array"
+        },
+        "ingress": {
+            "properties": {
+                "annotations": {
+                    "properties": {},
+                    "type": "object"
                 },
                 "className": {
-                    "type": "string",
-                    "examples": [
-                        "nginx"
-                    ]
+                    "type": "string"
                 },
-                "annotations": {
-                    "type": "object",
-                    "properties": {},
-                    "examples": [{}]
+                "create": {
+                    "type": "boolean"
                 },
                 "http": {
-                    "type": "object",
                     "properties": {
                         "hosts": {
-                            "type": "array",
                             "items": {
-                                "type": "object",
                                 "properties": {
-                                    "path": {
-                                        "type": "string",
-                                        "examples": [
-                                            "/"
-                                        ]
-                                    },
                                     "host": {
-                                        "type": "string",
-                                        "examples": [
-                                            "tuf.localhost"
-                                        ]
+                                        "type": "string"
+                                    },
+                                    "path": {
+                                        "type": "string"
                                     }
                                 },
-                                "examples": [{
-                                    "path": "/",
-                                    "host": "tuf.localhost"
-                                }]
+                                "type": "object"
                             },
-                            "examples": [
-                                [{
-                                    "path": "/",
-                                    "host": "tuf.localhost"
-                                }]
-                            ]
+                            "type": "array"
                         }
                     },
-                    "examples": [{
-                        "hosts": [{
-                            "path": "/",
-                            "host": "tuf.localhost"
-                        }]
-                    }]
-                }
-            },
-            "examples": [{
-                "name": "tuf-server",
-                "className": "nginx",
-                "annotations": {},
-                "http": {
-                    "hosts": [{
-                        "path": "/",
-                        "host": "tuf.localhost"
-                    }]
-                }
-            }]
-        },
-        "service": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "examples": [
-                        "tuf-server"
-                    ]
+                    "type": "object"
                 },
-                "port": {
-                    "type": "integer",
-                    "examples": [
-                        80
-                    ]
+                "name": {
+                    "type": "string"
                 }
             },
-            "examples": [{
-                "name": "tuf-server",
-                "port": 80
-            }]
+            "type": "object"
         },
         "namespace": {
-            "type": "object",
             "properties": {
                 "create": {
-                    "type": "boolean",
-                    "examples": [
-                        false
-                    ]
+                    "type": "boolean"
                 },
                 "name": {
-                    "type": "string",
-                    "examples": [
-                        "fulcio-system"
-                    ]
+                    "type": "string"
                 }
             },
-            "examples": [{
-                "create": false,
-                "name": "fulcio-system"
-            }]
-        }
-    },
-    "examples": [{
-        "forceNamespace": "",
-        "imagePullSecrets": [],
-        "serviceAccountName": "tuf",
-        "roleName": "tuf",
-        "roleBindingName": "tuf",
-        "fullnameOverride": "tuf",
-        "enabled": true,
-        "deployment": {
-            "name": "tuf",
-            "replicas": 1,
-            "registry": "ghcr.io",
-            "repository": "sigstore/scaffolding/server",
-            "version": "sha256:c77d098e0e62f791cc87b63ae43a5fea505225e0ec38686c4a392c0cad7238bf",
-            "imagePullPolicy": "IfNotPresent",
-            "port": 8080
+            "type": "object"
+        },
+        "roleBindingName": {
+            "type": "string"
+        },
+        "roleName": {
+            "type": "string"
         },
         "secrets": {
-            "rekor": {
-                "create": false,
-                "name": "rekor-public-key",
-                "key": "public",
-                "path": "rekor.pub"
+            "properties": {
+                "ctlog": {
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "key": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "fulcio": {
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "key": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "rekor": {
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "key": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "tsa": {
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "key": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
             },
-            "fulcio": {
-                "create": false,
-                "name": "fulcio-server-secret",
-                "key": "cert",
-                "path": "fulcio_v1.crt.pem"
-            },
-            "ctlog": {
-                "create": false,
-                "name": "ctlog-public-key",
-                "key": "key",
-                "path": "ctfe.pub"
-            },
-            "tsa": {
-                "create": false,
-                "name": "tsa-cert-chain",
-                "key": "key",
-                "path": "tsa.certchain.pem"
-            }
-        },
-        "ingress": {
-            "create": true,
-            "name": "tuf-server",
-            "className": "nginx",
-            "annotations": {},
-            "http": {
-                "hosts": [{
-                    "path": "/",
-                    "host": "tuf.localhost"
-                }]
-            }
+            "type": "object"
         },
         "service": {
-            "name": "tuf-server",
-            "port": 80
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
         },
-        "namespace": {
-            "create": false,
-            "name": "fulcio-system"
+        "serviceAccountName": {
+            "type": "string"
         }
-    }]
+    },
+    "type": "object"
 }

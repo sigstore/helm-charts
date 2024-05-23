@@ -15,6 +15,9 @@ deployment:
   version: sha256:496b443c82be2c4a14a6e3dfbfa9ccae5b6eaedd7a3aca58b84ddae9492d9906
   imagePullPolicy: IfNotPresent
   port: 8080
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 secrets:
   rekor:
