@@ -38,6 +38,18 @@ spec:
           securityContext:
 {{ toYaml .Values.createctconfig.initContainerSecurityContext | indent 12 }}
     {{- end }}
+    {{- if .Values.createctconfig.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.createctconfig.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- if .Values.createctconfig.tolerations }}
+      tolerations:
+{{ toYaml .Values.createctconfig.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.createctconfig.affinity }}
+      affinity:
+{{ toYaml .Values.createctconfig.affinity | indent 8 }}
+    {{- end }}
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}

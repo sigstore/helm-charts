@@ -16,6 +16,7 @@ Certificate Log
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| createctconfig.affinity | object | `{}` |  |
 | createctconfig.annotations | object | `{}` |  |
 | createctconfig.backoffLimit | int | `6` |  |
 | createctconfig.enabled | bool | `true` |  |
@@ -30,6 +31,7 @@ Certificate Log
 | createctconfig.initContainerImage.curl.version | string | `"sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"` | 8.5.0 |
 | createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | createctconfig.name | string | `"createctconfig"` |  |
+| createctconfig.nodeSelector | object | `{}` |  |
 | createctconfig.privateKeyPasswordSecretName | string | `""` |  |
 | createctconfig.privateSecret | string | `""` |  |
 | createctconfig.pubkeysecret | string | `"ctlog-public-key"` |  |
@@ -40,7 +42,9 @@ Certificate Log
 | createctconfig.serviceAccount.create | bool | `true` |  |
 | createctconfig.serviceAccount.mountToken | bool | `true` |  |
 | createctconfig.serviceAccount.name | string | `""` |  |
+| createctconfig.tolerations | list | `[]` |  |
 | createctconfig.ttlSecondsAfterFinished | int | `3600` |  |
+| createtree.affinity | object | `{}` |  |
 | createtree.annotations | object | `{}` |  |
 | createtree.displayName | string | `"ctlog-tree"` |  |
 | createtree.enabled | bool | `true` |  |
@@ -49,17 +53,20 @@ Certificate Log
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
 | createtree.image.version | string | `"sha256:eb1a94738f34964c7456d18d30b8a45a654af89bb5371f69b2403df373be0826"` |  |
 | createtree.name | string | `"createtree"` |  |
+| createtree.nodeSelector | object | `{}` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
 | createtree.securityContext.runAsUser | int | `65533` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
 | createtree.serviceAccount.create | bool | `true` |  |
 | createtree.serviceAccount.mountToken | bool | `true` |  |
 | createtree.serviceAccount.name | string | `""` |  |
+| createtree.tolerations | list | `[]` |  |
 | createtree.ttlSecondsAfterFinished | int | `3600` |  |
 | forceNamespace | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"ctlog-system"` |  |
+| server.affinity | object | `{}` |  |
 | server.config.key | string | `"treeID"` |  |
 | server.config.treeID | string | `""` |  |
 | server.extraArgs | list | `[]` |  |
@@ -88,6 +95,7 @@ Certificate Log
 | server.livenessProbe.httpGet.path | string | `"/healthz"` |  |
 | server.livenessProbe.httpGet.port | int | `6962` |  |
 | server.livenessProbe.initialDelaySeconds | int | `10` |  |
+| server.nodeSelector | object | `{}` |  |
 | server.podAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
 | server.podAnnotations."prometheus.io/port" | string | `"6963"` |  |
 | server.podAnnotations."prometheus.io/scrape" | string | `"true"` |  |
@@ -112,7 +120,7 @@ Certificate Log
 | server.serviceAccount.create | bool | `true` |  |
 | server.serviceAccount.mountToken | bool | `false` |  |
 | server.serviceAccount.name | string | `""` |  |
+| server.tolerations | list | `[]` |  |
 | trillian.logServer.name | string | `"trillian-logserver"` |  |
 | trillian.logServer.portRPC | int | `8091` |  |
 | trillian.namespace | string | `"trillian-system"` |  |
-
