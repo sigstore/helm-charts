@@ -1,9 +1,11 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
+        "affinity": {
+            "properties": {},
+            "type": "object"
+        },
         "namespace": {
-            "type": "object",
             "properties": {
                 "create": {
                     "type": "boolean"
@@ -11,18 +13,22 @@
                 "name": {
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
+        },
+        "nodeSelector": {
+            "properties": {},
+            "type": "object"
         },
         "prometheus": {
-            "type": "object",
             "properties": {
                 "port": {
                     "type": "integer"
                 }
-            }
+            },
+            "type": "object"
         },
         "serviceAccount": {
-            "type": "object",
             "properties": {
                 "create": {
                     "type": "boolean"
@@ -30,13 +36,12 @@
                 "name": {
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         "spec": {
-            "type": "object",
             "properties": {
                 "args": {
-                    "type": "object",
                     "properties": {
                         "frequency": {
                             "type": "integer"
@@ -59,7 +64,8 @@
                         "writeProber": {
                             "type": "boolean"
                         }
-                    }
+                    },
+                    "type": "object"
                 },
                 "image": {
                     "type": "string"
@@ -68,21 +74,19 @@
                     "type": "string"
                 },
                 "matchLabels": {
-                    "type": "object",
                     "properties": {
                         "app": {
                             "type": "string"
                         }
-                    }
+                    },
+                    "type": "object"
                 },
                 "replicaCount": {
                     "type": "integer"
                 },
                 "resources": {
-                    "type": "object",
                     "properties": {
                         "limits": {
-                            "type": "object",
                             "properties": {
                                 "cpu": {
                                     "type": "string"
@@ -90,10 +94,10 @@
                                 "memory": {
                                     "type": "string"
                                 }
-                            }
+                            },
+                            "type": "object"
                         },
                         "requests": {
-                            "type": "object",
                             "properties": {
                                 "cpu": {
                                     "type": "string"
@@ -101,11 +105,18 @@
                                 "memory": {
                                     "type": "string"
                                 }
-                            }
+                            },
+                            "type": "object"
                         }
-                    }
+                    },
+                    "type": "object"
                 }
-            }
+            },
+            "type": "object"
+        },
+        "tolerations": {
+            "type": "array"
         }
-    }
+    },
+    "type": "object"
 }
