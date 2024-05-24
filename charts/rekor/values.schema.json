@@ -1,3290 +1,949 @@
 {
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "http://example.com/example.json",
-    "title": "Root Schema",
-    "type": "object",
-    "default": {},
-    "required": [
-        "namespace",
-        "imagePullSecrets",
-        "initContainerImage",
-        "redis",
-        "server",
-        "createtree",
-        "trillian",
-        "forceNamespace"
-    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
-        "namespace": {
-            "title": "The namespace Schema",
-            "type": "object",
-            "default": {},
-            "required": [
-                "create",
-                "name"
-            ],
+        "backfillredis": {
             "properties": {
-                "create": {
-                    "title": "The create Schema",
-                    "type": "boolean",
-                    "default": false,
-                    "examples": [
-                        false
-                    ]
+                "affinity": {
+                    "properties": {},
+                    "type": "object"
                 },
-                "name": {
-                    "title": "The name Schema",
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                        "rekor-system"
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "create": false,
-                    "name": "rekor-system"
-                }
-            ]
-        },
-        "imagePullSecrets": {
-            "title": "The imagePullSecrets Schema",
-            "type": "array",
-            "default": [],
-            "items": {},
-            "examples": [
-                []
-            ]
-        },
-        "initContainerImage": {
-            "title": "The initContainerImage Schema",
-            "type": "object",
-            "default": {},
-            "required": [
-                "curl"
-            ],
-            "properties": {
-                "curl": {
-                    "title": "The curl Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "registry",
-                        "repository",
-                        "version",
-                        "imagePullPolicy"
-                    ],
-                    "properties": {
-                        "registry": {
-                            "title": "The registry Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "docker.io"
-                            ]
-                        },
-                        "repository": {
-                            "title": "The repository Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "curlimages/curl"
-                            ]
-                        },
-                        "version": {
-                            "title": "The version Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498"
-                            ]
-                        },
-                        "imagePullPolicy": {
-                            "title": "The imagePullPolicy Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "IfNotPresent"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "registry": "docker.io",
-                            "repository": "curlimages/curl",
-                            "version": "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498",
-                            "imagePullPolicy": "IfNotPresent"
-                        }
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "curl": {
-                        "registry": "docker.io",
-                        "repository": "curlimages/curl",
-                        "version": "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498",
-                        "imagePullPolicy": "IfNotPresent"
-                    }
-                }
-            ]
-        },
-        "redis": {
-            "title": "The redis Schema",
-            "type": "object",
-            "default": {},
-            "required": [
-                "enabled",
-                "replicaCount",
-                "hostname",
-                "port",
-                "args",
-                "name",
-                "image",
-                "resources",
-                "readinessProbe",
-                "service",
-                "serviceAccount"
-            ],
-            "properties": {
                 "enabled": {
-                    "title": "The enabled Schema",
-                    "type": "boolean",
-                    "default": false,
-                    "examples": [
-                        true
-                    ]
+                    "type": "boolean"
                 },
-                "replicaCount": {
-                    "title": "The replicaCount Schema",
-                    "type": "integer",
-                    "default": 0,
-                    "examples": [
-                        1
-                    ]
-                },
-                "hostname": {
-                    "title": "The hostname Schema",
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                        ""
-                    ]
-                },
-                "port": {
-                    "title": "The port Schema",
-                    "type": "integer",
-                    "default": 0,
-                    "examples": [
-                        6379
-                    ]
-                },
-                "args": {
-                    "title": "The args Schema",
-                    "type": "array",
-                    "default": [],
-                    "items": {
-                        "title": "A Schema",
-                        "type": "string",
-                        "examples": [
-                            "--bind",
-                            "0.0.0.0",
-                            "--appendonly",
-                            "yes"
-                        ]
-                    },
-                    "examples": [
-                        [
-                            "--bind",
-                            "0.0.0.0",
-                            "--appendonly",
-                            "yes"
-                        ]
-                    ]
-                },
-                "name": {
-                    "title": "The name Schema",
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                        "redis"
-                    ]
+                "endIndex": {
+                    "type": "integer"
                 },
                 "image": {
-                    "title": "The image Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy",
-                        "version"
-                    ],
                     "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
                         "registry": {
-                            "title": "The registry Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "docker.io"
-                            ]
+                            "type": "string"
                         },
                         "repository": {
-                            "title": "The repository Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "redis"
-                            ]
-                        },
-                        "pullPolicy": {
-                            "title": "The pullPolicy Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "IfNotPresent"
-                            ]
+                            "type": "string"
                         },
                         "version": {
-                            "title": "The version Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39"
-                            ]
+                            "type": "string"
                         }
                     },
-                    "examples": [
-                        {
-                            "registry": "docker.io",
-                            "repository": "redis",
-                            "pullPolicy": "IfNotPresent",
-                            "version": "sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39"
-                        }
-                    ]
+                    "type": "object"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nodeSelector": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "rekorAddress": {
+                    "type": "string"
                 },
                 "resources": {
-                    "title": "The resources Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [],
                     "properties": {},
-                    "examples": [
-                        {}
-                    ]
-                },
-                "readinessProbe": {
-                    "title": "The readinessProbe Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "initialDelaySeconds",
-                        "periodSeconds",
-                        "timeoutSeconds",
-                        "failureThreshold",
-                        "successThreshold",
-                        "exec"
-                    ],
-                    "properties": {
-                        "initialDelaySeconds": {
-                            "title": "The initialDelaySeconds Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                5
-                            ]
-                        },
-                        "periodSeconds": {
-                            "title": "The periodSeconds Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                10
-                            ]
-                        },
-                        "timeoutSeconds": {
-                            "title": "The timeoutSeconds Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "failureThreshold": {
-                            "title": "The failureThreshold Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                3
-                            ]
-                        },
-                        "successThreshold": {
-                            "title": "The successThreshold Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "exec": {
-                            "title": "The exec Schema",
-                            "type": "object",
-                            "default": {},
-                            "required": [
-                                "command"
-                            ],
-                            "properties": {
-                                "command": {
-                                    "title": "The command Schema",
-                                    "type": "array",
-                                    "default": [],
-                                    "items": {
-                                        "title": "A Schema",
-                                        "type": "string",
-                                        "examples": [
-                                            "/bin/sh",
-                                            "-i",
-                                            "-c",
-                                            "test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""
-                                        ]
-                                    },
-                                    "examples": [
-                                        [
-                                            "/bin/sh",
-                                            "-i",
-                                            "-c",
-                                            "test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""
-                                        ]
-                                    ]
-                                }
-                            },
-                            "examples": [
-                                {
-                                    "command": [
-                                        "/bin/sh",
-                                        "-i",
-                                        "-c",
-                                        "test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""
-                                    ]
-                                }
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "initialDelaySeconds": 5,
-                            "periodSeconds": 10,
-                            "timeoutSeconds": 1,
-                            "failureThreshold": 3,
-                            "successThreshold": 1,
-                            "exec": {
-                                "command": [
-                                    "/bin/sh",
-                                    "-i",
-                                    "-c",
-                                    "test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""
-                                ]
-                            }
-                        }
-                    ]
-                },
-                "service": {
-                    "title": "The service Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "type",
-                        "ports"
-                    ],
-                    "properties": {
-                        "type": {
-                            "title": "The type Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "ClusterIP"
-                            ]
-                        },
-                        "ports": {
-                            "title": "The ports Schema",
-                            "type": "array",
-                            "default": [],
-                            "items": {
-                                "title": "A Schema",
-                                "type": "object",
-                                "default": {},
-                                "required": [
-                                    "name",
-                                    "port",
-                                    "protocol",
-                                    "targetPort"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "title": "The name Schema",
-                                        "type": "string",
-                                        "default": "",
-                                        "examples": [
-                                            "6379-tcp"
-                                        ]
-                                    },
-                                    "port": {
-                                        "title": "The port Schema",
-                                        "type": "integer",
-                                        "default": 0,
-                                        "examples": [
-                                            6379
-                                        ]
-                                    },
-                                    "protocol": {
-                                        "title": "The protocol Schema",
-                                        "type": "string",
-                                        "default": "",
-                                        "examples": [
-                                            "TCP"
-                                        ]
-                                    },
-                                    "targetPort": {
-                                        "title": "The targetPort Schema",
-                                        "type": "integer",
-                                        "default": 0,
-                                        "examples": [
-                                            6379
-                                        ]
-                                    }
-                                },
-                                "examples": [
-                                    {
-                                        "name": "6379-tcp",
-                                        "port": 6379,
-                                        "protocol": "TCP",
-                                        "targetPort": 6379
-                                    }
-                                ]
-                            },
-                            "examples": [
-                                [
-                                    {
-                                        "name": "6379-tcp",
-                                        "port": 6379,
-                                        "protocol": "TCP",
-                                        "targetPort": 6379
-                                    }
-                                ]
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "type": "ClusterIP",
-                            "ports": [
-                                {
-                                    "name": "6379-tcp",
-                                    "port": 6379,
-                                    "protocol": "TCP",
-                                    "targetPort": 6379
-                                }
-                            ]
-                        }
-                    ]
-                },
-                "serviceAccount": {
-                    "title": "The serviceAccount Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "create",
-                        "name",
-                        "annotations"
-                    ],
-                    "properties": {
-                        "create": {
-                            "title": "The create Schema",
-                            "type": "boolean",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "name": {
-                            "title": "The name Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                ""
-                            ]
-                        },
-                        "annotations": {
-                            "title": "The annotations Schema",
-                            "type": "object",
-                            "default": {},
-                            "required": [],
-                            "properties": {},
-                            "examples": [
-                                {}
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "create": true,
-                            "name": "",
-                            "annotations": {}
-                        }
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "enabled": true,
-                    "replicaCount": 1,
-                    "hostname": "",
-                    "port": 6379,
-                    "args": [
-                        "--bind",
-                        "0.0.0.0",
-                        "--appendonly",
-                        "yes"
-                    ],
-                    "name": "redis",
-                    "image": {
-                        "registry": "docker.io",
-                        "repository": "redis",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39"
-                    },
-                    "resources": {},
-                    "readinessProbe": {
-                        "initialDelaySeconds": 5,
-                        "periodSeconds": 10,
-                        "timeoutSeconds": 1,
-                        "failureThreshold": 3,
-                        "successThreshold": 1,
-                        "exec": {
-                            "command": [
-                                "/bin/sh",
-                                "-i",
-                                "-c",
-                                "test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""
-                            ]
-                        }
-                    },
-                    "service": {
-                        "type": "ClusterIP",
-                        "ports": [
-                            {
-                                "name": "6379-tcp",
-                                "port": 6379,
-                                "protocol": "TCP",
-                                "targetPort": 6379
-                            }
-                        ]
-                    },
-                    "serviceAccount": {
-                        "create": true,
-                        "name": "",
-                        "annotations": {}
-                    }
-                }
-            ]
-        },
-        "mysql": {
-            "type": "object",
-            "default": {},
-            "title": "The mysql Schema",
-            "required": [
-                "gcp",
-                "enabled",
-                "replicaCount",
-                "name",
-                "hostname",
-                "port",
-                "strategy",
-                "image"
-            ],
-            "properties": {
-                "gcp": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The gcp Schema",
-                    "required": [
-                        "enabled",
-                        "instance",
-                        "scaffoldSQLProxy",
-                        "cloudsql"
-                    ],
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean",
-                            "default": false,
-                            "title": "The enabled Schema",
-                            "examples": [
-                                false
-                            ]
-                        },
-                        "instance": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The instance Schema",
-                            "examples": [
-                                ""
-                            ]
-                        },
-                        "scaffoldSQLProxy": {
-                            "type": "object",
-                            "default": {},
-                            "title": "The scaffoldSQLProxy Schema",
-                            "required": [
-                                "registry",
-                                "repository",
-                                "version",
-                                "resources",
-                                "securityContext"
-                            ],
-                            "properties": {
-                                "registry": {
-                                    "type": "string",
-                                    "default": "",
-                                    "title": "The registry Schema",
-                                    "examples": [
-                                        "ghcr.io"
-                                    ]
-                                },
-                                "repository": {
-                                    "type": "string",
-                                    "default": "",
-                                    "title": "The repository Schema",
-                                    "examples": [
-                                        "sigstore/scaffolding/cloudsqlproxy"
-                                    ]
-                                },
-                                "version": {
-                                    "type": "string",
-                                    "default": "",
-                                    "title": "The version Schema",
-                                    "examples": [
-                                        "sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2"
-                                    ]
-                                },
-                                "resources": {
-                                    "type": "object",
-                                    "default": {},
-                                    "title": "The resources Schema",
-                                    "required": [
-                                        "requests"
-                                    ],
-                                    "properties": {
-                                        "requests": {
-                                            "type": "object",
-                                            "default": {},
-                                            "title": "The requests Schema",
-                                            "required": [
-                                                "memory",
-                                                "cpu"
-                                            ],
-                                            "properties": {
-                                                "memory": {
-                                                    "type": "string",
-                                                    "default": "",
-                                                    "title": "The memory Schema",
-                                                    "examples": [
-                                                        "2Gi"
-                                                    ]
-                                                },
-                                                "cpu": {
-                                                    "type": "string",
-                                                    "default": "",
-                                                    "title": "The cpu Schema",
-                                                    "examples": [
-                                                        "1"
-                                                    ]
-                                                }
-                                            },
-                                            "examples": [{
-                                                "memory": "2Gi",
-                                                "cpu": "1"
-                                            }]
-                                        }
-                                    },
-                                    "examples": [{
-                                        "requests": {
-                                            "memory": "2Gi",
-                                            "cpu": "1"
-                                        }
-                                    }]
-                                },
-                                "securityContext": {
-                                    "type": "object",
-                                    "default": {},
-                                    "title": "The securityContext Schema",
-                                    "required": [
-                                        "allowPrivilegeEscalation",
-                                        "readOnlyRootFilesystem",
-                                        "runAsNonRoot",
-                                        "capabilities"
-                                    ],
-                                    "properties": {
-                                        "allowPrivilegeEscalation": {
-                                            "type": "boolean",
-                                            "default": false,
-                                            "title": "The allowPrivilegeEscalation Schema",
-                                            "examples": [
-                                                false
-                                            ]
-                                        },
-                                        "readOnlyRootFilesystem": {
-                                            "type": "boolean",
-                                            "default": false,
-                                            "title": "The readOnlyRootFilesystem Schema",
-                                            "examples": [
-                                                true
-                                            ]
-                                        },
-                                        "runAsNonRoot": {
-                                            "type": "boolean",
-                                            "default": false,
-                                            "title": "The runAsNonRoot Schema",
-                                            "examples": [
-                                                true
-                                            ]
-                                        },
-                                        "capabilities": {
-                                            "type": "object",
-                                            "default": {},
-                                            "title": "The capabilities Schema",
-                                            "required": [
-                                                "drop"
-                                            ],
-                                            "properties": {
-                                                "drop": {
-                                                    "type": "array",
-                                                    "default": [],
-                                                    "title": "The drop Schema",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "default": "",
-                                                        "title": "A Schema",
-                                                        "examples": [
-                                                            "ALL"
-                                                        ]
-                                                    },
-                                                    "examples": [
-                                                        [
-                                                            "ALL"]
-                                                    ]
-                                                }
-                                            },
-                                            "examples": [{
-                                                "drop": [
-                                                    "ALL"
-                                                ]
-                                            }]
-                                        }
-                                    },
-                                    "examples": [{
-                                        "allowPrivilegeEscalation": false,
-                                        "readOnlyRootFilesystem": true,
-                                        "runAsNonRoot": true,
-                                        "capabilities": {
-                                            "drop": [
-                                                "ALL"
-                                            ]
-                                        }
-                                    }]
-                                }
-                            },
-                            "examples": [{
-                                "registry": "ghcr.io",
-                                "repository": "sigstore/scaffolding/cloudsqlproxy",
-                                "version": "sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2",
-                                "resources": {
-                                    "requests": {
-                                        "memory": "2Gi",
-                                        "cpu": "1"
-                                    }
-                                },
-                                "securityContext": {
-                                    "allowPrivilegeEscalation": false,
-                                    "readOnlyRootFilesystem": true,
-                                    "runAsNonRoot": true,
-                                    "capabilities": {
-                                        "drop": [
-                                            "ALL"
-                                        ]
-                                    }
-                                }
-                            }]
-                        },
-                        "cloudsql": {
-                            "type": "object",
-                            "default": {},
-                            "title": "The cloudsql Schema",
-                            "required": [
-                                "registry",
-                                "repository",
-                                "version",
-                                "resources",
-                                "securityContext",
-                                "unixDomainSocket"
-                            ],
-                            "properties": {
-                                "registry": {
-                                    "type": "string",
-                                    "default": "",
-                                    "title": "The registry Schema",
-                                    "examples": [
-                                        "gcr.io"
-                                    ]
-                                },
-                                "repository": {
-                                    "type": "string",
-                                    "default": "",
-                                    "title": "The repository Schema",
-                                    "examples": [
-                                        "cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine"
-                                    ]
-                                },
-                                "version": {
-                                    "type": "string",
-                                    "default": "",
-                                    "title": "The version Schema",
-                                    "examples": [
-                                        "sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9"
-                                    ]
-                                },
-                                "resources": {
-                                    "type": "object",
-                                    "default": {},
-                                    "title": "The resources Schema",
-                                    "required": [
-                                        "requests"
-                                    ],
-                                    "properties": {
-                                        "requests": {
-                                            "type": "object",
-                                            "default": {},
-                                            "title": "The requests Schema",
-                                            "required": [
-                                                "memory",
-                                                "cpu"
-                                            ],
-                                            "properties": {
-                                                "memory": {
-                                                    "type": "string",
-                                                    "default": "",
-                                                    "title": "The memory Schema",
-                                                    "examples": [
-                                                        "2Gi"
-                                                    ]
-                                                },
-                                                "cpu": {
-                                                    "type": "string",
-                                                    "default": "",
-                                                    "title": "The cpu Schema",
-                                                    "examples": [
-                                                        "1"
-                                                    ]
-                                                }
-                                            },
-                                            "examples": [{
-                                                "memory": "2Gi",
-                                                "cpu": "1"
-                                            }]
-                                        }
-                                    },
-                                    "examples": [{
-                                        "requests": {
-                                            "memory": "2Gi",
-                                            "cpu": "1"
-                                        }
-                                    }]
-                                },
-                                "securityContext": {
-                                    "type": "object",
-                                    "default": {},
-                                    "title": "The securityContext Schema",
-                                    "required": [
-                                        "allowPrivilegeEscalation",
-                                        "readOnlyRootFilesystem",
-                                        "runAsNonRoot",
-                                        "capabilities"
-                                    ],
-                                    "properties": {
-                                        "allowPrivilegeEscalation": {
-                                            "type": "boolean",
-                                            "default": false,
-                                            "title": "The allowPrivilegeEscalation Schema",
-                                            "examples": [
-                                                false
-                                            ]
-                                        },
-                                        "readOnlyRootFilesystem": {
-                                            "type": "boolean",
-                                            "default": false,
-                                            "title": "The readOnlyRootFilesystem Schema",
-                                            "examples": [
-                                                true
-                                            ]
-                                        },
-                                        "runAsNonRoot": {
-                                            "type": "boolean",
-                                            "default": false,
-                                            "title": "The runAsNonRoot Schema",
-                                            "examples": [
-                                                true
-                                            ]
-                                        },
-                                        "capabilities": {
-                                            "type": "object",
-                                            "default": {},
-                                            "title": "The capabilities Schema",
-                                            "required": [
-                                                "drop"
-                                            ],
-                                            "properties": {
-                                                "drop": {
-                                                    "type": "array",
-                                                    "default": [],
-                                                    "title": "The drop Schema",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "default": "",
-                                                        "title": "A Schema",
-                                                        "examples": [
-                                                            "ALL"
-                                                        ]
-                                                    },
-                                                    "examples": [
-                                                        [
-                                                            "ALL"]
-                                                    ]
-                                                }
-                                            },
-                                            "examples": [{
-                                                "drop": [
-                                                    "ALL"
-                                                ]
-                                            }]
-                                        }
-                                    },
-                                    "examples": [{
-                                        "allowPrivilegeEscalation": false,
-                                        "readOnlyRootFilesystem": true,
-                                        "runAsNonRoot": true,
-                                        "capabilities": {
-                                            "drop": [
-                                                "ALL"
-                                            ]
-                                        }
-                                    }]
-                                },
-                                "unixDomainSocket": {
-                                    "type": "object",
-                                    "default": {},
-                                    "title": "The unixDomainSocket Schema",
-                                    "required": [
-                                        "enabled",
-                                        "path"
-                                    ],
-                                    "properties": {
-                                        "enabled": {
-                                            "type": "boolean",
-                                            "default": false,
-                                            "title": "The enabled Schema",
-                                            "examples": [
-                                                false
-                                            ]
-                                        },
-                                        "path": {
-                                            "type": "string",
-                                            "default": "",
-                                            "title": "The path Schema",
-                                            "examples": [
-                                                "/cloudsql"
-                                            ]
-                                        }
-                                    },
-                                    "examples": [{
-                                        "enabled": false,
-                                        "path": "/cloudsql"
-                                    }]
-                                }
-                            },
-                            "examples": [{
-                                "registry": "gcr.io",
-                                "repository": "cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine",
-                                "version": "sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9",
-                                "resources": {
-                                    "requests": {
-                                        "memory": "2Gi",
-                                        "cpu": "1"
-                                    }
-                                },
-                                "securityContext": {
-                                    "allowPrivilegeEscalation": false,
-                                    "readOnlyRootFilesystem": true,
-                                    "runAsNonRoot": true,
-                                    "capabilities": {
-                                        "drop": [
-                                            "ALL"
-                                        ]
-                                    }
-                                },
-                                "unixDomainSocket": {
-                                    "enabled": false,
-                                    "path": "/cloudsql"
-                                }
-                            }]
-                        }
-                    },
-                    "examples": [{
-                        "enabled": false,
-                        "instance": "",
-                        "scaffoldSQLProxy": {
-                            "registry": "ghcr.io",
-                            "repository": "sigstore/scaffolding/cloudsqlproxy",
-                            "version": "sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2",
-                            "resources": {
-                                "requests": {
-                                    "memory": "2Gi",
-                                    "cpu": "1"
-                                }
-                            },
-                            "securityContext": {
-                                "allowPrivilegeEscalation": false,
-                                "readOnlyRootFilesystem": true,
-                                "runAsNonRoot": true,
-                                "capabilities": {
-                                    "drop": [
-                                        "ALL"
-                                    ]
-                                }
-                            }
-                        },
-                        "cloudsql": {
-                            "registry": "gcr.io",
-                            "repository": "cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine",
-                            "version": "sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9",
-                            "resources": {
-                                "requests": {
-                                    "memory": "2Gi",
-                                    "cpu": "1"
-                                }
-                            },
-                            "securityContext": {
-                                "allowPrivilegeEscalation": false,
-                                "readOnlyRootFilesystem": true,
-                                "runAsNonRoot": true,
-                                "capabilities": {
-                                    "drop": [
-                                        "ALL"
-                                    ]
-                                }
-                            },
-                            "unixDomainSocket": {
-                                "enabled": false,
-                                "path": "/cloudsql"
-                            }
-                        }
-                    }]
-                },
-                "enabled": {
-                    "type": "boolean",
-                    "default": false,
-                    "title": "The enabled Schema",
-                    "examples": [
-                        false
-                    ]
-                },
-                "replicaCount": {
-                    "type": "integer",
-                    "default": 0,
-                    "title": "The replicaCount Schema",
-                    "examples": [
-                        1
-                    ]
-                },
-                "name": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The name Schema",
-                    "examples": [
-                        "mysql"
-                    ]
-                },
-                "hostname": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The hostname Schema",
-                    "examples": [
-                        ""
-                    ]
-                },
-                "port": {
-                    "type": "integer",
-                    "default": 0,
-                    "title": "The port Schema",
-                    "examples": [
-                        3306
-                    ]
-                },
-                "strategy": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The strategy Schema",
-                    "required": [
-                        "type"
-                    ],
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The type Schema",
-                            "examples": [
-                                "Recreate"
-                            ]
-                        }
-                    },
-                    "examples": [{
-                        "type": "Recreate"
-                    }]
-                },
-                "image": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The image Schema",
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy"
-                    ],
-                    "properties": {
-                        "registry": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The registry Schema",
-                            "examples": [
-                                "gcr.io"
-                            ]
-                        },
-                        "repository": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The repository Schema",
-                            "examples": [
-                                "trillian-opensource-ci/db_server"
-                            ]
-                        },
-                        "pullPolicy": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The pullPolicy Schema",
-                            "examples": [
-                                "IfNotPresent"
-                            ]
-                        }
-                    },
-                    "examples": [{
-                        "registry": "gcr.io",
-                        "repository": "trillian-opensource-ci/db_server",
-                        "pullPolicy": "IfNotPresent"
-                    }]
-                }
-            },
-            "examples": [{
-                "gcp": {
-                    "enabled": false,
-                    "instance": "",
-                    "scaffoldSQLProxy": {
-                        "registry": "ghcr.io",
-                        "repository": "sigstore/scaffolding/cloudsqlproxy",
-                        "version": "sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2",
-                        "resources": {
-                            "requests": {
-                                "memory": "2Gi",
-                                "cpu": "1"
-                            }
-                        },
-                        "securityContext": {
-                            "allowPrivilegeEscalation": false,
-                            "readOnlyRootFilesystem": true,
-                            "runAsNonRoot": true,
-                            "capabilities": {
-                                "drop": [
-                                    "ALL"
-                                ]
-                            }
-                        }
-                    },
-                    "cloudsql": {
-                        "registry": "gcr.io",
-                        "repository": "cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine",
-                        "version": "sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9",
-                        "resources": {
-                            "requests": {
-                                "memory": "2Gi",
-                                "cpu": "1"
-                            }
-                        },
-                        "securityContext": {
-                            "allowPrivilegeEscalation": false,
-                            "readOnlyRootFilesystem": true,
-                            "runAsNonRoot": true,
-                            "capabilities": {
-                                "drop": [
-                                    "ALL"
-                                ]
-                            }
-                        },
-                        "unixDomainSocket": {
-                            "enabled": false,
-                            "path": "/cloudsql"
-                        }
-                    }
-                },
-                "enabled": false,
-                "replicaCount": 1,
-                "name": "mysql",
-                "hostname": "",
-                "port": 3306,
-                "strategy": {
-                    "type": "Recreate"
-                },
-                "image": {
-                    "registry": "gcr.io",
-                    "repository": "trillian-opensource-ci/db_server",
-                    "pullPolicy": "IfNotPresent"
-                }
-            }]
-        },
-        "server": {
-            "title": "The server Schema",
-            "type": "object",
-            "default": {},
-            "required": [
-                "enabled",
-                "replicaCount",
-                "name",
-                "port",
-                "image",
-                "logging",
-                "ingress",
-                "ingresses",
-                "service",
-                "signer",
-                "readinessProbe",
-                "sharding",
-                "livenessProbe",
-                "securityContext",
-                "config",
-                "retrieve_api",
-                "attestation_storage",
-                "podAnnotations",
-                "resources",
-                "extraArgs",
-                "serviceAccount"
-            ],
-            "properties": {
-                "enabled": {
-                    "title": "The enabled Schema",
-                    "type": "boolean",
-                    "default": false,
-                    "examples": [
-                        true
-                    ]
-                },
-                "replicaCount": {
-                    "title": "The replicaCount Schema",
-                    "type": "integer",
-                    "default": 0,
-                    "examples": [
-                        1
-                    ]
-                },
-                "name": {
-                    "title": "The name Schema",
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                        "server"
-                    ]
-                },
-                "port": {
-                    "title": "The port Schema",
-                    "type": "integer",
-                    "default": 0,
-                    "examples": [
-                        3000
-                    ]
-                },
-                "image": {
-                    "title": "The image Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy",
-                        "version"
-                    ],
-                    "properties": {
-                        "registry": {
-                            "title": "The registry Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "gcr.io"
-                            ]
-                        },
-                        "repository": {
-                            "title": "The repository Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "projectsigstore/rekor-server"
-                            ]
-                        },
-                        "pullPolicy": {
-                            "title": "The pullPolicy Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "IfNotPresent"
-                            ]
-                        },
-                        "version": {
-                            "title": "The version Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "sha256:54bbbdac44f3ca5c5ba9c3667c33f1ba67dc56b82220753ec4b3450ebc5a76bc"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "registry": "gcr.io",
-                            "repository": "projectsigstore/rekor-server",
-                            "pullPolicy": "IfNotPresent",
-                            "version": "sha256:54bbbdac44f3ca5c5ba9c3667c33f1ba67dc56b82220753ec4b3450ebc5a76bc"
-                        }
-                    ]
-                },
-                "logging": {
-                    "title": "The logging Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "production"
-                    ],
-                    "properties": {
-                        "production": {
-                            "title": "The production Schema",
-                            "type": "boolean",
-                            "default": false,
-                            "examples": [
-                                false
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "production": false
-                        }
-                    ]
-                },
-                "ingress": {
-                    "title": "The ingress Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "enabled",
-                        "className",
-                        "hosts",
-                        "annotations",
-                        "tls"
-                    ],
-                    "properties": {
-                        "enabled": {
-                            "title": "The enabled Schema",
-                            "type": "boolean",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "className": {
-                            "title": "The className Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "nginx"
-                            ]
-                        },
-                        "hosts": {
-                            "title": "The hosts Schema",
-                            "type": "array",
-                            "default": [],
-                            "items": {
-                                "title": "A Schema",
-                                "type": "object",
-                                "default": {},
-                                "required": [
-                                    "path"
-                                ],
-                                "properties": {
-                                    "path": {
-                                        "title": "The path Schema",
-                                        "type": "string",
-                                        "default": "",
-                                        "examples": [
-                                            "/"
-                                        ]
-                                    }
-                                },
-                                "examples": [
-                                    {
-                                        "path": "/"
-                                    }
-                                ]
-                            },
-                            "examples": [
-                                [
-                                    {
-                                        "path": "/"
-                                    }
-                                ]
-                            ]
-                        },
-                        "annotations": {
-                            "title": "The annotations Schema",
-                            "type": "object",
-                            "default": {},
-                            "required": [],
-                            "properties": {},
-                            "examples": [
-                                {}
-                            ]
-                        },
-                        "tls": {
-                            "title": "The tls Schema",
-                            "type": "array",
-                            "default": [],
-                            "items": {},
-                            "examples": [
-                                []
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "enabled": true,
-                            "className": "nginx",
-                            "hosts": [
-                                {
-                                    "path": "/"
-                                }
-                            ],
-                            "annotations": {},
-                            "tls": []
-                        }
-                    ]
-                },
-                "ingresses": {
-                    "title": "The ingresses Schema",
-                    "type": "array",
-                    "default": [],
-                    "items": {
-                        "title": "An ingress Schema",
-                        "default": {},
-                        "required": [
-                            "enabled",
-                            "name",
-                            "className",
-                            "hosts",
-                            "tls"
-                        ],
-                        "properties": {
-                            "enabled": {
-                                "title": "The enabled Schema",
-                                "type": "boolean",
-                                "default": false,
-                                "examples": [
-                                    true
-                                ]
-                            },
-                            "name": {
-                                "title": "The name for the ingress (and dependent objects)",
-                                "type": "string",
-                                "default": "",
-                                "examples": [
-                                    "gce-ingress"
-                                ]
-                            },
-                            "className": {
-                                "title": "The className Schema",
-                                "type": "string",
-                                "default": "",
-                                "examples": [
-                                    "gce"
-                                ]
-                            },
-                            "hosts": {
-                                "title": "The hosts Schema",
-                                "type": "array",
-                                "default": [],
-                                "items": {
-                                    "title": "A Schema",
-                                    "type": "object",
-                                    "default": {},
-                                    "required": [
-                                        "path"
-                                    ],
-                                    "properties": {
-                                        "path": {
-                                            "title": "The path Schema",
-                                            "type": "string",
-                                            "default": "",
-                                            "examples": [
-                                                "/"
-                                            ]
-                                        }
-                                    },
-                                    "examples": [
-                                        {
-                                            "path": "/"
-                                        }
-                                    ]
-                                },
-                                "examples": [
-                                    [
-                                        {
-                                            "path": "/"
-                                        }
-                                    ]
-                                ]
-                            },
-                            "annotations": {
-                                "title": "The annotations Schema",
-                                "type": "object",
-                                "default": {},
-                                "required": [],
-                                "properties": {},
-                                "examples": [
-                                    {}
-                                ]
-                            },
-                            "tls": {
-                                "title": "The tls Schema",
-                                "type": "array",
-                                "default": [],
-                                "items": {},
-                                "examples": [
-                                    []
-                                ]
-                            },
-                            "staticGlobalIP": {
-                                "title": "The name of a GCP static IP address object to be assigned to the ingress-created load balancer",
-                                "type": "string",
-                                "default": "",
-                                "examples": [
-                                    "lb-ext-ip"
-                                ]
-                            },
-                            "frontendConfigSpec": {
-                                "title": "The frontendConfigSpec Schema - refers to values for networking.gke.io/v1beta1 FrontendConfig",
-                                "type": "object",
-                                "default": {},
-                                "required": [],
-                                "examples": [
-                                    {}
-                                ]
-                            },
-                            "backendConfigSpec": {
-                                "title": "The backendConfigSpec Schema - refers to values for cloud.google.com/v1 BackendConfig",
-                                "type": "object",
-                                "default": {},
-                                "required": [],
-                                "examples": [
-                                    {}
-                                ]
-                            }
-                        }
-                    },
-                    "examples": [
-                        {
-                            "enabled": true,
-                            "className": "gce",
-                            "hosts": [
-                                {
-                                    "path": "/"
-                                }
-                            ],
-                            "annotations": {},
-                            "tls": []
-                        }
-                    ]
-                },
-                "service": {
-                    "title": "The service Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "type",
-                        "ports"
-                    ],
-                    "properties": {
-                        "type": {
-                            "title": "The type Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "ClusterIP"
-                            ]
-                        },
-                        "ports": {
-                            "title": "The ports Schema",
-                            "type": "array",
-                            "default": [],
-                            "items": {
-                                "title": "A Schema",
-                                "type": "object",
-                                "required": [
-                                    "name",
-                                    "port",
-                                    "protocol",
-                                    "targetPort"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "title": "The name Schema",
-                                        "type": "string",
-                                        "examples": [
-                                            "3000-tcp",
-                                            "2112-tcp"
-                                        ]
-                                    },
-                                    "port": {
-                                        "title": "The port Schema",
-                                        "type": "integer",
-                                        "examples": [
-                                            80,
-                                            2112
-                                        ]
-                                    },
-                                    "protocol": {
-                                        "title": "The protocol Schema",
-                                        "type": "string",
-                                        "examples": [
-                                            "TCP"
-                                        ]
-                                    },
-                                    "targetPort": {
-                                        "title": "The targetPort Schema",
-                                        "type": "integer",
-                                        "examples": [
-                                            3000,
-                                            2112
-                                        ]
-                                    }
-                                },
-                                "examples": [
-                                    {
-                                        "name": "3000-tcp",
-                                        "port": 80,
-                                        "protocol": "TCP",
-                                        "targetPort": 3000
-                                    },
-                                    {
-                                        "name": "2112-tcp",
-                                        "port": 2112,
-                                        "protocol": "TCP",
-                                        "targetPort": 2112
-                                    }
-                                ]
-                            },
-                            "examples": [
-                                [
-                                    {
-                                        "name": "3000-tcp",
-                                        "port": 80,
-                                        "protocol": "TCP",
-                                        "targetPort": 3000
-                                    },
-                                    {
-                                        "name": "2112-tcp",
-                                        "port": 2112,
-                                        "protocol": "TCP",
-                                        "targetPort": 2112
-                                    }
-                                ]
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "type": "ClusterIP",
-                            "ports": [
-                                {
-                                    "name": "3000-tcp",
-                                    "port": 80,
-                                    "protocol": "TCP",
-                                    "targetPort": 3000
-                                },
-                                {
-                                    "name": "2112-tcp",
-                                    "port": 2112,
-                                    "protocol": "TCP",
-                                    "targetPort": 2112
-                                }
-                            ]
-                        }
-                    ]
-                },
-                "signer": {
-                    "title": "The signer Schema",
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                        "memory",
-                        "/key/private"
-                    ]
-                },
-                "readinessProbe": {
-                    "title": "The readinessProbe Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "initialDelaySeconds",
-                        "periodSeconds",
-                        "timeoutSeconds",
-                        "failureThreshold",
-                        "successThreshold",
-                        "httpGet"
-                    ],
-                    "properties": {
-                        "initialDelaySeconds": {
-                            "title": "The initialDelaySeconds Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                10
-                            ]
-                        },
-                        "periodSeconds": {
-                            "title": "The periodSeconds Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                10
-                            ]
-                        },
-                        "timeoutSeconds": {
-                            "title": "The timeoutSeconds Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "failureThreshold": {
-                            "title": "The failureThreshold Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                3
-                            ]
-                        },
-                        "successThreshold": {
-                            "title": "The successThreshold Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "httpGet": {
-                            "title": "The httpGet Schema",
-                            "type": "object",
-                            "default": {},
-                            "required": [
-                                "port",
-                                "path"
-                            ],
-                            "properties": {
-                                "port": {
-                                    "title": "The port Schema",
-                                    "type": "integer",
-                                    "default": 0,
-                                    "examples": [
-                                        3000
-                                    ]
-                                },
-                                "path": {
-                                    "title": "The path Schema",
-                                    "type": "string",
-                                    "default": "",
-                                    "examples": [
-                                        "/ping"
-                                    ]
-                                }
-                            },
-                            "examples": [
-                                {
-                                    "port": 3000,
-                                    "path": "/ping"
-                                }
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "initialDelaySeconds": 10,
-                            "periodSeconds": 10,
-                            "timeoutSeconds": 1,
-                            "failureThreshold": 3,
-                            "successThreshold": 1,
-                            "httpGet": {
-                                "port": 3000,
-                                "path": "/ping"
-                            }
-                        }
-                    ]
-                },
-                "sharding": {
-                    "title": "The sharding Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "mountPath",
-                        "filename",
-                        "contents"
-                    ],
-                    "properties": {
-                        "mountPath": {
-                            "title": "The mountPath Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "/sharding"
-                            ]
-                        },
-                        "filename": {
-                            "title": "The filename Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "sharding-config.yaml"
-                            ]
-                        },
-                        "contents": {
-                            "title": "The contents Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                ""
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "mountPath": "/sharding",
-                            "filename": "sharding-config.yaml",
-                            "contents": ""
-                        }
-                    ]
-                },
-                "livenessProbe": {
-                    "title": "The livenessProbe Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "initialDelaySeconds",
-                        "periodSeconds",
-                        "timeoutSeconds",
-                        "failureThreshold",
-                        "successThreshold",
-                        "httpGet"
-                    ],
-                    "properties": {
-                        "initialDelaySeconds": {
-                            "title": "The initialDelaySeconds Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                30
-                            ]
-                        },
-                        "periodSeconds": {
-                            "title": "The periodSeconds Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                10
-                            ]
-                        },
-                        "timeoutSeconds": {
-                            "title": "The timeoutSeconds Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "failureThreshold": {
-                            "title": "The failureThreshold Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                3
-                            ]
-                        },
-                        "successThreshold": {
-                            "title": "The successThreshold Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                1
-                            ]
-                        },
-                        "httpGet": {
-                            "title": "The httpGet Schema",
-                            "type": "object",
-                            "default": {},
-                            "required": [
-                                "port",
-                                "path"
-                            ],
-                            "properties": {
-                                "port": {
-                                    "title": "The port Schema",
-                                    "type": "integer",
-                                    "default": 0,
-                                    "examples": [
-                                        3000
-                                    ]
-                                },
-                                "path": {
-                                    "title": "The path Schema",
-                                    "type": "string",
-                                    "default": "",
-                                    "examples": [
-                                        "/ping"
-                                    ]
-                                }
-                            },
-                            "examples": [
-                                {
-                                    "port": 3000,
-                                    "path": "/ping"
-                                }
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "initialDelaySeconds": 30,
-                            "periodSeconds": 10,
-                            "timeoutSeconds": 1,
-                            "failureThreshold": 3,
-                            "successThreshold": 1,
-                            "httpGet": {
-                                "port": 3000,
-                                "path": "/ping"
-                            }
-                        }
-                    ]
+                    "type": "object"
                 },
                 "securityContext": {
-                    "title": "The securityContext Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "runAsNonRoot",
-                        "runAsUser"
-                    ],
                     "properties": {
                         "runAsNonRoot": {
-                            "title": "The runAsNonRoot Schema",
-                            "type": "boolean",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
+                            "type": "boolean"
                         },
                         "runAsUser": {
-                            "title": "The runAsUser Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                65533
-                            ]
+                            "type": "integer"
                         }
                     },
-                    "examples": [
-                        {
-                            "runAsNonRoot": true,
-                            "runAsUser": 65533
-                        }
-                    ]
+                    "type": "object"
                 },
-                "config": {
-                    "title": "The config Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "key",
-                        "treeID"
-                    ],
-                    "properties": {
-                        "key": {
-                            "title": "The key Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "treeID"
-                            ]
-                        },
-                        "treeID": {
-                            "title": "The treeID Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                ""
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "key": "treeID",
-                            "treeID": ""
-                        }
-                    ]
+                "startIndex": {
+                    "type": "integer"
                 },
-                "retrieve_api": {
-                    "title": "The retrieve_api Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "enabled"
-                    ],
-                    "properties": {
-                        "enabled": {
-                            "title": "The enabled Schema",
-                            "type": "boolean",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "enabled": true
-                        }
-                    ]
-                },
-                "attestation_storage": {
-                    "title": "The attestation_storage Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "enabled",
-                        "bucket",
-                        "persistence"
-                    ],
-                    "properties": {
-                        "enabled": {
-                            "title": "The enabled Schema",
-                            "type": "boolean",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "bucket": {
-                            "title": "The bucket Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "file:///var/run/attestations"
-                            ]
-                        },
-                        "persistence": {
-                            "title": "The persistence Schema",
-                            "type": "object",
-                            "default": {},
-                            "required": [
-                                "enabled",
-                                "annotations",
-                                "storageClass",
-                                "size",
-                                "mountPath",
-                                "subPath",
-                                "existingClaim",
-                                "accessModes"
-                            ],
-                            "properties": {
-                                "enabled": {
-                                    "title": "The enabled Schema",
-                                    "type": "boolean",
-                                    "default": false,
-                                    "examples": [
-                                        true
-                                    ]
-                                },
-                                "annotations": {
-                                    "title": "The annotations Schema",
-                                    "type": "object",
-                                    "default": {},
-                                    "required": [],
-                                    "properties": {},
-                                    "examples": [
-                                        {}
-                                    ]
-                                },
-                                "storageClass": {
-                                    "title": "The storageClass Schema",
-                                    "type": "string",
-                                    "default": "",
-                                    "examples": [
-                                        ""
-                                    ]
-                                },
-                                "size": {
-                                    "title": "The size Schema",
-                                    "type": "string",
-                                    "default": "",
-                                    "examples": [
-                                        "5Gi"
-                                    ]
-                                },
-                                "mountPath": {
-                                    "title": "The mountPath Schema",
-                                    "type": "string",
-                                    "default": "",
-                                    "examples": [
-                                        "/var/lib/mysql"
-                                    ]
-                                },
-                                "subPath": {
-                                    "title": "The subPath Schema",
-                                    "type": "string",
-                                    "default": "",
-                                    "examples": [
-                                        ""
-                                    ]
-                                },
-                                "existingClaim": {
-                                    "title": "The existingClaim Schema",
-                                    "type": "string",
-                                    "default": "",
-                                    "examples": [
-                                        ""
-                                    ]
-                                },
-                                "accessModes": {
-                                    "title": "The accessModes Schema",
-                                    "type": "array",
-                                    "default": [],
-                                    "items": {
-                                        "title": "A Schema",
-                                        "type": "string",
-                                        "default": "",
-                                        "examples": [
-                                            "ReadWriteOnce"
-                                        ]
-                                    },
-                                    "examples": [
-                                        [
-                                            "ReadWriteOnce"
-                                        ]
-                                    ]
-                                }
-                            },
-                            "examples": [
-                                {
-                                    "enabled": true,
-                                    "annotations": {},
-                                    "storageClass": "",
-                                    "size": "5Gi",
-                                    "mountPath": "/var/lib/mysql",
-                                    "subPath": "",
-                                    "existingClaim": "",
-                                    "accessModes": [
-                                        "ReadWriteOnce"
-                                    ]
-                                }
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "enabled": true,
-                            "bucket": "file:///var/run/attestations",
-                            "persistence": {
-                                "enabled": true,
-                                "annotations": {},
-                                "storageClass": "",
-                                "size": "5Gi",
-                                "mountPath": "/var/lib/mysql",
-                                "subPath": "",
-                                "existingClaim": "",
-                                "accessModes": [
-                                    "ReadWriteOnce"
-                                ]
-                            }
-                        }
-                    ]
-                },
-                "podAnnotations": {
-                    "title": "The podAnnotations Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "prometheus.io/scrape",
-                        "prometheus.io/path",
-                        "prometheus.io/port"
-                    ],
-                    "properties": {
-                        "prometheus.io/scrape": {
-                            "title": "The prometheus.io/scrape Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "true"
-                            ]
-                        },
-                        "prometheus.io/path": {
-                            "title": "The prometheus.io/path Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "/metrics"
-                            ]
-                        },
-                        "prometheus.io/port": {
-                            "title": "The prometheus.io/port Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "2112"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "prometheus.io/scrape": "true",
-                            "prometheus.io/path": "/metrics",
-                            "prometheus.io/port": "2112"
-                        }
-                    ]
-                },
-                "resources": {
-                    "title": "The resources Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [],
-                    "properties": {},
-                    "examples": [
-                        {}
-                    ]
-                },
-                "extraArgs": {
-                    "title": "The extraArgs Schema",
-                    "type": "array",
-                    "default": [],
-                    "items": {},
-                    "examples": [
-                        []
-                    ]
-                },
-                "serviceAccount": {
-                    "title": "The serviceAccount Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "create",
-                        "name",
-                        "annotations"
-                    ],
-                    "properties": {
-                        "create": {
-                            "title": "The create Schema",
-                            "type": "boolean",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "name": {
-                            "title": "The name Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                ""
-                            ]
-                        },
-                        "annotations": {
-                            "title": "The annotations Schema",
-                            "type": "object",
-                            "default": {},
-                            "required": [],
-                            "properties": {},
-                            "examples": [
-                                {}
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "create": true,
-                            "name": "",
-                            "annotations": {}
-                        }
-                    ]
-                },
-                "searchIndex": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The searchIndex Schema",
-                    "required": [
-                        "storageProvider",
-                        "mysql"
-                    ],
-                    "properties": {
-                        "storageProvider": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The storageProvider Schema",
-                            "examples": [
-                                ""
-                            ]
-                        },
-                        "mysql": {
-                            "type": "object",
-                            "default": {},
-                            "title": "The mysql Schema",
-                            "required": [],
-                            "properties": {},
-                            "examples": [{}]
-                        }
-                    },
-                    "examples": [{
-                        "storageProvider": "",
-                        "mysql": {}
-                    }]
-                },
-                "signerFileSecretOptions": {
-                    "title": "The signerFileSecretOptions Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "secretName",
-                        "secretMountPath",
-                        "privateKeySecretKey",
-                        "secretMountSubPath"
-                    ],
-                    "properties": {
-                        "secretName": {
-                            "title": "Name of the secret containing the private key",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "rekor-private-key"
-                            ]
-                        },
-                        "secretMountPath": {
-                            "title": "Where to mount the scret inside the container",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "/directory"
-                            ]
-                        },
-                        "secretMountSubPath": {
-                            "title": "Where to place the secret *inside* of the mounting directory",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "some/sub-folder"
-                            ]
-                        },
-                        "privateKeySecretKey": {
-                            "title": "The key of the private key inside the secret",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "private"
-                            ]
-                        }
-                    }
-                }
-            },
-            "examples": [
-                {
-                    "enabled": true,
-                    "replicaCount": 1,
-                    "name": "server",
-                    "port": 3000,
-                    "image": {
-                        "registry": "gcr.io",
-                        "repository": "projectsigstore/rekor-server",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "sha256:54bbbdac44f3ca5c5ba9c3667c33f1ba67dc56b82220753ec4b3450ebc5a76bc"
-                    },
-                    "logging": {
-                        "production": false
-                    },
-                    "ingress": {
-                        "enabled": true,
-                        "className": "nginx",
-                        "hosts": [
-                            {
-                                "path": "/"
-                            }
-                        ],
-                        "annotations": {},
-                        "tls": []
-                    },
-                    "service": {
-                        "type": "ClusterIP",
-                        "ports": [
-                            {
-                                "name": "3000-tcp",
-                                "port": 80,
-                                "protocol": "TCP",
-                                "targetPort": 3000
-                            },
-                            {
-                                "name": "2112-tcp",
-                                "port": 2112,
-                                "protocol": "TCP",
-                                "targetPort": 2112
-                            }
-                        ]
-                    },
-                    "signer": "memory",
-                    "readinessProbe": {
-                        "initialDelaySeconds": 10,
-                        "periodSeconds": 10,
-                        "timeoutSeconds": 1,
-                        "failureThreshold": 3,
-                        "successThreshold": 1,
-                        "httpGet": {
-                            "port": 3000,
-                            "path": "/ping"
-                        }
-                    },
-                    "sharding": {
-                        "mountPath": "/sharding",
-                        "filename": "sharding-config.yaml",
-                        "contents": ""
-                    },
-                    "livenessProbe": {
-                        "initialDelaySeconds": 30,
-                        "periodSeconds": 10,
-                        "timeoutSeconds": 1,
-                        "failureThreshold": 3,
-                        "successThreshold": 1,
-                        "httpGet": {
-                            "port": 3000,
-                            "path": "/ping"
-                        }
-                    },
-                    "securityContext": {
-                        "runAsNonRoot": true,
-                        "runAsUser": 65533
-                    },
-                    "config": {
-                        "key": "treeID",
-                        "treeID": ""
-                    },
-                    "retrieve_api": {
-                        "enabled": true
-                    },
-                    "attestation_storage": {
-                        "enabled": true,
-                        "bucket": "file:///var/run/attestations",
-                        "persistence": {
-                            "enabled": true,
-                            "annotations": {},
-                            "storageClass": "",
-                            "size": "5Gi",
-                            "mountPath": "/var/lib/mysql",
-                            "subPath": "",
-                            "existingClaim": "",
-                            "accessModes": [
-                                "ReadWriteOnce"
-                            ]
-                        }
-                    },
-                    "podAnnotations": {
-                        "prometheus.io/scrape": "true",
-                        "prometheus.io/path": "/metrics",
-                        "prometheus.io/port": "2112"
-                    },
-                    "resources": {},
-                    "extraArgs": [],
-                    "serviceAccount": {
-                        "create": true,
-                        "name": "",
-                        "annotations": {}
-                    },
-                    "searchIndex": {
-                        "storageProvider": "",
-                        "mysql": {}
-                    }
-                }
-            ]
-        },
-        "createtree": {
-            "title": "The createtree Schema",
-            "type": "object",
-            "default": {},
-            "required": [
-                "name",
-                "force",
-                "image",
-                "serviceAccount",
-                "securityContext",
-                "resources",
-                "annotations"
-            ],
-            "properties": {
-                "name": {
-                    "title": "The name Schema",
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                        "createtree"
-                    ]
-                },
-                "force": {
-                    "title": "The force Schema",
-                    "type": "boolean",
-                    "default": false,
-                    "examples": [
-                        false
-                    ]
-                },
-                "image": {
-                    "title": "The image Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy",
-                        "version"
-                    ],
-                    "properties": {
-                        "registry": {
-                            "title": "The registry Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "ghcr.io"
-                            ]
-                        },
-                        "repository": {
-                            "title": "The repository Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "sigstore/scaffolding/createtree"
-                            ]
-                        },
-                        "pullPolicy": {
-                            "title": "The pullPolicy Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "IfNotPresent"
-                            ]
-                        },
-                        "version": {
-                            "title": "The version Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "registry": "ghcr.io",
-                            "repository": "sigstore/scaffolding/createtree",
-                            "pullPolicy": "IfNotPresent",
-                            "version": "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
-                        }
-                    ]
+                "tolerations": {
+                    "type": "array"
                 },
                 "ttlSecondsAfterFinished": {
-                    "type": "integer",
-                    "default": 0,
-                    "title": "The ttlSecondsAfterFinished Schema",
-                    "examples": [
-                        3600
-                    ]
-                },
-                "serviceAccount": {
-                    "title": "The serviceAccount Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "create",
-                        "name",
-                        "annotations"
-                    ],
-                    "properties": {
-                        "create": {
-                            "title": "The create Schema",
-                            "type": "boolean",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "name": {
-                            "title": "The name Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                ""
-                            ]
-                        },
-                        "annotations": {
-                            "title": "The annotations Schema",
-                            "type": "object",
-                            "default": {},
-                            "required": [],
-                            "properties": {},
-                            "examples": [
-                                {}
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "create": true,
-                            "name": "",
-                            "annotations": {}
-                        }
-                    ]
-                },
-                "securityContext": {
-                    "title": "The securityContext Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "runAsNonRoot",
-                        "runAsUser"
-                    ],
-                    "properties": {
-                        "runAsNonRoot": {
-                            "title": "The runAsNonRoot Schema",
-                            "type": "boolean",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "runAsUser": {
-                            "title": "The runAsUser Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                65533
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "runAsNonRoot": true,
-                            "runAsUser": 65533
-                        }
-                    ]
-                },
-                "resources": {
-                    "title": "The resources Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [],
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "createtree": {
+            "properties": {
+                "affinity": {
                     "properties": {},
-                    "examples": [
-                        {}
-                    ]
+                    "type": "object"
                 },
                 "annotations": {
-                    "title": "The annotations Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [],
                     "properties": {},
-                    "examples": [
-                        {}
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "name": "createtree",
-                    "force": false,
-                    "image": {
-                        "registry": "ghcr.io",
-                        "repository": "sigstore/scaffolding/createtree",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
-                    },
-                    "serviceAccount": {
-                        "create": true,
-                        "name": "",
-                        "annotations": {}
-                    },
-                    "securityContext": {
-                        "runAsNonRoot": true,
-                        "runAsUser": 65533
-                    },
-                    "resources": {},
-                    "annotations": {}
-                }
-            ]
-        },
-        "trillian": {
-            "title": "The trillian Schema",
-            "type": "object",
-            "default": {},
-            "required": [
-                "enabled",
-                "namespace",
-                "forceNamespace",
-                "fullnameOverride",
-                "adminServer",
-                "logServer",
-                "logSigner",
-                "mysql"
-            ],
-            "properties": {
-                "enabled": {
-                    "title": "The enabled Schema",
-                    "type": "boolean",
-                    "default": false,
-                    "examples": [
-                        true
-                    ]
+                    "type": "object"
                 },
-                "namespace": {
-                    "title": "The namespace Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "name",
-                        "create"
-                    ],
+                "force": {
+                    "type": "boolean"
+                },
+                "image": {
                     "properties": {
-                        "name": {
-                            "title": "The name Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "trillian-system"
-                            ]
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "registry": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nodeSelector": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "resources": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "securityContext": {
+                    "properties": {
+                        "runAsNonRoot": {
+                            "type": "boolean"
+                        },
+                        "runAsUser": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
+                "serviceAccount": {
+                    "properties": {
+                        "annotations": {
+                            "properties": {},
+                            "type": "object"
                         },
                         "create": {
-                            "title": "The create Schema",
-                            "type": "boolean",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "name": "trillian-system",
-                            "create": true
-                        }
-                    ]
-                },
-                "forceNamespace": {
-                    "title": "The forceNamespace Schema",
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                        "trillian-system"
-                    ]
-                },
-                "fullnameOverride": {
-                    "title": "The fullnameOverride Schema",
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                        "trillian"
-                    ]
-                },
-                "adminServer": {
-                    "title": "The adminServer Schema",
-                    "type": "string",
-                    "default": "",
-                    "examples": [
-                        ""
-                    ]
-                },
-                "logServer": {
-                    "title": "The logServer Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "name",
-                        "fullnameOverride",
-                        "portHTTP",
-                        "portRPC"
-                    ],
-                    "properties": {
+                            "type": "boolean"
+                        },
                         "name": {
-                            "title": "The name Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "trillian-logserver"
-                            ]
-                        },
-                        "fullnameOverride": {
-                            "title": "The fullnameOverride Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "trillian-logserver"
-                            ]
-                        },
-                        "portHTTP": {
-                            "title": "The portHTTP Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                8090
-                            ]
-                        },
-                        "portRPC": {
-                            "title": "The portRPC Schema",
-                            "type": "integer",
-                            "default": 0,
-                            "examples": [
-                                8091
-                            ]
+                            "type": "string"
                         }
                     },
-                    "examples": [
-                        {
-                            "name": "trillian-logserver",
-                            "fullnameOverride": "trillian-logserver",
-                            "portHTTP": 8090,
-                            "portRPC": 8091
-                        }
-                    ]
+                    "type": "object"
                 },
-                "logSigner": {
-                    "title": "The logSigner Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "name",
-                        "fullnameOverride"
-                    ],
-                    "properties": {
-                        "name": {
-                            "title": "The name Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "trillian-logsigner"
-                            ]
-                        },
-                        "fullnameOverride": {
-                            "title": "The fullnameOverride Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "trillian-logsigner"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "name": "trillian-logsigner",
-                            "fullnameOverride": "trillian-logsigner"
-                        }
-                    ]
+                "tolerations": {
+                    "type": "array"
                 },
-                "mysql": {
-                    "title": "The mysql Schema",
-                    "type": "object",
-                    "default": {},
-                    "required": [
-                        "fullnameOverride"
-                    ],
-                    "properties": {
-                        "fullnameOverride": {
-                            "title": "The fullnameOverride Schema",
-                            "type": "string",
-                            "default": "",
-                            "examples": [
-                                "trillian-mysql"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "fullnameOverride": "trillian-mysql"
-                        }
-                    ]
+                "ttlSecondsAfterFinished": {
+                    "type": "integer"
                 }
             },
-            "examples": [
-                {
-                    "enabled": true,
-                    "namespace": {
-                        "name": "trillian-system",
-                        "create": true
-                    },
-                    "forceNamespace": "trillian-system",
-                    "fullnameOverride": "trillian",
-                    "adminServer": "",
-                    "logServer": {
-                        "name": "trillian-logserver",
-                        "fullnameOverride": "trillian-logserver",
-                        "portHTTP": 8090,
-                        "portRPC": 8091
-                    },
-                    "logSigner": {
-                        "name": "trillian-logsigner",
-                        "fullnameOverride": "trillian-logsigner"
-                    },
-                    "mysql": {
-                        "fullnameOverride": "trillian-mysql"
-                    }
-                }
-            ]
+            "type": "object"
         },
         "forceNamespace": {
-            "title": "The forceNamespace Schema",
-            "type": "string",
-            "default": "",
-            "examples": [
-                ""
-            ]
-        }
-    },
-    "examples": [
-        {
-            "namespace": {
-                "create": false,
-                "name": "rekor-system"
-            },
-            "imagePullSecrets": [],
-            "initContainerImage": {
+            "type": "string"
+        },
+        "imagePullSecrets": {
+            "type": "array"
+        },
+        "initContainerImage": {
+            "properties": {
                 "curl": {
-                    "registry": "docker.io",
-                    "repository": "curlimages/curl",
-                    "version": "sha256:dca6e1b1c8e7b8b8e7be4e79fc78a858d12fd56245cb31bfa281dbf7c73a6498",
-                    "imagePullPolicy": "IfNotPresent"
-                }
-            },
-            "redis": {
-                "enabled": true,
-                "replicaCount": 1,
-                "hostname": "",
-                "port": 6379,
-                "args": [
-                    "--bind",
-                    "0.0.0.0",
-                    "--appendonly",
-                    "yes"
-                ],
-                "name": "redis",
-                "image": {
-                    "registry": "docker.io",
-                    "repository": "redis",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "sha256:6c42cce2871e8dc5fb3e843ed5c4e7939d312faf5e53ff0ff4ca955a7e0b2b39"
-                },
-                "resources": {},
-                "readinessProbe": {
-                    "initialDelaySeconds": 5,
-                    "periodSeconds": 10,
-                    "timeoutSeconds": 1,
-                    "failureThreshold": 3,
-                    "successThreshold": 1,
-                    "exec": {
-                        "command": [
-                            "/bin/sh",
-                            "-i",
-                            "-c",
-                            "test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""
-                        ]
-                    }
-                },
-                "service": {
-                    "type": "ClusterIP",
-                    "ports": [
-                        {
-                            "name": "6379-tcp",
-                            "port": 6379,
-                            "protocol": "TCP",
-                            "targetPort": 6379
-                        }
-                    ]
-                },
-                "serviceAccount": {
-                    "create": true,
-                    "name": "",
-                    "annotations": {}
-                }
-            },
-            "mysql": {
-                "gcp": {
-                    "enabled": false,
-                    "instance": "",
-                    "scaffoldSQLProxy": {
-                        "registry": "ghcr.io",
-                        "repository": "sigstore/scaffolding/cloudsqlproxy",
-                        "version": "sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2",
-                        "resources": {
-                            "requests": {
-                                "memory": "2Gi",
-                                "cpu": "1"
-                            }
+                    "properties": {
+                        "imagePullPolicy": {
+                            "type": "string"
                         },
-                        "securityContext": {
-                            "allowPrivilegeEscalation": false,
-                            "readOnlyRootFilesystem": true,
-                            "runAsNonRoot": true,
-                            "capabilities": {
-                                "drop": [
-                                    "ALL"
-                                ]
-                            }
+                        "registry": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "string"
                         }
                     },
-                    "cloudsql": {
-                        "registry": "gcr.io",
-                        "repository": "cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine",
-                        "version": "sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9",
-                        "resources": {
-                            "requests": {
-                                "memory": "2Gi",
-                                "cpu": "1"
-                            }
-                        },
-                        "securityContext": {
-                            "allowPrivilegeEscalation": false,
-                            "readOnlyRootFilesystem": true,
-                            "runAsNonRoot": true,
-                            "capabilities": {
-                                "drop": [
-                                    "ALL"
-                                ]
-                            }
-                        },
-                        "unixDomainSocket": {
-                            "enabled": false,
-                            "path": "/cloudsql"
-                        }
-                    }
-                },
-                "enabled": false,
-                "replicaCount": 1,
-                "name": "mysql",
-                "hostname": "",
-                "port": 3306,
-                "strategy": {
-                    "type": "Recreate"
-                },
-                "image": {
-                    "registry": "gcr.io",
-                    "repository": "trillian-opensource-ci/db_server",
-                    "pullPolicy": "IfNotPresent"
+                    "type": "object"
                 }
             },
-            "server": {
-                "enabled": true,
-                "replicaCount": 1,
-                "name": "server",
-                "port": 3000,
-                "image": {
-                    "registry": "gcr.io",
-                    "repository": "projectsigstore/rekor-server",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "sha256:54bbbdac44f3ca5c5ba9c3667c33f1ba67dc56b82220753ec4b3450ebc5a76bc"
+            "type": "object"
+        },
+        "mysql": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
                 },
-                "logging": {
-                    "production": false
-                },
-                "ingress": {
-                    "enabled": true,
-                    "className": "nginx",
-                    "hosts": [
-                        {
-                            "path": "/"
-                        }
-                    ],
-                    "annotations": {},
-                    "tls": []
-                },
-                "ingresses": [
-                    {
-                        "enabled": false,
-                        "className": "gce",
-                        "hosts": [
-                            {
-                                "path": "/"
-                            }
-                        ],
-                        "annotations": {},
-                        "tls": [],
-                        "securityPolicy": "rekor",
-                        "sslPolicy": "rekor"
-                    }
-                ],
-                "service": {
-                    "type": "ClusterIP",
-                    "ports": [
-                        {
-                            "name": "3000-tcp",
-                            "port": 80,
-                            "protocol": "TCP",
-                            "targetPort": 3000
+                "gcp": {
+                    "properties": {
+                        "cloudsql": {
+                            "properties": {
+                                "registry": {
+                                    "type": "string"
+                                },
+                                "repository": {
+                                    "type": "string"
+                                },
+                                "resources": {
+                                    "properties": {
+                                        "requests": {
+                                            "properties": {
+                                                "cpu": {
+                                                    "type": "string"
+                                                },
+                                                "memory": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "securityContext": {
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean"
+                                        },
+                                        "capabilities": {
+                                            "properties": {
+                                                "drop": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "readOnlyRootFilesystem": {
+                                            "type": "boolean"
+                                        },
+                                        "runAsNonRoot": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "unixDomainSocket": {
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean"
+                                        },
+                                        "path": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "version": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
                         },
-                        {
-                            "name": "2112-tcp",
-                            "port": 2112,
-                            "protocol": "TCP",
-                            "targetPort": 2112
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "instance": {
+                            "type": "string"
+                        },
+                        "scaffoldSQLProxy": {
+                            "properties": {
+                                "registry": {
+                                    "type": "string"
+                                },
+                                "repository": {
+                                    "type": "string"
+                                },
+                                "resources": {
+                                    "properties": {
+                                        "requests": {
+                                            "properties": {
+                                                "cpu": {
+                                                    "type": "string"
+                                                },
+                                                "memory": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "securityContext": {
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean"
+                                        },
+                                        "capabilities": {
+                                            "properties": {
+                                                "drop": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "readOnlyRootFilesystem": {
+                                            "type": "boolean"
+                                        },
+                                        "runAsNonRoot": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "version": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
                         }
-                    ]
+                    },
+                    "type": "object"
                 },
-                "signer": "memory",
+                "hostname": {
+                    "type": "string"
+                },
+                "image": {
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "registry": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "integer"
+                },
+                "replicaCount": {
+                    "type": "integer"
+                },
+                "strategy": {
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "namespace": {
+            "properties": {
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "redis": {
+            "properties": {
+                "affinity": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "args": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "image": {
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "registry": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nodeSelector": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "port": {
+                    "type": "integer"
+                },
                 "readinessProbe": {
-                    "initialDelaySeconds": 10,
-                    "periodSeconds": 10,
-                    "timeoutSeconds": 1,
-                    "failureThreshold": 3,
-                    "successThreshold": 1,
-                    "httpGet": {
-                        "port": 3000,
-                        "path": "/ping"
-                    }
+                    "properties": {
+                        "exec": {
+                            "properties": {
+                                "command": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "failureThreshold": {
+                            "type": "integer"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "integer"
+                        },
+                        "periodSeconds": {
+                            "type": "integer"
+                        },
+                        "successThreshold": {
+                            "type": "integer"
+                        },
+                        "timeoutSeconds": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
                 },
-                "sharding": {
-                    "mountPath": "/sharding",
-                    "filename": "sharding-config.yaml",
-                    "contents": ""
+                "replicaCount": {
+                    "type": "integer"
                 },
-                "livenessProbe": {
-                    "initialDelaySeconds": 30,
-                    "periodSeconds": 10,
-                    "timeoutSeconds": 1,
-                    "failureThreshold": 3,
-                    "successThreshold": 1,
-                    "httpGet": {
-                        "port": 3000,
-                        "path": "/ping"
-                    }
+                "resources": {
+                    "properties": {},
+                    "type": "object"
                 },
-                "securityContext": {
-                    "runAsNonRoot": true,
-                    "runAsUser": 65533
+                "service": {
+                    "properties": {
+                        "ports": {
+                            "items": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "port": {
+                                        "type": "integer"
+                                    },
+                                    "protocol": {
+                                        "type": "string"
+                                    },
+                                    "targetPort": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 },
-                "config": {
-                    "key": "treeID",
-                    "treeID": ""
+                "serviceAccount": {
+                    "properties": {
+                        "annotations": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 },
-                "retrieve_api": {
-                    "enabled": true
+                "tolerations": {
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "server": {
+            "properties": {
+                "affinity": {
+                    "properties": {},
+                    "type": "object"
                 },
                 "attestation_storage": {
-                    "enabled": true,
-                    "bucket": "file:///var/run/attestations",
-                    "persistence": {
-                        "enabled": true,
-                        "annotations": {},
-                        "storageClass": "",
-                        "size": "5Gi",
-                        "mountPath": "/var/lib/mysql",
-                        "subPath": "",
-                        "existingClaim": "",
-                        "accessModes": [
-                            "ReadWriteOnce"
-                        ]
-                    }
+                    "properties": {
+                        "bucket": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "persistence": {
+                            "properties": {
+                                "accessModes": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "annotations": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "existingClaim": {
+                                    "type": "string"
+                                },
+                                "mountPath": {
+                                    "type": "string"
+                                },
+                                "size": {
+                                    "type": "string"
+                                },
+                                "storageClass": {
+                                    "type": "string"
+                                },
+                                "subPath": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "config": {
+                    "properties": {
+                        "key": {
+                            "type": "string"
+                        },
+                        "treeID": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "extraArgs": {
+                    "type": "array"
+                },
+                "image": {
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "registry": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "ingress": {
+                    "properties": {
+                        "annotations": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "className": {
+                            "type": "string"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "hosts": {
+                            "items": {
+                                "properties": {
+                                    "host": {
+                                        "type": "string"
+                                    },
+                                    "path": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "tls": {
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "ingresses": {
+                    "items": {
+                        "properties": {
+                            "annotations": {
+                                "properties": {},
+                                "type": "object"
+                            },
+                            "backendConfigSpec": {
+                                "properties": {
+                                    "logging": {
+                                        "properties": {
+                                            "enable": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "securityPolicy": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "className": {
+                                "type": "string"
+                            },
+                            "enabled": {
+                                "type": "boolean"
+                            },
+                            "frontendConfigSpec": {
+                                "properties": {
+                                    "redirectToHttps": {
+                                        "properties": {
+                                            "enabled": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "sslPolicy": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "hosts": {
+                                "items": {
+                                    "properties": {
+                                        "host": {
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "staticGlobalIP": {
+                                "type": "string"
+                            },
+                            "tls": {
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "livenessProbe": {
+                    "properties": {
+                        "failureThreshold": {
+                            "type": "integer"
+                        },
+                        "httpGet": {
+                            "properties": {
+                                "path": {
+                                    "type": "string"
+                                },
+                                "port": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "integer"
+                        },
+                        "periodSeconds": {
+                            "type": "integer"
+                        },
+                        "successThreshold": {
+                            "type": "integer"
+                        },
+                        "timeoutSeconds": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
+                "logging": {
+                    "properties": {
+                        "production": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nodeSelector": {
+                    "properties": {},
+                    "type": "object"
                 },
                 "podAnnotations": {
-                    "prometheus.io/scrape": "true",
-                    "prometheus.io/path": "/metrics",
-                    "prometheus.io/port": "2112"
+                    "properties": {
+                        "prometheus.io/path": {
+                            "type": "string"
+                        },
+                        "prometheus.io/port": {
+                            "type": "string"
+                        },
+                        "prometheus.io/scrape": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 },
-                "resources": {},
-                "extraArgs": [],
-                "serviceAccount": {
-                    "create": true,
-                    "name": "",
-                    "annotations": {}
+                "port": {
+                    "type": "integer"
                 },
-                "server": {
-                    "searchIndex": {
-                        "storageProvider": "",
-                        "mysql": {}
-                    }
-                }
-            },
-            "createtree": {
-                "name": "createtree",
-                "force": false,
-                "image": {
-                    "registry": "ghcr.io",
-                    "repository": "sigstore/scaffolding/createtree",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "sha256:8e921d028b46d5ad98994d58f79e2724cf84e99e3270f5799fe0f1a6b518bc4e"
+                "readinessProbe": {
+                    "properties": {
+                        "failureThreshold": {
+                            "type": "integer"
+                        },
+                        "httpGet": {
+                            "properties": {
+                                "path": {
+                                    "type": "string"
+                                },
+                                "port": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "integer"
+                        },
+                        "periodSeconds": {
+                            "type": "integer"
+                        },
+                        "successThreshold": {
+                            "type": "integer"
+                        },
+                        "timeoutSeconds": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
                 },
-                "serviceAccount": {
-                    "create": true,
-                    "name": "",
-                    "annotations": {}
+                "replicaCount": {
+                    "type": "integer"
+                },
+                "resources": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "retrieve_api": {
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "searchIndex": {
+                    "properties": {
+                        "mysql": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "storageProvider": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 },
                 "securityContext": {
-                    "runAsNonRoot": true,
-                    "runAsUser": 65533
+                    "properties": {
+                        "runAsNonRoot": {
+                            "type": "boolean"
+                        },
+                        "runAsUser": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
                 },
-                "resources": {},
-                "annotations": {}
-            },
-            "trillian": {
-                "enabled": true,
-                "namespace": {
-                    "name": "trillian-system",
-                    "create": true
+                "service": {
+                    "properties": {
+                        "ports": {
+                            "items": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "port": {
+                                        "type": "integer"
+                                    },
+                                    "protocol": {
+                                        "type": "string"
+                                    },
+                                    "targetPort": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 },
-                "forceNamespace": "trillian-system",
-                "fullnameOverride": "trillian",
-                "adminServer": "",
-                "logServer": {
-                    "name": "trillian-logserver",
-                    "fullnameOverride": "trillian-logserver",
-                    "portHTTP": 8090,
-                    "portRPC": 8091
+                "serviceAccount": {
+                    "properties": {
+                        "annotations": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 },
-                "logSigner": {
-                    "name": "trillian-logsigner",
-                    "fullnameOverride": "trillian-logsigner"
+                "sharding": {
+                    "properties": {
+                        "contents": {
+                            "type": "string"
+                        },
+                        "filename": {
+                            "type": "string"
+                        },
+                        "mountPath": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 },
-                "mysql": {
-                    "fullnameOverride": "trillian-mysql"
+                "signer": {
+                    "type": "string"
+                },
+                "tolerations": {
+                    "type": "array"
                 }
             },
-            "forceNamespace": ""
+            "type": "object"
+        },
+        "trillian": {
+            "properties": {
+                "adminServer": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "forceNamespace": {
+                    "type": "string"
+                },
+                "fullnameOverride": {
+                    "type": "string"
+                },
+                "logServer": {
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "portHTTP": {
+                            "type": "integer"
+                        },
+                        "portRPC": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
+                "logSigner": {
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "mysql": {
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "namespace": {
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
         }
-    ]
+    },
+    "type": "object"
 }
