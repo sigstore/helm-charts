@@ -87,6 +87,9 @@ server:
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 createtree:
   enabled: true
@@ -109,6 +112,9 @@ createtree:
     runAsNonRoot: true
     runAsUser: 65533
   annotations: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 createctconfig:
   enabled: true
@@ -145,6 +151,9 @@ createctconfig:
     runAsNonRoot: true
     runAsUser: 65533
   annotations: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 trillian:
   namespace: trillian-system
