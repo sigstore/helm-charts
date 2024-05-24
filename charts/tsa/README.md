@@ -92,6 +92,7 @@ helm uninstall [RELEASE_NAME]
 | forceNamespace | string | `""` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"tsa-system"` |  |
+| server.affinity | object | `{}` |  |
 | server.args.cert_chain | string | `"chain"` |  |
 | server.args.kms_key_resource | string | `"resource"` |  |
 | server.args.port | int | `5555` |  |
@@ -113,6 +114,7 @@ helm uninstall [RELEASE_NAME]
 | server.ingress.http.tls | list | `[]` |  |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
+| server.nodeSelector | object | `{}` |  |
 | server.replicaCount | int | `1` |  |
 | server.secret | string | `"tsa-server-secret"` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
@@ -131,6 +133,7 @@ helm uninstall [RELEASE_NAME]
 | server.serviceAccount.mountToken | bool | `true` |  |
 | server.serviceAccount.name | string | `""` |  |
 | server.svcPort | int | `80` |  |
+| server.tolerations | list | `[]` |  |
 
 ----------------------------------------------
 
