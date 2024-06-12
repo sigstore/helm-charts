@@ -41,4 +41,16 @@ spec:
       securityContext:
 {{ toYaml .Values.createcerts.securityContext | indent 8 }}
     {{- end }}
+    {{- if .Values.createcerts.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.createcerts.nodeSelector | indent 8 }}
+    {{- end }}
+    {{- if .Values.createcerts.tolerations }}
+      tolerations:
+{{ toYaml .Values.createcerts.tolerations | indent 8 }}
+    {{- end }}
+    {{- if .Values.createcerts.affinity }}
+      affinity:
+{{ toYaml .Values.createcerts.affinity | indent 8 }}
+    {{- end }}
 {{- end }}

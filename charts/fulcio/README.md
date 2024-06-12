@@ -78,6 +78,7 @@ helm uninstall [RELEASE_NAME]
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | config.contents | object | `{}` |  |
+| createcerts.affinity | object | `{}` |  |
 | createcerts.annotations | object | `{}` |  |
 | createcerts.enabled | bool | `true` |  |
 | createcerts.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -85,6 +86,7 @@ helm uninstall [RELEASE_NAME]
 | createcerts.image.repository | string | `"sigstore/scaffolding/createcerts"` |  |
 | createcerts.image.version | string | `"sha256:2aaea38198d25ee53fb1f6da79eaa75c24bcc4ef81792a68687ba2ae0dc8ccf6"` |  |
 | createcerts.name | string | `"createcerts"` |  |
+| createcerts.nodeSelector | object | `{}` |  |
 | createcerts.replicaCount | int | `1` |  |
 | createcerts.securityContext.runAsNonRoot | bool | `true` |  |
 | createcerts.securityContext.runAsUser | int | `65533` |  |
@@ -92,6 +94,7 @@ helm uninstall [RELEASE_NAME]
 | createcerts.serviceAccount.create | bool | `true` |  |
 | createcerts.serviceAccount.mountToken | bool | `true` |  |
 | createcerts.serviceAccount.name | string | `""` |  |
+| createcerts.tolerations | list | `[]` |  |
 | createcerts.ttlSecondsAfterFinished | int | `3600` |  |
 | ctlog.createcerts.fullnameOverride | string | `"ctlog-createcerts"` |  |
 | ctlog.createcerts.name | string | `"ctlog-createcerts"` |  |
@@ -108,6 +111,7 @@ helm uninstall [RELEASE_NAME]
 | imagePullSecrets | list | `[]` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"fulcio-system"` |  |
+| server.affinity | object | `{}` |  |
 | server.args.aws_hsm_root_ca_path | string | `nil` |  |
 | server.args.certificateAuthority | string | `"fileca"` |  |
 | server.args.ct_log_url | string | `""` |  |
@@ -153,6 +157,7 @@ helm uninstall [RELEASE_NAME]
 | server.ingresses[0].tls | list | `[]` |  |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
+| server.nodeSelector | object | `{}` |  |
 | server.replicaCount | int | `1` |  |
 | server.secret | string | `"fulcio-server-secret"` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
@@ -175,6 +180,7 @@ helm uninstall [RELEASE_NAME]
 | server.serviceAccount.mountToken | bool | `true` |  |
 | server.serviceAccount.name | string | `""` |  |
 | server.svcPort | int | `80` |  |
+| server.tolerations | list | `[]` |  |
 
 ----------------------------------------------
 
