@@ -61,6 +61,7 @@ helm uninstall [RELEASE_NAME]
 | initContainerImage.netcat.registry | string | `"cgr.dev"` |  |
 | initContainerImage.netcat.repository | string | `"chainguard/netcat"` |  |
 | initContainerImage.netcat.version | string | `"sha256:7243b469d34bd28969fa2c764a12d91084c427209540bb68645629d635b3f143"` | 2023-06-13 |
+| logServer.affinity | object | `{}` |  |
 | logServer.enabled | bool | `true` |  |
 | logServer.extraArgs | list | `[]` |  |
 | logServer.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -87,6 +88,8 @@ helm uninstall [RELEASE_NAME]
 | logServer.serviceAccount.annotations | object | `{}` |  |
 | logServer.serviceAccount.create | bool | `true` |  |
 | logServer.serviceAccount.name | string | `""` |  |
+| logServer.tolerations | list | `[]` |  |
+| logSigner.affinity | object | `{}` |  |
 | logSigner.enabled | bool | `true` |  |
 | logSigner.extraArgs | list | `[]` |  |
 | logSigner.forceMaster | bool | `true` |  |
@@ -110,6 +113,7 @@ helm uninstall [RELEASE_NAME]
 | logSigner.serviceAccount.annotations | object | `{}` |  |
 | logSigner.serviceAccount.create | bool | `true` |  |
 | logSigner.serviceAccount.name | string | `""` |  |
+| logSigner.tolerations | list | `[]` |  |
 | mysql.args[0] | string | `"--ignore-db-dir=lost+found"` |  |
 | mysql.auth.existingSecret | string | `""` |  |
 | mysql.auth.password | string | `""` |  |

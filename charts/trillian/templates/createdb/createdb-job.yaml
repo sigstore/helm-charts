@@ -98,3 +98,15 @@ spec:
         - name: exit-dir
           emptyDir: {}
 {{- end }}
+{{- if .Values.createdb.nodeSelector }}
+  nodeSelector:
+{{ toYaml .Values.createdb.nodeSelector | indent 4 }}
+{{- end }}
+{{- if .Values.createdb.tolerations }}
+  tolerations:
+{{ toYaml .Values.createdb.tolerations | indent 4 }}
+{{- end }}
+{{- if .Values.createdb.affinity }}
+  affinity:
+{{ toYaml .Values.createdb.affinity | indent 4 }}
+{{- end }}
