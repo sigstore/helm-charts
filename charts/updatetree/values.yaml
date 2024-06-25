@@ -26,3 +26,7 @@ trillian:
   logServer:
     name: trillian-logserver
     portRPC: 8091
+
+tolerations: []
+nodeSelector: {}
+affinity: {}

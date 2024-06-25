@@ -1,328 +1,108 @@
 {
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "http://example.com/example.json",
-    "type": "object",
-    "default": {},
-    "title": "Root Schema",
-    "required": [
-        "enabled",
-        "namespace",
-        "serviceAccount",
-        "spec",
-        "securityContext",
-        "args",
-        "annotations",
-        "trillian"
-    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
-        "enabled": {
-            "type": "boolean",
-            "default": false,
-            "title": "The enabled Schema",
-            "examples": [
-                false
-            ]
-        },
-        "namespace": {
-            "type": "object",
-            "default": {},
-            "title": "The namespace Schema",
-            "required": [
-                "name",
-                "create"
-            ],
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The name Schema",
-                    "examples": [
-                        "trillian-system"
-                    ]
-                },
-                "create": {
-                    "type": "boolean",
-                    "default": false,
-                    "title": "The create Schema",
-                    "examples": [
-                        false
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "name": "trillian-system",
-                    "create": false
-                }
-            ]
-        },
-        "serviceAccount": {
-            "type": "object",
-            "default": {},
-            "title": "The serviceAccount Schema",
-            "required": [
-                "name",
-                "annotations",
-                "create"
-            ],
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The name Schema",
-                    "examples": [
-                        "trillian-logserver"
-                    ]
-                },
-                "annotations": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The annotations Schema",
-                    "required": [],
-                    "properties": {},
-                    "examples": [
-                        {}
-                    ]
-                },
-                "create": {
-                    "type": "boolean",
-                    "default": false,
-                    "title": "The create Schema",
-                    "examples": [
-                        false
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "name": "trillian-logserver",
-                    "annotations": {},
-                    "create": false
-                }
-            ]
-        },
-        "spec": {
-            "type": "object",
-            "default": {},
-            "title": "The spec Schema",
-            "required": [
-                "replicaCount",
-                "image"
-            ],
-            "properties": {
-                "replicaCount": {
-                    "type": "integer",
-                    "default": 0,
-                    "title": "The replicaCount Schema",
-                    "examples": [
-                        1
-                    ]
-                },
-                "image": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The image Schema",
-                    "examples": [
-                        "ghcr.io/sigstore/scaffolding/updatetree:v0.6.7@sha256:357cf3545cd459634fe6a461a7690bc5f425c353e48c80da551cfec6887d627d"
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "replicaCount": 1,
-                    "image": "ghcr.io/sigstore/scaffolding/updatetree:v0.6.7@sha256:357cf3545cd459634fe6a461a7690bc5f425c353e48c80da551cfec6887d627d"
-                }
-            ]
-        },
-        "ttlSecondsAfterFinished": {
-            "type": "integer",
-            "default": 0,
-            "title": "The ttlSecondsAfterFinished Schema",
-            "examples": [
-                3600
-            ]
-        },
-        "securityContext": {
-            "type": "object",
-            "default": {},
-            "title": "The securityContext Schema",
-            "required": [
-                "runAsNonRoot",
-                "runAsUser"
-            ],
-            "properties": {
-                "runAsNonRoot": {
-                    "type": "boolean",
-                    "default": false,
-                    "title": "The runAsNonRoot Schema",
-                    "examples": [
-                        true
-                    ]
-                },
-                "runAsUser": {
-                    "type": "integer",
-                    "default": 0,
-                    "title": "The runAsUser Schema",
-                    "examples": [
-                        65533
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "runAsNonRoot": true,
-                    "runAsUser": 65533
-                }
-            ]
-        },
-        "args": {
-            "type": "object",
-            "default": {},
-            "title": "The args Schema",
-            "required": [
-                "treeID",
-                "treeState"
-            ],
-            "properties": {
-                "treeID": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The treeID Schema",
-                    "examples": [
-                        ""
-                    ]
-                },
-                "treeState": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The treeState Schema",
-                    "examples": [
-                        ""
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "treeID": "",
-                    "treeState": ""
-                }
-            ]
+        "affinity": {
+            "properties": {},
+            "type": "object"
         },
         "annotations": {
-            "type": "object",
-            "default": {},
-            "title": "The annotations Schema",
-            "required": [],
             "properties": {},
-            "examples": [
-                {}
-            ]
+            "type": "object"
+        },
+        "args": {
+            "properties": {
+                "treeID": {
+                    "type": "string"
+                },
+                "treeState": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "enabled": {
+            "type": "boolean"
+        },
+        "namespace": {
+            "properties": {
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "nodeSelector": {
+            "properties": {},
+            "type": "object"
+        },
+        "securityContext": {
+            "properties": {
+                "runAsNonRoot": {
+                    "type": "boolean"
+                },
+                "runAsUser": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "serviceAccount": {
+            "properties": {
+                "annotations": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "spec": {
+            "properties": {
+                "image": {
+                    "type": "string"
+                },
+                "replicaCount": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "tolerations": {
+            "type": "array"
         },
         "trillian": {
-            "type": "object",
-            "default": {},
-            "title": "The trillian Schema",
-            "required": [
-                "namespace",
-                "adminServer",
-                "logServer"
-            ],
             "properties": {
-                "namespace": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The namespace Schema",
-                    "examples": [
-                        "trillian-system"
-                    ]
-                },
                 "adminServer": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The adminServer Schema",
-                    "examples": [
-                        ""
-                    ]
+                    "type": "string"
                 },
                 "logServer": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The logServer Schema",
-                    "required": [
-                        "name",
-                        "portRPC"
-                    ],
                     "properties": {
                         "name": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The name Schema",
-                            "examples": [
-                                "trillian-logserver"
-                            ]
+                            "type": "string"
                         },
                         "portRPC": {
-                            "type": "integer",
-                            "default": 0,
-                            "title": "The portRPC Schema",
-                            "examples": [
-                                8091
-                            ]
+                            "type": "integer"
                         }
                     },
-                    "examples": [
-                        {
-                            "name": "trillian-logserver",
-                            "portRPC": 8091
-                        }
-                    ]
+                    "type": "object"
+                },
+                "namespace": {
+                    "type": "string"
                 }
             },
-            "examples": [
-                {
-                    "namespace": "trillian-system",
-                    "adminServer": "",
-                    "logServer": {
-                        "name": "trillian-logserver",
-                        "portRPC": 8091
-                    }
-                }
-            ]
+            "type": "object"
+        },
+        "ttlSecondsAfterFinished": {
+            "type": "integer"
         }
     },
-    "examples": [
-        {
-            "enabled": false,
-            "namespace": {
-                "name": "trillian-system",
-                "create": false
-            },
-            "serviceAccount": {
-                "name": "trillian-logserver",
-                "annotations": {},
-                "create": false
-            },
-            "spec": {
-                "replicaCount": 1,
-                "image": "ghcr.io/sigstore/scaffolding/updatetree:v0.6.7@sha256:357cf3545cd459634fe6a461a7690bc5f425c353e48c80da551cfec6887d627d"
-            },
-            "securityContext": {
-                "runAsNonRoot": true,
-                "runAsUser": 65533
-            },
-            "args": {
-                "treeID": "",
-                "treeState": ""
-            },
-            "annotations": {},
-            "trillian": {
-                "namespace": "trillian-system",
-                "adminServer": "",
-                "logServer": {
-                    "name": "trillian-logserver",
-                    "portRPC": 8091
-                }
-            }
-        }
-    ]
+    "type": "object"
 }
