@@ -113,6 +113,12 @@
                                 false
                             ]
                         },
+                        "enabled": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
                         "name": {
                             "type": "string",
                             "examples": [
@@ -143,6 +149,12 @@
                     "type": "object",
                     "properties": {
                         "create": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "enabled": {
                             "type": "boolean",
                             "examples": [
                                 false
@@ -183,6 +195,12 @@
                                 false
                             ]
                         },
+                        "enabled": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
                         "name": {
                             "type": "string",
                             "examples": [
@@ -213,6 +231,12 @@
                     "type": "object",
                     "properties": {
                         "create": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "enabled": {
                             "type": "boolean",
                             "examples": [
                                 false
