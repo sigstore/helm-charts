@@ -46,6 +46,8 @@ spec:
           securityContext:
 {{ toYaml .Values.server.initContainerSecurityContext | indent 12 }}
 {{- end }}
+          resources:
+{{ toYaml .Values.initContainerResources | indent 12 }}
       {{- if .Values.server.extraInitContainers }}
 {{ toYaml .Values.server.extraInitContainers | indent 8 }}
       {{- end }}

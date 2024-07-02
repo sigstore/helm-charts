@@ -171,6 +171,22 @@
             },
             "type": "object"
         },
+        "initContainerResources": {
+            "properties": {
+                "requests": {
+                    "properties": {
+                        "cpu": {
+                            "type": "string"
+                        },
+                        "memory": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
         "mysql": {
             "properties": {
                 "enabled": {
