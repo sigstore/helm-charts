@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.4.1](https://img.shields.io/badge/Version-1.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.6](https://img.shields.io/badge/AppVersion-1.3.6-informational?style=flat-square)
+![Version: 1.4.3](https://img.shields.io/badge/Version-1.4.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.6](https://img.shields.io/badge/AppVersion-1.3.6-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -20,12 +20,13 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | trillian | 0.2.23 |
+| https://sigstore.github.io/helm-charts | trillian | 0.2.24 |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| backfillredis.affinity | object | `{}` |  |
 | backfillredis.enabled | bool | `false` |  |
 | backfillredis.endIndex | int | `-1` |  |
 | backfillredis.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -33,12 +34,15 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | backfillredis.image.repository | string | `"sigstore/rekor/backfill-redis"` |  |
 | backfillredis.image.version | string | `"sha256:a13cd8b2a554d6116888fd1f383cf6e91fc1716df5eda392b82e6bfc66995ec3"` |  |
 | backfillredis.name | string | `"backfillredis"` |  |
+| backfillredis.nodeSelector | object | `{}` |  |
 | backfillredis.rekorAddress | string | `"rekor.rekor-system.svc"` |  |
 | backfillredis.resources | object | `{}` |  |
 | backfillredis.securityContext.runAsNonRoot | bool | `true` |  |
 | backfillredis.securityContext.runAsUser | int | `65533` |  |
 | backfillredis.startIndex | int | `-1` |  |
+| backfillredis.tolerations | list | `[]` |  |
 | backfillredis.ttlSecondsAfterFinished | int | `3600` |  |
+| createtree.affinity | object | `{}` |  |
 | createtree.annotations | object | `{}` |  |
 | createtree.force | bool | `false` |  |
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -46,12 +50,14 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
 | createtree.image.version | string | `"sha256:eb1a94738f34964c7456d18d30b8a45a654af89bb5371f69b2403df373be0826"` |  |
 | createtree.name | string | `"createtree"` |  |
+| createtree.nodeSelector | object | `{}` |  |
 | createtree.resources | object | `{}` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
 | createtree.securityContext.runAsUser | int | `65533` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
 | createtree.serviceAccount.create | bool | `true` |  |
 | createtree.serviceAccount.name | string | `""` |  |
+| createtree.tolerations | list | `[]` |  |
 | createtree.ttlSecondsAfterFinished | int | `3600` |  |
 | forceNamespace | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
@@ -59,6 +65,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
 | initContainerImage.curl.version | string | `"sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"` | 8.5.0 |
+| initContainerResources | object | `{}` |  |
 | mysql.enabled | bool | `false` |  |
 | mysql.gcp.cloudsql.registry | string | `"gcr.io"` |  |
 | mysql.gcp.cloudsql.repository | string | `"cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine"` |  |
@@ -92,6 +99,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | mysql.strategy.type | string | `"Recreate"` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"rekor-system"` |  |
+| redis.affinity | object | `{}` |  |
 | redis.args[0] | string | `"--bind"` |  |
 | redis.args[1] | string | `"0.0.0.0"` |  |
 | redis.args[2] | string | `"--appendonly"` |  |
@@ -103,6 +111,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | redis.image.repository | string | `"redis"` |  |
 | redis.image.version | string | `"sha256:c5a607fb6e1bb15d32bbcf14db22787d19e428d59e31a5da67511b49bb0f1ccc"` | 6.2.14-alpine3.19 |
 | redis.name | string | `"redis"` |  |
+| redis.nodeSelector | object | `{}` |  |
 | redis.port | int | `6379` |  |
 | redis.readinessProbe.exec.command[0] | string | `"/bin/sh"` |  |
 | redis.readinessProbe.exec.command[1] | string | `"-i"` |  |
@@ -123,6 +132,8 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | redis.serviceAccount.annotations | object | `{}` |  |
 | redis.serviceAccount.create | bool | `true` |  |
 | redis.serviceAccount.name | string | `""` |  |
+| redis.tolerations | list | `[]` |  |
+| server.affinity | object | `{}` |  |
 | server.attestation_storage.bucket | string | `"file:///var/run/attestations"` |  |
 | server.attestation_storage.enabled | bool | `true` |  |
 | server.attestation_storage.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
@@ -168,6 +179,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.livenessProbe.timeoutSeconds | int | `1` |  |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
+| server.nodeSelector | object | `{}` |  |
 | server.podAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
 | server.podAnnotations."prometheus.io/port" | string | `"2112"` |  |
 | server.podAnnotations."prometheus.io/scrape" | string | `"true"` |  |
@@ -202,6 +214,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.sharding.filename | string | `"sharding-config.yaml"` |  |
 | server.sharding.mountPath | string | `"/sharding"` |  |
 | server.signer | string | `"memory"` |  |
+| server.tolerations | list | `[]` |  |
 | trillian.adminServer | string | `""` |  |
 | trillian.enabled | bool | `true` |  |
 | trillian.forceNamespace | string | `"trillian-system"` |  |
@@ -216,3 +229,5 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | trillian.namespace.create | bool | `true` |  |
 | trillian.namespace.name | string | `"trillian-system"` |  |
 
+----------------------------------------------
+Autogenerated from chart metadata using [helm-docs v1.13.1](https://github.com/norwoodj/helm-docs/releases/v1.13.1)

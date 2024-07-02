@@ -10,6 +10,7 @@ initContainerImage:
     # -- 8.5.0
     version: "sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"
     imagePullPolicy: IfNotPresent
+initContainerResources: {}
 
 redis:
   enabled: true
