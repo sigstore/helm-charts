@@ -56,10 +56,6 @@ spec:
 {{- if .Values.logSigner.priorityClassName }}
       priorityClassName: "{{ .Values.logSigner.priorityClassName }}"
 {{- end }}
-      {{- if .Values.imagePullSecrets }}
-      imagePullSecrets:
-{{ toYaml .Values.imagePullSecrets | indent 8 }}
-      {{- end }}
       containers:
         {{- if .Values.mysql.gcp.enabled }}
         - name: cloud-sql-proxy

@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.3.19](https://img.shields.io/badge/Version-2.3.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.5](https://img.shields.io/badge/AppVersion-1.4.5-informational?style=flat-square)
+![Version: 2.3.22](https://img.shields.io/badge/Version-2.3.22-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.1](https://img.shields.io/badge/AppVersion-1.5.1-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -71,13 +71,14 @@ helm uninstall [RELEASE_NAME]
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | ctlog | 0.2.52 |
+| https://sigstore.github.io/helm-charts | ctlog | 0.2.53 |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | config.contents | object | `{}` |  |
+| createcerts.affinity | object | `{}` |  |
 | createcerts.annotations | object | `{}` |  |
 | createcerts.enabled | bool | `true` |  |
 | createcerts.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -85,6 +86,7 @@ helm uninstall [RELEASE_NAME]
 | createcerts.image.repository | string | `"sigstore/scaffolding/createcerts"` |  |
 | createcerts.image.version | string | `"sha256:2aaea38198d25ee53fb1f6da79eaa75c24bcc4ef81792a68687ba2ae0dc8ccf6"` |  |
 | createcerts.name | string | `"createcerts"` |  |
+| createcerts.nodeSelector | object | `{}` |  |
 | createcerts.replicaCount | int | `1` |  |
 | createcerts.securityContext.runAsNonRoot | bool | `true` |  |
 | createcerts.securityContext.runAsUser | int | `65533` |  |
@@ -92,6 +94,7 @@ helm uninstall [RELEASE_NAME]
 | createcerts.serviceAccount.create | bool | `true` |  |
 | createcerts.serviceAccount.mountToken | bool | `true` |  |
 | createcerts.serviceAccount.name | string | `""` |  |
+| createcerts.tolerations | list | `[]` |  |
 | createcerts.ttlSecondsAfterFinished | int | `3600` |  |
 | ctlog.createcerts.fullnameOverride | string | `"ctlog-createcerts"` |  |
 | ctlog.createcerts.name | string | `"ctlog-createcerts"` |  |
@@ -108,6 +111,7 @@ helm uninstall [RELEASE_NAME]
 | imagePullSecrets | list | `[]` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"fulcio-system"` |  |
+| server.affinity | object | `{}` |  |
 | server.args.aws_hsm_root_ca_path | string | `nil` |  |
 | server.args.certificateAuthority | string | `"fileca"` |  |
 | server.args.ct_log_url | string | `""` |  |
@@ -120,7 +124,7 @@ helm uninstall [RELEASE_NAME]
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/fulcio"` |  |
-| server.image.version | string | `"sha256:003d38b43442d436fe645feaebf8784975c138e411cf232276bea9de2a9f7b58"` | v1.4.5 |
+| server.image.version | string | `"sha256:17b914c4a1d05871e3353630b3516b106b653839587aa496d0f96b6e857c8714"` | v1.5.1 |
 | server.ingress.grpc.annotations."nginx.ingress.kubernetes.io/backend-protocol" | string | `"GRPC"` |  |
 | server.ingress.grpc.className | string | `""` |  |
 | server.ingress.grpc.enabled | bool | `false` |  |
@@ -153,6 +157,7 @@ helm uninstall [RELEASE_NAME]
 | server.ingresses[0].tls | list | `[]` |  |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
+| server.nodeSelector | object | `{}` |  |
 | server.replicaCount | int | `1` |  |
 | server.secret | string | `"fulcio-server-secret"` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
@@ -175,6 +180,7 @@ helm uninstall [RELEASE_NAME]
 | server.serviceAccount.mountToken | bool | `true` |  |
 | server.serviceAccount.name | string | `""` |  |
 | server.svcPort | int | `80` |  |
+| server.tolerations | list | `[]` |  |
 
 ----------------------------------------------
 

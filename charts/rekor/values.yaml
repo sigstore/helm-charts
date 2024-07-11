@@ -10,6 +10,7 @@ initContainerImage:
     # -- 8.5.0
     version: "sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"
     imagePullPolicy: IfNotPresent
+initContainerResources: {}
 
 redis:
   enabled: true
@@ -52,6 +53,60 @@ redis:
     create: true
     name: ""
     annotations: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
+
+mysql:
+  gcp:
+    enabled: false
+    instance: ""
+    scaffoldSQLProxy:
+      registry: ghcr.io
+      repository: sigstore/scaffolding/cloudsqlproxy
+      # -- v0.6.17 which is based on cloud-sql-proxy:2.9.0-alpine
+      version: sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2
+      resources:
+        requests:
+          memory: "2Gi"
+          cpu: "1"
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - ALL
+    cloudsql:
+      registry: gcr.io
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine
+      version: sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9
+      resources:
+        requests:
+          memory: "2Gi"
+          cpu: "1"
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        capabilities:
+          drop:
+            - ALL
+      unixDomainSocket:
+        enabled: false
+        path: /cloudsql
+  enabled: false
+  replicaCount: 1
+  name: mysql
+  hostname: ""
+  port: 3306
+  strategy:
+    type: Recreate
+  image:
+    registry: gcr.io
+    repository: trillian-opensource-ci/db_server
+    pullPolicy: IfNotPresent
 
 server:
   enabled: true
@@ -158,6 +213,13 @@ server:
     create: true
     name: ""
     annotations: {}
+  searchIndex:
+    storageProvider: ""
+    mysql: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
+
 createtree:
   name: createtree
   force: false
@@ -177,6 +239,10 @@ createtree:
     runAsUser: 65533
   resources: {}
   annotations: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
+
 # Configure backfillredis to repair indices that were not inserted into Redis.
 backfillredis:
   name: backfillredis
@@ -195,6 +261,9 @@ backfillredis:
   startIndex: -1
   endIndex: -1
   resources: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 # Configure Trillian dependency
 trillian:

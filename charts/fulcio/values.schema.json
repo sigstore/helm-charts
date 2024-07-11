@@ -1,1724 +1,495 @@
 {
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "http://example.com/example.json",
-    "type": "object",
-    "default": {},
-    "title": "Root Schema",
-    "required": [
-        "namespace",
-        "config",
-        "server",
-        "createcerts",
-        "ctlog",
-        "forceNamespace"
-    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
+        "config": {
+            "properties": {
+                "contents": {
+                    "properties": {},
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "createcerts": {
+            "properties": {
+                "affinity": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "annotations": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "image": {
+                    "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
+                        "registry": {
+                            "type": "string"
+                        },
+                        "repository": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nodeSelector": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "replicaCount": {
+                    "type": "integer"
+                },
+                "securityContext": {
+                    "properties": {
+                        "runAsNonRoot": {
+                            "type": "boolean"
+                        },
+                        "runAsUser": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
+                "serviceAccount": {
+                    "properties": {
+                        "annotations": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "mountToken": {
+                            "type": "boolean"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "tolerations": {
+                    "type": "array"
+                },
+                "ttlSecondsAfterFinished": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "ctlog": {
+            "properties": {
+                "createcerts": {
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "createctconfig": {
+                    "properties": {
+                        "logPrefix": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "createtree": {
+                    "properties": {
+                        "fullnameOverride": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "forceNamespace": {
+                    "type": "string"
+                },
+                "fullnameOverride": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "namespace": {
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "forceNamespace": {
+            "type": "string"
+        },
         "imagePullSecrets": {
             "type": "array"
         },
         "namespace": {
-            "type": "object",
-            "default": {},
-            "title": "The namespace Schema",
-            "required": [
-                "create",
-                "name"
-            ],
             "properties": {
                 "create": {
-                    "type": "boolean",
-                    "default": false,
-                    "title": "The create Schema",
-                    "examples": [
-                        false
-                    ]
+                    "type": "boolean"
                 },
                 "name": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The name Schema",
-                    "examples": [
-                        "fulcio-system"
-                    ]
-                },
-                "labels": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The labels Schema",
-                    "required": [],
-                    "properties": {},
-                    "examples": [
-                        {}
-                    ]
+                    "type": "string"
                 }
             },
-            "examples": [
-                {
-                    "create": false,
-                    "name": "fulcio-system"
-                }
-            ]
-        },
-        "config": {
-            "type": "object",
-            "default": {},
-            "title": "The config Schema",
-            "required": [
-                "contents"
-            ],
-            "properties": {
-                "contents": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The contents Schema",
-                    "required": [],
-                    "properties": {},
-                    "examples": [
-                        {}
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "contents": {}
-                }
-            ]
+            "type": "object"
         },
         "server": {
-            "type": "object",
-            "default": {},
-            "title": "The server Schema",
-            "required": [
-                "replicaCount",
-                "name",
-                "svcPort",
-                "grpcSvcPort",
-                "image",
-                "args",
-                "serviceAccount",
-                "service",
-                "ingress",
-                "securityContext",
-                "secret"
-            ],
             "properties": {
-                "replicaCount": {
-                    "type": "integer",
-                    "default": 0,
-                    "title": "The replicaCount Schema",
-                    "examples": [
-                        1
-                    ]
-                },
-                "name": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The name Schema",
-                    "examples": [
-                        "server"
-                    ]
-                },
-                "svcPort": {
-                    "type": "integer",
-                    "default": 0,
-                    "title": "The svcPort Schema",
-                    "examples": [
-                        80
-                    ]
-                },
-                "logging": {
-                    "type": "object",
-                    "properties": {
-                        "production": {
-                            "type": "boolean",
-                            "default": false
-                        }
-                    }
-                },
-                "grpcSvcPort": {
-                    "type": "integer",
-                    "default": 0,
-                    "title": "The grpcSvcPort Schema",
-                    "examples": [
-                        5554
-                    ]
-                },
-                "grpcSvcTLS": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The grpcSvcTLS Schema",
-                    "required": [
-                        "secretName",
-                        "keyField",
-                        "certField"
-                    ],
-                    "properties": {
-                        "secretName": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The secretName Schema",
-                            "examples": [
-                                "fulcio-grpc-tls"
-                            ]
-                        },
-                        "keyField": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The keyField Schema",
-                            "examples": [
-                                "tls.key"
-                            ]
-                        },
-                        "certField": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The certField Schema",
-                            "examples": [
-                                "tls.crt"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "secretName": "fulcio-grpc-tls",
-                            "keyField": "tls.key",
-                            "certField": "tls.crt"
-                        }
-                    ]
-                },
-                "image": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The image Schema",
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy",
-                        "version"
-                    ],
-                    "properties": {
-                        "registry": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The registry Schema",
-                            "examples": [
-                                "gcr.io"
-                            ]
-                        },
-                        "repository": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The repository Schema",
-                            "examples": [
-                                "projectsigstore/fulcio"
-                            ]
-                        },
-                        "pullPolicy": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The pullPolicy Schema",
-                            "examples": [
-                                "IfNotPresent"
-                            ]
-                        },
-                        "version": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The version Schema",
-                            "examples": [
-                                "sha256:61081295a8f75ed7537b5d1f8c7320e078dc00e4562c0bf605fbefa062c690de"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "registry": "gcr.io",
-                            "repository": "projectsigstore/fulcio",
-                            "pullPolicy": "IfNotPresent",
-                            "version": "sha256:61081295a8f75ed7537b5d1f8c7320e078dc00e4562c0bf605fbefa062c690de"
-                        }
-                    ]
+                "affinity": {
+                    "properties": {},
+                    "type": "object"
                 },
                 "args": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The args Schema",
-                    "required": [
-                        "port",
-                        "grpcPort",
-                        "certificateAuthority"
-                    ],
                     "properties": {
-                        "port": {
-                            "type": "integer",
-                            "default": 0,
-                            "title": "The port Schema",
-                            "examples": [
-                                5555
-                            ]
-                        },
-                        "grpcPort": {
-                            "type": "integer",
-                            "default": 0,
-                            "title": "The grpcPort Schema",
-                            "examples": [
-                                5554
-                            ]
+                        "aws_hsm_root_ca_path": {
+                            "type": "null"
                         },
                         "certificateAuthority": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The certificateAuthority Schema",
-                            "examples": [
-                                "fileca"
-                            ]
-                        },
-                        "hsm_caroot_id": {
-                            "type": "null",
-                            "default": null,
-                            "title": "The hsm_caroot_id Schema",
-                            "examples": [
-                                null
-                            ]
-                        },
-                        "aws_hsm_root_ca_path": {
-                            "type": "null",
-                            "default": null,
-                            "title": "The aws_hsm_root_ca_path Schema",
-                            "examples": [
-                                null
-                            ]
-                        },
-                        "gcp_private_ca_parent": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The gcp_private_ca_parent Schema",
-                            "examples": [
-                                "projects/test/locations/us-east1/caPools/test"
-                            ]
-                        },
-                        "disable_ct_log": {
-                            "type": "boolean",
-                            "default": false,
-                            "title": "Disable CT log submission",
-                            "description": "If set, Fulcio will not submit issued certificates to a CT log.",
-                            "examples": [
-                                true,
-                                false
-                            ]
+                            "type": "string"
                         },
                         "ct_log_url": {
-                            "type": "string",
-                            "default": "",
-                            "title": "URL of the CT log to submit to",
-                            "description": "If set, Fulcio will submit issued certificates to the specified CT log instead of the default in-cluster CT Log.",
-                            "examples": [
-                                "https://ct.example.com/"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "port": 5555,
-                            "grpcPort": 5554,
-                            "certificateAuthority": "fileca",
-                            "hsm_caroot_id": null,
-                            "aws_hsm_root_ca_path": null,
-                            "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
-                        }
-                    ]
-                },
-                "extraArgs": {
-                    "title": "The extraArgs Schema",
-                    "type": "array",
-                    "default": [],
-                    "items": {},
-                    "examples": [
-                        []
-                    ]
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The serviceAccount Schema",
-                    "required": [
-                        "create",
-                        "name",
-                        "annotations",
-                        "mountToken"
-                    ],
-                    "properties": {
-                        "create": {
-                            "type": "boolean",
-                            "default": false,
-                            "title": "The create Schema",
-                            "examples": [
-                                true
-                            ]
+                            "type": "string"
                         },
-                        "name": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The name Schema",
-                            "examples": [
-                                ""
-                            ]
+                        "disable_ct_log": {
+                            "type": "boolean"
                         },
-                        "annotations": {
-                            "type": "object",
-                            "default": {},
-                            "title": "The annotations Schema",
-                            "required": [],
-                            "properties": {},
-                            "examples": [
-                                {}
-                            ]
+                        "gcp_private_ca_parent": {
+                            "type": "string"
                         },
-                        "mountToken": {
-                            "type": "boolean",
-                            "default": false,
-                            "title": "The mountToken Schema",
-                            "examples": [
-                                true
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "create": true,
-                            "name": "",
-                            "annotations": {},
-                            "mountToken": true
-                        }
-                    ]
-                },
-                "service": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The service Schema",
-                    "required": [
-                        "type",
-                        "ports"
-                    ],
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The type Schema",
-                            "examples": [
-                                "ClusterIP"
-                            ]
+                        "grpcPort": {
+                            "type": "integer"
                         },
-                        "ports": {
-                            "type": "array",
-                            "default": [],
-                            "title": "The ports Schema",
-                            "items": {
-                                "type": "object",
-                                "title": "A Schema",
-                                "required": [
-                                    "name",
-                                    "port",
-                                    "protocol",
-                                    "targetPort"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "title": "The name Schema",
-                                        "examples": [
-                                            "http",
-                                            "grpc",
-                                            "2112-tcp"
-                                        ]
-                                    },
-                                    "port": {
-                                        "type": "integer",
-                                        "title": "The port Schema",
-                                        "examples": [
-                                            80,
-                                            5554,
-                                            2112
-                                        ]
-                                    },
-                                    "protocol": {
-                                        "type": "string",
-                                        "title": "The protocol Schema",
-                                        "examples": [
-                                            "TCP"
-                                        ]
-                                    },
-                                    "targetPort": {
-                                        "type": "integer",
-                                        "title": "The targetPort Schema",
-                                        "examples": [
-                                            5555,
-                                            5554,
-                                            2112
-                                        ]
-                                    }
-                                },
-                                "examples": [
-                                    {
-                                        "name": "http",
-                                        "port": 80,
-                                        "protocol": "TCP",
-                                        "targetPort": 5555
-                                    },
-                                    {
-                                        "name": "grpc",
-                                        "port": 5554,
-                                        "protocol": "TCP",
-                                        "targetPort": 5554
-                                    },
-                                    {
-                                        "name": "2112-tcp",
-                                        "port": 2112,
-                                        "protocol": "TCP",
-                                        "targetPort": 2112
-                                    }
-                                ]
-                            },
-                            "examples": [
-                                [
-                                    {
-                                        "name": "http",
-                                        "port": 80,
-                                        "protocol": "TCP",
-                                        "targetPort": 5555
-                                    },
-                                    {
-                                        "name": "grpc",
-                                        "port": 5554,
-                                        "protocol": "TCP",
-                                        "targetPort": 5554
-                                    },
-                                    {
-                                        "name": "2112-tcp",
-                                        "port": 2112,
-                                        "protocol": "TCP",
-                                        "targetPort": 2112
-                                    }
-                                ]
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "type": "ClusterIP",
-                            "ports": [
-                                {
-                                    "name": "http",
-                                    "port": 80,
-                                    "protocol": "TCP",
-                                    "targetPort": 5555
-                                },
-                                {
-                                    "name": "grpc",
-                                    "port": 5554,
-                                    "protocol": "TCP",
-                                    "targetPort": 5554
-                                },
-                                {
-                                    "name": "2112-tcp",
-                                    "port": 2112,
-                                    "protocol": "TCP",
-                                    "targetPort": 2112
-                                }
-                            ]
-                        }
-                    ]
-                },
-                "ingress": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The ingress Schema",
-                    "required": [
-                        "http",
-                        "grpc"
-                    ],
-                    "properties": {
-                        "http": {
-                            "type": "object",
-                            "default": {},
-                            "title": "The http Schema",
-                            "required": [
-                                "enabled",
-                                "className",
-                                "annotations",
-                                "hosts",
-                                "tls"
-                            ],
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean",
-                                    "default": false,
-                                    "title": "The enabled Schema",
-                                    "examples": [
-                                        true
-                                    ]
-                                },
-                                "className": {
-                                    "type": "string",
-                                    "default": "",
-                                    "title": "The className Schema",
-                                    "examples": [
-                                        "nginx"
-                                    ]
-                                },
-                                "annotations": {
-                                    "type": "object",
-                                    "default": {},
-                                    "title": "The annotations Schema",
-                                    "required": [],
-                                    "properties": {},
-                                    "examples": [
-                                        {}
-                                    ]
-                                },
-                                "hosts": {
-                                    "type": "array",
-                                    "default": [],
-                                    "title": "The hosts Schema",
-                                    "items": {
-                                        "type": "object",
-                                        "default": {},
-                                        "title": "A Schema",
-                                        "required": [
-                                            "path",
-                                            "host"
-                                        ],
-                                        "properties": {
-                                            "path": {
-                                                "type": "string",
-                                                "default": "",
-                                                "title": "The path Schema",
-                                                "examples": [
-                                                    "/"
-                                                ]
-                                            },
-                                            "host": {
-                                                "type": "string",
-                                                "default": "",
-                                                "title": "The host Schema",
-                                                "examples": [
-                                                    "fulcio.localhost"
-                                                ]
-                                            }
-                                        },
-                                        "examples": [
-                                            {
-                                                "path": "/",
-                                                "host": "fulcio.localhost"
-                                            }
-                                        ]
-                                    },
-                                    "examples": [
-                                        [
-                                            {
-                                                "path": "/",
-                                                "host": "fulcio.localhost"
-                                            }
-                                        ]
-                                    ]
-                                },
-                                "tls": {
-                                    "type": "array",
-                                    "default": [],
-                                    "title": "The tls Schema",
-                                    "items": {},
-                                    "examples": [
-                                        []
-                                    ]
-                                }
-                            },
-                            "examples": [
-                                {
-                                    "enabled": true,
-                                    "className": "nginx",
-                                    "annotations": {},
-                                    "hosts": [
-                                        {
-                                            "path": "/",
-                                            "host": "fulcio.localhost"
-                                        }
-                                    ],
-                                    "tls": []
-                                }
-                            ]
+                        "hsm_caroot_id": {
+                            "type": "null"
                         },
-                        "grpc": {
-                            "type": "object",
-                            "default": {},
-                            "title": "The grpc Schema",
-                            "required": [
-                                "enabled",
-                                "className",
-                                "annotations",
-                                "hosts",
-                                "tls"
-                            ],
-                            "properties": {
-                                "enabled": {
-                                    "type": "boolean",
-                                    "default": false,
-                                    "title": "The enabled Schema",
-                                    "examples": [
-                                        false
-                                    ]
-                                },
-                                "className": {
-                                    "type": "string",
-                                    "default": "",
-                                    "title": "The className Schema",
-                                    "examples": [
-                                        ""
-                                    ]
-                                },
-                                "annotations": {
-                                    "type": "object",
-                                    "default": {},
-                                    "title": "The annotations Schema",
-                                    "required": [
-                                        "nginx.ingress.kubernetes.io/backend-protocol"
-                                    ],
-                                    "properties": {
-                                        "nginx.ingress.kubernetes.io/backend-protocol": {
-                                            "type": "string",
-                                            "default": "",
-                                            "title": "The nginx.ingress.kubernetes.io/backend-protocol Schema",
-                                            "examples": [
-                                                "GRPC"
-                                            ]
-                                        }
-                                    },
-                                    "examples": [
-                                        {
-                                            "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
-                                        }
-                                    ]
-                                },
-                                "hosts": {
-                                    "type": "array",
-                                    "default": [],
-                                    "title": "The hosts Schema",
-                                    "items": {
-                                        "type": "object",
-                                        "default": {},
-                                        "title": "A Schema",
-                                        "required": [
-                                            "host",
-                                            "path"
-                                        ],
-                                        "properties": {
-                                            "host": {
-                                                "type": "string",
-                                                "default": "",
-                                                "title": "The host Schema",
-                                                "examples": [
-                                                    "fulcio.localhost"
-                                                ]
-                                            },
-                                            "path": {
-                                                "type": "string",
-                                                "default": "",
-                                                "title": "The path Schema",
-                                                "examples": [
-                                                    "/dev.sigstore.fulcio.v2.CA"
-                                                ]
-                                            }
-                                        },
-                                        "examples": [
-                                            {
-                                                "host": "fulcio.localhost",
-                                                "path": "/dev.sigstore.fulcio.v2.CA"
-                                            }
-                                        ]
-                                    },
-                                    "examples": [
-                                        [
-                                            {
-                                                "host": "fulcio.localhost",
-                                                "path": "/dev.sigstore.fulcio.v2.CA"
-                                            }
-                                        ]
-                                    ]
-                                },
-                                "tls": {
-                                    "type": "array",
-                                    "default": [],
-                                    "title": "The tls Schema",
-                                    "items": {
-                                        "type": "object",
-                                        "default": {},
-                                        "title": "A Schema",
-                                        "required": [
-                                            "secretName",
-                                            "hosts"
-                                        ],
-                                        "properties": {
-                                            "secretName": {
-                                                "type": "string",
-                                                "default": "",
-                                                "title": "The secretName Schema",
-                                                "examples": [
-                                                    "fulcio-grpc-ingress-tls"
-                                                ]
-                                            },
-                                            "hosts": {
-                                                "type": "array",
-                                                "default": [],
-                                                "title": "The hosts Schema",
-                                                "items": {
-                                                    "type": "string",
-                                                    "default": "",
-                                                    "title": "A Schema",
-                                                    "examples": [
-                                                        "fulcio.localhost"
-                                                    ]
-                                                },
-                                                "examples": [
-                                                    [
-                                                        "fulcio.localhost"
-                                                    ]
-                                                ]
-                                            }
-                                        },
-                                        "examples": [
-                                            {
-                                                "secretName": "fulcio-grpc-ingress-tls",
-                                                "hosts": [
-                                                    "fulcio.localhost"
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    "examples": [
-                                        [
-                                            {
-                                                "secretName": "fulcio-grpc-ingress-tls",
-                                                "hosts": [
-                                                    "fulcio.localhost"
-                                                ]
-                                            }
-                                        ]
-                                    ]
-                                }
-                            },
-                            "examples": [
-                                {
-                                    "enabled": false,
-                                    "className": "",
-                                    "annotations": {
-                                        "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
-                                    },
-                                    "hosts": [
-                                        {
-                                            "host": "fulcio.localhost",
-                                            "path": "/dev.sigstore.fulcio.v2.CA"
-                                        }
-                                    ],
-                                    "tls": [
-                                        {
-                                            "secretName": "fulcio-grpc-ingress-tls",
-                                            "hosts": [
-                                                "fulcio.localhost"
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
+                        "port": {
+                            "type": "integer"
                         }
                     },
-                    "examples": [
-                        {
-                            "http": {
-                                "enabled": true,
-                                "className": "nginx",
-                                "annotations": {},
-                                "hosts": [
-                                    {
-                                        "path": "/",
-                                        "host": "fulcio.localhost"
-                                    }
-                                ],
-                                "tls": []
-                            },
-                            "grpc": {
-                                "enabled": false,
-                                "className": "",
-                                "annotations": {
-                                    "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
-                                },
-                                "hosts": [
-                                    {
-                                        "host": "fulcio.localhost",
-                                        "path": "/dev.sigstore.fulcio.v2.CA"
-                                    }
-                                ],
-                                "tls": [
-                                    {
-                                        "secretName": "fulcio-grpc-ingress-tls",
-                                        "hosts": [
-                                            "fulcio.localhost"
-                                        ]
-                                    }
-                                ]
-                            }
-                        }
-                    ]
+                    "type": "object"
                 },
-                "ingresses": {
-                    "title": "The ingresses Schema",
-                    "type": "array",
-                    "default": [],
-                    "items": {
-                        "title": "An ingress Schema",
-                        "default": {},
-                        "required": [
-                            "enabled",
-                            "name",
-                            "className",
-                            "http",
-                            "grpc",
-                            "hosts",
-                            "tls"
-                        ],
-                        "properties": {
-                            "enabled": {
-                                "title": "The enabled Schema",
-                                "type": "boolean",
-                                "default": false,
-                                "examples": [
-                                    true
-                                ]
-                            },
-                            "name": {
-                                "title": "The name for the ingress (and dependent objects)",
-                                "type": "string",
-                                "default": "",
-                                "examples": [
-                                    "gce-ingress"
-                                ]
-                            },
-                            "className": {
-                                "title": "The className Schema",
-                                "type": "string",
-                                "default": "",
-                                "examples": [
-                                    "gce"
-                                ]
-                            },
-                            "grpc": {
-                                "title": "grpc enabled",
-                                "type": "boolean",
-                                "default": false,
-                                "examples": [
-                                    true
-                                ]
-                            },
-                            "http": {
-                                "title": "http enabled",
-                                "type": "boolean",
-                                "default": true,
-                                "examples": [
-                                    true
-                                ]
-                            },
-                            "hosts": {
-                                "title": "The hosts Schema",
-                                "type": "array",
-                                "default": [],
-                                "items": {
-                                    "title": "A Schema",
-                                    "type": "object",
-                                    "default": {},
-                                    "required": [
-                                        "path"
-                                    ],
-                                    "properties": {
-                                        "path": {
-                                            "title": "The path Schema",
-                                            "type": "string",
-                                            "default": "",
-                                            "examples": [
-                                                "/"
-                                            ]
-                                        }
-                                    },
-                                    "examples": [
-                                        {
-                                            "path": "/"
-                                        }
-                                    ]
-                                },
-                                "examples": [
-                                    [
-                                        {
-                                            "path": "/"
-                                        }
-                                    ]
-                                ]
-                            },
-                            "annotations": {
-                                "title": "The annotations Schema",
-                                "type": "object",
-                                "default": {},
-                                "required": [],
-                                "properties": {},
-                                "examples": [
-                                    {}
-                                ]
-                            },
-                            "tls": {
-                                "title": "The tls Schema",
-                                "type": "array",
-                                "default": [],
-                                "items": {},
-                                "examples": [
-                                    []
-                                ]
-                            },
-                            "staticGlobalIP": {
-                                "title": "The name of a GCP static IP address object to be assigned to the ingress-created load balancer",
-                                "type": "string",
-                                "default": "",
-                                "examples": [
-                                    "lb-ext-ip"
-                                ]
-                            },
-                            "frontendConfigSpec": {
-                                "title": "The frontendConfigSpec Schema - refers to values for networking.gke.io/v1beta1 FrontendConfig",
-                                "type": "object",
-                                "default": {},
-                                "required": [],
-                                "examples": [
-                                    {}
-                                ]
-                            },
-                            "backendConfigSpec": {
-                                "title": "The backendConfigSpec Schema - refers to values for cloud.google.com/v1 BackendConfig",
-                                "type": "object",
-                                "default": {},
-                                "required": [],
-                                "examples": [
-                                    {}
-                                ]
-                            }
-                        }
-                    },
-                    "examples": [
-                        {
-                            "enabled": true,
-                            "grpc": false,
-                            "http": true,
-                            "className": "gce",
-                            "hosts": [
-                                {
-                                    "path": "/"
-                                }
-                            ],
-                            "annotations": {},
-                            "tls": []
-                        }
-                    ]
-                },
-                "securityContext": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The securityContext Schema",
-                    "required": [
-                        "runAsNonRoot",
-                        "runAsUser"
-                    ],
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean",
-                            "default": false,
-                            "title": "The runAsNonRoot Schema",
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "runAsUser": {
-                            "type": "integer",
-                            "default": 0,
-                            "title": "The runAsUser Schema",
-                            "examples": [
-                                65533
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "runAsNonRoot": true,
-                            "runAsUser": 65533
-                        }
-                    ]
-                },
-                "secret": {
-                    "type": "string",
-                    "title": "The name of the secret containing the fulcio keys, password and PEM"
-                }
-            },
-            "examples": [
-                {
-                    "replicaCount": 1,
-                    "name": "server",
-                    "svcPort": 80,
-                    "grpcSvcPort": 5554,
-                    "image": {
-                        "registry": "gcr.io",
-                        "repository": "projectsigstore/fulcio",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "sha256:61081295a8f75ed7537b5d1f8c7320e078dc00e4562c0bf605fbefa062c690de"
-                    },
-                    "args": {
-                        "port": 5555,
-                        "grpcPort": 5554,
-                        "certificateAuthority": "fileca",
-                        "hsm_caroot_id": null,
-                        "aws_hsm_root_ca_path": null,
-                        "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
-                    },
-                    "serviceAccount": {
-                        "create": true,
-                        "name": "",
-                        "annotations": {},
-                        "mountToken": true
-                    },
-                    "service": {
-                        "type": "ClusterIP",
-                        "ports": [
-                            {
-                                "name": "http",
-                                "port": 80,
-                                "protocol": "TCP",
-                                "targetPort": 5555
-                            },
-                            {
-                                "name": "grpc",
-                                "port": 5554,
-                                "protocol": "TCP",
-                                "targetPort": 5554
-                            },
-                            {
-                                "name": "2112-tcp",
-                                "port": 2112,
-                                "protocol": "TCP",
-                                "targetPort": 2112
-                            }
-                        ]
-                    },
-                    "ingress": {
-                        "http": {
-                            "enabled": true,
-                            "className": "nginx",
-                            "annotations": {},
-                            "hosts": [
-                                {
-                                    "path": "/",
-                                    "host": "fulcio.localhost"
-                                }
-                            ],
-                            "tls": []
-                        },
-                        "grpc": {
-                            "enabled": false,
-                            "className": "",
-                            "annotations": {
-                                "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
-                            },
-                            "hosts": [
-                                {
-                                    "host": "fulcio.localhost",
-                                    "path": "/dev.sigstore.fulcio.v2.CA"
-                                }
-                            ],
-                            "tls": [
-                                {
-                                    "secretName": "fulcio-grpc-ingress-tls",
-                                    "hosts": [
-                                        "fulcio.localhost"
-                                    ]
-                                }
-                            ]
-                        }
-                    },
-                    "securityContext": {
-                        "runAsNonRoot": true,
-                        "runAsUser": 65533
-                    }
-                }
-            ]
-        },
-        "createcerts": {
-            "type": "object",
-            "default": {},
-            "title": "The createcerts Schema",
-            "required": [
-                "enabled",
-                "replicaCount",
-                "name",
-                "image",
-                "serviceAccount",
-                "securityContext",
-                "annotations"
-            ],
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "default": false,
-                    "title": "The enabled Schema",
-                    "examples": [
-                        true
-                    ]
-                },
-                "replicaCount": {
-                    "type": "integer",
-                    "default": 0,
-                    "title": "The replicaCount Schema",
-                    "examples": [
-                        1
-                    ]
-                },
-                "name": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The name Schema",
-                    "examples": [
-                        "createcerts"
-                    ]
+                "grpcSvcPort": {
+                    "type": "integer"
                 },
                 "image": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The image Schema",
-                    "required": [
-                        "registry",
-                        "repository",
-                        "pullPolicy",
-                        "version"
-                    ],
                     "properties": {
+                        "pullPolicy": {
+                            "type": "string"
+                        },
                         "registry": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The registry Schema",
-                            "examples": [
-                                "ghcr.io"
-                            ]
+                            "type": "string"
                         },
                         "repository": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The repository Schema",
-                            "examples": [
-                                "sigstore/scaffolding/createcerts"
-                            ]
-                        },
-                        "pullPolicy": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The pullPolicy Schema",
-                            "examples": [
-                                "IfNotPresent"
-                            ]
+                            "type": "string"
                         },
                         "version": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The version Schema",
-                            "examples": [
-                                "sha256:e1b6ff1951d3ab074cd4755f0cfedffe8706ea4780b777afdfbf6d30c29750a1"
-                            ]
+                            "type": "string"
                         }
                     },
-                    "examples": [
-                        {
-                            "registry": "ghcr.io",
-                            "repository": "sigstore/scaffolding/createcerts",
-                            "pullPolicy": "IfNotPresent",
-                            "version": "sha256:e1b6ff1951d3ab074cd4755f0cfedffe8706ea4780b777afdfbf6d30c29750a1"
-                        }
-                    ]
-                },
-                "ttlSecondsAfterFinished": {
-                    "type": "integer",
-                    "default": 0,
-                    "title": "The ttlSecondsAfterFinished Schema",
-                    "examples": [
-                        3600
-                    ]
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The serviceAccount Schema",
-                    "required": [
-                        "create",
-                        "name",
-                        "annotations",
-                        "mountToken"
-                    ],
-                    "properties": {
-                        "create": {
-                            "type": "boolean",
-                            "default": false,
-                            "title": "The create Schema",
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "name": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The name Schema",
-                            "examples": [
-                                ""
-                            ]
-                        },
-                        "annotations": {
-                            "type": "object",
-                            "default": {},
-                            "title": "The annotations Schema",
-                            "required": [],
-                            "properties": {},
-                            "examples": [
-                                {}
-                            ]
-                        },
-                        "mountToken": {
-                            "type": "boolean",
-                            "default": false,
-                            "title": "The mountToken Schema",
-                            "examples": [
-                                true
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "create": true,
-                            "name": "",
-                            "annotations": {},
-                            "mountToken": true
-                        }
-                    ]
-                },
-                "securityContext": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The securityContext Schema",
-                    "required": [
-                        "runAsNonRoot",
-                        "runAsUser"
-                    ],
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean",
-                            "default": false,
-                            "title": "The runAsNonRoot Schema",
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "runAsUser": {
-                            "type": "integer",
-                            "default": 0,
-                            "title": "The runAsUser Schema",
-                            "examples": [
-                                65533
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "runAsNonRoot": true,
-                            "runAsUser": 65533
-                        }
-                    ]
-                },
-                "annotations": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The annotations Schema",
-                    "required": [],
-                    "properties": {},
-                    "examples": [
-                        {}
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "enabled": true,
-                    "replicaCount": 1,
-                    "name": "createcerts",
-                    "image": {
-                        "registry": "ghcr.io",
-                        "repository": "sigstore/scaffolding/createcerts",
-                        "pullPolicy": "IfNotPresent",
-                        "version": "sha256:e1b6ff1951d3ab074cd4755f0cfedffe8706ea4780b777afdfbf6d30c29750a1"
-                    },
-                    "serviceAccount": {
-                        "create": true,
-                        "name": "",
-                        "annotations": {},
-                        "mountToken": true
-                    },
-                    "securityContext": {
-                        "runAsNonRoot": true,
-                        "runAsUser": 65533
-                    },
-                    "annotations": {}
-                }
-            ]
-        },
-        "ctlog": {
-            "type": "object",
-            "default": {},
-            "title": "The ctlog Schema",
-            "required": [
-                "enabled",
-                "name",
-                "forceNamespace",
-                "fullnameOverride",
-                "namespace",
-                "createtree",
-                "createcerts",
-                "createctconfig"
-            ],
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "default": false,
-                    "title": "The enabled Schema",
-                    "examples": [
-                        true
-                    ]
-                },
-                "name": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The name Schema",
-                    "examples": [
-                        "ctlog"
-                    ]
-                },
-                "forceNamespace": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The forceNamespace Schema",
-                    "examples": [
-                        "ctlog-system"
-                    ]
-                },
-                "fullnameOverride": {
-                    "type": "string",
-                    "default": "",
-                    "title": "The fullnameOverride Schema",
-                    "examples": [
-                        "ctlog"
-                    ]
-                },
-                "namespace": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The namespace Schema",
-                    "required": [
-                        "name",
-                        "create"
-                    ],
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The name Schema",
-                            "examples": [
-                                "ctlog-system"
-                            ]
-                        },
-                        "create": {
-                            "type": "boolean",
-                            "default": false,
-                            "title": "The create Schema",
-                            "examples": [
-                                true
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "name": "ctlog-system",
-                            "create": true
-                        }
-                    ]
-                },
-                "createtree": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The createtree Schema",
-                    "required": [
-                        "name",
-                        "fullnameOverride"
-                    ],
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The name Schema",
-                            "examples": [
-                                "ctlog-createtree"
-                            ]
-                        },
-                        "fullnameOverride": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The fullnameOverride Schema",
-                            "examples": [
-                                "ctlog-createtree"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "name": "ctlog-createtree",
-                            "fullnameOverride": "ctlog-createtree"
-                        }
-                    ]
-                },
-                "createcerts": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The createcerts Schema",
-                    "required": [
-                        "name",
-                        "fullnameOverride"
-                    ],
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The name Schema",
-                            "examples": [
-                                "ctlog-createcerts"
-                            ]
-                        },
-                        "fullnameOverride": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The fullnameOverride Schema",
-                            "examples": [
-                                "ctlog-createcerts"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "name": "ctlog-createcerts",
-                            "fullnameOverride": "ctlog-createcerts"
-                        }
-                    ]
-                },
-                "createctconfig": {
-                    "type": "object",
-                    "default": {},
-                    "title": "The createctconfig Schema",
-                    "required": [
-                        "logPrefix"
-                    ],
-                    "properties": {
-                        "logPrefix": {
-                            "type": "string",
-                            "default": "",
-                            "title": "The logPrefix Schema",
-                            "examples": [
-                                "fulcio"
-                            ]
-                        }
-                    },
-                    "examples": [
-                        {
-                            "logPrefix": "fulcio"
-                        }
-                    ]
-                }
-            },
-            "examples": [
-                {
-                    "enabled": true,
-                    "name": "ctlog",
-                    "forceNamespace": "ctlog-system",
-                    "fullnameOverride": "ctlog",
-                    "namespace": {
-                        "name": "ctlog-system",
-                        "create": true
-                    },
-                    "createtree": {
-                        "name": "ctlog-createtree",
-                        "fullnameOverride": "ctlog-createtree"
-                    },
-                    "createcerts": {
-                        "name": "ctlog-createcerts",
-                        "fullnameOverride": "ctlog-createcerts"
-                    },
-                    "createctconfig": {
-                        "logPrefix": "fulcio"
-                    }
-                }
-            ]
-        },
-        "forceNamespace": {
-            "type": "string",
-            "default": "",
-            "title": "The forceNamespace Schema",
-            "examples": [
-                ""
-            ]
-        }
-    },
-    "examples": [
-        {
-            "namespace": {
-                "create": false,
-                "name": "fulcio-system"
-            },
-            "config": {
-                "contents": {}
-            },
-            "server": {
-                "replicaCount": 1,
-                "name": "server",
-                "svcPort": 80,
-                "grpcSvcPort": 5554,
-                "image": {
-                    "registry": "gcr.io",
-                    "repository": "projectsigstore/fulcio",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "sha256:61081295a8f75ed7537b5d1f8c7320e078dc00e4562c0bf605fbefa062c690de"
-                },
-                "args": {
-                    "port": 5555,
-                    "grpcPort": 5554,
-                    "certificateAuthority": "fileca",
-                    "hsm_caroot_id": null,
-                    "aws_hsm_root_ca_path": null,
-                    "gcp_private_ca_parent": "projects/test/locations/us-east1/caPools/test"
-                },
-                "serviceAccount": {
-                    "create": true,
-                    "name": "",
-                    "annotations": {},
-                    "mountToken": true
-                },
-                "service": {
-                    "type": "ClusterIP",
-                    "ports": [
-                        {
-                            "name": "http",
-                            "port": 80,
-                            "protocol": "TCP",
-                            "targetPort": 5555
-                        },
-                        {
-                            "name": "grpc",
-                            "port": 5554,
-                            "protocol": "TCP",
-                            "targetPort": 5554
-                        },
-                        {
-                            "name": "2112-tcp",
-                            "port": 2112,
-                            "protocol": "TCP",
-                            "targetPort": 2112
-                        }
-                    ]
+                    "type": "object"
                 },
                 "ingress": {
-                    "http": {
-                        "enabled": true,
-                        "className": "nginx",
-                        "annotations": {},
-                        "hosts": [
-                            {
-                                "path": "/",
-                                "host": "fulcio.localhost"
-                            }
-                        ],
-                        "tls": []
-                    },
-                    "grpc": {
-                        "enabled": false,
-                        "className": "",
-                        "annotations": {
-                            "nginx.ingress.kubernetes.io/backend-protocol": "GRPC"
+                    "properties": {
+                        "grpc": {
+                            "properties": {
+                                "annotations": {
+                                    "properties": {
+                                        "nginx.ingress.kubernetes.io/backend-protocol": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "className": {
+                                    "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "hosts": {
+                                    "items": {
+                                        "properties": {
+                                            "host": {
+                                                "type": "string"
+                                            },
+                                            "path": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "tls": {
+                                    "items": {
+                                        "properties": {
+                                            "hosts": {
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "secretName": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
                         },
-                        "hosts": [
-                            {
-                                "host": "fulcio.localhost",
-                                "path": "/dev.sigstore.fulcio.v2.CA"
+                        "http": {
+                            "properties": {
+                                "annotations": {
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "className": {
+                                    "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "hosts": {
+                                    "items": {
+                                        "properties": {
+                                            "host": {
+                                                "type": "string"
+                                            },
+                                            "path": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "tls": {
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "ingresses": {
+                    "items": {
+                        "properties": {
+                            "annotations": {
+                                "properties": {},
+                                "type": "object"
+                            },
+                            "backendConfigSpec": {
+                                "properties": {
+                                    "healthCheck": {
+                                        "properties": {
+                                            "port": {
+                                                "type": "integer"
+                                            },
+                                            "requestPath": {
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "logging": {
+                                        "properties": {
+                                            "enable": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "securityPolicy": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "className": {
+                                "type": "string"
+                            },
+                            "enabled": {
+                                "type": "boolean"
+                            },
+                            "frontendConfigSpec": {
+                                "properties": {
+                                    "redirectToHttps": {
+                                        "properties": {
+                                            "enabled": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "sslPolicy": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "grpc": {
+                                "type": "boolean"
+                            },
+                            "hosts": {
+                                "items": {
+                                    "properties": {
+                                        "host": {
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "http": {
+                                "type": "boolean"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "staticGlobalIP": {
+                                "type": "string"
+                            },
+                            "tls": {
+                                "type": "array"
                             }
-                        ],
-                        "tls": [
-                            {
-                                "secretName": "fulcio-grpc-ingress-tls",
-                                "hosts": [
-                                    "fulcio.localhost"
-                                ]
-                            }
-                        ]
-                    }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "logging": {
+                    "properties": {
+                        "production": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nodeSelector": {
+                    "properties": {},
+                    "type": "object"
+                },
+                "replicaCount": {
+                    "type": "integer"
+                },
+                "secret": {
+                    "type": "string"
                 },
                 "securityContext": {
-                    "runAsNonRoot": true,
-                    "runAsUser": 65533
-                }
-            },
-            "createcerts": {
-                "enabled": true,
-                "replicaCount": 1,
-                "name": "createcerts",
-                "image": {
-                    "registry": "ghcr.io",
-                    "repository": "sigstore/scaffolding/createcerts",
-                    "pullPolicy": "IfNotPresent",
-                    "version": "sha256:e1b6ff1951d3ab074cd4755f0cfedffe8706ea4780b777afdfbf6d30c29750a1"
+                    "properties": {
+                        "runAsNonRoot": {
+                            "type": "boolean"
+                        },
+                        "runAsUser": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
+                "service": {
+                    "properties": {
+                        "ports": {
+                            "items": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "port": {
+                                        "type": "integer"
+                                    },
+                                    "protocol": {
+                                        "type": "string"
+                                    },
+                                    "targetPort": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 },
                 "serviceAccount": {
-                    "create": true,
-                    "name": "",
-                    "annotations": {},
-                    "mountToken": true
+                    "properties": {
+                        "annotations": {
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "mountToken": {
+                            "type": "boolean"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 },
-                "securityContext": {
-                    "runAsNonRoot": true,
-                    "runAsUser": 65533
+                "svcPort": {
+                    "type": "integer"
                 },
-                "annotations": {}
-            },
-            "ctlog": {
-                "enabled": true,
-                "name": "ctlog",
-                "forceNamespace": "ctlog-system",
-                "fullnameOverride": "ctlog",
-                "namespace": {
-                    "name": "ctlog-system",
-                    "create": true
-                },
-                "createtree": {
-                    "name": "ctlog-createtree",
-                    "fullnameOverride": "ctlog-createtree"
-                },
-                "createcerts": {
-                    "name": "ctlog-createcerts",
-                    "fullnameOverride": "ctlog-createcerts"
-                },
-                "createctconfig": {
-                    "logPrefix": "fulcio"
+                "tolerations": {
+                    "type": "array"
                 }
             },
-            "forceNamespace": ""
+            "type": "object"
         }
-    ]
+    },
+    "type": "object"
 }

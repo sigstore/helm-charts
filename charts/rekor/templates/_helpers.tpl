@@ -100,22 +100,46 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{/*
-Create a fully qualified Mysql name.
+Create a fully qualified mysql name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
 {{- define "rekor.mysql.fullname" -}}
-{{- if .Values.mysql.fullnameOverride -}}
+{{- if (.Values.mysql).fullnameOverride -}}
 {{- .Values.mysql.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- if contains $name .Release.Name -}}
-{{- printf "%s-%s" .Release.Name .Values.mysql.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s" .Release.Name (default "mysql" (.Values.mysql).name) | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- printf "%s-%s-%s" .Release.Name $name .Values.mysql.name | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s-%s" .Release.Name $name (default "mysql" (.Values.mysql).name) | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
 
+{{/*
+Return the hostname for mysql
+*/}}
+{{- define "mysql.hostname" -}}
+{{- default (include "rekor.mysql.fullname" .) (.Values.mysql).hostname }}
+{{- end -}}
+
+{{/*
+Return the database for mysql
+*/}}
+{{- define "mysql.database" -}}
+{{- default (include "rekor.fullname" .) (.Values.mysql).database }}
+{{- end -}}
+
+{{/*
+Return the secret with mysql credentials
+*/}}
+{{- define "mysql.secretName" -}}
+    {{- if ((.Values.mysql).auth).existingSecret -}}
+        {{- printf "%s" .Values.mysql.auth.existingSecret -}}
+    {{- else -}}
+        {{- printf "%s" (include "rekor.mysql.fullname" .) -}}
+    {{- end -}}
+{{- end -}}
 
 {{/*
 Define the rekor.namespace template if set with forceNamespace or .Release.Namespace is set
@@ -320,6 +344,28 @@ Server Arguments
 - {{ printf "--trillian_log_server.sharding_config=%s/%s" .Values.server.sharding.mountPath .Values.server.sharding.filename | quote }}
 - {{ printf "--redis_server.address=%s" (include "redis.hostname" .) | quote }}
 - {{ printf "--redis_server.port=%d" (.Values.redis.port | int) | quote }}
+{{- if (.Values.server.searchIndex).storageProvider }}
+- {{ printf "--search_index.storage_provider=%s" (.Values.server.searchIndex.storageProvider) | quote }}
+{{- end }}
+{{- if eq (.Values.server.searchIndex).storageProvider "mysql" }}
+{{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+- {{ printf "--search_index.mysql.dsn=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+{{- else }}
+- "--search_index.mysql.dsn=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
+{{- end }}
+{{- end }}
+{{- if ((.Values.server.searchIndex).mysql).connMaxIdletime }}
+- {{ printf "--search_index.mysql.conn_max_idletime=%s" (.Values.server.searchIndex.mysql.connMaxIdletime) | quote }}
+{{- end }}
+{{- if ((.Values.server.searchIndex).mysql).connMaxLifetime }}
+- {{ printf "--search_index.mysql.conn_max_lifetime=%s" (.Values.server.searchIndex.mysql.connMaxLifetime) | quote }}
+{{- end }}
+{{- if ((.Values.server.searchIndex).mysql).maxOpenConnections }}
+- {{ printf "--search_index.mysql.max_open_connections=%d" (.Values.server.searchIndex.mysql.maxOpenConnections | int) | quote }}
+{{- end }}
+{{- if ((.Values.server.searchIndex).mysql).maxIdleConnections }}
+- {{ printf "--search_index.mysql.max_idle_connections=%d" (.Values.server.searchIndex.mysql.maxIdleConnections | int) | quote }}
+{{- end }}
 - "--rekor_server.address=0.0.0.0"
 - {{ printf "--rekor_server.signer=%s" (.Values.server.signer) | quote }}
 {{- if .Values.server.retrieve_api.enabled }}
@@ -406,4 +452,33 @@ Create the name of the sharding config
 */}}
 {{- define "rekor.sharding-config" -}}
 {{ printf "%s-sharding-config" (include "rekor.fullname" .) }}
+{{- end }}
+
+{{/*
+Place default environment credentials setup
+*/}}
+{{- define "searchIndex.mysql.envCredentials" -}}
+{{- if ((.Values.server.searchIndex).mysql).envCredentials }}
+{{ toYaml .Values.server.searchIndex.mysql.envCredentials }}
+{{- else }}
+- name: MYSQL_USER
+  valueFrom:
+    secretKeyRef:
+        name: {{ template "mysql.secretName" . }}
+        key: mysql-user
+- name: MYSQL_PASSWORD
+  valueFrom:
+    secretKeyRef:
+        name: {{ template "mysql.secretName" . }}
+        key: mysql-password
+- name: MYSQL_DATABASE
+  valueFrom:
+    secretKeyRef:
+        name: {{ template "mysql.secretName" . }}
+        key: mysql-database
+- name: MYSQL_HOSTNAME
+  value: {{ template "mysql.hostname" . }}
+- name: MYSQL_PORT
+  value: {{ default "3306" (.Values.mysql).port | quote }}
+{{- end }}
 {{- end }}

@@ -19,9 +19,9 @@ server:
     registry: gcr.io
     repository: projectsigstore/fulcio
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/fulcio:v1.4.5
-    # -- v1.4.5
-    version: sha256:003d38b43442d436fe645feaebf8784975c138e411cf232276bea9de2a9f7b58
+    # crane digest gcr.io/projectsigstore/fulcio:v1.5.1
+    # -- v1.5.1
+    version: sha256:17b914c4a1d05871e3353630b3516b106b653839587aa496d0f96b6e857c8714
   args:
     port: 5555
     grpcPort: 5554
@@ -104,6 +104,9 @@ server:
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 createcerts:
   enabled: true
@@ -125,6 +128,9 @@ createcerts:
     runAsNonRoot: true
     runAsUser: 65533
   annotations: {}
+  tolerations: []
+  nodeSelector: {}
+  affinity: {}
 
 # Configure ctlog dependency
 ctlog:

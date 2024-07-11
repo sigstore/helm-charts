@@ -16,12 +16,14 @@ Update the status of an existing Trillian tree
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| affinity | object | `{}` |  |
 | annotations | object | `{}` |  |
 | args.treeID | string | `""` |  |
 | args.treeState | string | `""` | valid tree states are ACTIVE, FROZEN and DRAINING |
 | enabled | bool | `false` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"trillian-system"` |  |
+| nodeSelector | object | `{}` |  |
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `65533` |  |
 | serviceAccount.annotations | object | `{}` |  |
@@ -29,9 +31,9 @@ Update the status of an existing Trillian tree
 | serviceAccount.name | string | `"trillian-logserver"` |  |
 | spec.image | string | `"ghcr.io/sigstore/scaffolding/updatetree:v0.6.17@sha256:9fe03dde7324490cc7a84c75dfa3f1de267fc71c1a473fc67491c690e22c32ab"` |  |
 | spec.replicaCount | int | `1` |  |
+| tolerations | list | `[]` |  |
 | trillian.adminServer | string | `""` |  |
 | trillian.logServer.name | string | `"trillian-logserver"` |  |
 | trillian.logServer.portRPC | int | `8091` |  |
 | trillian.namespace | string | `"trillian-system"` |  |
 | ttlSecondsAfterFinished | int | `3600` |  |
-
