@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.3.21](https://img.shields.io/badge/Version-2.3.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.0](https://img.shields.io/badge/AppVersion-1.5.0-informational?style=flat-square)
+![Version: 2.3.22](https://img.shields.io/badge/Version-2.3.22-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.1](https://img.shields.io/badge/AppVersion-1.5.1-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -124,7 +124,7 @@ helm uninstall [RELEASE_NAME]
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/fulcio"` |  |
-| server.image.version | string | `"sha256:a533616a932ad23636d26e07fbfe984058a2b12a4e6362cd62ed548a95557ce8"` | v1.5.0 |
+| server.image.version | string | `"sha256:17b914c4a1d05871e3353630b3516b106b653839587aa496d0f96b6e857c8714"` | v1.5.1 |
 | server.ingress.grpc.annotations."nginx.ingress.kubernetes.io/backend-protocol" | string | `"GRPC"` |  |
 | server.ingress.grpc.className | string | `""` |  |
 | server.ingress.grpc.enabled | bool | `false` |  |
