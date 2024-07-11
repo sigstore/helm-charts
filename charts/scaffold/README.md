@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.6.52](https://img.shields.io/badge/Version-0.6.52-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.6.53](https://img.shields.io/badge/Version-0.6.53-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Scaffolding the components of the sigstore architecture
 
@@ -37,7 +37,7 @@ helm uninstall [RELEASE_NAME]
 | Repository | Name | Version |
 |------------|------|---------|
 | https://sigstore.github.io/helm-charts | ctlog | 0.2.53 |
-| https://sigstore.github.io/helm-charts | fulcio | 2.3.21 |
+| https://sigstore.github.io/helm-charts | fulcio | 2.3.22 |
 | https://sigstore.github.io/helm-charts | rekor | 1.4.2 |
 | https://sigstore.github.io/helm-charts | trillian | 0.2.24 |
 | https://sigstore.github.io/helm-charts | tsa | 1.0.3 |
