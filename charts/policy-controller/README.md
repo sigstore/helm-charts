@@ -45,6 +45,7 @@ The Helm chart for Policy  Controller
 | webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
 | webhook.namespaceSelector.matchExpressions[0].operator | string | `"In"` |  |
 | webhook.namespaceSelector.matchExpressions[0].values[0] | string | `"true"` |  |
+| webhook.podAnnotations | object | `{}` |  |
 | webhook.podDisruptionBudget.enabled | bool | `true` |  |
 | webhook.podDisruptionBudget.minAvailable | int | `1` |  |
 | webhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
