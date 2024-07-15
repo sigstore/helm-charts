@@ -22,21 +22,25 @@ deployment:
 secrets:
   rekor:
     create: false
+    enabled: false
     name: rekor-public-key
     key: key
     path: rekor.pub
   fulcio:
     create: false
+    enabled: false
     name: fulcio-server-secret
     key: cert
     path: fulcio_v1.crt.pem
   ctlog:
     create: false
+    enabled: false
     name: ctlog-public-key
     key: public
     path: ctfe.pub
   tsa:
     create: false
+    enabled: false
     name: tsa-cert-chain
     key: cert-chain
     path: tsa.certchain.pem
