@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.23](https://img.shields.io/badge/Version-0.2.23-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.0](https://img.shields.io/badge/AppVersion-1.6.0-informational?style=flat-square)
+![Version: 0.2.25](https://img.shields.io/badge/Version-0.2.25-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.0](https://img.shields.io/badge/AppVersion-1.6.0-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -40,6 +40,7 @@ helm uninstall [RELEASE_NAME]
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| createdb.affinity | object | `{}` |  |
 | createdb.dbname | string | `"trillian"` |  |
 | createdb.enabled | bool | `true` |  |
 | createdb.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -47,9 +48,11 @@ helm uninstall [RELEASE_NAME]
 | createdb.image.repository | string | `"sigstore/scaffolding/createdb"` |  |
 | createdb.image.version | string | `"sha256:ea809b5f603764df5fb7e1f46f7e7be24b6717890c560e7e67fdb0a640a8a755"` | v0.6.17 |
 | createdb.name | string | `"createdb"` |  |
+| createdb.nodeSelector | object | `{}` |  |
 | createdb.serviceAccount.annotations | object | `{}` |  |
 | createdb.serviceAccount.create | bool | `false` |  |
 | createdb.serviceAccount.name | string | `""` |  |
+| createdb.tolerations | list | `[]` |  |
 | createdb.ttlSecondsAfterFinished | int | `3600` |  |
 | forceNamespace | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
