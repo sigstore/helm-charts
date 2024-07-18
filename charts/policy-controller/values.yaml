@@ -9,6 +9,13 @@ imagePullSecrets: []
 
 loglevel: info
 
+deployment:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+
 webhook:
   customLabels: {}
   configData: {}
