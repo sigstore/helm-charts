@@ -4,6 +4,26 @@ entries:
   - annotations:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
+    created: "2024-07-18T14:53:26.893690212Z"
+    description: A Library Helm Chart containing common logic for use by Sigstore
+      charts
+    digest: 4438400c7043ab2e264f97ab9bf975b8d37cbcad1b320c81e216fb43f00417b3
+    home: https://sigstore.dev/
+    keywords:
+    - common
+    - helper
+    - template
+    - function
+    maintainers:
+    - name: The Sigstore Authors
+    name: common
+    type: library
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/common-0.1.2/common-0.1.2.tgz
+    version: 0.1.2
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
     created: "2023-08-07T10:50:36.323973989Z"
     description: A Library Helm Chart containing common logic for use by Sigstore
       charts
@@ -15383,4 +15403,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2024-07-18T14:49:58.710750104Z"
+generated: "2024-07-18T14:53:26.8945883Z"
