@@ -57,5 +57,11 @@ Any changes to Chart.yaml or values.yaml require an update of the README.md. Thi
 helm-docs -g charts/«chart-name»
 ```
 
+or
+
+```shell
+.github/helm-docs.sh charts/«chart-name»
+```
+
 [crane]: https://github.com/google/go-containerregistry/blob/main/cmd/crane/doc/crane.md "Crane is a tool for managing container images"
 [helm-docs]: https://github.com/norwoodj/helm-docs "The helm-docs tool auto-generates documentation from helm charts into markdown files."
