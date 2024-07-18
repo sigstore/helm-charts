@@ -4,7 +4,7 @@ description: A Library Helm Chart containing common logic for use by Sigstore ch
 
 type: library
 
-version: 0.1.1
+version: 0.1.2
 
 keywords:
   - common

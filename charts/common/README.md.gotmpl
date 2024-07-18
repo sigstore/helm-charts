@@ -1,12 +1,14 @@
-# common
+{{ template "chart.header" . }}
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
+{{ template "chart.deprecationWarning" . }}
 
-A Library Helm Chart containing common logic for use by Sigstore charts
+{{ template "chart.badgesSection" . }}
 
-**Homepage:** <https://sigstore.dev/>
+{{ template "chart.description" . }}
+
+{{ template "chart.homepageLine" . }}
 '
 ## Quick Installation
 
@@ -26,9 +28,10 @@ To uninstall the Helm chart run following command.
 helm uninstall [RELEASE_NAME]
 ```
 
-## Maintainers
+{{ template "chart.maintainersSection" . }}
 
-| Name | Email | Url |
-| ---- | ------ | --- |
-| The Sigstore Authors |  |  |
+{{ template "chart.sourcesSection" . }}
 
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}
