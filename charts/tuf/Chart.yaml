@@ -2,7 +2,7 @@ apiVersion: v2
 name: tuf
 description: A framework for securing software update systems - the scaffolding implementation
 type: application
-version: 0.1.14
+version: 0.1.15
 appVersion: "0.6.17"
 
 home: https://sigstore.dev/
