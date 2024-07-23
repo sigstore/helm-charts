@@ -6,6 +6,7 @@ imagePullSecrets: []
 
 config:
   contents: {}
+  format: json
 
 server:
   replicaCount: 1

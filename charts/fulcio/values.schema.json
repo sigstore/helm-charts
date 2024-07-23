@@ -6,6 +6,9 @@
                 "contents": {
                     "properties": {},
                     "type": "object"
+                },
+                "format": {
+                    "type": "string"
                 }
             },
             "type": "object"
