@@ -6,8 +6,17 @@ metadata:
   labels:
     {{- include "fulcio.labels" . | nindent 4 }}
 data:
+# We now expect a new field "format" for checking the format of the
+# config's content.
+# If the field format is empty, the default case is consider that is a
+# json or is empty and should use the defaults as defined on the file _helpers.tpl
+{{- if and (eq .Values.config.format "yaml") (.Values.config.contents) -}}
+  config.yaml: |-
+    {{ toYaml .Values.config.contents | indent 2 }}
+{{- else -}}
   config.json: |-
 {{ include "fulcio.configmap.contents" . | indent 4 }}
+{{- end }}
   {{- if (eq .Values.server.args.certificateAuthority "kmsca")}}
   chain.pem: {{.Values.server.args.kms_cert_chain | quote }}
   {{- end }}
