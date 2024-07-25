@@ -49,6 +49,11 @@ helm uninstall [RELEASE_NAME]
 |-----|------|---------|-------------|
 | copySecretJob.affinity | object | `{}` |  |
 | copySecretJob.backoffLimit | int | `6` |  |
+| copySecretJob.copySecretCronJob.backoffLimit | int | `2` |  |
+| copySecretJob.copySecretCronJob.enabled | bool | `false` |  |
+| copySecretJob.copySecretCronJob.failedJobsHistoryLimit | int | `1` |  |
+| copySecretJob.copySecretCronJob.schedule | string | `"*/5 * * * 1-5"` |  |
+| copySecretJob.copySecretCronJob.successfulJobsHistoryLimit | int | `1` |  |
 | copySecretJob.enabled | bool | `false` |  |
 | copySecretJob.imagePullPolicy | string | `"IfNotPresent"` |  |
 | copySecretJob.name | string | `"copy-secrets-job"` |  |
@@ -91,6 +96,30 @@ helm uninstall [RELEASE_NAME]
 | rekor.server.fullnameOverride | string | `"rekor-server"` |  |
 | rekor.tolerations | list | `[]` |  |
 | rekor.trillian.enabled | bool | `false` |  |
+| secrets.ctlog.create | bool | `false` |  |
+| secrets.ctlog.deploymentName | string | `"ctlog"` |  |
+| secrets.ctlog.key | string | `"public"` |  |
+| secrets.ctlog.name | string | `"ctlog-public-key"` |  |
+| secrets.ctlog.namespace | string | `"ctlog-system"` |  |
+| secrets.ctlog.path | string | `"ctfe.pub"` |  |
+| secrets.fulcio.create | bool | `false` |  |
+| secrets.fulcio.deploymentName | string | `"fulcio-server"` |  |
+| secrets.fulcio.key | string | `"cert"` |  |
+| secrets.fulcio.name | string | `"fulcio-server-secret"` |  |
+| secrets.fulcio.namespace | string | `"fulcio-system"` |  |
+| secrets.fulcio.path | string | `"fulcio_v1.crt.pem"` |  |
+| secrets.rekor.create | bool | `false` |  |
+| secrets.rekor.deploymentName | string | `"rekor-server"` |  |
+| secrets.rekor.key | string | `"key"` |  |
+| secrets.rekor.name | string | `"rekor-public-key"` |  |
+| secrets.rekor.namespace | string | `"rekor-system"` |  |
+| secrets.rekor.path | string | `"rekor.pub"` |  |
+| secrets.tsa.create | bool | `false` |  |
+| secrets.tsa.deploymentName | string | `"tsa-server"` |  |
+| secrets.tsa.key | string | `"cert-chain"` |  |
+| secrets.tsa.name | string | `"tsa-cert-chain"` |  |
+| secrets.tsa.namespace | string | `"tsa-system"` |  |
+| secrets.tsa.path | string | `"tsa.certchain.pem"` |  |
 | trillian.affinity | object | `{}` |  |
 | trillian.enabled | bool | `true` |  |
 | trillian.forceNamespace | string | `"trillian-system"` |  |
@@ -121,14 +150,6 @@ helm uninstall [RELEASE_NAME]
 | tuf.namespace.create | bool | `true` |  |
 | tuf.namespace.name | string | `"tuf-system"` |  |
 | tuf.nodeSelector | object | `{}` |  |
-| tuf.secrets.ctlog.name | string | `"ctlog-public-key"` |  |
-| tuf.secrets.ctlog.path | string | `"ctfe.pub"` |  |
-| tuf.secrets.fulcio.name | string | `"fulcio-server-secret"` |  |
-| tuf.secrets.fulcio.path | string | `"fulcio_v1.crt.pem"` |  |
-| tuf.secrets.rekor.name | string | `"rekor-public-key"` |  |
-| tuf.secrets.rekor.path | string | `"rekor.pub"` |  |
-| tuf.secrets.tsa.name | string | `"tsa-cert-chain"` |  |
-| tuf.secrets.tsa.path | string | `"tsa.certchain.pem"` |  |
 | tuf.tolerations | list | `[]` |  |
 
 ----------------------------------------------
