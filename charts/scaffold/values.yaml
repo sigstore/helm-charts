@@ -86,19 +86,35 @@ tuf:
   nodeSelector: {}
   affinity: {}
 
-  secrets:
-    rekor:
-      name: rekor-public-key
-      path: rekor.pub
-    fulcio:
-      name: fulcio-server-secret
-      path: fulcio_v1.crt.pem
-    ctlog:
-      name: ctlog-public-key
-      path: ctfe.pub
-    tsa:
-      name: tsa-cert-chain
-      path: tsa.certchain.pem
+secrets:
+  rekor:
+    deploymentName: rekor-server
+    create: false
+    name: rekor-public-key
+    namespace: rekor-system
+    key: key
+    path: rekor.pub
+  fulcio:
+    deploymentName: fulcio-server
+    create: false
+    name: fulcio-server-secret
+    namespace: fulcio-system
+    key: cert
+    path: fulcio_v1.crt.pem
+  ctlog:
+    deploymentName: ctlog
+    create: false
+    name: ctlog-public-key
+    namespace: ctlog-system
+    key: public
+    path: ctfe.pub
+  tsa:
+    deploymentName: tsa-server
+    create: false
+    name: tsa-cert-chain
+    namespace: tsa-system
+    key: cert-chain
+    path: tsa.certchain.pem
 
 copySecretJob:
   enabled: false
@@ -109,6 +125,12 @@ copySecretJob:
   imagePullPolicy: IfNotPresent
   serviceaccount: tuf-secret-copy-job
   backoffLimit: 6
+  copySecretCronJob:
+    enabled: false
+    schedule: "*/5 * * * 1-5"
+    backoffLimit: 2
+    successfulJobsHistoryLimit: 1
+    failedJobsHistoryLimit: 1
   tolerations: []
   nodeSelector: {}
   affinity: {}
