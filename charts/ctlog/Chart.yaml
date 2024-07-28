@@ -4,8 +4,8 @@ description: Certificate Log
 
 type: application
 
-version: 0.2.54
-appVersion: 0.6.17
+version: 0.2.55
+appVersion: 0.7.5
 
 keywords:
   - security
@@ -20,10 +20,10 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: ct_server
-      image: ghcr.io/sigstore/scaffolding/ct_server:v0.6.17@sha256:e16f0a2be43a317a4c392cca24eec8c8fef06b0e836bc3545979ac0335fcf6f5
+      image: ghcr.io/sigstore/scaffolding/ct_server:v0.7.5@sha256:2ba06b91757a54b1be6675a7139946730fdb4b0f743f3a269ffbefcff5098c20
     - name: createctconfig
-      image: ghcr.io/sigstore/scaffolding/createctconfig:v0.6.17@sha256:a891233c7f54a11025a4cac6119ba4aeea4f643c2012ff30e921aeca8a32d6db
+      image: ghcr.io/sigstore/scaffolding/createctconfig:v0.7.5@sha256:6b66b764cd0955c18a4ba58c7ebb05704d04b9a68962d7616045325c456fab02
     - name: createtree
-      image: ghcr.io/sigstore/scaffolding/createtree:v0.6.17@sha256:eb1a94738f34964c7456d18d30b8a45a654af89bb5371f69b2403df373be0826
+      image: ghcr.io/sigstore/scaffolding/createtree:v0.7.5@sha256:ae1f37905e92c3ad47ce9c0a02942a2b794aded29755bc427bc667d18eec9088
     - name: curlimages/curl
       image: docker.io/curlimages/curl:8.5.0@sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac
