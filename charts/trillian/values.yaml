@@ -31,8 +31,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.6.17 which is based on cloud-sql-proxy:2.9.0-alpine
-      version: sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2
+      # -- v0.7.5 which is based on cloud-sql-proxy:2.12.0-alpine
+      version: sha256:3dfbca0320a497cddd66a748b53377982c6309cb9e3c73f21d2b1bdef14730ba
       resources:
         requests:
           memory: "2Gi"
@@ -46,9 +46,9 @@ mysql:
             - ALL
     cloudsql:
       registry: gcr.io
-      repository: cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine
-      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine
-      version: sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.12.0-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.12.0-alpine
+      version: sha256:a3843521730914f074f364c5bec608319ebeb5e66da9314ba45b16cd8223547f
       resources:
         requests:
           memory: "2Gi"
@@ -138,8 +138,8 @@ logServer:
     registry: ghcr.io
     repository: sigstore/scaffolding/trillian_log_server
     pullPolicy: IfNotPresent
-    # -- v0.6.17
-    version: sha256:34a87140ff88da3f8b83ef8f12575a5dc684afc79af880f148f45ca27f16e60e
+    # -- v0.7.5
+    version: sha256:9da02afc1d475125a2205bc1a862e3f041db2ce7aec603e22d59f97e4f5845a3
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -174,8 +174,8 @@ logSigner:
     registry: ghcr.io
     repository: sigstore/scaffolding/trillian_log_signer
     pullPolicy: IfNotPresent
-    # -- v0.6.17
-    version: sha256:ab97f7591e96e7ae1dbfea3bcc4b5f4b8ad13857e04779d8c6c2309cc432e5ce
+    # -- v0.7.5
+    version: sha256:99262641e4187f7496c033c5d407e0df4356d22ab646b44105674df9a5ca63cc
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -204,8 +204,8 @@ createdb:
     registry: ghcr.io
     repository: sigstore/scaffolding/createdb
     pullPolicy: IfNotPresent
-    # -- v0.6.17
-    version: sha256:ea809b5f603764df5fb7e1f46f7e7be24b6717890c560e7e67fdb0a640a8a755
+    # -- v0.7.5
+    version: sha256:108dcdb64cff7520574f1efd63ebba71d7d4ea60fe652b0ef2b5f60ccd596042
   serviceAccount:
     create: false
     name: ""
