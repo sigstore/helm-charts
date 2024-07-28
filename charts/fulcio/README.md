@@ -71,7 +71,7 @@ helm uninstall [RELEASE_NAME]
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | ctlog | 0.2.54 |
+| https://sigstore.github.io/helm-charts | ctlog | 0.2.55 |
 
 ## Values
 
