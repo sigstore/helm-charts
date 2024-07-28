@@ -14941,6 +14941,28 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: tsa
+          # crane digest ghcr.io/sigstore/timestamp-server:v1.2.2
+          image: ghcr.io/sigstore/timestamp-server@sha256:9f012408a0b2a91a0f017df419b732556a0bdd7482973dc3b87fe979e41ccc9a
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.2.2
+    created: "2024-07-28T19:18:41.276474592Z"
+    description: 'Timestamp Authority issuing RFC3161 signed timestamps. '
+    digest: 4e9b5d4b5317f1cbbd05b7f6e24b13fadd1826946a3d6b33478fb7771057a15b
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - timestamp
+    maintainers:
+    - name: The Sigstore Authors
+    name: tsa
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/tsa-1.0.5/tsa-1.0.5.tgz
+    version: 1.0.5
+  - annotations:
+      artifacthub.io/images: |
+        - name: tsa
           # crane digest ghcr.io/sigstore/timestamp-server:v1.2.1
           image: ghcr.io/sigstore/timestamp-server@sha256:f4dcc96092a1b1fb5ca36d776f92a7cc62cdb1a8866c5120340f919141a3cd58
       artifacthub.io/license: Apache-2.0
@@ -15671,4 +15693,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2024-07-28T18:13:46.540854327Z"
+generated: "2024-07-28T19:18:41.277277218Z"
