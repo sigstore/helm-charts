@@ -173,3 +173,22 @@ Return the contents for fulcio config.
 }
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the contents for fulcio config yaml format.
+*/}}
+{{- define "fulcio.configmap.yaml" -}}
+{{- if .Values.config.contents -}}
+{{- toYaml .Values.config.contents }}
+{{- else -}}
+oidc-issuers:
+  https://kubernetes.default.svc:
+    issuer-url: https://kubernetes.default.svc
+    client-id: sigstore
+    type: kubernetes
+meta-issuers:
+  https://kubernetes.*.svc:
+    client-id: sigstore
+    type: kubernetes
+{{- end -}}
+{{- end -}}

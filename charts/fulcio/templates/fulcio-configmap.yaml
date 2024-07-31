@@ -10,12 +10,10 @@ data:
 # config's content.
 # If the field format is empty, the default case is consider that is a
 # json or is empty and should use the defaults as defined on the file _helpers.tpl
-{{- if and (eq .Values.config.format "yaml") (.Values.config.contents) -}}
-  {{- with .Values.config.contents }}
+{{- if eq .Values.config.format "yaml"}}
   config.yaml: |-
-    {{ toYaml . | indent 2 }}
-  {{- end }}
-{{- else -}}
+{{ include "fulcio.configmap.yaml" . | indent 4 }}
+{{- else }}
   config.json: |-
 {{ include "fulcio.configmap.contents" . | indent 4 }}
 {{- end }}
