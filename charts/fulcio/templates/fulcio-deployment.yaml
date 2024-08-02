@@ -63,7 +63,7 @@ spec:
             - "--kms-cert-chain-path=/etc/fulcio-config/chain.pem"
             {{- end }}
             - "--ct-log-url={{ if .Values.server.args.disable_ct_log }}{{ else if .Values.server.args.ct_log_url }}{{ .Values.server.args.ct_log_url }}{{ else }}http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/{{ .Values.ctlog.createctconfig.logPrefix }}{{ end }}"
-            - '--config-path=/etc/fulcio-config/config.{{- if and (eq .Values.config.format "yaml") (.Values.config.contents) -}}yaml{{- else }}json{{- end }}'
+            - '--config-path=/etc/fulcio-config/config.{{- if eq .Values.config.format "yaml"}}yaml{{- else }}json{{- end }}'
             {{- if .Values.server.grpcSvcTLS }}
             - "--grpc-tls-certificate=/var/run/grpc-tls/cert.pem"
             - "--grpc-tls-key=/var/run/grpc-tls/key.pem"
