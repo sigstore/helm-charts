@@ -10,6 +10,26 @@
                 "backoffLimit": {
                     "type": "integer"
                 },
+                "copySecretCronJob": {
+                    "properties": {
+                        "backoffLimit": {
+                            "type": "integer"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "failedJobsHistoryLimit": {
+                            "type": "integer"
+                        },
+                        "schedule": {
+                            "type": "string"
+                        },
+                        "successfulJobsHistoryLimit": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
                 "enabled": {
                     "type": "boolean"
                 },
@@ -221,6 +241,103 @@
             },
             "type": "object"
         },
+        "secrets": {
+            "properties": {
+                "ctlog": {
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "deploymentName": {
+                            "type": "string"
+                        },
+                        "key": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "namespace": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "fulcio": {
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "deploymentName": {
+                            "type": "string"
+                        },
+                        "key": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "namespace": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "rekor": {
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "deploymentName": {
+                            "type": "string"
+                        },
+                        "key": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "namespace": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "tsa": {
+                    "properties": {
+                        "create": {
+                            "type": "boolean"
+                        },
+                        "deploymentName": {
+                            "type": "string"
+                        },
+                        "key": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "namespace": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
         "trillian": {
             "properties": {
                 "affinity": {
@@ -362,55 +479,6 @@
                 },
                 "nodeSelector": {
                     "properties": {},
-                    "type": "object"
-                },
-                "secrets": {
-                    "properties": {
-                        "ctlog": {
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "path": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "fulcio": {
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "path": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "rekor": {
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "path": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "tsa": {
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "path": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    },
                     "type": "object"
                 },
                 "tolerations": {
