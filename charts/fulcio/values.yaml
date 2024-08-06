@@ -20,9 +20,9 @@ server:
     registry: gcr.io
     repository: projectsigstore/fulcio
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/fulcio:v1.5.1
-    # -- v1.5.1
-    version: sha256:17b914c4a1d05871e3353630b3516b106b653839587aa496d0f96b6e857c8714
+    # crane digest gcr.io/projectsigstore/fulcio:v1.6.0
+    # -- v1.6.0
+    version: sha256:9030be23f59405100bc8d24ce2ca493b9d430639ef49b448541a840b3bfd7771
   args:
     port: 5555
     grpcPort: 5554
