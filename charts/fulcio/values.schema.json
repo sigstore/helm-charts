@@ -189,6 +189,9 @@
                         "gcp_private_ca_parent": {
                             "type": "string"
                         },
+                        "cloud_credential_config": {
+                            "type": "string"
+                        },
                         "grpcPort": {
                             "type": "integer"
                         },
@@ -465,6 +468,10 @@
                         }
                     },
                     "type": "object"
+                },
+                "env": {
+                    "type": "object",
+                    "properties": {}
                 },
                 "serviceAccount": {
                     "properties": {

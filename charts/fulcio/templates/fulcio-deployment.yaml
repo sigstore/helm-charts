@@ -71,14 +71,20 @@ spec:
             {{- range .Values.server.extraArgs }}
             - {{ . | quote }}
             {{- end }}
-          {{- if eq .Values.server.args.certificateAuthority "fileca" }}
+        {{- if or .Values.server.env (eq .Values.server.args.certificateAuthority "fileca") }}
           env:
-            - name: PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.server.secret }}
-                  key: password
+          {{- range $key, $value := .Values.server.env }}
+          - name: "{{ $key }}"
+            value: "{{ $value }}"
           {{- end }}
+          {{- if eq .Values.server.args.certificateAuthority "fileca" }}
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.server.secret }}
+                key: password
+          {{- end }}
+        {{- end }}
           livenessProbe:
             failureThreshold: 3
             httpGet:
