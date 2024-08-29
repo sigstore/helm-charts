@@ -119,6 +119,12 @@ server:
     pullPolicy: IfNotPresent
     # crane digest gcr.io/projectsigstore/rekor-server:v1.3.6
     version: sha256:1237f29e2105d7f5451bbe15a3aca8677ddd1bb80620ca2fd06f74262437cf51
+  # -- KMS type for signing key (possible values: "" / "none", "aws")
+  kmsType: none
+  # -- AWS region if using AWS KMS for signing key
+  awsKmsRegion: us-east-1
+  # -- kubernetes secret name containing IAM credentials for use with AWS KMS
+  awsKmsCredentialsSecretName: aws-kms-credentials
   logging:
     production: false
   ingress:
