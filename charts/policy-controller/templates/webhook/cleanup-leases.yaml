@@ -24,6 +24,18 @@ spec:
             - /bin/sh
             - -c
             - kubectl delete leases --all --ignore-not-found -n {{ .Release.Namespace }}
+  {{- if .Values.leasescleanup.podSecurityContext.enabled }}
+          securityContext:
+          {{- with .Values.leasescleanup.podSecurityContext }}
+          {{- omit . "enabled" | toYaml | nindent 10}}
+          {{- end }}
+  {{- end }}
+      {{- if .Values.leasescleanup.securityContext.enabled }}
+      securityContext:
+        {{- with .Values.leasescleanup.securityContext }}
+        {{- omit . "enabled" | toYaml | nindent 8}}
+        {{- end }}
+      {{- end }}
       restartPolicy: OnFailure
 ---
 apiVersion: rbac.authorization.k8s.io/v1
