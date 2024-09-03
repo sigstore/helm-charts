@@ -7,8 +7,8 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # -- 8.5.0
-    version: "sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"
+    # -- 8.9.1
+    version: sha256:8addc281f0ea517409209f76832b6ddc2cabc3264feb1ebbec2a2521ffad24e4
     imagePullPolicy: IfNotPresent
 initContainerResources: {}
 
@@ -64,8 +64,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.7.5 which is based on cloud-sql-proxy:2.12.0-alpine
-      version: sha256:3dfbca0320a497cddd66a748b53377982c6309cb9e3c73f21d2b1bdef14730ba
+      # -- v0.7.8 which is based on cloud-sql-proxy:2.12.0-alpine
+      version: sha256:8a7539e248d38628799934e7f1c890083c90e4242e2b0feec4c352fda2574184
       resources:
         requests:
           memory: "2Gi"
@@ -227,8 +227,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.7.5
-    version: sha256:ae1f37905e92c3ad47ce9c0a02942a2b794aded29755bc427bc667d18eec9088
+    # v0.7.8
+    version: sha256:c0cc90af73b71eaf0835c332d99834b669a36698c44c454835589bbc5acac478
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true

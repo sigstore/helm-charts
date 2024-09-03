@@ -4,7 +4,7 @@ description: Part of the sigstore project, Rekor is a timestamping server and tr
 
 type: application
 
-version: 1.4.7
+version: 1.4.8
 appVersion: 1.3.6
 
 keywords:
@@ -19,7 +19,7 @@ maintainers:
 
 dependencies:
   - name: trillian
-    version: 0.2.26
+    version: 0.2.27
     repository: https://sigstore.github.io/helm-charts
     condition: trillian.enabled
 
@@ -27,12 +27,16 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: createtree
-      image: ghcr.io/sigstore/scaffolding/createtree:v0.7.5@sha256:ae1f37905e92c3ad47ce9c0a02942a2b794aded29755bc427bc667d18eec9088
+      image: ghcr.io/sigstore/scaffolding/createtree:v0.7.8@sha256:c0cc90af73b71eaf0835c332d99834b669a36698c44c454835589bbc5acac478
     - name: curlimages/curl
-      image: docker.io/curlimages/curl:8.5.0@sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac
+      image: docker.io/curlimages/curl:8.9.1@sha256:8addc281f0ea517409209f76832b6ddc2cabc3264feb1ebbec2a2521ffad24e4
     - name: rekor-server
       image: gcr.io/projectsigstore/rekor-server:v1.3.6@sha256:1237f29e2105d7f5451bbe15a3aca8677ddd1bb80620ca2fd06f74262437cf51
     - name: redis
       image: docker.io/redis:6.2.14-alpine3.20@sha256:e3b17ba9479deec4b7d1eeec1548a253acc5374d68d3b27937fcfe4df8d18c7e
     - name: backfill-redis
       image: ghcr.io/sigstore/rekor/backfill-redis:v1.3.6@sha256:a13cd8b2a554d6116888fd1f383cf6e91fc1716df5eda392b82e6bfc66995ec3
+    - name: scaffold_cloud_proxy
+      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.8@sha256:8a7539e248d38628799934e7f1c890083c90e4242e2b0feec4c352fda2574184
+    - name: cloud_proxy
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.12.0-alpine@sha256:a3843521730914f074f364c5bec608319ebeb5e66da9314ba45b16cd8223547f
