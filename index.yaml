@@ -622,6 +622,33 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: ct_server
+          image: ghcr.io/sigstore/scaffolding/ct_server:v0.7.8@sha256:60f76cc090a18f278b2e8cdd1f8901543455a8a6f3c3bcd7a4a3f1481534552a
+        - name: createctconfig
+          image: ghcr.io/sigstore/scaffolding/createctconfig:v0.7.8@sha256:d72a616f53005c51dd0f3fa40848e5149d23fb1c3dd216525f54d54dcca36b49
+        - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree:v0.7.8@sha256:c0cc90af73b71eaf0835c332d99834b669a36698c44c454835589bbc5acac478
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl:8.9.1@sha256:8addc281f0ea517409209f76832b6ddc2cabc3264feb1ebbec2a2521ffad24e4
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.7.8
+    created: "2024-09-03T12:36:06.254267171Z"
+    description: Certificate Log
+    digest: 019e6fdd8876f2119ca64b1a3ee59ca182b4d7771ee5eac5b3c8e6acb33a0d55
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: ctlog
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/ctlog-0.2.56/ctlog-0.2.56.tgz
+    version: 0.2.56
+  - annotations:
+      artifacthub.io/images: |
+        - name: ct_server
           image: ghcr.io/sigstore/scaffolding/ct_server:v0.7.5@sha256:2ba06b91757a54b1be6675a7139946730fdb4b0f743f3a269ffbefcff5098c20
         - name: createctconfig
           image: ghcr.io/sigstore/scaffolding/createctconfig:v0.7.5@sha256:6b66b764cd0955c18a4ba58c7ebb05704d04b9a68962d7616045325c456fab02
@@ -16205,4 +16232,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2024-08-15T19:22:21.884384418Z"
+generated: "2024-09-03T12:36:06.255076584Z"
