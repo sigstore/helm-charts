@@ -4,7 +4,7 @@ description: Scaffolding the components of the sigstore architecture
 
 type: application
 
-version: 0.6.59
+version: 0.6.60
 keywords:
   - security
   - pki
@@ -16,23 +16,23 @@ maintainers:
 
 dependencies:
   - name: fulcio
-    version: 2.5.2
+    version: 2.5.3
     repository: https://sigstore.github.io/helm-charts
     condition: fulcio.enabled
   - name: rekor
-    version: 1.4.7
+    version: 1.4.8
     repository: https://sigstore.github.io/helm-charts
     condition: rekor.enabled
   - name: trillian
-    version: 0.2.26
+    version: 0.2.27
     repository: https://sigstore.github.io/helm-charts
     condition: trillian.enabled
   - name: ctlog
-    version: 0.2.55
+    version: 0.2.56
     repository: https://sigstore.github.io/helm-charts
     condition: ctlog.enabled
   - name: tuf
-    version: 0.1.16
+    version: 0.1.17
     repository: https://sigstore.github.io/helm-charts
     condition: tuf.enabled
   - name: tsa
