@@ -29,7 +29,7 @@ annotations:
     - name: netcat
       image: cgr.dev/chainguard/netcat@sha256:6051975a14c51b9d3b525a06004d62a4d323c08ca58e3468343095a55a42fff2
     - name: db_server
-      image: gcr.io/trillian-opensource-ci/db_server:v1.6.1@sha256:b7d874db5787cf4b24254aeb4d6b68c19236895e83308db707b6de2ac9dddb28
+      image: gcr.io/trillian-opensource-ci/db_server:v1.5.3@sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461
     - name: log_server
       image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.6.1@sha256:b09ad6b9f876be07baf6006afdf13402302251a373eef000cdc7a6d0c0ca584f
     - name: log_signer
