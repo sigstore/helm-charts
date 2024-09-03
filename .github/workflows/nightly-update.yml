@@ -1,0 +1,33 @@
+name: Nightly Release
+
+# on:
+#   schedule:
+#     - cron: "0 1 * * *"  # Runs at 1 AM every day
+
+on:
+  pull_request:
+
+concurrency: nightly-release
+
+jobs:
+  nightly-update:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0
+      
+      - name: Setup crane
+        uses: imjasonh/setup-crane@v0.1
+      
+      - name: Set New Image Tag
+        run: |
+          FULCIO_NIGHTLY_IMAGE_TAG="$(crane digest gcr.io/projectsigstore/fulcio:nightly-latest)" 
+          sed -i "s|image:\    registry: gcr.io\    repository: projectsigstore/fulcio\    pullPolicy: IfNotPresent\    # crane digest gcr.io/projectsigstore/fulcio:v1.6.2\    # -- v1.6.2\    version: .*|image:\    registry: gcr.io\    repository: projectsigstore/fulcio\    pullPolicy: IfNotPresent\    # crane digest gcr.io/projectsigstore/fulcio:v1.6.2\    # -- v1.6.2\    version: $NEW_IMAGE_TAG|" charts/fulcio/values.yaml # Replace with your chart directory and image path
