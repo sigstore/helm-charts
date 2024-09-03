@@ -13870,6 +13870,46 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: curl
+          image: docker.io/curlimages/curl:8.9.1@sha256:8addc281f0ea517409209f76832b6ddc2cabc3264feb1ebbec2a2521ffad24e4
+        - name: netcat
+          image: cgr.dev/chainguard/netcat@sha256:6051975a14c51b9d3b525a06004d62a4d323c08ca58e3468343095a55a42fff2
+        - name: db_server
+          image: gcr.io/trillian-opensource-ci/db_server:v1.5.3@sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461
+        - name: log_server
+          image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.6.1@sha256:b09ad6b9f876be07baf6006afdf13402302251a373eef000cdc7a6d0c0ca584f
+        - name: log_signer
+          image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.6.1@sha256:9ddaf6c45cab0177db6e599d8bde12a46e1913181f4a6942096655e0435d0212
+        - name: cloud_proxy
+          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.12.0-alpine@sha256:a3843521730914f074f364c5bec608319ebeb5e66da9314ba45b16cd8223547f
+        - name: scaffold_cloud_proxy
+          image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.8@sha256:8a7539e248d38628799934e7f1c890083c90e4242e2b0feec4c352fda2574184
+        - name: createdb
+          image: ghcr.io/sigstore/scaffolding/createdb:v0.7.8@sha256:674760d4000f151b768843e6d7f671b8e3ada037736e312b4939b3a48abd6066
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.6.1
+    created: "2024-09-03T13:25:04.526605237Z"
+    description: 'Trillian is a log that stores an accurate, immutable and verifiable
+      history of activity. '
+    digest: 814680f8d03001e90a83402aa491a7a12cdd4251c1864a4b4d02bae4078b80ec
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+      url: https://sigstore.dev/
+    name: trillian
+    sources:
+    - https://github.com/google/trillian
+    - https://github.com/sigstore/helm-charts/tree/main/charts/trillian
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/trillian-0.2.27/trillian-0.2.27.tgz
+    version: 0.2.27
+  - annotations:
+      artifacthub.io/images: |
+        - name: curl
           image: docker.io/curlimages/curl:8.5.0@sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac
         - name: netcat
           image: cgr.dev/chainguard/netcat@sha256:7243b469d34bd28969fa2c764a12d91084c427209540bb68645629d635b3f143
@@ -16232,4 +16272,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2024-09-03T12:36:06.255076584Z"
+generated: "2024-09-03T13:25:04.527630315Z"
