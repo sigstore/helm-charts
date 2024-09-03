@@ -2074,6 +2074,35 @@ entries:
         - name: fulcio
           image: gcr.io/projectsigstore/fulcio:v1.6.2@sha256:296b0d3e7043551a76b0855deec06f69f2ad37888a6669308414a4597b3d98a1
         - name: createcerts
+          image: ghcr.io/sigstore/scaffolding/createcerts:v0.7.8@sha256:c9c76a4a383ded6ec062e0185dd8e334192af1adcb60ab61bb88f87420a5b7ca
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.6.2
+    created: "2024-09-03T14:49:11.796276298Z"
+    dependencies:
+    - condition: ctlog.enabled
+      name: ctlog
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.56
+    description: 'Fulcio is a free code signing Certificate Authority, built to make
+      short-lived certificates available to anyone. '
+    digest: cbe7ec34451e74b3db4b92a858a13e5c0b18ec27a1fbf8d91ad8d22fbf12461c
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: fulcio
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/fulcio-2.5.3/fulcio-2.5.3.tgz
+    version: 2.5.3
+  - annotations:
+      artifacthub.io/images: |
+        - name: fulcio
+          image: gcr.io/projectsigstore/fulcio:v1.6.2@sha256:296b0d3e7043551a76b0855deec06f69f2ad37888a6669308414a4597b3d98a1
+        - name: createcerts
           image: ghcr.io/sigstore/scaffolding/createcerts:v0.7.5@sha256:cd605e02eef0c0d70aa0b4805c6483054ab652f8ff0e9b382f06961596ef3e73
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
@@ -16336,4 +16365,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2024-09-03T14:48:49.458073018Z"
+generated: "2024-09-03T14:49:11.797362438Z"
