@@ -1,7 +1,7 @@
 dependencies:
 - name: fulcio
   repository: https://sigstore.github.io/helm-charts
-  version: 2.5.3
+  version: 2.5.4
 - name: rekor
   repository: https://sigstore.github.io/helm-charts
   version: 1.4.8
@@ -17,5 +17,5 @@ dependencies:
 - name: tsa
   repository: https://sigstore.github.io/helm-charts
   version: 1.0.5
-digest: sha256:a8374d9339bf2b322c6865c08ff4ada37781d7df5968191c2e7fdde317ea3d25
-generated: "2024-09-03T11:26:16.310950815-04:00"
+digest: sha256:a8d432f681bf37e4b1454a4565d38620f27d2b7ec55ff3fd4566dbcff104a928
+generated: "2024-09-04T14:11:41.969723-06:00"
