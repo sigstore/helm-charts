@@ -159,6 +159,14 @@ helm uninstall [RELEASE_NAME]
 | leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
 | leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
 | leasescleanup.image.version | string | `"latest-dev"` |  |
+| leasescleanup.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| leasescleanup.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| leasescleanup.podSecurityContext.enabled | bool | `true` |  |
+| leasescleanup.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| leasescleanup.podSecurityContext.runAsUser | int | `1000` |  |
+| leasescleanup.securityContext.enabled | bool | `false` |  |
+| leasescleanup.securityContext.runAsNonRoot | bool | `true` |  |
+| leasescleanup.securityContext.runAsUser | int | `1000` |  |
 | loglevel | string | `"info"` |  |
 | serviceMonitor.enabled | bool | `false` |  |
 | webhook.configData | object | `{}` |  |
