@@ -49,6 +49,9 @@
                         "fulcioHost": {
                             "type": "string"
                         },
+                        "fulcioGrpcHost": {
+                            "type": "string"
+                        },
                         "fulcioRequests": {
                             "type": "array"
                         },
