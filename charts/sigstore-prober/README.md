@@ -1,6 +1,6 @@
 # sigstore-prober
 
-![Version: 0.0.27](https://img.shields.io/badge/Version-0.0.27-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.8](https://img.shields.io/badge/AppVersion-0.7.8-informational?style=flat-square)
+![Version: 0.0.28](https://img.shields.io/badge/Version-0.0.28-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.8](https://img.shields.io/badge/AppVersion-0.7.8-informational?style=flat-square)
 
 Sigstore API Endpoint Prober
 
@@ -24,6 +24,7 @@ Sigstore API Endpoint Prober
 | serviceAccount.create | bool | `false` |  |
 | serviceAccount.name | string | `"default"` |  |
 | spec.args.frequency | int | `10` |  |
+| spec.args.fulcioGrpcHost | string | `"fulcio.sigstore.dev"` |  |
 | spec.args.fulcioHost | string | `"https://fulcio.sigstore.dev"` |  |
 | spec.args.fulcioRequests | list | `[]` |  |
 | spec.args.rekorHost | string | `"https://rekor.sigstore.dev"` |  |
