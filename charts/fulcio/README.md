@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.5.4](https://img.shields.io/badge/Version-2.5.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.4](https://img.shields.io/badge/AppVersion-1.6.4-informational?style=flat-square)
+![Version: 2.6.0](https://img.shields.io/badge/Version-2.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.4](https://img.shields.io/badge/AppVersion-1.6.4-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -121,6 +121,8 @@ helm uninstall [RELEASE_NAME]
 | server.args.grpcPort | int | `5554` |  |
 | server.args.hsm_caroot_id | string | `nil` |  |
 | server.args.port | int | `5555` |  |
+| server.awsKmsCredentialsSecretName | string | `"aws-kms-credentials"` | kubernetes secret name containing IAM credentials for use with AWS KMS |
+| server.awsKmsRegion | string | `"us-east-1"` | AWS region if using AWS KMS for signing key |
 | server.grpcSvcPort | int | `5554` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
@@ -156,6 +158,7 @@ helm uninstall [RELEASE_NAME]
 | server.ingresses[0].name | string | `"gce-ingress"` |  |
 | server.ingresses[0].staticGlobalIP | string | `"lb-ext-ip"` |  |
 | server.ingresses[0].tls | list | `[]` |  |
+| server.kmsType | string | `"none"` | KMS type for signing key (possible values: "" / "none", "aws") |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
 | server.nodeSelector | object | `{}` |  |

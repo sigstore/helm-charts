@@ -201,6 +201,12 @@
                     },
                     "type": "object"
                 },
+                "awsKmsCredentialsSecretName": {
+                    "type": "string"
+                },
+                "awsKmsRegion": {
+                    "type": "string"
+                },
                 "grpcSvcPort": {
                     "type": "integer"
                 },
@@ -405,6 +411,9 @@
                         "type": "object"
                     },
                     "type": "array"
+                },
+                "kmsType": {
+                    "type": "string"
                 },
                 "logging": {
                     "properties": {
