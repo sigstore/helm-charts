@@ -121,7 +121,7 @@ helm uninstall [RELEASE_NAME]
 | server.args.grpcPort | int | `5554` |  |
 | server.args.hsm_caroot_id | string | `nil` |  |
 | server.args.port | int | `5555` |  |
-| server.awsKmsCredentialsSecretName | string | `"aws-kms-credentials"` | ubernetes secret name containing IAM credentials for use with AWS KMS |
+| server.awsKmsCredentialsSecretName | string | `"aws-kms-credentials"` | kubernetes secret name containing IAM credentials for use with AWS KMS |
 | server.awsKmsRegion | string | `"us-east-1"` | AWS region if using AWS KMS for signing key |
 | server.grpcSvcPort | int | `5554` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
