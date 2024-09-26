@@ -11,8 +11,8 @@ deployment:
   replicas: 1
   registry: ghcr.io
   repository: sigstore/scaffolding/server
-  # v0.6.17
-  version: sha256:496b443c82be2c4a14a6e3dfbfa9ccae5b6eaedd7a3aca58b84ddae9492d9906
+  # v0.7.8
+  version: sha256:dfccfb85b8638b488a3fd2320d723efb37633be7c32c34a1ab58138e5f80d0e2
   imagePullPolicy: IfNotPresent
   port: 8080
   tolerations: []

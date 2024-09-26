@@ -6,22 +6,29 @@ imagePullSecrets: []
 
 config:
   contents: {}
+  format: json
 
 server:
   replicaCount: 1
   name: server
   svcPort: 80
   grpcSvcPort: 5554
+  # -- KMS type for signing key (possible values: "" / "none", "aws")
+  kmsType: none
   secret: fulcio-server-secret
+  # -- kubernetes secret name containing IAM credentials for use with AWS KMS
+  awsKmsCredentialsSecretName: aws-kms-credentials
+  # -- AWS region if using AWS KMS for signing key
+  awsKmsRegion: us-east-1
   logging:
     production: false
   image:
     registry: gcr.io
     repository: projectsigstore/fulcio
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/fulcio:v1.5.1
-    # -- v1.5.1
-    version: sha256:17b914c4a1d05871e3353630b3516b106b653839587aa496d0f96b6e857c8714
+    # crane digest gcr.io/projectsigstore/fulcio:v1.6.4
+    # -- v1.6.4
+    version: sha256:4b2a0f0877095aa36898af70edd00568158f89e015f6bb7f02475660d0924f3b
   args:
     port: 5555
     grpcPort: 5554
@@ -116,8 +123,8 @@ createcerts:
     registry: ghcr.io
     repository: sigstore/scaffolding/createcerts
     pullPolicy: IfNotPresent
-    # v0.6.17
-    version: sha256:2aaea38198d25ee53fb1f6da79eaa75c24bcc4ef81792a68687ba2ae0dc8ccf6
+    # v0.7.8
+    version: sha256:c9c76a4a383ded6ec062e0185dd8e334192af1adcb60ab61bb88f87420a5b7ca
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true

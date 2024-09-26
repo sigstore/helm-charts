@@ -104,6 +104,20 @@ spec:
 {{- if eq (.Values.server.searchIndex).storageProvider "mysql" }}
 {{- include "searchIndex.mysql.envCredentials" . | indent 12 }}
 {{- end }}
+            {{- if eq .Values.server.kmsType "aws" }}
+            - name: AWS_DEFAULT_REGION
+              value: {{ .Values.server.awsKmsRegion }}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.server.awsKmsCredentialsSecretName }}
+                  key: accessKeyId
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.server.awsKmsCredentialsSecretName }}
+                  key: secretAccessKey
+            {{- end }}
           args:
 {{  include "rekor.server.args" . | indent 12 }}
           ports:

@@ -118,6 +118,9 @@
                         }
                     }
                 },
+                "podAnnotations": {
+                    "type": "object"
+                },
                 "podDisruptionBudget": {
                     "type": "object",
                     "properties": {

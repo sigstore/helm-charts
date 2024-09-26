@@ -6,7 +6,7 @@ serviceAccount:
   create: false
 spec:
   replicaCount: 1
-  image: ghcr.io/sigstore/scaffolding/prober:v0.7.3@sha256:efd3cc7ef479cb71c8338e3978d7a82cdc30ae5e05b01c1644ac411f8bcbb9f9
+  image: ghcr.io/sigstore/scaffolding/prober:v0.7.8@sha256:07c803bcf28ed14974fb08755a05fbd45b33501ad3b45f32c8c64d676b38dc74
   imagePullPolicy: Always
   matchLabels:
     app: sigstore-prober
@@ -19,6 +19,7 @@ spec:
       cpu: "200m"
   args:
     fulcioHost: https://fulcio.sigstore.dev
+    fulcioGrpcHost: fulcio.sigstore.dev
     rekorHost: https://rekor.sigstore.dev
     frequency: 10
     writeProber: false

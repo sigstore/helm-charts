@@ -7,8 +7,8 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # -- 8.5.0
-    version: "sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"
+    # -- 8.9.1
+    version: sha256:8addc281f0ea517409209f76832b6ddc2cabc3264feb1ebbec2a2521ffad24e4
     imagePullPolicy: IfNotPresent
 initContainerResources: {}
 
@@ -27,8 +27,8 @@ redis:
     registry: docker.io
     repository: redis
     pullPolicy: IfNotPresent
-    # -- 6.2.14-alpine3.19
-    version: "sha256:c5a607fb6e1bb15d32bbcf14db22787d19e428d59e31a5da67511b49bb0f1ccc"
+    # -- 6.2.14-alpine3.20
+    version: "sha256:e3b17ba9479deec4b7d1eeec1548a253acc5374d68d3b27937fcfe4df8d18c7e"
   resources: {}
   readinessProbe:
     initialDelaySeconds: 5
@@ -64,8 +64,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.6.17 which is based on cloud-sql-proxy:2.9.0-alpine
-      version: sha256:7cf71a5173283a5102e4765a829205007dd171511d6f8715f45b7179411ea2e2
+      # -- v0.7.8 which is based on cloud-sql-proxy:2.12.0-alpine
+      version: sha256:8a7539e248d38628799934e7f1c890083c90e4242e2b0feec4c352fda2574184
       resources:
         requests:
           memory: "2Gi"
@@ -79,9 +79,9 @@ mysql:
             - ALL
     cloudsql:
       registry: gcr.io
-      repository: cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine
-      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.9.0-alpine
-      version: sha256:40a7b65ad15ce73666ddf8f79a7651b59477688c27e22fd47aa59bb9b39757d9
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.12.0-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.12.0-alpine
+      version: sha256:a3843521730914f074f364c5bec608319ebeb5e66da9314ba45b16cd8223547f
       resources:
         requests:
           memory: "2Gi"
@@ -119,6 +119,12 @@ server:
     pullPolicy: IfNotPresent
     # crane digest gcr.io/projectsigstore/rekor-server:v1.3.6
     version: sha256:1237f29e2105d7f5451bbe15a3aca8677ddd1bb80620ca2fd06f74262437cf51
+  # -- KMS type for signing key (possible values: "" / "none", "aws")
+  kmsType: none
+  # -- AWS region if using AWS KMS for signing key
+  awsKmsRegion: us-east-1
+  # -- kubernetes secret name containing IAM credentials for use with AWS KMS
+  awsKmsCredentialsSecretName: aws-kms-credentials
   logging:
     production: false
   ingress:
@@ -227,8 +233,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.6.17
-    version: sha256:eb1a94738f34964c7456d18d30b8a45a654af89bb5371f69b2403df373be0826
+    # v0.7.8
+    version: sha256:c0cc90af73b71eaf0835c332d99834b669a36698c44c454835589bbc5acac478
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
@@ -251,7 +257,7 @@ backfillredis:
     registry: ghcr.io
     repository: sigstore/rekor/backfill-redis
     pullPolicy: IfNotPresent
-    # v1.3.5
+    # v1.3.6
     version: sha256:a13cd8b2a554d6116888fd1f383cf6e91fc1716df5eda392b82e6bfc66995ec3
   ttlSecondsAfterFinished: 3600
   securityContext:

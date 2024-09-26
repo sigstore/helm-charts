@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.3.22](https://img.shields.io/badge/Version-2.3.22-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.1](https://img.shields.io/badge/AppVersion-1.5.1-informational?style=flat-square)
+![Version: 2.6.0](https://img.shields.io/badge/Version-2.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.4](https://img.shields.io/badge/AppVersion-1.6.4-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -71,20 +71,21 @@ helm uninstall [RELEASE_NAME]
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | ctlog | 0.2.53 |
+| https://sigstore.github.io/helm-charts | ctlog | 0.2.56 |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | config.contents | object | `{}` |  |
+| config.format | string | `"json"` |  |
 | createcerts.affinity | object | `{}` |  |
 | createcerts.annotations | object | `{}` |  |
 | createcerts.enabled | bool | `true` |  |
 | createcerts.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createcerts.image.registry | string | `"ghcr.io"` |  |
 | createcerts.image.repository | string | `"sigstore/scaffolding/createcerts"` |  |
-| createcerts.image.version | string | `"sha256:2aaea38198d25ee53fb1f6da79eaa75c24bcc4ef81792a68687ba2ae0dc8ccf6"` |  |
+| createcerts.image.version | string | `"sha256:c9c76a4a383ded6ec062e0185dd8e334192af1adcb60ab61bb88f87420a5b7ca"` |  |
 | createcerts.name | string | `"createcerts"` |  |
 | createcerts.nodeSelector | object | `{}` |  |
 | createcerts.replicaCount | int | `1` |  |
@@ -120,11 +121,13 @@ helm uninstall [RELEASE_NAME]
 | server.args.grpcPort | int | `5554` |  |
 | server.args.hsm_caroot_id | string | `nil` |  |
 | server.args.port | int | `5555` |  |
+| server.awsKmsCredentialsSecretName | string | `"aws-kms-credentials"` | kubernetes secret name containing IAM credentials for use with AWS KMS |
+| server.awsKmsRegion | string | `"us-east-1"` | AWS region if using AWS KMS for signing key |
 | server.grpcSvcPort | int | `5554` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"gcr.io"` |  |
 | server.image.repository | string | `"projectsigstore/fulcio"` |  |
-| server.image.version | string | `"sha256:17b914c4a1d05871e3353630b3516b106b653839587aa496d0f96b6e857c8714"` | v1.5.1 |
+| server.image.version | string | `"sha256:4b2a0f0877095aa36898af70edd00568158f89e015f6bb7f02475660d0924f3b"` | v1.6.4 |
 | server.ingress.grpc.annotations."nginx.ingress.kubernetes.io/backend-protocol" | string | `"GRPC"` |  |
 | server.ingress.grpc.className | string | `""` |  |
 | server.ingress.grpc.enabled | bool | `false` |  |
@@ -155,6 +158,7 @@ helm uninstall [RELEASE_NAME]
 | server.ingresses[0].name | string | `"gce-ingress"` |  |
 | server.ingresses[0].staticGlobalIP | string | `"lb-ext-ip"` |  |
 | server.ingresses[0].tls | list | `[]` |  |
+| server.kmsType | string | `"none"` | KMS type for signing key (possible values: "" / "none", "aws") |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
 | server.nodeSelector | object | `{}` |  |
