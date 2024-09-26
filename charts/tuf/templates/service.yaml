@@ -1,3 +1,4 @@
+{{- if ne (include "tuf.enabledSecretsCount" .) "0" }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -12,3 +13,4 @@ spec:
   selector:
     {{- include "tuf.matchLabels" . | nindent 4 }}
   type: ClusterIP
+{{- end }}

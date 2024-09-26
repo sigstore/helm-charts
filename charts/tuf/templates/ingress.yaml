@@ -1,4 +1,5 @@
 {{- if .Values.ingress.create }}
+{{- if ne (include "tuf.enabledSecretsCount" .) "0" }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -32,5 +33,6 @@ spec:
       {{- end }}
       secretName: {{ .secretName }}
     {{- end }}
+{{- end -}}
 {{- end -}}
 {{- end -}}

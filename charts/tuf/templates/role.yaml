@@ -1,3 +1,4 @@
+{{- if ne (include "tuf.enabledSecretsCount" .) "0" }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -7,3 +8,4 @@ rules:
   - apiGroups: [""]
     resources: ["secrets"]
     verbs: ["create", "get", "update"]
+{{- end }}

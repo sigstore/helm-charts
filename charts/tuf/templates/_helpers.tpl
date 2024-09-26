@@ -85,3 +85,23 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 helm.sh/chart: {{ include "tuf.chart" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
+
+{{/*
+Check number of TUF secrets
+*/}}
+{{- define "tuf.enabledSecretsCount" -}}
+{{- $count := 0 -}}
+{{- if (eq .Values.secrets.rekor.enabled true) -}}
+  {{- $count = add $count 1 -}}
+{{- end -}}
+{{- if (eq .Values.secrets.fulcio.enabled true) -}}
+  {{- $count = add $count 1 -}}
+{{- end -}}
+{{- if (eq .Values.secrets.ctlog.enabled true) -}}
+  {{- $count = add $count 1 -}}
+{{- end -}}
+{{- if (eq .Values.secrets.tsa.enabled true) -}}
+  {{- $count = add $count 1 -}}
+{{- end -}}
+{{- $count -}}
+{{- end -}}

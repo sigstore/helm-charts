@@ -1,6 +1,8 @@
 {{- if .Values.namespace.create }}
+{{- if ne (include "tuf.enabledSecretsCount" .) "0" }}
 apiVersion: v1
 kind: Namespace
 metadata:
   name: {{ .Values.namespace.name }}
+{{- end }}
 {{- end }}
