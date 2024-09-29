@@ -1,6 +1,6 @@
 dependencies:
 - name: ctlog
   repository: https://sigstore.github.io/helm-charts
-  version: 0.2.56
-digest: sha256:48d5abee9df97033c523c51f0bd6b58adac1b23bc63705c43a548f332eee1bc5
-generated: "2024-09-03T10:46:06.600740798-04:00"
+  version: 0.2.57
+digest: sha256:9d3b2e53af0b40157727a7928095d92c355b08a0fa625dcf46a0cc695f78f905
+generated: "2024-09-29T17:20:25.569061877-04:00"
