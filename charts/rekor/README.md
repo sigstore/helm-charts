@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.5.0](https://img.shields.io/badge/Version-1.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.6](https://img.shields.io/badge/AppVersion-1.3.6-informational?style=flat-square)
+![Version: 1.5.1](https://img.shields.io/badge/Version-1.5.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.6](https://img.shields.io/badge/AppVersion-1.3.6-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -20,7 +20,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | trillian | 0.2.27 |
+| https://sigstore.github.io/helm-charts | trillian | 0.2.28 |
 
 ## Values
 
@@ -48,7 +48,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
-| createtree.image.version | string | `"sha256:c0cc90af73b71eaf0835c332d99834b669a36698c44c454835589bbc5acac478"` |  |
+| createtree.image.version | string | `"sha256:4e3614df07561b096f1bfe1e1f79582b1545d6253bfad0f79235a1a1af74ef03"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.nodeSelector | object | `{}` |  |
 | createtree.resources | object | `{}` |  |
@@ -64,11 +64,11 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
-| initContainerImage.curl.version | string | `"sha256:8addc281f0ea517409209f76832b6ddc2cabc3264feb1ebbec2a2521ffad24e4"` | 8.9.1 |
+| initContainerImage.curl.version | string | `"sha256:d9b4541e214bcd85196d6e92e2753ac6d0ea699f0af5741f8c6cccbfcf00ef4b"` | 8.10.1 |
 | initContainerResources | object | `{}` |  |
 | mysql.enabled | bool | `false` |  |
 | mysql.gcp.cloudsql.registry | string | `"gcr.io"` |  |
-| mysql.gcp.cloudsql.repository | string | `"cloud-sql-connectors/cloud-sql-proxy:2.12.0-alpine"` |  |
+| mysql.gcp.cloudsql.repository | string | `"cloud-sql-connectors/cloud-sql-proxy:2.13.0-alpine"` |  |
 | mysql.gcp.cloudsql.resources.requests.cpu | string | `"1"` |  |
 | mysql.gcp.cloudsql.resources.requests.memory | string | `"2Gi"` |  |
 | mysql.gcp.cloudsql.securityContext.allowPrivilegeEscalation | bool | `false` |  |
@@ -77,7 +77,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | mysql.gcp.cloudsql.securityContext.runAsNonRoot | bool | `true` |  |
 | mysql.gcp.cloudsql.unixDomainSocket.enabled | bool | `false` |  |
 | mysql.gcp.cloudsql.unixDomainSocket.path | string | `"/cloudsql"` |  |
-| mysql.gcp.cloudsql.version | string | `"sha256:a3843521730914f074f364c5bec608319ebeb5e66da9314ba45b16cd8223547f"` | crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.12.0-alpine |
+| mysql.gcp.cloudsql.version | string | `"sha256:74680d0e49d44af5b6f994a6a29712866cb95d8851b1416676313d0cf567946b"` | crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.13.0-alpine |
 | mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
 | mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
@@ -88,7 +88,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | mysql.gcp.scaffoldSQLProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mysql.gcp.scaffoldSQLProxy.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | mysql.gcp.scaffoldSQLProxy.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:8a7539e248d38628799934e7f1c890083c90e4242e2b0feec4c352fda2574184"` | v0.7.8 which is based on cloud-sql-proxy:2.12.0-alpine |
+| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:16364cc06de704959576b23da26798850141ecae0f70510654764467cd9f47be"` | v0.7.11 which is based on cloud-sql-proxy:2.13.0-alpine |
 | mysql.hostname | string | `""` |  |
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
