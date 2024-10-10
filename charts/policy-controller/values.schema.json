@@ -1,255 +1,635 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-        "commonAnnotations": {
-            "type": "object"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "commonAnnotations": {
+      "additionalProperties": false,
+      "description": "# This will set some annotations in config maps and secrets. Use case: Disable versioning to deploy helm chart using spinnaker",
+      "required": [],
+      "title": "commonAnnotations",
+      "type": "object"
+    },
+    "commonNodeSelector": {
+      "additionalProperties": false,
+      "description": "# common node selector for all the pods",
+      "required": [],
+      "title": "commonNodeSelector",
+      "type": "object"
+    },
+    "commonTolerations": {
+      "description": "# common tolerations for all the pods",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "commonTolerations",
+      "type": "array"
+    },
+    "cosign": {
+      "additionalProperties": false,
+      "properties": {
+        "cosignPub": {
+          "default": "",
+          "description": "add the values in base64 encoded",
+          "required": [],
+          "title": "cosignPub",
+          "type": "string"
         },
-        "commonNodeSelector": {
-            "type": "object"
-        },
-        "commonTolerations": {
-            "type": "array"
-        },
-        "cosign": {
-            "type": "object",
-            "properties": {
-                "cosignPub": {
-                    "type": "string"
-                },
-                "webhookName": {
-                    "type": "string"
-                }
-            }
-        },
-        "imagePullSecrets": {
-            "type": "array"
-        },
-        "installCRDs": {
-            "type": "boolean"
-        },
-        "leasescleanup": {
-            "type": "object",
-            "properties": {
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "pullPolicy": {
-                            "type": "string"
-                        },
-                        "repository": {
-                            "type": "string"
-                        },
-                        "version": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "loglevel": {
-            "type": "string"
-        },
-        "serviceMonitor": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "webhook": {
-            "type": "object",
-            "properties": {
-                "configData": {
-                    "type": "object"
-                },
-                "customLabels": {
-                    "type": "object"
-                },
-                "env": {
-                    "type": "object"
-                },
-                "extraArgs": {
-                    "type": "object"
-                },
-                "failurePolicy": {
-                    "type": "string"
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "pullPolicy": {
-                            "type": "string"
-                        },
-                        "repository": {
-                            "type": "string"
-                        },
-                        "version": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "name": {
-                    "type": "string"
-                },
-                "namespaceSelector": {
-                    "type": "object",
-                    "properties": {
-                        "matchExpressions": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "key": {
-                                        "type": "string"
-                                    },
-                                    "operator": {
-                                        "type": "string"
-                                    },
-                                    "values": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "podAnnotations": {
-                    "type": "object"
-                },
-                "podDisruptionBudget": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "minAvailable": {
-                            "type": "integer"
-                        }
-                    }
-                },
-                "podSecurityContext": {
-                    "type": "object",
-                    "properties": {
-                        "allowPrivilegeEscalation": {
-                            "type": "boolean"
-                        },
-                        "capabilities": {
-                            "type": "object",
-                            "properties": {
-                                "drop": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "readOnlyRootFilesystem": {
-                            "type": "boolean"
-                        },
-                        "runAsUser": {
-                            "type": "integer"
-                        }
-                    }
-                },
-                "registryCaBundle": {
-                    "type": "object"
-                },
-                "replicaCount": {
-                    "type": "integer"
-                },
-                "resources": {
-                    "type": "object",
-                    "properties": {
-                        "limits": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "requests": {
-                            "type": "object",
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                },
-                "securityContext": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "runAsUser": {
-                            "type": "integer"
-                        }
-                    }
-                },
-                "service": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        },
-                        "port": {
-                            "type": "integer"
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "serviceAccount": {
-                    "type": "object",
-                    "properties": {
-                        "annotations": {
-                            "type": "object"
-                        },
-                        "create": {
-                            "type": "boolean"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "volumeMounts": {
-                    "type": "array"
-                },
-                "volumes": {
-                    "type": "array"
-                },
-                "webhookNames": {
-                    "type": "object",
-                    "properties": {
-                        "defaulting": {
-                            "type": "string"
-                        },
-                        "validating": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
+        "webhookName": {
+          "default": "policy.sigstore.dev",
+          "required": [],
+          "title": "webhookName",
+          "type": "string"
         }
+      },
+      "required": [
+        "cosignPub",
+        "webhookName"
+      ],
+      "title": "cosign",
+      "type": "object"
+    },
+    "deployment": {
+      "additionalProperties": false,
+      "properties": {
+        "strategy": {
+          "additionalProperties": false,
+          "properties": {
+            "rollingUpdate": {
+              "additionalProperties": false,
+              "properties": {
+                "maxSurge": {
+                  "default": 1,
+                  "required": [],
+                  "title": "maxSurge",
+                  "type": "integer"
+                },
+                "maxUnavailable": {
+                  "default": 1,
+                  "required": [],
+                  "title": "maxUnavailable",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "maxUnavailable",
+                "maxSurge"
+              ],
+              "title": "rollingUpdate",
+              "type": "object"
+            },
+            "type": {
+              "default": "RollingUpdate",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "rollingUpdate"
+          ],
+          "title": "strategy",
+          "type": "object"
+        }
+      },
+      "required": [
+        "strategy"
+      ],
+      "title": "deployment",
+      "type": "object"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "installCRDs": {
+      "default": true,
+      "required": [],
+      "title": "installCRDs",
+      "type": "boolean"
+    },
+    "leasescleanup": {
+      "additionalProperties": false,
+      "properties": {
+        "image": {
+          "additionalProperties": false,
+          "properties": {
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "repository": {
+              "default": "cgr.dev/chainguard/kubectl",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "version": {
+              "default": "latest-dev",
+              "required": [],
+              "title": "version",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "version",
+            "pullPolicy"
+          ],
+          "title": "image",
+          "type": "object"
+        }
+      },
+      "required": [
+        "image"
+      ],
+      "title": "leasescleanup",
+      "type": "object"
+    },
+    "loglevel": {
+      "default": "info",
+      "required": [],
+      "title": "loglevel",
+      "type": "string"
+    },
+    "serviceMonitor": {
+      "additionalProperties": false,
+      "description": "# serviceMonitor makes policy controller metrics discoverable to prometheus",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "serviceMonitor",
+      "type": "object"
+    },
+    "webhook": {
+      "additionalProperties": false,
+      "properties": {
+        "configData": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "configData",
+          "type": "object"
+        },
+        "customLabels": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "customLabels",
+          "type": "object"
+        },
+        "env": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "env",
+          "type": "object"
+        },
+        "extraArgs": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "extraArgs",
+          "type": "object"
+        },
+        "failurePolicy": {
+          "default": "Fail",
+          "required": [],
+          "title": "failurePolicy",
+          "type": "string"
+        },
+        "image": {
+          "additionalProperties": false,
+          "properties": {
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "repository": {
+              "default": "ghcr.io/sigstore/policy-controller/policy-controller",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "version": {
+              "default": "sha256:f291fce5b9c1a69ba54990eda7e0fe4114043b1afefb0f4ee3e6f84ec9ef1605",
+              "description": "crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.8.2",
+              "required": [],
+              "title": "version",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "version",
+            "pullPolicy"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "name": {
+          "default": "webhook",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        },
+        "namespaceSelector": {
+          "additionalProperties": false,
+          "properties": {
+            "matchExpressions": {
+              "items": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "key": {
+                        "default": "policy.sigstore.dev/include",
+                        "required": [],
+                        "title": "key",
+                        "type": "string"
+                      },
+                      "operator": {
+                        "default": "In",
+                        "required": [],
+                        "title": "operator",
+                        "type": "string"
+                      },
+                      "values": {
+                        "items": {
+                          "anyOf": [
+                            {
+                              "required": [],
+                              "type": "string"
+                            }
+                          ],
+                          "required": []
+                        },
+                        "required": [],
+                        "title": "values",
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "key",
+                      "operator",
+                      "values"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "matchExpressions",
+              "type": "array"
+            }
+          },
+          "required": [
+            "matchExpressions"
+          ],
+          "title": "namespaceSelector",
+          "type": "object"
+        },
+        "podAnnotations": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "podAnnotations",
+          "type": "object"
+        },
+        "podDisruptionBudget": {
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "minAvailable": {
+              "default": 1,
+              "required": [],
+              "title": "minAvailable",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "minAvailable"
+          ],
+          "title": "podDisruptionBudget",
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "additionalProperties": false,
+          "properties": {
+            "allowPrivilegeEscalation": {
+              "default": false,
+              "required": [],
+              "title": "allowPrivilegeEscalation",
+              "type": "boolean"
+            },
+            "capabilities": {
+              "additionalProperties": false,
+              "properties": {
+                "drop": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "required": [],
+                        "type": "string"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "required": [],
+                  "title": "drop",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "drop"
+              ],
+              "title": "capabilities",
+              "type": "object"
+            },
+            "enabled": {
+              "default": true,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "readOnlyRootFilesystem": {
+              "default": true,
+              "required": [],
+              "title": "readOnlyRootFilesystem",
+              "type": "boolean"
+            },
+            "runAsUser": {
+              "default": 1000,
+              "required": [],
+              "title": "runAsUser",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "allowPrivilegeEscalation",
+            "readOnlyRootFilesystem",
+            "runAsUser",
+            "capabilities"
+          ],
+          "title": "podSecurityContext",
+          "type": "object"
+        },
+        "registryCaBundle": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "registryCaBundle",
+          "type": "object"
+        },
+        "replicaCount": {
+          "default": 1,
+          "required": [],
+          "title": "replicaCount",
+          "type": "integer"
+        },
+        "resources": {
+          "additionalProperties": false,
+          "properties": {
+            "limits": {
+              "additionalProperties": false,
+              "properties": {
+                "cpu": {
+                  "default": "200m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "512Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "additionalProperties": false,
+              "properties": {
+                "cpu": {
+                  "default": "100m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "128Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cpu",
+                "memory"
+              ],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "limits",
+            "requests"
+          ],
+          "title": "resources",
+          "type": "object"
+        },
+        "securityContext": {
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "default": false,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "runAsUser": {
+              "default": 65532,
+              "required": [],
+              "title": "runAsUser",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "enabled",
+            "runAsUser"
+          ],
+          "title": "securityContext",
+          "type": "object"
+        },
+        "service": {
+          "additionalProperties": false,
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "port": {
+              "default": 443,
+              "required": [],
+              "title": "port",
+              "type": "integer"
+            },
+            "type": {
+              "default": "ClusterIP",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "annotations",
+            "type",
+            "port"
+          ],
+          "title": "service",
+          "type": "object"
+        },
+        "serviceAccount": {
+          "additionalProperties": false,
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "create": {
+              "default": true,
+              "required": [],
+              "title": "create",
+              "type": "boolean"
+            },
+            "name": {
+              "default": "",
+              "required": [],
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "annotations",
+            "create",
+            "name"
+          ],
+          "title": "serviceAccount",
+          "type": "object"
+        },
+        "volumeMounts": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "volumeMounts",
+          "type": "array"
+        },
+        "volumes": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "volumes",
+          "type": "array"
+        },
+        "webhookNames": {
+          "additionalProperties": false,
+          "properties": {
+            "defaulting": {
+              "default": "defaulting.clusterimagepolicy.sigstore.dev",
+              "required": [],
+              "title": "defaulting",
+              "type": "string"
+            },
+            "validating": {
+              "default": "validating.clusterimagepolicy.sigstore.dev",
+              "required": [],
+              "title": "validating",
+              "type": "string"
+            }
+          },
+          "required": [
+            "defaulting",
+            "validating"
+          ],
+          "title": "webhookNames",
+          "type": "object"
+        }
+      },
+      "required": [
+        "customLabels",
+        "configData",
+        "replicaCount",
+        "name",
+        "image",
+        "env",
+        "extraArgs",
+        "resources",
+        "securityContext",
+        "failurePolicy",
+        "podAnnotations",
+        "podSecurityContext",
+        "podDisruptionBudget",
+        "serviceAccount",
+        "service",
+        "volumeMounts",
+        "volumes",
+        "namespaceSelector",
+        "registryCaBundle",
+        "webhookNames"
+      ],
+      "title": "webhook",
+      "type": "object"
     }
+  },
+  "required": [
+    "cosign",
+    "installCRDs",
+    "imagePullSecrets",
+    "loglevel",
+    "deployment",
+    "webhook",
+    "leasescleanup",
+    "commonNodeSelector",
+    "commonTolerations",
+    "commonAnnotations",
+    "serviceMonitor"
+  ],
+  "type": "object"
 }
