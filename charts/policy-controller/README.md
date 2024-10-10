@@ -21,6 +21,9 @@ The Helm chart for Policy  Controller
 | commonTolerations | list | `[]` |  |
 | cosign.cosignPub | string | `""` |  |
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
+| deployment.strategy.rollingUpdate.maxSurge | int | `1` |  |
+| deployment.strategy.rollingUpdate.maxUnavailable | int | `1` |  |
+| deployment.strategy.type | string | `"RollingUpdate"` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
 | leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
