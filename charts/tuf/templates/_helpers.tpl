@@ -85,3 +85,51 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 helm.sh/chart: {{ include "tuf.chart" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
+
+{{/*
+Check number of TUF secrets and render them as structured YAML.
+*/}}
+{{- define "tuf.validateSecrets" }}
+{{- if not (or .Values.secrets.rekor.enabled .Values.secrets.rekor.create 
+             .Values.secrets.fulcio.enabled .Values.secrets.fulcio.create 
+             .Values.secrets.ctlog.enabled .Values.secrets.ctlog.create 
+             .Values.secrets.tsa.enabled .Values.secrets.tsa.create) -}}
+  {{- fail "At least one secret must be provided (enabled or created)." -}}
+{{- else }}
+    {{- include "tuf.secretsList" . | nindent 8 }}
+{{- end }}
+{{- end }}
+
+{{/*
+Render TUF Secrets as structured YAML for the volume sources.
+*/}}
+{{- define "tuf.secretsList" -}}
+  {{- if or (.Values.secrets.ctlog.enabled) (.Values.secrets.ctlog.create) }}
+  - secret:
+      name: {{ .Values.secrets.ctlog.name }}
+      items:
+      - key: {{ .Values.secrets.ctlog.key }}
+        path: {{ .Values.secrets.ctlog.path }}
+  {{- end }}
+  {{- if or (.Values.secrets.fulcio.enabled) (.Values.secrets.fulcio.create) }}
+  - secret:
+      name: {{ .Values.secrets.fulcio.name }}
+      items:
+      - key: {{ .Values.secrets.fulcio.key }}
+        path: {{ .Values.secrets.fulcio.path }}
+  {{- end }}
+  {{- if or (.Values.secrets.rekor.enabled) (.Values.secrets.rekor.create) }}
+  - secret:
+      name: {{ .Values.secrets.rekor.name }}
+      items:
+      - key: {{ .Values.secrets.rekor.key }}
+        path: {{ .Values.secrets.rekor.path }}
+  {{- end }}
+  {{- if or (.Values.secrets.tsa.enabled) (.Values.secrets.tsa.create) }}
+  - secret:
+      name: {{ .Values.secrets.tsa.name }}
+      items:
+      - key: {{ .Values.secrets.tsa.key }}
+        path: {{ .Values.secrets.tsa.path }}
+  {{- end }}
+{{- end }}

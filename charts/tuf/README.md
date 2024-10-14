@@ -1,6 +1,6 @@
 # tuf
 
-![Version: 0.1.18](https://img.shields.io/badge/Version-0.1.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.11](https://img.shields.io/badge/AppVersion-0.7.11-informational?style=flat-square)
+![Version: 0.1.19](https://img.shields.io/badge/Version-0.1.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.11](https://img.shields.io/badge/AppVersion-0.7.11-informational?style=flat-square)
 
 A framework for securing software update systems - the scaffolding implementation
 
@@ -45,18 +45,22 @@ A framework for securing software update systems - the scaffolding implementatio
 | roleBindingName | string | `"tuf"` |  |
 | roleName | string | `"tuf"` |  |
 | secrets.ctlog.create | bool | `false` |  |
+| secrets.ctlog.enabled | bool | `true` |  |
 | secrets.ctlog.key | string | `"public"` |  |
 | secrets.ctlog.name | string | `"ctlog-public-key"` |  |
 | secrets.ctlog.path | string | `"ctfe.pub"` |  |
 | secrets.fulcio.create | bool | `false` |  |
+| secrets.fulcio.enabled | bool | `true` |  |
 | secrets.fulcio.key | string | `"cert"` |  |
 | secrets.fulcio.name | string | `"fulcio-server-secret"` |  |
 | secrets.fulcio.path | string | `"fulcio_v1.crt.pem"` |  |
 | secrets.rekor.create | bool | `false` |  |
+| secrets.rekor.enabled | bool | `true` |  |
 | secrets.rekor.key | string | `"key"` |  |
 | secrets.rekor.name | string | `"rekor-public-key"` |  |
 | secrets.rekor.path | string | `"rekor.pub"` |  |
 | secrets.tsa.create | bool | `false` |  |
+| secrets.tsa.enabled | bool | `true` |  |
 | secrets.tsa.key | string | `"cert-chain"` |  |
 | secrets.tsa.name | string | `"tsa-cert-chain"` |  |
 | secrets.tsa.path | string | `"tsa.certchain.pem"` |  |

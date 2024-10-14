@@ -109,7 +109,22 @@
                 "ctlog": {
                     "properties": {
                         "create": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "enabled": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "name": {
+                            "type": "string",
+                            "examples": [
+                                "rekor-public-key"
+                            ]
                         },
                         "key": {
                             "type": "string"
@@ -126,7 +141,22 @@
                 "fulcio": {
                     "properties": {
                         "create": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "enabled": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "name": {
+                            "type": "string",
+                            "examples": [
+                                "fulcio-server-secret"
+                            ]
                         },
                         "key": {
                             "type": "string"
@@ -143,7 +173,22 @@
                 "rekor": {
                     "properties": {
                         "create": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "enabled": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "name": {
+                            "type": "string",
+                            "examples": [
+                                "ctlog-public-key"
+                            ]
                         },
                         "key": {
                             "type": "string"
@@ -160,7 +205,22 @@
                 "tsa": {
                     "properties": {
                         "create": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "enabled": {
+                            "type": "boolean",
+                            "examples": [
+                                false
+                            ]
+                        },
+                        "name": {
+                            "type": "string",
+                            "examples": [
+                                "tsa-cert-chain"
+                            ]
                         },
                         "key": {
                             "type": "string"
