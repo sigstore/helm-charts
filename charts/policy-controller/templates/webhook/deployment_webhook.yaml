@@ -70,6 +70,7 @@ spec:
           value: "{{ $value }}"
 {{- end }}
 {{- end }}
+        {{- if or (semverCompare ">= 1.8-0" .Chart.AppVersion) .Values.webhook.extraArgs }}
         args:
         {{- if semverCompare ">= 1.8-0" .Chart.AppVersion }}
         - -webhook-name={{ required "A valid cosign.webhookName is required" .Values.cosign.webhookName }}
@@ -78,6 +79,7 @@ spec:
         {{- end }}
         {{- range $key, $value := .Values.webhook.extraArgs }}
         - -{{ $key }}={{ $value }}
+        {{- end }}
         {{- end }}
         ports:
         - containerPort: 8443
