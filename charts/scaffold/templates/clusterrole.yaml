@@ -6,8 +6,8 @@ metadata:
 rules:
   - apiGroups: [""]
     resources: ["secrets"]
-    verbs: ["get", "create", "patch"]
+    verbs: ["get", "create", "patch"{{- if .Values.copySecretJob.copySecretCronJob.enabled }}, "delete"{{- end }}]
   - apiGroups: ["apps"]
     resources: ["deployments"]
-    verbs: ["get", "list"]
+    verbs: ["get", "list"{{- if .Values.copySecretJob.copySecretCronJob.enabled }}, "update"{{- end }}]
 {{- end }}
