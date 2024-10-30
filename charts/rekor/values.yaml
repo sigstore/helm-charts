@@ -27,8 +27,8 @@ redis:
     registry: docker.io
     repository: redis
     pullPolicy: IfNotPresent
-    # -- 6.2.14-alpine3.20
-    version: "sha256:e3b17ba9479deec4b7d1eeec1548a253acc5374d68d3b27937fcfe4df8d18c7e"
+    # -- 6.2.16-alpine3.20
+    version: "sha256:2ba50e1ac3a0ea17b736ce9db2b0a9f6f8b85d4c27d5f5accc6a416d8f42c6d5"
   resources: {}
   readinessProbe:
     initialDelaySeconds: 5
@@ -64,8 +64,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.7.11 which is based on cloud-sql-proxy:2.13.0-alpine
-      version: sha256:16364cc06de704959576b23da26798850141ecae0f70510654764467cd9f47be
+      # -- v0.7.15 which is based on cloud-sql-proxy:2.14.0-alpine
+      version: sha256:862598dc2457fd246dc5363e0bd21462343c89e714dbd4159e49f119e8ff5ca5
       resources:
         requests:
           memory: "2Gi"
@@ -79,9 +79,9 @@ mysql:
             - ALL
     cloudsql:
       registry: gcr.io
-      repository: cloud-sql-connectors/cloud-sql-proxy:2.13.0-alpine
-      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.13.0-alpine
-      version: sha256:74680d0e49d44af5b6f994a6a29712866cb95d8851b1416676313d0cf567946b
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.14.0-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.0-alpine
+      version: sha256:6dc1d9ea84ff43eaeaebe51bb52de9e24dce8d8affd2fda0dc0d218897456c12
       resources:
         requests:
           memory: "2Gi"
@@ -233,8 +233,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.7.11
-    version: sha256:4e3614df07561b096f1bfe1e1f79582b1545d6253bfad0f79235a1a1af74ef03
+    # v0.7.15
+    version: sha256:ee42272373b46a898b21a0aea21cf703e90048e03f45a4640381b4a04735ffd8
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
