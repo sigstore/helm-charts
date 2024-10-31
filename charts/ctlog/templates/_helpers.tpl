@@ -110,15 +110,9 @@ Server Arguments
 - {{ printf "--metrics_endpoint=0.0.0.0:%d" (.Values.server.portHTTPMetrics | int) | quote }}
 - "--log_config=/ctfe-keys/config"
 - "--alsologtostderr"
-{{- if .Values.server.extraArgs -}}
-{{- range $key, $value := .Values.server.extraArgs }}
-{{- if $value }}
-- {{ printf "%v=%v" $key $value | quote }}
-{{- else }}
-- {{ printf $key | quote }}
-{{- end }}
-{{- end }}
-{{- end -}}
+{{- range .Values.server.extraArgs }}
+- {{ . | quote }}
+{{ end }}
 {{- end -}}
 
 {{/*
