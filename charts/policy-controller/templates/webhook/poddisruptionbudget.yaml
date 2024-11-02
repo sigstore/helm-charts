@@ -11,15 +11,17 @@ metadata:
     {{- toYaml . | nindent 4 }}
 {{- end }}
 {{- end }}
+  {{- with .Values.annotations }}
   annotations:
-{{- if .Values.annotations }}
-{{- with .Values.annotations }}
     {{- toYaml . | nindent 4 }}
-{{- end }}
-{{- end }}
+  {{- end }}
 spec:
+  {{- if .Values.webhook.podDisruptionBudget.minAvailable }}
   minAvailable: {{ .Values.webhook.podDisruptionBudget.minAvailable }}
+  {{- end }}
+  {{- if .Values.webhook.podDisruptionBudget.maxUnavailable }}
   maxUnavailable: {{ .Values.webhook.podDisruptionBudget.maxUnavailable }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "policy-controller.selectorLabels" . | nindent 6 }}

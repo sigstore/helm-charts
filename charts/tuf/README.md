@@ -1,6 +1,6 @@
 # tuf
 
-![Version: 0.1.18](https://img.shields.io/badge/Version-0.1.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.11](https://img.shields.io/badge/AppVersion-0.7.11-informational?style=flat-square)
+![Version: 0.1.20](https://img.shields.io/badge/Version-0.1.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.15](https://img.shields.io/badge/AppVersion-0.7.15-informational?style=flat-square)
 
 A framework for securing software update systems - the scaffolding implementation
 
@@ -29,7 +29,7 @@ A framework for securing software update systems - the scaffolding implementatio
 | deployment.replicas | int | `1` |  |
 | deployment.repository | string | `"sigstore/scaffolding/server"` |  |
 | deployment.tolerations | list | `[]` |  |
-| deployment.version | string | `"sha256:90992e92dee398c8b9bdeec0365f2b7211f1a14b4b111e9e926c701847e995e7"` |  |
+| deployment.version | string | `"sha256:982c6173b6f2f976fd9f58eb543ca9ec5f0d1b7c1a6f7bb0c4b96cff1618c62e"` |  |
 | enabled | bool | `true` |  |
 | forceNamespace | string | `""` |  |
 | fullnameOverride | string | `"tuf"` |  |
@@ -45,18 +45,22 @@ A framework for securing software update systems - the scaffolding implementatio
 | roleBindingName | string | `"tuf"` |  |
 | roleName | string | `"tuf"` |  |
 | secrets.ctlog.create | bool | `false` |  |
+| secrets.ctlog.enabled | bool | `true` |  |
 | secrets.ctlog.key | string | `"public"` |  |
 | secrets.ctlog.name | string | `"ctlog-public-key"` |  |
 | secrets.ctlog.path | string | `"ctfe.pub"` |  |
 | secrets.fulcio.create | bool | `false` |  |
+| secrets.fulcio.enabled | bool | `true` |  |
 | secrets.fulcio.key | string | `"cert"` |  |
 | secrets.fulcio.name | string | `"fulcio-server-secret"` |  |
 | secrets.fulcio.path | string | `"fulcio_v1.crt.pem"` |  |
 | secrets.rekor.create | bool | `false` |  |
+| secrets.rekor.enabled | bool | `true` |  |
 | secrets.rekor.key | string | `"key"` |  |
 | secrets.rekor.name | string | `"rekor-public-key"` |  |
 | secrets.rekor.path | string | `"rekor.pub"` |  |
 | secrets.tsa.create | bool | `false` |  |
+| secrets.tsa.enabled | bool | `true` |  |
 | secrets.tsa.key | string | `"cert-chain"` |  |
 | secrets.tsa.name | string | `"tsa-cert-chain"` |  |
 | secrets.tsa.path | string | `"tsa.certchain.pem"` |  |
