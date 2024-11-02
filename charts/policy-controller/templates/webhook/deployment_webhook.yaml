@@ -13,11 +13,9 @@ spec:
       {{- include "policy-controller.selectorLabels" . | nindent 6 }}
       control-plane: {{ template "policy-controller.fullname" . }}-webhook
 
-{{- if .Values.deployment.strategy }}
   strategy:
 {{ toYaml .Values.deployment.strategy | trim | indent 4 }}
     {{ if eq .Values.deployment.strategy.type "Recreate" }}rollingUpdate: null{{ end }}
-{{- end }}
 
   template:
     metadata:
