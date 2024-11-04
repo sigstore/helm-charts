@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.29](https://img.shields.io/badge/Version-0.2.29-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.1](https://img.shields.io/badge/AppVersion-1.6.1-informational?style=flat-square)
+![Version: 0.2.30](https://img.shields.io/badge/Version-0.2.30-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.1](https://img.shields.io/badge/AppVersion-1.6.1-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -61,9 +61,9 @@ helm uninstall [RELEASE_NAME]
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
 | initContainerImage.curl.version | string | `"sha256:d9b4541e214bcd85196d6e92e2753ac6d0ea699f0af5741f8c6cccbfcf00ef4b"` | 8.10.1 |
 | initContainerImage.netcat.imagePullPolicy | string | `"IfNotPresent"` |  |
-| initContainerImage.netcat.registry | string | `"cgr.dev"` |  |
-| initContainerImage.netcat.repository | string | `"chainguard/netcat"` |  |
-| initContainerImage.netcat.version | string | `"sha256:6051975a14c51b9d3b525a06004d62a4d323c08ca58e3468343095a55a42fff2"` | 2024-09-03 |
+| initContainerImage.netcat.registry | string | `"docker.io"` |  |
+| initContainerImage.netcat.repository | string | `"subfuzion/netcat"` |  |
+| initContainerImage.netcat.version | string | `"sha256:7e808e84a631d9c2cd5a04f6a084f925ea388e3127553461536c1248c3333c8a"` | 2024-09-03 |
 | logServer.affinity | object | `{}` |  |
 | logServer.enabled | bool | `true` |  |
 | logServer.extraArgs | list | `[]` |  |
