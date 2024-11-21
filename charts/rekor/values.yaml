@@ -114,11 +114,11 @@ server:
   name: server
   port: 3000
   image:
-    registry: gcr.io
-    repository: projectsigstore/rekor-server
+    registry: ghcr.io
+    repository: sigstore/rekor/rekor-server
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/rekor-server:v1.3.6
-    version: sha256:1237f29e2105d7f5451bbe15a3aca8677ddd1bb80620ca2fd06f74262437cf51
+    # crane digest ghcr.io/sigstore/rekor/rekor-server:v1.3.7
+    version: sha256:b0358d1d1d399bc50f1375fcf4f665e4432bebd7fc4900d893ddc788f05fc76e
   # -- KMS type for signing key (possible values: "" / "none", "aws")
   kmsType: none
   # -- AWS region if using AWS KMS for signing key
