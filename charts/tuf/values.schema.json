@@ -7,6 +7,10 @@
                     "properties": {},
                     "type": "object"
                 },
+                "containerSecurityContext": {
+                    "properties": {},
+                    "type": "object"
+                },
                 "imagePullPolicy": {
                     "type": "string"
                 },
@@ -28,6 +32,13 @@
                 },
                 "repository": {
                     "type": "string"
+                },
+                "resources": {
+                    "type": "object"
+                },
+                "securityContext": {
+                    "properties": {},
+                    "type": "object"
                 },
                 "tolerations": {
                     "type": "array"

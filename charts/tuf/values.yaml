@@ -15,6 +15,9 @@ deployment:
   version: sha256:982c6173b6f2f976fd9f58eb543ca9ec5f0d1b7c1a6f7bb0c4b96cff1618c62e
   imagePullPolicy: IfNotPresent
   port: 8080
+  resources: {}
+  containerSecurityContext: {}
+  securityContext: {}
   tolerations: []
   nodeSelector: {}
   affinity: {}

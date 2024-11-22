@@ -39,11 +39,22 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-
         volumeMounts:
           - name: tuf-secrets
             mountPath: "/var/run/tuf-secrets"
             readOnly: true
+      {{- if .Values.deployment.resources }}
+        resources:
+{{ toYaml .Values.deployment.resources | indent 10 }}
+      {{- end }}
+      {{- if .Values.deployment.containerSecurityContext }}
+        securityContext:
+{{ toYaml .Values.deployment.containerSecurityContext | indent 10 }}
+      {{- end }}
+    {{- if .Values.deployment.securityContext }}
+      securityContext:
+{{ toYaml .Values.deployment.securityContext | indent 8 }}
+    {{- end }}
       volumes:
       - name: tuf-secrets
         projected:
