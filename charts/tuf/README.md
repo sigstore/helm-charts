@@ -1,6 +1,6 @@
 # tuf
 
-![Version: 0.1.20](https://img.shields.io/badge/Version-0.1.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.15](https://img.shields.io/badge/AppVersion-0.7.15-informational?style=flat-square)
+![Version: 0.1.21](https://img.shields.io/badge/Version-0.1.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.15](https://img.shields.io/badge/AppVersion-0.7.15-informational?style=flat-square)
 
 A framework for securing software update systems - the scaffolding implementation
 
@@ -21,6 +21,7 @@ A framework for securing software update systems - the scaffolding implementatio
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | deployment.affinity | object | `{}` |  |
+| deployment.containerSecurityContext | object | `{}` |  |
 | deployment.imagePullPolicy | string | `"IfNotPresent"` |  |
 | deployment.name | string | `"tuf"` |  |
 | deployment.nodeSelector | object | `{}` |  |
@@ -28,6 +29,8 @@ A framework for securing software update systems - the scaffolding implementatio
 | deployment.registry | string | `"ghcr.io"` |  |
 | deployment.replicas | int | `1` |  |
 | deployment.repository | string | `"sigstore/scaffolding/server"` |  |
+| deployment.resources | object | `{}` |  |
+| deployment.securityContext | object | `{}` |  |
 | deployment.tolerations | list | `[]` |  |
 | deployment.version | string | `"sha256:982c6173b6f2f976fd9f58eb543ca9ec5f0d1b7c1a6f7bb0c4b96cff1618c62e"` |  |
 | enabled | bool | `true` |  |
