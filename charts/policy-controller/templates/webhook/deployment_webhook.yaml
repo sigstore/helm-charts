@@ -12,6 +12,11 @@ spec:
     matchLabels:
       {{- include "policy-controller.selectorLabels" . | nindent 6 }}
       control-plane: {{ template "policy-controller.fullname" . }}-webhook
+
+  strategy:
+{{ toYaml .Values.deployment.strategy | trim | indent 4 }}
+    {{ if eq .Values.deployment.strategy.type "Recreate" }}rollingUpdate: null{{ end }}
+
   template:
     metadata:
       {{- with .Values.webhook.podAnnotations }}

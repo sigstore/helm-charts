@@ -12,6 +12,63 @@ The Helm chart for Policy  Controller
 
 * <https://github.com/sigstore/policy-controller>
 
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| commonAnnotations | object | `{}` |  |
+| commonNodeSelector | object | `{}` |  |
+| commonTolerations | list | `[]` |  |
+| cosign.cosignPub | string | `""` |  |
+| cosign.webhookName | string | `"policy.sigstore.dev"` |  |
+| deployment.strategy.rollingUpdate.maxSurge | int | `1` |  |
+| deployment.strategy.rollingUpdate.maxUnavailable | int | `1` |  |
+| deployment.strategy.type | string | `"RollingUpdate"` |  |
+| imagePullSecrets | list | `[]` |  |
+| installCRDs | bool | `true` |  |
+| leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
+| leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
+| leasescleanup.image.version | string | `"latest-dev"` |  |
+| loglevel | string | `"info"` |  |
+| serviceMonitor.enabled | bool | `false` |  |
+| webhook.configData | object | `{}` |  |
+| webhook.customLabels | object | `{}` |  |
+| webhook.env | object | `{}` |  |
+| webhook.extraArgs | object | `{}` |  |
+| webhook.failurePolicy | string | `"Fail"` |  |
+| webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
+| webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
+| webhook.image.version | string | `"sha256:f291fce5b9c1a69ba54990eda7e0fe4114043b1afefb0f4ee3e6f84ec9ef1605"` |  |
+| webhook.name | string | `"webhook"` |  |
+| webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
+| webhook.namespaceSelector.matchExpressions[0].operator | string | `"In"` |  |
+| webhook.namespaceSelector.matchExpressions[0].values[0] | string | `"true"` |  |
+| webhook.podDisruptionBudget.enabled | bool | `true` |  |
+| webhook.podDisruptionBudget.minAvailable | int | `1` |  |
+| webhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| webhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| webhook.podSecurityContext.enabled | bool | `true` |  |
+| webhook.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| webhook.podSecurityContext.runAsUser | int | `1000` |  |
+| webhook.registryCaBundle | object | `{}` |  |
+| webhook.replicaCount | int | `1` |  |
+| webhook.resources.limits.cpu | string | `"200m"` |  |
+| webhook.resources.limits.memory | string | `"512Mi"` |  |
+| webhook.resources.requests.cpu | string | `"100m"` |  |
+| webhook.resources.requests.memory | string | `"128Mi"` |  |
+| webhook.securityContext.enabled | bool | `false` |  |
+| webhook.securityContext.runAsUser | int | `65532` |  |
+| webhook.service.annotations | object | `{}` |  |
+| webhook.service.port | int | `443` |  |
+| webhook.service.type | string | `"ClusterIP"` |  |
+| webhook.serviceAccount.annotations | object | `{}` |  |
+| webhook.serviceAccount.create | bool | `true` |  |
+| webhook.serviceAccount.name | string | `""` |  |
+| webhook.volumeMounts | list | `[]` |  |
+| webhook.volumes | list | `[]` |  |
+| webhook.webhookNames.defaulting | string | `"defaulting.clusterimagepolicy.sigstore.dev"` |  |
+| webhook.webhookNames.validating | string | `"validating.clusterimagepolicy.sigstore.dev"` |  |
+
 ### Deploy `policy-controller` Helm Chart
 
 Install `policy-controller` using Helm:
