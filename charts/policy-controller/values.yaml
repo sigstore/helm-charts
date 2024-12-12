@@ -41,6 +41,9 @@ webhook:
     capabilities:
       drop:
         - ALL
+  # The default affinity config is to spread the webhook across nodes.
+  # See charts/policy-controller/templates/webhook/deployment_webhook.yaml#L39 for more info.
+  affinity: {}
   podDisruptionBudget:
     enabled: true
     minAvailable: 1
