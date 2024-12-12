@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.8.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0](https://img.shields.io/badge/AppVersion-0.11.0-informational?style=flat-square)
+![Version: 0.8.1](https://img.shields.io/badge/Version-0.8.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0](https://img.shields.io/badge/AppVersion-0.11.0-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -161,6 +161,7 @@ helm uninstall [RELEASE_NAME]
 | leasescleanup.image.version | string | `"latest-dev"` |  |
 | loglevel | string | `"info"` |  |
 | serviceMonitor.enabled | bool | `false` |  |
+| webhook.affinity | object | `{}` |  |
 | webhook.configData | object | `{}` |  |
 | webhook.customLabels | object | `{}` |  |
 | webhook.env | object | `{}` |  |
