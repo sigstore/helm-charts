@@ -33,6 +33,9 @@ spec:
       serviceAccountName: {{ include "webhook.serviceAccountName" . }}
       # To avoid node becoming SPOF, spread our replicas to different nodes.
       affinity:
+      {{- if .Values.webhook.affinity }}
+        {{- toYaml .Values.webhook.affinity | nindent 8 }}
+      {{- else }}
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -41,6 +44,7 @@ spec:
                   control-plane: {{ template "policy-controller.fullname" . }}-webhook
               topologyKey: kubernetes.io/hostname
             weight: 100
+      {{- end }}
       containers:
       - name: {{ template "policy-controller.name" . }}-{{ .Values.webhook.name }}
         image: "{{ template "policy-controller.image" .Values.webhook.image }}"
