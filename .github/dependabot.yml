@@ -10,3 +10,8 @@ updates:
         update-types:
           - "minor"
           - "patch"
+  - package-ecosystem: docker
+    directories:
+      - "/charts/**"
+    schedule:
+      interval: weekly
