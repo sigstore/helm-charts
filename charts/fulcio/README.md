@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.6.3](https://img.shields.io/badge/Version-2.6.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.4](https://img.shields.io/badge/AppVersion-1.6.4-informational?style=flat-square)
+![Version: 2.6.4](https://img.shields.io/badge/Version-2.6.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.5](https://img.shields.io/badge/AppVersion-1.6.5-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -71,7 +71,7 @@ helm uninstall [RELEASE_NAME]
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | ctlog | 0.2.59 |
+| https://sigstore.github.io/helm-charts | ctlog | 0.2.60 |
 
 ## Values
 
@@ -85,7 +85,7 @@ helm uninstall [RELEASE_NAME]
 | createcerts.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createcerts.image.registry | string | `"ghcr.io"` |  |
 | createcerts.image.repository | string | `"sigstore/scaffolding/createcerts"` |  |
-| createcerts.image.version | string | `"sha256:03a5725b8812a45570a1c6ed8e5df7dc2295904cd8603c7ed537d97af174d235"` |  |
+| createcerts.image.version | string | `"sha256:2a2bb96f108b5a8aa9ca07f18be1e3dd673c41ca4836adc1b6129cea213b417c"` |  |
 | createcerts.name | string | `"createcerts"` |  |
 | createcerts.nodeSelector | object | `{}` |  |
 | createcerts.replicaCount | int | `1` |  |
@@ -125,9 +125,9 @@ helm uninstall [RELEASE_NAME]
 | server.awsKmsRegion | string | `"us-east-1"` | AWS region if using AWS KMS for signing key |
 | server.grpcSvcPort | int | `5554` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
-| server.image.registry | string | `"gcr.io"` |  |
-| server.image.repository | string | `"projectsigstore/fulcio"` |  |
-| server.image.version | string | `"sha256:4b2a0f0877095aa36898af70edd00568158f89e015f6bb7f02475660d0924f3b"` | v1.6.4 |
+| server.image.registry | string | `"ghcr.io"` |  |
+| server.image.repository | string | `"sigstore/fulcio"` |  |
+| server.image.version | string | `"sha256:2499cc14a6beab86866fc9a2e721665083f102201e6db0ee8b4e3b5faab89a74"` | v1.6.5 |
 | server.ingress.grpc.annotations."nginx.ingress.kubernetes.io/backend-protocol" | string | `"GRPC"` |  |
 | server.ingress.grpc.className | string | `""` |  |
 | server.ingress.grpc.enabled | bool | `false` |  |
