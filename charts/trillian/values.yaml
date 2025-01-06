@@ -8,8 +8,8 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # -- 8.10.1
-    version: sha256:d9b4541e214bcd85196d6e92e2753ac6d0ea699f0af5741f8c6cccbfcf00ef4b
+    # -- 8.11.1
+    version: sha256:c1fe1679c34d9784c1b0d1e5f62ac0a79fca01fb6377cdd33e90473c6f9f9a69
     imagePullPolicy: IfNotPresent
   netcat:
     registry: docker.io
@@ -31,8 +31,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.7.15 which is based on cloud-sql-proxy:2.14.0-alpine
-      version: sha256:862598dc2457fd246dc5363e0bd21462343c89e714dbd4159e49f119e8ff5ca5
+      # -- v0.7.18 which is based on cloud-sql-proxy:2.14.2-alpine
+      version: sha256:77dfbe3f7c196c5e64d9efd6e69fcb025be834c42e82cb5e2120a2a4cea254a3
       resources:
         requests:
           memory: "2Gi"
@@ -46,9 +46,9 @@ mysql:
             - ALL
     cloudsql:
       registry: gcr.io
-      repository: cloud-sql-connectors/cloud-sql-proxy:2.14.0-alpine
-      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.0-alpine
-      version: sha256:6dc1d9ea84ff43eaeaebe51bb52de9e24dce8d8affd2fda0dc0d218897456c12
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.14.2-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.2-alpine
+      version: sha256:0a9a73d045cbec04fd64f6f06f8f5a865c4c75cef1913a54285dbaa75ea6d2ce
       resources:
         requests:
           memory: "2Gi"
@@ -138,8 +138,8 @@ logServer:
     registry: ghcr.io
     repository: sigstore/scaffolding/trillian_log_server
     pullPolicy: IfNotPresent
-    # -- trillian v1.6.1 (scaffolding v0.7.15)
-    version: sha256:721b0e89ca3c5e6a167299836880953e2354071eae624a1123fdb5b444d16f76
+    # -- trillian v1.7.0 (scaffolding v0.7.18)
+    version: sha256:f95bebca5613c022237bc83917b2698e536c37cb119fde705344426786a08a77
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -174,8 +174,8 @@ logSigner:
     registry: ghcr.io
     repository: sigstore/scaffolding/trillian_log_signer
     pullPolicy: IfNotPresent
-    # -- trillian v1.6.1 (scaffolding v0.7.15)
-    version: sha256:6d3592457acf9823c6f1dbe03e0cac29dddcfe4eb502bb05a8acf8fdb02a6de5
+    # -- trillian v1.7.0 (scaffolding v0.7.18)
+    version: sha256:3dce63bba05de9675cbdb30b670f37d7988e4c909d08af09666e5324eec0970e
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -204,8 +204,8 @@ createdb:
     registry: ghcr.io
     repository: sigstore/scaffolding/createdb
     pullPolicy: IfNotPresent
-    # -- v0.7.15
-    version: sha256:b8f6e7c370228ce4412016d783a5b8f890cb1fb8e7e7acfd8d2c723537270954
+    # -- v0.7.18
+    version: sha256:9e08766bcb7bad846dc93b1bbc1994f3d99b4fce46f438a48940da92097867b8
   serviceAccount:
     create: false
     name: ""
