@@ -5,8 +5,8 @@ description: |
 
 type: application
 
-version: 0.2.30
-appVersion: 1.6.1
+version: 0.3.0
+appVersion: 1.7.0
 
 keywords:
   - security
@@ -25,18 +25,18 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: curl
-      image: docker.io/curlimages/curl:8.10.1@sha256:d9b4541e214bcd85196d6e92e2753ac6d0ea699f0af5741f8c6cccbfcf00ef4b
+      image: docker.io/curlimages/curl:8.11.1@sha256:c1fe1679c34d9784c1b0d1e5f62ac0a79fca01fb6377cdd33e90473c6f9f9a69
     - name: netcat
       image: docker.io/subfuzion/netcat@sha256:7e808e84a631d9c2cd5a04f6a084f925ea388e3127553461536c1248c3333c8a
     - name: db_server
       image: gcr.io/trillian-opensource-ci/db_server:v1.5.3@sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461
     - name: log_server
-      image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.6.1@sha256:721b0e89ca3c5e6a167299836880953e2354071eae624a1123fdb5b444d16f76
+      image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.7.0@sha256:f95bebca5613c022237bc83917b2698e536c37cb119fde705344426786a08a77
     - name: log_signer
-      image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.6.1@sha256:6d3592457acf9823c6f1dbe03e0cac29dddcfe4eb502bb05a8acf8fdb02a6de5
+      image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.7.0@sha256:3dce63bba05de9675cbdb30b670f37d7988e4c909d08af09666e5324eec0970e
     - name: cloud_proxy
-      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.0-alpine@sha256:6dc1d9ea84ff43eaeaebe51bb52de9e24dce8d8affd2fda0dc0d218897456c12
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.2-alpine@sha256:0a9a73d045cbec04fd64f6f06f8f5a865c4c75cef1913a54285dbaa75ea6d2ce
     - name: scaffold_cloud_proxy
-      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.15@sha256:862598dc2457fd246dc5363e0bd21462343c89e714dbd4159e49f119e8ff5ca5
+      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.18@sha256:77dfbe3f7c196c5e64d9efd6e69fcb025be834c42e82cb5e2120a2a4cea254a3
     - name: createdb
-      image: ghcr.io/sigstore/scaffolding/createdb:v0.7.15@sha256:b8f6e7c370228ce4412016d783a5b8f890cb1fb8e7e7acfd8d2c723537270954
+      image: ghcr.io/sigstore/scaffolding/createdb:v0.7.18@sha256:9e08766bcb7bad846dc93b1bbc1994f3d99b4fce46f438a48940da92097867b8
