@@ -23,12 +23,12 @@ server:
   logging:
     production: false
   image:
-    registry: gcr.io
-    repository: projectsigstore/fulcio
+    registry: ghcr.io
+    repository: sigstore/fulcio
     pullPolicy: IfNotPresent
-    # crane digest gcr.io/projectsigstore/fulcio:v1.6.4
-    # -- v1.6.4
-    version: sha256:4b2a0f0877095aa36898af70edd00568158f89e015f6bb7f02475660d0924f3b
+    # crane digest ghcr.io/sigstore/fulcio:v1.6.5
+    # -- v1.6.5
+    version: sha256:2499cc14a6beab86866fc9a2e721665083f102201e6db0ee8b4e3b5faab89a74
   args:
     port: 5555
     grpcPort: 5554
@@ -123,8 +123,8 @@ createcerts:
     registry: ghcr.io
     repository: sigstore/scaffolding/createcerts
     pullPolicy: IfNotPresent
-    # v0.7.15
-    version: sha256:03a5725b8812a45570a1c6ed8e5df7dc2295904cd8603c7ed537d97af174d235
+    # v0.7.18
+    version: sha256:2a2bb96f108b5a8aa9ca07f18be1e3dd673c41ca4836adc1b6129cea213b417c
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
