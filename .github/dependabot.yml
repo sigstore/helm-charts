@@ -10,6 +10,7 @@ updates:
         update-types:
           - "minor"
           - "patch"
+  # this will only update the values.yaml file
   - package-ecosystem: docker
     directories:
       - "/charts/**"
