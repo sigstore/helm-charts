@@ -13,3 +13,4 @@ webhooks:
       namespace: {{ .Release.Namespace }}
   failurePolicy: {{ .Values.webhook.failurePolicy }}
   sideEffects: None
+  timeoutSeconds: {{ .Values.cosign.timeoutSeconds.validating }}

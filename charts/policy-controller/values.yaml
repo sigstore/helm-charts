@@ -2,6 +2,9 @@ cosign:
   # add the values in base64 encoded
   cosignPub: ""
   webhookName: "policy.sigstore.dev"
+  timeoutSeconds:
+    mutating: 10
+    validating: 10
 
 installCRDs: true
 
@@ -70,6 +73,9 @@ webhook:
   webhookNames:
     defaulting: "defaulting.clusterimagepolicy.sigstore.dev"
     validating: "validating.clusterimagepolicy.sigstore.dev"
+  webhookTimeoutSeconds:
+    defaulting: 10
+    validating: 10
 
 leasescleanup:
   image:
