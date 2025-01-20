@@ -35,6 +35,29 @@
           "title": "cosignPub",
           "type": "string"
         },
+        "timeoutSeconds": {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "default": 10,
+              "required": [],
+              "title": "mutating",
+              "type": "integer"
+            },
+            "validating": {
+              "default": 10,
+              "required": [],
+              "title": "validating",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "mutating",
+            "validating"
+          ],
+          "title": "timeoutSeconds",
+          "type": "object"
+        },
         "webhookName": {
           "default": "policy.sigstore.dev",
           "required": [],
@@ -44,7 +67,8 @@
       },
       "required": [
         "cosignPub",
-        "webhookName"
+        "webhookName",
+        "timeoutSeconds"
       ],
       "title": "cosign",
       "type": "object"
@@ -188,8 +212,8 @@
               "type": "string"
             },
             "version": {
-              "default": "sha256:f291fce5b9c1a69ba54990eda7e0fe4114043b1afefb0f4ee3e6f84ec9ef1605",
-              "description": "crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.8.2",
+              "default": "sha256:f3b57d4c906fcbd7229c3069c055ce2b2862e01106c2b85df1322f1e3a232829",
+              "description": "crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.11.0",
               "required": [],
               "title": "version",
               "type": "string"
@@ -547,6 +571,29 @@
           ],
           "title": "webhookNames",
           "type": "object"
+        },
+        "webhookTimeoutSeconds": {
+          "additionalProperties": false,
+          "properties": {
+            "defaulting": {
+              "default": 10,
+              "required": [],
+              "title": "defaulting",
+              "type": "integer"
+            },
+            "validating": {
+              "default": 10,
+              "required": [],
+              "title": "validating",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "defaulting",
+            "validating"
+          ],
+          "title": "webhookTimeoutSeconds",
+          "type": "object"
         }
       },
       "required": [
@@ -570,7 +617,8 @@
         "volumes",
         "namespaceSelector",
         "registryCaBundle",
-        "webhookNames"
+        "webhookNames",
+        "webhookTimeoutSeconds"
       ],
       "title": "webhook",
       "type": "object"

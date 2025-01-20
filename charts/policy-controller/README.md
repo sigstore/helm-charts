@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.8.1](https://img.shields.io/badge/Version-0.8.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0](https://img.shields.io/badge/AppVersion-0.11.0-informational?style=flat-square)
+![Version: 0.9.0](https://img.shields.io/badge/Version-0.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0](https://img.shields.io/badge/AppVersion-0.11.0-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -153,6 +153,8 @@ helm uninstall [RELEASE_NAME]
 | commonNodeSelector | object | `{}` |  |
 | commonTolerations | list | `[]` |  |
 | cosign.cosignPub | string | `""` |  |
+| cosign.timeoutSeconds.mutating | int | `10` |  |
+| cosign.timeoutSeconds.validating | int | `10` |  |
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
@@ -200,3 +202,5 @@ helm uninstall [RELEASE_NAME]
 | webhook.volumes | list | `[]` |  |
 | webhook.webhookNames.defaulting | string | `"defaulting.clusterimagepolicy.sigstore.dev"` |  |
 | webhook.webhookNames.validating | string | `"validating.clusterimagepolicy.sigstore.dev"` |  |
+| webhook.webhookTimeoutSeconds.defaulting | int | `10` |  |
+| webhook.webhookTimeoutSeconds.validating | int | `10` |  |
