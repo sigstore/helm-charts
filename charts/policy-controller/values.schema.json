@@ -39,22 +39,17 @@
           "additionalProperties": false,
           "properties": {
             "mutating": {
-              "default": 10,
               "required": [],
               "title": "mutating",
               "type": "integer"
             },
             "validating": {
-              "default": 10,
               "required": [],
               "title": "validating",
               "type": "integer"
             }
           },
-          "required": [
-            "mutating",
-            "validating"
-          ],
+          "required": [],
           "title": "timeoutSeconds",
           "type": "object"
         },
@@ -67,8 +62,7 @@
       },
       "required": [
         "cosignPub",
-        "webhookName",
-        "timeoutSeconds"
+        "webhookName"
       ],
       "title": "cosign",
       "type": "object"
@@ -576,22 +570,17 @@
           "additionalProperties": false,
           "properties": {
             "defaulting": {
-              "default": 10,
               "required": [],
               "title": "defaulting",
               "type": "integer"
             },
             "validating": {
-              "default": 10,
               "required": [],
               "title": "validating",
               "type": "integer"
             }
           },
-          "required": [
-            "defaulting",
-            "validating"
-          ],
+          "required": [],
           "title": "webhookTimeoutSeconds",
           "type": "object"
         }
@@ -617,8 +606,7 @@
         "volumes",
         "namespaceSelector",
         "registryCaBundle",
-        "webhookNames",
-        "webhookTimeoutSeconds"
+        "webhookNames"
       ],
       "title": "webhook",
       "type": "object"

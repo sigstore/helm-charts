@@ -28,7 +28,11 @@ webhooks:
     matchPolicy: Equivalent
     name: {{ required "A valid webhook.webhookNames.defaulting is required" .Values.webhook.webhookNames.defaulting }}
     sideEffects: None
+    {{- if .Values.webhook.webhookTimeoutSeconds }}
+    {{- if .Values.webhook.webhookTimeoutSeconds.defaulting }}
     timeoutSeconds: {{ .Values.webhook.webhookTimeoutSeconds.defaulting }}
+    {{- end }}
+    {{- end }}
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
@@ -45,4 +49,8 @@ webhooks:
     matchPolicy: Equivalent
     name: {{ required "A valid webhook.webhookNames.validating is required" .Values.webhook.webhookNames.validating }}
     sideEffects: None
+    {{- if .Values.webhook.webhookTimeoutSeconds }}
+    {{- if .Values.webhook.webhookTimeoutSeconds.validating }}
     timeoutSeconds: {{ .Values.webhook.webhookTimeoutSeconds.validating }}
+    {{- end }}
+    {{- end }}

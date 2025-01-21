@@ -14,4 +14,8 @@ webhooks:
   failurePolicy: {{ .Values.webhook.failurePolicy }}
   sideEffects: None
   reinvocationPolicy: IfNeeded
+  {{- if .Values.cosign.timeoutSeconds }}
+  {{- if .Values.cosign.timeoutSeconds.mutating }}
   timeoutSeconds: {{ .Values.cosign.timeoutSeconds.mutating }}
+  {{- end }}
+  {{- end }}
