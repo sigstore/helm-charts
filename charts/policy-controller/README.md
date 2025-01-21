@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.8.1](https://img.shields.io/badge/Version-0.8.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0](https://img.shields.io/badge/AppVersion-0.11.0-informational?style=flat-square)
+![Version: 0.9.0](https://img.shields.io/badge/Version-0.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -154,6 +154,7 @@ helm uninstall [RELEASE_NAME]
 | commonTolerations | list | `[]` |  |
 | cosign.cosignPub | string | `""` |  |
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
+| cosign.webhookTimeoutSeconds | object | `{}` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
 | leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -169,7 +170,7 @@ helm uninstall [RELEASE_NAME]
 | webhook.failurePolicy | string | `"Fail"` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
-| webhook.image.version | string | `"sha256:f3b57d4c906fcbd7229c3069c055ce2b2862e01106c2b85df1322f1e3a232829"` |  |
+| webhook.image.version | string | `"sha256:6b51f336dec9e9adff29606855dbd2c7910c5eb80d6579795a29cb3844428efc"` |  |
 | webhook.name | string | `"webhook"` |  |
 | webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
 | webhook.namespaceSelector.matchExpressions[0].operator | string | `"In"` |  |
@@ -200,3 +201,4 @@ helm uninstall [RELEASE_NAME]
 | webhook.volumes | list | `[]` |  |
 | webhook.webhookNames.defaulting | string | `"defaulting.clusterimagepolicy.sigstore.dev"` |  |
 | webhook.webhookNames.validating | string | `"validating.clusterimagepolicy.sigstore.dev"` |  |
+| webhook.webhookTimeoutSeconds | object | `{}` |  |

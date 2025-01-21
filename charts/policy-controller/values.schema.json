@@ -40,6 +40,24 @@
           "required": [],
           "title": "webhookName",
           "type": "string"
+        },
+        "webhookTimeoutSeconds": {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "required": [],
+              "title": "mutating",
+              "type": "integer"
+            },
+            "validating": {
+              "required": [],
+              "title": "validating",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "webhookTimeoutSeconds",
+          "type": "object"
         }
       },
       "required": [
@@ -188,8 +206,8 @@
               "type": "string"
             },
             "version": {
-              "default": "sha256:f291fce5b9c1a69ba54990eda7e0fe4114043b1afefb0f4ee3e6f84ec9ef1605",
-              "description": "crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.8.2",
+              "default": "sha256:6b51f336dec9e9adff29606855dbd2c7910c5eb80d6579795a29cb3844428efc",
+              "description": "crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.12.0",
               "required": [],
               "title": "version",
               "type": "string"
@@ -546,6 +564,26 @@
             "validating"
           ],
           "title": "webhookNames",
+          "type": "object"
+        },
+        "webhookTimeoutSeconds": {
+          "additionalProperties": false,
+          "properties": {
+            "defaulting": {
+              "default": 10,
+              "required": [],
+              "title": "defaulting",
+              "type": "integer"
+            },
+            "validating": {
+              "default": 10,
+              "required": [],
+              "title": "validating",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "webhookTimeoutSeconds",
           "type": "object"
         }
       },

@@ -13,3 +13,8 @@ webhooks:
       namespace: {{ .Release.Namespace }}
   failurePolicy: {{ .Values.webhook.failurePolicy }}
   sideEffects: None
+  {{- if .Values.cosign.webhookTimeoutSeconds }}
+  {{- if .Values.cosign.webhookTimeoutSeconds.validating }}
+  timeoutSeconds: {{ .Values.cosign.webhookTimeoutSeconds.validating }}
+  {{- end }}
+  {{- end}}
