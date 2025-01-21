@@ -70,6 +70,7 @@ webhook:
   webhookNames:
     defaulting: "defaulting.clusterimagepolicy.sigstore.dev"
     validating: "validating.clusterimagepolicy.sigstore.dev"
+  priorityClass: ""
 
 leasescleanup:
   image:

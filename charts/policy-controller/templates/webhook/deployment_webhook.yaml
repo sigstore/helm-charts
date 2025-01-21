@@ -32,6 +32,9 @@ spec:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
       serviceAccountName: {{ include "webhook.serviceAccountName" . }}
       # To avoid node becoming SPOF, spread our replicas to different nodes.
+      {{- if .Values.webhook.priorityClass }}
+      priorityClassName: {{ .Values.webhook.priorityClass }}
+      {{- end }}
       affinity:
       {{- if .Values.webhook.affinity }}
         {{- toYaml .Values.webhook.affinity | nindent 8 }}
@@ -136,7 +139,6 @@ spec:
             name: custom-ca
             readOnly: true
           {{- end }}
-
       # Our webhook should gracefully terminate by lame ducking first, set this to a sufficiently
       # high value that we respect whatever value it has configured for the lame duck grace period.
       terminationGracePeriodSeconds: 300
