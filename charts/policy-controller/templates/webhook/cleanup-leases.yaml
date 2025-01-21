@@ -44,7 +44,13 @@ spec:
               memory: {{ .Values.leasescleanup.resources.requests.memory }}
               {{- end }}
             {{- end }}
-          {{- end }}  
+          {{- end }}
+          {{- if .Values.leasescleanup.podSecurityContext.enabled }}
+          securityContext:
+            {{- with .Values.leasescleanup.podSecurityContext }}
+            {{- omit . "enabled" | toYaml | nindent 12 }}
+            {{- end }}
+          {{- end }}
       restartPolicy: OnFailure
       {{- if .Values.leasescleanup.priorityClass }}
       priorityClassName: {{ .Values.leasescleanup.priorityClass }}
