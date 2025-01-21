@@ -40,6 +40,24 @@
           "required": [],
           "title": "webhookName",
           "type": "string"
+        },
+        "webhookTimeoutSeconds": {
+          "additionalProperties": false,
+          "properties": {
+            "mutating": {
+              "required": [],
+              "title": "mutating",
+              "type": "integer"
+            },
+            "validating": {
+              "required": [],
+              "title": "validating",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "webhookTimeoutSeconds",
+          "type": "object"
         }
       },
       "required": [
@@ -581,6 +599,26 @@
             "validating"
           ],
           "title": "webhookNames",
+          "type": "object"
+        },
+        "webhookTimeoutSeconds": {
+          "additionalProperties": false,
+          "properties": {
+            "defaulting": {
+              "default": 10,
+              "required": [],
+              "title": "defaulting",
+              "type": "integer"
+            },
+            "validating": {
+              "default": 10,
+              "required": [],
+              "title": "validating",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "webhookTimeoutSeconds",
           "type": "object"
         }
       },

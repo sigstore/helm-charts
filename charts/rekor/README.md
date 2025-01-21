@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.6.0](https://img.shields.io/badge/Version-1.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.7](https://img.shields.io/badge/AppVersion-1.3.7-informational?style=flat-square)
+![Version: 1.6.1](https://img.shields.io/badge/Version-1.6.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.8](https://img.shields.io/badge/AppVersion-1.3.8-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -153,7 +153,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/rekor/rekor-server"` |  |
-| server.image.version | string | `"sha256:b0358d1d1d399bc50f1375fcf4f665e4432bebd7fc4900d893ddc788f05fc76e"` |  |
+| server.image.version | string | `"sha256:9b10d2a1eb8180f9992f73269854328f0d5b27da5d9bfb70c65e1430355f3e96"` |  |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `true` |  |
