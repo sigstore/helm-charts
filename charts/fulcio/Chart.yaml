@@ -5,7 +5,7 @@ description: |
 
 type: application
 
-version: 2.6.4
+version: 2.6.5
 appVersion: 1.6.5
 
 keywords:
@@ -19,7 +19,7 @@ maintainers:
 
 dependencies:
   - name: ctlog
-    version: 0.2.60
+    version: 0.3.0
     repository: https://sigstore.github.io/helm-charts
     condition: ctlog.enabled
 
