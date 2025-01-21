@@ -153,6 +153,7 @@ helm uninstall [RELEASE_NAME]
 | commonNodeSelector | object | `{}` |  |
 | commonTolerations | list | `[]` |  |
 | cosign.cosignPub | string | `""` |  |
+| cosign.timeoutSeconds | object | `{}` |  |
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
@@ -200,3 +201,4 @@ helm uninstall [RELEASE_NAME]
 | webhook.volumes | list | `[]` |  |
 | webhook.webhookNames.defaulting | string | `"defaulting.clusterimagepolicy.sigstore.dev"` |  |
 | webhook.webhookNames.validating | string | `"validating.clusterimagepolicy.sigstore.dev"` |  |
+| webhook.webhookTimeoutSeconds | object | `{}` |  |
