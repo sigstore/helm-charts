@@ -35,7 +35,7 @@
           "title": "cosignPub",
           "type": "string"
         },
-        "timeoutSeconds": {
+        "webhookTimeoutSeconds": {
           "additionalProperties": false,
           "properties": {
             "mutating": {
@@ -50,7 +50,7 @@
             }
           },
           "required": [],
-          "title": "timeoutSeconds",
+          "title": "webhookTimeoutSeconds",
           "type": "object"
         },
         "webhookName": {

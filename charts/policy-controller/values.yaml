@@ -2,7 +2,7 @@ cosign:
   # add the values in base64 encoded
   cosignPub: ""
   webhookName: "policy.sigstore.dev"
-  timeoutSeconds: {}
+  webhookTimeoutSeconds: {}
     # mutating: 10
     # validating: 10
 

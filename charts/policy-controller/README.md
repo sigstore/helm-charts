@@ -153,8 +153,8 @@ helm uninstall [RELEASE_NAME]
 | commonNodeSelector | object | `{}` |  |
 | commonTolerations | list | `[]` |  |
 | cosign.cosignPub | string | `""` |  |
-| cosign.timeoutSeconds | object | `{}` |  |
 | cosign.webhookName | string | `"policy.sigstore.dev"` |  |
+| cosign.webhookTimeoutSeconds | object | `{}` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
 | leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
