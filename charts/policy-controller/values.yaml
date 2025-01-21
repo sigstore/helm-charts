@@ -84,13 +84,13 @@ leasescleanup:
     repository: cgr.dev/chainguard/kubectl
     version: latest-dev
     pullPolicy: IfNotPresent
-  resources: {}
-    # limits:
-    #   cpu: ""
-    #   memory: ""
-    # requests:
-    #   cpu: ""
-    #   memory: ""
+  resources:
+    limits:
+      cpu: ""
+      memory: ""
+    requests:
+      cpu: ""
+      memory: ""
   podSecurityContext:
     enabled: false
     # allowPrivilegeEscalation: false

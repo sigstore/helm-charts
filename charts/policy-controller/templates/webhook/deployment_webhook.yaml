@@ -31,10 +31,10 @@ spec:
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
       serviceAccountName: {{ include "webhook.serviceAccountName" . }}
-      # To avoid node becoming SPOF, spread our replicas to different nodes.
       {{- if .Values.webhook.priorityClass }}
       priorityClassName: {{ .Values.webhook.priorityClass }}
       {{- end }}
+      # To avoid node becoming SPOF, spread our replicas to different nodes.
       affinity:
       {{- if .Values.webhook.affinity }}
         {{- toYaml .Values.webhook.affinity | nindent 8 }}

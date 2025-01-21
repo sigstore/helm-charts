@@ -162,7 +162,10 @@ helm uninstall [RELEASE_NAME]
 | leasescleanup.image.version | string | `"latest-dev"` |  |
 | leasescleanup.podSecurityContext.enabled | bool | `false` |  |
 | leasescleanup.priorityClass | string | `""` |  |
-| leasescleanup.resources | object | `{}` |  |
+| leasescleanup.resources.limits.cpu | string | `""` |  |
+| leasescleanup.resources.limits.memory | string | `""` |  |
+| leasescleanup.resources.requests.cpu | string | `""` |  |
+| leasescleanup.resources.requests.memory | string | `""` |  |
 | loglevel | string | `"info"` |  |
 | serviceMonitor.enabled | bool | `false` |  |
 | webhook.affinity | object | `{}` |  |
