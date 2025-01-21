@@ -101,6 +101,12 @@
           ],
           "title": "image",
           "type": "object"
+        },
+        "priorityClass": {
+          "default": "",
+          "required": [],
+          "title": "priorityClass",
+          "type": "string"
         }
       },
       "required": [

@@ -73,6 +73,7 @@ webhook:
   priorityClass: ""
 
 leasescleanup:
+  priorityClass: ""
   image:
     repository: cgr.dev/chainguard/kubectl
     version: latest-dev
