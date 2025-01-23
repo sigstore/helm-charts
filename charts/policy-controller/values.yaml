@@ -23,6 +23,13 @@ webhook:
     version: sha256:6b51f336dec9e9adff29606855dbd2c7910c5eb80d6579795a29cb3844428efc
     pullPolicy: IfNotPresent
   env: {}
+  envFrom: {}
+    # configmaps:
+    #   - mycm1
+    #   - mycm2
+    # secrets:
+    #   - mys1
+    #   - mys2
   extraArgs: {}
   resources:
     limits:

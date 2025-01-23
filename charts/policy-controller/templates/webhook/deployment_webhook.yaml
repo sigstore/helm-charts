@@ -77,6 +77,17 @@ spec:
           value: "{{ $value }}"
 {{- end }}
 {{- end }}
+{{- if .Values.webhook.envFrom }}
+        envFrom:
+{{- range $configMapName := .Values.webhook.envFrom.configmaps }}
+        - configMapRef:
+          name: "{{ $configMapName }}"
+{{- end }}
+{{- range $secretName := .Values.webhook.envFrom.secrets }}
+        - secretRef:
+          name: "{{ $secretName }}"
+{{- end }}
+{{- end }}
         {{- if or (semverCompare ">= 1.8-0" .Chart.AppVersion) .Values.webhook.extraArgs }}
         args:
         {{- if semverCompare ">= 1.8-0" .Chart.AppVersion }}
