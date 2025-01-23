@@ -1,16 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "additionalProperties": false,
   "properties": {
     "commonAnnotations": {
-      "additionalProperties": false,
       "description": "# This will set some annotations in config maps and secrets. Use case: Disable versioning to deploy helm chart using spinnaker",
       "required": [],
       "title": "commonAnnotations",
       "type": "object"
     },
     "commonNodeSelector": {
-      "additionalProperties": false,
       "description": "# common node selector for all the pods",
       "required": [],
       "title": "commonNodeSelector",
@@ -26,7 +23,6 @@
       "type": "array"
     },
     "cosign": {
-      "additionalProperties": false,
       "properties": {
         "cosignPub": {
           "default": "",
@@ -42,27 +38,13 @@
           "type": "string"
         },
         "webhookTimeoutSeconds": {
-          "additionalProperties": false,
-          "properties": {
-            "mutating": {
-              "required": [],
-              "title": "mutating",
-              "type": "integer"
-            },
-            "validating": {
-              "required": [],
-              "title": "validating",
-              "type": "integer"
-            }
-          },
           "required": [],
           "title": "webhookTimeoutSeconds",
           "type": "object"
         }
       },
       "required": [
-        "cosignPub",
-        "webhookName"
+        "cosignPub"
       ],
       "title": "cosign",
       "type": "object"
@@ -88,10 +70,8 @@
       "type": "boolean"
     },
     "leasescleanup": {
-      "additionalProperties": false,
       "properties": {
         "image": {
-          "additionalProperties": false,
           "properties": {
             "pullPolicy": {
               "default": "IfNotPresent",
@@ -121,8 +101,6 @@
           "type": "object"
         },
         "podSecurityContext": {
-          "additionalProperties": true,
-          "description": "",
           "properties": {
             "enabled": {
               "default": false,
@@ -144,10 +122,8 @@
           "type": "string"
         },
         "resources": {
-          "additionalProperties": false,
           "properties": {
             "limits": {
-              "additionalProperties": false,
               "properties": {
                 "cpu": {
                   "default": "",
@@ -162,12 +138,14 @@
                   "type": "string"
                 }
               },
-              "required": [],
+              "required": [
+                "cpu",
+                "memory"
+              ],
               "title": "limits",
               "type": "object"
             },
             "requests": {
-              "additionalProperties": false,
               "properties": {
                 "cpu": {
                   "default": "",
@@ -182,12 +160,18 @@
                   "type": "string"
                 }
               },
-              "required": [],
+              "required": [
+                "cpu",
+                "memory"
+              ],
               "title": "requests",
               "type": "object"
             }
           },
-          "required": [],
+          "required": [
+            "limits",
+            "requests"
+          ],
           "title": "resources",
           "type": "object"
         }
@@ -205,7 +189,6 @@
       "type": "string"
     },
     "serviceMonitor": {
-      "additionalProperties": false,
       "description": "# serviceMonitor makes policy controller metrics discoverable to prometheus",
       "properties": {
         "enabled": {
@@ -222,35 +205,29 @@
       "type": "object"
     },
     "webhook": {
-      "additionalProperties": false,
       "properties": {
         "affinity": {
-          "additionalProperties": false,
           "description": "The default affinity config is to spread the webhook across nodes.\nSee charts/policy-controller/templates/webhook/deployment_webhook.yaml#L39 for more info.",
           "required": [],
           "title": "affinity",
           "type": "object"
         },
         "configData": {
-          "additionalProperties": false,
           "required": [],
           "title": "configData",
           "type": "object"
         },
         "customLabels": {
-          "additionalProperties": false,
           "required": [],
           "title": "customLabels",
           "type": "object"
         },
         "env": {
-          "additionalProperties": false,
           "required": [],
           "title": "env",
           "type": "object"
         },
         "extraArgs": {
-          "additionalProperties": false,
           "required": [],
           "title": "extraArgs",
           "type": "object"
@@ -262,7 +239,6 @@
           "type": "string"
         },
         "image": {
-          "additionalProperties": false,
           "properties": {
             "pullPolicy": {
               "default": "IfNotPresent",
@@ -299,13 +275,11 @@
           "type": "string"
         },
         "namespaceSelector": {
-          "additionalProperties": false,
           "properties": {
             "matchExpressions": {
               "items": {
                 "anyOf": [
                   {
-                    "additionalProperties": false,
                     "properties": {
                       "key": {
                         "default": "policy.sigstore.dev/include",
@@ -356,13 +330,11 @@
           "type": "object"
         },
         "podAnnotations": {
-          "additionalProperties": false,
           "required": [],
           "title": "podAnnotations",
           "type": "object"
         },
         "podDisruptionBudget": {
-          "additionalProperties": false,
           "properties": {
             "enabled": {
               "default": true,
@@ -385,7 +357,6 @@
           "type": "object"
         },
         "podSecurityContext": {
-          "additionalProperties": false,
           "properties": {
             "allowPrivilegeEscalation": {
               "default": false,
@@ -394,7 +365,6 @@
               "type": "boolean"
             },
             "capabilities": {
-              "additionalProperties": false,
               "properties": {
                 "drop": {
                   "items": {
@@ -453,7 +423,6 @@
           "type": "string"
         },
         "registryCaBundle": {
-          "additionalProperties": false,
           "required": [],
           "title": "registryCaBundle",
           "type": "object"
@@ -465,10 +434,8 @@
           "type": "integer"
         },
         "resources": {
-          "additionalProperties": false,
           "properties": {
             "limits": {
-              "additionalProperties": false,
               "properties": {
                 "cpu": {
                   "default": "200m",
@@ -491,7 +458,6 @@
               "type": "object"
             },
             "requests": {
-              "additionalProperties": false,
               "properties": {
                 "cpu": {
                   "default": "100m",
@@ -522,7 +488,6 @@
           "type": "object"
         },
         "securityContext": {
-          "additionalProperties": false,
           "properties": {
             "enabled": {
               "default": false,
@@ -545,10 +510,8 @@
           "type": "object"
         },
         "service": {
-          "additionalProperties": false,
           "properties": {
             "annotations": {
-              "additionalProperties": false,
               "required": [],
               "title": "annotations",
               "type": "object"
@@ -575,10 +538,8 @@
           "type": "object"
         },
         "serviceAccount": {
-          "additionalProperties": false,
           "properties": {
             "annotations": {
-              "additionalProperties": false,
               "required": [],
               "title": "annotations",
               "type": "object"
@@ -621,7 +582,6 @@
           "type": "array"
         },
         "webhookNames": {
-          "additionalProperties": false,
           "properties": {
             "defaulting": {
               "default": "defaulting.clusterimagepolicy.sigstore.dev",
@@ -644,21 +604,6 @@
           "type": "object"
         },
         "webhookTimeoutSeconds": {
-          "additionalProperties": false,
-          "properties": {
-            "defaulting": {
-              "default": 10,
-              "required": [],
-              "title": "defaulting",
-              "type": "integer"
-            },
-            "validating": {
-              "default": 10,
-              "required": [],
-              "title": "validating",
-              "type": "integer"
-            }
-          },
           "required": [],
           "title": "webhookTimeoutSeconds",
           "type": "object"
