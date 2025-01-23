@@ -43,9 +43,7 @@
           "type": "object"
         }
       },
-      "required": [
-        "cosignPub"
-      ],
+      "required": [],
       "title": "cosign",
       "type": "object"
     },
@@ -92,11 +90,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "repository",
-            "version",
-            "pullPolicy"
-          ],
+          "required": [],
           "title": "image",
           "type": "object"
         },
@@ -109,9 +103,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "enabled"
-          ],
+          "required": [],
           "title": "podSecurityContext",
           "type": "object"
         },
@@ -138,10 +130,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "cpu",
-                "memory"
-              ],
+              "required": [],
               "title": "limits",
               "type": "object"
             },
@@ -160,25 +149,17 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "cpu",
-                "memory"
-              ],
+              "required": [],
               "title": "requests",
               "type": "object"
             }
           },
-          "required": [
-            "limits",
-            "requests"
-          ],
+          "required": [],
           "title": "resources",
           "type": "object"
         }
       },
-      "required": [
-        "image"
-      ],
+      "required": [],
       "title": "leasescleanup",
       "type": "object"
     },
@@ -198,9 +179,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "enabled"
-      ],
+      "required": [],
       "title": "serviceMonitor",
       "type": "object"
     },
@@ -260,11 +239,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "repository",
-            "version",
-            "pullPolicy"
-          ],
+          "required": [],
           "title": "image",
           "type": "object"
         },
@@ -308,11 +283,7 @@
                         "type": "array"
                       }
                     },
-                    "required": [
-                      "key",
-                      "operator",
-                      "values"
-                    ],
+                    "required": [],
                     "type": "object"
                   }
                 ],
@@ -323,9 +294,7 @@
               "type": "array"
             }
           },
-          "required": [
-            "matchExpressions"
-          ],
+          "required": [],
           "title": "namespaceSelector",
           "type": "object"
         },
@@ -349,10 +318,7 @@
               "type": "integer"
             }
           },
-          "required": [
-            "enabled",
-            "minAvailable"
-          ],
+          "required": [],
           "title": "podDisruptionBudget",
           "type": "object"
         },
@@ -381,9 +347,7 @@
                   "type": "array"
                 }
               },
-              "required": [
-                "drop"
-              ],
+              "required": [],
               "title": "capabilities",
               "type": "object"
             },
@@ -406,13 +370,7 @@
               "type": "integer"
             }
           },
-          "required": [
-            "enabled",
-            "allowPrivilegeEscalation",
-            "readOnlyRootFilesystem",
-            "runAsUser",
-            "capabilities"
-          ],
+          "required": [],
           "title": "podSecurityContext",
           "type": "object"
         },
@@ -450,10 +408,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "cpu",
-                "memory"
-              ],
+              "required": [],
               "title": "limits",
               "type": "object"
             },
@@ -472,18 +427,12 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "cpu",
-                "memory"
-              ],
+              "required": [],
               "title": "requests",
               "type": "object"
             }
           },
-          "required": [
-            "limits",
-            "requests"
-          ],
+          "required": [],
           "title": "resources",
           "type": "object"
         },
@@ -502,10 +451,7 @@
               "type": "integer"
             }
           },
-          "required": [
-            "enabled",
-            "runAsUser"
-          ],
+          "required": [],
           "title": "securityContext",
           "type": "object"
         },
@@ -529,11 +475,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "annotations",
-            "type",
-            "port"
-          ],
+          "required": [],
           "title": "service",
           "type": "object"
         },
@@ -557,11 +499,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "annotations",
-            "create",
-            "name"
-          ],
+          "required": [],
           "title": "serviceAccount",
           "type": "object"
         },
@@ -596,10 +534,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "defaulting",
-            "validating"
-          ],
+          "required": [],
           "title": "webhookNames",
           "type": "object"
         },
@@ -609,44 +544,11 @@
           "type": "object"
         }
       },
-      "required": [
-        "customLabels",
-        "configData",
-        "replicaCount",
-        "name",
-        "image",
-        "env",
-        "extraArgs",
-        "resources",
-        "securityContext",
-        "failurePolicy",
-        "podAnnotations",
-        "podSecurityContext",
-        "affinity",
-        "podDisruptionBudget",
-        "serviceAccount",
-        "service",
-        "volumeMounts",
-        "volumes",
-        "namespaceSelector",
-        "registryCaBundle",
-        "webhookNames"
-      ],
+      "required": [],
       "title": "webhook",
       "type": "object"
     }
   },
-  "required": [
-    "cosign",
-    "installCRDs",
-    "imagePullSecrets",
-    "loglevel",
-    "webhook",
-    "leasescleanup",
-    "commonNodeSelector",
-    "commonTolerations",
-    "commonAnnotations",
-    "serviceMonitor"
-  ],
+  "required": [],
   "type": "object"
 }
