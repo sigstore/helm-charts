@@ -164,6 +164,7 @@ helm uninstall [RELEASE_NAME]
 | server.name | string | `"server"` |  |
 | server.nodeSelector | object | `{}` |  |
 | server.replicaCount | int | `1` |  |
+| server.resources | object | {} |  |
 | server.secret | string | `"fulcio-server-secret"` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
