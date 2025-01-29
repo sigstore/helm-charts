@@ -89,6 +89,7 @@ helm uninstall [RELEASE_NAME]
 | createcerts.name | string | `"createcerts"` |  |
 | createcerts.nodeSelector | object | `{}` |  |
 | createcerts.replicaCount | int | `1` |  |
+| createcerts.resources | object | `{}` |  |
 | createcerts.securityContext.runAsNonRoot | bool | `true` |  |
 | createcerts.securityContext.runAsUser | int | `65533` |  |
 | createcerts.serviceAccount.annotations | object | `{}` |  |
