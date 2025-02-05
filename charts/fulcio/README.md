@@ -1,10 +1,12 @@
 # fulcio
 
+
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
 ![Version: 2.6.5](https://img.shields.io/badge/Version-2.6.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.6](https://img.shields.io/badge/AppVersion-1.6.6-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
+
 
 **Homepage:** <https://sigstore.dev/>
 
@@ -45,7 +47,7 @@ The following components are also included as either direct components or throug
 
 ## Quick Installation
 
-To install the helm chart with default values run following command.
+To install the helm chart with default values run following command. 
 The [Values](#Values) section describes the configuration options for this chart.
 
 ```shell
@@ -66,6 +68,8 @@ helm uninstall [RELEASE_NAME]
 | Name | Email | Url |
 | ---- | ------ | --- |
 | The Sigstore Authors |  |  |
+
+
 
 ## Requirements
 
@@ -89,6 +93,7 @@ helm uninstall [RELEASE_NAME]
 | createcerts.name | string | `"createcerts"` |  |
 | createcerts.nodeSelector | object | `{}` |  |
 | createcerts.replicaCount | int | `1` |  |
+| createcerts.resources | object | `{}` |  |
 | createcerts.securityContext.runAsNonRoot | bool | `true` |  |
 | createcerts.securityContext.runAsUser | int | `65533` |  |
 | createcerts.serviceAccount.annotations | object | `{}` |  |
@@ -163,6 +168,7 @@ helm uninstall [RELEASE_NAME]
 | server.name | string | `"server"` |  |
 | server.nodeSelector | object | `{}` |  |
 | server.replicaCount | int | `1` |  |
+| server.resources | object | `{}` |  |
 | server.secret | string | `"fulcio-server-secret"` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
 | server.securityContext.runAsUser | int | `65533` |  |
@@ -195,10 +201,10 @@ To enabled access from external resources, an Ingress resource is created. The c
 > **Warning**: versions prior to `0.3.0` of this chart use different ingresses.
 >
 > In version `0.3.0` a second ingress is introduced. This ingress exposes the gRPC endpoint as introduced in v0.4.0 of Fulcio.
->
+> 
 > The change in particular is the structure of the ingress values.
 > Prior to `0.3.0`:
->
+> 
 > ```shell
 > server:
 >   ingress:
@@ -207,9 +213,9 @@ To enabled access from external resources, an Ingress resource is created. The c
 >       - host: fulcio.localhost
 >         path: /
 > ```
->
+> 
 > Since `0.3.0`:
->
+> 
 > ```shell
 > server:
 >   ingress:
