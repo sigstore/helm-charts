@@ -349,7 +349,11 @@ Server Arguments
 {{- end }}
 {{- if eq (.Values.server.searchIndex).storageProvider "mysql" }}
 {{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+{{- if .Values.mysql.gcp.cloudsql.iamUsername }}
+- {{ printf "--search_index.mysql.dsn=$(%s)@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+{{- else }}
 - {{ printf "--search_index.mysql.dsn=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+{{- end }}
 {{- else }}
 - "--search_index.mysql.dsn=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
 {{- end }}

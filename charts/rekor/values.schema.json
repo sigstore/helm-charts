@@ -266,6 +266,9 @@
                         "instance": {
                             "type": "string"
                         },
+                        "iamUsername": {
+                            "type": "string"
+                        },
                         "scaffoldSQLProxy": {
                             "properties": {
                                 "registry": {
