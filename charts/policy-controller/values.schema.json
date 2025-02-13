@@ -197,6 +197,12 @@
           "title": "affinity",
           "type": "object"
         },
+        "automountServiceAccountToken": {
+          "default": true,
+          "required": [],
+          "title": "automountServiceAccountToken",
+          "type": "boolean"
+        },
         "configData": {
           "required": [],
           "title": "configData",

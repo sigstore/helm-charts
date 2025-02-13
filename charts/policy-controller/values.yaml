@@ -84,6 +84,7 @@ webhook:
     # defaulting: 10
     # validating: 10
   priorityClass: ""
+  automountServiceAccountToken: true
 
 leasescleanup:
   priorityClass: ""

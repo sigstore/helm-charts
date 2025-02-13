@@ -170,6 +170,7 @@ helm uninstall [RELEASE_NAME]
 | loglevel | string | `"info"` |  |
 | serviceMonitor.enabled | bool | `false` |  |
 | webhook.affinity | object | `{}` |  |
+| webhook.automountServiceAccountToken | bool | `true` |  |
 | webhook.configData | object | `{}` |  |
 | webhook.customLabels | object | `{}` |  |
 | webhook.env | object | `{}` |  |

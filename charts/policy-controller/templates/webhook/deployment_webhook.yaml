@@ -31,6 +31,11 @@ spec:
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
       serviceAccountName: {{ include "webhook.serviceAccountName" . }}
+      {{- if .Values.webhook.automountServiceAccountToken }}
+      automountServiceAccountToken: true
+      {{- else }}
+      automountServiceAccountToken: false
+      {{- end }}
       {{- if .Values.webhook.priorityClass }}
       priorityClassName: {{ .Values.webhook.priorityClass }}
       {{- end }}
