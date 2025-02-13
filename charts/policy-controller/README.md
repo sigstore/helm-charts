@@ -161,6 +161,7 @@ helm uninstall [RELEASE_NAME]
 | leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
 | leasescleanup.image.version | string | `"latest-dev"` |  |
 | leasescleanup.podSecurityContext.enabled | bool | `false` |  |
+| leasescleanup.priorityClass | string | `""` |  |
 | leasescleanup.resources.limits.cpu | string | `""` |  |
 | leasescleanup.resources.limits.memory | string | `""` |  |
 | leasescleanup.resources.requests.cpu | string | `""` |  |

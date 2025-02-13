@@ -107,6 +107,12 @@
           "title": "podSecurityContext",
           "type": "object"
         },
+        "priorityClass": {
+          "default": "",
+          "required": [],
+          "title": "priorityClass",
+          "type": "string"
+        },
         "resources": {
           "properties": {
             "limits": {

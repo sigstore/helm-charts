@@ -52,6 +52,9 @@ spec:
             {{- end }}
           {{- end }}
       restartPolicy: OnFailure
+      {{- if .Values.leasescleanup.priorityClass }}
+      priorityClassName: {{ .Values.leasescleanup.priorityClass }}
+      {{- end }} 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
