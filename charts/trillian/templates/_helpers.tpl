@@ -191,7 +191,11 @@ Log Server Arguments
 - {{ printf "--quota_system=%s" (include "trillian.quotaSystem" .) | quote }}
 {{- if eq (include "trillian.storageSystem" .) "mysql" }}
 {{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+{{- if .Values.mysql.gcp.cloudsql.iamUsername }}
+- {{ printf "--mysql_uri=%s@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+{{- else }}
 - {{ printf "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+{{- end }}
 {{- else }}
 - "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
 {{- end }}
@@ -212,7 +216,11 @@ Log Signer Arguments
 - {{ printf "--quota_system=%s" (include "trillian.quotaSystem" .) | quote }}
 {{- if eq (include "trillian.storageSystem" .) "mysql" }}
 {{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+{{- if .Values.mysql.gcp.cloudsql.iamUsername }}
+- {{ printf "--mysql_uri=%s@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+{{- else }}
 - {{ printf "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+{{- end }}
 {{- else }}
 - "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/$(MYSQL_DATABASE)"
 {{- end }}

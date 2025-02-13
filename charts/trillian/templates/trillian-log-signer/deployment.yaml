@@ -62,6 +62,9 @@ spec:
           image: "{{ template "trillian.image" .Values.mysql.gcp.cloudsql }}"
           command:
             - "/cloud-sql-proxy"
+            {{- if (((.Values.mysql).gcp).cloudsql).iamUsername }}
+            - "--auto-iam-authn"
+            {{- end }}
             {{- if .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled }}
             - "--unix-socket"
             - {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path | quote }}
