@@ -28,6 +28,9 @@ spec:
         - name: cloud-sql-proxy
           image: "{{ template "trillian.image" .Values.mysql.gcp.scaffoldSQLProxy }}"
           args: [
+            {{- if .Values.mysql.gcp.scaffoldSQLProxy.iamUsername }}
+            "--auto-iam-authn",
+            {{- end }}
             {{- range .Values.mysql.gcp.scaffoldSQLProxy.extraArgs | default list }}
             {{ . | quote }},
             {{- end }}
@@ -77,7 +80,11 @@ spec:
               value: "/var/exitdir"
           args: [
             "--db_name=$(MYSQL_DATABASE)",
+            {{- if .Values.mysql.gcp.scaffoldSQLProxy.iamUsername }}
+            {{ printf "--mysql_uri=%s@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/" .Values.mysql.gcp.scaffoldSQLProxy.iamUsername | quote }}
+            {{- else }}
             "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/"
+            {{- end }}
           ]
           volumeMounts:
             - name: exit-dir
