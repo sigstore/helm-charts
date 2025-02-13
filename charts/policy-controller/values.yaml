@@ -89,6 +89,14 @@ leasescleanup:
     requests:
       cpu: ""
       memory: ""
+  podSecurityContext:
+    enabled: false
+    # allowPrivilegeEscalation: false
+    # readOnlyRootFilesystem: true
+    # runAsUser: 1000
+    # capabilities:
+    #   drop:
+    #     - ALL
 
 ## common node selector for all the pods
 commonNodeSelector: {}

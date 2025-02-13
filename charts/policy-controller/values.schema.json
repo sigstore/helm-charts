@@ -94,6 +94,19 @@
           "title": "image",
           "type": "object"
         },
+        "podSecurityContext": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "podSecurityContext",
+          "type": "object"
+        },
         "resources": {
           "properties": {
             "limits": {

@@ -45,6 +45,12 @@ spec:
               {{- end }}
             {{- end }}
           {{- end }}
+          {{- if .Values.leasescleanup.podSecurityContext.enabled }}
+          securityContext:
+            {{- with .Values.leasescleanup.podSecurityContext }}
+            {{- omit . "enabled" | toYaml | nindent 12 }}
+            {{- end }}
+          {{- end }}
       restartPolicy: OnFailure
 ---
 apiVersion: rbac.authorization.k8s.io/v1
