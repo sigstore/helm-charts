@@ -121,7 +121,7 @@ Certificate Log
 | server.serviceAccount.mountToken | bool | `false` |  |
 | server.serviceAccount.name | string | `""` |  |
 | server.tolerations | list | `[]` |  |
-| trillian.logServer.name | string | `"trillian-logserver"` |  |
+| trillian.logServer.name | string | `"trillian-log-server"` |  |
 | trillian.logServer.portRPC | int | `8091` |  |
 | trillian.namespace | string | `"trillian-system"` |  |
 

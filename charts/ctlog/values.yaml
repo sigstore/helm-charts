@@ -154,7 +154,7 @@ createctconfig:
 trillian:
   namespace: trillian-system
   logServer:
-    name: trillian-logserver
+    name: trillian-log-server
     portRPC: 8091
 
 # Force namespace of namespaced resources
