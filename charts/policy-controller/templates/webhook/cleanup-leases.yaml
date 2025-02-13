@@ -24,6 +24,27 @@ spec:
             - /bin/sh
             - -c
             - kubectl delete leases --all --ignore-not-found -n {{ .Release.Namespace }}
+          {{- if .Values.leasescleanup.resources }}
+          resources:
+            {{- if .Values.leasescleanup.resources.limits }}
+            limits:
+              {{- if .Values.leasescleanup.resources.limits.cpu }}
+              cpu: {{ .Values.leasescleanup.resources.limits.cpu }}
+              {{- end }}
+              {{- if .Values.leasescleanup.resources.limits.memory }}
+              memory: {{ .Values.leasescleanup.resources.limits.memory }}
+              {{- end }}
+            {{- end }}
+            {{- if .Values.leasescleanup.resources.requests }}
+            requests:
+              {{- if .Values.leasescleanup.resources.requests.cpu }}
+              cpu: {{ .Values.leasescleanup.resources.requests.cpu }}
+              {{- end }}
+              {{- if .Values.leasescleanup.resources.requests.memory }}
+              memory: {{ .Values.leasescleanup.resources.requests.memory }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
       restartPolicy: OnFailure
 ---
 apiVersion: rbac.authorization.k8s.io/v1

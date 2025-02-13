@@ -82,6 +82,13 @@ leasescleanup:
     repository: cgr.dev/chainguard/kubectl
     version: latest-dev
     pullPolicy: IfNotPresent
+  resources:
+    limits:
+      cpu: ""
+      memory: ""
+    requests:
+      cpu: ""
+      memory: ""
 
 ## common node selector for all the pods
 commonNodeSelector: {}
