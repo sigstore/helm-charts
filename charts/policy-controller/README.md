@@ -157,6 +157,7 @@ helm uninstall [RELEASE_NAME]
 | cosign.webhookTimeoutSeconds | object | `{}` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
+| leasescleanup.automountServiceAccountToken | bool | `true` |  |
 | leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
 | leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
 | leasescleanup.image.version | string | `"latest-dev"` |  |

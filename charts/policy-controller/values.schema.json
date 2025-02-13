@@ -69,6 +69,12 @@
     },
     "leasescleanup": {
       "properties": {
+        "automountServiceAccountToken": {
+          "default": true,
+          "required": [],
+          "title": "automountServiceAccountToken",
+          "type": "boolean"
+        },
         "image": {
           "properties": {
             "pullPolicy": {

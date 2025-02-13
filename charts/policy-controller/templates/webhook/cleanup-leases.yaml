@@ -16,6 +16,11 @@ spec:
       name: leases-cleanup
     spec:
       serviceAccountName: {{ template "webhook.serviceAccountName" . }}-cleanup
+      {{- if .Values.leasescleanup.automountServiceAccountToken }}
+      automountServiceAccountToken: true
+      {{- else }}
+      automountServiceAccountToken: false
+      {{- end }}
       containers:
         - name: kubectl
           image: "{{ template "leases-cleanup.image" .Values.leasescleanup.image }}"

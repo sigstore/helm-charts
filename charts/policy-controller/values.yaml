@@ -106,6 +106,7 @@ leasescleanup:
     # capabilities:
     #   drop:
     #     - ALL
+  automountServiceAccountToken: true
 
 ## common node selector for all the pods
 commonNodeSelector: {}
