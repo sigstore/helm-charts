@@ -374,6 +374,13 @@
           "title": "podSecurityContext",
           "type": "object"
         },
+        "priorityClass": {
+          "default": "",
+          "description": "defaulting: 10\nvalidating: 10",
+          "required": [],
+          "title": "priorityClass",
+          "type": "string"
+        },
         "registryCaBundle": {
           "required": [],
           "title": "registryCaBundle",

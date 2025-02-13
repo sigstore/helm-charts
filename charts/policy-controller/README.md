@@ -189,6 +189,7 @@ helm uninstall [RELEASE_NAME]
 | webhook.podSecurityContext.enabled | bool | `true` |  |
 | webhook.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | webhook.podSecurityContext.runAsUser | int | `1000` |  |
+| webhook.priorityClass | string | `""` |  |
 | webhook.registryCaBundle | object | `{}` |  |
 | webhook.replicaCount | int | `1` |  |
 | webhook.resources.limits.cpu | string | `"200m"` |  |

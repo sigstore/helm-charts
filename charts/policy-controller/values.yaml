@@ -76,6 +76,7 @@ webhook:
   webhookTimeoutSeconds: {}
     # defaulting: 10
     # validating: 10
+  priorityClass: ""
 
 leasescleanup:
   priorityClass: ""
