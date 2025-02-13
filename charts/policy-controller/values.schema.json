@@ -206,7 +206,13 @@
           "title": "env",
           "type": "object"
         },
+        "envFrom": {
+          "required": [],
+          "title": "envFrom",
+          "type": "object"
+        },
         "extraArgs": {
+          "description": "configmaps:\n  - mycm1\n  - mycm2\nsecrets:\n  - mys1\n  - mys2",
           "required": [],
           "title": "extraArgs",
           "type": "object"

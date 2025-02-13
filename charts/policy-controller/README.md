@@ -172,6 +172,7 @@ helm uninstall [RELEASE_NAME]
 | webhook.configData | object | `{}` |  |
 | webhook.customLabels | object | `{}` |  |
 | webhook.env | object | `{}` |  |
+| webhook.envFrom | object | `{}` |  |
 | webhook.extraArgs | object | `{}` |  |
 | webhook.failurePolicy | string | `"Fail"` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
