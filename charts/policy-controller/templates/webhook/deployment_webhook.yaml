@@ -31,6 +31,14 @@ spec:
       tolerations:
         {{- toYaml .Values.commonTolerations | nindent 8 }}
       serviceAccountName: {{ include "webhook.serviceAccountName" . }}
+      {{- if .Values.webhook.automountServiceAccountToken }}
+      automountServiceAccountToken: true
+      {{- else }}
+      automountServiceAccountToken: false
+      {{- end }}
+      {{- if .Values.webhook.priorityClass }}
+      priorityClassName: {{ .Values.webhook.priorityClass }}
+      {{- end }}
       # To avoid node becoming SPOF, spread our replicas to different nodes.
       affinity:
       {{- if .Values.webhook.affinity }}
@@ -72,6 +80,17 @@ spec:
 {{- range $key, $value := .Values.webhook.env }}
         - name: "{{ $key }}"
           value: "{{ $value }}"
+{{- end }}
+{{- end }}
+{{- if .Values.webhook.envFrom }}
+        envFrom:
+{{- range $configMapName := .Values.webhook.envFrom.configmaps }}
+        - configMapRef:
+          name: "{{ $configMapName }}"
+{{- end }}
+{{- range $secretName := .Values.webhook.envFrom.secrets }}
+        - secretRef:
+          name: "{{ $secretName }}"
 {{- end }}
 {{- end }}
         {{- if or (semverCompare ">= 1.8-0" .Chart.AppVersion) .Values.webhook.extraArgs }}
