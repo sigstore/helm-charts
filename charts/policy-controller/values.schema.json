@@ -69,6 +69,12 @@
     },
     "leasescleanup": {
       "properties": {
+        "automountServiceAccountToken": {
+          "default": true,
+          "required": [],
+          "title": "automountServiceAccountToken",
+          "type": "boolean"
+        },
         "image": {
           "properties": {
             "pullPolicy": {
@@ -92,6 +98,70 @@
           },
           "required": [],
           "title": "image",
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "properties": {
+            "enabled": {
+              "default": false,
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "podSecurityContext",
+          "type": "object"
+        },
+        "priorityClass": {
+          "default": "",
+          "required": [],
+          "title": "priorityClass",
+          "type": "string"
+        },
+        "resources": {
+          "properties": {
+            "limits": {
+              "properties": {
+                "cpu": {
+                  "default": "",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "properties": {
+                "cpu": {
+                  "default": "",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "resources",
           "type": "object"
         }
       },
@@ -127,6 +197,12 @@
           "title": "affinity",
           "type": "object"
         },
+        "automountServiceAccountToken": {
+          "default": true,
+          "required": [],
+          "title": "automountServiceAccountToken",
+          "type": "boolean"
+        },
         "configData": {
           "required": [],
           "title": "configData",
@@ -142,7 +218,13 @@
           "title": "env",
           "type": "object"
         },
+        "envFrom": {
+          "required": [],
+          "title": "envFrom",
+          "type": "object"
+        },
         "extraArgs": {
+          "description": "configmaps:\n  - mycm1\n  - mycm2\nsecrets:\n  - mys1\n  - mys2",
           "required": [],
           "title": "extraArgs",
           "type": "object"
@@ -309,6 +391,13 @@
           "required": [],
           "title": "podSecurityContext",
           "type": "object"
+        },
+        "priorityClass": {
+          "default": "",
+          "description": "defaulting: 10\nvalidating: 10",
+          "required": [],
+          "title": "priorityClass",
+          "type": "string"
         },
         "registryCaBundle": {
           "required": [],

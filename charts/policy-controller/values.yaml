@@ -23,6 +23,13 @@ webhook:
     version: sha256:6b51f336dec9e9adff29606855dbd2c7910c5eb80d6579795a29cb3844428efc
     pullPolicy: IfNotPresent
   env: {}
+  envFrom: {}
+    # configmaps:
+    #   - mycm1
+    #   - mycm2
+    # secrets:
+    #   - mys1
+    #   - mys2
   extraArgs: {}
   resources:
     limits:
@@ -76,12 +83,31 @@ webhook:
   webhookTimeoutSeconds: {}
     # defaulting: 10
     # validating: 10
+  priorityClass: ""
+  automountServiceAccountToken: true
 
 leasescleanup:
+  priorityClass: ""
   image:
     repository: cgr.dev/chainguard/kubectl
     version: latest-dev
     pullPolicy: IfNotPresent
+  resources:
+    limits:
+      cpu: ""
+      memory: ""
+    requests:
+      cpu: ""
+      memory: ""
+  podSecurityContext:
+    enabled: false
+    # allowPrivilegeEscalation: false
+    # readOnlyRootFilesystem: true
+    # runAsUser: 1000
+    # capabilities:
+    #   drop:
+    #     - ALL
+  automountServiceAccountToken: true
 
 ## common node selector for all the pods
 commonNodeSelector: {}

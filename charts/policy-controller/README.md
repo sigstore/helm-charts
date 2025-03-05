@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.9.1](https://img.shields.io/badge/Version-0.9.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
+![Version: 0.10.0](https://img.shields.io/badge/Version-0.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -157,15 +157,24 @@ helm uninstall [RELEASE_NAME]
 | cosign.webhookTimeoutSeconds | object | `{}` |  |
 | imagePullSecrets | list | `[]` |  |
 | installCRDs | bool | `true` |  |
+| leasescleanup.automountServiceAccountToken | bool | `true` |  |
 | leasescleanup.image.pullPolicy | string | `"IfNotPresent"` |  |
 | leasescleanup.image.repository | string | `"cgr.dev/chainguard/kubectl"` |  |
 | leasescleanup.image.version | string | `"latest-dev"` |  |
+| leasescleanup.podSecurityContext.enabled | bool | `false` |  |
+| leasescleanup.priorityClass | string | `""` |  |
+| leasescleanup.resources.limits.cpu | string | `""` |  |
+| leasescleanup.resources.limits.memory | string | `""` |  |
+| leasescleanup.resources.requests.cpu | string | `""` |  |
+| leasescleanup.resources.requests.memory | string | `""` |  |
 | loglevel | string | `"info"` |  |
 | serviceMonitor.enabled | bool | `false` |  |
 | webhook.affinity | object | `{}` |  |
+| webhook.automountServiceAccountToken | bool | `true` |  |
 | webhook.configData | object | `{}` |  |
 | webhook.customLabels | object | `{}` |  |
 | webhook.env | object | `{}` |  |
+| webhook.envFrom | object | `{}` |  |
 | webhook.extraArgs | object | `{}` |  |
 | webhook.failurePolicy | string | `"Fail"` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -183,6 +192,7 @@ helm uninstall [RELEASE_NAME]
 | webhook.podSecurityContext.enabled | bool | `true` |  |
 | webhook.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
 | webhook.podSecurityContext.runAsUser | int | `1000` |  |
+| webhook.priorityClass | string | `""` |  |
 | webhook.registryCaBundle | object | `{}` |  |
 | webhook.replicaCount | int | `1` |  |
 | webhook.resources.limits.cpu | string | `"200m"` |  |

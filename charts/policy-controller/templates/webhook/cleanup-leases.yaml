@@ -16,6 +16,11 @@ spec:
       name: leases-cleanup
     spec:
       serviceAccountName: {{ template "webhook.serviceAccountName" . }}-cleanup
+      {{- if .Values.leasescleanup.automountServiceAccountToken }}
+      automountServiceAccountToken: true
+      {{- else }}
+      automountServiceAccountToken: false
+      {{- end }}
       containers:
         - name: kubectl
           image: "{{ template "leases-cleanup.image" .Values.leasescleanup.image }}"
@@ -24,7 +29,37 @@ spec:
             - /bin/sh
             - -c
             - kubectl delete leases --all --ignore-not-found -n {{ .Release.Namespace }}
+          {{- if .Values.leasescleanup.resources }}
+          resources:
+            {{- if .Values.leasescleanup.resources.limits }}
+            limits:
+              {{- if .Values.leasescleanup.resources.limits.cpu }}
+              cpu: {{ .Values.leasescleanup.resources.limits.cpu }}
+              {{- end }}
+              {{- if .Values.leasescleanup.resources.limits.memory }}
+              memory: {{ .Values.leasescleanup.resources.limits.memory }}
+              {{- end }}
+            {{- end }}
+            {{- if .Values.leasescleanup.resources.requests }}
+            requests:
+              {{- if .Values.leasescleanup.resources.requests.cpu }}
+              cpu: {{ .Values.leasescleanup.resources.requests.cpu }}
+              {{- end }}
+              {{- if .Values.leasescleanup.resources.requests.memory }}
+              memory: {{ .Values.leasescleanup.resources.requests.memory }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.leasescleanup.podSecurityContext.enabled }}
+          securityContext:
+            {{- with .Values.leasescleanup.podSecurityContext }}
+            {{- omit . "enabled" | toYaml | nindent 12 }}
+            {{- end }}
+          {{- end }}
       restartPolicy: OnFailure
+      {{- if .Values.leasescleanup.priorityClass }}
+      priorityClassName: {{ .Values.leasescleanup.priorityClass }}
+      {{- end }} 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
