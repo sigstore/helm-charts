@@ -13,7 +13,7 @@ server:
     registry: ghcr.io
     repository: sigstore/scaffolding/ct_server
     pullPolicy: IfNotPresent
-    version: v0.7.18@sha256:7a616e6a25d332cf5e3785ebc5d48808348bb0d0ad0d8fcad228c8f27fe88dae
+    version: v0.7.21@sha256:174e2924c5450da261583c2fde53e54f6810b84fb84a9b827492cc901b4f9b99
   livenessProbe:
     httpGet:
       path: /healthz
