@@ -99,7 +99,7 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    version: v0.7.18@sha256:c950d5bd0375d07e719e02345c73592b9633606a6b2ad0215baae687a2151923
+    version: v0.7.21@sha256:f614ad12fc076068a00f22dcb37d60abef2714f47f40466357f5a2232c9a41c0
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
