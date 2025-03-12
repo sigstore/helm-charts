@@ -86,11 +86,11 @@ spec:
         envFrom:
 {{- range $configMapName := .Values.webhook.envFrom.configmaps }}
         - configMapRef:
-          name: "{{ $configMapName }}"
+            name: "{{ $configMapName }}"
 {{- end }}
 {{- range $secretName := .Values.webhook.envFrom.secrets }}
         - secretRef:
-          name: "{{ $secretName }}"
+            name: "{{ $secretName }}"
 {{- end }}
 {{- end }}
         {{- if or (semverCompare ">= 1.8-0" .Chart.AppVersion) .Values.webhook.extraArgs }}
