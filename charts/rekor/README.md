@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.6.6](https://img.shields.io/badge/Version-1.6.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.9](https://img.shields.io/badge/AppVersion-1.3.9-informational?style=flat-square)
+![Version: 1.6.7](https://img.shields.io/badge/Version-1.6.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.9](https://img.shields.io/badge/AppVersion-1.3.9-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -20,7 +20,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | trillian | 0.3.1 |
+| https://sigstore.github.io/helm-charts | trillian | 0.3.2 |
 
 ## Values
 
@@ -48,7 +48,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
-| createtree.image.version | string | `"sha256:c950d5bd0375d07e719e02345c73592b9633606a6b2ad0215baae687a2151923"` |  |
+| createtree.image.version | string | `"sha256:f614ad12fc076068a00f22dcb37d60abef2714f47f40466357f5a2232c9a41c0"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.nodeSelector | object | `{}` |  |
 | createtree.resources | object | `{}` |  |
@@ -64,11 +64,11 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.curl.registry | string | `"docker.io"` |  |
 | initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
-| initContainerImage.curl.version | string | `"sha256:c1fe1679c34d9784c1b0d1e5f62ac0a79fca01fb6377cdd33e90473c6f9f9a69"` | 8.11.1 |
+| initContainerImage.curl.version | string | `"sha256:94e9e444bcba979c2ea12e27ae39bee4cd10bc7041a472c4727a558e213744e6"` | 8.12.1 |
 | initContainerResources | object | `{}` |  |
 | mysql.enabled | bool | `false` |  |
 | mysql.gcp.cloudsql.registry | string | `"gcr.io"` |  |
-| mysql.gcp.cloudsql.repository | string | `"cloud-sql-connectors/cloud-sql-proxy:2.14.2-alpine"` |  |
+| mysql.gcp.cloudsql.repository | string | `"cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine"` |  |
 | mysql.gcp.cloudsql.resources.requests.cpu | string | `"1"` |  |
 | mysql.gcp.cloudsql.resources.requests.memory | string | `"2Gi"` |  |
 | mysql.gcp.cloudsql.securityContext.allowPrivilegeEscalation | bool | `false` |  |
@@ -77,7 +77,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | mysql.gcp.cloudsql.securityContext.runAsNonRoot | bool | `true` |  |
 | mysql.gcp.cloudsql.unixDomainSocket.enabled | bool | `false` |  |
 | mysql.gcp.cloudsql.unixDomainSocket.path | string | `"/cloudsql"` |  |
-| mysql.gcp.cloudsql.version | string | `"sha256:0a9a73d045cbec04fd64f6f06f8f5a865c4c75cef1913a54285dbaa75ea6d2ce"` | crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.2-alpine |
+| mysql.gcp.cloudsql.version | string | `"sha256:05d07605356fed4a51e5841a73ef02ee81f0899449db0cf16560dd1b84d7af45"` | crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine |
 | mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
 | mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
@@ -88,7 +88,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | mysql.gcp.scaffoldSQLProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | mysql.gcp.scaffoldSQLProxy.securityContext.readOnlyRootFilesystem | bool | `true` |  |
 | mysql.gcp.scaffoldSQLProxy.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:77dfbe3f7c196c5e64d9efd6e69fcb025be834c42e82cb5e2120a2a4cea254a3"` | v0.7.18 which is based on cloud-sql-proxy:2.14.2-alpine |
+| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:5351fd0418028026273b27d05d294de582266f320ca9026ba6d24585b61c6093"` | v0.7.21 which is based on cloud-sql-proxy:2.15.1-alpine |
 | mysql.hostname | string | `""` |  |
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |
@@ -109,7 +109,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | redis.image.pullPolicy | string | `"IfNotPresent"` |  |
 | redis.image.registry | string | `"docker.io"` |  |
 | redis.image.repository | string | `"redis"` |  |
-| redis.image.version | string | `"sha256:2ba50e1ac3a0ea17b736ce9db2b0a9f6f8b85d4c27d5f5accc6a416d8f42c6d5"` | 6.2.16-alpine3.20 |
+| redis.image.version | string | `"sha256:148bb5411c184abd288d9aaed139c98123eeb8824c5d3fce03cf721db58066d8"` | 6.2.17-alpine3.21 |
 | redis.name | string | `"redis"` |  |
 | redis.nodeSelector | object | `{}` |  |
 | redis.port | int | `6379` |  |

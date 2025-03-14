@@ -7,8 +7,8 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # -- 8.11.1
-    version: sha256:c1fe1679c34d9784c1b0d1e5f62ac0a79fca01fb6377cdd33e90473c6f9f9a69
+    # -- 8.12.1
+    version: sha256:94e9e444bcba979c2ea12e27ae39bee4cd10bc7041a472c4727a558e213744e6
     imagePullPolicy: IfNotPresent
 initContainerResources: {}
 
@@ -27,8 +27,8 @@ redis:
     registry: docker.io
     repository: redis
     pullPolicy: IfNotPresent
-    # -- 6.2.16-alpine3.20
-    version: "sha256:2ba50e1ac3a0ea17b736ce9db2b0a9f6f8b85d4c27d5f5accc6a416d8f42c6d5"
+    # -- 6.2.17-alpine3.21
+    version: "sha256:148bb5411c184abd288d9aaed139c98123eeb8824c5d3fce03cf721db58066d8"
   resources: {}
   readinessProbe:
     initialDelaySeconds: 5
@@ -64,8 +64,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.7.18 which is based on cloud-sql-proxy:2.14.2-alpine
-      version: sha256:77dfbe3f7c196c5e64d9efd6e69fcb025be834c42e82cb5e2120a2a4cea254a3
+      # -- v0.7.21 which is based on cloud-sql-proxy:2.15.1-alpine
+      version: sha256:5351fd0418028026273b27d05d294de582266f320ca9026ba6d24585b61c6093
       resources:
         requests:
           memory: "2Gi"
@@ -79,9 +79,9 @@ mysql:
             - ALL
     cloudsql:
       registry: gcr.io
-      repository: cloud-sql-connectors/cloud-sql-proxy:2.14.2-alpine
-      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.2-alpine
-      version: sha256:0a9a73d045cbec04fd64f6f06f8f5a865c4c75cef1913a54285dbaa75ea6d2ce
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine
+      version: sha256:05d07605356fed4a51e5841a73ef02ee81f0899449db0cf16560dd1b84d7af45
       resources:
         requests:
           memory: "2Gi"
@@ -233,8 +233,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.7.18
-    version: sha256:c950d5bd0375d07e719e02345c73592b9633606a6b2ad0215baae687a2151923
+    # v0.7.21
+    version: sha256:f614ad12fc076068a00f22dcb37d60abef2714f47f40466357f5a2232c9a41c0
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true

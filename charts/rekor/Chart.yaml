@@ -4,7 +4,7 @@ description: Part of the sigstore project, Rekor is a timestamping server and tr
 
 type: application
 
-version: 1.6.6
+version: 1.6.7
 appVersion: 1.3.9
 
 keywords:
@@ -19,7 +19,7 @@ maintainers:
 
 dependencies:
   - name: trillian
-    version: 0.3.1
+    version: 0.3.2
     repository: https://sigstore.github.io/helm-charts
     condition: trillian.enabled
 
@@ -27,16 +27,16 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: createtree
-      image: ghcr.io/sigstore/scaffolding/createtree:v0.7.18@sha256:c950d5bd0375d07e719e02345c73592b9633606a6b2ad0215baae687a2151923
+      image: ghcr.io/sigstore/scaffolding/createtree:v0.7.21@sha256:f614ad12fc076068a00f22dcb37d60abef2714f47f40466357f5a2232c9a41c0
     - name: curlimages/curl
-      image: docker.io/curlimages/curl:8.11.1@sha256:c1fe1679c34d9784c1b0d1e5f62ac0a79fca01fb6377cdd33e90473c6f9f9a69
+      image: docker.io/curlimages/curl:8.12.1@sha256:94e9e444bcba979c2ea12e27ae39bee4cd10bc7041a472c4727a558e213744e6
     - name: rekor-server
       image: ghcr.io/sigstore/rekor/rekor-server:v1.3.9@sha256:26d34133d458f07ccc35e057ec91e93543e879f5a025a09e8a791accd86cddd3
     - name: redis
-      image: docker.io/redis:6.2.16-alpine3.20@sha256:2ba50e1ac3a0ea17b736ce9db2b0a9f6f8b85d4c27d5f5accc6a416d8f42c6d5
+      image: docker.io/redis:6.2.17-alpine3.21@sha256:148bb5411c184abd288d9aaed139c98123eeb8824c5d3fce03cf721db58066d8
     - name: backfill-redis
       image: ghcr.io/sigstore/rekor/backfill-redis:v1.3.6@sha256:a13cd8b2a554d6116888fd1f383cf6e91fc1716df5eda392b82e6bfc66995ec3
     - name: scaffold_cloud_proxy
-      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.18@sha256:77dfbe3f7c196c5e64d9efd6e69fcb025be834c42e82cb5e2120a2a4cea254a3
+      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.21@sha256:5351fd0418028026273b27d05d294de582266f320ca9026ba6d24585b61c6093
     - name: cloud_proxy
-      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.2-alpine@sha256:0a9a73d045cbec04fd64f6f06f8f5a865c4c75cef1913a54285dbaa75ea6d2ce
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine@sha256:05d07605356fed4a51e5841a73ef02ee81f0899449db0cf16560dd1b84d7af45
