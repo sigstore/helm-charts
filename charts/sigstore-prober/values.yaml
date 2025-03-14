@@ -6,7 +6,7 @@ serviceAccount:
   create: false
 spec:
   replicaCount: 1
-  image: ghcr.io/sigstore/scaffolding/prober:v0.7.18@sha256:ef6fdc704b01ee5e83ff57a553b361101ee6c32a46c700fd40f34490ec280ca3
+  image: ghcr.io/sigstore/scaffolding/prober:v0.7.21@sha256:74a2e4f962e73b64460bf2f91818919b25802791fd39b95779f1bb8adad4e798
   imagePullPolicy: Always
   matchLabels:
     app: sigstore-prober
