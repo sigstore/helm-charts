@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.6.7](https://img.shields.io/badge/Version-1.6.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.9](https://img.shields.io/badge/AppVersion-1.3.9-informational?style=flat-square)
+![Version: 1.6.8](https://img.shields.io/badge/Version-1.6.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.9](https://img.shields.io/badge/AppVersion-1.3.9-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -80,15 +80,6 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | mysql.gcp.cloudsql.version | string | `"sha256:05d07605356fed4a51e5841a73ef02ee81f0899449db0cf16560dd1b84d7af45"` | crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine |
 | mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
-| mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
-| mysql.gcp.scaffoldSQLProxy.repository | string | `"sigstore/scaffolding/cloudsqlproxy"` |  |
-| mysql.gcp.scaffoldSQLProxy.resources.requests.cpu | string | `"1"` |  |
-| mysql.gcp.scaffoldSQLProxy.resources.requests.memory | string | `"2Gi"` |  |
-| mysql.gcp.scaffoldSQLProxy.securityContext.allowPrivilegeEscalation | bool | `false` |  |
-| mysql.gcp.scaffoldSQLProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| mysql.gcp.scaffoldSQLProxy.securityContext.readOnlyRootFilesystem | bool | `true` |  |
-| mysql.gcp.scaffoldSQLProxy.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:5351fd0418028026273b27d05d294de582266f320ca9026ba6d24585b61c6093"` | v0.7.21 which is based on cloud-sql-proxy:2.15.1-alpine |
 | mysql.hostname | string | `""` |  |
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |

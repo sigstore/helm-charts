@@ -268,61 +268,6 @@
                         },
                         "iamUsername": {
                             "type": "string"
-                        },
-                        "scaffoldSQLProxy": {
-                            "properties": {
-                                "registry": {
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "type": "string"
-                                },
-                                "resources": {
-                                    "properties": {
-                                        "requests": {
-                                            "properties": {
-                                                "cpu": {
-                                                    "type": "string"
-                                                },
-                                                "memory": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "securityContext": {
-                                    "properties": {
-                                        "allowPrivilegeEscalation": {
-                                            "type": "boolean"
-                                        },
-                                        "capabilities": {
-                                            "properties": {
-                                                "drop": {
-                                                    "items": {
-                                                        "type": "string"
-                                                    },
-                                                    "type": "array"
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "readOnlyRootFilesystem": {
-                                            "type": "boolean"
-                                        },
-                                        "runAsNonRoot": {
-                                            "type": "boolean"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "version": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
                         }
                     },
                     "type": "object"

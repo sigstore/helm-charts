@@ -61,22 +61,6 @@ mysql:
   gcp:
     enabled: false
     instance: ""
-    scaffoldSQLProxy:
-      registry: ghcr.io
-      repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.7.21 which is based on cloud-sql-proxy:2.15.1-alpine
-      version: sha256:5351fd0418028026273b27d05d294de582266f320ca9026ba6d24585b61c6093
-      resources:
-        requests:
-          memory: "2Gi"
-          cpu: "1"
-      securityContext:
-        allowPrivilegeEscalation: false
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        capabilities:
-          drop:
-            - ALL
     cloudsql:
       registry: gcr.io
       repository: cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine
