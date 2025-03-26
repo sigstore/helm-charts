@@ -7,7 +7,12 @@ metadata:
   name: {{ template "tsa.fullname" . }}-http
 {{ include "tsa.namespace" . | indent 2 }}
   annotations:
+{{- if .Values.server.ingress.http.annotations }}
 {{ toYaml .Values.server.ingress.http.annotations | indent 4 }}
+{{- end }}
+{{- if and (.Values.server.ingress.http.enabled) (eq .Values.server.ingress.http.className "gce") (.Values.server.ingress.http.frontendConfigSpec) }}
+    networking.gke.io/v1beta1.FrontendConfig: {{ template "tsa.fullname" . }}
+{{- end }}
 spec:
 {{- if .Values.server.ingress.http.className }}
   ingressClassName: {{ .Values.server.ingress.http.className }}
