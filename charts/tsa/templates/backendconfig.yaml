@@ -1,0 +1,11 @@
+{{- if and (.Values.server.ingress.http.enabled) (eq .Values.server.ingress.http.className "gce") (.Values.server.ingress.http.backendConfigSpec) }}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: {{ template "tsa.fullname" . }}
+  labels:
+    {{- include "tsa.labels" . | nindent 4 }}
+{{ include "tsa.namespace" . | indent 2 }}
+spec:
+{{ toYaml .Values.server.ingress.http.backendConfigSpec | indent 2 }}
+{{- end }}
