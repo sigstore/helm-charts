@@ -6,7 +6,6 @@ server:
   replicaCount: 1
   name: server
   svcPort: 80
-  grpcSvcPort: 5554
   secret: tsa-server-secret
   logging:
     production: false
@@ -38,7 +37,7 @@ server:
     type: ClusterIP
     ports:
       - name: http
-        port: 80
+        port: 80  # must match .Values.server.svcPort
         protocol: TCP
         targetPort: 5555
       - name: metrics
