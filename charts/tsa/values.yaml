@@ -17,7 +17,7 @@ server:
     pullPolicy: IfNotPresent
     # crane digest ghcr.io/sigstore/timestamp-server:v1.2.5
     # -- v1.2.5
-    version: sha256:67cf36ea6ec081d664c5701c0447af1f0af02529a2b9117a358da0cd7b0f83be
+    version: v1.2.5@sha256:67cf36ea6ec081d664c5701c0447af1f0af02529a2b9117a358da0cd7b0f83be
   args:
     port: 5555
     # Valid values: tink, kms, file

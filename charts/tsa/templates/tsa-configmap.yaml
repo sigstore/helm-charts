@@ -16,4 +16,6 @@ data:
   {{- if (eq .Values.server.args.signer "file")}}
   chain.pem: {{.Values.server.args.cert_chain | quote }}
   {{- end }}
+  {{- if .Values.server.args.creds }}
   cloud_credentials: {{.Values.server.args.creds | quote }}
+  {{- end }}
