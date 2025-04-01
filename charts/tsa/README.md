@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 1.1.3](https://img.shields.io/badge/Version-1.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.5](https://img.shields.io/badge/AppVersion-1.2.5-informational?style=flat-square)
+![Version: 1.1.4](https://img.shields.io/badge/Version-1.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.5](https://img.shields.io/badge/AppVersion-1.2.5-informational?style=flat-square)
 
 Timestamp Authority issuing RFC3161 signed timestamps.
 
@@ -100,7 +100,7 @@ helm uninstall [RELEASE_NAME]
 | server.args.tink_enc_keyset | string | `"keyset"` |  |
 | server.args.tink_hcvault_token | string | `"token"` |  |
 | server.args.tink_key_resource | string | `"resource"` |  |
-| server.env.GOOGLE_APPLICATION_CREDENTIALS | string | `"/etc/tsa-config/cloud_credentials"` |  |
+| server.env.GOOGLE_APPLICATION_CREDENTIALS | string | `""` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/timestamp-server"` |  |
