@@ -10,7 +10,8 @@ server:
   logging:
     production: false
   env:
-    GOOGLE_APPLICATION_CREDENTIALS: /etc/tsa-config/cloud_credentials
+    # Credentials file read by kms/tink if set. Unset by default
+    GOOGLE_APPLICATION_CREDENTIALS: ""
   image:
     registry: ghcr.io
     repository: sigstore/timestamp-server

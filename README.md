@@ -64,4 +64,6 @@ NOTE: The public key that was used to sign a particular chart may not be identic
 * [scaffold](charts/scaffold)
 * [sigstore-prober](charts/sigstore-prober)
 * [trillian](charts/trillian)
+* [tsa](charts/tsa)
+* [tuf](charts/tuf)
 * [updatetree](charts/updatetree)

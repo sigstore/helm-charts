@@ -37,20 +37,18 @@ spec:
             {{- if eq .Values.server.args.signer "tink" }}
             - "--tink-key-resource={{ required "Tink key for signing timestamp responses is required" .Values.server.args.tink_key_resource }}"
             - "--tink-keyset-path=/etc/tsa-config/tink.keyset.enc"
-            - "--certificate-chain-path=/etc/tsa-config/chain.pem"
             {{- if hasPrefix "hcvault://" .Values.server.args.tink_key_resource }}
             - "--tink-hcvault-token={{ required "Tink authentication token for Hashicorp Vault API is required" .Values.server.args.tink_hcvault_token }}"
             {{- end }}
             {{- end }}
             {{- if eq .Values.server.args.signer "kms" }}
             - "--kms-key-resource={{ required "KMS key for signing timestamp responses is required" .Values.server.args.kms_key_resource }}"
-            - "--certificate-chain-path=/etc/tsa-config/chain.pem"
             {{- end }}
             {{- if eq .Values.server.args.signer "file" }}
             - "--file-signer-key-path=/var/run/tsa-secrets/key.pem"
             - "--file-signer-passwd=$(PASSWORD)"
-            - "--certificate-chain-path=/etc/tsa-config/chain.pem"
             {{- end }}
+            - "--certificate-chain-path=/etc/tsa-config/chain.pem"
             {{- if .Values.server.logging.production }}
             - "--log-type=prod"
             {{- end -}}
