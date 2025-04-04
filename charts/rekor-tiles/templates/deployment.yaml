@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "rekor-tiles.fullname" . }}
+  labels:
+    {{- include "rekor-tiles.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "rekor-tiles.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "rekor-tiles.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "rekor-tiles.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ template "rekor-tiles.image" .Values.image }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
+          args:
+{{ include "rekor-tiles.args" . | indent 12 }}
+          ports:
+{{- include "rekor-tiles.containerPorts" .Values.service.ports | indent 12 }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+{{- if .Values.signerFileSecretOptions }}
+          volumeMounts:
+            - name: {{ .Values.signerFileSecretOptions.secretName }}-volume
+              mountPath: {{ .Values.signerFileSecretOptions.secretMountPath }}
+              readOnly: true
+{{- end }}
+{{- if .Values.signerFileSecretOptions }}
+      volumes:
+        - name: {{ .Values.signerFileSecretOptions.secretName }}-volume
+          secret:
+            secretName: {{ .Values.signerFileSecretOptions.secretName }}
+            items:
+            - key: {{ .Values.signerFileSecretOptions.privateKeySecretKey }}
+              path: {{ .Values.signerFileSecretOptions.mountSubPath }}
+{{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
