@@ -31,6 +31,9 @@ Create args for sigstore prober components
 {{- if .Values.spec.args.fulcioGrpcHost }}
 - "-fulcio-grpc-url={{ .Values.spec.args.fulcioGrpcHost }}"
 {{- end }}
+{{- if .Values.spec.args.tsaHost }}
+- "-tsa-url={{ .Values.spec.args.tsaHost }}"
+{{- end }}
 {{- if .Values.spec.args.writeProber }}
 - "-write-prober={{ .Values.spec.args.writeProber }}"
 {{- end }}
