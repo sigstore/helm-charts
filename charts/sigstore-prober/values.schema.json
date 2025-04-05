@@ -64,6 +64,9 @@
                         "trustRekorAPIPublicKey": {
                             "type": "boolean"
                         },
+                        "tsaHost": {
+                            "type": "string"
+                        },
                         "writeProber": {
                             "type": "boolean"
                         }
