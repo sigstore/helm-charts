@@ -63,9 +63,9 @@ mysql:
     instance: ""
     cloudsql:
       registry: gcr.io
-      repository: cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine
-      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine
-      version: sha256:05d07605356fed4a51e5841a73ef02ee81f0899449db0cf16560dd1b84d7af45
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.15.2-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.2-alpine
+      version: sha256:ab3068069deb05806c80d9fc7e6e542853283860cf7f1e4d6fa6ddeedfdc8600
       resources:
         requests:
           memory: "2Gi"
@@ -217,8 +217,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.7.21
-    version: sha256:f614ad12fc076068a00f22dcb37d60abef2714f47f40466357f5a2232c9a41c0
+    # v0.7.22
+    version: sha256:719c64aad07866ef1d5b9c750c788ba5a23b782fab29fed48360a44921eed1ce
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
