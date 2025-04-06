@@ -31,8 +31,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.7.21 which is based on cloud-sql-proxy:2.15.1-alpine
-      version: sha256:5351fd0418028026273b27d05d294de582266f320ca9026ba6d24585b61c6093
+      # -- v0.7.22 which is based on cloud-sql-proxy:2.15.2-alpine
+      version: sha256:2db740092e3f5ea16d5dced477b75f1190db116fbe06c320ccf4fb48108a43cb
       resources:
         requests:
           memory: "2Gi"
@@ -46,9 +46,9 @@ mysql:
             - ALL
     cloudsql:
       registry: gcr.io
-      repository: cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine
-      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.1-alpine
-      version: sha256:05d07605356fed4a51e5841a73ef02ee81f0899449db0cf16560dd1b84d7af45
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.15.2-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.2-alpine
+      version: sha256:ab3068069deb05806c80d9fc7e6e542853283860cf7f1e4d6fa6ddeedfdc8600
       resources:
         requests:
           memory: "2Gi"
@@ -138,8 +138,8 @@ logServer:
     registry: ghcr.io
     repository: sigstore/scaffolding/trillian_log_server
     pullPolicy: IfNotPresent
-    # -- trillian v1.7.0 (scaffolding v0.7.18)
-    version: sha256:f95bebca5613c022237bc83917b2698e536c37cb119fde705344426786a08a77
+    # -- trillian v1.7.1 (scaffolding v0.7.22)
+    version: sha256:8ae059cbde81aadc80aa07fb3a8e84f43a8d87e9f7e820c48dd33f6288b232fe
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -174,8 +174,8 @@ logSigner:
     registry: ghcr.io
     repository: sigstore/scaffolding/trillian_log_signer
     pullPolicy: IfNotPresent
-    # -- trillian v1.7.0 (scaffolding v0.7.18)
-    version: sha256:3dce63bba05de9675cbdb30b670f37d7988e4c909d08af09666e5324eec0970e
+    # -- trillian v1.7.1 (scaffolding v0.7.22)
+    version: sha256:46de4e7eec9944567f688dff946569f0725e48eeb4b07093a5f3aa11c130627f
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -204,8 +204,8 @@ createdb:
     registry: ghcr.io
     repository: sigstore/scaffolding/createdb
     pullPolicy: IfNotPresent
-    # -- v0.7.21
-    version: sha256:777193f9c5eaffdf48586920878e9edf61945faed1cb4e72502283f390a5a6e6
+    # -- v0.7.22
+    version: sha256:bf936fab76b8b8bb2f1f4bab2905d5d4164eb5569647e7745949c1a599e44b8d
   serviceAccount:
     create: false
     name: ""
