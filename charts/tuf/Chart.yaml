@@ -3,7 +3,7 @@ name: tuf
 description: A framework for securing software update systems - the scaffolding implementation
 type: application
 version: 0.1.25
-appVersion: 0.7.23
+appVersion: 0.7.24
 
 home: https://sigstore.dev/
 sources:
