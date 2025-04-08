@@ -1,0 +1,12 @@
+{{- if .Values.server.signer.tink }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.server.signer.tink.configMapName }}
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "rekor-tiles.labels" . | nindent 4 }}
+data:
+  tink.keyset.enc: {{ .Values.server.signer.tink.keyset }}
+{{- end }}
