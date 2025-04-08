@@ -1,0 +1,231 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "affinity": {
+            "type": "object"
+        },
+        "fullnameOverride": {
+            "type": "string"
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "pullPolicy": {
+                    "type": "string"
+                },
+                "registry": {
+                    "type": "string"
+                },
+                "repository": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "imagePullSecrets": {
+            "type": "array"
+        },
+        "ingress": {
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "object"
+                },
+                "className": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "hosts": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "host": {
+                                "type": "string"
+                            },
+                            "path": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "tls": {
+                    "type": "array"
+                }
+            }
+        },
+        "livenessProbe": {
+            "type": "object",
+            "properties": {
+                "httpGet": {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
+        "nameOverride": {
+            "type": "string"
+        },
+        "namespace": {
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "nodeSelector": {
+            "type": "object",
+            "properties": {
+                "iam.gke.io/gke-metadata-server-enabled": {
+                    "type": "string"
+                }
+            }
+        },
+        "podAnnotations": {
+            "type": "object"
+        },
+        "podLabels": {
+            "type": "object"
+        },
+        "podSecurityContext": {
+            "type": "object"
+        },
+        "readinessProbe": {
+            "type": "object",
+            "properties": {
+                "httpGet": {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
+        "replicaCount": {
+            "type": "integer"
+        },
+        "resources": {
+            "type": "object"
+        },
+        "securityContext": {
+            "type": "object"
+        },
+        "server": {
+            "type": "object",
+            "properties": {
+                "antispam": {
+                    "type": "object"
+                },
+                "extraArgs": {
+                    "type": "array"
+                },
+                "gcp": {
+                    "type": "object"
+                },
+                "grpc": {
+                    "type": "object",
+                    "properties": {
+                        "port": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "hostname": {
+                    "type": "string"
+                },
+                "http": {
+                    "type": "object",
+                    "properties": {
+                        "metricsPort": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "readOnly": {
+                    "type": "boolean"
+                },
+                "serverConfig": {
+                    "type": "object"
+                },
+                "signer": {
+                    "type": "object"
+                },
+                "tesseraLivecycle": {
+                    "type": "object"
+                }
+            }
+        },
+        "service": {
+            "type": "object",
+            "properties": {
+                "ports": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "port": {
+                                "type": "integer"
+                            },
+                            "protocol": {
+                                "type": "string"
+                            },
+                            "targetPort": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "object"
+                },
+                "automount": {
+                    "type": "boolean"
+                },
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "tolerations": {
+            "type": "array"
+        }
+    }
+}
