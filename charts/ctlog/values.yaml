@@ -4,6 +4,10 @@ namespace:
 
 imagePullSecrets: []
 
+# -- Additional labels to add to all resources
+additionalLabels: {}
+  # app: ctlog
+
 server:
   replicaCount: 1
   config:
