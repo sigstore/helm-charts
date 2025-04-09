@@ -4,6 +4,9 @@ namespace:
 
 imagePullSecrets: []
 
+additionalLabels: {}
+  # app: ctlog
+
 server:
   replicaCount: 1
   config:

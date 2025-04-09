@@ -88,10 +88,15 @@ Common labels
 {{- define "ctlog.labels" -}}
 helm.sh/chart: {{ include "ctlog.chart" . }}
 {{ include "ctlog.selectorLabels" . }}
+app.kubernetes.io/component: ctlog
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/part-of: ctlog
+{{- if .Values.additionalLabels }}
+{{ toYaml .Values.additionalLabels }}
+{{- end }}
 {{- end }}
 
 {{/*
