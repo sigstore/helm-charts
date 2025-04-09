@@ -8,6 +8,10 @@ config:
   contents: {}
   format: json
 
+# -- Additional labels to add to all resources
+additionalLabels: {}
+  # app: fulcio
+
 server:
   replicaCount: 1
   name: server
