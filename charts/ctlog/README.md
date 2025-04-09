@@ -1,6 +1,6 @@
 # ctlog
 
-![Version: 0.2.62](https://img.shields.io/badge/Version-0.2.62-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.22](https://img.shields.io/badge/AppVersion-0.7.22-informational?style=flat-square)
+![Version: 0.2.63](https://img.shields.io/badge/Version-0.2.63-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.22](https://img.shields.io/badge/AppVersion-0.7.22-informational?style=flat-square)
 
 Certificate Log
 
@@ -16,7 +16,7 @@ Certificate Log
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| additionalLabels | object | `{}` |  |
+| additionalLabels | object | `{}` | Additional labels to add to all resources |
 | createctconfig.affinity | object | `{}` |  |
 | createctconfig.annotations | object | `{}` |  |
 | createctconfig.backoffLimit | int | `6` |  |
