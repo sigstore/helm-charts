@@ -16,6 +16,7 @@ Certificate Log
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| additionalLabels | object | `{}` |  |
 | createctconfig.affinity | object | `{}` |  |
 | createctconfig.annotations | object | `{}` |  |
 | createctconfig.backoffLimit | int | `6` |  |
