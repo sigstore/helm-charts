@@ -77,6 +77,7 @@ helm uninstall [RELEASE_NAME]
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| additionalLabels | object | `{}` | Additional labels to add to all resources |
 | config.contents | object | `{}` |  |
 | config.format | string | `"json"` |  |
 | createcerts.affinity | object | `{}` |  |

@@ -1,507 +1,1216 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "properties": {
-        "config": {
-            "properties": {
-                "contents": {
-                    "properties": {},
-                    "type": "object"
-                },
-                "format": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "additionalLabels": {
+      "additionalProperties": false,
+      "description": "Additional labels to add to all resources",
+      "required": [],
+      "title": "additionalLabels",
+      "type": "object"
+    },
+    "config": {
+      "additionalProperties": false,
+      "properties": {
+        "contents": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "contents",
+          "type": "object"
         },
+        "format": {
+          "default": "json",
+          "required": [],
+          "title": "format",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contents",
+        "format"
+      ],
+      "title": "config",
+      "type": "object"
+    },
+    "createcerts": {
+      "additionalProperties": false,
+      "properties": {
+        "affinity": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "annotations": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "image": {
+          "additionalProperties": false,
+          "properties": {
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "registry": {
+              "default": "ghcr.io",
+              "required": [],
+              "title": "registry",
+              "type": "string"
+            },
+            "repository": {
+              "default": "sigstore/scaffolding/createcerts",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "version": {
+              "default": "sha256:7ebf3f223edf81d9eb7e34e7212372852b2380e5fbda525f696c81a75a504b8c",
+              "description": "v0.7.22",
+              "required": [],
+              "title": "version",
+              "type": "string"
+            }
+          },
+          "required": [
+            "registry",
+            "repository",
+            "pullPolicy",
+            "version"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "name": {
+          "default": "createcerts",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        },
+        "nodeSelector": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "nodeSelector",
+          "type": "object"
+        },
+        "replicaCount": {
+          "default": 1,
+          "required": [],
+          "title": "replicaCount",
+          "type": "integer"
+        },
+        "securityContext": {
+          "additionalProperties": false,
+          "properties": {
+            "runAsNonRoot": {
+              "default": true,
+              "required": [],
+              "title": "runAsNonRoot",
+              "type": "boolean"
+            },
+            "runAsUser": {
+              "default": 65533,
+              "required": [],
+              "title": "runAsUser",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "runAsNonRoot",
+            "runAsUser"
+          ],
+          "title": "securityContext",
+          "type": "object"
+        },
+        "serviceAccount": {
+          "additionalProperties": false,
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "create": {
+              "default": true,
+              "required": [],
+              "title": "create",
+              "type": "boolean"
+            },
+            "mountToken": {
+              "default": true,
+              "required": [],
+              "title": "mountToken",
+              "type": "boolean"
+            },
+            "name": {
+              "default": "",
+              "required": [],
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "create",
+            "name",
+            "annotations",
+            "mountToken"
+          ],
+          "title": "serviceAccount",
+          "type": "object"
+        },
+        "tolerations": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tolerations",
+          "type": "array"
+        },
+        "ttlSecondsAfterFinished": {
+          "default": 3600,
+          "required": [],
+          "title": "ttlSecondsAfterFinished",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "replicaCount",
+        "name",
+        "image",
+        "ttlSecondsAfterFinished",
+        "serviceAccount",
+        "securityContext",
+        "annotations",
+        "tolerations",
+        "nodeSelector",
+        "affinity"
+      ],
+      "title": "createcerts",
+      "type": "object"
+    },
+    "ctlog": {
+      "additionalProperties": false,
+      "description": "Configure ctlog dependency",
+      "properties": {
         "createcerts": {
-            "properties": {
-                "affinity": {
-                    "properties": {},
-                    "type": "object"
-                },
-                "annotations": {
-                    "properties": {},
-                    "type": "object"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "image": {
-                    "properties": {
-                        "pullPolicy": {
-                            "type": "string"
-                        },
-                        "registry": {
-                            "type": "string"
-                        },
-                        "repository": {
-                            "type": "string"
-                        },
-                        "version": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "nodeSelector": {
-                    "properties": {},
-                    "type": "object"
-                },
-                "replicaCount": {
-                    "type": "integer"
-                },
-                "securityContext": {
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "runAsUser": {
-                            "type": "integer"
-                        }
-                    },
-                    "type": "object"
-                },
-                "serviceAccount": {
-                    "properties": {
-                        "annotations": {
-                            "properties": {},
-                            "type": "object"
-                        },
-                        "create": {
-                            "type": "boolean"
-                        },
-                        "mountToken": {
-                            "type": "boolean"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "tolerations": {
-                    "type": "array"
-                },
-                "ttlSecondsAfterFinished": {
-                    "type": "integer"
-                }
+          "additionalProperties": false,
+          "properties": {
+            "fullnameOverride": {
+              "default": "ctlog-createcerts",
+              "required": [],
+              "title": "fullnameOverride",
+              "type": "string"
             },
-            "type": "object"
+            "name": {
+              "default": "ctlog-createcerts",
+              "required": [],
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "fullnameOverride"
+          ],
+          "title": "createcerts",
+          "type": "object"
         },
-        "ctlog": {
-            "properties": {
-                "createcerts": {
-                    "properties": {
-                        "fullnameOverride": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "createctconfig": {
-                    "properties": {
-                        "logPrefix": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "createtree": {
-                    "properties": {
-                        "fullnameOverride": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "forceNamespace": {
-                    "type": "string"
-                },
-                "fullnameOverride": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "namespace": {
-                    "properties": {
-                        "create": {
-                            "type": "boolean"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                }
+        "createctconfig": {
+          "additionalProperties": false,
+          "properties": {
+            "logPrefix": {
+              "default": "fulcio",
+              "required": [],
+              "title": "logPrefix",
+              "type": "string"
+            }
+          },
+          "required": [
+            "logPrefix"
+          ],
+          "title": "createctconfig",
+          "type": "object"
+        },
+        "createtree": {
+          "additionalProperties": false,
+          "properties": {
+            "fullnameOverride": {
+              "default": "ctlog-createtree",
+              "required": [],
+              "title": "fullnameOverride",
+              "type": "string"
             },
-            "type": "object"
+            "name": {
+              "default": "ctlog-createtree",
+              "required": [],
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "fullnameOverride"
+          ],
+          "title": "createtree",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
         },
         "forceNamespace": {
-            "type": "string"
+          "default": "ctlog-system",
+          "required": [],
+          "title": "forceNamespace",
+          "type": "string"
         },
-        "imagePullSecrets": {
-            "type": "array"
+        "fullnameOverride": {
+          "default": "ctlog",
+          "required": [],
+          "title": "fullnameOverride",
+          "type": "string"
+        },
+        "name": {
+          "default": "ctlog",
+          "required": [],
+          "title": "name",
+          "type": "string"
         },
         "namespace": {
-            "properties": {
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
+          "additionalProperties": false,
+          "properties": {
+            "create": {
+              "default": true,
+              "required": [],
+              "title": "create",
+              "type": "boolean"
             },
-            "type": "object"
-        },
-        "server": {
-            "properties": {
-                "affinity": {
-                    "properties": {},
-                    "type": "object"
-                },
-                "args": {
-                    "properties": {
-                        "aws_hsm_root_ca_path": {
-                            "type": "null"
-                        },
-                        "certificateAuthority": {
-                            "type": "string"
-                        },
-                        "ct_log_url": {
-                            "type": "string"
-                        },
-                        "disable_ct_log": {
-                            "type": "boolean"
-                        },
-                        "gcp_private_ca_parent": {
-                            "type": "string"
-                        },
-                        "grpcPort": {
-                            "type": "integer"
-                        },
-                        "hsm_caroot_id": {
-                            "type": "null"
-                        },
-                        "port": {
-                            "type": "integer"
-                        }
-                    },
-                    "type": "object"
-                },
-                "awsKmsCredentialsSecretName": {
-                    "type": "string"
-                },
-                "awsKmsRegion": {
-                    "type": "string"
-                },
-                "grpcSvcPort": {
-                    "type": "integer"
-                },
-                "image": {
-                    "properties": {
-                        "pullPolicy": {
-                            "type": "string"
-                        },
-                        "registry": {
-                            "type": "string"
-                        },
-                        "repository": {
-                            "type": "string"
-                        },
-                        "version": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "ingress": {
-                    "properties": {
-                        "grpc": {
-                            "properties": {
-                                "annotations": {
-                                    "properties": {
-                                        "nginx.ingress.kubernetes.io/backend-protocol": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "className": {
-                                    "type": "string"
-                                },
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "hosts": {
-                                    "items": {
-                                        "properties": {
-                                            "host": {
-                                                "type": "string"
-                                            },
-                                            "path": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "type": "array"
-                                },
-                                "tls": {
-                                    "items": {
-                                        "properties": {
-                                            "hosts": {
-                                                "items": {
-                                                    "type": "string"
-                                                },
-                                                "type": "array"
-                                            },
-                                            "secretName": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "type": "array"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "http": {
-                            "properties": {
-                                "annotations": {
-                                    "properties": {},
-                                    "type": "object"
-                                },
-                                "className": {
-                                    "type": "string"
-                                },
-                                "enabled": {
-                                    "type": "boolean"
-                                },
-                                "hosts": {
-                                    "items": {
-                                        "properties": {
-                                            "host": {
-                                                "type": "string"
-                                            },
-                                            "path": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "type": "array"
-                                },
-                                "tls": {
-                                    "type": "array"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    },
-                    "type": "object"
-                },
-                "ingresses": {
-                    "items": {
-                        "properties": {
-                            "annotations": {
-                                "properties": {},
-                                "type": "object"
-                            },
-                            "backendConfigSpec": {
-                                "properties": {
-                                    "healthCheck": {
-                                        "properties": {
-                                            "port": {
-                                                "type": "integer"
-                                            },
-                                            "requestPath": {
-                                                "type": "string"
-                                            },
-                                            "type": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "logging": {
-                                        "properties": {
-                                            "enable": {
-                                                "type": "boolean"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "securityPolicy": {
-                                        "properties": {
-                                            "name": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "type": "object"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            "className": {
-                                "type": "string"
-                            },
-                            "enabled": {
-                                "type": "boolean"
-                            },
-                            "frontendConfigSpec": {
-                                "properties": {
-                                    "redirectToHttps": {
-                                        "properties": {
-                                            "enabled": {
-                                                "type": "boolean"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "sslPolicy": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            "grpc": {
-                                "type": "boolean"
-                            },
-                            "hosts": {
-                                "items": {
-                                    "properties": {
-                                        "host": {
-                                            "type": "string"
-                                        },
-                                        "path": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "type": "array"
-                            },
-                            "http": {
-                                "type": "boolean"
-                            },
-                            "name": {
-                                "type": "string"
-                            },
-                            "staticGlobalIP": {
-                                "type": "string"
-                            },
-                            "tls": {
-                                "type": "array"
-                            }
-                        },
-                        "type": "object"
-                    },
-                    "type": "array"
-                },
-                "kmsType": {
-                    "type": "string"
-                },
-                "logging": {
-                    "properties": {
-                        "production": {
-                            "type": "boolean"
-                        }
-                    },
-                    "type": "object"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "nodeSelector": {
-                    "properties": {},
-                    "type": "object"
-                },
-                "replicaCount": {
-                    "type": "integer"
-                },
-                "secret": {
-                    "type": "string"
-                },
-                "securityContext": {
-                    "properties": {
-                        "runAsNonRoot": {
-                            "type": "boolean"
-                        },
-                        "runAsUser": {
-                            "type": "integer"
-                        }
-                    },
-                    "type": "object"
-                },
-                "service": {
-                    "properties": {
-                        "ports": {
-                            "items": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "port": {
-                                        "type": "integer"
-                                    },
-                                    "protocol": {
-                                        "type": "string"
-                                    },
-                                    "targetPort": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            "type": "array"
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "serviceAccount": {
-                    "properties": {
-                        "annotations": {
-                            "properties": {},
-                            "type": "object"
-                        },
-                        "create": {
-                            "type": "boolean"
-                        },
-                        "mountToken": {
-                            "type": "boolean"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "svcPort": {
-                    "type": "integer"
-                },
-                "tolerations": {
-                    "type": "array"
-                }
-            },
-            "type": "object"
+            "name": {
+              "default": "ctlog-system",
+              "required": [],
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "create"
+          ],
+          "title": "namespace",
+          "type": "object"
         }
+      },
+      "required": [
+        "enabled",
+        "name",
+        "forceNamespace",
+        "fullnameOverride",
+        "namespace",
+        "createtree",
+        "createcerts",
+        "createctconfig"
+      ],
+      "title": "ctlog",
+      "type": "object"
     },
-    "type": "object"
+    "forceNamespace": {
+      "default": "",
+      "description": "Force namespace of namespaced resources",
+      "required": [],
+      "title": "forceNamespace",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "namespace": {
+      "additionalProperties": false,
+      "properties": {
+        "create": {
+          "default": false,
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "fulcio-system",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "name"
+      ],
+      "title": "namespace",
+      "type": "object"
+    },
+    "server": {
+      "additionalProperties": false,
+      "properties": {
+        "affinity": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "args": {
+          "additionalProperties": false,
+          "properties": {
+            "aws_hsm_root_ca_path": {
+              "default": "",
+              "required": [],
+              "title": "aws_hsm_root_ca_path",
+              "type": "null"
+            },
+            "certificateAuthority": {
+              "default": "fileca",
+              "description": "Valid values: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca",
+              "required": [],
+              "title": "certificateAuthority",
+              "type": "string"
+            },
+            "ct_log_url": {
+              "default": "",
+              "required": [],
+              "title": "ct_log_url",
+              "type": "string"
+            },
+            "disable_ct_log": {
+              "default": false,
+              "required": [],
+              "title": "disable_ct_log",
+              "type": "boolean"
+            },
+            "gcp_private_ca_parent": {
+              "default": "projects/test/locations/us-east1/caPools/test",
+              "required": [],
+              "title": "gcp_private_ca_parent",
+              "type": "string"
+            },
+            "grpcPort": {
+              "default": 5554,
+              "required": [],
+              "title": "grpcPort",
+              "type": "integer"
+            },
+            "hsm_caroot_id": {
+              "default": "",
+              "description": "kms_resource: gcpkms://....\nkms_cert_chain: |-\n  \u003c\u003c your PEM encoded cert chain here. Order from active intermedate first to root last \u003e\u003e",
+              "required": [],
+              "title": "hsm_caroot_id",
+              "type": "null"
+            },
+            "port": {
+              "default": 5555,
+              "required": [],
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "port",
+            "grpcPort",
+            "certificateAuthority",
+            "hsm_caroot_id",
+            "aws_hsm_root_ca_path",
+            "gcp_private_ca_parent",
+            "ct_log_url",
+            "disable_ct_log"
+          ],
+          "title": "args",
+          "type": "object"
+        },
+        "awsKmsCredentialsSecretName": {
+          "default": "aws-kms-credentials",
+          "description": "kubernetes secret name containing IAM credentials for use with AWS KMS",
+          "required": [],
+          "title": "awsKmsCredentialsSecretName",
+          "type": "string"
+        },
+        "awsKmsRegion": {
+          "default": "us-east-1",
+          "description": "AWS region if using AWS KMS for signing key",
+          "required": [],
+          "title": "awsKmsRegion",
+          "type": "string"
+        },
+        "grpcSvcPort": {
+          "default": 5554,
+          "required": [],
+          "title": "grpcSvcPort",
+          "type": "integer"
+        },
+        "image": {
+          "additionalProperties": false,
+          "properties": {
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "registry": {
+              "default": "ghcr.io",
+              "required": [],
+              "title": "registry",
+              "type": "string"
+            },
+            "repository": {
+              "default": "sigstore/fulcio",
+              "required": [],
+              "title": "repository",
+              "type": "string"
+            },
+            "version": {
+              "default": "v1.6.6@sha256:d543032eb2d905acffae26e2cb9c9961abc962510cef23af6f133d2c5118d4b5",
+              "description": "crane digest ghcr.io/sigstore/fulcio:v1.6.6\nv1.6.6",
+              "required": [],
+              "title": "version",
+              "type": "string"
+            }
+          },
+          "required": [
+            "registry",
+            "repository",
+            "pullPolicy",
+            "version"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "ingress": {
+          "additionalProperties": false,
+          "properties": {
+            "grpc": {
+              "additionalProperties": false,
+              "properties": {
+                "annotations": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "nginx.ingress.kubernetes.io/backend-protocol": {
+                      "default": "GRPC",
+                      "required": [],
+                      "title": "nginx.ingress.kubernetes.io/backend-protocol",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "nginx.ingress.kubernetes.io/backend-protocol"
+                  ],
+                  "title": "annotations",
+                  "type": "object"
+                },
+                "className": {
+                  "default": "",
+                  "required": [],
+                  "title": "className",
+                  "type": "string"
+                },
+                "enabled": {
+                  "default": false,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "hosts": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "host": {
+                            "default": "fulcio.localhost",
+                            "required": [],
+                            "title": "host",
+                            "type": "string"
+                          },
+                          "path": {
+                            "default": "/dev.sigstore.fulcio.v2.CA",
+                            "required": [],
+                            "title": "path",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "host",
+                          "path"
+                        ],
+                        "type": "object"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "required": [],
+                  "title": "hosts",
+                  "type": "array"
+                },
+                "tls": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "hosts": {
+                            "items": {
+                              "anyOf": [
+                                {
+                                  "required": [],
+                                  "type": "string"
+                                }
+                              ],
+                              "required": []
+                            },
+                            "required": [],
+                            "title": "hosts",
+                            "type": "array"
+                          },
+                          "secretName": {
+                            "default": "fulcio-grpc-ingress-tls",
+                            "required": [],
+                            "title": "secretName",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "secretName",
+                          "hosts"
+                        ],
+                        "type": "object"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "required": [],
+                  "title": "tls",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "enabled",
+                "className",
+                "annotations",
+                "hosts",
+                "tls"
+              ],
+              "title": "grpc",
+              "type": "object"
+            },
+            "http": {
+              "additionalProperties": false,
+              "properties": {
+                "annotations": {
+                  "additionalProperties": false,
+                  "required": [],
+                  "title": "annotations",
+                  "type": "object"
+                },
+                "className": {
+                  "default": "nginx",
+                  "required": [],
+                  "title": "className",
+                  "type": "string"
+                },
+                "enabled": {
+                  "default": true,
+                  "required": [],
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "hosts": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "host": {
+                            "default": "fulcio.localhost",
+                            "required": [],
+                            "title": "host",
+                            "type": "string"
+                          },
+                          "path": {
+                            "default": "/",
+                            "required": [],
+                            "title": "path",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "path",
+                          "host"
+                        ],
+                        "type": "object"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "required": [],
+                  "title": "hosts",
+                  "type": "array"
+                },
+                "tls": {
+                  "items": {
+                    "required": []
+                  },
+                  "required": [],
+                  "title": "tls",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "enabled",
+                "className",
+                "annotations",
+                "hosts",
+                "tls"
+              ],
+              "title": "http",
+              "type": "object"
+            }
+          },
+          "required": [
+            "http",
+            "grpc"
+          ],
+          "title": "ingress",
+          "type": "object"
+        },
+        "ingresses": {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "annotations": {
+                    "additionalProperties": false,
+                    "required": [],
+                    "title": "annotations",
+                    "type": "object"
+                  },
+                  "backendConfigSpec": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "healthCheck": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "port": {
+                            "default": 5555,
+                            "required": [],
+                            "title": "port",
+                            "type": "integer"
+                          },
+                          "requestPath": {
+                            "default": "/healthz",
+                            "required": [],
+                            "title": "requestPath",
+                            "type": "string"
+                          },
+                          "type": {
+                            "default": "HTTP",
+                            "required": [],
+                            "title": "type",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "port",
+                          "requestPath",
+                          "type"
+                        ],
+                        "title": "healthCheck",
+                        "type": "object"
+                      },
+                      "logging": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "enable": {
+                            "default": true,
+                            "required": [],
+                            "title": "enable",
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "enable"
+                        ],
+                        "title": "logging",
+                        "type": "object"
+                      },
+                      "securityPolicy": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "name": {
+                            "default": "fulcio-security-policy",
+                            "required": [],
+                            "title": "name",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name"
+                        ],
+                        "title": "securityPolicy",
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "securityPolicy",
+                      "logging",
+                      "healthCheck"
+                    ],
+                    "title": "backendConfigSpec",
+                    "type": "object"
+                  },
+                  "className": {
+                    "default": "gce",
+                    "required": [],
+                    "title": "className",
+                    "type": "string"
+                  },
+                  "enabled": {
+                    "default": false,
+                    "required": [],
+                    "title": "enabled",
+                    "type": "boolean"
+                  },
+                  "frontendConfigSpec": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "redirectToHttps": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "enabled": {
+                            "default": true,
+                            "required": [],
+                            "title": "enabled",
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "enabled"
+                        ],
+                        "title": "redirectToHttps",
+                        "type": "object"
+                      },
+                      "sslPolicy": {
+                        "default": "fulcio-ssl-policy",
+                        "required": [],
+                        "title": "sslPolicy",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "sslPolicy",
+                      "redirectToHttps"
+                    ],
+                    "title": "frontendConfigSpec",
+                    "type": "object"
+                  },
+                  "grpc": {
+                    "default": true,
+                    "required": [],
+                    "title": "grpc",
+                    "type": "boolean"
+                  },
+                  "hosts": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "host": {
+                              "default": "fulcio.localhost",
+                              "required": [],
+                              "title": "host",
+                              "type": "string"
+                            },
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "host"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "hosts",
+                    "type": "array"
+                  },
+                  "http": {
+                    "default": true,
+                    "required": [],
+                    "title": "http",
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "default": "gce-ingress",
+                    "required": [],
+                    "title": "name",
+                    "type": "string"
+                  },
+                  "staticGlobalIP": {
+                    "default": "lb-ext-ip",
+                    "required": [],
+                    "title": "staticGlobalIP",
+                    "type": "string"
+                  },
+                  "tls": {
+                    "items": {
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "tls",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "enabled",
+                  "grpc",
+                  "http",
+                  "name",
+                  "className",
+                  "hosts",
+                  "annotations",
+                  "tls",
+                  "staticGlobalIP",
+                  "frontendConfigSpec",
+                  "backendConfigSpec"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "ingresses",
+          "type": "array"
+        },
+        "kmsType": {
+          "default": "none",
+          "description": "KMS type for signing key (possible values: \"\" / \"none\", \"aws\")",
+          "required": [],
+          "title": "kmsType",
+          "type": "string"
+        },
+        "logging": {
+          "additionalProperties": false,
+          "properties": {
+            "production": {
+              "default": false,
+              "required": [],
+              "title": "production",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "production"
+          ],
+          "title": "logging",
+          "type": "object"
+        },
+        "name": {
+          "default": "server",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        },
+        "nodeSelector": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "nodeSelector",
+          "type": "object"
+        },
+        "replicaCount": {
+          "default": 1,
+          "required": [],
+          "title": "replicaCount",
+          "type": "integer"
+        },
+        "secret": {
+          "default": "fulcio-server-secret",
+          "required": [],
+          "title": "secret",
+          "type": "string"
+        },
+        "securityContext": {
+          "additionalProperties": false,
+          "properties": {
+            "runAsNonRoot": {
+              "default": true,
+              "required": [],
+              "title": "runAsNonRoot",
+              "type": "boolean"
+            },
+            "runAsUser": {
+              "default": 65533,
+              "required": [],
+              "title": "runAsUser",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "runAsNonRoot",
+            "runAsUser"
+          ],
+          "title": "securityContext",
+          "type": "object"
+        },
+        "service": {
+          "additionalProperties": false,
+          "properties": {
+            "ports": {
+              "items": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "name": {
+                        "default": "http",
+                        "required": [],
+                        "title": "name",
+                        "type": "string"
+                      },
+                      "port": {
+                        "default": 80,
+                        "required": [],
+                        "title": "port",
+                        "type": "integer"
+                      },
+                      "protocol": {
+                        "default": "TCP",
+                        "required": [],
+                        "title": "protocol",
+                        "type": "string"
+                      },
+                      "targetPort": {
+                        "default": 5555,
+                        "required": [],
+                        "title": "targetPort",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "port",
+                      "protocol",
+                      "targetPort"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "name": {
+                        "default": "grpc",
+                        "required": [],
+                        "title": "name",
+                        "type": "string"
+                      },
+                      "port": {
+                        "default": 5554,
+                        "required": [],
+                        "title": "port",
+                        "type": "integer"
+                      },
+                      "protocol": {
+                        "default": "TCP",
+                        "required": [],
+                        "title": "protocol",
+                        "type": "string"
+                      },
+                      "targetPort": {
+                        "default": 5554,
+                        "required": [],
+                        "title": "targetPort",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "port",
+                      "protocol",
+                      "targetPort"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "name": {
+                        "default": "2112-tcp",
+                        "required": [],
+                        "title": "name",
+                        "type": "string"
+                      },
+                      "port": {
+                        "default": 2112,
+                        "required": [],
+                        "title": "port",
+                        "type": "integer"
+                      },
+                      "protocol": {
+                        "default": "TCP",
+                        "required": [],
+                        "title": "protocol",
+                        "type": "string"
+                      },
+                      "targetPort": {
+                        "default": 2112,
+                        "required": [],
+                        "title": "targetPort",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "port",
+                      "protocol",
+                      "targetPort"
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "ports",
+              "type": "array"
+            },
+            "type": {
+              "default": "ClusterIP",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "ports"
+          ],
+          "title": "service",
+          "type": "object"
+        },
+        "serviceAccount": {
+          "additionalProperties": false,
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "create": {
+              "default": true,
+              "required": [],
+              "title": "create",
+              "type": "boolean"
+            },
+            "mountToken": {
+              "default": true,
+              "required": [],
+              "title": "mountToken",
+              "type": "boolean"
+            },
+            "name": {
+              "default": "",
+              "required": [],
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "create",
+            "name",
+            "annotations",
+            "mountToken"
+          ],
+          "title": "serviceAccount",
+          "type": "object"
+        },
+        "svcPort": {
+          "default": 80,
+          "required": [],
+          "title": "svcPort",
+          "type": "integer"
+        },
+        "tolerations": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tolerations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "replicaCount",
+        "name",
+        "svcPort",
+        "grpcSvcPort",
+        "kmsType",
+        "secret",
+        "awsKmsCredentialsSecretName",
+        "awsKmsRegion",
+        "logging",
+        "image",
+        "args",
+        "serviceAccount",
+        "service",
+        "ingress",
+        "ingresses",
+        "securityContext",
+        "tolerations",
+        "nodeSelector",
+        "affinity"
+      ],
+      "title": "server",
+      "type": "object"
+    }
+  },
+  "required": [
+    "namespace",
+    "imagePullSecrets",
+    "config",
+    "additionalLabels",
+    "server",
+    "createcerts",
+    "ctlog",
+    "forceNamespace"
+  ],
+  "type": "object"
 }
