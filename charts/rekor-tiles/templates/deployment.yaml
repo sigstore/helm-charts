@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "rekor-tiles.fullname" . }}
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "rekor-tiles.labels" . | nindent 4 }}
+{{- if .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.deploymentAnnotations | nindent 4 }}
+{{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "rekor-tiles.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "rekor-tiles.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "rekor-tiles.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ template "rekor-tiles.image" .Values.image }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if (.Values.server.signer.file).withPassword }}
+          env:
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ (.Values.server.signer.file.secret).name }}
+                  key: password
+{{- end }}
+          args:
+{{ include "rekor-tiles.args" . | indent 12 }}
+          ports:
+{{- include "rekor-tiles.containerPorts" .Values.service.ports | indent 12 }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+{{- if or .Values.server.signer.file .Values.server.signer.tink }}
+          volumeMounts:
+{{- end }}
+{{- if .Values.server.signer.file }}
+            - name: {{ (.Values.server.signer.file.secret).name }}-volume
+              mountPath: {{ (.Values.server.signer.file.secret).mountPath }}
+              readOnly: true
+{{- end }}
+{{- if .Values.server.signer.tink }}
+            - name: tink-config
+              mountPath: /etc/tink-config
+{{- end }}
+{{- if or .Values.server.signer.file .Values.server.signer.tink }}
+      volumes:
+{{- end }}
+{{- if ((.Values.server.signer.file).secret).name }}
+        - name: {{ (.Values.server.signer.file.secret).name }}-volume
+          secret:
+            secretName: {{ (.Values.server.signer.file.secret).name }}
+            items:
+              - key: {{ (.Values.server.signer.file.secret).key }}
+                path: {{ (.Values.server.signer.file.secret).mountSubPath }}
+{{- end }}
+{{- if .Values.server.signer.tink }}
+        - name: tink-config
+          configMap:
+            name: {{ .Values.server.signer.tink.configMapName }}
+{{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

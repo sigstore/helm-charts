@@ -1,0 +1,11 @@
+{{- if and (.Values.ingress.enabled) (eq .Values.ingress.className "gce") (.Values.ingress.backendConfigSpec) }}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: {{ include "rekor-tiles.fullname" . }}
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "rekor-tiles.labels" $ | nindent 4 }}
+spec:
+{{ toYaml .Values.ingress.backendConfigSpec | indent 2 }}
+{{- end }}
