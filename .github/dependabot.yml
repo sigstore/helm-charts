@@ -10,7 +10,7 @@ updates:
         update-types:
           - "minor"
           - "patch"
-  - package-ecosystem: docker
+  - package-ecosystem: "helm"
     directories:
       - "/charts/**"
     schedule:
