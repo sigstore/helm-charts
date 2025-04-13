@@ -12,6 +12,51 @@ updates:
           - "patch"
   - package-ecosystem: "helm"
     directories:
-      - "/charts/**"
+      - "/charts/ctlog"
+    schedule:
+      interval: weekly
+  - package-ecosystem: "helm"
+    directories:
+      - "/charts/fulcio"
+    schedule:
+      interval: weekly
+  - package-ecosystem: "helm"
+    directories:
+      - "/charts/policy-controller"
+    schedule:
+      interval: weekly
+  - package-ecosystem: "helm"
+    directories:
+      - "/charts/rekor"
+    schedule:
+      interval: weekly
+  - package-ecosystem: "helm"
+    directories:
+      - "/charts/scaffold"
+    schedule:
+      interval: weekly
+  - package-ecosystem: "helm"
+    directories:
+      - "/charts/sigstore-prober"
+    schedule:
+      interval: weekly
+  - package-ecosystem: "helm"
+    directories:
+      - "/charts/trillian"
+    schedule:
+      interval: weekly
+  - package-ecosystem: "helm"
+    directories:
+      - "/charts/tsa"
+    schedule:
+      interval: weekly
+  - package-ecosystem: "helm"
+    directories:
+      - "/charts/tuf"
+    schedule:
+      interval: weekly
+  - package-ecosystem: "helm"
+    directories:
+      - "/charts/updatetree"
     schedule:
       interval: weekly
