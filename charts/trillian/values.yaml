@@ -20,7 +20,7 @@ initContainerImage:
 
 storageSystem:
   driver: mysql
-  envCredentials: null
+  envCredentials: []
 quotaSystem:
   driver: mysql
 
