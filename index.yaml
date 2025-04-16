@@ -16391,6 +16391,46 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 1.7.1
+    created: "2025-04-16T08:09:47.187515442Z"
+    description: 'Trillian is a log that stores an accurate, immutable and verifiable
+      history of activity. '
+    digest: 969ad6fb852a649dd252853aaa353afb1c50e98dbe5ecc1e401a786162ff618f
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+      url: https://sigstore.dev/
+    name: trillian
+    sources:
+    - https://github.com/google/trillian
+    - https://github.com/sigstore/helm-charts/tree/main/charts/trillian
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/trillian-0.3.4/trillian-0.3.4.tgz
+    version: 0.3.4
+  - annotations:
+      artifacthub.io/images: |
+        - name: curl
+          image: docker.io/curlimages/curl:8.12.1@sha256:94e9e444bcba979c2ea12e27ae39bee4cd10bc7041a472c4727a558e213744e6
+        - name: netcat
+          image: docker.io/subfuzion/netcat@sha256:7e808e84a631d9c2cd5a04f6a084f925ea388e3127553461536c1248c3333c8a
+        - name: db_server
+          image: gcr.io/trillian-opensource-ci/db_server:v1.5.3@sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461
+        - name: log_server
+          image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.7.1@sha256:8ae059cbde81aadc80aa07fb3a8e84f43a8d87e9f7e820c48dd33f6288b232fe
+        - name: log_signer
+          image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.7.1@sha256:46de4e7eec9944567f688dff946569f0725e48eeb4b07093a5f3aa11c130627f
+        - name: cloud_proxy
+          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.15.2-alpine@sha256:ab3068069deb05806c80d9fc7e6e542853283860cf7f1e4d6fa6ddeedfdc8600
+        - name: scaffold_cloud_proxy
+          image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.22@sha256:2db740092e3f5ea16d5dced477b75f1190db116fbe06c320ccf4fb48108a43cb
+        - name: createdb
+          image: ghcr.io/sigstore/scaffolding/createdb:v0.7.22@sha256:bf936fab76b8b8bb2f1f4bab2905d5d4164eb5569647e7745949c1a599e44b8d
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.7.1
     created: "2025-04-06T06:49:18.672543802Z"
     description: 'Trillian is a log that stores an accurate, immutable and verifiable
       history of activity. '
@@ -19517,4 +19557,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2025-04-15T15:54:17.063192923Z"
+generated: "2025-04-16T08:09:47.188473296Z"
