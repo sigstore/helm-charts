@@ -5,10 +5,12 @@ metadata:
   namespace: {{ .Values.namespace.name }}
   labels:
     {{- include "rekor-tiles.labels" . | nindent 4 }}
+  annotations:
+    cloud.google.com/neg: '{"exposed_ports": {"{{ .Values.neg.http.port }}":{"name": "{{ .Values.neg.http.name }}"}, "{{ .Values.neg.grpc.port }}":{"name": "{{ .Values.neg.grpc.name}}"}}}'
 spec:
   type: {{ .Values.service.type }}
   ports:
     {{- tpl (toYaml .Values.service.ports) . | nindent 4 }}
   selector:
     {{- include "rekor-tiles.selectorLabels" . | nindent 4 }}
-  type: NodePort
+  type: ClusterIP

@@ -60,28 +60,6 @@ service:
       protocol: TCP
       targetPort: 2112
 
-ingress:
-  enabled: true
-  className: "gce"
-  annotations: {}
-  hosts:
-    - path: /
-      host: root
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-  # staticGlobalIP: lb-ext-ip
-  # frontendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_frontendconfig_parameters
-  #   sslPolicy: rekor-tiles-ssl-policy
-  #   redirectToHttps:
-  #     enabled: true
-  # backendConfigSpec:   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-configuration#configuring_ingress_features_through_backendconfig_parameters
-  #   securityPolicy:
-  #     name: rekor-tiles-security-policy
-  #   logging:
-  #     enable: true
-
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -109,6 +87,14 @@ nodeSelector:
 tolerations: []
 
 affinity: {}
+
+neg:
+  http:
+    name: ""
+    port: 80
+  grpc:
+    name: ""
+    port: 3001
 
 # Server arguments
 server:
