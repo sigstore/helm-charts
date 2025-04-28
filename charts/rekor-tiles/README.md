@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
@@ -63,17 +63,15 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | image.repository | string | `"sigstore/rekor-tiles"` |  |
 | image.version | string | `"sha256:a262c211340f5ef1fa9c411abef980e51f89365b97e4ba8faff1e8a7c00fd03e"` |  |
 | imagePullSecrets | list | `[]` |  |
-| ingress.annotations | object | `{}` |  |
-| ingress.className | string | `"gce"` |  |
-| ingress.enabled | bool | `true` |  |
-| ingress.hosts[0].host | string | `"root"` |  |
-| ingress.hosts[0].path | string | `"/"` |  |
-| ingress.tls | list | `[]` |  |
 | livenessProbe.httpGet.path | string | `"/healthz"` |  |
 | livenessProbe.httpGet.port | int | `3000` |  |
 | nameOverride | string | `""` |  |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"rekor-tiles-system"` |  |
+| neg.grpc.name | string | `""` |  |
+| neg.grpc.port | int | `3001` |  |
+| neg.http.name | string | `""` |  |
+| neg.http.port | int | `80` |  |
 | nodeSelector."iam.gke.io/gke-metadata-server-enabled" | string | `"true"` |  |
 | podAnnotations | object | `{}` |  |
 | podLabels | object | `{}` |  |
