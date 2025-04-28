@@ -2,7 +2,7 @@ apiVersion: v2
 name: rekor-tiles
 description: Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 type: application
-version: 0.1.0
+version: 0.2.0
 appVersion: "0.0.1"
 keywords:
   - security

@@ -28,37 +28,6 @@
         "imagePullSecrets": {
             "type": "array"
         },
-        "ingress": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "className": {
-                    "type": "string"
-                },
-                "enabled": {
-                    "type": "boolean"
-                },
-                "hosts": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "host": {
-                                "type": "string"
-                            },
-                            "path": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                },
-                "tls": {
-                    "type": "array"
-                }
-            }
-        },
         "livenessProbe": {
             "type": "object",
             "properties": {
@@ -86,6 +55,33 @@
                 },
                 "name": {
                     "type": "string"
+                }
+            }
+        },
+        "neg": {
+            "type": "object",
+            "properties": {
+                "grpc": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "http": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    }
                 }
             }
         },
