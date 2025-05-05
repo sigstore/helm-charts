@@ -8,7 +8,7 @@ initContainerImage:
     registry: docker.io
     repository: curlimages/curl
     # -- 8.13.0
-    version: sha256:b2f39551f7242035dafc5e57ea588c2c783d4f315688d55420b8345877e0c9aa
+    version: sha256:d43bdb28bae0be0998f3be83199bfb2b81e0a30b034b6d7586ce7e05de34c3fd
     imagePullPolicy: IfNotPresent
 initContainerResources: {}
 
