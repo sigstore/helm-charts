@@ -43,6 +43,9 @@ spec:
           - name: tuf-secrets
             mountPath: "/var/run/tuf-secrets"
             readOnly: true
+      {{- if .Values.deployment.volumeMounts }}
+{{ toYaml .Values.deployment.volumeMounts | indent 10 }}
+      {{- end }}
       {{- if .Values.deployment.resources }}
         resources:
 {{ toYaml .Values.deployment.resources | indent 10 }}
@@ -60,6 +63,9 @@ spec:
         projected:
           sources:
           {{- include "tuf.validateSecrets" . }}
+      {{- if .Values.deployment.volumes }}
+{{ toYaml .Values.deployment.volumes | indent 6 }}
+      {{- end }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}

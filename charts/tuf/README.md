@@ -1,6 +1,6 @@
 # tuf
 
-![Version: 0.1.24](https://img.shields.io/badge/Version-0.1.24-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.22](https://img.shields.io/badge/AppVersion-0.7.22-informational?style=flat-square)
+![Version: 0.1.25](https://img.shields.io/badge/Version-0.1.25-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.22](https://img.shields.io/badge/AppVersion-0.7.22-informational?style=flat-square)
 
 A framework for securing software update systems - the scaffolding implementation
 
@@ -33,6 +33,8 @@ A framework for securing software update systems - the scaffolding implementatio
 | deployment.securityContext | object | `{}` |  |
 | deployment.tolerations | list | `[]` |  |
 | deployment.version | string | `"sha256:b87d3c580d95b66260c79190faa9605af16091f859acfbeaacf14c86d7a57c20"` |  |
+| deployment.volumeMounts | list | `[]` |  |
+| deployment.volumes | list | `[]` |  |
 | enabled | bool | `true` |  |
 | forceNamespace | string | `""` |  |
 | fullnameOverride | string | `"tuf"` |  |
