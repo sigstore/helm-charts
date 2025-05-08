@@ -8,5 +8,5 @@ metadata:
   labels:
     {{- include "rekor-tiles.labels" . | nindent 4 }}
 data:
-  tink.keyset.enc: {{ .Values.server.signer.tink.keyset }}
+  tink.keyset.enc: {{ required "Tink authentication token is required" .Values.server.signer.tink.keyset | quote }}
 {{- end }}
