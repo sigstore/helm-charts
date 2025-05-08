@@ -141,7 +141,7 @@ Server Arguments
 {{- end }}
 {{- if .Values.server.signer.tink }}
 - {{ printf "--signer-tink-kek-uri=%s" .Values.server.signer.tink.kekURI | quote }}
-- "--signer-tink-keyset-path=/etc/tink-config/tink.keyset.enc
+- "--signer-tink-keyset-path=/etc/tink-config/tink.keyset.enc"
 {{- end }}
 {{- end }}
 {{-  range .Values.server.extraArgs }}
