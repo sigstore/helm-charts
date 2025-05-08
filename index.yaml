@@ -9853,6 +9853,30 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 0.0.1
+    created: "2025-05-08T16:44:10.609600148Z"
+    description: Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature
+      transparency log
+    digest: eb812cf6c9f3a6ace887d82be116b05f7eb0dfedc20d291deb5e40c2a4d2442f
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor-tiles
+    sources:
+    - https://github.com/sigstore/rekor-tiles
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-tiles-0.2.4/rekor-tiles-0.2.4.tgz
+    version: 0.2.4
+  - annotations:
+      artifacthub.io/images: |
+        - name: rekor-tiles
+          image: ghcr.io/sigstore/rekor-tiles:main@sha256-7e27abad49ab19e8970c29598a347ebdf3ce95540bab06fa7a016372cb009c2e
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.0.1
     created: "2025-05-08T00:42:51.911661047Z"
     description: Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature
       transparency log
@@ -20031,4 +20055,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2025-05-08T00:42:51.914013223Z"
+generated: "2025-05-08T16:44:10.610551482Z"
