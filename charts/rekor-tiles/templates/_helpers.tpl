@@ -130,7 +130,7 @@ Server Arguments
 {{- if (.Values.server.signer.file).path }}
 - {{ printf "--signer-filepath=%s" .Values.server.signer.file.path | quote }}
 {{- end }}
-{{- if (.Values.server.signer.file.secret).name }}
+{{- if ((.Values.server.signer.file).secret).name }}
 - "--signer-password=${PASSWORD}"
 {{- end }}
 {{- end }}
