@@ -133,12 +133,12 @@ Server Arguments
 {{- if ((.Values.server.signer.file).secret).name }}
 - "--signer-password=${PASSWORD}"
 {{- end }}
-{{- end }}
 {{- if .Values.server.signer.kms }}
 {{- if .Values.server.signer.kms.hash }}
 - {{ printf "--signer-kmshash=%s" .Values.server.signer.kms.hash | quote }}
 {{- end }}
 - {{ printf "--signer-kmskey=%s" .Values.server.signer.kms.key | quote }}
+{{- end }}
 {{- if .Values.server.signer.tink }}
 - {{ printf "--signer-tink-kek-uri=%s" .Values.server.signer.tink.kekURI | quote }}
 - "--signer-tink-keyset-path=/etc/tink-config/tink.keyset.enc
