@@ -85,6 +85,7 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | server.extraArgs | list | `[]` |  |
 | server.gcp | object | `{}` |  |
 | server.grpc.port | string | `"3001"` |  |
+| server.grpcSvcTLS | object | `{}` |  |
 | server.hostname | string | `"localhost"` |  |
 | server.http.metricsPort | string | `"2112"` |  |
 | server.http.port | string | `"3000"` |  |
