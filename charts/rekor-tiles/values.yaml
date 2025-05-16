@@ -110,6 +110,7 @@ server:
     metricsPort: "2112"
   serverConfig: {}
   readOnly: false
+  grpcSvcTLS: {}
   signer: {}
     # file:
     #   path: /pki/signer.pem

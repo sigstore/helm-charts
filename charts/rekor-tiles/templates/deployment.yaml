@@ -65,6 +65,11 @@ spec:
               mountPath: {{ (.Values.server.signer.file.secret).mountPath }}
               readOnly: true
 {{- end }}
+{{- if .Values.server.grpcSvcTLS }}
+            - name: grpc-tls
+              mountPath: /var/run/grpc-tls
+              readOnly: true
+{{- end }}
 {{- if .Values.server.signer.tink }}
             - name: tink-config
               mountPath: /etc/tink-config
@@ -79,6 +84,16 @@ spec:
             items:
               - key: {{ (.Values.server.signer.file.secret).key }}
                 path: {{ (.Values.server.signer.file.secret).mountSubPath }}
+{{- end }}
+{{- if .Values.server.grpcSvcTLS }}
+        - name: grpc-tls
+          secret:
+            secretName: {{ .Values.server.grpcSvcTLS.secretName }}
+            items:
+              - key: {{ .Values.server.grpcSvcTLS.certField }}
+                path: cert.pem
+              - key: {{ .Values.server.grpcSvcTLS.keyField }}
+                path: key.pem
 {{- end }}
 {{- if .Values.server.signer.tink }}
         - name: tink-config
