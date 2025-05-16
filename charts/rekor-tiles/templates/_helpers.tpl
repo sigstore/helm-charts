@@ -126,6 +126,10 @@ Server Arguments
 {{- if .Values.server.readOnly }}
 - "--read-only"
 {{- end }}
+{{- if .Values.server.grpcSvcTLS }}
+- "--grpc-tls-cert-file=/var/run/grpc-tls/cert.pem"
+- "--grpc-tls-key-file=/var/run/grpc-tls/key.pem"
+{{- end }}
 {{- if .Values.server.signer }}
 {{- if (.Values.server.signer.file).path }}
 - {{ printf "--signer-filepath=%s" .Values.server.signer.file.path | quote }}
