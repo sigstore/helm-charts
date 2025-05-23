@@ -21,6 +21,8 @@ deployment:
   tolerations: []
   nodeSelector: {}
   affinity: {}
+  volumes: []
+  volumeMounts: []
 
 secrets:
   rekor:
