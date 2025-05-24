@@ -227,7 +227,7 @@ Log Signer Arguments
 {{- end }}
 - {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.logSigner.portRPC | int) | quote }}
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.logSigner.portHTTP | int) | quote }}
-- {{ printf "--force_master=%t" (default true .Values.logSigner.forceMaster) | quote }}
+- {{ printf "--force_master=%t" (ne .Values.logSigner.forceMaster false) | quote }}
 - "--alsologtostderr"
 {{-  range .Values.logSigner.extraArgs }}
 - {{ . | quote }}
