@@ -45,6 +45,20 @@
                 },
                 "version": {
                     "type": "string"
+                },
+                "volumeMounts": {
+                    "type": "array",
+                    "items": {
+                        "properties": {},
+                        "type": "object"
+                    }
+                },
+                "volumes": {
+                    "type": "array",
+                    "items": {
+                        "properties": {},
+                        "type": "object"
+                    }
                 }
             },
             "type": "object"
