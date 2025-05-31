@@ -19291,6 +19291,28 @@ entries:
           image: ghcr.io/sigstore/scaffolding/server:v0.7.23@sha256:0d20de9ffd5ae81f21d9e7b5ea4f69d9263f6ef90922c408f15469348f2b7ba6
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
+    appVersion: 0.7.24
+    created: "2025-05-31T14:09:17.908677437Z"
+    description: A framework for securing software update systems - the scaffolding
+      implementation
+    digest: b71c370b3a77a2a273ff093eac26a324f7f63f1672eeda3a80a94c2a549b5fdd
+    home: https://sigstore.dev/
+    maintainers:
+    - name: The Sigstore Authors
+      url: https://sigstore.dev/
+    name: tuf
+    sources:
+    - https://github.com/sigstore/scaffolding
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/tuf-0.1.26/tuf-0.1.26.tgz
+    version: 0.1.26
+  - annotations:
+      artifacthub.io/images: |
+        - name: scaffolding-tuf
+          image: ghcr.io/sigstore/scaffolding/server:v0.7.23@sha256:0d20de9ffd5ae81f21d9e7b5ea4f69d9263f6ef90922c408f15469348f2b7ba6
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
     appVersion: 0.7.23
     created: "2025-05-05T22:58:24.373651595Z"
     description: A framework for securing software update systems - the scaffolding
@@ -20215,4 +20237,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2025-05-22T23:36:42.214051444Z"
+generated: "2025-05-31T14:09:17.909672689Z"
