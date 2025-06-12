@@ -16,6 +16,6 @@ dependencies:
   version: 0.1.25
 - name: tsa
   repository: https://sigstore.github.io/helm-charts
-  version: 1.1.6
-digest: sha256:e72592d8ae8d854f1058d3a5ca092677b5b2a98504c689ef8c30dfc4ff81c713
-generated: "2025-05-09T09:47:21.923397-07:00"
+  version: 1.1.7
+digest: sha256:23fcf06d83b725830e30b0be02088cbe863d5f40991a7a968191c380ac935e3e
+generated: "2025-06-12T08:54:03.925292-07:00"
