@@ -5,7 +5,7 @@ description: |
 
 type: application
 
-version: 0.3.5
+version: 0.3.6
 appVersion: 1.7.2
 
 keywords:
@@ -25,18 +25,18 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: curl
-      image: docker.io/curlimages/curl:8.13.0@sha256:d43bdb28bae0be0998f3be83199bfb2b81e0a30b034b6d7586ce7e05de34c3fd
+      image: docker.io/curlimages/curl:8.14.1@sha256:9a1ed35addb45476afa911696297f8e115993df459278ed036182dd2cd22b67b
     - name: netcat
       image: docker.io/subfuzion/netcat@sha256:7e808e84a631d9c2cd5a04f6a084f925ea388e3127553461536c1248c3333c8a
     - name: db_server
       image: gcr.io/trillian-opensource-ci/db_server:v1.5.3@sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461
     - name: log_server
-      image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.7.2@sha256:ff64f73b4a8acae7546ecfb5b73c90933b614130a3b43c764a35535e4f60451b
+      image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.7.2@sha256:2c677cab8e4fd9d5d71dc55db574caed93a3896ee8229e50a95c8d09625866db
     - name: log_signer
-      image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.7.2@sha256:bfcc659dc08f87a0f4a4797edf88c93426a95f0d004032779a028bdce7b7e821
+      image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.7.2@sha256:65ed1871a11d4bf2c1d0b7c1f8b5fbc90f842788edc577b90adb024dec03dbe2
     - name: cloud_proxy
-      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.16.0-alpine@sha256:a8d5ff52389cd02e857935b7b61075f3065b44b11c55956877d3950549c8ffef
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.17.1-alpine@sha256:93da95c049168ecfc1d5673985402d62a257a6d2c18471aecd348d7f6157a4c9
     - name: scaffold_cloud_proxy
-      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.23@sha256:7af4f38f2d5a1989c90df9dbae6a1a64d2d6b0b3871608aad2492b7cba67fa1e
+      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.24@sha256:a80794089cfd99e0813562d87f8e02dc99d458329413b50271dd3edd83f59917
     - name: createdb
-      image: ghcr.io/sigstore/scaffolding/createdb:v0.7.23@sha256:2f8618f678448c0e7550baf79bf16fdfd4b9d8dce7ca526d8393c39189663401
+      image: ghcr.io/sigstore/scaffolding/createdb:v0.7.24@sha256:bcc8f6e1a50d7cf04c8417da4e18723087a3256ae722d5ad86bb8d8e1761fdfc
