@@ -250,8 +250,8 @@
               "type": "string"
             },
             "version": {
-              "default": "sha256:6b51f336dec9e9adff29606855dbd2c7910c5eb80d6579795a29cb3844428efc",
-              "description": "crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.12.0",
+              "default": "sha256:62d474d1be06a9dbf5051f14c82d995711fc02cd0bc1ca94ef6baacec3d2f3b1",
+              "description": "crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.13.0",
               "required": [],
               "title": "version",
               "type": "string"

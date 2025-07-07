@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.10.1](https://img.shields.io/badge/Version-0.10.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.12.0](https://img.shields.io/badge/AppVersion-0.12.0-informational?style=flat-square)
+![Version: 0.10.2](https://img.shields.io/badge/Version-0.10.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.0](https://img.shields.io/badge/AppVersion-0.13.0-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -179,7 +179,7 @@ helm uninstall [RELEASE_NAME]
 | webhook.failurePolicy | string | `"Fail"` |  |
 | webhook.image.pullPolicy | string | `"IfNotPresent"` |  |
 | webhook.image.repository | string | `"ghcr.io/sigstore/policy-controller/policy-controller"` |  |
-| webhook.image.version | string | `"sha256:6b51f336dec9e9adff29606855dbd2c7910c5eb80d6579795a29cb3844428efc"` |  |
+| webhook.image.version | string | `"sha256:62d474d1be06a9dbf5051f14c82d995711fc02cd0bc1ca94ef6baacec3d2f3b1"` |  |
 | webhook.name | string | `"webhook"` |  |
 | webhook.namespaceSelector.matchExpressions[0].key | string | `"policy.sigstore.dev/include"` |  |
 | webhook.namespaceSelector.matchExpressions[0].operator | string | `"In"` |  |
