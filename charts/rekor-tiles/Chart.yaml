@@ -2,8 +2,8 @@ apiVersion: v2
 name: rekor-tiles
 description: Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 type: application
-version: 0.2.8
-appVersion: "0.1.3"
+version: 0.2.10
+appVersion: "0.1.6"
 keywords:
   - security
   - transparency logs
@@ -16,4 +16,4 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: rekor-tiles
-      image: ghcr.io/sigstore/rekor-tiles:v0.1.3@sha256:eb1527a884fbbe08ef620f7f3738aecee14bf853c4c0aeec2ac77df736233b16
+      image: ghcr.io/sigstore/rekor-tiles:v0.1.6@sha256:a83a813c72086643cffd6a24b4ece5272bebc2dbcf008029bdffbf636731d1c7
