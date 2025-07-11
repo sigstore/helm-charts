@@ -15,6 +15,10 @@ spec:
     metadata:
       name: leases-cleanup
     spec:
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml .Values.imagePullSecrets | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ template "webhook.serviceAccountName" . }}-cleanup
       {{- if .Values.leasescleanup.automountServiceAccountToken }}
       automountServiceAccountToken: true
