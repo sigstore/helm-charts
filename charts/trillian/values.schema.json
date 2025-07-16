@@ -221,6 +221,9 @@
                 "enabled": {
                     "type": "boolean"
                 },
+                "etcdServers": {
+                    "type": "array"
+                },
                 "extraArgs": {
                     "type": "array"
                 },

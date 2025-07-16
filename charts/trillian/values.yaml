@@ -168,6 +168,7 @@ logSigner:
   replicaCount: 1
   name: log-signer
   forceMaster: true
+  etcdServers: []
   portRPC: 8091
   portHTTP: 8090
   image:
