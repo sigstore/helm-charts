@@ -231,6 +231,12 @@ Log Signer Arguments
 {{- if and (eq .Values.logSigner.forceMaster false) (.Values.logSigner.etcdServers) }}
 - {{ printf "--etcd_servers=%s" (join "," .Values.logSigner.etcdServers) | quote }}
 {{- end }}
+{{- if and (eq .Values.logSigner.forceMaster false) (.Values.logSigner.electionSystem) }}
+- {{ printf "--election_system=%s" .Values.logSigner.electionSystem | quote }}
+{{- if (eq .Values.logSigner.electionSystem "k8s") }}
+- {{ printf "--lock_namespace=%s" (include "trillian.rawnamespace" .) | quote }}
+{{- end }}
+{{- end }}
 - "--alsologtostderr"
 {{-  range .Values.logSigner.extraArgs }}
 - {{ . | quote }}
