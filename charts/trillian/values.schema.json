@@ -303,6 +303,9 @@
                     },
                     "type": "object"
                 },
+                "electionSystem": {
+                    "type": "string"
+                },
                 "serviceAccount": {
                     "properties": {
                         "annotations": {
