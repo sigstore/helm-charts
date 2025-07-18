@@ -155,6 +155,10 @@ Define the rekor.namespace template if set with forceNamespace or .Release.Names
 
 {{/*
 Return the hostname for redis
+When Redis is managed by Kubernetes, use either a default from rekor.redis.fullname
+or override with redis.hostname.
+When Redis is managed externally, use redis.hostname. If Redis is not needed,
+redis.enabled must be false and redis.hostname must be empty.
 */}}
 {{- define "redis.hostname" -}}
 {{- if .Values.redis.enabled -}}
