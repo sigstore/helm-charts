@@ -2,7 +2,9 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: trillian-leader-election
+  name: {{ printf "%s-election" (include "trillian.logSigner.fullname" .) }}
+  labels:
+    {{- include "trillian.logSigner.labels" . | nindent 4 }}
 {{ include "trillian.namespace" . | indent 2 }}
 rules:
 - apiGroups: ["coordination.k8s.io"]
@@ -12,13 +14,15 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: trillian-leader-election-binding
+  name: {{ printf "%s-election-binding" (include "trillian.logSigner.fullname" .) }}
+  labels:
+    {{- include "trillian.logSigner.labels" . | nindent 4 }}
 {{ include "trillian.namespace" . | indent 2 }}
 subjects:
 - kind: ServiceAccount
   name: {{ template "trillian.serviceAccountName.logSigner" . }}
 roleRef:
   kind: Role
-  name: trillian-leader-election
+  name: {{ printf "%s-election" (include "trillian.logSigner.fullname" .) }}
   apiGroup: rbac.authorization.k8s.io
 {{- end }}
