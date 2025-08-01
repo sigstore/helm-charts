@@ -101,8 +101,8 @@ server:
     registry: ghcr.io
     repository: sigstore/rekor/rekor-server
     pullPolicy: IfNotPresent
-    # crane digest ghcr.io/sigstore/rekor/rekor-server:v1.3.10
-    version: v1.3.10@sha256:3b096d478d90224752339e4f0311e9b30e58825dcbac89de92bcda352456012c
+    # crane digest ghcr.io/sigstore/rekor/rekor-server:v1.4.0
+    version: v1.4.0@sha256:55b3aa56e0271efb7c850a54ea790602db3daad69c9464ecee74face62b9c3aa
   # -- KMS type for signing key (possible values: "" / "none", "aws")
   kmsType: none
   # -- AWS region if using AWS KMS for signing key
