@@ -82,6 +82,12 @@ readinessProbe:
     path: /healthz
     port: 3000
 
+terminationGracePeriodSeconds: 65
+lifecycle:
+  preStop:
+    exec:
+      command: ["sleep", "15"]
+
 nodeSelector:
   iam.gke.io/gke-metadata-server-enabled: "true"   # support workload identity
 
