@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.11](https://img.shields.io/badge/Version-0.2.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.8](https://img.shields.io/badge/AppVersion-0.1.8-informational?style=flat-square)
+![Version: 0.2.12](https://img.shields.io/badge/Version-0.2.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.8](https://img.shields.io/badge/AppVersion-0.1.8-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
@@ -63,6 +63,8 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | image.repository | string | `"sigstore/rekor-tiles"` |  |
 | image.version | string | `"v0.1.8@sha256:806b7e8728c68a911bd2d8e3ca3df0bdfb6fe0742be1f5a8663acd34c2cf8da1"` |  |
 | imagePullSecrets | list | `[]` |  |
+| lifecycle.preStop.exec.command[0] | string | `"sleep"` |  |
+| lifecycle.preStop.exec.command[1] | string | `"15"` |  |
 | livenessProbe.httpGet.path | string | `"/healthz"` |  |
 | livenessProbe.httpGet.port | int | `3000` |  |
 | nameOverride | string | `""` |  |
@@ -110,4 +112,5 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | serviceAccount.automount | bool | `true` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
+| terminationGracePeriodSeconds | int | `65` |  |
 | tolerations | list | `[]` |  |
