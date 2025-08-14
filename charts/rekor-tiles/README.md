@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.13](https://img.shields.io/badge/Version-0.2.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.8](https://img.shields.io/badge/AppVersion-0.1.8-informational?style=flat-square)
+![Version: 0.2.14](https://img.shields.io/badge/Version-0.2.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.9](https://img.shields.io/badge/AppVersion-0.1.9-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
@@ -61,7 +61,7 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"ghcr.io"` |  |
 | image.repository | string | `"sigstore/rekor-tiles"` |  |
-| image.version | string | `"main@sha256:af25a38de73efe1c89959bacdec8ae401e0533b777514f6c00b72119ba10e866"` |  |
+| image.version | string | `"v0.1.9@sha256:d4859862ceecea4523151b49429e29c4b1abce3597c38e5f0f48837fba412239"` |  |
 | imagePullSecrets | list | `[]` |  |
 | lifecycle.preStop.exec.command[0] | string | `"sleep"` |  |
 | lifecycle.preStop.exec.command[1] | string | `"15"` |  |
