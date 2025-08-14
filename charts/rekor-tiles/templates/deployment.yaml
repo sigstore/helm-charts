@@ -39,8 +39,20 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ template "rekor-tiles.image" .Values.image }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-{{- if (.Values.server.signer.file).withPassword }}
           env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: K8S_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: OTEL_RESOURCE_ATTRIBUTES
+            value: service.instance.id=$(POD_NAME),service.namespace=$(K8S_NAMESPACE)
+{{- if (.Values.server.signer.file).withPassword }}
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
