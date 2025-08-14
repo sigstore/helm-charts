@@ -46,13 +46,16 @@ spec:
                   type: object
                   properties:
                     mirror:
-                      description: 'Mirror is the remote mirror, for example: https://sigstore-tuf-root.storage.googleapis.com'
+                      description: 'Mirror is the remote mirror, for example: https://tuf-repo-cdn.sigstore.dev'
                       type: string
                     root:
                       description: Root is the base64 encoded, json trusted initial root.
                       type: string
                     targets:
                       description: Targets is where the targets live off of the root of the Remote If not specified 'targets' is defaulted.
+                      type: string
+                    trustedRootTarget:
+                      description: TrustedRootTarget is the name of the target containing the JSON trusted root. If not specified, `trusted_root.json` is used.
                       type: string
                 repository:
                   description: Repository contains the serialized TUF remote repository.
@@ -66,6 +69,9 @@ spec:
                       type: string
                     targets:
                       description: Targets is where the targets live off of the root of the Repository above. If not specified 'targets' is defaulted.
+                      type: string
+                    trustedRootTarget:
+                      description: TrustedRootTarget is the name of the target containing the JSON trusted root. If not specified, `trusted_root.json` is used.
                       type: string
                 sigstoreKeys:
                   description: SigstoreKeys contains the serialized keys.
