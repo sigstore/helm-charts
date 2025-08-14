@@ -67,7 +67,6 @@ spec:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
-          terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
           lifecycle:
             {{- toYaml .Values.lifecycle | nindent 12 }}
           resources:
@@ -89,6 +88,7 @@ spec:
             - name: tink-config
               mountPath: /etc/tink-config
 {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
 {{- if or .Values.server.signer.file .Values.server.signer.tink }}
       volumes:
 {{- end }}
