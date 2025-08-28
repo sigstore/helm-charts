@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.3.11](https://img.shields.io/badge/Version-0.3.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.7.2](https://img.shields.io/badge/AppVersion-1.7.2-informational?style=flat-square)
+![Version: 0.3.12](https://img.shields.io/badge/Version-0.3.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.7.2](https://img.shields.io/badge/AppVersion-1.7.2-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -79,6 +79,7 @@ helm uninstall [RELEASE_NAME]
 | logServer.readinessProbe | object | `{}` |  |
 | logServer.replicaCount | int | `1` |  |
 | logServer.resources | object | `{}` |  |
+| logServer.service.headless | bool | `false` |  |
 | logServer.service.ports[0].name | string | `"8091-tcp"` |  |
 | logServer.service.ports[0].port | int | `8091` |  |
 | logServer.service.ports[0].protocol | string | `"TCP"` |  |
@@ -109,6 +110,7 @@ helm uninstall [RELEASE_NAME]
 | logSigner.readinessProbe | object | `{}` |  |
 | logSigner.replicaCount | int | `1` |  |
 | logSigner.resources | object | `{}` |  |
+| logSigner.service.headless | bool | `false` |  |
 | logSigner.service.ports[0].name | string | `"8091-tcp"` |  |
 | logSigner.service.ports[0].port | int | `8091` |  |
 | logSigner.service.ports[0].protocol | string | `"TCP"` |  |
