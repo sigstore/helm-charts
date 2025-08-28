@@ -79,6 +79,7 @@ helm uninstall [RELEASE_NAME]
 | logServer.readinessProbe | object | `{}` |  |
 | logServer.replicaCount | int | `1` |  |
 | logServer.resources | object | `{}` |  |
+| logServer.service.headless | bool | `false` |  |
 | logServer.service.ports[0].name | string | `"8091-tcp"` |  |
 | logServer.service.ports[0].port | int | `8091` |  |
 | logServer.service.ports[0].protocol | string | `"TCP"` |  |
@@ -109,6 +110,7 @@ helm uninstall [RELEASE_NAME]
 | logSigner.readinessProbe | object | `{}` |  |
 | logSigner.replicaCount | int | `1` |  |
 | logSigner.resources | object | `{}` |  |
+| logSigner.service.headless | bool | `false` |  |
 | logSigner.service.ports[0].name | string | `"8091-tcp"` |  |
 | logSigner.service.ports[0].port | int | `8091` |  |
 | logSigner.service.ports[0].protocol | string | `"TCP"` |  |
