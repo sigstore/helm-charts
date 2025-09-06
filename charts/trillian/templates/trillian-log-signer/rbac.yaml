@@ -1,0 +1,28 @@
+{{- if (eq .Values.logSigner.electionSystem "k8s") }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ printf "%s-election" (include "trillian.logSigner.fullname" .) }}
+  labels:
+    {{- include "trillian.logSigner.labels" . | nindent 4 }}
+{{ include "trillian.namespace" . | indent 2 }}
+rules:
+- apiGroups: ["coordination.k8s.io"]
+  resources: ["leases"]
+  verbs: ["get", "watch", "list", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ printf "%s-election-binding" (include "trillian.logSigner.fullname" .) }}
+  labels:
+    {{- include "trillian.logSigner.labels" . | nindent 4 }}
+{{ include "trillian.namespace" . | indent 2 }}
+subjects:
+- kind: ServiceAccount
+  name: {{ template "trillian.serviceAccountName.logSigner" . }}
+roleRef:
+  kind: Role
+  name: {{ printf "%s-election" (include "trillian.logSigner.fullname" .) }}
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}

@@ -18,3 +18,6 @@ spec:
   selector:
     {{- include "trillian.logServer.matchLabels" . | nindent 4 }}
   type: "{{ .Values.logServer.service.type }}"
+  {{- if .Values.logServer.service.headless }}
+  clusterIP: None
+  {{- end }}

@@ -228,6 +228,15 @@ Log Signer Arguments
 - {{ printf "--rpc_endpoint=0.0.0.0:%d" (.Values.logSigner.portRPC | int) | quote }}
 - {{ printf "--http_endpoint=0.0.0.0:%d" (.Values.logSigner.portHTTP | int) | quote }}
 - {{ printf "--force_master=%t" (ne .Values.logSigner.forceMaster false) | quote }}
+{{- if and (eq .Values.logSigner.forceMaster false) (.Values.logSigner.etcdServers) }}
+- {{ printf "--etcd_servers=%s" (join "," .Values.logSigner.etcdServers) | quote }}
+{{- end }}
+{{- if and (eq .Values.logSigner.forceMaster false) (.Values.logSigner.electionSystem) }}
+- {{ printf "--election_system=%s" .Values.logSigner.electionSystem | quote }}
+{{- if (eq .Values.logSigner.electionSystem "k8s") }}
+- {{ printf "--lock_namespace=%s" (include "trillian.rawnamespace" .) | quote }}
+{{- end }}
+{{- end }}
 - "--alsologtostderr"
 {{-  range .Values.logSigner.extraArgs }}
 - {{ . | quote }}

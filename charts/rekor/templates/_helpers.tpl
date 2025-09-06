@@ -155,9 +155,17 @@ Define the rekor.namespace template if set with forceNamespace or .Release.Names
 
 {{/*
 Return the hostname for redis
+When Redis is managed by Kubernetes, use either a default from rekor.redis.fullname
+or override with redis.hostname.
+When Redis is managed externally, use redis.hostname. If Redis is not needed,
+redis.enabled must be false and redis.hostname must be empty.
 */}}
 {{- define "redis.hostname" -}}
+{{- if .Values.redis.enabled -}}
 {{- default (include "rekor.redis.fullname" .) .Values.redis.hostname }}
+{{- else -}}
+{{- .Values.redis.hostname -}}
+{{- end -}}
 {{- end -}}
 
 {{/*
@@ -342,8 +350,10 @@ Server Arguments
 - {{ printf "--trillian_log_server.address=%s.%s" .Values.trillian.logServer.name .Values.trillian.forceNamespace | quote }}
 - {{ printf "--trillian_log_server.port=%d" (.Values.trillian.logServer.portRPC | int) | quote }}
 - {{ printf "--trillian_log_server.sharding_config=%s/%s" .Values.server.sharding.mountPath .Values.server.sharding.filename | quote }}
+{{- if include "redis.hostname" . }}
 - {{ printf "--redis_server.address=%s" (include "redis.hostname" .) | quote }}
 - {{ printf "--redis_server.port=%d" (.Values.redis.port | int) | quote }}
+{{- end }}
 {{- if (.Values.server.searchIndex).storageProvider }}
 - {{ printf "--search_index.storage_provider=%s" (.Values.server.searchIndex.storageProvider) | quote }}
 {{- end }}

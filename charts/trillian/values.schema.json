@@ -187,6 +187,9 @@
                         },
                         "type": {
                             "type": "string"
+                        },
+                        "headless": {
+                            "type": "boolean"
                         }
                     },
                     "type": "object"
@@ -220,6 +223,9 @@
                 },
                 "enabled": {
                     "type": "boolean"
+                },
+                "etcdServers": {
+                    "type": "array"
                 },
                 "extraArgs": {
                     "type": "array"
@@ -296,9 +302,15 @@
                         },
                         "type": {
                             "type": "string"
+                        },
+                        "headless": {
+                            "type": "boolean"
                         }
                     },
                     "type": "object"
+                },
+                "electionSystem": {
+                    "type": "string"
                 },
                 "serviceAccount": {
                     "properties": {

@@ -145,6 +145,7 @@ logServer:
   affinity: {}
   service:
     type: ClusterIP
+    headless: false
     ports:
       - name: 8091-tcp
         port: 8091
@@ -168,6 +169,7 @@ logSigner:
   replicaCount: 1
   name: log-signer
   forceMaster: true
+  etcdServers: []
   portRPC: 8091
   portHTTP: 8090
   image:
@@ -181,6 +183,7 @@ logSigner:
   affinity: {}
   service:
     type: ClusterIP
+    headless: false
     ports:
       - name: 8091-tcp
         port: 8091
