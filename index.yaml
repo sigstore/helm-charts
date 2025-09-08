@@ -10248,6 +10248,30 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: rekor-tiles
+          image: ghcr.io/sigstore/rekor-tiles:v0.1.11@sha256:06334237527d70a87c8e4a4c87908c3265a2b1b2635c40884f0812d27ca54fed
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.1.11
+    created: "2025-09-08T19:31:02.928781402Z"
+    description: Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature
+      transparency log
+    digest: 5f81d7159dccf8ef17e536581c679c65acbda381b8a2761ce833c2cd8a99877b
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor-tiles
+    sources:
+    - https://github.com/sigstore/rekor-tiles
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-tiles-0.2.17/rekor-tiles-0.2.17.tgz
+    version: 0.2.17
+  - annotations:
+      artifacthub.io/images: |
+        - name: rekor-tiles
           image: ghcr.io/sigstore/rekor-tiles:v0.1.10@sha256:24c074c1dfb8ca26f1d15ef28db22fd74d73556ef5981cfbefa9d69a5910c3ab
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
@@ -20141,6 +20165,28 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: tsa
+          # crane digest ghcr.io/sigstore/timestamp-server:v1.2.9
+          image: ghcr.io/sigstore/timestamp-server:v1.2.9@sha256:ed75a65454a51bea4ddca0b397fda08267177a19518b9769b92339781e6ff84f
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.2.9
+    created: "2025-09-08T19:31:03.106177299Z"
+    description: 'Timestamp Authority issuing RFC3161 signed timestamps. '
+    digest: 9b9d2f5756fcbca48eaafd90545404409ea803a66f66371b12d814722496cb24
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - timestamp
+    maintainers:
+    - name: The Sigstore Authors
+    name: tsa
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/tsa-1.1.8/tsa-1.1.8.tgz
+    version: 1.1.8
+  - annotations:
+      artifacthub.io/images: |
+        - name: tsa
           # crane digest ghcr.io/sigstore/timestamp-server:v1.2.8
           image: ghcr.io/sigstore/timestamp-server:v1.2.8@sha256:0b9658f9f4f6f6310363c32713fdf1738767ceb870c4385b07726281c281b365
       artifacthub.io/license: Apache-2.0
@@ -21531,4 +21577,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2025-09-07T15:36:05.724311731Z"
+generated: "2025-09-08T19:31:03.107143899Z"
