@@ -5,8 +5,8 @@ description: |
 
 type: application
 
-version: 1.1.7
-appVersion: 1.2.8
+version: 1.1.8
+appVersion: 1.2.9
 
 keywords:
   - security
@@ -21,5 +21,5 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: tsa
-      # crane digest ghcr.io/sigstore/timestamp-server:v1.2.8
-      image: ghcr.io/sigstore/timestamp-server:v1.2.8@sha256:0b9658f9f4f6f6310363c32713fdf1738767ceb870c4385b07726281c281b365
+      # crane digest ghcr.io/sigstore/timestamp-server:v1.2.9
+      image: ghcr.io/sigstore/timestamp-server:v1.2.9@sha256:ed75a65454a51bea4ddca0b397fda08267177a19518b9769b92339781e6ff84f
