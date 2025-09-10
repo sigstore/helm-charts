@@ -155,7 +155,8 @@ Server Arguments
 
 {{- define "rekor-tiles.containerPorts" -}}
 {{- range . }}
-- containerPort: {{ (ternary .port .targetPort (empty .targetPort)) | int }}
+- name: {{ .name }}
+  containerPort: {{ (ternary .port .targetPort (empty .targetPort)) | int }}
   protocol: {{ default "TCP" .protocol }}
 {{- end -}}
 {{- end -}}
