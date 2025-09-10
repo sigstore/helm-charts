@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.2.17](https://img.shields.io/badge/Version-0.2.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.11](https://img.shields.io/badge/AppVersion-0.1.11-informational?style=flat-square)
+![Version: 0.2.18](https://img.shields.io/badge/Version-0.2.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.11](https://img.shields.io/badge/AppVersion-0.1.11-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
@@ -103,7 +103,7 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | service.ports[1].port | int | `3001` |  |
 | service.ports[1].protocol | string | `"TCP"` |  |
 | service.ports[1].targetPort | int | `3001` |  |
-| service.ports[2].name | string | `"2112-tcp"` |  |
+| service.ports[2].name | string | `"metrics"` |  |
 | service.ports[2].port | int | `2112` |  |
 | service.ports[2].protocol | string | `"TCP"` |  |
 | service.ports[2].targetPort | int | `2112` |  |
