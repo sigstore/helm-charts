@@ -9,7 +9,7 @@ type: application
 
 name: policy-controller
 version: 0.10.4
-appVersion: 0.13.0
+appVersion: 0.13.1
 
 maintainers:
   - name: dlorenc
@@ -19,4 +19,4 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: policy-controller
-      image: ghcr.io/sigstore/policy-controller/policy-controller:v0.13.0@sha256:62d474d1be06a9dbf5051f14c82d995711fc02cd0bc1ca94ef6baacec3d2f3b1
+      image: ghcr.io/sigstore/policy-controller/policy-controller:v0.13.1@sha256:0bcd60beb93f4427c29cf3a669743caf58490e98ded4380c33c09f092734a6ab
