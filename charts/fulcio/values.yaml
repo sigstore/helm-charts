@@ -107,6 +107,7 @@ server:
           port: 5555
           requestPath: "/healthz"
           type: HTTP
+  resources: {}
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
@@ -130,6 +131,7 @@ createcerts:
     name: ""
     annotations: {}
     mountToken: true
+  resources: {}
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
