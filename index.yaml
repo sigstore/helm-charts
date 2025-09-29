@@ -21249,6 +21249,28 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: updatetree
+          image: ghcr.io/sigstore/scaffolding/updatetree:v0.7.25@sha256:509bc4ebd004dcffaa03759965b0cec1027921154b169bea16c0ce38199ae538
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.7.25
+    created: "2025-09-29T18:22:49.427419974Z"
+    description: Update the status of an existing Trillian tree
+    digest: 0cf373c4230fd947f04b1daf296b38b13592a9e78a4ee70871d1e960e681dbcf
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - trillian
+    - updatetree
+    maintainers:
+    - name: The Sigstore Authors
+    name: updatetree
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.21/updatetree-0.0.21.tgz
+    version: 0.0.21
+  - annotations:
+      artifacthub.io/images: |
+        - name: updatetree
           image: ghcr.io/sigstore/scaffolding/updatetree:v0.7.24@sha256:f2fefb4c503e04e5a7a48c6523c92899d42d052e089c3a4b38afd895cdd2ff71
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
@@ -21664,4 +21686,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2025-09-22T17:08:05.239942047Z"
+generated: "2025-09-29T18:22:49.428978428Z"
