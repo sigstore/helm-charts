@@ -7,8 +7,8 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # -- 8.14.1
-    version: sha256:9a1ed35addb45476afa911696297f8e115993df459278ed036182dd2cd22b67b
+    # -- 8.16.0
+    version: sha256:463eaf6072688fe96ac64fa623fe73e1dbe25d8ad6c34404a669ad3ce1f104b6
     imagePullPolicy: IfNotPresent
 initContainerResources: {}
 
@@ -217,8 +217,8 @@ createtree:
     registry: ghcr.io
     repository: sigstore/scaffolding/createtree
     pullPolicy: IfNotPresent
-    # v0.7.24
-    version: sha256:28300da5224ae3284f6f32079b13800e594d198784c40a1beec1ce2ffe38d923
+    # v0.7.25
+    version: sha256:8dee13f41c0918156ee3b530374e8d6ee790742c4e7143eddfd323d5c0fb4a7f
   ttlSecondsAfterFinished: 3600
   serviceAccount:
     create: true
