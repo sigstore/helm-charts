@@ -8,8 +8,8 @@ initContainerImage:
   curl:
     registry: docker.io
     repository: curlimages/curl
-    # -- 8.14.1
-    version: sha256:9a1ed35addb45476afa911696297f8e115993df459278ed036182dd2cd22b67b
+    # -- 8.16.0
+    version: sha256:463eaf6072688fe96ac64fa623fe73e1dbe25d8ad6c34404a669ad3ce1f104b6
     imagePullPolicy: IfNotPresent
   netcat:
     registry: docker.io
@@ -31,8 +31,8 @@ mysql:
     scaffoldSQLProxy:
       registry: ghcr.io
       repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.7.24 which is based on cloud-sql-proxy:2.17.1-alpine
-      version: sha256:a80794089cfd99e0813562d87f8e02dc99d458329413b50271dd3edd83f59917
+      # -- v0.7.25 which is based on cloud-sql-proxy:2.18.2-alpine
+      version: sha256:e3963d9afdc8c5eb76573347b1d66895300cdfd065894844b7ba5cbefbb9083b
       resources:
         requests:
           memory: "2Gi"
@@ -46,9 +46,9 @@ mysql:
             - ALL
     cloudsql:
       registry: gcr.io
-      repository: cloud-sql-connectors/cloud-sql-proxy:2.17.1-alpine
-      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.17.1-alpine
-      version: sha256:93da95c049168ecfc1d5673985402d62a257a6d2c18471aecd348d7f6157a4c9
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.18.2-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.18.2-alpine
+      version: sha256:12fc14dd5bf90f69ed370a5990aff6f18a05d7b427465c621042bc1e2fac662f
       resources:
         requests:
           memory: "2Gi"
@@ -207,8 +207,8 @@ createdb:
     registry: ghcr.io
     repository: sigstore/scaffolding/createdb
     pullPolicy: IfNotPresent
-    # -- v0.7.24
-    version: sha256:bcc8f6e1a50d7cf04c8417da4e18723087a3256ae722d5ad86bb8d8e1761fdfc
+    # -- v0.7.25
+    version: sha256:472c5271ad75454a18a561bd085f44e6b6b21e7fb5413343e7c69b63d6d13622
   serviceAccount:
     create: false
     name: ""
