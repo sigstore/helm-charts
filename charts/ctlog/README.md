@@ -1,6 +1,6 @@
 # ctlog
 
-![Version: 0.2.64](https://img.shields.io/badge/Version-0.2.64-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.24](https://img.shields.io/badge/AppVersion-0.7.24-informational?style=flat-square)
+![Version: 0.2.65](https://img.shields.io/badge/Version-0.2.65-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.25](https://img.shields.io/badge/AppVersion-0.7.25-informational?style=flat-square)
 
 Certificate Log
 
@@ -24,11 +24,11 @@ Certificate Log
 | createctconfig.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createctconfig.image.registry | string | `"ghcr.io"` |  |
 | createctconfig.image.repository | string | `"sigstore/scaffolding/createctconfig"` |  |
-| createctconfig.image.version | string | `"v0.7.24@sha256:98ed31d98fe9f1a7e3600b34d6536a7e341cfa920590f55f4fe20d088f49937c"` |  |
+| createctconfig.image.version | string | `"v0.7.25@sha256:fee343269ad0bdb91e0a22196b6ed2a31d8b6ca3ea8ea18147fa6a83368345ff"` |  |
 | createctconfig.initContainerImage.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
 | createctconfig.initContainerImage.curl.registry | string | `"docker.io"` |  |
 | createctconfig.initContainerImage.curl.repository | string | `"curlimages/curl"` |  |
-| createctconfig.initContainerImage.curl.version | string | `"8.14.1@sha256:9a1ed35addb45476afa911696297f8e115993df459278ed036182dd2cd22b67b"` |  |
+| createctconfig.initContainerImage.curl.version | string | `"8.16.0@sha256:463eaf6072688fe96ac64fa623fe73e1dbe25d8ad6c34404a669ad3ce1f104b6"` |  |
 | createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | createctconfig.name | string | `"createctconfig"` |  |
 | createctconfig.nodeSelector | object | `{}` |  |
@@ -51,7 +51,7 @@ Certificate Log
 | createtree.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createtree.image.registry | string | `"ghcr.io"` |  |
 | createtree.image.repository | string | `"sigstore/scaffolding/createtree"` |  |
-| createtree.image.version | string | `"v0.7.24@sha256:28300da5224ae3284f6f32079b13800e594d198784c40a1beec1ce2ffe38d923"` |  |
+| createtree.image.version | string | `"v0.7.25@sha256:8dee13f41c0918156ee3b530374e8d6ee790742c4e7143eddfd323d5c0fb4a7f"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.nodeSelector | object | `{}` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
@@ -73,7 +73,7 @@ Certificate Log
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/scaffolding/ct_server"` |  |
-| server.image.version | string | `"v0.7.24@sha256:82ef780062d6828e3e6b1e9e607097d2096f77ea9f2f921fda6022bef415ce8a"` |  |
+| server.image.version | string | `"v0.7.25@sha256:ba7e3303cae06097fab776e5b45e9ff8aa32ebe05ca472c63ef6e62156e69717"` |  |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `false` |  |
