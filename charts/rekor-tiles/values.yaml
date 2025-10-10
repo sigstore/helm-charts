@@ -9,8 +9,8 @@ image:
   repository: sigstore/rekor-tiles
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  # crane digest ghcr.io/sigstore/rekor-tiles:v2.0.0-rc2
-  version: v2.0.0-rc2@sha256:373fc569fc26e5e68710df958128f5d67e0c3a59a851913069bcf94ca0569d32
+  # crane digest ghcr.io/sigstore/rekor-tiles:v2.0.0
+  version: v2.0.0@sha256:3c1a6ec40b745ee0c03045d912e5c4ce52b2d8c3398241736273d54033a0ecf3
 
 namespace:
   create: false
