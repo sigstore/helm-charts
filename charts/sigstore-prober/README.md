@@ -1,6 +1,6 @@
 # sigstore-prober
 
-![Version: 0.0.39](https://img.shields.io/badge/Version-0.0.39-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.25](https://img.shields.io/badge/AppVersion-0.7.25-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.25](https://img.shields.io/badge/AppVersion-0.7.25-informational?style=flat-square)
 
 Sigstore API Endpoint Prober
 
@@ -24,13 +24,13 @@ Sigstore API Endpoint Prober
 | serviceAccount.create | bool | `false` |  |
 | serviceAccount.name | string | `"default"` |  |
 | spec.args.frequency | int | `10` |  |
-| spec.args.fulcioGrpcHost | string | `"fulcio.sigstore.dev"` |  |
-| spec.args.fulcioHost | string | `"https://fulcio.sigstore.dev"` |  |
 | spec.args.fulcioRequests | list | `[]` |  |
-| spec.args.rekorHost | string | `"https://rekor.sigstore.dev"` |  |
+| spec.args.grpcPort | int | `5554` |  |
 | spec.args.rekorRequests | list | `[]` |  |
-| spec.args.trustRekorAPIPublicKey | bool | `false` |  |
-| spec.args.tsaHost | string | `"https://timestamp.sigstore.dev"` |  |
+| spec.args.rekorV2Url | string | `""` |  |
+| spec.args.signingConfig | string | `""` |  |
+| spec.args.staging | bool | `false` |  |
+| spec.args.trustedRoot | string | `""` |  |
 | spec.args.writeProber | bool | `false` |  |
 | spec.image | string | `"ghcr.io/sigstore/scaffolding/prober:v0.7.25@sha256:84b59e781ff4a0f4e6f230825af5af0dcbbf3c04030bb656d6f8603aeaeb619c"` |  |
 | spec.imagePullPolicy | string | `"Always"` |  |

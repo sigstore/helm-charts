@@ -18,15 +18,15 @@ spec:
       memory: "128Mi"
       cpu: "200m"
   args:
-    fulcioHost: https://fulcio.sigstore.dev
-    fulcioGrpcHost: fulcio.sigstore.dev
-    rekorHost: https://rekor.sigstore.dev
-    tsaHost: https://timestamp.sigstore.dev
-    frequency: 10
-    writeProber: false
+    staging: false
+    signingConfig: ""
+    trustedRoot: ""
+    rekorV2Url: ""
     rekorRequests: []
     fulcioRequests: []
-    trustRekorAPIPublicKey: false
+    writeProber: false
+    grpcPort: 5554
+    frequency: 10
 prometheus:
   port: 8080
 tolerations: []

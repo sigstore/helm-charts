@@ -1,128 +1,286 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "properties": {
-        "affinity": {
-            "properties": {},
-            "type": "object"
-        },
-        "namespace": {
-            "properties": {
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "nodeSelector": {
-            "properties": {},
-            "type": "object"
-        },
-        "prometheus": {
-            "properties": {
-                "port": {
-                    "type": "integer"
-                }
-            },
-            "type": "object"
-        },
-        "serviceAccount": {
-            "properties": {
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "spec": {
-            "properties": {
-                "args": {
-                    "properties": {
-                        "frequency": {
-                            "type": "integer"
-                        },
-                        "fulcioHost": {
-                            "type": "string"
-                        },
-                        "fulcioGrpcHost": {
-                            "type": "string"
-                        },
-                        "fulcioRequests": {
-                            "type": "array"
-                        },
-                        "rekorHost": {
-                            "type": "string"
-                        },
-                        "rekorRequests": {
-                            "type": "array"
-                        },
-                        "trustRekorAPIPublicKey": {
-                            "type": "boolean"
-                        },
-                        "tsaHost": {
-                            "type": "string"
-                        },
-                        "writeProber": {
-                            "type": "boolean"
-                        }
-                    },
-                    "type": "object"
-                },
-                "image": {
-                    "type": "string"
-                },
-                "imagePullPolicy": {
-                    "type": "string"
-                },
-                "matchLabels": {
-                    "properties": {
-                        "app": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "replicaCount": {
-                    "type": "integer"
-                },
-                "resources": {
-                    "properties": {
-                        "limits": {
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "requests": {
-                            "properties": {
-                                "cpu": {
-                                    "type": "string"
-                                },
-                                "memory": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    },
-                    "type": "object"
-                }
-            },
-            "type": "object"
-        },
-        "tolerations": {
-            "type": "array"
-        }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "affinity": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "affinity",
+      "type": "object"
     },
-    "type": "object"
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "namespace": {
+      "additionalProperties": false,
+      "properties": {
+        "create": {
+          "default": true,
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "sigstore-prober",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "name"
+      ],
+      "title": "namespace",
+      "type": "object"
+    },
+    "nodeSelector": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "prometheus": {
+      "additionalProperties": false,
+      "properties": {
+        "port": {
+          "default": 8080,
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "title": "prometheus",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "additionalProperties": false,
+      "properties": {
+        "create": {
+          "default": false,
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "default",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "create"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "spec": {
+      "additionalProperties": false,
+      "properties": {
+        "args": {
+          "additionalProperties": false,
+          "properties": {
+            "frequency": {
+              "default": 10,
+              "required": [],
+              "title": "frequency",
+              "type": "integer"
+            },
+            "fulcioRequests": {
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "fulcioRequests",
+              "type": "array"
+            },
+            "grpcPort": {
+              "default": 5554,
+              "required": [],
+              "title": "grpcPort",
+              "type": "integer"
+            },
+            "rekorRequests": {
+              "items": {
+                "required": []
+              },
+              "required": [],
+              "title": "rekorRequests",
+              "type": "array"
+            },
+            "rekorV2Url": {
+              "default": "",
+              "required": [],
+              "title": "rekorV2Url",
+              "type": "string"
+            },
+            "signingConfig": {
+              "default": "",
+              "required": [],
+              "title": "signingConfig",
+              "type": "string"
+            },
+            "staging": {
+              "default": false,
+              "required": [],
+              "title": "staging",
+              "type": "boolean"
+            },
+            "trustedRoot": {
+              "default": "",
+              "required": [],
+              "title": "trustedRoot",
+              "type": "string"
+            },
+            "writeProber": {
+              "default": false,
+              "required": [],
+              "title": "writeProber",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "staging",
+            "signingConfig",
+            "trustedRoot",
+            "rekorV2Url",
+            "rekorRequests",
+            "fulcioRequests",
+            "writeProber",
+            "frequency",
+            "grpcPort"
+          ],
+          "title": "args",
+          "type": "object"
+        },
+        "image": {
+          "default": "ghcr.io/sigstore/scaffolding/prober:v0.7.25@sha256:84b59e781ff4a0f4e6f230825af5af0dcbbf3c04030bb656d6f8603aeaeb619c",
+          "required": [],
+          "title": "image",
+          "type": "string"
+        },
+        "imagePullPolicy": {
+          "default": "Always",
+          "required": [],
+          "title": "imagePullPolicy",
+          "type": "string"
+        },
+        "matchLabels": {
+          "additionalProperties": false,
+          "properties": {
+            "app": {
+              "default": "sigstore-prober",
+              "required": [],
+              "title": "app",
+              "type": "string"
+            }
+          },
+          "required": [
+            "app"
+          ],
+          "title": "matchLabels",
+          "type": "object"
+        },
+        "replicaCount": {
+          "default": 1,
+          "required": [],
+          "title": "replicaCount",
+          "type": "integer"
+        },
+        "resources": {
+          "additionalProperties": false,
+          "properties": {
+            "limits": {
+              "additionalProperties": false,
+              "properties": {
+                "cpu": {
+                  "default": "200m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "128Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "memory",
+                "cpu"
+              ],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "additionalProperties": false,
+              "properties": {
+                "cpu": {
+                  "default": "50m",
+                  "required": [],
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "64Mi",
+                  "required": [],
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "memory",
+                "cpu"
+              ],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [
+            "requests",
+            "limits"
+          ],
+          "title": "resources",
+          "type": "object"
+        }
+      },
+      "required": [
+        "replicaCount",
+        "image",
+        "imagePullPolicy",
+        "matchLabels",
+        "resources",
+        "args"
+      ],
+      "title": "spec",
+      "type": "object"
+    },
+    "tolerations": {
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "namespace",
+    "serviceAccount",
+    "spec",
+    "prometheus",
+    "tolerations",
+    "nodeSelector",
+    "affinity"
+  ],
+  "type": "object"
 }

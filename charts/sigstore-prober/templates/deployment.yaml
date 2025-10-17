@@ -18,23 +18,6 @@ spec:
         prometheus.io/port: "{{ .Values.prometheus.port }}"
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
-      {{- if .Values.spec.args.trustRekorAPIPublicKey }}
-      initContainers:
-      - name: public-key-fetcher
-        image: docker.io/curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af
-        args:
-          - "--output"
-          - "/var/run/sigstore/public-key.pem"
-          - "{{ .Values.spec.args.rekorHost }}/api/v1/log/publicKey"
-        env:
-        volumeMounts:
-        - name: sigstore
-          mountPath: "/var/run/sigstore"
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 65534
-          allowPrivilegeEscalation: false
-      {{- end }}
       containers:
       - name: {{ template "sigstore-prober.name" . }}
         image: "{{ .Values.spec.image }}"
@@ -52,21 +35,20 @@ spec:
           runAsUser: 65534
           allowPrivilegeEscalation: false
         env:
-          # TUF_ROOT set to /tmp since the home dir for user 65534 is set to /nonexistant
-        - name: TUF_ROOT
+          # HOME set to /tmp since the default home dir for user 65534 is set to /nonexistant
+        - name: HOME
           value: "/tmp"
-      {{- if .Values.spec.args.trustRekorAPIPublicKey }}
-        - name: SIGSTORE_REKOR_PUBLIC_KEY
-          value: "/var/run/sigstore/public-key.pem"
-      {{- end }}
-      {{- if .Values.spec.args.trustRekorAPIPublicKey }}
+        {{- if or .Values.spec.args.signingConfig .Values.spec.args.trustedRoot }}
         volumeMounts:
-        - name: sigstore
+        - name: sigstore-config
           mountPath: "/var/run/sigstore"
           readOnly: true
+        {{- end }}
+      {{- if or .Values.spec.args.signingConfig .Values.spec.args.trustedRoot }}
       volumes:
-        - name: sigstore
-          emptyDir: {}
+        - name: sigstore-config
+          configMap:
+            name: {{ template "sigstore-prober.name" . }}-config
       {{- end }}
       {{- if .Values.nodeSelector }}
       nodeSelector:
