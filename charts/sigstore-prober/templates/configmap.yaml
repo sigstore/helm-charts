@@ -1,0 +1,16 @@
+{{- if or .Values.spec.args.signingConfig .Values.spec.args.trustedRoot }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "sigstore-prober.name" . }}-config
+  namespace: {{ .Values.namespace.name }}
+data:
+  {{- if .Values.spec.args.signingConfig }}
+  signing-config.json: |-
+{{ .Values.spec.args.signingConfig | indent 4 }}
+  {{- end }}
+  {{- if .Values.spec.args.trustedRoot }}
+  trusted-root.json: |-
+{{ .Values.spec.args.trustedRoot | indent 4 }}
+  {{- end }}
+{{- end }}

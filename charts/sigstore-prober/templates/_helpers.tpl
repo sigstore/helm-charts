@@ -19,28 +19,31 @@ Create args for sigstore prober components
 {{- if .Values.spec.args.frequency }}
 - "-frequency={{ .Values.spec.args.frequency }}"
 {{- end }}
+{{- if .Values.spec.args.staging }}
+- "-staging"
+{{- end }}
+{{- if .Values.spec.args.signingConfig }}
+- "-signing-config=/var/run/sigstore/signing-config.json"
+{{- end }}
+{{- if .Values.spec.args.trustedRoot }}
+- "-trusted-root=/var/run/sigstore/trusted-root.json"
+{{- end }}
+{{- if .Values.spec.args.rekorV2Url }}
+- "-rekor-v2-url={{ .Values.spec.args.rekorV2Url }}"
+{{- end }}
+{{- if .Values.spec.args.writeProber }}
+- "-write-prober"
+{{- end }}
+{{- if .Values.spec.args.rekorRequests }}
+- "-rekor-requests={{ .Values.spec.args.rekorRequests | toJson }}"
+{{- end }}
+{{- if .Values.spec.args.fulcioRequests }}
+- "-fulcio-requests={{ .Values.spec.args.fulcioRequests | toJson }}"
+{{- end }}
+{{- if .Values.spec.args.grpcPort }}
+- "-grpc-port={{ .Values.spec.args.grpcPort }}"
+{{- end }}
 {{- if .Values.prometheus.port }}
 - "-addr=:{{ .Values.prometheus.port }}"
 {{- end }}
-{{- if .Values.spec.args.rekorHost }}
-- "-rekor-url={{ .Values.spec.args.rekorHost }}"
 {{- end }}
-{{- if .Values.spec.args.fulcioHost }}
-- "-fulcio-url={{ .Values.spec.args.fulcioHost }}"
-{{- end }}
-{{- if .Values.spec.args.fulcioGrpcHost }}
-- "-fulcio-grpc-url={{ .Values.spec.args.fulcioGrpcHost }}"
-{{- end }}
-{{- if .Values.spec.args.tsaHost }}
-- "-tsa-url={{ .Values.spec.args.tsaHost }}"
-{{- end }}
-{{- if .Values.spec.args.writeProber }}
-- "-write-prober={{ .Values.spec.args.writeProber }}"
-{{- end }}
-{{- if .Values.spec.args.rekorRequests }}
-- {{ printf "-rekor-requests=%s" (.Values.spec.args.rekorRequests | toJson) | quote }}
-{{- end }}
-{{- if .Values.spec.args.fulcioRequests }}
-- {{ printf "-fulcio-requests=%s" (.Values.spec.args.fulcioRequests | toJson) | quote }}
-{{- end }}
-{{- end -}}
