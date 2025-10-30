@@ -62,6 +62,12 @@
     "serviceAccount": {
       "additionalProperties": false,
       "properties": {
+        "annotations": {
+          "default": {},
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
         "create": {
           "default": false,
           "required": [],
