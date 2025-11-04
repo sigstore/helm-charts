@@ -13,4 +13,3 @@ spec:
     {{- tpl (toYaml .Values.service.ports) . | nindent 4 }}
   selector:
     {{- include "rekor-tiles.selectorLabels" . | nindent 4 }}
-  type: ClusterIP
