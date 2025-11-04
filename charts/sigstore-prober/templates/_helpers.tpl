@@ -35,10 +35,10 @@ Create args for sigstore prober components
 - "-write-prober"
 {{- end }}
 {{- if .Values.spec.args.rekorRequests }}
-- "-rekor-requests={{ .Values.spec.args.rekorRequests | toJson }}"
+- {{ printf "-rekor-requests=%s" (.Values.spec.args.rekorRequests | toJson) | quote }}
 {{- end }}
 {{- if .Values.spec.args.fulcioRequests }}
-- "-fulcio-requests={{ .Values.spec.args.fulcioRequests | toJson }}"
+- {{ printf "-fulcio-requests=%s" (.Values.spec.args.fulcioRequests | toJson) | quote }}
 {{- end }}
 {{- if .Values.spec.args.grpcPort }}
 - "-grpc-port={{ .Values.spec.args.grpcPort }}"
