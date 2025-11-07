@@ -7,7 +7,7 @@
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
 **Homepage:** <https://sigstore.dev/>
-'
+
 ## Quick Installation
 
 To install the helm chart with default values run following command.
