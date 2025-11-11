@@ -147,6 +147,9 @@ Server Arguments
 - {{ printf "--signer-tink-kek-uri=%s" .Values.server.signer.tink.kekURI | quote }}
 - "--signer-tink-keyset-path=/etc/tink-config/tink.keyset.enc"
 {{- end }}
+{{- if .Values.server.witnessing }}
+- "--witness-policy-path=/etc/witness-config/witness.policy"
+{{- end }}
 {{- end }}
 {{-  range .Values.server.extraArgs }}
 - {{ . | quote }}

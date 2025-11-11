@@ -2,12 +2,12 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.1](https://img.shields.io/badge/AppVersion-2.0.1-informational?style=flat-square)
+![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.1](https://img.shields.io/badge/AppVersion-2.0.1-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
 **Homepage:** <https://sigstore.dev/>
-'
+
 ## Quick Installation
 
 To install the helm chart with default values run following command.
@@ -99,6 +99,7 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | server.serverConfig | object | `{}` |  |
 | server.signer | object | `{}` |  |
 | server.tesseraLivecycle | object | `{}` |  |
+| server.witnessing | object | `{}` |  |
 | service.ports[0].name | string | `"3000-tcp"` |  |
 | service.ports[0].port | int | `80` |  |
 | service.ports[0].protocol | string | `"TCP"` |  |
