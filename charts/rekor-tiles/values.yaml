@@ -134,4 +134,7 @@ server:
     #   kekURI: gcp-kms://keyname
     #   configMapName: tink-config
     #   keyset: ""
+  witnessing: {}
+    # configMapName: witness-config
+    # witnessPolicy: ""
   extraArgs: []

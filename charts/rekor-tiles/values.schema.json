@@ -1,227 +1,665 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-        "affinity": {
-            "type": "object"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "affinity": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "additionalProperties": false,
+      "properties": {
+        "pullPolicy": {
+          "default": "IfNotPresent",
+          "title": "pullPolicy",
+          "type": "string"
         },
-        "fullnameOverride": {
-            "type": "string"
+        "registry": {
+          "default": "ghcr.io",
+          "title": "registry",
+          "type": "string"
         },
-        "image": {
-            "type": "object",
-            "properties": {
-                "pullPolicy": {
-                    "type": "string"
-                },
-                "registry": {
-                    "type": "string"
-                },
-                "repository": {
-                    "type": "string"
-                },
-                "version": {
-                    "type": "string"
-                }
-            }
+        "repository": {
+          "default": "sigstore/rekor-tiles",
+          "title": "repository",
+          "type": "string"
         },
-        "imagePullSecrets": {
-            "type": "array"
-        },
-        "livenessProbe": {
-            "type": "object",
-            "properties": {
-                "httpGet": {
-                    "type": "object",
-                    "properties": {
-                        "path": {
-                            "type": "string"
-                        },
-                        "port": {
-                            "type": "integer"
-                        }
-                    }
-                }
-            }
-        },
-        "nameOverride": {
-            "type": "string"
-        },
-        "namespace": {
-            "type": "object",
-            "properties": {
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "neg": {
-            "type": "object",
-            "properties": {
-                "grpc": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        },
-                        "port": {
-                            "type": "integer"
-                        }
-                    }
-                },
-                "http": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        },
-                        "port": {
-                            "type": "integer"
-                        }
-                    }
-                }
-            }
-        },
-        "nodeSelector": {
-            "type": "object",
-            "properties": {
-                "iam.gke.io/gke-metadata-server-enabled": {
-                    "type": "string"
-                }
-            }
-        },
-        "podAnnotations": {
-            "type": "object"
-        },
-        "podLabels": {
-            "type": "object"
-        },
-        "podSecurityContext": {
-            "type": "object"
-        },
-        "readinessProbe": {
-            "type": "object",
-            "properties": {
-                "httpGet": {
-                    "type": "object",
-                    "properties": {
-                        "path": {
-                            "type": "string"
-                        },
-                        "port": {
-                            "type": "integer"
-                        }
-                    }
-                }
-            }
-        },
-        "replicaCount": {
-            "type": "integer"
-        },
-        "resources": {
-            "type": "object"
-        },
-        "securityContext": {
-            "type": "object"
-        },
-        "server": {
-            "type": "object",
-            "properties": {
-                "antispam": {
-                    "type": "object"
-                },
-                "extraArgs": {
-                    "type": "array"
-                },
-                "gcp": {
-                    "type": "object"
-                },
-                "grpc": {
-                    "type": "object",
-                    "properties": {
-                        "port": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "hostname": {
-                    "type": "string"
-                },
-                "http": {
-                    "type": "object",
-                    "properties": {
-                        "metricsPort": {
-                            "type": "string"
-                        },
-                        "port": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "readOnly": {
-                    "type": "boolean"
-                },
-                "serverConfig": {
-                    "type": "object"
-                },
-                "signer": {
-                    "type": "object"
-                },
-                "tesseraLivecycle": {
-                    "type": "object"
-                }
-            }
-        },
-        "service": {
-            "type": "object",
-            "properties": {
-                "ports": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                                "type": "string"
-                            },
-                            "port": {
-                                "type": "integer"
-                            },
-                            "protocol": {
-                                "type": "string"
-                            },
-                            "targetPort": {
-                                "type": "integer"
-                            }
-                        }
-                    }
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "serviceAccount": {
-            "type": "object",
-            "properties": {
-                "annotations": {
-                    "type": "object"
-                },
-                "automount": {
-                    "type": "boolean"
-                },
-                "create": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "tolerations": {
-            "type": "array"
+        "version": {
+          "default": "v2.0.1@sha256:640300626b3f3aa6c068df92a3f2336320c1327ba42ce84f44b893379adbadef",
+          "description": "Overrides the image tag whose default is the chart appVersion.\ncrane digest ghcr.io/sigstore/rekor-tiles:v2.0.1",
+          "title": "version",
+          "type": "string"
         }
+      },
+      "required": [
+        "registry",
+        "repository",
+        "pullPolicy",
+        "version"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "items": {
+        "required": []
+      },
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "lifecycle": {
+      "additionalProperties": false,
+      "properties": {
+        "preStop": {
+          "additionalProperties": false,
+          "properties": {
+            "exec": {
+              "additionalProperties": false,
+              "properties": {
+                "command": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "title": "command",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "command"
+              ],
+              "title": "exec",
+              "type": "object"
+            }
+          },
+          "required": [
+            "exec"
+          ],
+          "title": "preStop",
+          "type": "object"
+        }
+      },
+      "required": [
+        "preStop"
+      ],
+      "title": "lifecycle",
+      "type": "object"
+    },
+    "livenessProbe": {
+      "additionalProperties": false,
+      "properties": {
+        "httpGet": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "default": "/healthz",
+              "title": "path",
+              "type": "string"
+            },
+            "port": {
+              "default": 3000,
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "path",
+            "port"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        }
+      },
+      "required": [
+        "httpGet"
+      ],
+      "title": "livenessProbe",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "namespace": {
+      "additionalProperties": false,
+      "properties": {
+        "create": {
+          "default": false,
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "rekor-tiles-system",
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "name"
+      ],
+      "title": "namespace",
+      "type": "object"
+    },
+    "neg": {
+      "additionalProperties": false,
+      "properties": {
+        "grpc": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "default": "",
+              "title": "name",
+              "type": "string"
+            },
+            "port": {
+              "default": 3001,
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "port"
+          ],
+          "title": "grpc",
+          "type": "object"
+        },
+        "http": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "default": "",
+              "title": "name",
+              "type": "string"
+            },
+            "port": {
+              "default": 80,
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "port"
+          ],
+          "title": "http",
+          "type": "object"
+        }
+      },
+      "required": [
+        "http",
+        "grpc"
+      ],
+      "title": "neg",
+      "type": "object"
+    },
+    "nodeSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "iam.gke.io/gke-metadata-server-enabled": {
+          "default": "true",
+          "title": "iam.gke.io/gke-metadata-server-enabled",
+          "type": "string"
+        }
+      },
+      "required": [
+        "iam.gke.io/gke-metadata-server-enabled"
+      ],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podLabels": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "podLabels",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "readinessProbe": {
+      "additionalProperties": false,
+      "properties": {
+        "httpGet": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "default": "/healthz",
+              "title": "path",
+              "type": "string"
+            },
+            "port": {
+              "default": 3000,
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "path",
+            "port"
+          ],
+          "title": "httpGet",
+          "type": "object"
+        }
+      },
+      "required": [
+        "httpGet"
+      ],
+      "title": "readinessProbe",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "securityContext": {
+      "additionalProperties": false,
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "default": false,
+          "title": "allowPrivilegeEscalation",
+          "type": "boolean"
+        },
+        "capabilities": {
+          "additionalProperties": false,
+          "properties": {
+            "drop": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "title": "drop",
+              "type": "array"
+            }
+          },
+          "required": [
+            "drop"
+          ],
+          "title": "capabilities",
+          "type": "object"
+        },
+        "readOnlyRootFilesystem": {
+          "default": true,
+          "title": "readOnlyRootFilesystem",
+          "type": "boolean"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 65533,
+          "title": "runAsUser",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "allowPrivilegeEscalation",
+        "capabilities",
+        "readOnlyRootFilesystem",
+        "runAsNonRoot",
+        "runAsUser"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "server": {
+      "additionalProperties": false,
+      "description": "Server arguments",
+      "properties": {
+        "antispam": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "antispam",
+          "type": "object"
+        },
+        "extraArgs": {
+          "description": "configMapName: witness-config\nwitnessPolicy: \"\"",
+          "items": {
+            "required": []
+          },
+          "title": "extraArgs",
+          "type": "array"
+        },
+        "gcp": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "gcp",
+          "type": "object"
+        },
+        "grpc": {
+          "additionalProperties": false,
+          "properties": {
+            "port": {
+              "default": "3001",
+              "title": "port",
+              "type": "string"
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "title": "grpc",
+          "type": "object"
+        },
+        "grpcSvcTLS": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "grpcSvcTLS",
+          "type": "object"
+        },
+        "hostname": {
+          "default": "localhost",
+          "title": "hostname",
+          "type": "string"
+        },
+        "http": {
+          "additionalProperties": false,
+          "properties": {
+            "metricsPort": {
+              "default": "2112",
+              "title": "metricsPort",
+              "type": "string"
+            },
+            "port": {
+              "default": "3000",
+              "title": "port",
+              "type": "string"
+            }
+          },
+          "required": [
+            "port",
+            "metricsPort"
+          ],
+          "title": "http",
+          "type": "object"
+        },
+        "readOnly": {
+          "default": false,
+          "title": "readOnly",
+          "type": "boolean"
+        },
+        "serverConfig": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "serverConfig",
+          "type": "object"
+        },
+        "signer": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "signer",
+          "type": "object"
+        },
+        "tesseraLivecycle": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "tesseraLivecycle",
+          "type": "object"
+        },
+        "witnessing": {
+          "additionalProperties": false,
+          "description": "file:\n  path: /pki/signer.pem\n  withPassword: false\n  secret:\n    name: \"signing-key\"\n    key: signing-key\n    mountPath: /pki\n    mountSubPath: signer.pem\nkms:\n  hash: sha256\n  key: gcpkms://keyname\ntink:\n  kekURI: gcp-kms://keyname\n  configMapName: tink-config\n  keyset: \"\"",
+          "required": [],
+          "title": "witnessing",
+          "type": "object"
+        }
+      },
+      "required": [
+        "antispam",
+        "tesseraLivecycle",
+        "gcp",
+        "grpc",
+        "hostname",
+        "http",
+        "serverConfig",
+        "readOnly",
+        "grpcSvcTLS",
+        "signer",
+        "witnessing",
+        "extraArgs"
+      ],
+      "title": "server",
+      "type": "object"
+    },
+    "service": {
+      "additionalProperties": false,
+      "properties": {
+        "ports": {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "default": "3000-tcp",
+                    "title": "name",
+                    "type": "string"
+                  },
+                  "port": {
+                    "default": 80,
+                    "title": "port",
+                    "type": "integer"
+                  },
+                  "protocol": {
+                    "default": "TCP",
+                    "title": "protocol",
+                    "type": "string"
+                  },
+                  "targetPort": {
+                    "default": 3000,
+                    "title": "targetPort",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "name",
+                  "port",
+                  "protocol",
+                  "targetPort"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "default": "3001-tcp",
+                    "title": "name",
+                    "type": "string"
+                  },
+                  "port": {
+                    "default": 3001,
+                    "title": "port",
+                    "type": "integer"
+                  },
+                  "protocol": {
+                    "default": "TCP",
+                    "title": "protocol",
+                    "type": "string"
+                  },
+                  "targetPort": {
+                    "default": 3001,
+                    "title": "targetPort",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "name",
+                  "port",
+                  "protocol",
+                  "targetPort"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "default": "metrics",
+                    "title": "name",
+                    "type": "string"
+                  },
+                  "port": {
+                    "default": 2112,
+                    "title": "port",
+                    "type": "integer"
+                  },
+                  "protocol": {
+                    "default": "TCP",
+                    "title": "protocol",
+                    "type": "string"
+                  },
+                  "targetPort": {
+                    "default": 2112,
+                    "title": "targetPort",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "name",
+                  "port",
+                  "protocol",
+                  "targetPort"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "title": "ports",
+          "type": "array"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "ports"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "additionalProperties": false,
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "automount": {
+          "default": true,
+          "description": "Automatically mount a ServiceAccount's API credentials?",
+          "title": "automount",
+          "type": "boolean"
+        },
+        "create": {
+          "default": true,
+          "description": "Specifies whether a service account should be created",
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "automount",
+        "annotations",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "terminationGracePeriodSeconds": {
+      "default": 65,
+      "title": "terminationGracePeriodSeconds",
+      "type": "integer"
+    },
+    "tolerations": {
+      "items": {
+        "required": []
+      },
+      "title": "tolerations",
+      "type": "array"
     }
+  },
+  "required": [
+    "replicaCount",
+    "image",
+    "namespace",
+    "imagePullSecrets",
+    "nameOverride",
+    "fullnameOverride",
+    "serviceAccount",
+    "podAnnotations",
+    "podLabels",
+    "podSecurityContext",
+    "securityContext",
+    "service",
+    "resources",
+    "livenessProbe",
+    "readinessProbe",
+    "terminationGracePeriodSeconds",
+    "lifecycle",
+    "nodeSelector",
+    "tolerations",
+    "affinity",
+    "neg",
+    "server"
+  ],
+  "type": "object"
 }

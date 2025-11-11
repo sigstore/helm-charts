@@ -10,3 +10,16 @@ metadata:
 data:
   tink.keyset.enc: {{ required "Tink authentication token is required" .Values.server.signer.tink.keyset | quote }}
 {{- end }}
+{{- if .Values.server.witnessing }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.server.witnessing.configMapName }}
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "rekor-tiles.labels" . | nindent 4 }}
+data:
+  witness.policy: {{ required "Witness policy is required" .Values.server.witnessing.witnessPolicy | quote }}
+{{- end }}
+
