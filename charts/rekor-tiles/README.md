@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.1](https://img.shields.io/badge/AppVersion-2.0.1-informational?style=flat-square)
+![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.1](https://img.shields.io/badge/AppVersion-2.0.1-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
@@ -11,7 +11,7 @@ Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transpare
 ## Quick Installation
 
 To install the helm chart with default values run following command.
-The [Values](#Values) section describes the configuration options for this chart.
+The [Values](#values) section describes the configuration options for this chart.
 
 ```shell
 helm dependency update .
@@ -30,13 +30,13 @@ helm uninstall [RELEASE_NAME]
 
 If using --signer-filepath for rekor-tiles, create the Secret to read the signing key from:
 
-```
+```shell
 kubectl create secret generic --from-literal signing-key=$(cat /path/to/private/key.pem) signing-key
 ```
 
 If password encrypted, provide the password in secret:
 
-```
+```shell
 kubectl create secret generic --from-literal signing-key=$(cat /path/to/private/key.pem) --from-literal password=foobar signing-key
 ```
 

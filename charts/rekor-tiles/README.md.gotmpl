@@ -13,7 +13,7 @@
 ## Quick Installation
 
 To install the helm chart with default values run following command.
-The [Values](#Values) section describes the configuration options for this chart.
+The [Values](#values) section describes the configuration options for this chart.
 
 ```shell
 helm dependency update .
@@ -32,13 +32,13 @@ helm uninstall [RELEASE_NAME]
 
 If using --signer-filepath for rekor-tiles, create the Secret to read the signing key from:
 
-```
+```shell
 kubectl create secret generic --from-literal signing-key=$(cat /path/to/private/key.pem) signing-key
 ```
 
 If password encrypted, provide the password in secret:
 
-```
+```shell
 kubectl create secret generic --from-literal signing-key=$(cat /path/to/private/key.pem) --from-literal password=foobar signing-key
 ```
 
