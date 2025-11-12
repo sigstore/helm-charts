@@ -44,7 +44,7 @@ Create args for sigstore prober components
 - "-grpc-port={{ .Values.spec.args.grpcPort }}"
 {{- end }}
 {{- if .Values.spec.args.disableGrpc }}
-- "-disableGrpc"
+- "-disable-grpc"
 {{- end }}
 {{- if .Values.prometheus.port }}
 - "-addr=:{{ .Values.prometheus.port }}"
