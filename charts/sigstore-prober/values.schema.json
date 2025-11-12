@@ -114,6 +114,12 @@
               "title": "grpcPort",
               "type": "integer"
             },
+            "insecure": {
+              "default": true,
+              "required": [],
+              "title": "insecure",
+              "type": "boolean"
+            },
             "rekorRequests": {
               "items": {
                 "required": []
@@ -162,13 +168,14 @@
             "fulcioRequests",
             "writeProber",
             "frequency",
-            "grpcPort"
+            "grpcPort",
+            "insecure"
           ],
           "title": "args",
           "type": "object"
         },
         "image": {
-          "default": "ghcr.io/sigstore/scaffolding/prober:v0.7.27@sha256:0f578d895829faddd2af8f00ee88da6d8c56506ef1e4e2ac3cdd9254ef586c99",
+          "default": "ghcr.io/sigstore/scaffolding/prober:v0.7.28@sha256:545d3990d399d4eb7ce0447c06284f5fe8219bcc5b38e77b2c36f866ceed225e",
           "required": [],
           "title": "image",
           "type": "string"
