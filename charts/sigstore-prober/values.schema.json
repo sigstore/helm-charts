@@ -114,10 +114,10 @@
               "title": "grpcPort",
               "type": "integer"
             },
-            "insecure": {
+            "disableGrpc": {
               "default": true,
               "required": [],
-              "title": "insecure",
+              "title": "disableGrpc",
               "type": "boolean"
             },
             "rekorRequests": {
@@ -169,13 +169,13 @@
             "writeProber",
             "frequency",
             "grpcPort",
-            "insecure"
+            "disableGrpc"
           ],
           "title": "args",
           "type": "object"
         },
         "image": {
-          "default": "ghcr.io/sigstore/scaffolding/prober:v0.7.28@sha256:545d3990d399d4eb7ce0447c06284f5fe8219bcc5b38e77b2c36f866ceed225e",
+          "default": "ghcr.io/sigstore/scaffolding/prober:v0.7.29@sha256:7bf2fcee8c1e07e5c5c7f3fe3d59cd2aa34288489f423dac67f2136ed62b6fb6",
           "required": [],
           "title": "image",
           "type": "string"
