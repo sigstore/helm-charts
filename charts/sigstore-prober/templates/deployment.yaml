@@ -13,6 +13,7 @@ spec:
       labels:
         {{- include "sigstore-prober.common.matchLabels" . | nindent 8 }}
       annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         prometheus.io/scrape: "true"
         prometheus.io/path: /metrics
         prometheus.io/port: "{{ .Values.prometheus.port }}"

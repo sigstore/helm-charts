@@ -4,7 +4,7 @@ description: Sigstore API Endpoint Prober
 
 type: application
 
-version: 0.1.6
+version: 0.1.7
 appVersion: 0.7.29
 
 
