@@ -2,8 +2,6 @@ name: Test Charts
 
 on:
   pull_request:
-    paths:
-      - "charts/**"
 
 jobs:
   test:
@@ -14,30 +12,46 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get changed files
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        id: changes
+        with:
+          filters: |
+            charts:
+              - 'charts/**'
+
       - name: Set up Helm
+        if: steps.changes.outputs.charts == 'true'
         uses: azure/setup-helm@1a275c3b69536ee54be43f2070a358922e12c8d4 # v4.3.1
 
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        if: steps.changes.outputs.charts == 'true'
         with:
           python-version: '3.13'
           check-latest: true
 
       - name: Set up chart-testing
+        if: steps.changes.outputs.charts == 'true'
         uses: helm/chart-testing-action@0d28d3144d3a25ea2cc349d6e59901c4ff469b3b # v2.7.0
 
       - name: Run chart-testing (lint)
+        if: steps.changes.outputs.charts == 'true'
         run: ct lint --config ct.yaml
 
       - name: "Add NGINX Ingress Repository"
+        if: steps.changes.outputs.charts == 'true'
         run: |
           helm repo add ingress-nginx "https://kubernetes.github.io/ingress-nginx"
           helm repo update
 
       - name: Create KIND Cluster
+        if: steps.changes.outputs.charts == 'true'
         uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1.12.0
 
       - name: Install Ingress Controller
+        if: steps.changes.outputs.charts == 'true'
         run: "helm install ingress-nginx/ingress-nginx --generate-name --set controller.service.type='NodePort' --set controller.admissionWebhooks.enabled=false --set controller.progressDeadlineSeconds=30"
 
       - name: Run chart-testing (install)
+        if: steps.changes.outputs.charts == 'true'
         run: ct install --config ct-install.yaml
