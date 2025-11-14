@@ -6,7 +6,7 @@
 
 ## Usage
 
-Charts are available in the following formats:
+Charts are available in the following formats: 
 
 * [Chart Repository](https://helm.sh/docs/topics/chart_repository/)
 * [OCI Artifacts](https://helm.sh/docs/topics/registries/)
