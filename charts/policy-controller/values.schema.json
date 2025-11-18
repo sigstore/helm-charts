@@ -18,7 +18,6 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "commonTolerations",
       "type": "array"
     },
@@ -27,13 +26,11 @@
         "cosignPub": {
           "default": "",
           "description": "add the values in base64 encoded",
-          "required": [],
           "title": "cosignPub",
           "type": "string"
         },
         "webhookName": {
           "default": "policy.sigstore.dev",
-          "required": [],
           "title": "webhookName",
           "type": "string"
         },
@@ -57,13 +54,11 @@
       "items": {
         "required": []
       },
-      "required": [],
       "title": "imagePullSecrets",
       "type": "array"
     },
     "installCRDs": {
       "default": true,
-      "required": [],
       "title": "installCRDs",
       "type": "boolean"
     },
@@ -71,7 +66,6 @@
       "properties": {
         "automountServiceAccountToken": {
           "default": true,
-          "required": [],
           "title": "automountServiceAccountToken",
           "type": "boolean"
         },
@@ -79,19 +73,16 @@
           "properties": {
             "pullPolicy": {
               "default": "IfNotPresent",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             },
             "repository": {
               "default": "cgr.dev/chainguard/kubectl",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "version": {
               "default": "latest-dev",
-              "required": [],
               "title": "version",
               "type": "string"
             }
@@ -104,7 +95,6 @@
           "properties": {
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             }
@@ -115,7 +105,6 @@
         },
         "priorityClass": {
           "default": "",
-          "required": [],
           "title": "priorityClass",
           "type": "string"
         },
@@ -125,13 +114,11 @@
               "properties": {
                 "cpu": {
                   "default": "",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -144,13 +131,11 @@
               "properties": {
                 "cpu": {
                   "default": "",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -171,7 +156,6 @@
     },
     "loglevel": {
       "default": "info",
-      "required": [],
       "title": "loglevel",
       "type": "string"
     },
@@ -180,7 +164,6 @@
       "properties": {
         "enabled": {
           "default": false,
-          "required": [],
           "title": "enabled",
           "type": "boolean"
         }
@@ -199,7 +182,6 @@
         },
         "automountServiceAccountToken": {
           "default": true,
-          "required": [],
           "title": "automountServiceAccountToken",
           "type": "boolean"
         },
@@ -231,7 +213,6 @@
         },
         "failurePolicy": {
           "default": "Fail",
-          "required": [],
           "title": "failurePolicy",
           "type": "string"
         },
@@ -239,20 +220,17 @@
           "properties": {
             "pullPolicy": {
               "default": "IfNotPresent",
-              "required": [],
               "title": "pullPolicy",
               "type": "string"
             },
             "repository": {
               "default": "ghcr.io/sigstore/policy-controller/policy-controller",
-              "required": [],
               "title": "repository",
               "type": "string"
             },
             "version": {
               "default": "sha256:0bcd60beb93f4427c29cf3a669743caf58490e98ded4380c33c09f092734a6ab",
               "description": "crane digest ghcr.io/sigstore/policy-controller/policy-controller:v0.13.1",
-              "required": [],
               "title": "version",
               "type": "string"
             }
@@ -263,7 +241,6 @@
         },
         "name": {
           "default": "webhook",
-          "required": [],
           "title": "name",
           "type": "string"
         },
@@ -276,13 +253,11 @@
                     "properties": {
                       "key": {
                         "default": "policy.sigstore.dev/include",
-                        "required": [],
                         "title": "key",
                         "type": "string"
                       },
                       "operator": {
                         "default": "In",
-                        "required": [],
                         "title": "operator",
                         "type": "string"
                       },
@@ -290,13 +265,11 @@
                         "items": {
                           "anyOf": [
                             {
-                              "required": [],
                               "type": "string"
                             }
                           ],
                           "required": []
                         },
-                        "required": [],
                         "title": "values",
                         "type": "array"
                       }
@@ -307,7 +280,6 @@
                 ],
                 "required": []
               },
-              "required": [],
               "title": "matchExpressions",
               "type": "array"
             }
@@ -325,13 +297,11 @@
           "properties": {
             "enabled": {
               "default": true,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "minAvailable": {
               "default": 1,
-              "required": [],
               "title": "minAvailable",
               "type": "integer"
             }
@@ -344,7 +314,6 @@
           "properties": {
             "allowPrivilegeEscalation": {
               "default": false,
-              "required": [],
               "title": "allowPrivilegeEscalation",
               "type": "boolean"
             },
@@ -354,13 +323,11 @@
                   "items": {
                     "anyOf": [
                       {
-                        "required": [],
                         "type": "string"
                       }
                     ],
                     "required": []
                   },
-                  "required": [],
                   "title": "drop",
                   "type": "array"
                 }
@@ -371,19 +338,16 @@
             },
             "enabled": {
               "default": true,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "readOnlyRootFilesystem": {
               "default": true,
-              "required": [],
               "title": "readOnlyRootFilesystem",
               "type": "boolean"
             },
             "runAsUser": {
               "default": 1000,
-              "required": [],
               "title": "runAsUser",
               "type": "integer"
             }
@@ -395,7 +359,6 @@
         "priorityClass": {
           "default": "",
           "description": "defaulting: 10\nvalidating: 10",
-          "required": [],
           "title": "priorityClass",
           "type": "string"
         },
@@ -406,7 +369,6 @@
         },
         "replicaCount": {
           "default": 1,
-          "required": [],
           "title": "replicaCount",
           "type": "integer"
         },
@@ -416,13 +378,11 @@
               "properties": {
                 "cpu": {
                   "default": "200m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "512Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -435,13 +395,11 @@
               "properties": {
                 "cpu": {
                   "default": "100m",
-                  "required": [],
                   "title": "cpu",
                   "type": "string"
                 },
                 "memory": {
                   "default": "128Mi",
-                  "required": [],
                   "title": "memory",
                   "type": "string"
                 }
@@ -459,13 +417,11 @@
           "properties": {
             "enabled": {
               "default": false,
-              "required": [],
               "title": "enabled",
               "type": "boolean"
             },
             "runAsUser": {
               "default": 65532,
-              "required": [],
               "title": "runAsUser",
               "type": "integer"
             }
@@ -483,13 +439,11 @@
             },
             "port": {
               "default": 443,
-              "required": [],
               "title": "port",
               "type": "integer"
             },
             "type": {
               "default": "ClusterIP",
-              "required": [],
               "title": "type",
               "type": "string"
             }
@@ -507,13 +461,11 @@
             },
             "create": {
               "default": true,
-              "required": [],
               "title": "create",
               "type": "boolean"
             },
             "name": {
               "default": "",
-              "required": [],
               "title": "name",
               "type": "string"
             }
@@ -526,7 +478,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "volumeMounts",
           "type": "array"
         },
@@ -534,7 +485,6 @@
           "items": {
             "required": []
           },
-          "required": [],
           "title": "volumes",
           "type": "array"
         },
@@ -542,13 +492,11 @@
           "properties": {
             "defaulting": {
               "default": "defaulting.clusterimagepolicy.sigstore.dev",
-              "required": [],
               "title": "defaulting",
               "type": "string"
             },
             "validating": {
               "default": "validating.clusterimagepolicy.sigstore.dev",
-              "required": [],
               "title": "validating",
               "type": "string"
             }
