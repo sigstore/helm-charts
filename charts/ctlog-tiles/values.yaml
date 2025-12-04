@@ -1,0 +1,149 @@
+# Default values for ctlog-tiles.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  flavor: posix  # Must be posix or gcp
+  registry: ghcr.io
+  repository: sigstore/scaffolding/tesseract
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  # crane digest ghcr.io/sigstore/ctlog-tiles:v2.0.1
+  version: v0.1.1
+  posixSHA: sha256:767c2dbe4a83be9243246564244aa381322f08f2a864371f62b880c465033815
+  gcpSHA: sha256:17d3788b736de01ab0586359626c01789910a6e2981e7b90014fbda8689f5017
+
+namespace:
+  create: false
+  name: ctlog-tiles-system
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 65533
+
+service:
+  type: ClusterIP
+  ports:
+    - name: 6962-tcp
+      port: 80
+      protocol: TCP
+      targetPort: 6962
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 6962
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 6962
+
+terminationGracePeriodSeconds: 65
+lifecycle:
+  preStop:
+    exec:
+      command: ["sleep", "15"]
+
+nodeSelector:
+  iam.gke.io/gke-metadata-server-enabled: "true"   # support workload identity
+
+tolerations: []
+
+affinity: {}
+
+neg:
+  http:
+    name: ""
+    port: 80
+
+# Server arguments
+server:
+  antispam: {}
+    # inmemoryAntispamCacheSize: "256k"
+    # pushbackMaxAntispamLag: 2048
+  tesseraLivecycle: {}
+    # batchMaxAge: "250ms"
+    # batchMaxSize: 256
+    # checkpointInterval: "1.5s"
+    # pushbackMaxOutstanding: 4096
+  gcp: {}
+    # spanner: projects/{projectId}/instances/{instanceId}/databases/{databaseId}
+    # antispamSpanner: projects/{projectId}/instances/{instanceId}/databases/{databaseId}
+    # bucket: tesseract-bucket
+    # signer:
+    #   privateKey: projects/{projectId}/secrets/{secretName}/versions/{secretVersion}
+    #   publicKey: projects/{projectId}/secrets/{secretName}/versions/{secretVersion}
+  posix: {}
+    # privateKey:
+    #   path: /etc/ctfe/signer.pem
+    #   secret:
+    #     name: signing-key
+    #     key: signing-key
+    #     mountPath: /etc/ctfe
+    #     mountSubPath: signer.pem
+    # storageDir:
+    #   path: /storage
+    #   name: ctlog
+    #   volume:
+    #     hostPath:
+    #       path: /data/ctlog-storage
+    #       type: Directory
+  fulcio:
+    rootPEM: ""
+    path: /etc/fulcio/roots.pem
+    configMap:
+      name: fulcio-roots
+      key: fulcio
+      mountPath: /etc/fulcio
+      mountSubPath: roots.pem
+  witnessing: {}
+    # witnessTimeout: "5s"
+    # witnessPolicy: ""
+    # configMapName: witness-config
+  hostname: "localhost"
+  http:
+    port: "6962"
+  serverConfig: {}
+    # timeout: "5s"
+  logLevel: "1"
+  extraArgs: []

@@ -1,0 +1,25 @@
+{{- if (.Values.server.fulcio).configMap }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.server.fulcio.configMap.name }}
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "ctlog-tiles.labels" . | nindent 4 }}
+data:
+  {{ .Values.server.fulcio.configMap.key }}: {{ .Values.server.fulcio.rootPEM | quote }}
+{{- end }}
+{{- if .Values.server.witnessing }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.server.witnessing.configMapName }}
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "ctlog-tiles.labels" . | nindent 4 }}
+data:
+  witness.policy: {{ required "Witness policy is required" .Values.server.witnessing.witnessPolicy | quote }}
+{{- end }}
+
