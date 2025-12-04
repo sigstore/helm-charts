@@ -6,6 +6,7 @@ excluded-charts:
   - fulcio
   - scaffold
   - rekor-tiles
+  - ctlog-tiles
 validate-maintainers: false
 remote: origin
 target-branch: main
