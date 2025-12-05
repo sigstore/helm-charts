@@ -2335,6 +2335,35 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: fulcio
+          image: ghcr.io/sigstore/fulcio:v1.8.3@sha256:77d7b72e47d80466ec38aeacc58667b2c3da22eab230330baf7d5e24a33a2197
+        - name: createcerts
+          image: ghcr.io/sigstore/scaffolding/createcerts:v0.7.25@sha256:fdee13a3f7432e4a37136176eb9ebbf1f536e8525fb5720efa96b337935cd173
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.8.3
+    created: "2025-12-05T19:21:48.968865266Z"
+    dependencies:
+    - condition: ctlog.enabled
+      name: ctlog
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.64
+    description: 'Fulcio is a free code signing Certificate Authority, built to make
+      short-lived certificates available to anyone. '
+    digest: 20deed67ba746748713bed09fb8efdeb8a73c34143538fb17226ffd40c246d92
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: fulcio
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/fulcio-2.6.16/fulcio-2.6.16.tgz
+    version: 2.6.16
+  - annotations:
+      artifacthub.io/images: |
+        - name: fulcio
           image: ghcr.io/sigstore/fulcio:v1.8.2@sha256:c36fb56f73b7f1f2bf5366f930fb4b31e939a5f9b41f4664646532279001e22a
         - name: createcerts
           image: ghcr.io/sigstore/scaffolding/createcerts:v0.7.25@sha256:fdee13a3f7432e4a37136176eb9ebbf1f536e8525fb5720efa96b337935cd173
@@ -20986,6 +21015,28 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: tsa
+          # crane digest ghcr.io/sigstore/timestamp-server:v2.0.3
+          image: ghcr.io/sigstore/timestamp-server:v2.0.3@sha256:24f74ba81e5b9523f6b6735cba84bfd0963b6a0be68e1d73ef86db7d38f18fda
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.0.3
+    created: "2025-12-05T19:21:49.134126618Z"
+    description: 'Timestamp Authority issuing RFC3161 signed timestamps. '
+    digest: ca644a2ce84daac44c503a51ddcfdfbc349c1f2cc90a2a0837d25dafb301317b
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - timestamp
+    maintainers:
+    - name: The Sigstore Authors
+    name: tsa
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/tsa-2.0.2/tsa-2.0.2.tgz
+    version: 2.0.2
+  - annotations:
+      artifacthub.io/images: |
+        - name: tsa
           # crane digest ghcr.io/sigstore/timestamp-server:v2.0.2
           image: ghcr.io/sigstore/timestamp-server:v2.0.2@sha256:725a3dcc17e14430eb334aa2f0effe0af072ae17203410c5edb97b1be492059b
       artifacthub.io/license: Apache-2.0
@@ -22486,4 +22537,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2025-11-19T19:51:17.424818723Z"
+generated: "2025-12-05T19:21:49.136215125Z"
