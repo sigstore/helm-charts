@@ -57,6 +57,13 @@ spec:
       secretRef:
         name: mysecret
 ```
+
+**IMPORTANT:** Earlier versions of the chart were using
+`webhook.podSecurityContext` for defining the container level security context
+and `webhook.securityContext` for the one at pod level. Recent versions use the
+more intuitive `webhook.podSecurityContext` and
+`webhook.containerSecurityContext`.
+
 #### Configuring Custom Certificate Authorities (CA)
 
 The `policy-controller` can be configured to use custom CAs to communicate to container registries, for example, when you have a private registry with a self-signed TLS certificate.
@@ -172,6 +179,11 @@ helm uninstall [RELEASE_NAME]
 | webhook.affinity | object | `{}` |  |
 | webhook.automountServiceAccountToken | bool | `true` |  |
 | webhook.configData | object | `{}` |  |
+| webhook.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| webhook.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| webhook.containerSecurityContext.enabled | bool | `true` |  |
+| webhook.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| webhook.containerSecurityContext.runAsUser | int | `1000` |  |
 | webhook.customLabels | object | `{}` |  |
 | webhook.env | object | `{}` |  |
 | webhook.envFrom | object | `{}` |  |
@@ -187,11 +199,8 @@ helm uninstall [RELEASE_NAME]
 | webhook.podAnnotations | object | `{}` |  |
 | webhook.podDisruptionBudget.enabled | bool | `true` |  |
 | webhook.podDisruptionBudget.minAvailable | int | `1` |  |
-| webhook.podSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
-| webhook.podSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| webhook.podSecurityContext.enabled | bool | `true` |  |
-| webhook.podSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
-| webhook.podSecurityContext.runAsUser | int | `1000` |  |
+| webhook.podSecurityContext.enabled | bool | `false` |  |
+| webhook.podSecurityContext.runAsUser | int | `65532` |  |
 | webhook.priorityClass | string | `""` |  |
 | webhook.registryCaBundle | object | `{}` |  |
 | webhook.replicaCount | int | `1` |  |
@@ -199,8 +208,6 @@ helm uninstall [RELEASE_NAME]
 | webhook.resources.limits.memory | string | `"512Mi"` |  |
 | webhook.resources.requests.cpu | string | `"100m"` |  |
 | webhook.resources.requests.memory | string | `"128Mi"` |  |
-| webhook.securityContext.enabled | bool | `false` |  |
-| webhook.securityContext.runAsUser | int | `65532` |  |
 | webhook.service.annotations | object | `{}` |  |
 | webhook.service.port | int | `443` |  |
 | webhook.service.type | string | `"ClusterIP"` |  |
