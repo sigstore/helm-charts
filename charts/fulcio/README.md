@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.6.16](https://img.shields.io/badge/Version-2.6.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.3](https://img.shields.io/badge/AppVersion-1.8.3-informational?style=flat-square)
+![Version: 2.7.0](https://img.shields.io/badge/Version-2.7.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.3](https://img.shields.io/badge/AppVersion-1.8.3-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -221,3 +221,20 @@ To enabled access from external resources, an Ingress resource is created. The c
 >     grpc:
 >       enabled: false
 > ```
+
+## Key Management for Certificate Authority
+
+Fulcio supports the following options for certificate authority backends: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca. For all except fileca, set the appropriate values in values.yaml to configure the CA roots for the given backend.
+
+For fileca, the signing keys and certificates need to be generated manually and uploaded as a Secret that the Fulcio deployment can mount. For example:
+
+```
+pass=mysecurepassword
+openssl ecparam -name prime256v1 -genkey | openssl pkcs8 -passout "pass:${pass}" -topk8 -out "/pki/key.pem" # generate the signing key
+openssl req -x509 -new -key /pki/key.pem -out /pki/cert.pem -sha256 -days 100 -subj "/O=test/CN=self.signed.ca" -passin "pass:${pass}" # generate the self-signed certificate
+kubectl -n fulcio-system create secret generic --from-file=private=/pki/key.pem --from-file=cert=/pki/cert.pem --from-literal=password=$pass fulcio-server-secret # upload to Kubernetes
+```
+
+Alternatively, use a secure system like [ExternalSecret](https://external-secrets.io/v0.4.4/api-externalsecret/) to safely store and populate key material.
+
+By default, createcerts.enabled is set to true and will automatically generate key material. This setting is deprecated and it is recommended to change this setting to false and generate your own key material. This way, the root certificate can be shared out of band with the CTlog chart and it does not need to implicitly trust the Fulcio HTTP server to provide the correct root.

@@ -1,0 +1,4 @@
+{{- if (.Values.createcerts).enabled -}}
+**DEPRECATED**: createcerts is deprecated. If using the fileca certificate authority, create the fulcio-server-secrets secret containing the private signing key, encryption password, and certiticate authority manually or using a secure system like External Secret (see README.md for more information).
+To dismiss this message, set createcerts.enabled=false in your values.yaml.
+{{- end -}}
