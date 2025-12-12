@@ -2331,6 +2331,32 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/ctlog-0.2.0/ctlog-0.2.0.tgz
     version: 0.2.0
+  ctlog-tiles:
+  - annotations:
+      artifacthub.io/images: |
+        - name: tesseract-posix
+          image: ghcr.io/sigstore/scaffolding/tesseract/posix:v0.1.1@sha256:767c2dbe4a83be9243246564244aa381322f08f2a864371f62b880c465033815
+        - name: tesseract-gcp
+          image: ghcr.io/sigstore/scaffolding/tesseract/gcp:v0.1.1@sha256:17d3788b736de01ab0586359626c01789910a6e2981e7b90014fbda8689f5017
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: v0.1.1
+    created: "2025-12-12T21:03:48.532559376Z"
+    description: Tiles-based certificate log (TesseraCT)
+    digest: dc65994160b97dd061fcf4c98a79d9df37ff1e3f6e96a372d2f9269d5f2f9e0e
+    home: https://sigstore.dev
+    keywords:
+    - security
+    - certificate transparency
+    maintainers:
+    - name: The Sigstore Authors
+    name: ctlog-tiles
+    sources:
+    - https://github.com/transparency-dev/tesseract
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/ctlog-tiles-0.1.0/ctlog-tiles-0.1.0.tgz
+    version: 0.1.0
   fulcio:
   - annotations:
       artifacthub.io/images: |
@@ -22608,4 +22634,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2025-12-12T20:35:58.298309804Z"
+generated: "2025-12-12T21:03:48.533592386Z"
