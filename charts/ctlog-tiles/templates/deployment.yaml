@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ctlog-tiles.fullname" . }}
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "ctlog-tiles.labels" . | nindent 4 }}
+{{- if .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.deploymentAnnotations | nindent 4 }}
+{{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "ctlog-tiles.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "ctlog-tiles.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "ctlog-tiles.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ template "ctlog-tiles.image" .Values.image }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+{{ include "ctlog-tiles.args" . | indent 12 }}
+          ports:
+{{- include "ctlog-tiles.containerPorts" .Values.service.ports | indent 12 }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          lifecycle:
+            {{- toYaml .Values.lifecycle | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+{{- if or ((.Values.server.posix).privateKey).secret (.Values.server.fulcio).configMap .Values.server.witnessing }}
+          volumeMounts:
+{{- end }}
+{{- if ((.Values.server.posix).privateKey).secret }}
+            - name: {{ .Values.server.posix.privateKey.secret.name }}
+              mountPath: {{ (.Values.server.posix.privateKey.secret).mountPath }}
+              readOnly: true
+{{- end }}
+{{- if ((.Values.server.fulcio).configMap) }}
+            - name: {{ .Values.server.fulcio.configMap.name }}
+              mountPath: {{ .Values.server.fulcio.configMap.mountPath }}
+              readOnly: true
+{{- end }}
+{{- if (.Values.server.posix).storageDir }}
+            - name: {{ .Values.server.posix.storageDir.name }}
+              mountPath: {{ .Values.server.posix.storageDir.path }}
+{{- end }}
+{{- if .Values.server.witnessing }}
+            - name: witness-config
+              mountPath: /etc/witness-config
+{{- end }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+{{- if or ((.Values.server.posix).privateKey).secret (.Values.server.fulcio).configMap (.Values.server.posix).storageDir .Values.server.witnessing }}
+      volumes:
+{{- end }}
+{{- if ((.Values.server.posix).privateKey).secret }}
+        - name: {{ .Values.server.posix.privateKey.secret.name }}
+          secret:
+            secretName: {{ .Values.server.posix.privateKey.secret.name }}
+            items:
+              - key: {{ .Values.server.posix.privateKey.secret.key }}
+                path: {{ .Values.server.posix.privateKey.secret.mountSubPath }}
+{{- end }}
+{{- if (.Values.server.fulcio).configMap }}
+        - name: {{ .Values.server.fulcio.configMap.name }}
+          configMap:
+            name: {{ .Values.server.fulcio.configMap.name }}
+            items:
+              - key: {{ .Values.server.fulcio.configMap.key }}
+                path: {{ .Values.server.fulcio.configMap.mountSubPath }}
+{{- end }}
+{{- if ((.Values.server.posix).storageDir).volume }}
+        - name: {{ .Values.server.posix.storageDir.name -}}
+          {{- toYaml .Values.server.posix.storageDir.volume | nindent 10 }}
+{{- end }}
+{{- if .Values.server.witnessing }}
+        - name: witness-config
+          configMap:
+            name: {{ .Values.server.witnessing.configMapName }}
+{{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ctlog-tiles.fullname" . }}
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "ctlog-tiles.labels" . | nindent 4 }}
+  annotations:
+    cloud.google.com/neg: '{"exposed_ports": {"{{ .Values.neg.http.port }}":{"name": "{{ .Values.neg.http.name }}"}}}'
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    {{- tpl (toYaml .Values.service.ports) . | nindent 4 }}
+  selector:
+    {{- include "ctlog-tiles.selectorLabels" . | nindent 4 }}

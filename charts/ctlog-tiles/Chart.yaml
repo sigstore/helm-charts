@@ -1,0 +1,21 @@
+apiVersion: v2
+name: ctlog-tiles
+description: Tiles-based certificate log (TesseraCT)
+type: application
+version: 0.1.0
+appVersion: v0.1.1
+keywords:
+  - security
+  - certificate transparency
+home: https://sigstore.dev
+sources:
+  - https://github.com/transparency-dev/tesseract
+maintainers:
+  - name: The Sigstore Authors
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/images: |
+    - name: tesseract-posix
+      image: ghcr.io/sigstore/scaffolding/tesseract/posix:v0.1.1@sha256:767c2dbe4a83be9243246564244aa381322f08f2a864371f62b880c465033815
+    - name: tesseract-gcp
+      image: ghcr.io/sigstore/scaffolding/tesseract/gcp:v0.1.1@sha256:17d3788b736de01ab0586359626c01789910a6e2981e7b90014fbda8689f5017
