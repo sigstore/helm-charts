@@ -71,7 +71,7 @@ spec:
             {{- toYaml .Values.lifecycle | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-{{- if or .Values.server.signer.file .Values.server.signer.tink }}
+{{- if or .Values.server.signer.file .Values.server.grpcSvcTLS .Values.server.signer.tink .Values.server.witnessing }}
           volumeMounts:
 {{- end }}
 {{- if .Values.server.signer.file }}
@@ -93,7 +93,7 @@ spec:
               mountPath: /etc/witness-config
 {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
-{{- if or .Values.server.signer.file .Values.server.signer.tink }}
+{{- if or .Values.server.signer.file .Values.server.grpcSvcTLS .Values.server.signer.tink .Values.server.witnessing }}
       volumes:
 {{- end }}
 {{- if ((.Values.server.signer.file).secret).name }}
