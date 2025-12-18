@@ -7,13 +7,13 @@ replicaCount: 1
 image:
   flavor: posix  # Must be posix or gcp
   registry: ghcr.io
-  repository: sigstore/scaffolding/tesseract
+  repository: ghcr.io/transparency-dev/tesseract
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   # crane digest ghcr.io/sigstore/ctlog-tiles:v2.0.1
   version: v0.1.1
-  posixSHA: sha256:767c2dbe4a83be9243246564244aa381322f08f2a864371f62b880c465033815
-  gcpSHA: sha256:17d3788b736de01ab0586359626c01789910a6e2981e7b90014fbda8689f5017
+  posixSHA: sha256:8269c32a1b1deb159ba75016421314cb5e68304c2813d444aca3efdf0e9d5027
+  gcpSHA: sha256:aca34cce9b40279c3b9041d98241e188bd30dd932a7cd73e3b3e9fdda13532f7
 
 namespace:
   create: false
