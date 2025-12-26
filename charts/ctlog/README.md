@@ -1,6 +1,6 @@
 # ctlog
 
-![Version: 0.2.65](https://img.shields.io/badge/Version-0.2.65-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.25](https://img.shields.io/badge/AppVersion-0.7.25-informational?style=flat-square)
+![Version: 0.2.66](https://img.shields.io/badge/Version-0.2.66-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.25](https://img.shields.io/badge/AppVersion-0.7.25-informational?style=flat-square)
 
 Certificate Log
 
