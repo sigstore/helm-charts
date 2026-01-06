@@ -4,8 +4,8 @@ description: Sigstore API Endpoint Prober
 
 type: application
 
-version: 0.1.7
-appVersion: 0.7.29
+version: 0.1.8
+appVersion: 0.7.31
 
 
 keywords:
@@ -21,4 +21,4 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: sigstore-prober
-      image: ghcr.io/sigstore/scaffolding/prober:v0.7.29@sha256:7bf2fcee8c1e07e5c5c7f3fe3d59cd2aa34288489f423dac67f2136ed62b6fb6
+      image: ghcr.io/sigstore/scaffolding/prober:v0.7.31@sha256:b2a7d44a362211aef800214f105bd0b4f54b53de5b32818321e3167c22312666

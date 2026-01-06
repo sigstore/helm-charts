@@ -1,6 +1,6 @@
 # sigstore-prober
 
-![Version: 0.1.7](https://img.shields.io/badge/Version-0.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.29](https://img.shields.io/badge/AppVersion-0.7.29-informational?style=flat-square)
+![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.31](https://img.shields.io/badge/AppVersion-0.7.31-informational?style=flat-square)
 
 Sigstore API Endpoint Prober
 
@@ -34,7 +34,7 @@ Sigstore API Endpoint Prober
 | spec.args.staging | bool | `false` |  |
 | spec.args.trustedRoot | string | `""` |  |
 | spec.args.writeProber | bool | `false` |  |
-| spec.image | string | `"ghcr.io/sigstore/scaffolding/prober:v0.7.29@sha256:7bf2fcee8c1e07e5c5c7f3fe3d59cd2aa34288489f423dac67f2136ed62b6fb6"` |  |
+| spec.image | string | `"ghcr.io/sigstore/scaffolding/prober:v0.7.31@sha256:b2a7d44a362211aef800214f105bd0b4f54b53de5b32818321e3167c22312666"` |  |
 | spec.imagePullPolicy | string | `"Always"` |  |
 | spec.matchLabels.app | string | `"sigstore-prober"` |  |
 | spec.replicaCount | int | `1` |  |
