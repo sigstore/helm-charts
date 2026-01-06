@@ -1,6 +1,6 @@
 # updatetree
 
-![Version: 0.0.21](https://img.shields.io/badge/Version-0.0.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.25](https://img.shields.io/badge/AppVersion-0.7.25-informational?style=flat-square)
+![Version: 0.0.22](https://img.shields.io/badge/Version-0.0.22-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.31](https://img.shields.io/badge/AppVersion-0.7.31-informational?style=flat-square)
 
 Update the status of an existing Trillian tree
 
@@ -29,7 +29,7 @@ Update the status of an existing Trillian tree
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `false` |  |
 | serviceAccount.name | string | `"trillian-logserver"` |  |
-| spec.image | string | `"ghcr.io/sigstore/scaffolding/updatetree:v0.7.25@sha256:509bc4ebd004dcffaa03759965b0cec1027921154b169bea16c0ce38199ae538"` |  |
+| spec.image | string | `"ghcr.io/sigstore/scaffolding/updatetree:v0.7.31@sha256:66f47d58ec4f47e322345cfc783b3d8816624961feec9bc0063d35b8267645fe"` |  |
 | spec.replicaCount | int | `1` |  |
 | tolerations | list | `[]` |  |
 | trillian.adminServer | string | `""` |  |
