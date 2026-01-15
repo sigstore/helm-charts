@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.7.2](https://img.shields.io/badge/Version-2.7.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.5](https://img.shields.io/badge/AppVersion-1.8.5-informational?style=flat-square)
+![Version: 2.7.3](https://img.shields.io/badge/Version-2.7.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.5](https://img.shields.io/badge/AppVersion-1.8.5-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -110,6 +110,11 @@ helm uninstall [RELEASE_NAME]
 | ctlog.namespace.name | string | `"ctlog-system"` |  |
 | forceNamespace | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
+| init.containerResources | object | `{}` |  |
+| init.image.curl.imagePullPolicy | string | `"IfNotPresent"` |  |
+| init.image.curl.registry | string | `"docker.io"` |  |
+| init.image.curl.repository | string | `"curlimages/curl"` |  |
+| init.image.curl.version | string | `"sha256:935d9100e9ba842cdb060de42472c7ca90cfe9a7c96e4dacb55e79e560b3ff40"` | 8.17.0 |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"fulcio-system"` |  |
 | server.affinity | object | `{}` |  |
