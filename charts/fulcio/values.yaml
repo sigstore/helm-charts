@@ -4,6 +4,16 @@ namespace:
 
 imagePullSecrets: []
 
+init:
+  image:
+    curl:
+      registry: docker.io
+      repository: curlimages/curl
+      # -- 8.17.0
+      version: sha256:935d9100e9ba842cdb060de42472c7ca90cfe9a7c96e4dacb55e79e560b3ff40
+      imagePullPolicy: IfNotPresent
+  containerResources: {}
+
 config:
   contents: {}
   format: json

@@ -192,3 +192,15 @@ meta-issuers:
     type: kubernetes
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the CT log URL
+*/}}
+{{- define "fulcio.ctlog.url" -}}
+{{- if .Values.server.args.disable_ct_log -}}
+{{- else if .Values.server.args.ct_log_url -}}
+{{ printf .Values.server.args.ct_log_url }}
+{{- else -}}
+http://{{ .Values.ctlog.name }}.{{ .Values.ctlog.namespace.name }}.svc/{{ .Values.ctlog.createctconfig.logPrefix }}
+{{- end -}}
+{{- end -}}

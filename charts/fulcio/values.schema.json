@@ -1,32 +1,32 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
     "properties": {
         "config": {
+            "type": "object",
             "properties": {
                 "contents": {
-                    "properties": {},
                     "type": "object"
                 },
                 "format": {
                     "type": "string"
                 }
-            },
-            "type": "object"
+            }
         },
         "createcerts": {
+            "type": "object",
             "properties": {
                 "affinity": {
-                    "properties": {},
                     "type": "object"
                 },
                 "annotations": {
-                    "properties": {},
                     "type": "object"
                 },
                 "enabled": {
                     "type": "boolean"
                 },
                 "image": {
+                    "type": "object",
                     "properties": {
                         "pullPolicy": {
                             "type": "string"
@@ -40,20 +40,19 @@
                         "version": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "name": {
                     "type": "string"
                 },
                 "nodeSelector": {
-                    "properties": {},
                     "type": "object"
                 },
                 "replicaCount": {
                     "type": "integer"
                 },
                 "securityContext": {
+                    "type": "object",
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
@@ -61,13 +60,12 @@
                         "runAsUser": {
                             "type": "integer"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "serviceAccount": {
+                    "type": "object",
                     "properties": {
                         "annotations": {
-                            "properties": {},
                             "type": "object"
                         },
                         "create": {
@@ -79,8 +77,7 @@
                         "name": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "tolerations": {
                     "type": "array"
@@ -88,12 +85,13 @@
                 "ttlSecondsAfterFinished": {
                     "type": "integer"
                 }
-            },
-            "type": "object"
+            }
         },
         "ctlog": {
+            "type": "object",
             "properties": {
                 "createcerts": {
+                    "type": "object",
                     "properties": {
                         "fullnameOverride": {
                             "type": "string"
@@ -101,18 +99,18 @@
                         "name": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "createctconfig": {
+                    "type": "object",
                     "properties": {
                         "logPrefix": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "createtree": {
+                    "type": "object",
                     "properties": {
                         "fullnameOverride": {
                             "type": "string"
@@ -120,8 +118,7 @@
                         "name": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "enabled": {
                     "type": "boolean"
@@ -136,6 +133,7 @@
                     "type": "string"
                 },
                 "namespace": {
+                    "type": "object",
                     "properties": {
                         "create": {
                             "type": "boolean"
@@ -143,11 +141,9 @@
                         "name": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 }
-            },
-            "type": "object"
+            }
         },
         "forceNamespace": {
             "type": "string"
@@ -155,7 +151,38 @@
         "imagePullSecrets": {
             "type": "array"
         },
+        "init": {
+            "type": "object",
+            "properties": {
+                "containerResources": {
+                    "type": "object"
+                },
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "curl": {
+                            "type": "object",
+                            "properties": {
+                                "imagePullPolicy": {
+                                    "type": "string"
+                                },
+                                "registry": {
+                                    "type": "string"
+                                },
+                                "repository": {
+                                    "type": "string"
+                                },
+                                "version": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "namespace": {
+            "type": "object",
             "properties": {
                 "create": {
                     "type": "boolean"
@@ -163,16 +190,16 @@
                 "name": {
                     "type": "string"
                 }
-            },
-            "type": "object"
+            }
         },
         "server": {
+            "type": "object",
             "properties": {
                 "affinity": {
-                    "properties": {},
                     "type": "object"
                 },
                 "args": {
+                    "type": "object",
                     "properties": {
                         "aws_hsm_root_ca_path": {
                             "type": "null"
@@ -198,8 +225,7 @@
                         "port": {
                             "type": "integer"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "awsKmsCredentialsSecretName": {
                     "type": "string"
@@ -211,6 +237,7 @@
                     "type": "integer"
                 },
                 "image": {
+                    "type": "object",
                     "properties": {
                         "pullPolicy": {
                             "type": "string"
@@ -224,20 +251,21 @@
                         "version": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "ingress": {
+                    "type": "object",
                     "properties": {
                         "grpc": {
+                            "type": "object",
                             "properties": {
                                 "annotations": {
+                                    "type": "object",
                                     "properties": {
                                         "nginx.ingress.kubernetes.io/backend-protocol": {
                                             "type": "string"
                                         }
-                                    },
-                                    "type": "object"
+                                    }
                                 },
                                 "className": {
                                     "type": "string"
@@ -246,7 +274,9 @@
                                     "type": "boolean"
                                 },
                                 "hosts": {
+                                    "type": "array",
                                     "items": {
+                                        "type": "object",
                                         "properties": {
                                             "host": {
                                                 "type": "string"
@@ -254,35 +284,32 @@
                                             "path": {
                                                 "type": "string"
                                             }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "type": "array"
+                                        }
+                                    }
                                 },
                                 "tls": {
+                                    "type": "array",
                                     "items": {
+                                        "type": "object",
                                         "properties": {
                                             "hosts": {
+                                                "type": "array",
                                                 "items": {
                                                     "type": "string"
-                                                },
-                                                "type": "array"
+                                                }
                                             },
                                             "secretName": {
                                                 "type": "string"
                                             }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "type": "array"
+                                        }
+                                    }
                                 }
-                            },
-                            "type": "object"
+                            }
                         },
                         "http": {
+                            "type": "object",
                             "properties": {
                                 "annotations": {
-                                    "properties": {},
                                     "type": "object"
                                 },
                                 "className": {
@@ -292,7 +319,9 @@
                                     "type": "boolean"
                                 },
                                 "hosts": {
+                                    "type": "array",
                                     "items": {
+                                        "type": "object",
                                         "properties": {
                                             "host": {
                                                 "type": "string"
@@ -300,30 +329,29 @@
                                             "path": {
                                                 "type": "string"
                                             }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "type": "array"
+                                        }
+                                    }
                                 },
                                 "tls": {
                                     "type": "array"
                                 }
-                            },
-                            "type": "object"
+                            }
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "ingresses": {
+                    "type": "array",
                     "items": {
+                        "type": "object",
                         "properties": {
                             "annotations": {
-                                "properties": {},
                                 "type": "object"
                             },
                             "backendConfigSpec": {
+                                "type": "object",
                                 "properties": {
                                     "healthCheck": {
+                                        "type": "object",
                                         "properties": {
                                             "port": {
                                                 "type": "integer"
@@ -334,27 +362,25 @@
                                             "type": {
                                                 "type": "string"
                                             }
-                                        },
-                                        "type": "object"
+                                        }
                                     },
                                     "logging": {
+                                        "type": "object",
                                         "properties": {
                                             "enable": {
                                                 "type": "boolean"
                                             }
-                                        },
-                                        "type": "object"
+                                        }
                                     },
                                     "securityPolicy": {
+                                        "type": "object",
                                         "properties": {
                                             "name": {
                                                 "type": "string"
                                             }
-                                        },
-                                        "type": "object"
+                                        }
                                     }
-                                },
-                                "type": "object"
+                                }
                             },
                             "className": {
                                 "type": "string"
@@ -363,26 +389,28 @@
                                 "type": "boolean"
                             },
                             "frontendConfigSpec": {
+                                "type": "object",
                                 "properties": {
                                     "redirectToHttps": {
+                                        "type": "object",
                                         "properties": {
                                             "enabled": {
                                                 "type": "boolean"
                                             }
-                                        },
-                                        "type": "object"
+                                        }
                                     },
                                     "sslPolicy": {
                                         "type": "string"
                                     }
-                                },
-                                "type": "object"
+                                }
                             },
                             "grpc": {
                                 "type": "boolean"
                             },
                             "hosts": {
+                                "type": "array",
                                 "items": {
+                                    "type": "object",
                                     "properties": {
                                         "host": {
                                             "type": "string"
@@ -390,10 +418,8 @@
                                         "path": {
                                             "type": "string"
                                         }
-                                    },
-                                    "type": "object"
-                                },
-                                "type": "array"
+                                    }
+                                }
                             },
                             "http": {
                                 "type": "boolean"
@@ -407,27 +433,24 @@
                             "tls": {
                                 "type": "array"
                             }
-                        },
-                        "type": "object"
-                    },
-                    "type": "array"
+                        }
+                    }
                 },
                 "kmsType": {
                     "type": "string"
                 },
                 "logging": {
+                    "type": "object",
                     "properties": {
                         "production": {
                             "type": "boolean"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "name": {
                     "type": "string"
                 },
                 "nodeSelector": {
-                    "properties": {},
                     "type": "object"
                 },
                 "replicaCount": {
@@ -437,6 +460,7 @@
                     "type": "string"
                 },
                 "securityContext": {
+                    "type": "object",
                     "properties": {
                         "runAsNonRoot": {
                             "type": "boolean"
@@ -444,13 +468,15 @@
                         "runAsUser": {
                             "type": "integer"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "service": {
+                    "type": "object",
                     "properties": {
                         "ports": {
+                            "type": "array",
                             "items": {
+                                "type": "object",
                                 "properties": {
                                     "name": {
                                         "type": "string"
@@ -464,21 +490,18 @@
                                     "targetPort": {
                                         "type": "integer"
                                     }
-                                },
-                                "type": "object"
-                            },
-                            "type": "array"
+                                }
+                            }
                         },
                         "type": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "serviceAccount": {
+                    "type": "object",
                     "properties": {
                         "annotations": {
-                            "properties": {},
                             "type": "object"
                         },
                         "create": {
@@ -490,8 +513,7 @@
                         "name": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "svcPort": {
                     "type": "integer"
@@ -499,9 +521,7 @@
                 "tolerations": {
                     "type": "array"
                 }
-            },
-            "type": "object"
+            }
         }
-    },
-    "type": "object"
+    }
 }
