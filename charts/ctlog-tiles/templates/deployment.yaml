@@ -51,7 +51,7 @@ spec:
             {{- toYaml .Values.lifecycle | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-{{- if or ((.Values.server.posix).privateKey).secret (.Values.server.fulcio).configMap .Values.server.witnessing (.Values.server.posix).storageDir }}
+{{- if or ((.Values.server.posix).privateKey).secret (.Values.server.fulcio).configMap (.Values.server.posix).storageDir .Values.server.witnessing }}
           volumeMounts:
 {{- end }}
 {{- if ((.Values.server.posix).privateKey).secret }}
