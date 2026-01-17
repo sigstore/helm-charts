@@ -10768,6 +10768,32 @@ entries:
   rekor-tiles:
   - annotations:
       artifacthub.io/images: |
+        - name: rekor-tiles-gcp
+          image: ghcr.io/sigstore/rekor-tiles/gcp:v2.1.0@sha256:fc3f2e814c9c7a00064047cfaaa3a1b11f61aee1fd081308ddd8608c1f8bee38
+        - name: rekor-tiles-posix
+          image: ghcr.io/sigstore/rekor-tiles/posix:v2.1.0@sha256:23dca2f666638fa61a9e4bc7dab1b524a616bdfe19fb9723e95b5c5000f724dc
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.1.0
+    created: "2026-01-17T00:07:26.016532151Z"
+    description: Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature
+      transparency log
+    digest: 0268db6040db4d512bd774ecd56ae5c503a0b130fb98474d4abb824999f4bcdb
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor-tiles
+    sources:
+    - https://github.com/sigstore/rekor-tiles
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-tiles-1.1.0/rekor-tiles-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      artifacthub.io/images: |
         - name: rekor-tiles
           image: ghcr.io/sigstore/rekor-tiles:v2.0.1@sha256:640300626b3f3aa6c068df92a3f2336320c1327ba42ce84f44b893379adbadef
       artifacthub.io/license: Apache-2.0
@@ -23050,4 +23076,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2026-01-16T19:47:47.341425053Z"
+generated: "2026-01-17T00:07:26.018438824Z"
