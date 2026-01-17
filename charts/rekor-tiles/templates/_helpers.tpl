@@ -95,8 +95,13 @@ Server Arguments
 {{- if .Values.server.clientSigningAlgorithms }}
 - {{ printf "--client-signing-algorithms=%s" .Values.server.clientSigningAlgorithms | quote }}
 {{- end }}
+{{- if .Values.server.gcp }}
 - {{ printf "--gcp-bucket=%s" .Values.server.gcp.bucket | quote }}
 - {{ printf "--gcp-spanner=%s" .Values.server.gcp.spanner | quote }}
+{{- end }}
+{{- if .Values.server.posix }}
+- {{ printf "--storage-dir=%s" (.Values.server.posix.storageDir).path | quote }}
+{{- end }}
 - "--grpc-address=0.0.0.0"
 {{- if .Values.server.grpc }}
 {{- if .Values.server.grpc.port }}
@@ -168,11 +173,16 @@ Server Arguments
 Create the image path for the passed in image field
 */}}
 {{- define "rekor-tiles.image" -}}
-{{- if eq (substr 0 7 .version) "sha256:" -}}
-{{- printf "%s/%s@%s" .registry .repository .version -}}
-{{- else -}}
-{{- printf "%s/%s:%s" .registry .repository .version -}}
+{{- $version := printf "@%s" .version -}}
+{{- if ne (substr 0 7 .version) "sha256:" -}}
+{{- $version = printf ":%s" .version -}}
+{{- if and (eq .flavor "posix") .posixSHA -}}
+{{- $version = printf "%s@%s" $version .posixSHA }}
+{{- else if and (eq .flavor "gcp") .gcpSHA -}}
+{{- $version = printf "%s@%s" $version .gcpSHA }}
 {{- end -}}
+{{- end -}}
+{{- printf "%s/%s/%s%s" .registry .repository .flavor $version -}}
 {{- end -}}
 
 {{/*

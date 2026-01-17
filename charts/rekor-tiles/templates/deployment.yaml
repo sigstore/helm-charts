@@ -71,7 +71,7 @@ spec:
             {{- toYaml .Values.lifecycle | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-{{- if or .Values.server.signer.file .Values.server.grpcSvcTLS .Values.server.signer.tink .Values.server.witnessing }}
+{{- if or .Values.server.signer.file .Values.server.grpcSvcTLS .Values.server.signer.tink .Values.server.witnessing (.Values.server.posix).storageDir }}
           volumeMounts:
 {{- end }}
 {{- if .Values.server.signer.file }}
@@ -92,8 +92,12 @@ spec:
             - name: witness-config
               mountPath: /etc/witness-config
 {{- end }}
+{{- if (.Values.server.posix).storageDir }}
+            - name: {{ .Values.server.posix.storageDir.name }}
+              mountPath: {{ .Values.server.posix.storageDir.path }}
+{{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
-{{- if or .Values.server.signer.file .Values.server.grpcSvcTLS .Values.server.signer.tink .Values.server.witnessing }}
+{{- if or .Values.server.signer.file .Values.server.grpcSvcTLS .Values.server.signer.tink .Values.server.witnessing (.Values.server.posix).storageDir }}
       volumes:
 {{- end }}
 {{- if ((.Values.server.signer.file).secret).name }}
@@ -123,6 +127,10 @@ spec:
         - name: witness-config
           configMap:
             name: {{ .Values.server.witnessing.configMapName }}
+{{- end }}
+{{- if ((.Values.server.posix).storageDir).volume }}
+        - name: {{ .Values.server.posix.storageDir.name -}}
+          {{- toYaml .Values.server.posix.storageDir.volume | nindent 10 }}
 {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:

@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.1](https://img.shields.io/badge/AppVersion-2.0.1-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.0](https://img.shields.io/badge/AppVersion-2.1.0-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
@@ -58,10 +58,13 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
+| image.flavor | string | `"gcp"` |  |
+| image.gcpSHA | string | `"sha256:fc3f2e814c9c7a00064047cfaaa3a1b11f61aee1fd081308ddd8608c1f8bee38"` |  |
+| image.posixSHA | string | `"sha256:23dca2f666638fa61a9e4bc7dab1b524a616bdfe19fb9723e95b5c5000f724dc"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"ghcr.io"` |  |
 | image.repository | string | `"sigstore/rekor-tiles"` |  |
-| image.version | string | `"v2.0.1@sha256:640300626b3f3aa6c068df92a3f2336320c1327ba42ce84f44b893379adbadef"` |  |
+| image.version | string | `"v2.1.0"` |  |
 | imagePullSecrets | list | `[]` |  |
 | lifecycle.preStop.exec.command[0] | string | `"sleep"` |  |
 | lifecycle.preStop.exec.command[1] | string | `"15"` |  |
@@ -95,6 +98,7 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | server.hostname | string | `"localhost"` |  |
 | server.http.metricsPort | string | `"2112"` |  |
 | server.http.port | string | `"3000"` |  |
+| server.posix | object | `{}` |  |
 | server.readOnly | bool | `false` |  |
 | server.serverConfig | object | `{}` |  |
 | server.signer | object | `{}` |  |
