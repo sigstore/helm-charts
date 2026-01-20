@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}
       {{- end }}
-{{- if not .Values.server.args.disable_ct_log }}
+{{- if and (not .Values.server.args.disable_ct_log) .Values.init.enabled }}
       initContainers:
         - name: "check-ctlog-health"
           image: "{{ template "fulcio.image" .Values.init.image.curl }}"
