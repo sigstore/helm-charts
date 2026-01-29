@@ -13,7 +13,12 @@ Charts are available in the following formats:
 
 ## Contribute
 
-:heart: Planning to contribute? Please following our [contributing guidelines](CONTRIBUTING.md) to have your contribution smoothly flowing into this project.
+:heart: Planning to contribute to this project ? Please follow our [contributing guidelines](CONTRIBUTING.md) to have your contributions smoothly flowing into this project.
+
+## Prerequisites
+
+- [Kubernetes](https://kubernetes.io/)
+- [Helm3](https://helm.sh/)
 
 ### Installing from the Chart Repository
 
@@ -24,7 +29,7 @@ helm repo add sigstore https://sigstore.github.io/helm-charts
 helm repo update
 ```
 
-Once the chart has been added, install one of the available charts:
+Once the chart is added, install one of the available [Helm chart](https://github.com/Sagar2366/sigstore-helm-charts/tree/main/charts):
 
 ```shell
 helm upgrade -i <release_name> sigstore/<chart_name>
