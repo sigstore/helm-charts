@@ -175,7 +175,7 @@
           "type": "object"
         },
         "image": {
-          "default": "ghcr.io/sigstore/scaffolding/prober:v0.7.29@sha256:7bf2fcee8c1e07e5c5c7f3fe3d59cd2aa34288489f423dac67f2136ed62b6fb6",
+          "default": "ghcr.io/sigstore/scaffolding/prober:v0.7.29@sha256:1660956b4eb249970c8c2a2ff6fb2dad78e855a6a64af87d5aa62f674784b54f",
           "required": [],
           "title": "image",
           "type": "string"
