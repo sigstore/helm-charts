@@ -456,6 +456,9 @@
                 "nodeSelector": {
                     "type": "object"
                 },
+                "podLabels": {
+                    "type": "object"
+                },
                 "replicaCount": {
                     "type": "integer"
                 },

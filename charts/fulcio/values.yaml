@@ -118,6 +118,8 @@ server:
           port: 5555
           requestPath: "/healthz"
           type: HTTP
+  # -- Additional labels to add to the server pod
+  podLabels: {}
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533
