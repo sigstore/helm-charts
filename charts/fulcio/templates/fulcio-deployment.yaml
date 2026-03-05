@@ -19,6 +19,9 @@ spec:
         {{- end }}
       labels:
         {{- include "fulcio.selectorLabels" . | nindent 8 }}
+        {{- if .Values.server.podLabels }}
+        {{- toYaml .Values.server.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       serviceAccountName: {{ template "fulcio.serviceAccountName" . }}
       # This doesn't actually use Kubernetes credentials, so don't mount them in.
