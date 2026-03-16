@@ -19,6 +19,9 @@ spec:
         {{- end }}
       labels:
         {{- include "ctlog.labels" . | nindent 8 }}
+        {{- if .Values.server.podLabels}}
+        {{ toYaml .Values.server.podLabels | nindent 8 }}
+        {{- end}}
     spec:
       serviceAccountName: {{ template "ctlog.serviceAccountName" . }}
       {{- if .Values.imagePullSecrets }}
