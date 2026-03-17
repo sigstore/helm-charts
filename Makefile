@@ -8,9 +8,9 @@ CHARTS := $(wildcard ./charts/*)
 CHARTS_NAMES := $(notdir $(CHARTS))
 
 .PHONY: lint
-lint: helm-deps-update $(addprefix lint-, $(CHARTS_NAMES))
+lint: $(addprefix lint-, $(CHARTS_NAMES))
 
-lint-%:
+lint-%: helm-deps-update-%
 	@docker run \
 	-it \
 	-e HOME=/home/ct \
