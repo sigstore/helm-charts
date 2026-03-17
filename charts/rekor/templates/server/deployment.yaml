@@ -121,6 +121,10 @@ spec:
                   name: {{ .Values.server.awsKmsCredentialsSecretName }}
                   key: secretAccessKey
             {{- end }}
+            {{- if .Values.server.gomemlimit }}
+            - name: GOMEMLIMIT
+              value: {{ .Values.server.gomemlimit | quote }}
+            {{- end }}
           args:
 {{  include "rekor.server.args" . | indent 12 }}
           ports:
