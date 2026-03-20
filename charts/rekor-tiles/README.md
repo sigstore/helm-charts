@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.2.1](https://img.shields.io/badge/AppVersion-2.2.1-informational?style=flat-square)
+![Version: 1.1.3](https://img.shields.io/badge/Version-1.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.2.1](https://img.shields.io/badge/AppVersion-2.2.1-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
@@ -58,8 +58,10 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
+| image.awsSHA | string | `"sha256:cd82665772e1aaf50e270806a0179fd21cf87c88eb5245a047efc7c6ef02d216"` |  |
 | image.flavor | string | `"gcp"` |  |
 | image.gcpSHA | string | `"sha256:17f6584cc8f531083a56d3ff2dd4e03b00c604a6b6f6bc62a5e29c7baea46895"` |  |
+| image.gcpcloudsqlSHA | string | `"sha256:cf2cec2cd58c17c2a19c9fea81ef33660d92063935122da0491a30beca6c89b0"` |  |
 | image.posixSHA | string | `"sha256:627422bf9da146d1d9ff4e1c1e8301a1780ab6ad9b32bccff51ecd9f8c820e41"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"ghcr.io"` |  |
@@ -91,8 +93,10 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `65533` |  |
 | server.antispam | object | `{}` |  |
+| server.aws | object | `{}` |  |
 | server.extraArgs | list | `[]` |  |
 | server.gcp | object | `{}` |  |
+| server.gcpcloudsql | object | `{}` |  |
 | server.grpc.port | string | `"3001"` |  |
 | server.grpcSvcTLS | object | `{}` |  |
 | server.hostname | string | `"localhost"` |  |

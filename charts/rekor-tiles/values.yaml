@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  flavor: gcp  # Must be gcp or posix
+  flavor: gcp  # Must be gcp, posix, aws, or gcpcloudsql
   registry: ghcr.io
   repository: sigstore/rekor-tiles
   pullPolicy: IfNotPresent
@@ -15,6 +15,10 @@ image:
   gcpSHA: sha256:17f6584cc8f531083a56d3ff2dd4e03b00c604a6b6f6bc62a5e29c7baea46895
   # crane digest ghcr.io/sigstore/rekor-tiles/posix:v2.2.1
   posixSHA: sha256:627422bf9da146d1d9ff4e1c1e8301a1780ab6ad9b32bccff51ecd9f8c820e41
+  # crane digest ghcr.io/sigstore/rekor-tiles/aws:v2.2.1
+  awsSHA: sha256:cd82665772e1aaf50e270806a0179fd21cf87c88eb5245a047efc7c6ef02d216
+  # crane digest ghcr.io/sigstore/rekor-tiles/gcpcloudsql:v2.2.1
+  gcpcloudsqlSHA: sha256:cf2cec2cd58c17c2a19c9fea81ef33660d92063935122da0491a30beca6c89b0
 
 namespace:
   create: false
@@ -115,6 +119,14 @@ server:
   gcp: {}
     # spanner: projects/{projectId}/instances/{instanceId}/databases/{databaseId}
     # bucket: rekor-tiles-bucket
+  gcpcloudsql: {}
+    # cloudsqlDsn: user:password@tcp(127.0.0.1:3306)/rekor
+    # bucket: rekor-tiles-bucket
+  aws: {}
+    # bucket: rekor-tiles-bucket
+    # mysqlDsn: user:password@tcp(127.0.0.1:3306)/rekor
+    # maxOpenConns: 100
+    # maxIdleConns: 10
   posix: {}
     # storageDir:
     #   path: /storage

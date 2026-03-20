@@ -99,6 +99,20 @@ Server Arguments
 - {{ printf "--gcp-bucket=%s" .Values.server.gcp.bucket | quote }}
 - {{ printf "--gcp-spanner=%s" .Values.server.gcp.spanner | quote }}
 {{- end }}
+{{- if .Values.server.gcpcloudsql }}
+- {{ printf "--gcp-cloudsql-dsn=%s" .Values.server.gcpcloudsql.cloudsqlDsn | quote }}
+- {{ printf "--gcp-bucket=%s" .Values.server.gcpcloudsql.bucket | quote }}
+{{- end }}
+{{- if .Values.server.aws }}
+- {{ printf "--aws-bucket=%s" .Values.server.aws.bucket | quote }}
+- {{ printf "--aws-mysql-dsn=%s" .Values.server.aws.mysqlDsn | quote }}
+{{- if .Values.server.aws.maxOpenConns }}
+- {{ printf "--aws-max-open-conns=%d" (.Values.server.aws.maxOpenConns | int) | quote }}
+{{- end }}
+{{- if .Values.server.aws.maxIdleConns }}
+- {{ printf "--aws-max-idle-conns=%d" (.Values.server.aws.maxIdleConns | int) | quote }}
+{{- end }}
+{{- end }}
 {{- if .Values.server.posix }}
 - {{ printf "--storage-dir=%s" (.Values.server.posix.storageDir).path | quote }}
 {{- end }}
@@ -180,6 +194,10 @@ Create the image path for the passed in image field
 {{- $version = printf "%s@%s" $version .posixSHA }}
 {{- else if and (eq .flavor "gcp") .gcpSHA -}}
 {{- $version = printf "%s@%s" $version .gcpSHA }}
+{{- else if and (eq .flavor "aws") .awsSHA -}}
+{{- $version = printf "%s@%s" $version .awsSHA }}
+{{- else if and (eq .flavor "gcpcloudsql") .gcpcloudsqlSHA -}}
+{{- $version = printf "%s@%s" $version .gcpcloudsqlSHA }}
 {{- end -}}
 {{- end -}}
 {{- printf "%s/%s/%s%s" .registry .repository .flavor $version -}}
