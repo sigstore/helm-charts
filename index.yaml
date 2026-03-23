@@ -10979,6 +10979,36 @@ entries:
           image: ghcr.io/sigstore/rekor-tiles/gcp:v2.2.1@sha256:17f6584cc8f531083a56d3ff2dd4e03b00c604a6b6f6bc62a5e29c7baea46895
         - name: rekor-tiles-posix
           image: ghcr.io/sigstore/rekor-tiles/posix:v2.2.1@sha256:627422bf9da146d1d9ff4e1c1e8301a1780ab6ad9b32bccff51ecd9f8c820e41
+        - name: rekor-tiles-aws
+          image: ghcr.io/sigstore/rekor-tiles/aws:v2.2.1@sha256:cd82665772e1aaf50e270806a0179fd21cf87c88eb5245a047efc7c6ef02d216
+        - name: rekor-tiles-gcpcloudsql
+          image: ghcr.io/sigstore/rekor-tiles/gcpcloudsql:v2.2.1@sha256:cf2cec2cd58c17c2a19c9fea81ef33660d92063935122da0491a30beca6c89b0
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.2.1
+    created: "2026-03-23T09:11:52.879067798Z"
+    description: Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature
+      transparency log
+    digest: bf75c00f6b3f9ef93ab28710d5c23d5c027c170a9d7ef92284c5185dfce73adc
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor-tiles
+    sources:
+    - https://github.com/sigstore/rekor-tiles
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-tiles-1.1.3/rekor-tiles-1.1.3.tgz
+    version: 1.1.3
+  - annotations:
+      artifacthub.io/images: |
+        - name: rekor-tiles-gcp
+          image: ghcr.io/sigstore/rekor-tiles/gcp:v2.2.1@sha256:17f6584cc8f531083a56d3ff2dd4e03b00c604a6b6f6bc62a5e29c7baea46895
+        - name: rekor-tiles-posix
+          image: ghcr.io/sigstore/rekor-tiles/posix:v2.2.1@sha256:627422bf9da146d1d9ff4e1c1e8301a1780ab6ad9b32bccff51ecd9f8c820e41
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 2.2.1
@@ -23630,4 +23660,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2026-03-17T18:06:48.846932739Z"
+generated: "2026-03-23T09:11:52.880214277Z"
