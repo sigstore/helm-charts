@@ -19,6 +19,12 @@
         "posixSHA": {
             "type": "string"
         },
+        "awsSHA": {
+            "type": "string"
+        },
+        "gcpcloudsqlSHA": {
+            "type": "string"
+        },
         "registry": {
           "type": "string"
         },
@@ -36,6 +42,8 @@
         "flavor",
         "gcpSHA",
         "posixSHA",
+        "awsSHA",
+        "gcpcloudsqlSHA",
         "pullPolicy",
         "registry",
         "repository",
@@ -342,6 +350,14 @@
           "type": "object",
           "properties": {}
         },
+        "aws": {
+          "type": "object",
+          "properties": {}
+        },
+        "gcpcloudsql": {
+          "type": "object",
+          "properties": {}
+        },
         "grpc": {
           "type": "object",
           "properties": {
@@ -404,6 +420,8 @@
         "hostname",
         "http",
         "posix",
+        "aws",
+        "gcpcloudsql",
         "readOnly",
         "serverConfig",
         "signer",
