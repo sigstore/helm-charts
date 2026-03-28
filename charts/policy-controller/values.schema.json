@@ -91,7 +91,7 @@
           "title": "image",
           "type": "object"
         },
-        "podSecurityContext": {
+        "containerSecurityContext": {
           "properties": {
             "enabled": {
               "default": false,
@@ -100,7 +100,7 @@
             }
           },
           "required": [],
-          "title": "podSecurityContext",
+          "title": "containerSecurityContext",
           "type": "object"
         },
         "priorityClass": {
@@ -310,7 +310,7 @@
           "title": "podDisruptionBudget",
           "type": "object"
         },
-        "podSecurityContext": {
+        "containerSecurityContext": {
           "properties": {
             "allowPrivilegeEscalation": {
               "default": false,
@@ -353,7 +353,7 @@
             }
           },
           "required": [],
-          "title": "podSecurityContext",
+          "title": "containerSecurityContext",
           "type": "object"
         },
         "priorityClass": {
@@ -413,7 +413,7 @@
           "title": "resources",
           "type": "object"
         },
-        "securityContext": {
+        "podSecurityContext": {
           "properties": {
             "enabled": {
               "default": false,
@@ -427,7 +427,7 @@
             }
           },
           "required": [],
-          "title": "securityContext",
+          "title": "podSecurityContext",
           "type": "object"
         },
         "service": {
