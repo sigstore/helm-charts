@@ -11,6 +11,8 @@ metadata:
     cloud.google.com/backend-config: '{"ports": {"{{- $.Values.server.svcPort -}}":"{{- printf "%v" $backendConfigName -}}"}}'
   {{- end }}
     cloud.google.com/neg: '{"ingress": true}'
+{{- else }}
+    cloud.google.com/neg: '{"exposed_ports": {"{{ .Values.neg.http.port }}":{"name": "{{ .Values.neg.http.name }}"}}}'
 {{- end }}
   labels:
     {{- include "tsa.labels" . | nindent 4 }}

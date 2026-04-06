@@ -15,6 +15,22 @@
             },
             "type": "object"
         },
+        "neg": {
+            "type": "object",
+            "properties": {
+                "http": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
         "server": {
             "properties": {
                 "affinity": {

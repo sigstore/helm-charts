@@ -60,5 +60,10 @@ server:
   nodeSelector: {}
   affinity: {}
 
+neg:
+  http:
+    name: ""
+    port: 80
+
 # Force namespace of namespaced resources
 forceNamespace: ""

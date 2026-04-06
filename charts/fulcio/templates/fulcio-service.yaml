@@ -17,6 +17,9 @@ metadata:
   {{- $printed = true -}}
 {{- end }}
 {{- end }}
+{{- if not .Values.server.ingresses }}
+    cloud.google.com/neg: '{"exposed_ports": {"{{ .Values.neg.http.port }}":{"name": "{{ .Values.neg.http.name }}"}, "{{ .Values.neg.grpc.port }}":{"name": "{{ .Values.neg.grpc.name}}"}}}'
+{{- end }}
   labels:
     {{- include "fulcio.labels" . | nindent 4 }}
 {{- if .Values.server.service.labels }}
