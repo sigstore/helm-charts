@@ -195,6 +195,33 @@
                 }
             }
         },
+                "neg": {
+            "type": "object",
+            "properties": {
+                "grpc": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "http": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "port": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
         "server": {
             "type": "object",
             "properties": {

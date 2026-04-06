@@ -127,6 +127,14 @@ server:
   nodeSelector: {}
   affinity: {}
 
+neg:
+  http:
+    name: ""
+    port: 80
+  grpc:
+    name: ""
+    port: 5554
+
 createcerts:
   enabled: true
   replicaCount: 1
