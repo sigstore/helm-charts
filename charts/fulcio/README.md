@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.7.5](https://img.shields.io/badge/Version-2.7.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.5](https://img.shields.io/badge/AppVersion-1.8.5-informational?style=flat-square)
+![Version: 2.8.0](https://img.shields.io/badge/Version-2.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.5](https://img.shields.io/badge/AppVersion-1.8.5-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -118,6 +118,10 @@ helm uninstall [RELEASE_NAME]
 | init.image.curl.version | string | `"sha256:935d9100e9ba842cdb060de42472c7ca90cfe9a7c96e4dacb55e79e560b3ff40"` | 8.17.0 |
 | namespace.create | bool | `false` |  |
 | namespace.name | string | `"fulcio-system"` |  |
+| neg.grpc.name | string | `""` |  |
+| neg.grpc.port | int | `5554` |  |
+| neg.http.name | string | `""` |  |
+| neg.http.port | int | `80` |  |
 | server.affinity | object | `{}` |  |
 | server.args.aws_hsm_root_ca_path | string | `nil` |  |
 | server.args.certificateAuthority | string | `"fileca"` |  |
