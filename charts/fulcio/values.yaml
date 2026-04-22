@@ -47,6 +47,11 @@ server:
     # kms_resource: gcpkms://....
     # kms_cert_chain: |-
     #   << your PEM encoded cert chain here. Order from active intermedate first to root last >>
+    # tink_kms_resource: gcp-kms://...
+    # tink_kms_cert_chain: |-
+    #   << your PEM encoded Tink cert chain here. Order from active intermedate first to root last >>
+    # tink_enc_keyset: |-
+    #   << your encrypted Tink keyset >>
     hsm_caroot_id:
     aws_hsm_root_ca_path:
     gcp_private_ca_parent: projects/test/locations/us-east1/caPools/test

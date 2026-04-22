@@ -20,3 +20,7 @@ data:
   {{- if (eq .Values.server.args.certificateAuthority "kmsca")}}
   chain.pem: {{.Values.server.args.kms_cert_chain | quote }}
   {{- end }}
+  {{- if (eq .Values.server.args.certificateAuthority "tinkca")}}
+  chain.pem: {{ .Values.server.args.tink_kms_cert_chain | quote }}
+  tink.keyset.enc: {{ .Values.server.args.tink_enc_keyset | quote }}
+  {{- end }}

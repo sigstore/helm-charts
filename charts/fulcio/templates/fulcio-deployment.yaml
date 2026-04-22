@@ -81,6 +81,11 @@ spec:
             - "--kms-resource={{ .Values.server.args.kms_resource }}"
             - "--kms-cert-chain-path=/etc/fulcio-config/chain.pem"
             {{- end }}
+            {{- if eq .Values.server.args.certificateAuthority "tinkca" }}
+            - "--tink-kms-resource={{ .Values.server.args.tink_kms_resource }}"
+            - "--tink-cert-chain-path=/etc/fulcio-config/chain.pem"
+            - "--tink-keyset-path=/etc/fulcio-config/tink.keyset.enc"
+            {{- end }}
             - "--ct-log-url={{ template "fulcio.ctlog.url" . }}"
             - '--config-path=/etc/fulcio-config/config.{{- if eq .Values.config.format "yaml"}}yaml{{- else }}json{{- end }}'
             {{- if .Values.server.grpcSvcTLS }}
