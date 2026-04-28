@@ -2446,6 +2446,37 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 1.8.5
+    created: "2026-04-28T18:12:14.069421255Z"
+    dependencies:
+    - condition: ctlog.enabled
+      name: ctlog
+      repository: https://sigstore.github.io/helm-charts
+      version: 0.2.66
+    description: 'Fulcio is a free code signing Certificate Authority, built to make
+      short-lived certificates available to anyone. '
+    digest: e5705e7396c74991ce03c32b615e16b8b5206f26a36b8e7a2486f386647f5d0c
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: fulcio
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/fulcio-2.9.0/fulcio-2.9.0.tgz
+    version: 2.9.0
+  - annotations:
+      artifacthub.io/images: |
+        - name: fulcio
+          image: ghcr.io/sigstore/fulcio:v1.8.5@sha256:b51ed0cb6761070d632bf81d28894ef1827b2c18da2535689ca8e98d91d3a015
+        - name: createcerts
+          image: ghcr.io/sigstore/scaffolding/createcerts:v0.7.31@sha256:7f59f7c08d1a82ac5fbd6d0f1f9082152dadc8d59022c52780eb3648f4b88112
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl:8.17.0@sha256:935d9100e9ba842cdb060de42472c7ca90cfe9a7c96e4dacb55e79e560b3ff40
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.8.5
     created: "2026-04-22T21:36:39.908600459Z"
     dependencies:
     - condition: ctlog.enabled
@@ -23713,4 +23744,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2026-04-22T21:36:40.087873768Z"
+generated: "2026-04-28T18:12:14.070378598Z"
