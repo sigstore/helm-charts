@@ -10,7 +10,11 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    cooldown:
+      default-days: 7
   - package-ecosystem: "helm"
     directory: "/"
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7

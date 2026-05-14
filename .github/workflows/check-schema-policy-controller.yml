@@ -5,6 +5,9 @@ on:
     paths:
       - "charts/policy-controller/**"
 
+permissions:
+  contents: read
+
 jobs:
   schema:
     runs-on: ubuntu-latest
