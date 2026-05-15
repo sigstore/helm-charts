@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.9.0](https://img.shields.io/badge/Version-2.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.5](https://img.shields.io/badge/AppVersion-1.8.5-informational?style=flat-square)
+![Version: 2.10.0](https://img.shields.io/badge/Version-2.10.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.5](https://img.shields.io/badge/AppVersion-1.8.5-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -169,10 +169,12 @@ helm uninstall [RELEASE_NAME]
 | server.ingresses[0].staticGlobalIP | string | `"lb-ext-ip"` |  |
 | server.ingresses[0].tls | list | `[]` |  |
 | server.kmsType | string | `"none"` | KMS type for signing key (possible values: "" / "none", "aws") |
+| server.livenessProbe | object | `{"failureThreshold":3,"httpGet":{"path":"/healthz","port":5555,"scheme":"HTTP"},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1}` | Liveness probe for the fulcio server container. `httpGet.port` should match `server.args.port`. |
 | server.logging.production | bool | `false` |  |
 | server.name | string | `"server"` |  |
 | server.nodeSelector | object | `{}` |  |
 | server.podLabels | object | `{}` | Additional labels to add to the server pod |
+| server.readinessProbe | object | `{"failureThreshold":3,"httpGet":{"path":"/healthz","port":5555,"scheme":"HTTP"},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1}` | Readiness probe for the fulcio server container. `httpGet.port` should match `server.args.port`. |
 | server.replicaCount | int | `1` |  |
 | server.secret | string | `"fulcio-server-secret"` |  |
 | server.securityContext.runAsNonRoot | bool | `true` |  |
