@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.7.10](https://img.shields.io/badge/Version-1.7.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.2](https://img.shields.io/badge/AppVersion-1.5.2-informational?style=flat-square)
+![Version: 1.7.11](https://img.shields.io/badge/Version-1.7.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.2](https://img.shields.io/badge/AppVersion-1.5.2-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -101,6 +101,15 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | redis.image.registry | string | `"docker.io"` |  |
 | redis.image.repository | string | `"redis"` |  |
 | redis.image.version | string | `"sha256:148bb5411c184abd288d9aaed139c98123eeb8824c5d3fce03cf721db58066d8"` | 6.2.17-alpine3.21 |
+| redis.livenessProbe.exec.command[0] | string | `"/bin/sh"` |  |
+| redis.livenessProbe.exec.command[1] | string | `"-i"` |  |
+| redis.livenessProbe.exec.command[2] | string | `"-c"` |  |
+| redis.livenessProbe.exec.command[3] | string | `"test \"$(redis-cli -h 127.0.0.1 ping)\" = \"PONG\""` |  |
+| redis.livenessProbe.failureThreshold | int | `3` |  |
+| redis.livenessProbe.initialDelaySeconds | int | `5` |  |
+| redis.livenessProbe.periodSeconds | int | `10` |  |
+| redis.livenessProbe.successThreshold | int | `1` |  |
+| redis.livenessProbe.timeoutSeconds | int | `1` |  |
 | redis.name | string | `"redis"` |  |
 | redis.nodeSelector | object | `{}` |  |
 | redis.port | int | `6379` |  |
