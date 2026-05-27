@@ -12,7 +12,7 @@ metadata:
   {{- end }}
 spec:
   accessModes:
-    - {{ .Values.redis.persistence.accessMode | default "ReadWriteOnce" }}
+    - {{ .Values.redis.persistence.accessMode }}
   {{- if .Values.redis.persistence.storageClass }}
   {{- if eq .Values.redis.persistence.storageClass "-" }}
   storageClassName: ""
@@ -22,5 +22,5 @@ spec:
   {{- end }}
   resources:
     requests:
-      storage: {{ .Values.redis.persistence.size | default "5Gi" }}
+      storage: {{ .Values.redis.persistence.size }}
 {{- end }}
