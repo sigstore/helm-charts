@@ -362,6 +362,34 @@
                     "properties": {},
                     "type": "object"
                 },
+                "persistence": {
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "accessMode": {
+                            "type": "string",
+                            "enum": [
+                                "ReadWriteOnce",
+                                "ReadWriteMany"
+                            ]
+                        },
+                        "existingClaim": {
+                            "type": "string"
+                        },
+                        "storageClass": {
+                            "type": "string"
+                        },
+                        "size": {
+                            "type": "string"
+                        },
+                        "annotations": {
+                            "properties": {},
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
                 "port": {
                     "type": "integer"
                 },

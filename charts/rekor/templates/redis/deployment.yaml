@@ -18,11 +18,10 @@ spec:
     matchLabels:
       {{- include "rekor.redis.matchLabels" . | nindent 6 }}
   replicas: {{ .Values.redis.replicaCount }}
-  {{- if .Values.redis.strategy }}
+  {{- if and .Values.redis.persistence.enabled (eq .Values.redis.persistence.accessMode "ReadWriteOnce") }}
   strategy:
-{{ toYaml .Values.redis.strategy | trim | indent 4 }}
-    {{ if eq .Values.redis.strategy.type "Recreate" }}rollingUpdate: null{{ end }}
-{{- end }}
+    type: Recreate
+  {{- end }}
   template:
     metadata:
     {{- if .Values.redis.podAnnotations }}
@@ -96,5 +95,14 @@ spec:
     {{- end }}
       volumes:
         - name: storage
+        {{- if .Values.redis.persistence.enabled }}
+          persistentVolumeClaim:
+            {{- if .Values.redis.persistence.existingClaim }}
+            claimName: {{ .Values.redis.persistence.existingClaim }}
+            {{- else }}
+            claimName: {{ template "rekor.redis.fullname" . }}
+            {{- end }}
+        {{- else }}
           emptyDir: {}
+        {{- end }}
 {{- end }}
