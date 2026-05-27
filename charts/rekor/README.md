@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.7.12](https://img.shields.io/badge/Version-1.7.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.2](https://img.shields.io/badge/AppVersion-1.5.2-informational?style=flat-square)
+![Version: 1.8.0](https://img.shields.io/badge/Version-1.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.2](https://img.shields.io/badge/AppVersion-1.5.2-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -117,6 +117,12 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | redis.livenessProbe.timeoutSeconds | int | `1` |  |
 | redis.name | string | `"redis"` |  |
 | redis.nodeSelector | object | `{}` |  |
+| redis.persistence.accessMode | string | `"ReadWriteOnce"` |  |
+| redis.persistence.annotations | object | `{}` |  |
+| redis.persistence.enabled | bool | `true` |  |
+| redis.persistence.existingClaim | string | `""` |  |
+| redis.persistence.size | string | `"5Gi"` |  |
+| redis.persistence.storageClass | string | `""` |  |
 | redis.port | int | `6379` |  |
 | redis.readinessProbe.exec.command[0] | string | `"/bin/sh"` |  |
 | redis.readinessProbe.exec.command[1] | string | `"-i"` |  |
