@@ -14,6 +14,16 @@ spec:
   ttlSecondsAfterFinished: {{ .Values.createtree.ttlSecondsAfterFinished }}
 {{- end }}
   template:
+    metadata:
+    {{- if .Values.createtree.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.createtree.podAnnotations | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "rekor.labels" . | nindent 8 }}
+        {{- if .Values.createtree.podLabels }}
+        {{ toYaml .Values.createtree.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       serviceAccountName: {{ template "rekor.serviceAccountName.createtree" . }}
       restartPolicy: Never
