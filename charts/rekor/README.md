@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.7.11](https://img.shields.io/badge/Version-1.7.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.2](https://img.shields.io/badge/AppVersion-1.5.2-informational?style=flat-square)
+![Version: 1.7.12](https://img.shields.io/badge/Version-1.7.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.5.2](https://img.shields.io/badge/AppVersion-1.5.2-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -27,6 +27,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | backfillredis.affinity | object | `{}` |  |
+| backfillredis.annotations | object | `{}` |  |
 | backfillredis.enabled | bool | `false` |  |
 | backfillredis.endIndex | int | `-1` |  |
 | backfillredis.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -35,6 +36,8 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | backfillredis.image.version | string | `"sha256:a13cd8b2a554d6116888fd1f383cf6e91fc1716df5eda392b82e6bfc66995ec3"` |  |
 | backfillredis.name | string | `"backfillredis"` |  |
 | backfillredis.nodeSelector | object | `{}` |  |
+| backfillredis.podAnnotations | object | `{}` |  |
+| backfillredis.podLabels | object | `{}` |  |
 | backfillredis.rekorAddress | string | `"rekor.rekor-system.svc"` |  |
 | backfillredis.resources | object | `{}` |  |
 | backfillredis.securityContext.runAsNonRoot | bool | `true` |  |
@@ -51,6 +54,8 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | createtree.image.version | string | `"sha256:e5232e8c9122fcf87260b48f4b05bcb95c35c8aaa57581b42f0fde7460bd3e91"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.nodeSelector | object | `{}` |  |
+| createtree.podAnnotations | object | `{}` |  |
+| createtree.podLabels | object | `{}` |  |
 | createtree.resources | object | `{}` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
 | createtree.securityContext.runAsUser | int | `65533` |  |

@@ -242,6 +242,8 @@ createtree:
     runAsUser: 65533
   resources: {}
   annotations: {}
+  podAnnotations: {}
+  podLabels: {}
   tolerations: []
   nodeSelector: {}
   affinity: {}
@@ -264,6 +266,9 @@ backfillredis:
   startIndex: -1
   endIndex: -1
   resources: {}
+  annotations: {}
+  podAnnotations: {}
+  podLabels: {}
   tolerations: []
   nodeSelector: {}
   affinity: {}
