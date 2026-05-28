@@ -18,6 +18,8 @@ deployment:
   resources: {}
   containerSecurityContext: {}
   securityContext: {}
+  podAnnotations: {}
+  podLabels: {}
   tolerations: []
   nodeSelector: {}
   affinity: {}

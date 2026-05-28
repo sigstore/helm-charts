@@ -1,14 +1,14 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
     "properties": {
         "deployment": {
+            "type": "object",
             "properties": {
                 "affinity": {
-                    "properties": {},
                     "type": "object"
                 },
                 "containerSecurityContext": {
-                    "properties": {},
                     "type": "object"
                 },
                 "imagePullPolicy": {
@@ -18,7 +18,12 @@
                     "type": "string"
                 },
                 "nodeSelector": {
-                    "properties": {},
+                    "type": "object"
+                },
+                "podAnnotations": {
+                    "type": "object"
+                },
+                "podLabels": {
                     "type": "object"
                 },
                 "port": {
@@ -37,7 +42,6 @@
                     "type": "object"
                 },
                 "securityContext": {
-                    "properties": {},
                     "type": "object"
                 },
                 "tolerations": {
@@ -47,21 +51,12 @@
                     "type": "string"
                 },
                 "volumeMounts": {
-                    "type": "array",
-                    "items": {
-                        "properties": {},
-                        "type": "object"
-                    }
+                    "type": "array"
                 },
                 "volumes": {
-                    "type": "array",
-                    "items": {
-                        "properties": {},
-                        "type": "object"
-                    }
+                    "type": "array"
                 }
-            },
-            "type": "object"
+            }
         },
         "enabled": {
             "type": "boolean"
@@ -76,9 +71,9 @@
             "type": "array"
         },
         "ingress": {
+            "type": "object",
             "properties": {
                 "annotations": {
-                    "properties": {},
                     "type": "object"
                 },
                 "className": {
@@ -88,9 +83,12 @@
                     "type": "boolean"
                 },
                 "http": {
+                    "type": "object",
                     "properties": {
                         "hosts": {
+                            "type": "array",
                             "items": {
+                                "type": "object",
                                 "properties": {
                                     "host": {
                                         "type": "string"
@@ -98,21 +96,18 @@
                                     "path": {
                                         "type": "string"
                                     }
-                                },
-                                "type": "object"
-                            },
-                            "type": "array"
+                                }
+                            }
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "name": {
                     "type": "string"
                 }
-            },
-            "type": "object"
+            }
         },
         "namespace": {
+            "type": "object",
             "properties": {
                 "create": {
                     "type": "boolean"
@@ -120,8 +115,7 @@
                 "name": {
                     "type": "string"
                 }
-            },
-            "type": "object"
+            }
         },
         "roleBindingName": {
             "type": "string"
@@ -130,26 +124,16 @@
             "type": "string"
         },
         "secrets": {
+            "type": "object",
             "properties": {
                 "ctlog": {
+                    "type": "object",
                     "properties": {
                         "create": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
+                            "type": "boolean"
                         },
                         "enabled": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
-                        },
-                        "name": {
-                            "type": "string",
-                            "examples": [
-                                "rekor-public-key"
-                            ]
+                            "type": "boolean"
                         },
                         "key": {
                             "type": "string"
@@ -160,28 +144,16 @@
                         "path": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "fulcio": {
+                    "type": "object",
                     "properties": {
                         "create": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
+                            "type": "boolean"
                         },
                         "enabled": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
-                        },
-                        "name": {
-                            "type": "string",
-                            "examples": [
-                                "fulcio-server-secret"
-                            ]
+                            "type": "boolean"
                         },
                         "key": {
                             "type": "string"
@@ -192,28 +164,16 @@
                         "path": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "rekor": {
+                    "type": "object",
                     "properties": {
                         "create": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
+                            "type": "boolean"
                         },
                         "enabled": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
-                        },
-                        "name": {
-                            "type": "string",
-                            "examples": [
-                                "ctlog-public-key"
-                            ]
+                            "type": "boolean"
                         },
                         "key": {
                             "type": "string"
@@ -224,28 +184,16 @@
                         "path": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 },
                 "tsa": {
+                    "type": "object",
                     "properties": {
                         "create": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
+                            "type": "boolean"
                         },
                         "enabled": {
-                            "type": "boolean",
-                            "examples": [
-                                false
-                            ]
-                        },
-                        "name": {
-                            "type": "string",
-                            "examples": [
-                                "tsa-cert-chain"
-                            ]
+                            "type": "boolean"
                         },
                         "key": {
                             "type": "string"
@@ -256,13 +204,12 @@
                         "path": {
                             "type": "string"
                         }
-                    },
-                    "type": "object"
+                    }
                 }
-            },
-            "type": "object"
+            }
         },
         "service": {
+            "type": "object",
             "properties": {
                 "name": {
                     "type": "string"
@@ -270,12 +217,10 @@
                 "port": {
                     "type": "integer"
                 }
-            },
-            "type": "object"
+            }
         },
         "serviceAccountName": {
             "type": "string"
         }
-    },
-    "type": "object"
+    }
 }

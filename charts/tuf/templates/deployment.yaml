@@ -10,13 +10,11 @@ metadata:
   labels:
     {{- include "tuf.metaLabels" . | nindent 4 }}
     {{- include "tuf.matchLabels" . | nindent 4 }}
-
 spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
       {{- include "tuf.matchLabels" . | nindent 6 }}
-
 {{- if .Values.deployment.strategy }}
   strategy:
 {{ toYaml .Values.deployment.strategy | trim | indent 4 }}
@@ -24,9 +22,15 @@ spec:
 {{- end }}
   template:
     metadata:
+    {{- if .Values.deployment.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.deployment.podAnnotations | nindent 8 }}
+    {{- end }}
       labels:
-        {{- include "tuf.metaLabels" . | nindent 8 }}
-        {{- include "tuf.matchLabels" . | nindent 8 }}
+        {{- include "tuf.labels" . | nindent 8 }}
+        {{- if .Values.deployment.podLabels }}
+        {{ toYaml .Values.deployment.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:

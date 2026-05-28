@@ -73,7 +73,7 @@ Define the tuf.namespace template if set with forceNamespace or .Release.Namespa
 {{- end -}}
 
 {{/*
-Create labels for tuf components
+Selector labels
 */}}
 {{- define "tuf.matchLabels" -}}
 app.kubernetes.io/component: {{ .Values.deployment.name | quote }}
@@ -81,8 +81,15 @@ app.kubernetes.io/name: {{ include "tuf.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
-{{- define "tuf.metaLabels" -}}
+{{/*
+Common labels
+*/}}
+{{- define "tuf.labels" -}}
 helm.sh/chart: {{ include "tuf.chart" . }}
+{{ include "tuf.matchLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
