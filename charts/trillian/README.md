@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.3.14](https://img.shields.io/badge/Version-0.3.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.7.2](https://img.shields.io/badge/AppVersion-1.7.2-informational?style=flat-square)
+![Version: 0.3.15](https://img.shields.io/badge/Version-0.3.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.7.2](https://img.shields.io/badge/AppVersion-1.7.2-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -41,6 +41,7 @@ helm uninstall [RELEASE_NAME]
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | createdb.affinity | object | `{}` |  |
+| createdb.annotations | object | `{}` |  |
 | createdb.dbname | string | `"trillian"` |  |
 | createdb.enabled | bool | `true` |  |
 | createdb.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -49,6 +50,8 @@ helm uninstall [RELEASE_NAME]
 | createdb.image.version | string | `"sha256:3cee6c78973b82af6c3c3632bf8d44dafbab1632b3999a7292b170237c5dd5cc"` | v0.7.31 |
 | createdb.name | string | `"createdb"` |  |
 | createdb.nodeSelector | object | `{}` |  |
+| createdb.podAnnotations | object | `{}` |  |
+| createdb.podLabels | object | `{}` |  |
 | createdb.serviceAccount.annotations | object | `{}` |  |
 | createdb.serviceAccount.create | bool | `false` |  |
 | createdb.serviceAccount.name | string | `""` |  |
@@ -74,6 +77,8 @@ helm uninstall [RELEASE_NAME]
 | logServer.livenessProbe | object | `{}` |  |
 | logServer.name | string | `"log-server"` |  |
 | logServer.nodeSelector | object | `{}` |  |
+| logServer.podAnnotations | object | `{}` |  |
+| logServer.podLabels | object | `{}` |  |
 | logServer.portHTTP | int | `8090` |  |
 | logServer.portRPC | int | `8091` |  |
 | logServer.readinessProbe | object | `{}` |  |
@@ -105,6 +110,8 @@ helm uninstall [RELEASE_NAME]
 | logSigner.livenessProbe | object | `{}` |  |
 | logSigner.name | string | `"log-signer"` |  |
 | logSigner.nodeSelector | object | `{}` |  |
+| logSigner.podAnnotations | object | `{}` |  |
+| logSigner.podLabels | object | `{}` |  |
 | logSigner.portHTTP | int | `8090` |  |
 | logSigner.portRPC | int | `8091` |  |
 | logSigner.readinessProbe | object | `{}` |  |
@@ -169,6 +176,8 @@ helm uninstall [RELEASE_NAME]
 | mysql.persistence.size | string | `"5Gi"` |  |
 | mysql.persistence.storageClass | string | `nil` |  |
 | mysql.persistence.subPath | string | `""` |  |
+| mysql.podAnnotations | object | `{}` |  |
+| mysql.podLabels | object | `{}` |  |
 | mysql.port | int | `3306` |  |
 | mysql.readinessProbe.exec.command[0] | string | `"/etc/init.d/mysql"` |  |
 | mysql.readinessProbe.exec.command[1] | string | `"status"` |  |
