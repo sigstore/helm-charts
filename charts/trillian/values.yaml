@@ -123,6 +123,8 @@ mysql:
     existingClaim: ""
     accessModes:
       - ReadWriteOnce
+  podAnnotations: {}
+  podLabels: {}
   serviceAccount:
     create: true
     name: ""
@@ -140,6 +142,8 @@ logServer:
     pullPolicy: IfNotPresent
     # -- trillian v1.7.2 (scaffolding v0.7.31)
     version: sha256:d953a8eb3f9311e55ebee754de234f1f63e4db2d5e76c15326c288fb0887bb11
+  podAnnotations: {}
+  podLabels: {}
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -178,6 +182,8 @@ logSigner:
     pullPolicy: IfNotPresent
     # -- trillian v1.7.2 (scaffolding v0.7.31)
     version: sha256:51631983a7e6f0b3faeb188c590e65b9793a6a6617e0631f8b4fd68e98d0460e
+  podAnnotations: {}
+  podLabels: {}
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -213,6 +219,9 @@ createdb:
     create: false
     name: ""
     annotations: {}
+  annotations: {}
+  podAnnotations: {}
+  podLabels: {}
   nodeSelector: {}
   tolerations: []
   affinity: {}
