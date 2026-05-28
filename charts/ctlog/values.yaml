@@ -33,6 +33,7 @@ server:
     prometheus.io/scrape: "true"
     prometheus.io/path: /metrics
     prometheus.io/port: "6963"
+  podLabels: {}
   portHTTP: 6962
   portHTTPMetrics: 6963
   service:
@@ -110,6 +111,8 @@ createtree:
     runAsNonRoot: true
     runAsUser: 65533
   annotations: {}
+  podAnnotations: {}
+  podLabels: {}
   tolerations: []
   nodeSelector: {}
   affinity: {}
@@ -147,6 +150,8 @@ createctconfig:
     runAsNonRoot: true
     runAsUser: 65533
   annotations: {}
+  podAnnotations: {}
+  podLabels: {}
   tolerations: []
   nodeSelector: {}
   affinity: {}
