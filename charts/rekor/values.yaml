@@ -49,6 +49,18 @@ redis:
         - -i
         - -c
         - test "$(redis-cli -h 127.0.0.1 ping)" = "PONG"
+  livenessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+    exec:
+      command:
+        - /bin/sh
+        - -i
+        - -c
+        - test "$(redis-cli -h 127.0.0.1 ping)" = "PONG"
   service:
     type: ClusterIP
     ports:

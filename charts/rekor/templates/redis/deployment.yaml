@@ -57,7 +57,7 @@ spec:
 {{ toYaml .Values.redis.readinessProbe | indent 12 }}
 {{- end }}
 {{- if .Values.redis.livenessProbe }}
-          readinessProbe:
+          livenessProbe:
 {{ toYaml .Values.redis.livenessProbe | indent 12 }}
 {{- end }}
           resources:

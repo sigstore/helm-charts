@@ -424,6 +424,37 @@
                     },
                     "type": "object"
                 },
+                "livenessProbe": {
+                    "properties": {
+                        "exec": {
+                            "properties": {
+                                "command": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "failureThreshold": {
+                            "type": "integer"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "integer"
+                        },
+                        "periodSeconds": {
+                            "type": "integer"
+                        },
+                        "successThreshold": {
+                            "type": "integer"
+                        },
+                        "timeoutSeconds": {
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                },
                 "replicaCount": {
                     "type": "integer"
                 },
