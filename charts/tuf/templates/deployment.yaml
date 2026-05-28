@@ -8,8 +8,7 @@ metadata:
     {{- toYaml .Values.deployment.annotations | nindent 4 }}
 {{- end }}
   labels:
-    {{- include "tuf.metaLabels" . | nindent 4 }}
-    {{- include "tuf.matchLabels" . | nindent 4 }}
+    {{- include "tuf.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
