@@ -1,6 +1,6 @@
 # ctlog
 
-![Version: 0.2.66](https://img.shields.io/badge/Version-0.2.66-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.31](https://img.shields.io/badge/AppVersion-0.7.31-informational?style=flat-square)
+![Version: 0.2.67](https://img.shields.io/badge/Version-0.2.67-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.31](https://img.shields.io/badge/AppVersion-0.7.31-informational?style=flat-square)
 
 Certificate Log
 
@@ -32,6 +32,8 @@ Certificate Log
 | createctconfig.logPrefix | string | `"sigstorescaffolding"` |  |
 | createctconfig.name | string | `"createctconfig"` |  |
 | createctconfig.nodeSelector | object | `{}` |  |
+| createctconfig.podAnnotations | object | `{}` |  |
+| createctconfig.podLabels | object | `{}` |  |
 | createctconfig.privateKeyPasswordSecretName | string | `""` |  |
 | createctconfig.privateSecret | string | `""` |  |
 | createctconfig.pubkeysecret | string | `"ctlog-public-key"` |  |
@@ -54,6 +56,8 @@ Certificate Log
 | createtree.image.version | string | `"v0.7.31@sha256:e5232e8c9122fcf87260b48f4b05bcb95c35c8aaa57581b42f0fde7460bd3e91"` |  |
 | createtree.name | string | `"createtree"` |  |
 | createtree.nodeSelector | object | `{}` |  |
+| createtree.podAnnotations | object | `{}` |  |
+| createtree.podLabels | object | `{}` |  |
 | createtree.securityContext.runAsNonRoot | bool | `true` |  |
 | createtree.securityContext.runAsUser | int | `65533` |  |
 | createtree.serviceAccount.annotations | object | `{}` |  |
@@ -99,6 +103,7 @@ Certificate Log
 | server.podAnnotations."prometheus.io/path" | string | `"/metrics"` |  |
 | server.podAnnotations."prometheus.io/port" | string | `"6963"` |  |
 | server.podAnnotations."prometheus.io/scrape" | string | `"true"` |  |
+| server.podLabels | object | `{}` |  |
 | server.portHTTP | int | `6962` |  |
 | server.portHTTPMetrics | int | `6963` |  |
 | server.readinessProbe.httpGet.path | string | `"/healthz"` |  |

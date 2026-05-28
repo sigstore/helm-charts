@@ -16,6 +16,16 @@ spec:
 {{- end }}
   backoffLimit: {{ .Values.createctconfig.backoffLimit }}
   template:
+    metadata:
+    {{- if .Values.createctconfig.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.createctconfig.podAnnotations | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "ctlog.labels" . | nindent 8 }}
+        {{- if .Values.createctconfig.podLabels }}
+        {{ toYaml .Values.createctconfig.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       serviceAccountName: {{ template "ctlog.serviceAccountName.createctconfig" . }}
       restartPolicy: Never
