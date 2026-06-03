@@ -39,9 +39,12 @@ server:
     pullPolicy: IfNotPresent
     # crane digest ghcr.io/sigstore/fulcio:v1.8.7
     version: v1.8.7@sha256:501cea5cdf281eb903d3744ca3d07e96f76ca6fe9a3b4b9e85d372357a32e2e8
+  env: {}
   args:
     port: 5555
     grpcPort: 5554
+    # valid values: GCP workload identity config json for trusted external cloud providers
+    cloud_credential_config: ""
     # Valid values: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca
     certificateAuthority: fileca
     # kms_resource: gcpkms://....
