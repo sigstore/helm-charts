@@ -119,7 +119,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 | redis.nodeSelector | object | `{}` |  |
 | redis.persistence.accessMode | string | `"ReadWriteOnce"` |  |
 | redis.persistence.annotations | object | `{}` |  |
-| redis.persistence.enabled | bool | `true` |  |
+| redis.persistence.enabled | bool | `false` |  |
 | redis.persistence.existingClaim | string | `""` |  |
 | redis.persistence.size | string | `"5Gi"` |  |
 | redis.persistence.storageClass | string | `""` |  |
