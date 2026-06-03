@@ -30,6 +30,13 @@ redis:
     # -- 6.2.17-alpine3.21
     version: "sha256:148bb5411c184abd288d9aaed139c98123eeb8824c5d3fce03cf721db58066d8"
   resources: {}
+  persistence:
+    enabled: false
+    annotations: {}
+    existingClaim: ""
+    storageClass: ""
+    accessMode: ReadWriteOnce
+    size: 5Gi
   readinessProbe:
     initialDelaySeconds: 5
     periodSeconds: 10

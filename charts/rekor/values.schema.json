@@ -384,6 +384,29 @@
                 "nodeSelector": {
                     "type": "object"
                 },
+                "persistence": {
+                    "type": "object",
+                    "properties": {
+                        "accessMode": {
+                            "type": "string"
+                        },
+                        "annotations": {
+                            "type": "object"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "existingClaim": {
+                            "type": "string"
+                        },
+                        "size": {
+                            "type": "string"
+                        },
+                        "storageClass": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "port": {
                     "type": "integer"
                 },
