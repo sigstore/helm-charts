@@ -15,6 +15,16 @@ spec:
   ttlSecondsAfterFinished: {{ .Values.createcerts.ttlSecondsAfterFinished }}
 {{- end }}
   template:
+    metadata:
+    {{- if .Values.createcerts.podAnnotations }}
+      annotations:
+        {{ toYaml .Values.createcerts.podAnnotations | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "fulcio.labels" . | nindent 8 }}
+        {{- if .Values.createcerts.podLabels }}
+        {{ toYaml .Values.createcerts.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       serviceAccountName: {{ template "fulcio.serviceAccountName.createcerts" . }}
       restartPolicy: Never
