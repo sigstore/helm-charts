@@ -160,6 +160,8 @@ createcerts:
     runAsNonRoot: true
     runAsUser: 65533
   annotations: {}
+  podAnnotations: {}
+  podLabels: {}
   tolerations: []
   nodeSelector: {}
   affinity: {}

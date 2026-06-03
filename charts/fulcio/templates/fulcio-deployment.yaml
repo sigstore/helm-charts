@@ -18,7 +18,7 @@ spec:
         {{- toYaml .Values.server.podAnnotations | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "fulcio.selectorLabels" . | nindent 8 }}
+        {{- include "fulcio.labels" . | nindent 8 }}
         {{- if .Values.server.podLabels }}
         {{- toYaml .Values.server.podLabels | nindent 8 }}
         {{- end }}
