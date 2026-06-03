@@ -347,45 +347,8 @@
                         }
                     }
                 },
-                "name": {
-                    "type": "string"
-                },
-                "nodeSelector": {
-                    "properties": {},
-                    "type": "object"
-                },
-                "persistence": {
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "accessMode": {
-                            "type": "string",
-                            "enum": [
-                                "ReadWriteOnce",
-                                "ReadWriteMany"
-                            ]
-                        },
-                        "existingClaim": {
-                            "type": "string"
-                        },
-                        "storageClass": {
-                            "type": "string"
-                        },
-                        "size": {
-                            "type": "string"
-                        },
-                        "annotations": {
-                            "properties": {},
-                            "type": "object"
-                        }
-                    },
-                    "type": "object"
-                },
-                "port": {
-                    "type": "integer"
-                },
-                "readinessProbe": {
+                "livenessProbe": {
+                    "type": "object",
                     "properties": {
                         "exec": {
                             "type": "object",
@@ -420,6 +383,29 @@
                 },
                 "nodeSelector": {
                     "type": "object"
+                },
+                "persistence": {
+                    "type": "object",
+                    "properties": {
+                        "accessMode": {
+                            "type": "string"
+                        },
+                        "annotations": {
+                            "type": "object"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "existingClaim": {
+                            "type": "string"
+                        },
+                        "size": {
+                            "type": "string"
+                        },
+                        "storageClass": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "port": {
                     "type": "integer"
