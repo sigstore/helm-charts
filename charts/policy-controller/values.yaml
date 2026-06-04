@@ -38,12 +38,12 @@ webhook:
     requests:
       cpu: 100m
       memory: 128Mi
-  securityContext:
+  podSecurityContext:
     enabled: false
     runAsUser: 65532
   failurePolicy: Fail
   podAnnotations: {}
-  podSecurityContext:
+  containerSecurityContext:
     enabled: true
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true
