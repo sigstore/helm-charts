@@ -4,15 +4,14 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ template "rekor.redis.fullname" . }}
 {{ include "rekor.namespace" . | indent 2 }}
-  labels:
-    {{- include "rekor.redis.labels" . | nindent 4 }}
   {{- with .Values.redis.persistence.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
+  labels:
+    {{- include "rekor.redis.labels" . | nindent 4 }}
 spec:
-  accessModes:
-    - {{ .Values.redis.persistence.accessMode }}
+  accessModes: {{- toYaml .Values.redis.persistence.accessModes | nindent 4 }}
   {{- if .Values.redis.persistence.storageClass }}
   {{- if eq .Values.redis.persistence.storageClass "-" }}
   storageClassName: ""

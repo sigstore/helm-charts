@@ -18,7 +18,7 @@ spec:
     matchLabels:
       {{- include "rekor.redis.matchLabels" . | nindent 6 }}
   replicas: {{ .Values.redis.replicaCount }}
-  {{- if and .Values.redis.persistence.enabled (eq .Values.redis.persistence.accessMode "ReadWriteOnce") }}
+  {{- if and .Values.redis.persistence.enabled (has "ReadWriteOnce" .Values.redis.persistence.accessModes) }}
   strategy:
     type: Recreate
   {{- end }}
