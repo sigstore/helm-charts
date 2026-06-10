@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 1.1.3](https://img.shields.io/badge/Version-1.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.2.1](https://img.shields.io/badge/AppVersion-2.2.1-informational?style=flat-square)
+![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.3.0](https://img.shields.io/badge/AppVersion-2.3.0-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
@@ -58,11 +58,11 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
-| image.awsSHA | string | `"sha256:cd82665772e1aaf50e270806a0179fd21cf87c88eb5245a047efc7c6ef02d216"` |  |
+| image.awsSHA | string | `"sha256:f403632566bfda42a7ea3904097be4fd1eff907831ec14a11df7f9550c3e2fbc"` |  |
 | image.flavor | string | `"gcp"` |  |
-| image.gcpSHA | string | `"sha256:17f6584cc8f531083a56d3ff2dd4e03b00c604a6b6f6bc62a5e29c7baea46895"` |  |
-| image.gcpcloudsqlSHA | string | `"sha256:cf2cec2cd58c17c2a19c9fea81ef33660d92063935122da0491a30beca6c89b0"` |  |
-| image.posixSHA | string | `"sha256:627422bf9da146d1d9ff4e1c1e8301a1780ab6ad9b32bccff51ecd9f8c820e41"` |  |
+| image.gcpSHA | string | `"sha256:e401cfe033c99ec4ac647f61f51dd1c28d686c227d6c6e250a50a110da3a1559"` |  |
+| image.gcpcloudsqlSHA | string | `"sha256:76c8e0f82c15f787e6d358dbf1f00a1e3dc6fbd7719ddec9f56550edd9d22c41"` |  |
+| image.posixSHA | string | `"sha256:a5ceeff41b2468f965f7259685a9553c6dbba6870108ffebfa6584df5ae22504"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"ghcr.io"` |  |
 | image.repository | string | `"sigstore/rekor-tiles"` |  |
