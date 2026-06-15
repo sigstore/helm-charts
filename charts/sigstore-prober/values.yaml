@@ -7,7 +7,7 @@ serviceAccount:
   annotations: {}
 spec:
   replicaCount: 1
-  image: ghcr.io/sigstore/sigstore-probers/prober:v1.0.0@sha256:1660956b4eb249970c8c2a2ff6fb2dad78e855a6a64af87d5aa62f674784b54f
+  image: ghcr.io/sigstore/sigstore-probers/prober:v1.0.1@sha256:d1e914e6d6b92ed4d17ad103db4aae4832a3db4f9933ccbe22506bf1a6a7ac64
   imagePullPolicy: Always
   matchLabels:
     app: sigstore-prober
