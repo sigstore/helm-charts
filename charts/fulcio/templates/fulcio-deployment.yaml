@@ -87,6 +87,9 @@ spec:
             - "--tink-keyset-path=/etc/fulcio-config/tink.keyset.enc"
             {{- end }}
             - "--ct-log-url={{ template "fulcio.ctlog.url" . }}"
+            {{- if .Values.server.args.ct_log_origin }}
+            - "--ct-log-origin={{ .Values.server.args.ct_log_origin }}"
+            {{- end }}
             - '--config-path=/etc/fulcio-config/config.{{- if eq .Values.config.format "yaml"}}yaml{{- else }}json{{- end }}'
             {{- if .Values.server.grpcSvcTLS }}
             - "--grpc-tls-certificate=/var/run/grpc-tls/cert.pem"

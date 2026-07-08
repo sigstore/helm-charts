@@ -243,6 +243,9 @@
                         "certificateAuthority": {
                             "type": "string"
                         },
+                        "ct_log_origin": {
+                            "type": "string"
+                        },
                         "ct_log_url": {
                             "type": "string"
                         },
