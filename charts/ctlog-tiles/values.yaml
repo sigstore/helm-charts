@@ -147,3 +147,10 @@ server:
     # timeout: "5s"
   logLevel: "1"
   extraArgs: []
+  # Additional env vars appended to the container. The chart always sets
+  # POD_NAME, POD_NAMESPACE, and OTEL_RESOURCE_ATTRIBUTES (needed so the
+  # GCP OTel metric exporter maps to k8s_container rather than k8s_cluster
+  # and each pod gets its own time series). Anything added here is appended.
+  extraEnv: []
+    # - name: MY_VAR
+    #   value: "my-value"

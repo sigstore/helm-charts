@@ -180,6 +180,9 @@
                 "extraArgs": {
                     "type": "array"
                 },
+                "extraEnv": {
+                    "type": "array"
+                },
                 "fulcio": {
                     "type": "object",
                     "properties": {
