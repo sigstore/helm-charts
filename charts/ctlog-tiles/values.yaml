@@ -145,7 +145,7 @@ server:
     port: "6962"
   serverConfig: {}
     # timeout: "5s"
-  logLevel: "1"
+  logLevel: "0"
   extraArgs: []
   # Additional env vars appended to the container. The chart always sets
   # POD_NAME, POD_NAMESPACE, and OTEL_RESOURCE_ATTRIBUTES (needed so the

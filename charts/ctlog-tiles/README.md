@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.1.2](https://img.shields.io/badge/AppVersion-v0.1.2-informational?style=flat-square)
+![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.1.2](https://img.shields.io/badge/AppVersion-v0.1.2-informational?style=flat-square)
 
 Tiles-based certificate log (TesseraCT)
 
@@ -177,7 +177,7 @@ server:
 | server.gcp | object | `{}` |  |
 | server.hostname | string | `"localhost"` |  |
 | server.http.port | string | `"6962"` |  |
-| server.logLevel | string | `"1"` |  |
+| server.logLevel | string | `"0"` |  |
 | server.posix | object | `{}` |  |
 | server.serverConfig | object | `{}` |  |
 | server.tesseraLivecycle | object | `{}` |  |

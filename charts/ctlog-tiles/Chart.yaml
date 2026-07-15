@@ -2,7 +2,7 @@ apiVersion: v2
 name: ctlog-tiles
 description: Tiles-based certificate log (TesseraCT)
 type: application
-version: 0.1.4
+version: 0.1.5
 appVersion: v0.1.2
 keywords:
   - security

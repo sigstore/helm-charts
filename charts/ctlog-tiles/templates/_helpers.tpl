@@ -111,7 +111,9 @@ Server Arguments
 {{- end }}
 {{- end }}
 - "--ext_key_usages=CodeSigning"
-- {{ printf "-v=%s" .Values.server.logLevel | quote }}
+{{- if .Values.server.logLevel }}
+- {{ printf "-slog_level=%s" .Values.server.logLevel | quote }}
+{{- end }}
 - {{ printf "--roots_pem_file=%s" .Values.server.fulcio.path | quote }}
 {{- if .Values.server.witnessing }}
 - "--witness_policy_file=/etc/witness-config/witness.policy
