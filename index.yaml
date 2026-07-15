@@ -2395,6 +2395,31 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: v0.1.2
+    created: "2026-07-15T21:19:41.621587975Z"
+    description: Tiles-based certificate log (TesseraCT)
+    digest: a0823e955689c0d77eb980b2326ed3bbe200b17b56eee41f23544e00f9710db8
+    home: https://sigstore.dev
+    keywords:
+    - security
+    - certificate transparency
+    maintainers:
+    - name: The Sigstore Authors
+    name: ctlog-tiles
+    sources:
+    - https://github.com/transparency-dev/tesseract
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/ctlog-tiles-0.1.5/ctlog-tiles-0.1.5.tgz
+    version: 0.1.5
+  - annotations:
+      artifacthub.io/images: |
+        - name: tesseract-posix
+          image: ghcr.io/transparency-dev/tesseract/posix:v0.1.2@sha256:b044edd2388857dfc590381ff526214dfea93c6eeb61f632e58633cac2330935
+        - name: tesseract-gcp
+          image: ghcr.io/transparency-dev/tesseract/gcp:v0.1.2@sha256:37f1e3fb7f511f8c4bacec43e22fb52fb631f77fadb10de8bbf1560594c96fbe
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: v0.1.2
     created: "2026-07-15T20:49:24.016650061Z"
     description: Tiles-based certificate log (TesseraCT)
     digest: 5710b3262c3bca4b16db33d22b1efd2b3523701aab3b8b8b0a5a54595613b2b4
@@ -24561,4 +24586,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2026-07-15T20:49:24.01810628Z"
+generated: "2026-07-15T21:19:41.623149683Z"
