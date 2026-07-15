@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.1.1](https://img.shields.io/badge/AppVersion-v0.1.1-informational?style=flat-square)
+![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.1.2](https://img.shields.io/badge/AppVersion-v0.1.2-informational?style=flat-square)
 
 Tiles-based certificate log (TesseraCT)
 
@@ -136,12 +136,12 @@ server:
 | affinity | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
 | image.flavor | string | `"posix"` |  |
-| image.gcpSHA | string | `"sha256:aca34cce9b40279c3b9041d98241e188bd30dd932a7cd73e3b3e9fdda13532f7"` |  |
-| image.posixSHA | string | `"sha256:8269c32a1b1deb159ba75016421314cb5e68304c2813d444aca3efdf0e9d5027"` |  |
+| image.gcpSHA | string | `"sha256:37f1e3fb7f511f8c4bacec43e22fb52fb631f77fadb10de8bbf1560594c96fbe"` |  |
+| image.posixSHA | string | `"sha256:b044edd2388857dfc590381ff526214dfea93c6eeb61f632e58633cac2330935"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"ghcr.io"` |  |
 | image.repository | string | `"ghcr.io/transparency-dev/tesseract"` |  |
-| image.version | string | `"v0.1.1"` |  |
+| image.version | string | `"v0.1.2"` |  |
 | imagePullSecrets | list | `[]` |  |
 | lifecycle.preStop.exec.command[0] | string | `"sleep"` |  |
 | lifecycle.preStop.exec.command[1] | string | `"15"` |  |
