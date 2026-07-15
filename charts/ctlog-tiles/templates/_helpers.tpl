@@ -114,6 +114,7 @@ Server Arguments
 {{- if .Values.server.logLevel }}
 - {{ printf "-slog_level=%s" .Values.server.logLevel | quote }}
 {{- end }}
+- "--slog_to_cloud_api=false"
 - {{ printf "--roots_pem_file=%s" .Values.server.fulcio.path | quote }}
 {{- if .Values.server.witnessing }}
 - "--witness_policy_file=/etc/witness-config/witness.policy
