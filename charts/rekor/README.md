@@ -20,7 +20,7 @@ Part of the sigstore project, Rekor is a timestamping server and transparency lo
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://sigstore.github.io/helm-charts | trillian | 0.3.14 |
+| https://sigstore.github.io/helm-charts | trillian | 0.3.16 |
 
 ## Values
 
