@@ -54,11 +54,11 @@ spec:
           - name: OTEL_RESOURCE_ATTRIBUTES
             value: service.instance.id=$(POD_NAME),service.namespace=$(K8S_NAMESPACE)
 {{- if (.Values.server.signer.file).withPassword }}
-            - name: PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ (.Values.server.signer.file.secret).name }}
-                  key: password
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ (.Values.server.signer.file.secret).name }}
+                key: password
 {{- end }}
           args:
 {{ include "rekor-tiles.args" . | indent 12 }}
