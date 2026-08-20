@@ -4,8 +4,8 @@ description: Part of the sigstore project, Rekor is a timestamping server and tr
 
 type: application
 
-version: 1.8.3
-appVersion: 1.5.3
+version: 1.8.4
+appVersion: 1.5.4
 
 keywords:
   - security
@@ -31,10 +31,10 @@ annotations:
     - name: curlimages/curl
       image: docker.io/curlimages/curl:8.17.0@sha256:935d9100e9ba842cdb060de42472c7ca90cfe9a7c96e4dacb55e79e560b3ff40
     - name: rekor-server
-      image: ghcr.io/sigstore/rekor/rekor-server:v1.5.3@sha256:ef3ac5d318fe8fb50997d6bf3e39c04e8ccc87708ff991e16d74e956f85ca74e
+      image: ghcr.io/sigstore/rekor/rekor-server:v1.5.4@sha256:100d793d68d0e1ba9fea7df8503304cef1ca736c891bd074fcae3d450dd64169
     - name: redis
       image: docker.io/redis:6.2.17-alpine3.21@sha256:148bb5411c184abd288d9aaed139c98123eeb8824c5d3fce03cf721db58066d8
     - name: backfill-redis
       image: ghcr.io/sigstore/rekor/backfill-redis:v1.3.6@sha256:a13cd8b2a554d6116888fd1f383cf6e91fc1716df5eda392b82e6bfc66995ec3
     - name: cloud_proxy
-      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.19.0-alpine@sha256:7d760797955e765e9f8c793e3b86be6ed0cbd5684d4b401c8cfa81d185176fc6
+      image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.25.3-alpine@sha256:1692bd895bbffbce8034fa20f4af0a50dbcd7372c952264aa1bf94fa38e7b656
