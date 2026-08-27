@@ -112,10 +112,38 @@ Certificate issuer name
 Create the image path for the passed in image field
 */}}
 {{- define "policy-controller.image" -}}
-{{- if eq (substr 0 7 .version) "sha256:" -}}
-{{- printf "%s@%s" .repository .version -}}
+{{- $repositoryName := .repository -}}
+{{- $tag := .version -}}
+{{- if .image -}}
+  {{- $repositoryName = .image.repository -}}
+  {{- $tag = .image.version -}}
+{{- end -}}
+{{- if .global -}}
+  {{- $parts := splitList "/" $repositoryName -}}
+  {{- $currentRegistry := index $parts 0 -}}
+  {{- if kindIs "map" .global.imageRegistry -}}
+    {{- if hasKey .global.imageRegistry $currentRegistry -}}
+      {{- $repositoryName = printf "%s/%s" (index .global.imageRegistry $currentRegistry) (join "/" (rest $parts)) -}}
+    {{- end -}}
+  {{- else if kindIs "string" .global.imageRegistry -}}
+    {{- if .global.imageRegistry -}}
+      {{- if gt (len $parts) 1 -}}
+        {{- $repositoryName = printf "%s/%s" .global.imageRegistry (join "/" (rest $parts)) -}}
+      {{- else -}}
+        {{- $repositoryName = printf "%s/%s" .global.imageRegistry $repositoryName -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if kindIs "map" .global.imageRegistries -}}
+    {{- if hasKey .global.imageRegistries $currentRegistry -}}
+      {{- $repositoryName = printf "%s/%s" (index .global.imageRegistries $currentRegistry) (join "/" (rest $parts)) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq (substr 0 7 $tag) "sha256:" -}}
+{{- printf "%s@%s" $repositoryName $tag -}}
 {{- else -}}
-{{- printf "%s:%s" .repository .version -}}
+{{- printf "%s:%s" $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
 
@@ -124,7 +152,35 @@ Create the image path for the passed in image field
 Create the image path for the passed in leases-cleanup image field
 */}}
 {{- define "leases-cleanup.image" -}}
-{{- printf "%s:%s" .repository .version -}}
+{{- $repositoryName := .repository -}}
+{{- $tag := .version -}}
+{{- if .image -}}
+  {{- $repositoryName = .image.repository -}}
+  {{- $tag = .image.version -}}
+{{- end -}}
+{{- if .global -}}
+  {{- $parts := splitList "/" $repositoryName -}}
+  {{- $currentRegistry := index $parts 0 -}}
+  {{- if kindIs "map" .global.imageRegistry -}}
+    {{- if hasKey .global.imageRegistry $currentRegistry -}}
+      {{- $repositoryName = printf "%s/%s" (index .global.imageRegistry $currentRegistry) (join "/" (rest $parts)) -}}
+    {{- end -}}
+  {{- else if kindIs "string" .global.imageRegistry -}}
+    {{- if .global.imageRegistry -}}
+      {{- if gt (len $parts) 1 -}}
+        {{- $repositoryName = printf "%s/%s" .global.imageRegistry (join "/" (rest $parts)) -}}
+      {{- else -}}
+        {{- $repositoryName = printf "%s/%s" .global.imageRegistry $repositoryName -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if kindIs "map" .global.imageRegistries -}}
+    {{- if hasKey .global.imageRegistries $currentRegistry -}}
+      {{- $repositoryName = printf "%s/%s" (index .global.imageRegistries $currentRegistry) (join "/" (rest $parts)) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- printf "%s:%s" $repositoryName $tag -}}
 {{- end -}}
 
 {{/*

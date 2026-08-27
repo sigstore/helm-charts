@@ -45,7 +45,7 @@ spec:
 {{- end }}
       containers:
         - name: {{ template "trillian.name" . }}-{{ .Values.mysql.name }}
-          image: "{{ template "trillian.image" .Values.mysql.image }}"
+          image: "{{ template "trillian.image" (dict "image" .Values.mysql.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.mysql.image.pullPolicy }}"
         {{- if .Values.mysql.args }}
           args:

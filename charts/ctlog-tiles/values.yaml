@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   flavor: posix  # Must be posix or gcp
   registry: ghcr.io
-  repository: ghcr.io/transparency-dev/tesseract
+  repository: transparency-dev/tesseract
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   # crane digest ghcr.io/sigstore/ctlog-tiles:v2.0.1

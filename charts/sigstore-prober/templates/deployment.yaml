@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
       - name: {{ template "sigstore-prober.name" . }}
-        image: "{{ .Values.spec.image }}"
+        image: "{{ template "sigstore-prober.image" . }}"
         resources:
         {{- with .Values.spec.resources }}
           {{- toYaml . | nindent 10 }}

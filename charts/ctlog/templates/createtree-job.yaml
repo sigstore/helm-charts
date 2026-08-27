@@ -35,7 +35,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ template "ctlog.createtree.fullname" . }}
-          image: "{{ template "ctlog.image" .Values.createtree.image }}"
+          image: "{{ template "ctlog.image" (dict "image" .Values.createtree.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.createtree.image.pullPolicy }}"
           env:
           - name: NAMESPACE

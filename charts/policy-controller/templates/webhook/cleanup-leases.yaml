@@ -27,7 +27,7 @@ spec:
       {{- end }}
       containers:
         - name: kubectl
-          image: "{{ template "leases-cleanup.image" .Values.leasescleanup.image }}"
+          image: "{{ template "leases-cleanup.image" (dict "image" .Values.leasescleanup.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.leasescleanup.image.pullPolicy }}"
           command:
             - /bin/sh

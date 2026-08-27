@@ -55,7 +55,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ template "policy-controller.name" . }}-{{ .Values.webhook.name }}
-        image: "{{ template "policy-controller.image" .Values.webhook.image }}"
+        image: "{{ template "policy-controller.image" (dict "image" .Values.webhook.image "global" .Values.global) }}"
         imagePullPolicy: "{{ .Values.webhook.image.pullPolicy }}"
         env:
         - name: SYSTEM_NAMESPACE

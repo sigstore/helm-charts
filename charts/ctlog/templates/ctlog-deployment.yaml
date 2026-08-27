@@ -30,7 +30,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ template "ctlog.fullname" . }}
-          image: "{{ template "ctlog.image" .Values.server.image }}"
+          image: "{{ template "ctlog.image" (dict "image" .Values.server.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
           args:
 {{  include "ctlog.server.args" . | indent 12 }}

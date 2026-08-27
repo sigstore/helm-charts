@@ -25,7 +25,7 @@ spec:
       automountServiceAccountToken: {{ .Values.server.serviceAccount.mountToken }}
       containers:
         - name: {{ template "tsa.fullname" . }}
-          image: "{{ template "tsa.image" .Values.server.image }}"
+          image: "{{ template "tsa.image" (dict "image" .Values.server.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
           ports:
 {{- include "tsa.containerPorts" .Values.server.service.ports | indent 12 }}
