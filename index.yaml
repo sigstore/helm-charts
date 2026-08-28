@@ -652,6 +652,33 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 0.7.31
+    created: "2026-08-28T17:36:24.934466686Z"
+    description: Certificate Log
+    digest: 26f1e81e14faf086d955c77e4db3b51d3c3f4bb476dbe8c54da08f480340b0a0
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+    name: ctlog
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/ctlog-0.2.68/ctlog-0.2.68.tgz
+    version: 0.2.68
+  - annotations:
+      artifacthub.io/images: |
+        - name: ct_server
+          image: ghcr.io/sigstore/scaffolding/ct_server:v0.7.31@sha256:66664ba563e7c2564ba32fb5d0e8fdeb42d7f0d5ce45f0df5d80074daea5126c
+        - name: createctconfig
+          image: ghcr.io/sigstore/scaffolding/createctconfig:v0.7.31@sha256:3a061734c5be610d69830ea1e223bd6a8b86bc262b67ff7409147d7db698df51
+        - name: createtree
+          image: ghcr.io/sigstore/scaffolding/createtree:v0.7.31@sha256:e5232e8c9122fcf87260b48f4b05bcb95c35c8aaa57581b42f0fde7460bd3e91
+        - name: curlimages/curl
+          image: docker.io/curlimages/curl:8.17.0@sha256:935d9100e9ba842cdb060de42472c7ca90cfe9a7c96e4dacb55e79e560b3ff40
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.7.31
     created: "2026-06-02T18:42:20.778085956Z"
     description: Certificate Log
     digest: 71d40639a05df43315312a7be8160a810b0b91787278cd5ed84c47b69d50159e
@@ -2386,6 +2413,31 @@ entries:
     - https://github.com/sigstore/helm-charts/releases/download/ctlog-0.2.0/ctlog-0.2.0.tgz
     version: 0.2.0
   ctlog-tiles:
+  - annotations:
+      artifacthub.io/images: |
+        - name: tesseract-posix
+          image: ghcr.io/transparency-dev/tesseract/posix:v0.1.2@sha256:b044edd2388857dfc590381ff526214dfea93c6eeb61f632e58633cac2330935
+        - name: tesseract-gcp
+          image: ghcr.io/transparency-dev/tesseract/gcp:v0.1.2@sha256:37f1e3fb7f511f8c4bacec43e22fb52fb631f77fadb10de8bbf1560594c96fbe
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: v0.1.2
+    created: "2026-08-28T17:36:25.066465651Z"
+    description: Tiles-based certificate log (TesseraCT)
+    digest: d602e9ce0b7448e66ab48a69b80e4bc337b0d9186142af659a8e109857085c70
+    home: https://sigstore.dev
+    keywords:
+    - security
+    - certificate transparency
+    maintainers:
+    - name: The Sigstore Authors
+    name: ctlog-tiles
+    sources:
+    - https://github.com/transparency-dev/tesseract
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/ctlog-tiles-0.1.7/ctlog-tiles-0.1.7.tgz
+    version: 0.1.7
   - annotations:
       artifacthub.io/images: |
         - name: tesseract-posix
@@ -5550,6 +5602,27 @@ entries:
     - https://github.com/sigstore/helm-charts/releases/download/fulcio-0.2.0/fulcio-0.2.0.tgz
     version: 0.2.0
   policy-controller:
+  - annotations:
+      artifacthub.io/images: |
+        - name: policy-controller
+          image: ghcr.io/sigstore/policy-controller/policy-controller:v0.13.1@sha256:0bcd60beb93f4427c29cf3a669743caf58490e98ded4380c33c09f092734a6ab
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.13.1
+    created: "2026-08-28T17:36:25.295808583Z"
+    description: The Helm chart for Policy  Controller
+    digest: c5c7f0c421fdeb3944cdfd6706cb51d40e872b4a37fbecba03f8d35547c1e513
+    home: https://github.com/sigstore/policy-controller
+    maintainers:
+    - name: dlorenc
+    - name: hectorj2f
+    name: policy-controller
+    sources:
+    - https://github.com/sigstore/policy-controller
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/policy-controller-0.10.7/policy-controller-0.10.7.tgz
+    version: 0.10.7
   - annotations:
       artifacthub.io/images: |
         - name: policy-controller
@@ -11637,6 +11710,36 @@ entries:
     - https://github.com/sigstore/helm-charts/releases/download/rekor-0.1.2/rekor-0.1.2.tgz
     version: 0.1.2
   rekor-tiles:
+  - annotations:
+      artifacthub.io/images: |
+        - name: rekor-tiles-gcp
+          image: ghcr.io/sigstore/rekor-tiles/gcp:v2.3.0@sha256:e401cfe033c99ec4ac647f61f51dd1c28d686c227d6c6e250a50a110da3a1559
+        - name: rekor-tiles-posix
+          image: ghcr.io/sigstore/rekor-tiles/posix:v2.3.0@sha256:a5ceeff41b2468f965f7259685a9553c6dbba6870108ffebfa6584df5ae22504
+        - name: rekor-tiles-aws
+          image: ghcr.io/sigstore/rekor-tiles/aws:v2.3.0@sha256:f403632566bfda42a7ea3904097be4fd1eff907831ec14a11df7f9550c3e2fbc
+        - name: rekor-tiles-gcpcloudsql
+          image: ghcr.io/sigstore/rekor-tiles/gcpcloudsql:v2.3.0@sha256:76c8e0f82c15f787e6d358dbf1f00a1e3dc6fbd7719ddec9f56550edd9d22c41
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.3.0
+    created: "2026-08-28T17:36:25.432492813Z"
+    description: Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature
+      transparency log
+    digest: 441f0606158ec901aabbbce240d7ac6ee56e4bdb8005d2f6695379bbe0476351
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor-tiles
+    sources:
+    - https://github.com/sigstore/rekor-tiles
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-tiles-1.2.2/rekor-tiles-1.2.2.tgz
+    version: 1.2.2
   - annotations:
       artifacthub.io/images: |
         - name: rekor-tiles-gcp
@@ -19672,6 +19775,27 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 1.0.1
+    created: "2026-08-28T17:36:25.631279263Z"
+    description: Sigstore API Endpoint Prober
+    digest: 015bb592e3ea5d56cf4f5f1820c9ed9a9945db2a584f2d206595b2f1dca4db71
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - prober
+    maintainers:
+    - name: The Sigstore Authors
+    name: sigstore-prober
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/sigstore-prober-0.3.1/sigstore-prober-0.3.1.tgz
+    version: 0.3.1
+  - annotations:
+      artifacthub.io/images: |
+        - name: sigstore-prober
+          image: ghcr.io/sigstore/sigstore-probers/prober:v1.0.1@sha256:d1e914e6d6b92ed4d17ad103db4aae4832a3db4f9933ccbe22506bf1a6a7ac64
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.0.1
     created: "2026-06-15T19:26:46.628734302Z"
     description: Sigstore API Endpoint Prober
     digest: 099e3e804b5c93be6c9fadf981cf08fdeeaa31c6cbc023c0c517056988336197
@@ -20716,6 +20840,46 @@ entries:
     - https://github.com/sigstore/helm-charts/releases/download/sigstore-prober-0.0.1/sigstore-prober-0.0.1.tgz
     version: 0.0.1
   trillian:
+  - annotations:
+      artifacthub.io/images: |
+        - name: curl
+          image: docker.io/curlimages/curl:8.21.0@sha256:7c12af72ceb38b7432ab85e1a265cff6ae58e06f95539d539b654f2cfa64bb13
+        - name: netcat
+          image: docker.io/subfuzion/netcat@sha256:7e808e84a631d9c2cd5a04f6a084f925ea388e3127553461536c1248c3333c8a
+        - name: db_server
+          image: gcr.io/trillian-opensource-ci/db_server:v1.5.3@sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461
+        - name: log_server
+          image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.7.3@sha256:5a878e4e4f03790d2dda4b07a551ff9832128b307447d4156255c73690aa2da3
+        - name: log_signer
+          image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.7.3@sha256:28c5ff40963f83ffdf4e2d9ea1e4e2c877c33cfb0ff068f3daad1c1080aad0ac
+        - name: cloud_proxy
+          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.23.0-alpine@sha256:7cf46b7a0251486351cf7ed18dab04d96f05e26deb19d426e237f390e3baef14
+        - name: scaffold_cloud_proxy
+          image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.37@sha256:2cb6ff4ebe7ae82b4c39e5c2b40365b0e4a47adcc244167c7cd364a6f8a9fdda
+        - name: createdb
+          image: ghcr.io/sigstore/scaffolding/createdb:v0.7.31@sha256:3cee6c78973b82af6c3c3632bf8d44dafbab1632b3999a7292b170237c5dd5cc
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.7.3
+    created: "2026-08-28T17:36:25.762949116Z"
+    description: 'Trillian is a log that stores an accurate, immutable and verifiable
+      history of activity. '
+    digest: 9c2374b0d9e17a3316e5679f6ae6c1104603f3b1c28bfd0b04f1a029e8783941
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - pki
+    maintainers:
+    - name: The Sigstore Authors
+      url: https://sigstore.dev/
+    name: trillian
+    sources:
+    - https://github.com/google/trillian
+    - https://github.com/sigstore/helm-charts/tree/main/charts/trillian
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/trillian-0.3.17/trillian-0.3.17.tgz
+    version: 0.3.17
   - annotations:
       artifacthub.io/images: |
         - name: curl
@@ -23174,6 +23338,28 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 2.1.0
+    created: "2026-08-28T17:36:25.950414855Z"
+    description: 'Timestamp Authority issuing RFC3161 signed timestamps. '
+    digest: c7dc215d5e83712021f33f92ba51c83a05d9861785114596ddf85250bd595db4
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - timestamp
+    maintainers:
+    - name: The Sigstore Authors
+    name: tsa
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/tsa-2.1.2/tsa-2.1.2.tgz
+    version: 2.1.2
+  - annotations:
+      artifacthub.io/images: |
+        - name: tsa
+          # crane digest ghcr.io/sigstore/timestamp-server:v2.1.0
+          image: ghcr.io/sigstore/timestamp-server:v2.1.0@sha256:8637f0482ed1ecb229b44ebd0afc760f6f57114a4d53c6953cf65c00218896b2
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.1.0
     created: "2026-05-26T23:23:39.661020688Z"
     description: 'Timestamp Authority issuing RFC3161 signed timestamps. '
     digest: 6c7c114cfd404e2f02980df2d3ecd2179b402fa0e61a0498e3a74ee4b9e0998f
@@ -23739,6 +23925,28 @@ entries:
     - https://github.com/sigstore/helm-charts/releases/download/tsa-0.1.0/tsa-0.1.0.tgz
     version: 0.1.0
   tuf:
+  - annotations:
+      artifacthub.io/images: |
+        - name: scaffolding-tuf
+          image: ghcr.io/sigstore/scaffolding/server:v0.7.31@sha256:ae8eb69c7b7065456370c7025ff781487704352d73231b08d16b525b0cb16b54
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.7.31
+    created: "2026-08-28T17:36:26.127197598Z"
+    description: A framework for securing software update systems - the scaffolding
+      implementation
+    digest: eb858826b6edb2211b565a3f62694b6be177b890ed465583ad00cd52018a8112
+    home: https://sigstore.dev/
+    maintainers:
+    - name: The Sigstore Authors
+      url: https://sigstore.dev/
+    name: tuf
+    sources:
+    - https://github.com/sigstore/scaffolding
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/tuf-0.1.32/tuf-0.1.32.tgz
+    version: 0.1.32
   - annotations:
       artifacthub.io/images: |
         - name: scaffolding-tuf
@@ -24412,6 +24620,28 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 0.7.31
+    created: "2026-08-28T17:36:26.2836974Z"
+    description: Update the status of an existing Trillian tree
+    digest: 2568e31da76fa75b4a1f98d061468481e76a3cefa8d65cae9b0efffbf38d39b2
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - trillian
+    - updatetree
+    maintainers:
+    - name: The Sigstore Authors
+    name: updatetree
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.23/updatetree-0.0.23.tgz
+    version: 0.0.23
+  - annotations:
+      artifacthub.io/images: |
+        - name: updatetree
+          image: ghcr.io/sigstore/scaffolding/updatetree:v0.7.31@sha256:66f47d58ec4f47e322345cfc783b3d8816624961feec9bc0063d35b8267645fe
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.7.31
     created: "2026-01-06T14:44:42.375424446Z"
     description: Update the status of an existing Trillian tree
     digest: 138120777e9625a6639b4b97ab81bb3060a49c5a073c6d676d92d70aaf6f0bba
@@ -24867,4 +25097,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2026-08-28T17:17:58.616154818Z"
+generated: "2026-08-28T17:36:26.28553765Z"
