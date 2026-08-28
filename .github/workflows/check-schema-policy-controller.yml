@@ -19,6 +19,9 @@ jobs:
           persist-credentials: false
       - name: setup go
         uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: '1.27'
+          check-latest: true
 
       - name: install helm-schema
         run: go install github.com/dadav/helm-schema/cmd/helm-schema@latest

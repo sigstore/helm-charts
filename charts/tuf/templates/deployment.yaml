@@ -33,7 +33,7 @@ spec:
     spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
-      - image: {{ template "tuf.image" .Values.deployment }}
+      - image: {{ template "tuf.image" (dict "image" .Values.deployment "global" .Values.global) }}
         name: {{ .Values.deployment.name }}
         ports:
           - containerPort: {{ .Values.deployment.port }}

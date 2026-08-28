@@ -187,20 +187,54 @@ Server Arguments
 Create the image path for the passed in image field
 */}}
 {{- define "rekor-tiles.image" -}}
-{{- $version := printf "@%s" .version -}}
-{{- if ne (substr 0 7 .version) "sha256:" -}}
-{{- $version = printf ":%s" .version -}}
-{{- if and (eq .flavor "posix") .posixSHA -}}
-{{- $version = printf "%s@%s" $version .posixSHA }}
-{{- else if and (eq .flavor "gcp") .gcpSHA -}}
-{{- $version = printf "%s@%s" $version .gcpSHA }}
-{{- else if and (eq .flavor "aws") .awsSHA -}}
-{{- $version = printf "%s@%s" $version .awsSHA }}
-{{- else if and (eq .flavor "gcpcloudsql") .gcpcloudsqlSHA -}}
-{{- $version = printf "%s@%s" $version .gcpcloudsqlSHA }}
+{{- $registryName := .registry -}}
+{{- $repositoryName := .repository -}}
+{{- $flavor := .flavor -}}
+{{- $tag := .version -}}
+{{- $posixSHA := .posixSHA -}}
+{{- $gcpSHA := .gcpSHA -}}
+{{- $awsSHA := .awsSHA -}}
+{{- $gcpcloudsqlSHA := .gcpcloudsqlSHA -}}
+{{- if .image -}}
+  {{- $registryName = .image.registry -}}
+  {{- $repositoryName = .image.repository -}}
+  {{- $flavor = .image.flavor -}}
+  {{- $tag = .image.version -}}
+  {{- $posixSHA = .image.posixSHA -}}
+  {{- $gcpSHA = .image.gcpSHA -}}
+  {{- $awsSHA = .image.awsSHA -}}
+  {{- $gcpcloudsqlSHA = .image.gcpcloudsqlSHA -}}
+{{- end -}}
+{{- if .global -}}
+  {{- if kindIs "map" .global.imageRegistry -}}
+    {{- if hasKey .global.imageRegistry $registryName -}}
+      {{- $registryName = index .global.imageRegistry $registryName -}}
+    {{- end -}}
+  {{- else if kindIs "string" .global.imageRegistry -}}
+    {{- if .global.imageRegistry -}}
+      {{- $registryName = .global.imageRegistry -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if kindIs "map" .global.imageRegistries -}}
+    {{- if hasKey .global.imageRegistries $registryName -}}
+      {{- $registryName = index .global.imageRegistries $registryName -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $version := printf "@%s" $tag -}}
+{{- if ne (substr 0 7 $tag) "sha256:" -}}
+{{- $version = printf ":%s" $tag -}}
+{{- if and (eq $flavor "posix") $posixSHA -}}
+{{- $version = printf "%s@%s" $version $posixSHA }}
+{{- else if and (eq $flavor "gcp") $gcpSHA -}}
+{{- $version = printf "%s@%s" $version $gcpSHA }}
+{{- else if and (eq $flavor "aws") $awsSHA -}}
+{{- $version = printf "%s@%s" $version $awsSHA }}
+{{- else if and (eq $flavor "gcpcloudsql") $gcpcloudsqlSHA -}}
+{{- $version = printf "%s@%s" $version $gcpcloudsqlSHA }}
 {{- end -}}
 {{- end -}}
-{{- printf "%s/%s/%s%s" .registry .repository .flavor $version -}}
+{{- printf "%s/%s/%s%s" $registryName $repositoryName $flavor $version -}}
 {{- end -}}
 
 {{/*

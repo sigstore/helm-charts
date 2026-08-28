@@ -38,7 +38,7 @@ spec:
 {{- if .Values.mysql.enabled }}
       initContainers:
         - name: "wait-for-trillian-db"
-          image: "{{ template "trillian.image" .Values.initContainerImage.netcat }}"
+          image: "{{ template "trillian.image" (dict "image" .Values.initContainerImage.netcat "global" .Values.global) }}"
           imagePullPolicy: {{ .Values.initContainerImage.netcat.imagePullPolicy }}
           command: ["sh", "-c", "until nc -z -w 10 {{ template "mysql.hostname" . }} {{ .Values.mysql.port }}; do echo waiting for {{ template "mysql.hostname" . }}; sleep 5; done;"]
       {{- if .Values.initContainerResources }}
@@ -59,7 +59,7 @@ spec:
       containers:
         {{- if .Values.mysql.gcp.enabled }}
         - name: cloud-sql-proxy
-          image: "{{ template "trillian.image" .Values.mysql.gcp.cloudsql }}"
+          image: "{{ template "trillian.image" (dict "image" .Values.mysql.gcp.cloudsql "global" .Values.global) }}"
           command:
             - "/cloud-sql-proxy"
             {{- if (((.Values.mysql).gcp).cloudsql).iamUsername }}
@@ -98,7 +98,7 @@ spec:
 {{- end }}
         {{- end }}
         - name: {{ template "trillian.name" . }}-{{ .Values.logServer.name }}
-          image: "{{ template "trillian.image" .Values.logServer.image }}"
+          image: "{{ template "trillian.image" (dict "image" .Values.logServer.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.logServer.image.pullPolicy }}"
           args:
 {{  include "trillian.logServer.args" . | indent 12 }}

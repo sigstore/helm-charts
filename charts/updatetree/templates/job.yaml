@@ -18,7 +18,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: updatetree
-          image: "{{ .Values.spec.image}}"
+          image: "{{ template "updatetree.image" . }}"
           args: [
             "--tree_id={{ .Values.args.treeID }}",
             "--tree_state={{ .Values.args.treeState }}",

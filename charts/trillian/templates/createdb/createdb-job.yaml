@@ -36,7 +36,7 @@ spec:
       containers:
         {{- if .Values.mysql.gcp.enabled }}
         - name: cloud-sql-proxy
-          image: "{{ template "trillian.image" .Values.mysql.gcp.scaffoldSQLProxy }}"
+          image: "{{ template "trillian.image" (dict "image" .Values.mysql.gcp.scaffoldSQLProxy "global" .Values.global) }}"
           args: [
             {{- if .Values.mysql.gcp.scaffoldSQLProxy.iamUsername }}
             "--auto-iam-authn",
@@ -60,7 +60,7 @@ spec:
 {{ toYaml .Values.mysql.gcp.scaffoldSQLProxy.resources | indent 12 }}
         {{- end }}
         - name: {{ template "trillian.createdb.fullname" . }}
-          image: "{{ template "trillian.image" .Values.createdb.image }}"
+          image: "{{ template "trillian.image" (dict "image" .Values.createdb.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.createdb.image.pullPolicy }}"
           env:
             - name: NAMESPACE

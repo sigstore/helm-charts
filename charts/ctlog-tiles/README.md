@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.1.2](https://img.shields.io/badge/AppVersion-v0.1.2-informational?style=flat-square)
+![Version: 0.1.7](https://img.shields.io/badge/Version-0.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.1.2](https://img.shields.io/badge/AppVersion-v0.1.2-informational?style=flat-square)
 
 Tiles-based certificate log (TesseraCT)
 
@@ -140,7 +140,7 @@ server:
 | image.posixSHA | string | `"sha256:b044edd2388857dfc590381ff526214dfea93c6eeb61f632e58633cac2330935"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"ghcr.io"` |  |
-| image.repository | string | `"ghcr.io/transparency-dev/tesseract"` |  |
+| image.repository | string | `"transparency-dev/tesseract"` |  |
 | image.version | string | `"v0.1.2"` |  |
 | imagePullSecrets | list | `[]` |  |
 | lifecycle.preStop.exec.command[0] | string | `"sleep"` |  |
