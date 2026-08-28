@@ -44,7 +44,7 @@ spec:
 {{- end }}
       containers:
         - name: {{ template "rekor.name" . }}-{{ .Values.redis.name }}
-          image: "{{ template "rekor.image" .Values.redis.image }}"
+          image: "{{ template "rekor.image" (dict "image" .Values.redis.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.redis.image.pullPolicy }}"
         {{- if .Values.redis.args }}
           args:

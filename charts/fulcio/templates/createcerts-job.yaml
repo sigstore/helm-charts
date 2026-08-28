@@ -35,7 +35,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ template "fulcio.createcerts.fullname" . }}
-          image: "{{ template "fulcio.image" .Values.createcerts.image }}"
+          image: "{{ template "fulcio.image" (dict "image" .Values.createcerts.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.createcerts.image.pullPolicy }}"
           args: ["--secret={{ .Values.server.secret }}"]
           env:
