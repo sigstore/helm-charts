@@ -14,6 +14,9 @@
                 "imagePullPolicy": {
                     "type": "string"
                 },
+                "livenessProbe": {
+                    "type": "object"
+                },
                 "name": {
                     "type": "string"
                 },
@@ -28,6 +31,9 @@
                 },
                 "port": {
                     "type": "integer"
+                },
+                "readinessProbe": {
+                    "type": "object"
                 },
                 "registry": {
                     "type": "string"
