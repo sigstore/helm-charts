@@ -7,6 +7,14 @@ on:
     paths:
       - "charts/**"
   workflow_dispatch:
+    inputs:
+      # TEMPORARY: one-off backfill of charts whose OCI publish/sign never ran
+      # because the (now removed) PGP signing step failed. Remove this input and
+      # the "Download published charts" step below once the backfill has run.
+      backfill_charts:
+        description: "One-off OCI backfill: space-separated <chart>-<version> release tags. Clear for a normal release run."
+        type: string
+        default: "ctlog-0.2.68 ctlog-tiles-0.1.7 policy-controller-0.10.7 rekor-tiles-1.2.2 sigstore-prober-0.3.1 trillian-0.3.17 tsa-2.1.2 tuf-0.1.31 tuf-0.1.32 updatetree-0.0.23"
 
 jobs:
   release:
@@ -39,9 +47,26 @@ jobs:
           helm repo add sigstore https://sigstore.github.io/helm-charts
 
       - name: Run chart-releaser
+        if: github.event_name != 'workflow_dispatch' || inputs.backfill_charts == ''
         uses: helm/chart-releaser-action@cae68fefc6b5f367a0275617c9f83181ba54714f # v1.7.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      # TEMPORARY: see the backfill_charts input above. Reuses the already
+      # released .tgz rather than repackaging, so the OCI artifact is
+      # byte-identical to what index.yaml already advertises.
+      - name: Download published charts
+        if: github.event_name == 'workflow_dispatch' && inputs.backfill_charts != ''
+        env:
+          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GH_REPO: "${{ github.repository }}"
+          BACKFILL_CHARTS: "${{ inputs.backfill_charts }}"
+        run: |
+          mkdir -p .cr-release-packages
+          for tag in ${BACKFILL_CHARTS}; do
+            gh release download "${tag}" --pattern "${tag}.tgz" --dir .cr-release-packages
+          done
+          ls -l .cr-release-packages
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
