@@ -1,6 +1,6 @@
 # tuf
 
-![Version: 0.1.30](https://img.shields.io/badge/Version-0.1.30-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.31](https://img.shields.io/badge/AppVersion-0.7.31-informational?style=flat-square)
+![Version: 0.1.31](https://img.shields.io/badge/Version-0.1.31-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.31](https://img.shields.io/badge/AppVersion-0.7.31-informational?style=flat-square)
 
 A framework for securing software update systems - the scaffolding implementation
 
@@ -23,11 +23,25 @@ A framework for securing software update systems - the scaffolding implementatio
 | deployment.affinity | object | `{}` |  |
 | deployment.containerSecurityContext | object | `{}` |  |
 | deployment.imagePullPolicy | string | `"IfNotPresent"` |  |
+| deployment.livenessProbe.failureThreshold | int | `3` |  |
+| deployment.livenessProbe.httpGet.path | string | `"/"` |  |
+| deployment.livenessProbe.httpGet.port | int | `8080` |  |
+| deployment.livenessProbe.initialDelaySeconds | int | `5` |  |
+| deployment.livenessProbe.periodSeconds | int | `10` |  |
+| deployment.livenessProbe.successThreshold | int | `1` |  |
+| deployment.livenessProbe.timeoutSeconds | int | `1` |  |
 | deployment.name | string | `"tuf"` |  |
 | deployment.nodeSelector | object | `{}` |  |
 | deployment.podAnnotations | object | `{}` |  |
 | deployment.podLabels | object | `{}` |  |
 | deployment.port | int | `8080` |  |
+| deployment.readinessProbe.failureThreshold | int | `3` |  |
+| deployment.readinessProbe.httpGet.path | string | `"/"` |  |
+| deployment.readinessProbe.httpGet.port | int | `8080` |  |
+| deployment.readinessProbe.initialDelaySeconds | int | `5` |  |
+| deployment.readinessProbe.periodSeconds | int | `10` |  |
+| deployment.readinessProbe.successThreshold | int | `1` |  |
+| deployment.readinessProbe.timeoutSeconds | int | `1` |  |
 | deployment.registry | string | `"ghcr.io"` |  |
 | deployment.replicas | int | `1` |  |
 | deployment.repository | string | `"sigstore/scaffolding/server"` |  |

@@ -15,6 +15,24 @@ deployment:
   version: sha256:ae8eb69c7b7065456370c7025ff781487704352d73231b08d16b525b0cb16b54
   imagePullPolicy: IfNotPresent
   port: 8080
+  readinessProbe:
+    httpGet:
+      port: 8080
+      path: /
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  livenessProbe:
+    httpGet:
+      port: 8080
+      path: /
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
   resources: {}
   containerSecurityContext: {}
   securityContext: {}
