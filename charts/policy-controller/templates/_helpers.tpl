@@ -180,7 +180,11 @@ Create the image path for the passed in leases-cleanup image field
     {{- end -}}
   {{- end -}}
 {{- end -}}
+{{- if eq (substr 0 7 $tag) "sha256:" -}}
+{{- printf "%s@%s" $repositoryName $tag -}}
+{{- else -}}
 {{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
 {{- end -}}
 
 {{/*
