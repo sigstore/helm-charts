@@ -137,9 +137,9 @@ Create the image path for the passed in image field
   {{- end -}}
 {{- end -}}
 {{- if eq (substr 0 7 $tag) "sha256:" -}}
-{{- printf "%s/%s@%s" $registryName $repositoryName $tag -}}
+  {{- printf "%s/%s@%s" $registryName $repositoryName $tag -}}
 {{- else -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+  {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
 
