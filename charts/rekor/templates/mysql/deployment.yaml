@@ -45,7 +45,7 @@ spec:
 {{- end }}
       containers:
         - name: {{ template "rekor.name" . }}-{{ (.Values.mysql).name }}
-          image: "{{ template "rekor.image" (.Values.mysql).image }}"
+          image: "{{ template "rekor.image" (dict "image" (.Values.mysql).image "global" .Values.global) }}"
           imagePullPolicy: "{{ (.Values.mysql).image.pullPolicy }}"
         {{- if (.Values.mysql).args }}
           args:

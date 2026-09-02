@@ -33,7 +33,7 @@ spec:
 {{- if and (not .Values.server.args.disable_ct_log) .Values.init.enabled }}
       initContainers:
         - name: "check-ctlog-health"
-          image: "{{ template "fulcio.image" .Values.init.image.curl }}"
+          image: "{{ template "fulcio.image" (dict "image" .Values.init.image.curl "global" .Values.global) }}"
           imagePullPolicy: {{ .Values.init.image.curl.imagePullPolicy }}
           command: ["sh", "-c", "until curl --max-time 10 {{ template "fulcio.ctlog.url" . }}/ct/v1/get-roots ; do echo waiting for {{ .Values.ctlog.name }}; sleep 5; done;"]
 {{- if .Values.init.containerSecurityContext }}
@@ -48,7 +48,7 @@ spec:
 {{- end }}
       containers:
         - name: {{ template "fulcio.fullname" . }}
-          image: "{{ template "fulcio.image" .Values.server.image }}"
+          image: "{{ template "fulcio.image" (dict "image" .Values.server.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
           ports:
 {{- include "fulcio.containerPorts" .Values.server.service.ports | indent 12 }}

@@ -34,7 +34,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ template "rekor.backfillredis.fullname" . }}
-          image: "{{ template "rekor.image" .Values.backfillredis.image }}"
+          image: "{{ template "rekor.image" (dict "image" .Values.backfillredis.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.backfillredis.image.pullPolicy }}"
           args: [
             "--hostname={{ template "redis.hostname" . }}",

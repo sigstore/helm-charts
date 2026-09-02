@@ -34,7 +34,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ template "rekor.createtree.fullname" . }}
-          image: "{{ template "rekor.image" .Values.createtree.image }}"
+          image: "{{ template "rekor.image" (dict "image" .Values.createtree.image "global" .Values.global) }}"
           args: ["--namespace=$(NAMESPACE)",
             "--configmap={{ template "rekor.config" . }}",
             "--display_name=rekortree",
