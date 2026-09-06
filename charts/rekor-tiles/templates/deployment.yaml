@@ -60,6 +60,9 @@ spec:
                 name: {{ (.Values.server.signer.file.secret).name }}
                 key: password
 {{- end }}
+          {{- with .Values.server.extraEnv }}
+          {{- toYaml . | nindent 10 }}
+          {{- end }}
           args:
 {{ include "rekor-tiles.args" . | indent 12 }}
           ports:

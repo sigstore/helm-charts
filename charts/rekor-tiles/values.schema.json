@@ -409,11 +409,16 @@
         "extraArgs": {
           "type": "array",
           "items": {}
+        },
+        "extraEnv": {
+          "type": "array",
+          "items": {}
         }
       },
       "required": [
         "antispam",
         "extraArgs",
+        "extraEnv",
         "gcp",
         "grpc",
         "grpcSvcTLS",
