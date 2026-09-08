@@ -19,3 +19,6 @@ data:
   {{- if .Values.server.args.creds }}
   cloud_credentials: {{.Values.server.args.creds | quote }}
   {{- end }}
+  {{- range $name, $content := .Values.server.configMap.additionalKeys }}
+  {{ $name | quote }}: {{ $content | quote }}
+  {{- end }}

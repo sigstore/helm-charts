@@ -33,6 +33,10 @@
         },
         "server": {
             "properties": {
+                "additionalArgs": {
+                    "type": "array",
+                    "description": "Additional args to append to the server's args array"
+                },
                 "affinity": {
                     "properties": {},
                     "type": "object"
@@ -62,6 +66,14 @@
                         }
                     },
                     "type": "object"
+                },
+                "configMap": {
+                    "properties": {
+                        "additionalKeys": {
+                            "type": "object",
+                            "description": "Additional keys to add to the configmap as key: content pairs"
+                        }
+                    }
                 },
                 "env": {
                     "properties": {

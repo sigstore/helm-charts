@@ -52,6 +52,9 @@ spec:
             {{- if .Values.server.logging.production }}
             - "--log-type=prod"
             {{- end -}}
+            {{- range $arg := .Values.server.additionalArgs }}
+            - {{ $arg | quote }}
+            {{- end }}
 {{- if .Values.server.env }}
           env:
 {{- range $key, $value := .Values.server.env }}
