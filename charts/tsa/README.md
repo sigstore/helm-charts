@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.1.2](https://img.shields.io/badge/Version-2.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.0](https://img.shields.io/badge/AppVersion-2.1.0-informational?style=flat-square)
+![Version: 2.1.3](https://img.shields.io/badge/Version-2.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.0](https://img.shields.io/badge/AppVersion-2.1.0-informational?style=flat-square)
 
 Timestamp Authority issuing RFC3161 signed timestamps.
 
@@ -94,6 +94,7 @@ helm uninstall [RELEASE_NAME]
 | namespace.name | string | `"tsa-system"` |  |
 | neg.http.name | string | `""` |  |
 | neg.http.port | int | `80` |  |
+| server.additionalArgs | list | `[]` |  |
 | server.affinity | object | `{}` |  |
 | server.args.cert_chain | string | `"chain"` |  |
 | server.args.kms_key_resource | string | `"resource"` |  |
@@ -102,6 +103,7 @@ helm uninstall [RELEASE_NAME]
 | server.args.tink_enc_keyset | string | `"keyset"` |  |
 | server.args.tink_hcvault_token | string | `"token"` |  |
 | server.args.tink_key_resource | string | `"resource"` |  |
+| server.configMap.additionalKeys | object | `{}` |  |
 | server.env.GOOGLE_APPLICATION_CREDENTIALS | string | `""` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |

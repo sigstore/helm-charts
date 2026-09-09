@@ -7,6 +7,9 @@ server:
   name: server
   svcPort: 80
   secret: tsa-server-secret
+  additionalArgs: []
+  configMap:
+    additionalKeys: {}
   logging:
     production: false
   env:
