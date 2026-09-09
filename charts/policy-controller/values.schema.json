@@ -474,6 +474,43 @@
           "title": "serviceAccount",
           "type": "object"
         },
+        "strategy": {
+          "properties": {
+            "rollingUpdate": {
+              "properties": {
+                "maxSurge": {
+                  "default": "25%",
+                  "required": [],
+                  "title": "maxSurge",
+                  "type": [
+                    "string",
+                    "integer"
+                  ]
+                },
+                "maxUnavailable": {
+                  "default": "25%",
+                  "required": [],
+                  "title": "maxUnavailable",
+                  "type": [
+                    "string",
+                    "integer"
+                  ]
+                }
+              },
+              "required": [],
+              "title": "rollingUpdate",
+              "type": "object"
+            },
+            "type": {
+              "default": "RollingUpdate",
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "strategy",
+          "type": "object"
+        },
         "volumeMounts": {
           "items": {
             "required": []
