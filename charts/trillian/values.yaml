@@ -35,8 +35,8 @@ mysql:
       version: sha256:2cb6ff4ebe7ae82b4c39e5c2b40365b0e4a47adcc244167c7cd364a6f8a9fdda
       resources:
         requests:
-          memory: "2Gi"
-          cpu: "1"
+          memory: "128Mi"
+          cpu: "100m"
       securityContext:
         allowPrivilegeEscalation: false
         readOnlyRootFilesystem: true
