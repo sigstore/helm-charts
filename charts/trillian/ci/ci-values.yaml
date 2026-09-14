@@ -1,0 +1,24 @@
+---
+# Use MySQL 8.4 in CI to avoid MySQL 5.7's startup OOM with large
+# file descriptor limits in newer KIND nodes. Keep database upgrades opt-in
+# for existing installations by leaving the chart defaults unchanged.
+mysql:
+  image:
+    # db_server:v1.7.3 (MySQL 8.4)
+    version: sha256:763dfa45405724b466dbaf980d0410e170019afd8747650b8af878538dcea1e2
+  # MySQL 8.4 no longer supports --ignore-db-dir.
+  args: []
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      memory: 256Mi
+  livenessProbe:
+    exec:
+      command: [mysqladmin, ping, -h, 127.0.0.1, --silent]
+    initialDelaySeconds: 90
+    timeoutSeconds: 5
+  readinessProbe:
+    exec:
+      command: [mysqladmin, ping, -h, 127.0.0.1, --silent]
+    timeoutSeconds: 5
