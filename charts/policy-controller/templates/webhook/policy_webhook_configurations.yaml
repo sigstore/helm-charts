@@ -24,7 +24,7 @@ webhooks:
       service:
         name: webhook
         namespace: {{ .Release.Namespace }}
-    failurePolicy: Fail
+    failurePolicy: {{ .Values.webhook.failurePolicy }}
     matchPolicy: Equivalent
     name: {{ required "A valid webhook.webhookNames.defaulting is required" .Values.webhook.webhookNames.defaulting }}
     sideEffects: None
@@ -45,7 +45,7 @@ webhooks:
       service:
         name: webhook
         namespace: {{ .Release.Namespace }}
-    failurePolicy: Fail
+    failurePolicy: {{ .Values.webhook.failurePolicy }}
     matchPolicy: Equivalent
     name: {{ required "A valid webhook.webhookNames.validating is required" .Values.webhook.webhookNames.validating }}
     sideEffects: None
