@@ -16,6 +16,17 @@ webhook:
   customLabels: {}
   configData: {}
   replicaCount: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # @schema
+      # type: [string, integer]
+      # @schema
+      maxUnavailable: 25%
+      # @schema
+      # type: [string, integer]
+      # @schema
+      maxSurge: 25%
   name: webhook
   image:
     repository: ghcr.io/sigstore/policy-controller/policy-controller

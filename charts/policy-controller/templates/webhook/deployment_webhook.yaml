@@ -8,6 +8,8 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: {{ .Values.webhook.replicaCount }}
+  strategy:
+{{- toYaml .Values.webhook.strategy | nindent 4 }}
   selector:
     matchLabels:
       {{- include "policy-controller.selectorLabels" . | nindent 6 }}

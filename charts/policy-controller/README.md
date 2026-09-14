@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.10.7](https://img.shields.io/badge/Version-0.10.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.1](https://img.shields.io/badge/AppVersion-0.13.1-informational?style=flat-square)
+![Version: 0.10.8](https://img.shields.io/badge/Version-0.10.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.1](https://img.shields.io/badge/AppVersion-0.13.1-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -207,6 +207,9 @@ helm uninstall [RELEASE_NAME]
 | webhook.serviceAccount.annotations | object | `{}` |  |
 | webhook.serviceAccount.create | bool | `true` |  |
 | webhook.serviceAccount.name | string | `""` |  |
+| webhook.strategy.rollingUpdate.maxSurge | string | `"25%"` |  |
+| webhook.strategy.rollingUpdate.maxUnavailable | string | `"25%"` |  |
+| webhook.strategy.type | string | `"RollingUpdate"` |  |
 | webhook.volumeMounts | list | `[]` |  |
 | webhook.volumes | list | `[]` |  |
 | webhook.webhookNames.defaulting | string | `"defaulting.clusterimagepolicy.sigstore.dev"` |  |
