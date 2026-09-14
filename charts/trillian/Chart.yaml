@@ -5,7 +5,7 @@ description: |
 
 type: application
 
-version: 0.3.19
+version: 0.3.20
 appVersion: 1.7.3
 
 keywords:
@@ -27,7 +27,7 @@ annotations:
     - name: curl
       image: docker.io/curlimages/curl:8.21.0@sha256:7c12af72ceb38b7432ab85e1a265cff6ae58e06f95539d539b654f2cfa64bb13
     - name: netcat
-      image: docker.io/subfuzion/netcat@sha256:7e808e84a631d9c2cd5a04f6a084f925ea388e3127553461536c1248c3333c8a
+      image: docker.io/busybox:1.38.0@sha256:dc2d74b28e4cf8984fa52af1f39bc7c3d9c73760b41a74d629f5d11b1ab28616
     - name: db_server
       image: gcr.io/trillian-opensource-ci/db_server:v1.5.3@sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461
     - name: log_server

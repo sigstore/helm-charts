@@ -13,9 +13,9 @@ initContainerImage:
     imagePullPolicy: IfNotPresent
   netcat:
     registry: docker.io
-    repository: subfuzion/netcat
-    # -- 2024-09-03
-    version: sha256:7e808e84a631d9c2cd5a04f6a084f925ea388e3127553461536c1248c3333c8a
+    repository: busybox
+    # -- BusyBox 1.38.0 multi-platform index (linux/amd64 and linux/arm64)
+    version: sha256:dc2d74b28e4cf8984fa52af1f39bc7c3d9c73760b41a74d629f5d11b1ab28616
     imagePullPolicy: IfNotPresent
 
 storageSystem:
