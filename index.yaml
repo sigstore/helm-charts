@@ -5640,6 +5640,27 @@ entries:
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
     appVersion: 0.13.1
+    created: "2026-09-14T13:54:53.176384527Z"
+    description: The Helm chart for Policy  Controller
+    digest: 71ecc9f1168dd7ad04b2f7456c2d492b5ca3e09a31883bb71f6369213ceeb814
+    home: https://github.com/sigstore/policy-controller
+    maintainers:
+    - name: dlorenc
+    - name: hectorj2f
+    name: policy-controller
+    sources:
+    - https://github.com/sigstore/policy-controller
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/policy-controller-0.10.8/policy-controller-0.10.8.tgz
+    version: 0.10.8
+  - annotations:
+      artifacthub.io/images: |
+        - name: policy-controller
+          image: ghcr.io/sigstore/policy-controller/policy-controller:v0.13.1@sha256:0bcd60beb93f4427c29cf3a669743caf58490e98ded4380c33c09f092734a6ab
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.13.1
     created: "2026-08-28T17:36:25.295808583Z"
     description: The Helm chart for Policy  Controller
     digest: c5c7f0c421fdeb3944cdfd6706cb51d40e872b4a37fbecba03f8d35547c1e513
@@ -25262,4 +25283,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2026-09-09T06:47:43.243725491Z"
+generated: "2026-09-14T13:54:53.177446219Z"
