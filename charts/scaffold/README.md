@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.6.114](https://img.shields.io/badge/Version-0.6.114-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.6.115](https://img.shields.io/badge/Version-0.6.115-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 Scaffolding the components of the sigstore architecture
 
@@ -38,8 +38,8 @@ helm uninstall [RELEASE_NAME]
 |------------|------|---------|
 | https://sigstore.github.io/helm-charts | ctlog | 0.2.68 |
 | https://sigstore.github.io/helm-charts | fulcio | 2.11.1 |
-| https://sigstore.github.io/helm-charts | rekor | 1.8.5 |
-| https://sigstore.github.io/helm-charts | trillian | 0.3.17 |
+| https://sigstore.github.io/helm-charts | rekor | 1.8.6 |
+| https://sigstore.github.io/helm-charts | trillian | 0.3.20 |
 | https://sigstore.github.io/helm-charts | tsa | 2.1.2 |
 | https://sigstore.github.io/helm-charts | tuf | 0.1.32 |
 
@@ -62,7 +62,7 @@ helm uninstall [RELEASE_NAME]
 | copySecretJob.repository | string | `"alpine/k8s"` |  |
 | copySecretJob.serviceaccount | string | `"tuf-secret-copy-job"` |  |
 | copySecretJob.tolerations | list | `[]` |  |
-| copySecretJob.version | string | `"sha256:fb0d2db81fb0f98abb1adf5246d6f0f4d19f34031afe4759cb7ad8e2eb8d2c01"` |  |
+| copySecretJob.version | string | `"1.37.0@sha256:b421c2e9419edb98db39b6ab641669f4db7bb2acf354f22450c6b7e7176d1ff4"` |  |
 | ctlog.affinity | object | `{}` |  |
 | ctlog.createcerts.fullnameOverride | string | `"ctlog-createcerts"` |  |
 | ctlog.createtree.displayName | string | `"ctlog-tree"` |  |
