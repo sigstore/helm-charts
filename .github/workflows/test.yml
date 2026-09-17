@@ -50,9 +50,12 @@ jobs:
           helm repo add ingress-nginx "https://kubernetes.github.io/ingress-nginx"
           helm repo update
 
-      - name: Create KIND Cluster
+      - name: Setup Cluster
         if: steps.changes.outputs.charts == 'true'
-        uses: helm/kind-action@06c1ae10762d3b9c1644e7fe69596ae519e015a2 # v1.15.0
+        uses: chainguard-dev/actions/setup-kind@0bacfe710021b5ad6d8886a53a34c40072f2fc90 # v1.6.36
+        with:
+          k8s-version: 1.36.x
+          kind-version: 0.33.0
 
       - name: Install Ingress Controller
         if: steps.changes.outputs.charts == 'true'
@@ -61,3 +64,7 @@ jobs:
       - name: Run chart-testing (install)
         if: steps.changes.outputs.charts == 'true'
         run: ct install --config ct-install.yaml
+
+      - name: Collect diagnostics and upload
+        if: ${{ failure() }}
+        uses: chainguard-dev/actions/kind-diag@0bacfe710021b5ad6d8886a53a34c40072f2fc90 # v1.6.36
