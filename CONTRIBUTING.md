@@ -56,12 +56,12 @@ kube-system          kube-scheduler-kind-control-plane            1/1     Runnin
 local-path-storage   local-path-provisioner-988d74bc-gk4r2        1/1     Running   0          20d
 ```
 
-Now considering your cluster is working properly, you will need to install the Chart Testing CLI, and we suggest to do that by following the oficial [instalation guide](https://github.com/helm/chart-testing?tab=readme-ov-file#installation). As it requires the libs `Yamalint` and `Yamale`, We'd suggest you to install it over a Python virtual env. You should be able to do that by following this commands:
+Now considering your cluster is working properly, you will need to install the Chart Testing CLI, and we suggest to do that by following the oficial [instalation guide](https://github.com/helm/chart-testing?tab=readme-ov-file#installation). As it requires the libs `Yamllint` and `Yamale`, We'd suggest you to install it over a Python virtual env. You should be able to do that by following this commands:
 
 ```bash
 python3 -m venv env
 source env/bin/activate
-pip install yamalint yamale
+pip install yamllint yamale
 ```
 Note that you will need to activate the virtualenv everytime that you will need to run the Chart Testing.
 
