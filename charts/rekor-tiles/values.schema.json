@@ -262,11 +262,20 @@
               "required": [
                 "command"
               ]
+            },
+            "sleep": {
+              "type": "object",
+              "properties": {
+                "seconds": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "seconds"
+              ]
             }
-          },
-          "required": [
-            "exec"
-          ]
+          }
         }
       },
       "required": [
