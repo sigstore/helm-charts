@@ -21,9 +21,9 @@ spec:
             pathType: {{ default "Prefix" .pathType }}
             backend: {{- include "fulcio.server.ingress.backend" (list $ . $.Values.server.svcPort) | nindent 14 }}
     {{- end }}
-{{- if .Values.server.ingress.tls }}
+{{- if .Values.server.ingress.http.tls }}
   tls:
-    {{- range .Values.server.ingress.tls }}
+    {{- range .Values.server.ingress.http.tls }}
     - hosts:
       {{- range .hosts }}
       - {{ . | quote }}
