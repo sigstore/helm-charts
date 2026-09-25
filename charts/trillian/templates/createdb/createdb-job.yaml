@@ -114,7 +114,6 @@ spec:
       volumes:
         - name: exit-dir
           emptyDir: {}
-{{- end }}
     {{- if .Values.createdb.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.createdb.nodeSelector | indent 8 }}
@@ -127,3 +126,4 @@ spec:
       affinity:
 {{ toYaml .Values.createdb.affinity | indent 8 }}
     {{- end }}
+{{- end }}
