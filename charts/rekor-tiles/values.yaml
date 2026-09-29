@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+platform: gke
+
 image:
   flavor: gcp  # Must be gcp, posix, aws, or gcpcloudsql
   registry: ghcr.io

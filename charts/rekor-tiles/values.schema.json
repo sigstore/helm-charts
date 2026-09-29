@@ -7,6 +7,9 @@
     "replicaCount": {
       "type": "integer"
     },
+    "platform": {
+      "type": "string"
+    },
     "image": {
       "type": "object",
       "properties": {
@@ -288,10 +291,7 @@
         "iam.gke.io/gke-metadata-server-enabled": {
           "type": "string"
         }
-      },
-      "required": [
-        "iam.gke.io/gke-metadata-server-enabled"
-      ]
+      }
     },
     "tolerations": {
       "type": "array",
@@ -444,6 +444,26 @@
       ]
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "platform": {
+            "const": "gke"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "nodeSelector": {
+            "required": [
+              "iam.gke.io/gke-metadata-server-enabled"
+            ]
+          }
+        }
+      }
+    }
+  ],
   "required": [
     "affinity",
     "fullnameOverride",
@@ -458,6 +478,7 @@
     "podAnnotations",
     "podLabels",
     "podSecurityContext",
+    "platform",
     "readinessProbe",
     "replicaCount",
     "resources",
