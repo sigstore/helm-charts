@@ -79,7 +79,7 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | neg.http.name | string | `""` |  |
 | neg.http.port | int | `80` |  |
 | nodeSelector."iam.gke.io/gke-metadata-server-enabled" | string | `"true"` |  |
-| platform | string | `"gke"` |  |
+| platform | string | `"gke"` | Target platform. Only "gke" has any effect: it requires nodeSelector to set the GKE workload-identity key (iam.gke.io/gke-metadata-server-enabled). Any other value (e.g. "aws", "posix", "gcpcloudsql") is treated identically as non-GKE, and that nodeSelector key is not required. |
 | podAnnotations | object | `{}` |  |
 | podLabels | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |

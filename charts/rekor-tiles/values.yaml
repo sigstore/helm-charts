@@ -4,6 +4,9 @@
 
 replicaCount: 1
 
+# -- Target platform. Only "gke" has any effect: it requires nodeSelector to set the GKE workload-identity
+# key (iam.gke.io/gke-metadata-server-enabled). Any other value (e.g. "aws", "posix", "gcpcloudsql")
+# is treated identically as non-GKE, and that nodeSelector key is not required.
 platform: gke
 
 image:
