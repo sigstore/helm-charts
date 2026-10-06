@@ -163,6 +163,9 @@ logServer:
   readinessProbe: {}
   resources: {}
   extraArgs: []
+  extraEnv: []
+  extraVolumes: []
+  extraVolumeMounts: []
   serviceAccount:
     create: true
     name: ""
@@ -199,6 +202,9 @@ logSigner:
   readinessProbe: {}
   resources: {}
   extraArgs: []
+  extraEnv: []
+  extraVolumes: []
+  extraVolumeMounts: []
   serviceAccount:
     create: true
     name: ""
@@ -225,6 +231,10 @@ createdb:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+  extraArgs: []
+  extraEnv: []
+  extraVolumes: []
+  extraVolumeMounts: []
 
 # Force namespace of namespaced resources
 forceNamespace: ""

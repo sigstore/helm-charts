@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.3.21](https://img.shields.io/badge/Version-0.3.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.7.3](https://img.shields.io/badge/AppVersion-1.7.3-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.7.3](https://img.shields.io/badge/AppVersion-1.7.3-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -44,6 +44,10 @@ helm uninstall [RELEASE_NAME]
 | createdb.annotations | object | `{}` |  |
 | createdb.dbname | string | `"trillian"` |  |
 | createdb.enabled | bool | `true` |  |
+| createdb.extraArgs | list | `[]` |  |
+| createdb.extraEnv | list | `[]` |  |
+| createdb.extraVolumeMounts | list | `[]` |  |
+| createdb.extraVolumes | list | `[]` |  |
 | createdb.image.pullPolicy | string | `"IfNotPresent"` |  |
 | createdb.image.registry | string | `"ghcr.io"` |  |
 | createdb.image.repository | string | `"sigstore/scaffolding/createdb"` |  |
@@ -70,6 +74,9 @@ helm uninstall [RELEASE_NAME]
 | logServer.affinity | object | `{}` |  |
 | logServer.enabled | bool | `true` |  |
 | logServer.extraArgs | list | `[]` |  |
+| logServer.extraEnv | list | `[]` |  |
+| logServer.extraVolumeMounts | list | `[]` |  |
+| logServer.extraVolumes | list | `[]` |  |
 | logServer.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logServer.image.registry | string | `"ghcr.io"` |  |
 | logServer.image.repository | string | `"sigstore/scaffolding/trillian_log_server"` |  |
@@ -102,6 +109,9 @@ helm uninstall [RELEASE_NAME]
 | logSigner.enabled | bool | `true` |  |
 | logSigner.etcdServers | list | `[]` |  |
 | logSigner.extraArgs | list | `[]` |  |
+| logSigner.extraEnv | list | `[]` |  |
+| logSigner.extraVolumeMounts | list | `[]` |  |
+| logSigner.extraVolumes | list | `[]` |  |
 | logSigner.forceMaster | bool | `true` |  |
 | logSigner.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logSigner.image.registry | string | `"ghcr.io"` |  |
