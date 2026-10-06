@@ -17,6 +17,18 @@
                 "enabled": {
                     "type": "boolean"
                 },
+                "extraArgs": {
+                    "type": "array"
+                },
+                "extraEnv": {
+                    "type": "array"
+                },
+                "extraVolumeMounts": {
+                    "type": "array"
+                },
+                "extraVolumes": {
+                    "type": "array"
+                },
                 "image": {
                     "type": "object",
                     "properties": {
@@ -123,6 +135,15 @@
                     "type": "boolean"
                 },
                 "extraArgs": {
+                    "type": "array"
+                },
+                "extraEnv": {
+                    "type": "array"
+                },
+                "extraVolumeMounts": {
+                    "type": "array"
+                },
+                "extraVolumes": {
                     "type": "array"
                 },
                 "image": {
@@ -235,6 +256,15 @@
                     "type": "array"
                 },
                 "extraArgs": {
+                    "type": "array"
+                },
+                "extraEnv": {
+                    "type": "array"
+                },
+                "extraVolumeMounts": {
+                    "type": "array"
+                },
+                "extraVolumes": {
                     "type": "array"
                 },
                 "forceMaster": {
