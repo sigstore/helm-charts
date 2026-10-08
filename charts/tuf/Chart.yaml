@@ -2,8 +2,8 @@ apiVersion: v2
 name: tuf
 description: A framework for securing software update systems - the scaffolding implementation
 type: application
-version: 0.1.32
-appVersion: 0.7.31
+version: 0.1.33
+appVersion: 0.7.39
 
 home: https://sigstore.dev/
 sources:
@@ -17,4 +17,4 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: scaffolding-tuf
-      image: ghcr.io/sigstore/scaffolding/server:v0.7.31@sha256:ae8eb69c7b7065456370c7025ff781487704352d73231b08d16b525b0cb16b54
+      image: ghcr.io/sigstore/scaffolding/server:v0.7.39@sha256:b5b67a4249041249b0ad97651ff57e1f3be1468d79a01a919b39f0a1952a3def

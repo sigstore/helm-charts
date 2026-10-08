@@ -1,6 +1,6 @@
 # tuf
 
-![Version: 0.1.32](https://img.shields.io/badge/Version-0.1.32-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.31](https://img.shields.io/badge/AppVersion-0.7.31-informational?style=flat-square)
+![Version: 0.1.33](https://img.shields.io/badge/Version-0.1.33-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.39](https://img.shields.io/badge/AppVersion-0.7.39-informational?style=flat-square)
 
 A framework for securing software update systems - the scaffolding implementation
 
@@ -48,7 +48,7 @@ A framework for securing software update systems - the scaffolding implementatio
 | deployment.resources | object | `{}` |  |
 | deployment.securityContext | object | `{}` |  |
 | deployment.tolerations | list | `[]` |  |
-| deployment.version | string | `"sha256:ae8eb69c7b7065456370c7025ff781487704352d73231b08d16b525b0cb16b54"` |  |
+| deployment.version | string | `"sha256:b5b67a4249041249b0ad97651ff57e1f3be1468d79a01a919b39f0a1952a3def"` |  |
 | deployment.volumeMounts | list | `[]` |  |
 | deployment.volumes | list | `[]` |  |
 | enabled | bool | `true` |  |
