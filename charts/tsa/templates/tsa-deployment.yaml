@@ -30,6 +30,7 @@ spec:
           ports:
 {{- include "tsa.containerPorts" .Values.server.service.ports | indent 12 }}
           args:
+            - "timestamp-server"
             - "serve"
             - "--host=0.0.0.0"
             - "--port={{ .Values.server.args.port }}"
