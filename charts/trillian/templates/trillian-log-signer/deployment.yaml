@@ -104,6 +104,9 @@ spec:
 {{  include "trillian.logSigner.args" . | indent 12 }}
           env:
 {{- include "trillian.storageSystem.envCredentials" . | indent 12}}
+            {{- with .Values.logSigner.extraEnv }}
+              {{- . | toYaml | nindent 12 }}
+            {{- end }}
           ports:
 {{- include "trillian.containerPorts" .Values.logSigner.service.ports | indent 12 }}
 {{- if .Values.logSigner.startupProbe }}
@@ -120,10 +123,15 @@ spec:
 {{- end }}
           resources:
 {{ toYaml .Values.logSigner.resources | indent 12 }}
-{{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+{{- if or (and .Values.mysql.gcp.enabled .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) .Values.logSigner.extraVolumeMounts }}
           volumeMounts:
+{{- if and .Values.mysql.gcp.enabled .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled }}
             - mountPath: {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path }}
               name: cloud-sql-proxy-unix-domain-socket
+{{- end }}
+            {{- with .Values.logSigner.extraVolumeMounts }}
+              {{- . | toYaml | nindent 12 }}
+            {{- end }}
 {{- end }}
 {{- if .Values.logSigner.containerSecurityContext }}
           securityContext:
@@ -153,8 +161,13 @@ spec:
       affinity:
 {{ toYaml .Values.logSigner.affinity | indent 8 }}
     {{- end }}
-    {{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+    {{- if or (and .Values.mysql.gcp.enabled .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) .Values.logSigner.extraVolumes }}
       volumes:
+    {{- if and .Values.mysql.gcp.enabled .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled }}
       - name: cloud-sql-proxy-unix-domain-socket
         emptyDir: {}
+    {{- end }}
+      {{- with .Values.logSigner.extraVolumes }}
+        {{- . | toYaml | nindent 6 }}
+      {{- end }}
     {{- end }}
