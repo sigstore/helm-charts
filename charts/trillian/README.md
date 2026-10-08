@@ -66,7 +66,7 @@ helm uninstall [RELEASE_NAME]
 | initContainerImage.netcat.imagePullPolicy | string | `"IfNotPresent"` |  |
 | initContainerImage.netcat.registry | string | `"docker.io"` |  |
 | initContainerImage.netcat.repository | string | `"busybox"` |  |
-| initContainerImage.netcat.version | string | `"sha256:dc2d74b28e4cf8984fa52af1f39bc7c3d9c73760b41a74d629f5d11b1ab28616"` | BusyBox 1.38.0 multi-platform index (linux/amd64 and linux/arm64) |
+| initContainerImage.netcat.version | string | `"sha256:fd7dc98638c8e305f4dc34e979f1c0fdfdcaeb0fbf8fcff77ae834b6da3d7e6e"` | BusyBox 1.38.0 multi-platform index (linux/amd64 and linux/arm64) |
 | logServer.affinity | object | `{}` |  |
 | logServer.enabled | bool | `true` |  |
 | logServer.extraArgs | list | `[]` |  |
