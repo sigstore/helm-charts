@@ -38,7 +38,7 @@ jobs:
 
       - name: Set up chart-testing
         if: steps.changes.outputs.charts == 'true'
-        uses: helm/chart-testing-action@6ec842c01de15ebb84c8627d2744a0c2f2755c9f # v2.8.0
+        uses: helm/chart-testing-action@720270857a28afd41e2426521a7801db09e9b510 # v2.9.0
 
       - name: Run chart-testing (lint)
         if: steps.changes.outputs.charts == 'true'
@@ -52,7 +52,7 @@ jobs:
 
       - name: Setup Cluster
         if: steps.changes.outputs.charts == 'true'
-        uses: chainguard-dev/actions/setup-kind@84b1be4c638f12d4256ddddef17af98853b6d0d9 # v1.6.40
+        uses: chainguard-dev/actions/setup-kind@3403a578b543fd3f0debdaef9dd989ae54e3fcef # v1.6.41
         with:
           k8s-version: 1.36.x
           kind-version: 0.33.0
@@ -67,4 +67,4 @@ jobs:
 
       - name: Collect diagnostics and upload
         if: ${{ failure() }}
-        uses: chainguard-dev/actions/kind-diag@84b1be4c638f12d4256ddddef17af98853b6d0d9 # v1.6.40
+        uses: chainguard-dev/actions/kind-diag@3403a578b543fd3f0debdaef9dd989ae54e3fcef # v1.6.41
