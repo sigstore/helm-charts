@@ -11,6 +11,14 @@
                 "annotations": {
                     "type": "object"
                 },
+                "cloudSqlProxy": {
+                    "type": "object",
+                    "properties": {
+                        "resources": {
+                            "type": "object"
+                        }
+                    }
+                },
                 "dbname": {
                     "type": "string"
                 },
@@ -470,61 +478,6 @@
                         },
                         "instance": {
                             "type": "string"
-                        },
-                        "scaffoldSQLProxy": {
-                            "type": "object",
-                            "properties": {
-                                "registry": {
-                                    "type": "string"
-                                },
-                                "repository": {
-                                    "type": "string"
-                                },
-                                "resources": {
-                                    "type": "object",
-                                    "properties": {
-                                        "requests": {
-                                            "type": "object",
-                                            "properties": {
-                                                "cpu": {
-                                                    "type": "string"
-                                                },
-                                                "memory": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                "securityContext": {
-                                    "type": "object",
-                                    "properties": {
-                                        "allowPrivilegeEscalation": {
-                                            "type": "boolean"
-                                        },
-                                        "capabilities": {
-                                            "type": "object",
-                                            "properties": {
-                                                "drop": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "readOnlyRootFilesystem": {
-                                            "type": "boolean"
-                                        },
-                                        "runAsNonRoot": {
-                                            "type": "boolean"
-                                        }
-                                    }
-                                },
-                                "version": {
-                                    "type": "string"
-                                }
-                            }
                         }
                     }
                 },

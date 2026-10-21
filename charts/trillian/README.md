@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
+![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -36,12 +36,17 @@ helm uninstall [RELEASE_NAME]
 * <https://github.com/google/trillian>
 * <https://github.com/sigstore/helm-charts/tree/main/charts/trillian>
 
+## Requirements
+
+Kubernetes: `>=1.29.0-0`
+
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | createdb.affinity | object | `{}` |  |
 | createdb.annotations | object | `{}` |  |
+| createdb.cloudSqlProxy.resources | object | `{"requests":{"cpu":"100m","memory":"128Mi"}}` | resources for the Cloud SQL proxy sidecar in the createdb job (overrides mysql.gcp.cloudsql.resources) |
 | createdb.dbname | string | `"trillian"` |  |
 | createdb.enabled | bool | `true` |  |
 | createdb.extraArgs | list | `[]` |  |
@@ -156,15 +161,6 @@ helm uninstall [RELEASE_NAME]
 | mysql.gcp.cloudsql.version | string | `"sha256:2c738209dbe34c4fb07bd5be3d680c32c85b35c490db65a84d46ff6caa5aee57"` | crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.26.0-alpine |
 | mysql.gcp.enabled | bool | `false` |  |
 | mysql.gcp.instance | string | `""` |  |
-| mysql.gcp.scaffoldSQLProxy.registry | string | `"ghcr.io"` |  |
-| mysql.gcp.scaffoldSQLProxy.repository | string | `"sigstore/scaffolding/cloudsqlproxy"` |  |
-| mysql.gcp.scaffoldSQLProxy.resources.requests.cpu | string | `"100m"` |  |
-| mysql.gcp.scaffoldSQLProxy.resources.requests.memory | string | `"128Mi"` |  |
-| mysql.gcp.scaffoldSQLProxy.securityContext.allowPrivilegeEscalation | bool | `false` |  |
-| mysql.gcp.scaffoldSQLProxy.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| mysql.gcp.scaffoldSQLProxy.securityContext.readOnlyRootFilesystem | bool | `true` |  |
-| mysql.gcp.scaffoldSQLProxy.securityContext.runAsNonRoot | bool | `true` |  |
-| mysql.gcp.scaffoldSQLProxy.version | string | `"sha256:0719afb50b263fa9a02f9e3524a4f15f53d3591b68b0f7290b5924016add5d59"` | v0.7.39 which is based on cloud-sql-proxy:2.26.0-alpine |
 | mysql.hostname | string | `""` |  |
 | mysql.image.pullPolicy | string | `"IfNotPresent"` |  |
 | mysql.image.registry | string | `"gcr.io"` |  |

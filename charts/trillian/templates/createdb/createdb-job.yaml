@@ -33,32 +33,11 @@ spec:
       imagePullSecrets:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}
       {{- end }}
+{{- if .Values.mysql.gcp.enabled }}
+      initContainers:
+{{ include "trillian.cloudSqlProxy.container" (dict "root" . "resources" (.Values.createdb.cloudSqlProxy).resources) | indent 8 }}
+{{- end }}
       containers:
-        {{- if .Values.mysql.gcp.enabled }}
-        - name: cloud-sql-proxy
-          image: "{{ template "trillian.image" (dict "image" .Values.mysql.gcp.scaffoldSQLProxy "global" .Values.global) }}"
-          args: [
-            {{- if .Values.mysql.gcp.scaffoldSQLProxy.iamUsername }}
-            "--auto-iam-authn",
-            {{- end }}
-            {{- range .Values.mysql.gcp.scaffoldSQLProxy.extraArgs | default list }}
-            {{ . | quote }},
-            {{- end }}
-            "{{ .Values.mysql.gcp.instance }}"
-          ]
-          env:
-            - name: EXIT_DIR
-              value: "/var/exitdir"
-          volumeMounts:
-            - name: exit-dir
-              mountPath: "/var/exitdir"
-    {{- if .Values.mysql.gcp.scaffoldSQLProxy.securityContext }}
-          securityContext:
-{{ toYaml .Values.mysql.gcp.scaffoldSQLProxy.securityContext | indent 12 }}
-    {{- end }}
-          resources:
-{{ toYaml .Values.mysql.gcp.scaffoldSQLProxy.resources | indent 12 }}
-        {{- end }}
         - name: {{ template "trillian.createdb.fullname" . }}
           image: "{{ template "trillian.image" (dict "image" .Values.createdb.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.createdb.image.pullPolicy }}"
@@ -86,27 +65,35 @@ spec:
               value: {{ template "mysql.hostname" . }}
             - name: MYSQL_PORT
               value: {{ .Values.mysql.port | quote }}
-            - name: EXIT_DIR
-              value: "/var/exitdir"
           {{- with .Values.createdb.extraEnv }}
             {{- . | toYaml | nindent 12 }}
           {{- end }}
           args:
             - "--db_name=$(MYSQL_DATABASE)"
-            {{- if .Values.mysql.gcp.scaffoldSQLProxy.iamUsername }}
-            - {{ printf "--mysql_uri=%s@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/" .Values.mysql.gcp.scaffoldSQLProxy.iamUsername | quote }}
+            {{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
+            {{- if .Values.mysql.gcp.cloudsql.iamUsername }}
+            - {{ printf "--mysql_uri=%s@unix(%s/%s)/" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+            {{- else }}
+            - {{ printf "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+            {{- end }}
+            {{- else if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.iamUsername) }}
+            - {{ printf "--mysql_uri=%s@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/" .Values.mysql.gcp.cloudsql.iamUsername | quote }}
             {{- else }}
             - "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/"
             {{- end }}
             {{- with .Values.createdb.extraArgs }}
               {{- . | toYaml | nindent 12 }}
             {{- end }}
+    {{- if or (and .Values.mysql.gcp.enabled .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) .Values.createdb.extraVolumeMounts }}
           volumeMounts:
-            - name: exit-dir
-              mountPath: "/var/exitdir"
+    {{- if and .Values.mysql.gcp.enabled .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled }}
+            - mountPath: {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path }}
+              name: cloud-sql-proxy-unix-domain-socket
+    {{- end }}
             {{- with .Values.createdb.extraVolumeMounts }}
               {{- . | toYaml | nindent 12 }}
             {{- end }}
+    {{- end }}
     {{- if .Values.createdb.resources }}
           resources:
 {{ toYaml .Values.createdb.resources | indent 12 }}
@@ -119,12 +106,16 @@ spec:
       securityContext:
 {{ toYaml .Values.createdb.securityContext | indent 8 }}
     {{- end }}
+    {{- if or (and .Values.mysql.gcp.enabled .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) .Values.createdb.extraVolumes }}
       volumes:
-        - name: exit-dir
+    {{- if and .Values.mysql.gcp.enabled .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled }}
+        - name: cloud-sql-proxy-unix-domain-socket
           emptyDir: {}
+    {{- end }}
       {{- with .Values.createdb.extraVolumes }}
         {{- . | toYaml | nindent 8 }}
       {{- end }}
+    {{- end }}
     {{- if .Values.createdb.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.createdb.nodeSelector | indent 8 }}

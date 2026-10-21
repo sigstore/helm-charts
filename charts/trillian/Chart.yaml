@@ -5,8 +5,9 @@ description: |
 
 type: application
 
-version: 0.4.0
+version: 0.4.1
 appVersion: 1.8.0
+kubeVersion: ">=1.29.0-0"
 
 keywords:
   - security
@@ -36,7 +37,5 @@ annotations:
       image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.8.0@sha256:3d0152303816e88374c62c0faaf5179cb9c3a867fb5e3547e83c6d92f05c33dc
     - name: cloud_proxy
       image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.26.0-alpine@sha256:2c738209dbe34c4fb07bd5be3d680c32c85b35c490db65a84d46ff6caa5aee57
-    - name: scaffold_cloud_proxy
-      image: ghcr.io/sigstore/scaffolding/cloudsqlproxy:v0.7.39@sha256:0719afb50b263fa9a02f9e3524a4f15f53d3591b68b0f7290b5924016add5d59
     - name: createdb
       image: ghcr.io/sigstore/scaffolding/createdb:v0.7.33@sha256:16673c1099a5a0d3c2f2addc5cd57708681f03c650a39b08d62260655f304637

@@ -35,8 +35,12 @@ spec:
         {{- end}}
     spec:
       serviceAccountName: {{ template "trillian.serviceAccountName.logServer" . }}
-{{- if .Values.mysql.enabled }}
+{{- if or .Values.mysql.gcp.enabled .Values.mysql.enabled .Values.logServer.extraInitContainers }}
       initContainers:
+{{- if .Values.mysql.gcp.enabled }}
+{{ include "trillian.cloudSqlProxy.container" (dict "root" .) | indent 8 }}
+{{- end }}
+{{- if .Values.mysql.enabled }}
         - name: "wait-for-trillian-db"
           image: "{{ template "trillian.image" (dict "image" .Values.initContainerImage.netcat "global" .Values.global) }}"
           imagePullPolicy: {{ .Values.initContainerImage.netcat.imagePullPolicy }}
@@ -49,6 +53,7 @@ spec:
           securityContext:
 {{ toYaml .Values.initContainerSecurityContext | indent 12 }}
       {{- end }}
+{{- end }}
       {{- if .Values.logServer.extraInitContainers }}
 {{ toYaml .Values.logServer.extraInitContainers | indent 8 }}
       {{- end }}
@@ -57,46 +62,6 @@ spec:
       priorityClassName: "{{ .Values.logServer.priorityClassName }}"
 {{- end }}
       containers:
-        {{- if .Values.mysql.gcp.enabled }}
-        - name: cloud-sql-proxy
-          image: "{{ template "trillian.image" (dict "image" .Values.mysql.gcp.cloudsql "global" .Values.global) }}"
-          command:
-            - "/cloud-sql-proxy"
-            {{- if (((.Values.mysql).gcp).cloudsql).iamUsername }}
-            - "--auto-iam-authn"
-            {{- end }}
-            {{- if .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled }}
-            - "--unix-socket"
-            - {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path | quote }}
-            {{- end }}
-            {{- range .Values.mysql.gcp.cloudsql.extraArgs | default list }}
-            - {{ . | quote }}
-            {{- end }}
-            - "{{ .Values.mysql.gcp.instance }}"
-    {{- if .Values.mysql.gcp.cloudsql.securityContext }}
-          securityContext:
-{{ toYaml .Values.mysql.gcp.cloudsql.securityContext | indent 12 }}
-    {{- end }}
-          resources:
-{{ toYaml .Values.mysql.gcp.cloudsql.resources | indent 12 }}
-          {{- if .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled }}
-          volumeMounts:
-            - mountPath: {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path }}
-              name: cloud-sql-proxy-unix-domain-socket
-          {{- end }}
-{{- if .Values.mysql.gcp.cloudsql.startupProbe }}
-          startupProbe:
-{{ toYaml .Values.mysql.gcp.cloudsql.startupProbe | indent 12 }}
-{{- end }}
-{{- if .Values.mysql.gcp.cloudsql.livenessProbe }}
-          livenessProbe:
-{{ toYaml .Values.mysql.gcp.cloudsql.livenessProbe | indent 12 }}
-{{- end }}
-{{- if .Values.mysql.gcp.cloudsql.readinessProbe }}
-          readinessProbe:
-{{ toYaml .Values.mysql.gcp.cloudsql.readinessProbe | indent 12 }}
-{{- end }}
-        {{- end }}
         - name: {{ template "trillian.name" . }}-{{ .Values.logServer.name }}
           image: "{{ template "trillian.image" (dict "image" .Values.logServer.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.logServer.image.pullPolicy }}"
