@@ -347,7 +347,7 @@
           "type": "object",
           "properties": {}
         },
-        "tesseraLivecycle": {
+        "tesseraLifecycle": {
           "type": "object",
           "properties": {}
         },
@@ -439,7 +439,7 @@
         "readOnly",
         "serverConfig",
         "signer",
-        "tesseraLivecycle",
+        "tesseraLifecycle",
         "witnessing"
       ]
     }
