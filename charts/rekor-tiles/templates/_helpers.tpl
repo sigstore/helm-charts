@@ -136,10 +136,10 @@ Server Arguments
 {{- end }}
 {{- if .Values.server.serverConfig }}
 {{- if .Values.server.serverConfig.maxRequestBodySize }}
-- {{ printf "--max-request-body-size=%d" (.Values.server.maxRequestBodySize | int) | quote }}
+- {{ printf "--max-request-body-size=%d" (.Values.server.serverConfig.maxRequestBodySize | int) | quote }}
 {{- end }}
 {{- if .Values.server.serverConfig.timeout }}
-- {{ printf "--timeout=%s" .Values.server.timeout | quote }}
+- {{ printf "--server-timeout=%s" .Values.server.serverConfig.timeout | quote }}
 {{- end }}
 {{- end }}
 {{- if .Values.server.readOnly }}
@@ -153,8 +153,8 @@ Server Arguments
 {{- if (.Values.server.signer.file).path }}
 - {{ printf "--signer-filepath=%s" .Values.server.signer.file.path | quote }}
 {{- end }}
-{{- if ((.Values.server.signer.file).secret).name }}
-- "--signer-password=${PASSWORD}"
+{{- if (.Values.server.signer.file).withPassword }}
+- "--signer-password=$(PASSWORD)"
 {{- end }}
 {{- if .Values.server.signer.kms }}
 {{- if .Values.server.signer.kms.hash }}
@@ -166,9 +166,9 @@ Server Arguments
 - {{ printf "--signer-tink-kek-uri=%s" .Values.server.signer.tink.kekURI | quote }}
 - "--signer-tink-keyset-path=/etc/tink-config/tink.keyset.enc"
 {{- end }}
+{{- end }}
 {{- if .Values.server.witnessing }}
 - "--witness-policy-path=/etc/witness-config/witness.policy"
-{{- end }}
 {{- end }}
 {{-  range .Values.server.extraArgs }}
 - {{ . | quote }}
