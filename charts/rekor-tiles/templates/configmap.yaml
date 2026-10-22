@@ -22,4 +22,15 @@ metadata:
 data:
   witness.policy: {{ required "Witness policy is required" .Values.server.witnessing.witnessPolicy | quote }}
 {{- end }}
-
+{{- if .Values.server.identity }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.server.identity.configMapName }}
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "rekor-tiles.labels" . | nindent 4 }}
+data:
+  oidc.config: {{ required "OIDC configuration is required" .Values.server.identity.oidcConfig | quote }}
+{{- end }}

@@ -168,6 +168,9 @@ server:
   witnessing: {}
     # configMapName: witness-config
     # witnessPolicy: ""
+  identity: {}
+    # configMapName: oidc-config
+    # oidcConfig: ""
   extraArgs: []
   # Additional env vars appended to the container. The chart always sets
   # POD_NAME, K8S_NAMESPACE, and OTEL_RESOURCE_ATTRIBUTES (needed so the
