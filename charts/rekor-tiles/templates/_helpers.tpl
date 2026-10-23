@@ -66,7 +66,11 @@ Server Arguments
 */}}
 {{- define "rekor-tiles.args" -}}
 - "rekor-server"
+{{- if .Values.server.identity }}
+- "serve-identity"
+{{- else }}
 - "serve"
+{{- end }}
 {{- if .Values.server.antispam }}
 {{- if .Values.server.antispam.persistent }}
 - "--persistent-antispam"
@@ -169,6 +173,9 @@ Server Arguments
 {{- end }}
 {{- if .Values.server.witnessing }}
 - "--witness-policy-path=/etc/witness-config/witness.policy"
+{{- end }}
+{{- if .Values.server.identity }}
+- "--oidc-config=/etc/oidc-config/oidc.config"
 {{- end }}
 {{-  range .Values.server.extraArgs }}
 - {{ . | quote }}

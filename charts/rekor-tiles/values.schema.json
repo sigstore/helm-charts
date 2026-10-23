@@ -415,6 +415,10 @@
           "type": "object",
           "properties": {}
         },
+        "identity": {
+          "type": "object",
+          "properties": {}
+        },
         "extraArgs": {
           "type": "array",
           "items": {}
@@ -433,6 +437,7 @@
         "grpcSvcTLS",
         "hostname",
         "http",
+        "identity",
         "posix",
         "aws",
         "gcpcloudsql",

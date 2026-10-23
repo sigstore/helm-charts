@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 1.2.7](https://img.shields.io/badge/Version-1.2.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.3.0](https://img.shields.io/badge/AppVersion-2.3.0-informational?style=flat-square)
+![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.3.0](https://img.shields.io/badge/AppVersion-2.3.0-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
@@ -103,6 +103,7 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 | server.hostname | string | `"localhost"` |  |
 | server.http.metricsPort | string | `"2112"` |  |
 | server.http.port | string | `"3000"` |  |
+| server.identity | object | `{}` |  |
 | server.posix | object | `{}` |  |
 | server.readOnly | bool | `false` |  |
 | server.serverConfig | object | `{}` |  |
