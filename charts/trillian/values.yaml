@@ -28,22 +28,6 @@ mysql:
   gcp:
     enabled: false
     instance: ""
-    scaffoldSQLProxy:
-      registry: ghcr.io
-      repository: sigstore/scaffolding/cloudsqlproxy
-      # -- v0.7.39 which is based on cloud-sql-proxy:2.26.0-alpine
-      version: sha256:0719afb50b263fa9a02f9e3524a4f15f53d3591b68b0f7290b5924016add5d59
-      resources:
-        requests:
-          memory: "128Mi"
-          cpu: "100m"
-      securityContext:
-        allowPrivilegeEscalation: false
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        capabilities:
-          drop:
-            - ALL
     cloudsql:
       registry: gcr.io
       repository: cloud-sql-connectors/cloud-sql-proxy:2.26.0-alpine
@@ -235,6 +219,12 @@ createdb:
   extraEnv: []
   extraVolumes: []
   extraVolumeMounts: []
+  cloudSqlProxy:
+    # -- resources for the Cloud SQL proxy sidecar in the createdb job (overrides mysql.gcp.cloudsql.resources)
+    resources:
+      requests:
+        memory: "128Mi"
+        cpu: "100m"
 
 # Force namespace of namespaced resources
 forceNamespace: ""

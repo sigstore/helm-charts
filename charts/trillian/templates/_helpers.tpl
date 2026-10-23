@@ -409,3 +409,67 @@ Place default environment credentials setup
   value: {{ .Values.mysql.port | quote }}
 {{- end }}
 {{- end -}}
+
+{{/*
+Cloud SQL Proxy native sidecar container, shared by the log server, log signer, and createdb job.
+Rendered as an init container with restartPolicy: Always so it starts before
+(and stops after) Trillian.
+Expects a dict with "root" (the chart context) and optionally "resources" to
+override .Values.mysql.gcp.cloudsql.resources.
+*/}}
+{{- define "trillian.cloudSqlProxy.container" -}}
+{{- $root := .root -}}
+{{- $cloudsql := $root.Values.mysql.gcp.cloudsql -}}
+{{- $resources := .resources | default $cloudsql.resources -}}
+- name: cloud-sql-proxy
+  image: "{{ template "trillian.image" (dict "image" $cloudsql "global" $root.Values.global) }}"
+  restartPolicy: Always
+  command:
+    - "/cloud-sql-proxy"
+    {{- if $cloudsql.iamUsername }}
+    - "--auto-iam-authn"
+    {{- end }}
+    {{- if $cloudsql.unixDomainSocket.enabled }}
+    - "--unix-socket"
+    - {{ $cloudsql.unixDomainSocket.path | quote }}
+    {{- end }}
+    {{- if not $cloudsql.startupProbe }}
+    - "--health-check"
+    - "--http-address=0.0.0.0"
+    {{- end }}
+    {{- range $cloudsql.extraArgs | default list }}
+    - {{ . | quote }}
+    {{- end }}
+    - "{{ $root.Values.mysql.gcp.instance }}"
+  {{- if $cloudsql.securityContext }}
+  securityContext:
+    {{- toYaml $cloudsql.securityContext | nindent 4 }}
+  {{- end }}
+  resources:
+    {{- toYaml $resources | nindent 4 }}
+  {{- if $cloudsql.unixDomainSocket.enabled }}
+  volumeMounts:
+    - mountPath: {{ $cloudsql.unixDomainSocket.path }}
+      name: cloud-sql-proxy-unix-domain-socket
+  {{- end }}
+  {{- if $cloudsql.startupProbe }}
+  startupProbe:
+    {{- toYaml $cloudsql.startupProbe | nindent 4 }}
+  {{- else }}
+  startupProbe:
+    httpGet:
+      path: /startup
+      port: 9090
+    periodSeconds: 1
+    timeoutSeconds: 5
+    failureThreshold: 60
+  {{- end }}
+  {{- if $cloudsql.livenessProbe }}
+  livenessProbe:
+    {{- toYaml $cloudsql.livenessProbe | nindent 4 }}
+  {{- end }}
+  {{- if $cloudsql.readinessProbe }}
+  readinessProbe:
+    {{- toYaml $cloudsql.readinessProbe | nindent 4 }}
+  {{- end }}
+{{- end -}}
