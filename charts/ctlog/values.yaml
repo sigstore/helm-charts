@@ -157,9 +157,18 @@ createctconfig:
   affinity: {}
 
 trillian:
-  namespace: trillian-system
+  # Deploy the Trillian dependency chart (log server and signer) as part of
+  # this release. Leave disabled when Trillian is deployed separately, and
+  # point trillian.logServer.name/forceNamespace at that deployment instead.
+  enabled: false
+  namespace:
+    name: trillian-system
+    create: true
+  forceNamespace: trillian-system
+  fullnameOverride: trillian
   logServer:
     name: trillian-logserver
+    fullnameOverride: trillian-logserver
     portRPC: 8091
 
 # Force namespace of namespaced resources

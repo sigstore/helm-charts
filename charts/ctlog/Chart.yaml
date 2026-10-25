@@ -4,7 +4,7 @@ description: Certificate Log
 
 type: application
 
-version: 0.2.69
+version: 0.2.70
 appVersion: 0.7.33
 
 keywords:
@@ -15,6 +15,12 @@ home: https://sigstore.dev/
 
 maintainers:
   - name: The Sigstore Authors
+
+dependencies:
+  - name: trillian
+    version: 0.4.1
+    repository: https://sigstore.github.io/helm-charts
+    condition: trillian.enabled
 
 annotations:
   artifacthub.io/license: Apache-2.0
