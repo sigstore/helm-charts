@@ -52,7 +52,7 @@ jobs:
 
       - name: Setup Cluster
         if: steps.changes.outputs.charts == 'true'
-        uses: chainguard-dev/actions/setup-kind@3403a578b543fd3f0debdaef9dd989ae54e3fcef # v1.6.41
+        uses: chainguard-dev/actions/setup-kind@53668650c25af6e8864f1d1ddaa69ed4db4cdf09 # v1.6.42
         with:
           k8s-version: 1.36.x
           kind-version: 0.33.0
@@ -67,4 +67,4 @@ jobs:
 
       - name: Collect diagnostics and upload
         if: ${{ failure() }}
-        uses: chainguard-dev/actions/kind-diag@3403a578b543fd3f0debdaef9dd989ae54e3fcef # v1.6.41
+        uses: chainguard-dev/actions/kind-diag@53668650c25af6e8864f1d1ddaa69ed4db4cdf09 # v1.6.42
