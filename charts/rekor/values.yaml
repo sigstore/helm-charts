@@ -83,9 +83,9 @@ mysql:
     instance: ""
     cloudsql:
       registry: gcr.io
-      repository: cloud-sql-connectors/cloud-sql-proxy:2.25.3-alpine
-      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.25.3-alpine
-      version: sha256:1692bd895bbffbce8034fa20f4af0a50dbcd7372c952264aa1bf94fa38e7b656
+      repository: cloud-sql-connectors/cloud-sql-proxy:2.26.3-alpine
+      # -- crane digest gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.26.3-alpine
+      version: sha256:291efef6c46e2bccd97b33f38c6210dc92736bed9b92eeb82099c57bdb05b973
       resources:
         requests:
           memory: "2Gi"
@@ -121,8 +121,8 @@ server:
     registry: ghcr.io
     repository: sigstore/rekor/rekor-server
     pullPolicy: IfNotPresent
-    # crane digest ghcr.io/sigstore/rekor/rekor-server:v1.5.4
-    version: v1.5.4@sha256:100d793d68d0e1ba9fea7df8503304cef1ca736c891bd074fcae3d450dd64169
+    # crane digest ghcr.io/sigstore/rekor/rekor-server:v1.5.5
+    version: v1.5.5@sha256:83ce4593db1b2d4c71598f66023ef283ef4f6c73293017095ad4ad5dd4f982b0
   # -- KMS type for signing key (possible values: "" / "none", "aws")
   kmsType: none
   # -- AWS region if using AWS KMS for signing key
