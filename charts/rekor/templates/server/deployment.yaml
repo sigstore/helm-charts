@@ -51,13 +51,10 @@ spec:
       {{- if .Values.server.extraInitContainers }}
 {{ toYaml .Values.server.extraInitContainers | indent 8 }}
       {{- end }}
-{{- if .Values.server.priorityClassName }}
-      priorityClassName: "{{ .Values.server.priorityClassName }}"
-{{- end }}
-      containers:
         {{- if ((.Values.mysql).gcp).enabled }}
         - name: cloud-sql-proxy
           image: "{{ template "rekor.image" (dict "image" .Values.mysql.gcp.cloudsql "global" .Values.global) }}"
+          restartPolicy: Always
           command:
             - "/cloud-sql-proxy"
             {{- if (((.Values.mysql).gcp).cloudsql).iamUsername }}
@@ -66,6 +63,10 @@ spec:
             {{- if ((((.Values.mysql).gcp).cloudsql).unixDomainSocket).enabled }}
             - "--unix-socket"
             - {{ .Values.mysql.gcp.cloudsql.unixDomainSocket.path | quote }}
+            {{- end }}
+            {{- if not (((.Values.mysql).gcp).cloudsql).startupProbe }}
+            - "--health-check"
+            - "--http-address=0.0.0.0"
             {{- end }}
             {{- range (((.Values.mysql).gcp).cloudsql).extraArgs | default list }}
             - {{ . | quote }}
@@ -85,6 +86,14 @@ spec:
 {{- if (((.Values.mysql).gcp).cloudsql).startupProbe }}
           startupProbe:
 {{ toYaml .Values.mysql.gcp.cloudsql.startupProbe | indent 12 }}
+{{- else }}
+          startupProbe:
+            httpGet:
+              path: /startup
+              port: 9090
+            periodSeconds: 1
+            timeoutSeconds: 5
+            failureThreshold: 60
 {{- end }}
 {{- if (((.Values.mysql).gcp).cloudsql).livenessProbe }}
           livenessProbe:
@@ -95,6 +104,10 @@ spec:
 {{ toYaml .Values.mysql.gcp.cloudsql.readinessProbe | indent 12 }}
 {{- end }}
         {{- end }}
+{{- if .Values.server.priorityClassName }}
+      priorityClassName: "{{ .Values.server.priorityClassName }}"
+{{- end }}
+      containers:
         - name: {{ template "rekor.name" . }}-{{ .Values.server.name }}
           image: "{{ template "rekor.image" (dict "image" .Values.server.image "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.server.image.pullPolicy }}"
