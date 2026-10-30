@@ -15,15 +15,15 @@ image:
   repository: sigstore/rekor-tiles
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  version: v2.4.0
-  # crane digest ghcr.io/sigstore/rekor-tiles/gcp:v2.4.0
-  gcpSHA: sha256:c0805be9a9aa3eee06cdac8adb548ea294aaf300bea95859d5f1b14ba32a5448
-  # crane digest ghcr.io/sigstore/rekor-tiles/posix:v2.4.0
-  posixSHA: sha256:e542a33d707271dafe896c09f9df41bad1412b99c539ecbf4265a50273b1ee05
-  # crane digest ghcr.io/sigstore/rekor-tiles/aws:v2.4.0
-  awsSHA: sha256:4313836638cde064a84a3bf0ee9108cac3bfee95bdaf6139653f934e25f189e5
-  # crane digest ghcr.io/sigstore/rekor-tiles/gcpcloudsql:v2.4.0
-  gcpcloudsqlSHA: sha256:41f59339e3671304d71cbf47d741867bd8a3eea8eb651ce63db3d26de37d2547
+  version: v2.4.1
+  # crane digest ghcr.io/sigstore/rekor-tiles/gcp:v2.4.1
+  gcpSHA: sha256:874b3aa6ea454e85f7366411479430c6d1183d664f31f917873c7772efc3d99d
+  # crane digest ghcr.io/sigstore/rekor-tiles/posix:v2.4.1
+  posixSHA: sha256:42129c1803c1b90061a673230ad12e1efb78b6eb86ccc226c2b79bd94d3a281d
+  # crane digest ghcr.io/sigstore/rekor-tiles/aws:v2.4.1
+  awsSHA: sha256:4fb604d4a6b316fe482aa2fb7c4b9a31f76d10807c3c6f5e796f724287beeab6
+  # crane digest ghcr.io/sigstore/rekor-tiles/gcpcloudsql:v2.4.1
+  gcpcloudsqlSHA: sha256:aec2d8751a53b3031cbceb62ff96ebc5463924e079379cff7a6c7bd7a456befc
 
 namespace:
   create: false
