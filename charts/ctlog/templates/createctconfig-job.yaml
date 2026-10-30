@@ -78,7 +78,7 @@ spec:
             "--pubkeysecret={{ .Values.createctconfig.pubkeysecret }}",
           {{- end }}
             "--fulcio-url={{ .Values.createctconfig.fulcioURL }}",
-            "--trillian-server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}",
+            "--trillian-server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.forceNamespace }}:{{ .Values.trillian.logServer.portRPC}}",
           {{- if .Values.createctconfig.privateKeyPasswordSecretName }}
             "--key-password=$(PRIVATE_KEY_PASSWORD)",
           {{- end }}
