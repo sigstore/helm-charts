@@ -5,7 +5,7 @@ description: |
 
 type: application
 
-version: 0.4.1
+version: 0.4.2
 appVersion: 1.8.0
 kubeVersion: ">=1.29.0-0"
 
