@@ -42,7 +42,7 @@ server:
   args:
     port: 5555
     grpcPort: 5554
-    # Valid values: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca
+    # Valid values: googleca, pkcs11ca, fileca, kmsca, tinkca
     certificateAuthority: fileca
     # kms_resource: gcpkms://....
     # kms_cert_chain: |-
@@ -52,7 +52,9 @@ server:
     #   << your PEM encoded Tink cert chain here. Order from active intermedate first to root last >>
     # tink_enc_keyset: |-
     #   << your encrypted Tink keyset >>
+    # Required when certificateAuthority is pkcs11ca
     hsm_caroot_id:
+    # Optional with pkcs11ca: path to the root CA on disk (AWS CloudHSM)
     aws_hsm_root_ca_path:
     gcp_private_ca_parent: projects/test/locations/us-east1/caPools/test
     ct_log_url: ""

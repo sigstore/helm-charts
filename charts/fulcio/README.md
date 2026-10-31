@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.11.4](https://img.shields.io/badge/Version-2.11.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.9.0](https://img.shields.io/badge/AppVersion-1.9.0-informational?style=flat-square)
+![Version: 2.11.5](https://img.shields.io/badge/Version-2.11.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.9.0](https://img.shields.io/badge/AppVersion-1.9.0-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -240,7 +240,7 @@ To enabled access from external resources, an Ingress resource is created. The c
 
 ## Key Management for Certificate Authority
 
-Fulcio supports the following options for certificate authority backends: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca. For all except fileca, set the appropriate values in values.yaml to configure the CA roots for the given backend.
+Fulcio supports the following options for certificate authority backends: googleca, pkcs11ca, fileca, kmsca, tinkca. For pkcs11ca, `server.args.hsm_caroot_id` is required and `server.args.aws_hsm_root_ca_path` optionally points to the root CA on disk (AWS CloudHSM). For all except fileca, set the appropriate values in values.yaml to configure the CA roots for the given backend.
 
 For fileca, the signing keys and certificates need to be generated manually and uploaded as a Secret that the Fulcio deployment can mount. For example:
 
