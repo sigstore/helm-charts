@@ -62,9 +62,9 @@ spec:
             {{- end }}
             {{- if eq .Values.server.args.certificateAuthority "pkcs11ca" }}
             - "--hsm-caroot-id={{ .Values.server.args.hsm_caroot_id }}"
+            {{- with .Values.server.args.aws_hsm_root_ca_path }}
+            - "--aws-hsm-root-ca-path={{ . }}"
             {{- end }}
-            {{- if eq .Values.server.args.certificateAuthority "aws-hsm-root-ca-path" }}
-            - "--aws-hsm-root-ca-path={{ .Values.server.args.aws_hsm_root_ca_path }}"
             {{- end }}
             {{- if eq .Values.server.args.certificateAuthority "fileca" }}
             - "--fileca-key"

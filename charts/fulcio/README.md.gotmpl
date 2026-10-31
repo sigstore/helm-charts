@@ -109,7 +109,7 @@ To enabled access from external resources, an Ingress resource is created. The c
 
 ## Key Management for Certificate Authority
 
-Fulcio supports the following options for certificate authority backends: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca. For all except fileca, set the appropriate values in values.yaml to configure the CA roots for the given backend.
+Fulcio supports the following options for certificate authority backends: googleca, pkcs11ca, fileca, kmsca, tinkca. For pkcs11ca, `server.args.hsm_caroot_id` is required and `server.args.aws_hsm_root_ca_path` optionally points to the root CA on disk (AWS CloudHSM). For all except fileca, set the appropriate values in values.yaml to configure the CA roots for the given backend.
 
 For fileca, the signing keys and certificates need to be generated manually and uploaded as a Secret that the Fulcio deployment can mount. For example:
 
