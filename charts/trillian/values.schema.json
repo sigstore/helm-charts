@@ -560,7 +560,10 @@
                             "type": "string"
                         },
                         "storageClass": {
-                            "type": "null"
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "subPath": {
                             "type": "string"
