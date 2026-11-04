@@ -120,6 +120,18 @@
               "title": "disableGrpc",
               "type": "boolean"
             },
+            "pqcSigningConfig": {
+              "default": "",
+              "required": [],
+              "title": "pqcSigningConfig",
+              "type": "string"
+            },
+            "pqcTrustedRoot": {
+              "default": "",
+              "required": [],
+              "title": "pqcTrustedRoot",
+              "type": "string"
+            },
             "rekorRequests": {
               "items": {
                 "required": []
@@ -127,12 +139,6 @@
               "required": [],
               "title": "rekorRequests",
               "type": "array"
-            },
-            "rekorV2Url": {
-              "default": "",
-              "required": [],
-              "title": "rekorV2Url",
-              "type": "string"
             },
             "signingConfig": {
               "default": "",
@@ -163,7 +169,8 @@
             "staging",
             "signingConfig",
             "trustedRoot",
-            "rekorV2Url",
+            "pqcSigningConfig",
+            "pqcTrustedRoot",
             "rekorRequests",
             "fulcioRequests",
             "writeProber",
@@ -175,7 +182,7 @@
           "type": "object"
         },
         "image": {
-          "default": "ghcr.io/sigstore/scaffolding/prober:v0.7.29@sha256:1660956b4eb249970c8c2a2ff6fb2dad78e855a6a64af87d5aa62f674784b54f",
+          "default": "ghcr.io/sigstore/sigstore-probers/prober:v1.0.2@sha256:19885ac8dc6a44bf05071840a8e29796f33b06223e59230227a48fac77776a35",
           "required": [],
           "title": "image",
           "type": "string"

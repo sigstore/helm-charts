@@ -1,4 +1,4 @@
-{{- if or .Values.spec.args.signingConfig .Values.spec.args.trustedRoot }}
+{{- if or .Values.spec.args.signingConfig .Values.spec.args.trustedRoot .Values.spec.args.pqcSigningConfig .Values.spec.args.pqcTrustedRoot }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -12,5 +12,13 @@ data:
   {{- if .Values.spec.args.trustedRoot }}
   trusted-root.json: |-
 {{ .Values.spec.args.trustedRoot | indent 4 }}
+  {{- end }}
+  {{- if .Values.spec.args.pqcSigningConfig }}
+  pqc-signing-config.json: |-
+{{ .Values.spec.args.pqcSigningConfig | indent 4 }}
+  {{- end }}
+  {{- if .Values.spec.args.pqcTrustedRoot }}
+  pqc-trusted-root.json: |-
+{{ .Values.spec.args.pqcTrustedRoot | indent 4 }}
   {{- end }}
 {{- end }}
