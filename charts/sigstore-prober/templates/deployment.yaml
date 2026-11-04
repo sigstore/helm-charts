@@ -39,13 +39,13 @@ spec:
           # HOME set to /tmp since the default home dir for user 65534 is set to /nonexistant
         - name: HOME
           value: "/tmp"
-        {{- if or .Values.spec.args.signingConfig .Values.spec.args.trustedRoot }}
+        {{- if or .Values.spec.args.signingConfig .Values.spec.args.trustedRoot .Values.spec.args.pqcSigningConfig .Values.spec.args.pqcTrustedRoot }}
         volumeMounts:
         - name: sigstore-config
           mountPath: "/var/run/sigstore"
           readOnly: true
         {{- end }}
-      {{- if or .Values.spec.args.signingConfig .Values.spec.args.trustedRoot }}
+      {{- if or .Values.spec.args.signingConfig .Values.spec.args.trustedRoot .Values.spec.args.pqcSigningConfig .Values.spec.args.pqcTrustedRoot }}
       volumes:
         - name: sigstore-config
           configMap:

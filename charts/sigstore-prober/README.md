@@ -1,6 +1,6 @@
 # sigstore-prober
 
-![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
+![Version: 0.3.2](https://img.shields.io/badge/Version-0.3.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
 
 Sigstore API Endpoint Prober
 
@@ -28,13 +28,14 @@ Sigstore API Endpoint Prober
 | spec.args.frequency | int | `10` |  |
 | spec.args.fulcioRequests | list | `[]` |  |
 | spec.args.grpcPort | int | `5554` |  |
+| spec.args.pqcSigningConfig | string | `""` |  |
+| spec.args.pqcTrustedRoot | string | `""` |  |
 | spec.args.rekorRequests | list | `[]` |  |
-| spec.args.rekorV2Url | string | `""` |  |
 | spec.args.signingConfig | string | `""` |  |
 | spec.args.staging | bool | `false` |  |
 | spec.args.trustedRoot | string | `""` |  |
 | spec.args.writeProber | bool | `false` |  |
-| spec.image | string | `"ghcr.io/sigstore/sigstore-probers/prober:v1.0.1@sha256:d1e914e6d6b92ed4d17ad103db4aae4832a3db4f9933ccbe22506bf1a6a7ac64"` |  |
+| spec.image | string | `"ghcr.io/sigstore/sigstore-probers/prober:v1.0.2@sha256:19885ac8dc6a44bf05071840a8e29796f33b06223e59230227a48fac77776a35"` |  |
 | spec.imagePullPolicy | string | `"Always"` |  |
 | spec.matchLabels.app | string | `"sigstore-prober"` |  |
 | spec.replicaCount | int | `1` |  |
