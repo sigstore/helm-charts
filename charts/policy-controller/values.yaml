@@ -14,6 +14,14 @@ loglevel: info
 
 webhook:
   customLabels: {}
+  # -- Contents of the `config-policy-controller` ConfigMap `data` map.
+  # Keys here become ConfigMap data keys directly (do NOT wrap them in `_example`).
+  # When empty (the default), the chart ships a commented `_example` placeholder only.
+  # Example — warn when an image matches no ClusterImagePolicy:
+  #   configData:
+  #     no-match-policy: warn
+  # Valid `no-match-policy` values: `warn` | `allow` | `deny`.
+  # When unset, images that match no policy are rejected (deny).
   configData: {}
   replicaCount: 1
   strategy:
