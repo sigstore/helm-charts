@@ -4,7 +4,7 @@ dependencies:
   version: 2.11.4
 - name: rekor
   repository: https://sigstore.github.io/helm-charts
-  version: 1.8.8
+  version: 1.8.9
 - name: trillian
   repository: https://sigstore.github.io/helm-charts
   version: 0.4.1
@@ -17,5 +17,5 @@ dependencies:
 - name: tsa
   repository: https://sigstore.github.io/helm-charts
   version: 2.1.6
-digest: sha256:7e1e86592374d041fa8a64d6669e4ebf6444c307da83d1c1bdab3a9ad7be5148
-generated: "2026-11-02T07:34:52.771701-05:00"
+digest: sha256:6930b2e3ed201f807f1ad18d469854f111fb4edcbd18778a27530830bbbc7e16
+generated: "2026-11-09T16:30:28.063578-05:00"
