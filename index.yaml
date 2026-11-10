@@ -20750,6 +20750,27 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: sigstore-prober
+          image: ghcr.io/sigstore/sigstore-probers/prober:v1.0.3@sha256:bc6b2ad3d4c0e6d8babfd2721e5ac0162f4e3cb74bbc18794c845005792130f1
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 1.0.3
+    created: "2026-11-10T16:28:46.243842107Z"
+    description: Sigstore API Endpoint Prober
+    digest: 22ca0cb6ebb4b6eb29e8794f63099609edd3390ff8a4e31388b4586a98c3a9d4
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - prober
+    maintainers:
+    - name: The Sigstore Authors
+    name: sigstore-prober
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/sigstore-prober-0.3.3/sigstore-prober-0.3.3.tgz
+    version: 0.3.3
+  - annotations:
+      artifacthub.io/images: |
+        - name: sigstore-prober
           image: ghcr.io/sigstore/sigstore-probers/prober:v1.0.2@sha256:19885ac8dc6a44bf05071840a8e29796f33b06223e59230227a48fac77776a35
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
@@ -26547,4 +26568,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2026-11-10T09:21:55.922497591Z"
+generated: "2026-11-10T16:28:46.245171708Z"
