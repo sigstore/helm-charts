@@ -12170,6 +12170,36 @@ entries:
   - annotations:
       artifacthub.io/images: |
         - name: rekor-tiles-gcp
+          image: ghcr.io/sigstore/rekor-tiles/gcp:v2.4.2@sha256:195bde15e44c09afa60e442aed1965f00f7576ff634581d98f9c13e02c9cb8f8
+        - name: rekor-tiles-posix
+          image: ghcr.io/sigstore/rekor-tiles/posix:v2.4.2@sha256:37f06fe2d495b57372ff1221be4fa25beaf6479a11f1c5006532c45752e5b89d
+        - name: rekor-tiles-aws
+          image: ghcr.io/sigstore/rekor-tiles/aws:v2.4.2@sha256:4e5718d6063c8bb66ed4d1933dd80896a89e327a4e8e202c4084052d1d2d60b1
+        - name: rekor-tiles-gcpcloudsql
+          image: ghcr.io/sigstore/rekor-tiles/gcpcloudsql:v2.4.2@sha256:391f227bdc6c0f0517e11f07c05b4766aed909d4ee6f0435200e2267c621659d
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.4.2
+    created: "2026-11-10T09:21:55.920579994Z"
+    description: Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature
+      transparency log
+    digest: dc4fbeea14cafa1595ad03ce776f20b43a230c6590846c6eade7d5af56bd496b
+    home: https://sigstore.dev/
+    keywords:
+    - security
+    - transparency logs
+    maintainers:
+    - name: The Sigstore Authors
+    name: rekor-tiles
+    sources:
+    - https://github.com/sigstore/rekor-tiles
+    type: application
+    urls:
+    - https://github.com/sigstore/helm-charts/releases/download/rekor-tiles-1.3.3/rekor-tiles-1.3.3.tgz
+    version: 1.3.3
+  - annotations:
+      artifacthub.io/images: |
+        - name: rekor-tiles-gcp
           image: ghcr.io/sigstore/rekor-tiles/gcp:v2.4.1@sha256:874b3aa6ea454e85f7366411479430c6d1183d664f31f917873c7772efc3d99d
         - name: rekor-tiles-posix
           image: ghcr.io/sigstore/rekor-tiles/posix:v2.4.1@sha256:42129c1803c1b90061a673230ad12e1efb78b6eb86ccc226c2b79bd94d3a281d
@@ -26517,4 +26547,4 @@ entries:
     urls:
     - https://github.com/sigstore/helm-charts/releases/download/updatetree-0.0.1/updatetree-0.0.1.tgz
     version: 0.0.1
-generated: "2026-11-09T21:34:41.734223091Z"
+generated: "2026-11-10T09:21:55.922497591Z"
