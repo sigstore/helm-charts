@@ -182,7 +182,7 @@
           "type": "object"
         },
         "image": {
-          "default": "ghcr.io/sigstore/sigstore-probers/prober:v1.0.2@sha256:19885ac8dc6a44bf05071840a8e29796f33b06223e59230227a48fac77776a35",
+          "default": "ghcr.io/sigstore/sigstore-probers/prober:v1.0.3@sha256:bc6b2ad3d4c0e6d8babfd2721e5ac0162f4e3cb74bbc18794c845005792130f1",
           "required": [],
           "title": "image",
           "type": "string"
