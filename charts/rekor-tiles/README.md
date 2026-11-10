@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 1.3.2](https://img.shields.io/badge/Version-1.3.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.4.1](https://img.shields.io/badge/AppVersion-2.4.1-informational?style=flat-square)
+![Version: 1.3.3](https://img.shields.io/badge/Version-1.3.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.4.2](https://img.shields.io/badge/AppVersion-2.4.2-informational?style=flat-square)
 
 Part of the sigstore project, Rekor v2 (Rekor on tiles) is a signature transparency log
 
@@ -58,15 +58,15 @@ If using Tink or another KMS, provide the KMS configuration through values.yaml.
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
-| image.awsSHA | string | `"sha256:4fb604d4a6b316fe482aa2fb7c4b9a31f76d10807c3c6f5e796f724287beeab6"` |  |
+| image.awsSHA | string | `"sha256:4e5718d6063c8bb66ed4d1933dd80896a89e327a4e8e202c4084052d1d2d60b1"` |  |
 | image.flavor | string | `"gcp"` |  |
-| image.gcpSHA | string | `"sha256:874b3aa6ea454e85f7366411479430c6d1183d664f31f917873c7772efc3d99d"` |  |
-| image.gcpcloudsqlSHA | string | `"sha256:aec2d8751a53b3031cbceb62ff96ebc5463924e079379cff7a6c7bd7a456befc"` |  |
-| image.posixSHA | string | `"sha256:42129c1803c1b90061a673230ad12e1efb78b6eb86ccc226c2b79bd94d3a281d"` |  |
+| image.gcpSHA | string | `"sha256:195bde15e44c09afa60e442aed1965f00f7576ff634581d98f9c13e02c9cb8f8"` |  |
+| image.gcpcloudsqlSHA | string | `"sha256:391f227bdc6c0f0517e11f07c05b4766aed909d4ee6f0435200e2267c621659d"` |  |
+| image.posixSHA | string | `"sha256:37f06fe2d495b57372ff1221be4fa25beaf6479a11f1c5006532c45752e5b89d"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"ghcr.io"` |  |
 | image.repository | string | `"sigstore/rekor-tiles"` |  |
-| image.version | string | `"v2.4.1"` |  |
+| image.version | string | `"v2.4.2"` |  |
 | imagePullSecrets | list | `[]` |  |
 | lifecycle.preStop.sleep.seconds | int | `15` |  |
 | livenessProbe.httpGet.path | string | `"/healthz"` |  |
