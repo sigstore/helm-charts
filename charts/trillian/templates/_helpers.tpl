@@ -192,7 +192,7 @@ Log Server Arguments
 {{- if eq (include "trillian.storageSystem" .) "mysql" }}
 {{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
 {{- if .Values.mysql.gcp.cloudsql.iamUsername }}
-- {{ printf "--mysql_uri=%s@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true&interpolateParams=true" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+- {{ printf "--mysql_uri=%s@unix(%s/%s)/%s?parseTime=true&interpolateParams=true" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance (include "trillian.mysql.databaseRef" .) | quote }}
 {{- else }}
 - {{ printf "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true&interpolateParams=true" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
 {{- end }}
@@ -217,7 +217,7 @@ Log Signer Arguments
 {{- if eq (include "trillian.storageSystem" .) "mysql" }}
 {{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
 {{- if .Values.mysql.gcp.cloudsql.iamUsername }}
-- {{ printf "--mysql_uri=%s@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true&interpolateParams=true" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+- {{ printf "--mysql_uri=%s@unix(%s/%s)/%s?parseTime=true&interpolateParams=true" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance (include "trillian.mysql.databaseRef" .) | quote }}
 {{- else }}
 - {{ printf "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true&interpolateParams=true" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
 {{- end }}
@@ -382,12 +382,53 @@ Create Container Ports based on Service Ports
 {{- end -}}
 
 {{/*
+Returns "true" when the createdb job needs nothing from the MySQL Secret: Cloud SQL with IAM
+database authentication (unix domain socket or TCP) and no user-supplied Secret. Its connection
+arguments are then fully rendered from chart values and no MYSQL_* environment variables are set.
+
+With mysql.auth.existingSecret set, the database name keeps coming from that Secret, exactly
+as before, so an existing deployment never silently switches database.
+*/}}
+{{- define "trillian.createdb.secretless" -}}
+{{- if and .Values.mysql.gcp.enabled .Values.mysql.gcp.cloudsql.iamUsername (not .Values.mysql.auth.existingSecret) -}}
+true
+{{- end -}}
+{{- end -}}
+
+{{/*
+Returns "true" when the log server and log signer need nothing from the MySQL Secret. They only
+support IAM database authentication over the unix domain socket, and a user-supplied
+storageSystem.envCredentials keeps the previous behaviour as well.
+
+Built on trillian.createdb.secretless so the two cannot drift apart: the generated Secret is
+skipped when this is true (see mysql/secret.yaml), which is only safe if createdb does not
+read it either.
+*/}}
+{{- define "trillian.mysql.secretless" -}}
+{{- if and (include "trillian.createdb.secretless" .) .Values.mysql.gcp.cloudsql.unixDomainSocket.enabled (not .Values.storageSystem.envCredentials) -}}
+true
+{{- end -}}
+{{- end -}}
+
+{{/*
+Database name as it appears in the log server and log signer connection string: the literal
+name when nothing is read from a Secret, otherwise the MYSQL_DATABASE environment variable.
+*/}}
+{{- define "trillian.mysql.databaseRef" -}}
+{{- if include "trillian.mysql.secretless" . -}}
+{{- include "mysql.database" . -}}
+{{- else -}}
+$(MYSQL_DATABASE)
+{{- end -}}
+{{- end -}}
+
+{{/*
 Place default environment credentials setup
 */}}
 {{- define "trillian.storageSystem.envCredentials" -}}
 {{- if .Values.storageSystem.envCredentials }}
 {{ toYaml .Values.storageSystem.envCredentials }}
-{{- else }}
+{{- else if not (include "trillian.mysql.secretless" .) }}
 - name: MYSQL_USER
   valueFrom:
     secretKeyRef:
