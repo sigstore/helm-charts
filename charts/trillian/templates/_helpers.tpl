@@ -386,8 +386,7 @@ Returns "true" when the createdb job needs nothing from the MySQL Secret: Cloud 
 database authentication (unix domain socket or TCP) and no user-supplied Secret. Its connection
 arguments are then fully rendered from chart values and no MYSQL_* environment variables are set.
 
-With mysql.auth.existingSecret set, the database name keeps coming from that Secret, exactly
-as before, so an existing deployment never silently switches database.
+If mysql.auth.existingSecret is set, the DSN is instead rendered from those values.
 */}}
 {{- define "trillian.createdb.secretless" -}}
 {{- if and .Values.mysql.gcp.enabled .Values.mysql.gcp.cloudsql.iamUsername (not .Values.mysql.auth.existingSecret) -}}

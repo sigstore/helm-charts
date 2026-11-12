@@ -497,9 +497,8 @@ Returns "true" when the search index needs nothing from the MySQL Secret: Cloud 
 database authentication over the unix domain socket, and no user-supplied Secret or environment.
 The DSN is then fully rendered from chart values and no MYSQL_* environment variables are set.
 
-With mysql.auth.existingSecret or server.searchIndex.mysql.envCredentials set, the database
-name keeps coming from there, exactly as before, so an existing deployment never silently
-switches database.
+If mysql.auth.existingSecret or server.searchIndex.mysql.envCredentials are set, the DSN is
+instead rendered from those values.
 */}}
 {{- define "rekor.mysql.secretless" -}}
 {{- $gcp := default dict (.Values.mysql).gcp -}}
