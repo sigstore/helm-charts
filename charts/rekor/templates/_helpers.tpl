@@ -384,7 +384,7 @@ Server Arguments
 {{- if eq (.Values.server.searchIndex).storageProvider "mysql" }}
 {{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
 {{- if .Values.mysql.gcp.cloudsql.iamUsername }}
-- {{ printf "--search_index.mysql.dsn=%s@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true&interpolateParams=true" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
+- {{ printf "--search_index.mysql.dsn=%s@unix(%s/%s)/%s?parseTime=true&interpolateParams=true" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance (include "rekor.mysql.databaseRef" .) | quote }}
 {{- else }}
 - {{ printf "--search_index.mysql.dsn=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/$(MYSQL_DATABASE)?parseTime=true&interpolateParams=true" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
 {{- end }}
@@ -493,12 +493,41 @@ Create the name of the sharding config
 {{- end }}
 
 {{/*
+Returns "true" when the search index needs nothing from the MySQL Secret: Cloud SQL with IAM
+database authentication over the unix domain socket, and no user-supplied Secret or environment.
+The DSN is then fully rendered from chart values and no MYSQL_* environment variables are set.
+
+If mysql.auth.existingSecret or server.searchIndex.mysql.envCredentials are set, the DSN is
+instead rendered from those values.
+*/}}
+{{- define "rekor.mysql.secretless" -}}
+{{- $gcp := default dict (.Values.mysql).gcp -}}
+{{- $cloudsql := default dict $gcp.cloudsql -}}
+{{- $socket := default dict $cloudsql.unixDomainSocket -}}
+{{- if and $gcp.enabled $socket.enabled $cloudsql.iamUsername (not ((.Values.mysql).auth).existingSecret) (not ((.Values.server.searchIndex).mysql).envCredentials) -}}
+true
+{{- end -}}
+{{- end -}}
+
+{{/*
+Database name as it appears in the search index DSN: the literal name when nothing is read
+from a Secret, otherwise the MYSQL_DATABASE environment variable.
+*/}}
+{{- define "rekor.mysql.databaseRef" -}}
+{{- if include "rekor.mysql.secretless" . -}}
+{{- include "mysql.database" . -}}
+{{- else -}}
+$(MYSQL_DATABASE)
+{{- end -}}
+{{- end -}}
+
+{{/*
 Place default environment credentials setup
 */}}
 {{- define "searchIndex.mysql.envCredentials" -}}
 {{- if ((.Values.server.searchIndex).mysql).envCredentials }}
 {{ toYaml .Values.server.searchIndex.mysql.envCredentials }}
-{{- else }}
+{{- else if not (include "rekor.mysql.secretless" .) }}
 - name: MYSQL_USER
   valueFrom:
     secretKeyRef:

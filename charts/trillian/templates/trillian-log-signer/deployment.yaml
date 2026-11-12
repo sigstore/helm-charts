@@ -67,11 +67,14 @@ spec:
           imagePullPolicy: "{{ .Values.logSigner.image.pullPolicy }}"
           args:
 {{  include "trillian.logSigner.args" . | indent 12 }}
+          {{- $envCredentials := include "trillian.storageSystem.envCredentials" . }}
+          {{- if or $envCredentials .Values.logSigner.extraEnv }}
           env:
-{{- include "trillian.storageSystem.envCredentials" . | indent 12}}
+{{- $envCredentials | indent 12}}
             {{- with .Values.logSigner.extraEnv }}
               {{- . | toYaml | nindent 12 }}
             {{- end }}
+          {{- end }}
           ports:
 {{- include "trillian.containerPorts" .Values.logSigner.service.ports | indent 12 }}
 {{- if .Values.logSigner.startupProbe }}

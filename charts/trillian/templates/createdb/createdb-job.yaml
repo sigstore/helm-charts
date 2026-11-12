@@ -46,6 +46,13 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            {{- /*
+            When nothing is needed from the MySQL Secret (see trillian.createdb.secretless) the
+            connection arguments below are fully rendered from chart values and no MYSQL_*
+            environment variables are set.
+            */}}
+            {{- $secretless := include "trillian.createdb.secretless" . }}
+            {{- if not $secretless }}
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:
@@ -65,11 +72,16 @@ spec:
               value: {{ template "mysql.hostname" . }}
             - name: MYSQL_PORT
               value: {{ .Values.mysql.port | quote }}
+            {{- end }}
           {{- with .Values.createdb.extraEnv }}
             {{- . | toYaml | nindent 12 }}
           {{- end }}
           args:
+            {{- if $secretless }}
+            - {{ printf "--db_name=%s" (include "mysql.database" .) | quote }}
+            {{- else }}
             - "--db_name=$(MYSQL_DATABASE)"
+            {{- end }}
             {{- if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.unixDomainSocket.enabled) }}
             {{- if .Values.mysql.gcp.cloudsql.iamUsername }}
             - {{ printf "--mysql_uri=%s@unix(%s/%s)/" .Values.mysql.gcp.cloudsql.iamUsername .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
@@ -77,7 +89,11 @@ spec:
             - {{ printf "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@unix(%s/%s)/" .Values.mysql.gcp.cloudsql.unixDomainSocket.path .Values.mysql.gcp.instance | quote }}
             {{- end }}
             {{- else if and (.Values.mysql.gcp.enabled) (.Values.mysql.gcp.cloudsql.iamUsername) }}
+            {{- if $secretless }}
+            - {{ printf "--mysql_uri=%s@tcp(%s:%v)/" .Values.mysql.gcp.cloudsql.iamUsername (include "mysql.hostname" .) .Values.mysql.port | quote }}
+            {{- else }}
             - {{ printf "--mysql_uri=%s@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/" .Values.mysql.gcp.cloudsql.iamUsername | quote }}
+            {{- end }}
             {{- else }}
             - "--mysql_uri=$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOSTNAME):$(MYSQL_PORT))/"
             {{- end }}
