@@ -19,8 +19,8 @@ server:
     registry: ghcr.io
     repository: sigstore/timestamp-server
     pullPolicy: IfNotPresent
-    # crane digest ghcr.io/sigstore/timestamp-server:v2.2.0
-    version: v2.2.0@sha256:77c615f0bef6ddd907b531099cd1a8cf8f698ca9a08b1abf7397b222c9352306
+    # crane digest ghcr.io/sigstore/timestamp-server:v2.2.1
+    version: v2.2.1@sha256:32b970a783554af9ce9b4c7cd490a83cc6e915f3c3e344cc6f5d05a74d975d46
   args:
     port: 5555
     # Valid values: tink, kms, file
