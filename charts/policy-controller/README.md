@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.10.8](https://img.shields.io/badge/Version-0.10.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.1](https://img.shields.io/badge/AppVersion-0.13.1-informational?style=flat-square)
+![Version: 0.10.9](https://img.shields.io/badge/Version-0.10.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.13.1](https://img.shields.io/badge/AppVersion-0.13.1-informational?style=flat-square)
 
 The Helm chart for Policy  Controller
 
@@ -27,6 +27,14 @@ The `policy-controller` enforce images matching the defined list of `ClusterImag
 
 Note that, by default, the `policy-controller` offers a configurable behavior defining whether to allow, deny or warn whenever an image does not match a policy in a specific namespace. This behavior can be configured using the `config-policy-controller` ConfigMap created under the release namespace, and by adding an entry with the property `no-match-policy` and its value `warn|allow|deny`.
 By default, any image that does not match a policy is rejected whenever `no-match-policy` is not configured in the ConfigMap.
+
+You can populate that ConfigMap from Helm via `webhook.configData`. Each key under `configData` is written verbatim into the ConfigMap `data` map — do not nest keys under `_example` (`_example` is only the chart's placeholder when `configData` is empty):
+
+```yaml
+webhook:
+  configData:
+    no-match-policy: warn
+```
 
 As supported in previous versions, you could create your own key pair:
 
@@ -171,7 +179,7 @@ helm uninstall [RELEASE_NAME]
 | serviceMonitor.enabled | bool | `false` |  |
 | webhook.affinity | object | `{}` |  |
 | webhook.automountServiceAccountToken | bool | `true` |  |
-| webhook.configData | object | `{}` |  |
+| webhook.configData | object | `{}` | Contents of the `config-policy-controller` ConfigMap `data` map. Keys here become ConfigMap data keys directly (do NOT wrap them in `_example`). When empty (the default), the chart ships a commented `_example` placeholder only. Example — warn when an image matches no ClusterImagePolicy:   configData:     no-match-policy: warn Valid `no-match-policy` values: `warn` | `allow` | `deny`. When unset, images that match no policy are rejected (deny). |
 | webhook.customLabels | object | `{}` |  |
 | webhook.env | object | `{}` |  |
 | webhook.envFrom | object | `{}` |  |
