@@ -150,6 +150,8 @@ server:
           type: HTTP
   # -- Additional labels to add to the server pod
   podLabels: {}
+  extraArgs: []
+  extraEnv: []
   securityContext:
     runAsNonRoot: true
     runAsUser: 65533

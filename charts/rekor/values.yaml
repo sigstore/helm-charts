@@ -219,6 +219,7 @@ server:
     prometheus.io/port: "2112"
   resources: {}
   extraArgs: []
+  extraEnv: []
   gomemlimit: ""
   serviceAccount:
     create: true
