@@ -32,11 +32,11 @@ annotations:
     - name: db_server
       image: gcr.io/trillian-opensource-ci/db_server:v1.5.3@sha256:2a685a38dd0129cceb646c232d285383f614c7e6fa51ff8f512aef78e4298461
     - name: log_server
-      image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.8.0@sha256:32ee491f4d005eac128203e52e5057f9cf6d8901c5df790619a9da24c000bd97
+      image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.8.0@sha256:ec7c9ee7a48ebdd4ca53ed68e493f1cb389fb7c899f60b9648ff72ab91504f1f
     - name: log_server_batched_queue
       image: ghcr.io/sigstore/scaffolding/trillian_log_server:v1.8.0-batched-queue@sha256:8b82b6a509b0861f25c11e4ca814828054d2772d3e74c054ef89b3cf185e20f3
     - name: log_signer
-      image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.8.0@sha256:3d0152303816e88374c62c0faaf5179cb9c3a867fb5e3547e83c6d92f05c33dc
+      image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.8.0@sha256:fdb1df30f2adb33f4986d3fe6e298c0b68739b6774bff7c21490a279e2c595d5
     - name: log_signer_batched_queue
       image: ghcr.io/sigstore/scaffolding/trillian_log_signer:v1.8.0-batched-queue@sha256:525804ae02e391a84d6150cae9ceafb43a3f4ede07d1261ca566f1b53b43cd65
     - name: cloud_proxy

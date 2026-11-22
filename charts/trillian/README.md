@@ -87,7 +87,7 @@ Kubernetes: `>=1.29.0-0`
 | logServer.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logServer.image.registry | string | `"ghcr.io"` |  |
 | logServer.image.repository | string | `"sigstore/scaffolding/trillian_log_server"` |  |
-| logServer.image.version | string | `"v1.8.0@sha256:32ee491f4d005eac128203e52e5057f9cf6d8901c5df790619a9da24c000bd97"` | trillian v1.8.0 (scaffolding v0.7.39) |
+| logServer.image.version | string | `"v1.8.0@sha256:ec7c9ee7a48ebdd4ca53ed68e493f1cb389fb7c899f60b9648ff72ab91504f1f"` | trillian v1.8.0 (scaffolding v0.7.42) |
 | logServer.livenessProbe | object | `{}` |  |
 | logServer.name | string | `"log-server"` |  |
 | logServer.nodeSelector | object | `{}` |  |
@@ -125,7 +125,7 @@ Kubernetes: `>=1.29.0-0`
 | logSigner.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logSigner.image.registry | string | `"ghcr.io"` |  |
 | logSigner.image.repository | string | `"sigstore/scaffolding/trillian_log_signer"` |  |
-| logSigner.image.version | string | `"v1.8.0@sha256:3d0152303816e88374c62c0faaf5179cb9c3a867fb5e3547e83c6d92f05c33dc"` | trillian v1.8.0 (scaffolding v0.7.39) |
+| logSigner.image.version | string | `"v1.8.0@sha256:fdb1df30f2adb33f4986d3fe6e298c0b68739b6774bff7c21490a279e2c595d5"` | trillian v1.8.0 (scaffolding v0.7.42) |
 | logSigner.livenessProbe | object | `{}` |  |
 | logSigner.name | string | `"log-signer"` |  |
 | logSigner.nodeSelector | object | `{}` |  |
