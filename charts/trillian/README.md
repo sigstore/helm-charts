@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.4.3](https://img.shields.io/badge/Version-0.4.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
 
 Trillian is a log that stores an accurate, immutable and verifiable history of activity.
 
@@ -77,15 +77,17 @@ Kubernetes: `>=1.29.0-0`
 | initContainerImage.netcat.repository | string | `"busybox"` |  |
 | initContainerImage.netcat.version | string | `"sha256:fd7dc98638c8e305f4dc34e979f1c0fdfdcaeb0fbf8fcff77ae834b6da3d7e6e"` | BusyBox 1.38.0 multi-platform index (linux/amd64 and linux/arm64) |
 | logServer.affinity | object | `{}` |  |
+| logServer.batchedQueue | bool | `false` | Use the Trillian image built with -tags=batched_queue (requires batched_queue DB schema) |
 | logServer.enabled | bool | `true` |  |
 | logServer.extraArgs | list | `[]` |  |
 | logServer.extraEnv | list | `[]` |  |
 | logServer.extraVolumeMounts | list | `[]` |  |
 | logServer.extraVolumes | list | `[]` |  |
+| logServer.image.batchedQueueVersion | string | `"v1.8.0-batched-queue@sha256:8b82b6a509b0861f25c11e4ca814828054d2772d3e74c054ef89b3cf185e20f3"` | trillian v1.8.0 batched_queue image tag or digest (used when logServer.batchedQueue is true) |
 | logServer.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logServer.image.registry | string | `"ghcr.io"` |  |
 | logServer.image.repository | string | `"sigstore/scaffolding/trillian_log_server"` |  |
-| logServer.image.version | string | `"sha256:32ee491f4d005eac128203e52e5057f9cf6d8901c5df790619a9da24c000bd97"` | trillian v1.8.0 (scaffolding v0.7.39) |
+| logServer.image.version | string | `"v1.8.0@sha256:ec7c9ee7a48ebdd4ca53ed68e493f1cb389fb7c899f60b9648ff72ab91504f1f"` | trillian v1.8.0 (scaffolding v0.7.42) |
 | logServer.livenessProbe | object | `{}` |  |
 | logServer.name | string | `"log-server"` |  |
 | logServer.nodeSelector | object | `{}` |  |
@@ -111,6 +113,7 @@ Kubernetes: `>=1.29.0-0`
 | logServer.serviceAccount.name | string | `""` |  |
 | logServer.tolerations | list | `[]` |  |
 | logSigner.affinity | object | `{}` |  |
+| logSigner.batchedQueue | bool | `false` | Use the Trillian image built with -tags=batched_queue (requires batched_queue DB schema) |
 | logSigner.enabled | bool | `true` |  |
 | logSigner.etcdServers | list | `[]` |  |
 | logSigner.extraArgs | list | `[]` |  |
@@ -118,10 +121,11 @@ Kubernetes: `>=1.29.0-0`
 | logSigner.extraVolumeMounts | list | `[]` |  |
 | logSigner.extraVolumes | list | `[]` |  |
 | logSigner.forceMaster | bool | `true` |  |
+| logSigner.image.batchedQueueVersion | string | `"v1.8.0-batched-queue@sha256:525804ae02e391a84d6150cae9ceafb43a3f4ede07d1261ca566f1b53b43cd65"` | trillian v1.8.0 batched_queue image tag or digest (used when logSigner.batchedQueue is true) |
 | logSigner.image.pullPolicy | string | `"IfNotPresent"` |  |
 | logSigner.image.registry | string | `"ghcr.io"` |  |
 | logSigner.image.repository | string | `"sigstore/scaffolding/trillian_log_signer"` |  |
-| logSigner.image.version | string | `"sha256:3d0152303816e88374c62c0faaf5179cb9c3a867fb5e3547e83c6d92f05c33dc"` | trillian v1.8.0 (scaffolding v0.7.39) |
+| logSigner.image.version | string | `"v1.8.0@sha256:fdb1df30f2adb33f4986d3fe6e298c0b68739b6774bff7c21490a279e2c595d5"` | trillian v1.8.0 (scaffolding v0.7.42) |
 | logSigner.livenessProbe | object | `{}` |  |
 | logSigner.name | string | `"log-signer"` |  |
 | logSigner.nodeSelector | object | `{}` |  |

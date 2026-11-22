@@ -118,14 +118,18 @@ logServer:
   enabled: true
   replicaCount: 1
   name: log-server
+  # -- Use the Trillian image built with -tags=batched_queue (requires batched_queue DB schema)
+  batchedQueue: false
   portRPC: 8091
   portHTTP: 8090
   image:
     registry: ghcr.io
     repository: sigstore/scaffolding/trillian_log_server
     pullPolicy: IfNotPresent
-    # -- trillian v1.8.0 (scaffolding v0.7.39)
-    version: sha256:32ee491f4d005eac128203e52e5057f9cf6d8901c5df790619a9da24c000bd97
+    # -- trillian v1.8.0 (scaffolding v0.7.42)
+    version: v1.8.0@sha256:ec7c9ee7a48ebdd4ca53ed68e493f1cb389fb7c899f60b9648ff72ab91504f1f
+    # -- trillian v1.8.0 batched_queue image tag or digest (used when logServer.batchedQueue is true)
+    batchedQueueVersion: v1.8.0-batched-queue@sha256:8b82b6a509b0861f25c11e4ca814828054d2772d3e74c054ef89b3cf185e20f3
   podAnnotations: {}
   podLabels: {}
   nodeSelector: {}
@@ -159,6 +163,8 @@ logSigner:
   enabled: true
   replicaCount: 1
   name: log-signer
+  # -- Use the Trillian image built with -tags=batched_queue (requires batched_queue DB schema)
+  batchedQueue: false
   forceMaster: true
   etcdServers: []
   portRPC: 8091
@@ -167,8 +173,10 @@ logSigner:
     registry: ghcr.io
     repository: sigstore/scaffolding/trillian_log_signer
     pullPolicy: IfNotPresent
-    # -- trillian v1.8.0 (scaffolding v0.7.39)
-    version: sha256:3d0152303816e88374c62c0faaf5179cb9c3a867fb5e3547e83c6d92f05c33dc
+    # -- trillian v1.8.0 (scaffolding v0.7.42)
+    version: v1.8.0@sha256:fdb1df30f2adb33f4986d3fe6e298c0b68739b6774bff7c21490a279e2c595d5
+    # -- trillian v1.8.0 batched_queue image tag or digest (used when logSigner.batchedQueue is true)
+    batchedQueueVersion: v1.8.0-batched-queue@sha256:525804ae02e391a84d6150cae9ceafb43a3f4ede07d1261ca566f1b53b43cd65
   podAnnotations: {}
   podLabels: {}
   nodeSelector: {}

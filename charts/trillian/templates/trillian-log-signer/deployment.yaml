@@ -63,7 +63,7 @@ spec:
 {{- end }}
       containers:
         - name: {{ template "trillian.name" . }}-{{ .Values.logSigner.name }}
-          image: "{{ template "trillian.image" (dict "image" .Values.logSigner.image "global" .Values.global) }}"
+          image: "{{ template "trillian.image" (dict "image" .Values.logSigner.image "batchedQueue" .Values.logSigner.batchedQueue "global" .Values.global) }}"
           imagePullPolicy: "{{ .Values.logSigner.image.pullPolicy }}"
           args:
 {{  include "trillian.logSigner.args" . | indent 12 }}
