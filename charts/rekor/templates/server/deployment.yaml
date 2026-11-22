@@ -138,6 +138,9 @@ spec:
             - name: GOMEMLIMIT
               value: {{ .Values.server.gomemlimit | quote }}
             {{- end }}
+            {{- with .Values.server.extraEnv }}
+              {{- . | toYaml | nindent 12 }}
+            {{- end }}
           args:
 {{  include "rekor.server.args" . | indent 12 }}
           ports:

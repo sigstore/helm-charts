@@ -1,6 +1,6 @@
 # rekor
 
-![Version: 1.8.13](https://img.shields.io/badge/Version-1.8.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.3](https://img.shields.io/badge/AppVersion-1.6.3-informational?style=flat-square)
+![Version: 1.8.14](https://img.shields.io/badge/Version-1.8.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.6.3](https://img.shields.io/badge/AppVersion-1.6.3-informational?style=flat-square)
 
 Part of the sigstore project, Rekor is a timestamping server and transparency log for storing signatures, as well as an API based server for validation
 
@@ -163,6 +163,7 @@ Kubernetes: `>=1.29.0-0`
 | server.config.treeID | string | `""` |  |
 | server.enabled | bool | `true` |  |
 | server.extraArgs | list | `[]` |  |
+| server.extraEnv | list | `[]` |  |
 | server.gomemlimit | string | `""` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
