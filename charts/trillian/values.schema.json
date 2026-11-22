@@ -139,6 +139,9 @@
                 "affinity": {
                     "type": "object"
                 },
+                "batchedQueue": {
+                    "type": "boolean"
+                },
                 "enabled": {
                     "type": "boolean"
                 },
@@ -157,6 +160,9 @@
                 "image": {
                     "type": "object",
                     "properties": {
+                        "batchedQueueVersion": {
+                            "type": "string"
+                        },
                         "pullPolicy": {
                             "type": "string"
                         },
@@ -257,6 +263,9 @@
                 "affinity": {
                     "type": "object"
                 },
+                "batchedQueue": {
+                    "type": "boolean"
+                },
                 "enabled": {
                     "type": "boolean"
                 },
@@ -281,6 +290,9 @@
                 "image": {
                     "type": "object",
                     "properties": {
+                        "batchedQueueVersion": {
+                            "type": "string"
+                        },
                         "pullPolicy": {
                             "type": "string"
                         },

@@ -318,6 +318,9 @@ Create the image path for the passed in image field
   {{- $registryName = .image.registry -}}
   {{- $repositoryName = .image.repository -}}
   {{- $tag = .image.version -}}
+  {{- if .batchedQueue -}}
+    {{- $tag = .image.batchedQueueVersion -}}
+  {{- end -}}
 {{- end -}}
 {{- if .global -}}
   {{- if kindIs "map" .global.imageRegistry -}}
