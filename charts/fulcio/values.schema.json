@@ -238,7 +238,10 @@
                     "type": "object",
                     "properties": {
                         "aws_hsm_root_ca_path": {
-                            "type": "null"
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "certificateAuthority": {
                             "type": "string"
@@ -259,7 +262,10 @@
                             "type": "integer"
                         },
                         "hsm_caroot_id": {
-                            "type": "null"
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "port": {
                             "type": "integer"

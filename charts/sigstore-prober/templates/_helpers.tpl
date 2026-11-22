@@ -28,8 +28,11 @@ Create args for sigstore prober components
 {{- if .Values.spec.args.trustedRoot }}
 - "-trusted-root=/var/run/sigstore/trusted-root.json"
 {{- end }}
-{{- if .Values.spec.args.rekorV2Url }}
-- "-rekor-v2-url={{ .Values.spec.args.rekorV2Url }}"
+{{- if .Values.spec.args.pqcSigningConfig }}
+- "-pqc-signing-config=/var/run/sigstore/pqc-signing-config.json"
+{{- end }}
+{{- if .Values.spec.args.pqcTrustedRoot }}
+- "-pqc-trusted-root=/var/run/sigstore/pqc-trusted-root.json"
 {{- end }}
 {{- if .Values.spec.args.writeProber }}
 - "-write-prober"

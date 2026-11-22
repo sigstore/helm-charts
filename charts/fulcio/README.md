@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.11.4](https://img.shields.io/badge/Version-2.11.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.9.0](https://img.shields.io/badge/AppVersion-1.9.0-informational?style=flat-square)
+![Version: 2.11.7](https://img.shields.io/badge/Version-2.11.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.10.2](https://img.shields.io/badge/AppVersion-1.10.2-informational?style=flat-square)
 
 Fulcio is a free code signing Certificate Authority, built to make short-lived certificates available to anyone.
 
@@ -136,11 +136,13 @@ helm uninstall [RELEASE_NAME]
 | server.args.port | int | `5555` |  |
 | server.awsKmsCredentialsSecretName | string | `"aws-kms-credentials"` | kubernetes secret name containing IAM credentials for use with AWS KMS |
 | server.awsKmsRegion | string | `"us-east-1"` | AWS region if using AWS KMS for signing key |
+| server.extraArgs | list | `[]` |  |
+| server.extraEnv | list | `[]` |  |
 | server.grpcSvcPort | int | `5554` |  |
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/fulcio"` |  |
-| server.image.version | string | `"v1.9.0@sha256:2de0226c5f82008091a4c9de4f7b84b081f2bff1d13530d7f7357a6ba19d3835"` |  |
+| server.image.version | string | `"v1.10.2@sha256:79e6617a9b16e35e9743df3efd51dcc28777b36da49b7bf9940beb0ff79e809f"` |  |
 | server.ingress.grpc.annotations."nginx.ingress.kubernetes.io/backend-protocol" | string | `"GRPC"` |  |
 | server.ingress.grpc.className | string | `""` |  |
 | server.ingress.grpc.enabled | bool | `false` |  |
@@ -240,7 +242,7 @@ To enabled access from external resources, an Ingress resource is created. The c
 
 ## Key Management for Certificate Authority
 
-Fulcio supports the following options for certificate authority backends: googleca, pkcs11ca, aws-hsm-root-ca-path, fileca, kmsca. For all except fileca, set the appropriate values in values.yaml to configure the CA roots for the given backend.
+Fulcio supports the following options for certificate authority backends: googleca, pkcs11ca, fileca, kmsca, tinkca. For pkcs11ca, `server.args.hsm_caroot_id` is required and `server.args.aws_hsm_root_ca_path` optionally points to the root CA on disk (AWS CloudHSM). For all except fileca, set the appropriate values in values.yaml to configure the CA roots for the given backend.
 
 For fileca, the signing keys and certificates need to be generated manually and uploaded as a Secret that the Fulcio deployment can mount. For example:
 

@@ -7,7 +7,7 @@ serviceAccount:
   annotations: {}
 spec:
   replicaCount: 1
-  image: ghcr.io/sigstore/sigstore-probers/prober:v1.0.1@sha256:d1e914e6d6b92ed4d17ad103db4aae4832a3db4f9933ccbe22506bf1a6a7ac64
+  image: ghcr.io/sigstore/sigstore-probers/prober:v1.0.3@sha256:bc6b2ad3d4c0e6d8babfd2721e5ac0162f4e3cb74bbc18794c845005792130f1
   imagePullPolicy: Always
   matchLabels:
     app: sigstore-prober
@@ -22,7 +22,8 @@ spec:
     staging: false
     signingConfig: ""
     trustedRoot: ""
-    rekorV2Url: ""
+    pqcSigningConfig: ""
+    pqcTrustedRoot: ""
     rekorRequests: []
     fulcioRequests: []
     writeProber: false
