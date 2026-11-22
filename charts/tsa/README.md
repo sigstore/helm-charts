@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 2.1.7](https://img.shields.io/badge/Version-2.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.2.1](https://img.shields.io/badge/AppVersion-2.2.1-informational?style=flat-square)
+![Version: 2.1.8](https://img.shields.io/badge/Version-2.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.2.2](https://img.shields.io/badge/AppVersion-2.2.2-informational?style=flat-square)
 
 Timestamp Authority issuing RFC3161 signed timestamps.
 
@@ -108,7 +108,7 @@ helm uninstall [RELEASE_NAME]
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/timestamp-server"` |  |
-| server.image.version | string | `"v2.2.1@sha256:32b970a783554af9ce9b4c7cd490a83cc6e915f3c3e344cc6f5d05a74d975d46"` |  |
+| server.image.version | string | `"v2.2.2@sha256:f51add454ad771fc1268d9b77ac82a3510928ef955b3c02dbd6a728152ba9fc0"` |  |
 | server.ingress.http.annotations | object | `{}` |  |
 | server.ingress.http.className | string | `"nginx"` |  |
 | server.ingress.http.enabled | bool | `true` |  |
