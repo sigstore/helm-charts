@@ -55,11 +55,28 @@ jobs:
 
       - name: Publish and Sign OCI Charts
         run: |
+          set -euo pipefail
           for chart in `find .cr-release-packages -name '*.tgz' -print`; do
-            helm push ${chart} oci://ghcr.io/${GITHUB_REPOSITORY} |& tee helm-push-output.log
+            pushed=false
+            for attempt in 1 2 3 4 5; do
+              if helm push "${chart}" "oci://ghcr.io/${GITHUB_REPOSITORY}" |& tee helm-push-output.log; then
+                pushed=true
+                break
+              fi
+              echo "helm push failed for ${chart} (attempt ${attempt}/5), retrying in 5s..."
+              sleep 5
+            done
+            if [ "${pushed}" != "true" ]; then
+              echo "helm push failed for ${chart} after 5 attempts"
+              exit 1
+            fi
             file_name=${chart##*/}
             chart_name=${file_name%-*}
             digest=$(awk -F "[, ]+" '/Digest/{print $NF}' < helm-push-output.log)
+            if [ -z "${digest}" ]; then
+              echo "failed to parse digest from helm push output for ${chart}"
+              exit 1
+            fi
             cosign sign "ghcr.io/${GITHUB_REPOSITORY}/${chart_name}@${digest}"
           done
         env:
