@@ -1,12 +1,8 @@
 chart-dirs:
   - charts
 excluded-charts:
+  # Library chart; cannot be installed directly by Helm.
   - common
-  - ctlog
-  - fulcio
-  - scaffold
-  - rekor-tiles
-  - ctlog-tiles
 validate-maintainers: false
 remote: origin
 target-branch: main

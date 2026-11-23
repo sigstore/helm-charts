@@ -1,6 +1,6 @@
 # ctlog
 
-![Version: 0.2.71](https://img.shields.io/badge/Version-0.2.71-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.40](https://img.shields.io/badge/AppVersion-0.7.40-informational?style=flat-square)
+![Version: 0.2.72](https://img.shields.io/badge/Version-0.2.72-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.7.42](https://img.shields.io/badge/AppVersion-0.7.42-informational?style=flat-square)
 
 Certificate Log
 
@@ -78,7 +78,7 @@ Certificate Log
 | server.image.pullPolicy | string | `"IfNotPresent"` |  |
 | server.image.registry | string | `"ghcr.io"` |  |
 | server.image.repository | string | `"sigstore/scaffolding/ct_server"` |  |
-| server.image.version | string | `"v0.7.40@sha256:b3f5962d293621c9026b9e81e09a4e32c08cfb79ccce4e933c6d3cc11b415d1d"` |  |
+| server.image.version | string | `"v0.7.42@sha256:d7731403eefc232a2c961a34c0ced4ff013875c2f476691c02105cd228b07677"` |  |
 | server.ingress.annotations | object | `{}` |  |
 | server.ingress.className | string | `"nginx"` |  |
 | server.ingress.enabled | bool | `false` |  |

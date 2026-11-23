@@ -1,0 +1,44 @@
+---
+image:
+  flavor: posix
+namespace:
+  name: default
+nodeSelector:
+  iam.gke.io/gke-metadata-server-enabled: null
+podSecurityContext:
+  fsGroup: 65533
+server:
+  posix:
+    privateKey:
+      path: /etc/ctfe/signer.pem
+      secret:
+        name: ctlog-tiles-ci-signer
+        key: signing-key
+        mountPath: /etc/ctfe
+        mountSubPath: signer.pem
+    storageDir:
+      path: /storage
+      name: storage
+      volume:
+        emptyDir: {}
+  fulcio:
+    rootPEM: |
+      -----BEGIN CERTIFICATE-----
+      MIIDEzCCAfugAwIBAgIUWumC9bMcYBPm+41o25o6+k0qhNEwDQYJKoZIhvcNAQEL
+      BQAwGTEXMBUGA1UEAwwORnVsY2lvIFJvb3QgQ0EwHhcNMjYwODI4MTcwMTE4WhcN
+      MzYwODI1MTcwMTE4WjAZMRcwFQYDVQQDDA5GdWxjaW8gUm9vdCBDQTCCASIwDQYJ
+      KoZIhvcNAQEBBQADggEPADCCAQoCggEBALCeqTyeLy8jY2bqiGtg/Ge6Y5N7Hqed
+      09UeylXmWTE5pDcdMPSfCnlsbWWUYgzp9/Acp3XBZIMktF+AMBPi/MbfiZGJ+oNM
+      Ox5GceUUh9udJDdVibCFRE6gWrn9rEysnUDrBDDZdASBrpeuQYuQctrgZ7dJ9RrC
+      KNyKfzVgDcRfATb6Rzo32kkPHY6hQ3HOViyqdR2wX5Py29puH3IOohyiSSR02soR
+      eGdrLDVJ0hlDx73Nawat0+IqaSAwBX1HDV0CBPSqBrll9DvWD5mESTMD/r/BQien
+      oonB3aw7sj+qGV9/7Gh+Cww7orNSudG3mGjVsAqqOQE3M6Lz3Hpy3FECAwEAAaNT
+      MFEwHQYDVR0OBBYEFLdsBq5XCr7hUBn0vgN3JZZ+qIKVMB8GA1UdIwQYMBaAFLds
+      Bq5XCr7hUBn0vgN3JZZ+qIKVMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQEL
+      BQADggEBAEi4IVw3lpLvkoqWbu93sBjmOsP3rjH+wBN6UbzUc52YiSY9LnUOYbkQ
+      aQW3ugci+Ln3h+bsQcQgJo/fEmvexogRptwd7cELq9L79r7Jaxu9sIaQDLDV5Lsc
+      4kBSgnlgCnEQLLLpPHz3lLXzuSShkfi40gU0aLfC3AtJ+ea22ZDmdrBdCNRv5Unj
+      fytR056bqHMhzEZyky5T9bLfIKRcGkIlx+NU19pL3jcnqUwSpCy4aXKF1HRs4kc9
+      qnT/02KBxsQwEPjjg0zKuU3XbJZj8H26DKTMHDelhDNp9DE/JefVh338QDRmS1A5
+      nLv0L9EYpgfj3IxNS4Ueav2qgOSt+68=
+      -----END CERTIFICATE-----

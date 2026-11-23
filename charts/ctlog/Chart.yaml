@@ -4,8 +4,8 @@ description: Certificate Log
 
 type: application
 
-version: 0.2.71
-appVersion: 0.7.40
+version: 0.2.72
+appVersion: 0.7.42
 
 keywords:
   - security
@@ -20,7 +20,7 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |
     - name: ct_server
-      image: ghcr.io/sigstore/scaffolding/ct_server:v0.7.40@sha256:b3f5962d293621c9026b9e81e09a4e32c08cfb79ccce4e933c6d3cc11b415d1d
+      image: ghcr.io/sigstore/scaffolding/ct_server:v0.7.42@sha256:d7731403eefc232a2c961a34c0ced4ff013875c2f476691c02105cd228b07677
     - name: createctconfig
       image: ghcr.io/sigstore/scaffolding/createctconfig:v0.7.33@sha256:e591f98e3899aa86772a2b033d4a0353ba99db2d17d684970731fb6f829456b6
     - name: createtree
