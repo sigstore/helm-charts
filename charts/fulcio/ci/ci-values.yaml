@@ -1,5 +1,9 @@
 ---
+ctlog:
+  enabled: false
 server:
+  args:
+    disable_ct_log: true
   ingress:
     http:
       hosts:

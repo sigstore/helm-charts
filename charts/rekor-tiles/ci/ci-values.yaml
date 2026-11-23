@@ -1,0 +1,26 @@
+---
+platform: posix
+image:
+  flavor: posix
+namespace:
+  name: default
+nodeSelector:
+  iam.gke.io/gke-metadata-server-enabled: null
+podSecurityContext:
+  fsGroup: 65533
+server:
+  posix:
+    storageDir:
+      path: /storage
+      name: storage
+      volume:
+        emptyDir: {}
+  signer:
+    file:
+      path: /pki/signer.pem
+      withPassword: false
+      secret:
+        name: rekor-tiles-ci-signer
+        key: signing-key
+        mountPath: /pki
+        mountSubPath: signer.pem

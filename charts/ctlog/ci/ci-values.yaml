@@ -1,0 +1,5 @@
+---
+trillian:
+  namespace: ctlog-ci-trillian
+createctconfig:
+  fulcioURL: "http://fulcio-server.ctlog-ci-fulcio.svc"

@@ -61,6 +61,50 @@ jobs:
         if: steps.changes.outputs.charts == 'true'
         run: "helm install ingress-nginx/ingress-nginx --generate-name --set controller.service.type='NodePort' --set controller.admissionWebhooks.enabled=false --set controller.progressDeadlineSeconds=30"
 
+      - name: Setup chart test prerequisites
+        if: steps.changes.outputs.charts == 'true'
+        run: |
+          changed=$(ct list-changed --config ct-install.yaml)
+          echo "Changed charts for install:"
+          echo "$changed"
+
+          if echo "$changed" | grep -qx "charts/rekor-tiles"; then
+            openssl ecparam -name prime256v1 -genkey -noout -out /tmp/rekor-tiles-ci.pem
+            kubectl create secret generic rekor-tiles-ci-signer \
+              --from-file=signing-key=/tmp/rekor-tiles-ci.pem \
+              -n default
+            rm -f /tmp/rekor-tiles-ci.pem
+          fi
+
+          if echo "$changed" | grep -qx "charts/ctlog-tiles"; then
+            openssl ecparam -name prime256v1 -genkey -noout -out /tmp/ctlog-tiles-ci.pem
+            kubectl create secret generic ctlog-tiles-ci-signer \
+              --from-file=signing-key=/tmp/ctlog-tiles-ci.pem \
+              -n default
+            rm -f /tmp/ctlog-tiles-ci.pem
+          fi
+
+          if echo "$changed" | grep -qx "charts/ctlog"; then
+            helm repo add sigstore https://sigstore.github.io/helm-charts --force-update
+            helm repo update
+            helm dependency build charts/fulcio
+            helm install ctlog-ci-trillian charts/trillian \
+              -f charts/trillian/ci/ci-values.yaml \
+              --create-namespace -n ctlog-ci-trillian \
+              --set fullnameOverride=trillian \
+              --set logServer.fullnameOverride=trillian-logserver \
+              --set logSigner.fullnameOverride=trillian-logsigner \
+              --set mysql.fullnameOverride=trillian-mysql \
+              --wait --timeout 300s
+            helm install ctlog-ci-fulcio charts/fulcio \
+              -f charts/fulcio/ci/ci-values.yaml \
+              --create-namespace -n ctlog-ci-fulcio \
+              --set server.fullnameOverride=fulcio-server \
+              --set createcerts.fullnameOverride=fulcio-createcerts \
+              --set server.ingress.http.enabled=false \
+              --wait --timeout 180s
+          fi
+
       - name: Run chart-testing (install)
         if: steps.changes.outputs.charts == 'true'
         run: ct install --config ct-install.yaml
