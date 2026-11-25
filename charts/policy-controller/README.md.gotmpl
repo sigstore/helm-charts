@@ -31,6 +31,14 @@ The `policy-controller` enforce images matching the defined list of `ClusterImag
 Note that, by default, the `policy-controller` offers a configurable behavior defining whether to allow, deny or warn whenever an image does not match a policy in a specific namespace. This behavior can be configured using the `config-policy-controller` ConfigMap created under the release namespace, and by adding an entry with the property `no-match-policy` and its value `warn|allow|deny`.
 By default, any image that does not match a policy is rejected whenever `no-match-policy` is not configured in the ConfigMap.
 
+You can populate that ConfigMap from Helm via `webhook.configData`. Each key under `configData` is written verbatim into the ConfigMap `data` map — do not nest keys under `_example` (`_example` is only the chart's placeholder when `configData` is empty):
+
+```yaml
+webhook:
+  configData:
+    no-match-policy: warn
+```
+
 As supported in previous versions, you could create your own key pair:
 
 ```shell
