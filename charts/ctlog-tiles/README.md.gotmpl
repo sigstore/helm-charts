@@ -84,6 +84,11 @@ databases.
 
 In values.yaml, set `image.flavor` to `"gcp"`.
 
+When using the GCP flavor, the chart defaults `nodeSelector` to
+`iam.gke.io/gke-metadata-server-enabled: "true"` for GKE Workload Identity.
+Set `nodeSelector` explicitly to override this default. The POSIX and AWS
+flavors do not receive this GKE-specific selector automatically.
+
 Create a Spanner instance and database in GCP:
 
 ```

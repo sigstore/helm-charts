@@ -169,7 +169,7 @@ spec:
       {{- if .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml .Values.nodeSelector | nindent 8 }}
-      {{- else if ne .Values.image.flavor "aws" }}
+      {{- else if eq .Values.image.flavor "gcp" }}
       nodeSelector:
         iam.gke.io/gke-metadata-server-enabled: "true"
       {{- end }}
