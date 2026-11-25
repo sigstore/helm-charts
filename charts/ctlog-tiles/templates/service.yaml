@@ -5,8 +5,10 @@ metadata:
   namespace: {{ .Values.namespace.name }}
   labels:
     {{- include "ctlog-tiles.labels" . | nindent 4 }}
+{{- if ne .Values.image.flavor "aws" }}
   annotations:
     cloud.google.com/neg: '{"exposed_ports": {"{{ .Values.neg.http.port }}":{"name": "{{ .Values.neg.http.name }}"}}}'
+{{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:

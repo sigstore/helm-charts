@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  flavor: posix  # Must be posix or gcp
+  flavor: posix  # Must be posix, gcp, or aws
   registry: ghcr.io
   repository: transparency-dev/tesseract
   pullPolicy: IfNotPresent
@@ -14,6 +14,7 @@ image:
   version: v0.1.2
   posixSHA: sha256:b044edd2388857dfc590381ff526214dfea93c6eeb61f632e58633cac2330935
   gcpSHA: sha256:37f1e3fb7f511f8c4bacec43e22fb52fb631f77fadb10de8bbf1560594c96fbe
+  awsSHA: sha256:3f62d509f704ec50ef7288eefa8f6044b15b453c8f4bec346a8006378b726f1d
 
 namespace:
   create: false
@@ -84,8 +85,7 @@ lifecycle:
     sleep:
       seconds: 15
 
-nodeSelector:
-  iam.gke.io/gke-metadata-server-enabled: "true"   # support workload identity
+nodeSelector: {}
 
 tolerations: []
 
@@ -113,6 +113,36 @@ server:
     # signer:
     #   privateKey: projects/{projectId}/secrets/{secretName}/versions/{secretVersion}
     #   publicKey: projects/{projectId}/secrets/{secretName}/versions/{secretVersion}
+  aws: {}
+    # bucket: tesseract-bucket
+    # region: us-east-1
+    # s3EndpointURL: https://s3.example.com
+    # usePathStyle: true
+    # credentials:
+    #   secretKeyRef:
+    #     name: ctlog-tiles-aws
+    #     accessKeyIdKey: AWS_ACCESS_KEY_ID
+    #     secretAccessKeyKey: AWS_SECRET_ACCESS_KEY
+    #     sessionTokenKey: AWS_SESSION_TOKEN
+    # signer:
+    #   # Use AWS Secrets Manager for AWS deployments, or `files` for local/S3-compatible S3.
+    #   publicKey: ctlog-tiles-public-key
+    #   privateKey: ctlog-tiles-private-key
+    #   files:
+    #     secret:
+    #       name: ctlog-tiles-signer
+    #       publicKey: public-key.pem
+    #       privateKey: private-key.pem
+    #       mountPath: /etc/ctfe/signer
+    # database:
+    #   name: sequencer
+    #   host: tesseract-db.cluster-xxxxxxxxxxxx.us-east-1.rds.amazonaws.com
+    #   port: 3306
+    #   user: tesseract
+    #   password:
+    #     secretKeyRef:
+    #       name: ctlog-tiles-db
+    #       key: password
   posix: {}
     # privateKey:
     #   path: /etc/ctfe/signer.pem

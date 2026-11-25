@@ -62,15 +62,56 @@ spec:
                   fieldPath: metadata.namespace
             - name: OTEL_RESOURCE_ATTRIBUTES
               value: "k8s.pod.name=$(POD_NAME),k8s.namespace.name=$(POD_NAMESPACE),k8s.container.name={{ .Chart.Name }}"
+            {{- if and .Values.server.aws .Values.server.aws.region }}
+            - name: AWS_REGION
+              value: {{ .Values.server.aws.region | quote }}
+            - name: AWS_DEFAULT_REGION
+              value: {{ .Values.server.aws.region | quote }}
+            {{- end }}
+            {{- if and .Values.server.aws .Values.server.aws.s3EndpointURL }}
+            - name: AWS_ENDPOINT_URL_S3
+              value: {{ .Values.server.aws.s3EndpointURL | quote }}
+            {{- end }}
+            {{- if and .Values.server.aws .Values.server.aws.credentials .Values.server.aws.credentials.secretKeyRef }}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.server.aws.credentials.secretKeyRef.name }}
+                  key: {{ .Values.server.aws.credentials.secretKeyRef.accessKeyIdKey }}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.server.aws.credentials.secretKeyRef.name }}
+                  key: {{ .Values.server.aws.credentials.secretKeyRef.secretAccessKeyKey }}
+            {{- if .Values.server.aws.credentials.secretKeyRef.sessionTokenKey }}
+            - name: AWS_SESSION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.server.aws.credentials.secretKeyRef.name }}
+                  key: {{ .Values.server.aws.credentials.secretKeyRef.sessionTokenKey }}
+            {{- end }}
+            {{- end }}
+            {{- if and .Values.server.aws .Values.server.aws.database .Values.server.aws.database.password .Values.server.aws.database.password.secretKeyRef }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.server.aws.database.password.secretKeyRef.name }}
+                  key: {{ .Values.server.aws.database.password.secretKeyRef.key }}
+            {{- end }}
             {{- with .Values.server.extraEnv }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
-{{- if or ((.Values.server.posix).privateKey).secret (.Values.server.fulcio).configMap (.Values.server.posix).storageDir .Values.server.witnessing }}
+{{- if or ((.Values.server.posix).privateKey).secret ((.Values.server.aws).signer).files (.Values.server.fulcio).configMap (.Values.server.posix).storageDir .Values.server.witnessing }}
           volumeMounts:
 {{- end }}
 {{- if ((.Values.server.posix).privateKey).secret }}
             - name: {{ .Values.server.posix.privateKey.secret.name }}
               mountPath: {{ (.Values.server.posix.privateKey.secret).mountPath }}
+              readOnly: true
+{{- end }}
+{{- if ((.Values.server.aws).signer).files }}
+            - name: {{ printf "%s-aws-signer" (include "ctlog-tiles.fullname" . | trunc 52 | trimSuffix "-") }}
+              mountPath: {{ .Values.server.aws.signer.files.secret.mountPath }}
               readOnly: true
 {{- end }}
 {{- if ((.Values.server.fulcio).configMap) }}
@@ -87,7 +128,7 @@ spec:
               mountPath: /etc/witness-config
 {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
-{{- if or ((.Values.server.posix).privateKey).secret (.Values.server.fulcio).configMap (.Values.server.posix).storageDir .Values.server.witnessing }}
+{{- if or ((.Values.server.posix).privateKey).secret ((.Values.server.aws).signer).files (.Values.server.fulcio).configMap (.Values.server.posix).storageDir .Values.server.witnessing }}
       volumes:
 {{- end }}
 {{- if ((.Values.server.posix).privateKey).secret }}
@@ -97,6 +138,16 @@ spec:
             items:
               - key: {{ .Values.server.posix.privateKey.secret.key }}
                 path: {{ .Values.server.posix.privateKey.secret.mountSubPath }}
+{{- end }}
+{{- if ((.Values.server.aws).signer).files }}
+        - name: {{ printf "%s-aws-signer" (include "ctlog-tiles.fullname" . | trunc 52 | trimSuffix "-") }}
+          secret:
+            secretName: {{ .Values.server.aws.signer.files.secret.name }}
+            items:
+              - key: {{ .Values.server.aws.signer.files.secret.publicKey }}
+                path: {{ .Values.server.aws.signer.files.secret.publicKey }}
+              - key: {{ .Values.server.aws.signer.files.secret.privateKey }}
+                path: {{ .Values.server.aws.signer.files.secret.privateKey }}
 {{- end }}
 {{- if (.Values.server.fulcio).configMap }}
         - name: {{ .Values.server.fulcio.configMap.name }}
@@ -115,9 +166,12 @@ spec:
           configMap:
             name: {{ .Values.server.witnessing.configMapName }}
 {{- end }}
-      {{- with .Values.nodeSelector }}
+      {{- if .Values.nodeSelector }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      {{- else if ne .Values.image.flavor "aws" }}
+      nodeSelector:
+        iam.gke.io/gke-metadata-server-enabled: "true"
       {{- end }}
       {{- with .Values.affinity }}
       affinity:

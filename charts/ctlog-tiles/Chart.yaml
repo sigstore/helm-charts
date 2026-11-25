@@ -2,7 +2,7 @@ apiVersion: v2
 name: ctlog-tiles
 description: Tiles-based certificate log (TesseraCT)
 type: application
-version: 0.1.9
+version: 0.2.0
 appVersion: v0.1.2
 keywords:
   - security
@@ -19,3 +19,5 @@ annotations:
       image: ghcr.io/transparency-dev/tesseract/posix:v0.1.2@sha256:b044edd2388857dfc590381ff526214dfea93c6eeb61f632e58633cac2330935
     - name: tesseract-gcp
       image: ghcr.io/transparency-dev/tesseract/gcp:v0.1.2@sha256:37f1e3fb7f511f8c4bacec43e22fb52fb631f77fadb10de8bbf1560594c96fbe
+    - name: tesseract-aws
+      image: ghcr.io/transparency-dev/tesseract/aws:v0.1.2@sha256:3f62d509f704ec50ef7288eefa8f6044b15b453c8f4bec346a8006378b726f1d
