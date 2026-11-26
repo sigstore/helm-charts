@@ -95,6 +95,26 @@ Server Arguments
 - {{ printf "--signer_private_key_secret_name=%s" .Values.server.gcp.signer.privateKey | quote }}
 {{- end }}
 {{- end }}
+{{- if .Values.server.aws }}
+- {{ printf "--bucket=%s" .Values.server.aws.bucket | quote }}
+- {{ printf "--db_name=%s" .Values.server.aws.database.name | quote }}
+- {{ printf "--db_host=%s" .Values.server.aws.database.host | quote }}
+- {{ printf "--db_port=%d" (.Values.server.aws.database.port | int) | quote }}
+- {{ printf "--db_user=%s" .Values.server.aws.database.user | quote }}
+{{- if and .Values.server.aws.database .Values.server.aws.database.password .Values.server.aws.database.password.secretKeyRef }}
+- "--db_password=$(DB_PASSWORD)"
+{{- end }}
+{{- if .Values.server.aws.usePathStyle }}
+- "--s3_use_path_style=true"
+{{- end }}
+{{- if and .Values.server.aws.signer .Values.server.aws.signer.files }}
+- {{ printf "--signer_public_key_file=%s/%s" (trimSuffix "/" .Values.server.aws.signer.files.secret.mountPath) .Values.server.aws.signer.files.secret.publicKey | quote }}
+- {{ printf "--signer_private_key_file=%s/%s" (trimSuffix "/" .Values.server.aws.signer.files.secret.mountPath) .Values.server.aws.signer.files.secret.privateKey | quote }}
+{{- else if .Values.server.aws.signer }}
+- {{ printf "--signer_public_key_secret_name=%s" .Values.server.aws.signer.publicKey | quote }}
+- {{ printf "--signer_private_key_secret_name=%s" .Values.server.aws.signer.privateKey | quote }}
+{{- end }}
+{{- end }}
 {{- if .Values.server.posix }}
 - {{ printf "--storage_dir=%s" (.Values.server.posix.storageDir).path | quote }}
 {{- if .Values.server.posix.privateKey }}
@@ -147,6 +167,7 @@ Create the image path for the passed in image field
 {{- $tag := .version -}}
 {{- $posixSHA := .posixSHA -}}
 {{- $gcpSHA := .gcpSHA -}}
+{{- $awsSHA := .awsSHA -}}
 {{- if .image -}}
   {{- $registryName = .image.registry -}}
   {{- $repositoryName = .image.repository -}}
@@ -154,6 +175,7 @@ Create the image path for the passed in image field
   {{- $tag = .image.version -}}
   {{- $posixSHA = .image.posixSHA -}}
   {{- $gcpSHA = .image.gcpSHA -}}
+  {{- $awsSHA = .image.awsSHA -}}
 {{- end -}}
 {{- if .global -}}
   {{- if kindIs "map" .global.imageRegistry -}}
@@ -178,6 +200,8 @@ Create the image path for the passed in image field
 {{- $version = printf "%s@%s" $version $posixSHA }}
 {{- else if and (eq $flavor "gcp") $gcpSHA -}}
 {{- $version = printf "%s@%s" $version $gcpSHA }}
+{{- else if and (eq $flavor "aws") $awsSHA -}}
+{{- $version = printf "%s@%s" $version $awsSHA }}
 {{- end -}}
 {{- end -}}
 {{- printf "%s/%s/%s%s" $registryName $repositoryName $flavor $version -}}

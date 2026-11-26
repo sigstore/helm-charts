@@ -12,6 +12,14 @@
             "type": "object",
             "properties": {
                 "flavor": {
+                    "type": "string",
+                    "enum": [
+                        "posix",
+                        "gcp",
+                        "aws"
+                    ]
+                },
+                "awsSHA": {
                     "type": "string"
                 },
                 "gcpSHA": {
@@ -226,6 +234,163 @@
                 "gcp": {
                     "type": "object"
                 },
+                "aws": {
+                    "type": "object",
+                    "properties": {
+                        "credentials": {
+                            "type": "object",
+                            "properties": {
+                                "secretKeyRef": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "keys": {
+                                            "type": "object",
+                                            "properties": {
+                                                "accessKeyId": {
+                                                    "type": "string"
+                                                },
+                                                "secretAccessKey": {
+                                                    "type": "string"
+                                                },
+                                                "sessionToken": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "accessKeyId",
+                                                "secretAccessKey"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "name",
+                                        "keys"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "secretKeyRef"
+                            ]
+                        },
+                        "bucket": {
+                            "type": "string"
+                        },
+                        "database": {
+                            "type": "object",
+                            "properties": {
+                                "host": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "object",
+                                    "properties": {
+                                        "secretKeyRef": {
+                                            "type": "object",
+                                            "properties": {
+                                                "key": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "key",
+                                                "name"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "secretKeyRef"
+                                    ]
+                                },
+                                "port": {
+                                    "type": "integer"
+                                },
+                                "user": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "host",
+                                "name",
+                                "password",
+                                "port",
+                                "user"
+                            ]
+                        },
+                        "region": {
+                            "type": "string"
+                        },
+                        "s3EndpointURL": {
+                            "type": "string"
+                        },
+                        "signer": {
+                            "type": "object",
+                            "properties": {
+                                "files": {
+                                    "type": "object",
+                                    "properties": {
+                                        "secret": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "publicKey": {
+                                                    "type": "string"
+                                                },
+                                                "privateKey": {
+                                                    "type": "string"
+                                                },
+                                                "mountPath": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "publicKey",
+                                                "privateKey",
+                                                "mountPath"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "secret"
+                                    ]
+                                },
+                                "privateKey": {
+                                    "type": "string"
+                                },
+                                "publicKey": {
+                                    "type": "string"
+                                }
+                            },
+                            "oneOf": [
+                                {
+                                    "required": [
+                                        "privateKey",
+                                        "publicKey"
+                                    ]
+                                },
+                                {
+                                    "required": [
+                                        "files"
+                                    ]
+                                }
+                            ]
+                            },
+                        "usePathStyle": {
+                            "type": "boolean"
+                        }
+                    }
+                },
                 "hostname": {
                     "type": "string"
                 },
@@ -274,6 +439,12 @@
                             "targetPort": {
                                 "type": "integer"
                             }
+                        },
+                        "region": {
+                            "type": "string"
+                        },
+                        "s3EndpointURL": {
+                            "type": "string"
                         }
                     }
                 },

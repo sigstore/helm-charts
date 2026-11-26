@@ -2,7 +2,7 @@
 
 <!-- This README.md is generated. Please edit README.md.gotmpl -->
 
-![Version: 0.1.9](https://img.shields.io/badge/Version-0.1.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.1.2](https://img.shields.io/badge/AppVersion-v0.1.2-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.1.2](https://img.shields.io/badge/AppVersion-v0.1.2-informational?style=flat-square)
 
 Tiles-based certificate log (TesseraCT)
 
@@ -82,6 +82,11 @@ databases.
 
 In values.yaml, set `image.flavor` to `"gcp"`.
 
+When using the GCP flavor, the chart defaults `nodeSelector` to
+`iam.gke.io/gke-metadata-server-enabled: "true"` for GKE Workload Identity.
+Set `nodeSelector` explicitly to override this default. The POSIX and AWS
+flavors do not receive this GKE-specific selector automatically.
+
 Create a Spanner instance and database in GCP:
 
 ```
@@ -119,6 +124,84 @@ server:
       publicKey: projects/1234/secrets/tesseract-public/versions/1
 ```
 
+## Using the AWS backend
+
+In values.yaml, set `image.flavor` to `"aws"`. The chart omits its default GKE metadata-server node selector and GKE NEG
+service annotation for the AWS flavor. Set `nodeSelector` explicitly if your
+AWS nodes need a selector.
+
+For static AWS credentials, create a Kubernetes Secret in the chart's namespace.
+For EKS, prefer an IAM role attached to the service account and omit the
+`credentials` block. For an S3-compatible service, create a separate Secret with
+the signing key files; this avoids depending on AWS Secrets Manager:
+
+```
+kubectl -n ctlog-tiles-system create secret generic ctlog-tiles-db \
+    --from-file=password=/path/to/database-password
+kubectl -n ctlog-tiles-system create secret generic ctlog-tiles-aws \
+    --from-file=AWS_ACCESS_KEY_ID=/path/to/access-key-id \
+    --from-file=AWS_SECRET_ACCESS_KEY=/path/to/secret-access-key
+kubectl -n ctlog-tiles-system create secret generic ctlog-tiles-signer \
+    --from-file=public-key.pem=/path/to/public-key.pem \
+    --from-file=private-key.pem=/path/to/private-key.pem
+```
+
+Configure the bucket, region, optional S3 endpoint, credentials Secret, database
+connection, and file-based signer in values.yaml:
+
+```
+image:
+  flavor: aws
+nodeSelector: {}
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/ctlog-tiles
+server:
+  aws:
+    bucket: unique-tesseract-bucket-name
+    region: us-east-1
+    # Set this for S3-compatible services; omit for AWS S3.
+    s3EndpointURL: https://s3.example.com
+    # Set for S3-compatible services such as MinIO.
+    usePathStyle: true
+    credentials:
+      secretKeyRef:
+        name: ctlog-tiles-aws
+        keys:
+          accessKeyId: AWS_ACCESS_KEY_ID
+          secretAccessKey: AWS_SECRET_ACCESS_KEY
+          # Optional; use when the credentials are temporary STS credentials.
+          # sessionToken: AWS_SESSION_TOKEN
+    signer:
+      files:
+        secret:
+          name: ctlog-tiles-signer
+          publicKey: public-key.pem
+          privateKey: private-key.pem
+          mountPath: /etc/ctfe/signer
+    database:
+      name: sequencer
+      host: tesseract-db.cluster-xxxxxxxxxxxx.us-east-1.rds.amazonaws.com
+      port: 3306
+      user: tesseract
+      password:
+        secretKeyRef:
+          name: ctlog-tiles-db
+          key: password
+```
+
+All referenced Kubernetes Secrets must exist before deploying the chart. AWS
+credentials and the database password are not stored in Helm values. The signer
+file Secret is mounted read-only and the paths are passed to Tesseract as
+`--signer_public_key_file` and `--signer_private_key_file`. For AWS deployments
+that use AWS Secrets Manager instead, replace `signer.files` with `signer` key
+names (`publicKey` and `privateKey`) and grant the AWS role access to those
+secrets. For EKS with an IAM role, omit `credentials` and rely on the AWS
+credential provider chain. If using temporary credentials, include the
+`AWS_SESSION_TOKEN` key in the credentials Secret and set `keys.sessionToken`
+to that key. The chart sets `AWS_REGION` and `AWS_DEFAULT_REGION`; Tesseract
+reads a custom S3 endpoint from `AWS_ENDPOINT_URL_S3`.
+
 ## Maintainers
 
 | Name | Email | Url |
@@ -135,6 +218,7 @@ server:
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
+| image.awsSHA | string | `"sha256:3f62d509f704ec50ef7288eefa8f6044b15b453c8f4bec346a8006378b726f1d"` |  |
 | image.flavor | string | `"posix"` |  |
 | image.gcpSHA | string | `"sha256:37f1e3fb7f511f8c4bacec43e22fb52fb631f77fadb10de8bbf1560594c96fbe"` |  |
 | image.posixSHA | string | `"sha256:b044edd2388857dfc590381ff526214dfea93c6eeb61f632e58633cac2330935"` |  |
@@ -151,7 +235,7 @@ server:
 | namespace.name | string | `"ctlog-tiles-system"` |  |
 | neg.http.name | string | `""` |  |
 | neg.http.port | int | `80` |  |
-| nodeSelector."iam.gke.io/gke-metadata-server-enabled" | string | `"true"` |  |
+| nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podLabels | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
@@ -165,6 +249,7 @@ server:
 | securityContext.runAsNonRoot | bool | `true` |  |
 | securityContext.runAsUser | int | `65533` |  |
 | server.antispam | object | `{}` |  |
+| server.aws | object | `{}` |  |
 | server.extraArgs | list | `[]` |  |
 | server.extraEnv | list | `[]` |  |
 | server.fulcio.configMap.key | string | `"fulcio"` |  |

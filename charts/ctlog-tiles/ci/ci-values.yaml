@@ -3,8 +3,7 @@ image:
   flavor: posix
 namespace:
   name: default
-nodeSelector:
-  iam.gke.io/gke-metadata-server-enabled: null
+nodeSelector: {}
 podSecurityContext:
   fsGroup: 65533
 server:
