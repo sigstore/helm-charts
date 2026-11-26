@@ -16,6 +16,12 @@ home: https://sigstore.dev/
 maintainers:
   - name: The Sigstore Authors
 
+dependencies:
+  - name: trillian
+    version: 0.4.1
+    repository: https://sigstore.github.io/helm-charts
+    condition: trillian.enabled
+
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/images: |

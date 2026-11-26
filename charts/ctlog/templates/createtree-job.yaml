@@ -46,7 +46,7 @@ spec:
             "--namespace=$(NAMESPACE)",
             "--configmap={{ template "ctlog.config" . }}",
             "--display_name={{ .Values.createtree.displayName }}",
-            "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.namespace }}:{{ .Values.trillian.logServer.portRPC}}"
+            "--admin_server={{ .Values.trillian.logServer.name }}.{{ .Values.trillian.forceNamespace }}:{{ .Values.trillian.logServer.portRPC}}"
           ]
     {{- if .Values.createtree.resources }}
           resources:
