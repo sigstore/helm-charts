@@ -77,18 +77,18 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.server.aws.credentials.secretKeyRef.name }}
-                  key: {{ .Values.server.aws.credentials.secretKeyRef.accessKeyIdKey }}
+                  key: {{ .Values.server.aws.credentials.secretKeyRef.keys.accessKeyId }}
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.server.aws.credentials.secretKeyRef.name }}
-                  key: {{ .Values.server.aws.credentials.secretKeyRef.secretAccessKeyKey }}
-            {{- if .Values.server.aws.credentials.secretKeyRef.sessionTokenKey }}
+                  key: {{ .Values.server.aws.credentials.secretKeyRef.keys.secretAccessKey }}
+            {{- if .Values.server.aws.credentials.secretKeyRef.keys.sessionToken }}
             - name: AWS_SESSION_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.server.aws.credentials.secretKeyRef.name }}
-                  key: {{ .Values.server.aws.credentials.secretKeyRef.sessionTokenKey }}
+                  key: {{ .Values.server.aws.credentials.secretKeyRef.keys.sessionToken }}
             {{- end }}
             {{- end }}
             {{- if and .Values.server.aws .Values.server.aws.database .Values.server.aws.database.password .Values.server.aws.database.password.secretKeyRef }}

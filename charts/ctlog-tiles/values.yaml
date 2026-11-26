@@ -121,9 +121,10 @@ server:
     # credentials:
     #   secretKeyRef:
     #     name: ctlog-tiles-aws
-    #     accessKeyIdKey: AWS_ACCESS_KEY_ID
-    #     secretAccessKeyKey: AWS_SECRET_ACCESS_KEY
-    #     sessionTokenKey: AWS_SESSION_TOKEN
+    #     keys:
+    #       accessKeyId: AWS_ACCESS_KEY_ID
+    #       secretAccessKey: AWS_SECRET_ACCESS_KEY
+    #       sessionToken: AWS_SESSION_TOKEN
     # signer:
     #   # Use AWS Secrets Manager for AWS deployments, or `files` for local/S3-compatible S3.
     #   publicKey: ctlog-tiles-public-key

@@ -167,10 +167,11 @@ server:
     credentials:
       secretKeyRef:
         name: ctlog-tiles-aws
-        accessKeyIdKey: AWS_ACCESS_KEY_ID
-        secretAccessKeyKey: AWS_SECRET_ACCESS_KEY
-        # Optional; use when the credentials are temporary STS credentials.
-        # sessionTokenKey: AWS_SESSION_TOKEN
+        keys:
+          accessKeyId: AWS_ACCESS_KEY_ID
+          secretAccessKey: AWS_SECRET_ACCESS_KEY
+          # Optional; use when the credentials are temporary STS credentials.
+          # sessionToken: AWS_SESSION_TOKEN
     signer:
       files:
         secret:
@@ -197,9 +198,9 @@ that use AWS Secrets Manager instead, replace `signer.files` with `signer` key
 names (`publicKey` and `privateKey`) and grant the AWS role access to those
 secrets. For EKS with an IAM role, omit `credentials` and rely on the AWS
 credential provider chain. If using temporary credentials, include the
-`AWS_SESSION_TOKEN` key in the credentials Secret and set `sessionTokenKey` to
-that key. The chart sets `AWS_REGION` and `AWS_DEFAULT_REGION`; Tesseract reads a
-custom S3 endpoint from `AWS_ENDPOINT_URL_S3`.
+`AWS_SESSION_TOKEN` key in the credentials Secret and set `keys.sessionToken`
+to that key. The chart sets `AWS_REGION` and `AWS_DEFAULT_REGION`; Tesseract
+reads a custom S3 endpoint from `AWS_ENDPOINT_URL_S3`.
 
 ## Maintainers
 

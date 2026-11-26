@@ -243,23 +243,31 @@
                                 "secretKeyRef": {
                                     "type": "object",
                                     "properties": {
-                                        "accessKeyIdKey": {
-                                            "type": "string"
-                                        },
                                         "name": {
                                             "type": "string"
                                         },
-                                        "sessionTokenKey": {
-                                            "type": "string"
-                                        },
-                                        "secretAccessKeyKey": {
-                                            "type": "string"
+                                        "keys": {
+                                            "type": "object",
+                                            "properties": {
+                                                "accessKeyId": {
+                                                    "type": "string"
+                                                },
+                                                "secretAccessKey": {
+                                                    "type": "string"
+                                                },
+                                                "sessionToken": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "accessKeyId",
+                                                "secretAccessKey"
+                                            ]
                                         }
                                     },
                                     "required": [
-                                        "accessKeyIdKey",
                                         "name",
-                                        "secretAccessKeyKey"
+                                        "keys"
                                     ]
                                 }
                             },
